@@ -1,0 +1,475 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>PostScript Routines</title>
+<meta content="Some reusable PostScript routines" name=description>
+<meta content="PostScript routines" name=keywords>
+<meta content="Julian D. A. Wiseman" name=author>
+<meta content="general" name="rating">
+<meta content="index,follow,noimageclick" name=robots>
+<meta content="8 hours" name=expires>
+<meta content="7 days" name=revisit><link href="../../favicon.ico" rel="SHORTCUT ICON">
+<link rel="stylesheet" type="text/css" href="placemat.css">
+</head>
+
+<body bgcolor="#ffffff">
+<table width="100%" border="0" id="top">
+<tr>
+	<td width="30%" align="left"><a href="../../index.html">Main index</a></td>
+	<td width="40%" align="center"><a href="placemat.html">Placemat: main guide</a></td>
+	<td width="30%" align="right"><a href="../../author.html">About author</a></td>
+</tr></table>
+<hr>
+
+<div style="float: right;  margin-top: 0;  padding-top: 0;">
+	<p style="border: none;  margin-top: 0;  padding-top: 0;">
+		<a href="http://validator.w3.org/check?uri=http%3A%2F%2Fwww.jdawiseman.com%2Fpapers%2Fplacemat%2Fpostscript_routines.html"><img src="../../graphics/valid-html401.png" alt="Valid HTML 4.01 Transitional" height="31" width="88"></a> 
+		<a href="http://jigsaw.w3.org/css-validator/validator?uri=www.jdawiseman.com%2Fpapers%2Fplacemat%2Fpostscript_routines.html"><img src="../../graphics/valid-css.png" alt="Valid CSS" height="31" width="88"></a>
+	</p>
+</div>
+
+<h1>PostScript Routines</h1>
+<p align="right"><i>Julian D. A. Wiseman</i></p>
+
+<p><b>Contents:</b></p>
+<ul><li><p><a href="#introduction"><b>Introduction</b></a>;</p>
+<li><p><a href="#general-purpose_routines"><b>General-purpose routines</b></a>: 
+<a href="#concatenate"><tt>Concatenate</tt></a>; 
+<a href="#ConcatenateToMark"><tt>ConcatenateToMark</tt></a>; 
+<a href="#currentfontname"><tt>CurrentFontName</tt></a>; 
+<a href="#currentfontsize"><tt>CurrentFontSize</tt></a>; 
+<a href="#greatestcommondivisor"><tt>GreatestCommonDivisor</tt></a>; 
+<a href="#isnumber"><tt>IsNumber</tt></a>; 
+<a href="#sorting"><tt>ShellSort</tt></a>; 
+<a href="#PolynomialRoots"><tt>PolynomialRoots</tt></a>;</p>
+<li><p><a href="#debug"><b>Debug</b></a>: 
+<a href="#countgraphicsstack"><tt>CountGraphicsStack</tt></a>; 
+<a href="#thingtodebugtext"><tt>ThingToDebugText</tt></a>; 
+<a href="#outputlogtopage"><tt>OutputLogToPage</tt></a>; 
+<a href="#error_reporting"><tt>Error reporting</tt></a>;</p>
+<li><p><a href="#shapes"><b>Shapes</b></a>: 
+<a href="#star"><tt>Star</tt></a>; 
+<a href="#ArrowPath"><tt>ArrowPath</tt></a>; 
+<a href="#ApproximatingCurve"><tt>ApproximatingCurve</tt></a>; 
+<a href="#ArchimedeanSpiralPath"><tt>ArchimedeanSpiralPath</tt></a>; 
+<a href="#analogueclock"><tt>AnalogueClock</tt></a>;</p>
+<li><p><a href="#compoundobjects"><b>Compound Objects</b></a>: 
+<a href="#glyphpath"><tt>GlyphPath</tt></a>; 
+<a href="#glyphpathmoveto"><tt>GlyphPathMoveto</tt></a>; 
+<a href="#charpathrecursive"><tt>CharPathRecursive</tt></a>; 
+<a href="#charpathrecursivemoveto"><tt>CharPathRecursiveMoveto</tt></a>; 
+<a href="#stringheight"><tt>StringHeight</tt></a>; 
+<a href="#stringmiddleoffset"><tt>StringMiddleOffset</tt></a>; 
+<a href="#stringtopoffset"><tt>StringTopOffset</tt></a>; 
+<a href="#stringwidthrecursive"><tt>StringWidthRecursive</tt></a>; 
+<a href="#showrecursive"><tt>ShowRecursive</tt></a>; 
+<a href="#lengthcompoundobject"><tt>LengthCompoundObject</tt></a>; 
+<a href="#xcheckrecursive"><tt>XcheckRecursive</tt></a>; 
+<a href="#deglyphrecursive"><tt>DeGlyphRecursive</tt></a>;</p> 
+<li><p><a href="#pathsoutput"><b>Paths and Output</b></a>: 
+<a href="#pathbbox"><tt>PathBBox</tt></a>; 
+<a href="#setpapersize"><tt>SetPaperSize</tt></a>; 
+<a href="#repeatclippedwithin"><tt>RepeatClippedWithin</tt></a>; 
+<a href="#transformpath"><tt>TransformPath</tt></a>.</p></ul>
+
+<hr>
+
+<h3 id="introduction"><a href="#top">&uArr;</a> <a href="#introduction">&bull;</a> Introduction</h3>
+
+<p>The author has written a program, in PostScript, to render placemats for glasses at a wine tasting. 
+That program can be found at <a href="http://www.jdawiseman.com/papers/placemat/placemat.ps">www.jdawiseman.com/papers/placemat/placemat.ps</a>, 
+and the documentation at <a href="http://www.jdawiseman.com/papers/placemat/placemat.html">www.jdawiseman.com/papers/placemat/placemat.html</a> 
+and <a href="http://www.jdawiseman.com/papers/placemat/placemat-code.html">www.jdawiseman.com/papers/placemat/placemat-code.html</a>. 
+The code contains several routines that other PostScript programmers might wish to reuse, described here.</p>
+
+<p>However, users are cautioned that this &lsquo;manual&rsquo; tends to lag the code.</p>
+
+<hr>
+<h2 id="general-purpose_routines"><a href="#top">&uArr;</a> <a href="#general-purpose_routines">&bull;</a> General-purpose routines</h2>
+
+<h3 id="concatenate"><a href="#top">&uArr;</a> <a href="#general-purpose_routines">&uarr;</a> <a href="#concatenate">&bull;</a> Concatenate</h3>
+<p><i>string</i><small><sub>1</sub></small>&nbsp;<i>string</i><small><sub>2</sub></small> 
+<tt>Concatenate</tt> 
+<i>string</i></p>
+<p><tt>Concatenate</tt> concatenates the two strings. 
+An older version, available at <a href="concatenate.ps">www.jdawiseman.com/papers/placemat/concatenate.ps</a>, 
+would work with strings or arrays, and did some error handling.</p>
+
+<h3 id="ConcatenateToMark"><a href="#top">&uArr;</a> <a href="#general-purpose_routines">&uarr;</a> <a href="#ConcatenateToMark">&bull;</a> ConcatenateToMark</h3>
+<p>mark <i>thing</i><small><sub>0</sub></small>&nbsp;<i>thing</i><small><sub>1</sub></small>&nbsp;&hellip; 
+ConcatenateToMark 
+<i>string</i></p>
+<p><tt>ConcatenateToMark</tt> concatenates the items, converting non-strings to strings using <tt>ToString</tt>.</p>
+
+<h3 id="currentfontname"><a href="#top">&uArr;</a> <a href="#general-purpose_routines">&uarr;</a> <a href="#currentfontname">&bull;</a> CurrentFontName</h3>
+<p>- 
+<tt>CurrentFontName</tt> 
+<i>name</i></p>
+<p><tt>CurrentFontName</tt> returns the name of the current font.</p>
+
+<h3 id="currentfontsize"><a href="#top">&uArr;</a> <a href="#general-purpose_routines">&uarr;</a> <a href="#currentfontsize">&bull;</a> CurrentFontSize</h3>
+<p>- 
+<tt>CurrentFontSize</tt> 
+<i>num</i></p>
+<p><tt>CurrentFontSize</tt> returns the size of the current font, such that 
+<tt>CurrentFontName&nbsp;CurrentFontSize&nbsp;selectfont</tt> has no effect.</p>
+
+<h3 id="greatestcommondivisor"><a href="#top">&uArr;</a> <a href="#general-purpose_routines">&uarr;</a> <a href="#greatestcommondivisor">&bull;</a> GreatestCommonDivisor</h3>
+<p><i>int</i><small><sub>1</sub></small>&nbsp;<i>int</i><small><sub>2</sub></small>
+<tt>GreatestCommonDivisor</tt> 
+<i>int</i></p>
+<p><tt>GreatestCommonDivisor</tt> returns the greatest common divisor of the two integers. 
+There is a small speed gain if <i>int</i><small><sub>1</sub></small>&nbsp;&ge;&nbsp;<i>int</i><small><sub>2</sub></small>.
+If it is not known which is larger, it is not worth testing.</p>
+
+<h3 id="isnumber"><a href="#top">&uArr;</a> <a href="#general-purpose_routines">&uarr;</a> <a href="#isnumber">&bull;</a> IsNumber</h3>
+<p><i>any</i> 
+<tt>IsNumber</tt> 
+<i>bool</i></p>
+<p><tt>IsNumber</tt> returns <tt>true</tt> if the parameter is an integer or a real, otherwise <tt>false</tt>.
+
+<h3 id="sorting"><a href="#top">&uArr;</a> <a href="#general-purpose_routines">&uarr;</a> <a href="#sorting">&bull;</a> ShellSort</h3>
+<p><i>array</i>&nbsp;<i>code</i> <tt>ShellSort</tt> -<br><i>array</i>&nbsp;<i>code</i> <tt>HeapSort</tt> -</p>
+<p>Until April 2019, the code used <tt>HeapSort</tt>, which was then replaced with <tt>ShellSort</tt>. 
+The routines are both in and compared by <a href="ShellSort_HeapSort.ps">www.jdawiseman.com/papers/placemat/ShellSort_HeapSort.ps</a>.</p>
+<p>The second parameter is code, is a function that takes two items from the stack (two items from the array), and returns a boolean. 
+Both <tt>ShellSort</tt> and <tt>HeapSort</tt> sorts the array such that for elements <i>i</i> and <i>i</i>+1 the comparison code returns <tt>true</tt>.
+E.g., <tt>[2 0 4 3 1] dup {le} ShellSort ==</tt> outputs <tt>[0 1 2 3 4]</tt>.</p>
+<p><tt>ShellSort</tt> uses gaps of <tt><b>1 3 5 8 11 13 17 23 29 37 47 59 71 83 97 113 133 157 181 211 241 277 317 359 409 463 523 587 661 743 829 929 1039 1163 1297 1439 1597 1763 1951 2153 2377 2621 2887 3169 3491 3833 4201 4603 5039 5507 6011 6553 7151 7789 8479 9221 10009 10867 11789 12781 13843 14983 16217 17539 18959 20477 22109 23857 25717 27707 29839 32119 34549 37157 39937 42901 46061 49433 53017 56843 60923 65269</b> 69899 74821 80051 85619 91537 97829 104513 111611 119143 127139 135623 144629 154171 164291 175013 186377 198413 211153 224657 238943 254053 270037 286961 304841 323753 343727 364831 387137 410687 435553 461801 489493 518717 549551 582073 616367 652523 690629 730783 773093 817669 864613 914041 966079 1020853 1078489 1139137 1202939 1270051 1340627 1414837 1492837 1574821 1660979 1751507 1846609 1946501 2051389 2161531 2277157 2398537 2525923 2659571 2799809 2946917 3101207 3263009 3432659 3610531 3796963 3992357 4197131 4411679 4636441 4871869 5118439 5376647 5646997 5930017 6226279 6536351 6860837 7200359 7555571 7927147 8315803 8722271 9147293 9591677 10056247 10541851 11049397 11579803 12134033 12713087 13318013 13949879 14609839 15299041 16018703 16770079 17554507 18373321 19227941 20119843 21050563 22021661 23034793 24091667 25194061 26343817 27542831 28793099 30096679 31455701 32872387 34349041 35888029 37491833 39163039 40904299 42718391 44608169 46576597 48626759 50761853 52985197 55300229 57710489 60219697 62831641 65550319 68379833 71324441 74388551 77576747 80893759 84344501 87934051 91667683 95550839 99589187 103788577 108155057 112694929 117414683 122321047 127420987 132721717 138230711 143955697 149904679 156085927 162508019 169179841 176110549 183309653 190786987 198552703 206617339 214991779 223687273 232715479 242088437 251818607 261918863 272402551 283283443 294575797 306294337 318454303 331071437 344162023 357742907 371831477 386445713 401604211 417326177 433631477 450540619 468074809 486255971 505106731 524650471 544911359 565914359 587685271 610250723 633638249 657876253 682994107 709022113 735991589 763934867 792885323 822877439 853946809 886130191 919465523 953991971 989749973 1026781267 1065128941 1104837467 1145952739 1188522131 1232594533 1278220393 1325451791 1374342439 1424947729 1477324921 1531532987 1587632807 1645687201 1705760941 1767920857 1832235887 1898777159 1967617999 2038834043 2112503321</tt>, each being the nearest integer to Exp[Sqrt[2 Log[3] Log[2] + Log[prevGap]^2]]. 
+(Most PostScript implementations have a maximum array size of 65535, so this goes much further than is likely to be useful&mdash;the bolded numbers are generally sufficient&mdash;but in theory an implentation could allow larger arrays.)</p>
+
+<h3 id="PolynomialRoots"><a href="#top">&uArr;</a> <a href="#general-purpose_routines">&uarr;</a> <a href="#PolynomialRoots">&bull;</a> PolynomialRoots</h3>
+<p>[ <i>c</i><small><sub>0</sub></small>&nbsp;<i>c</i><small><sub>1</sub></small>&nbsp;&hellip;&nbsp;] LimitLower StrictLower LimitUpper StrictUpper Tolerance 
+<tt>PolynomialRoots</tt> 
+[ in-range roots ]</p>
+<p>Returns real solutions to 0&nbsp;=&nbsp;&sum;<small><sub><i>i</i>&ge;0</sub></small>&nbsp;<i>x</i><small><sup><i>i</i></sup></small>&nbsp;&times;&nbsp;<i>c</i><small><sub><i>i</i></sub></small> that are between the numbers LimitLower and LimitUpper, strictness of limits being determined by the Booleans StrictLower and StrictUpper. 
+Up to cubics solutions are exact to within PostScript&rsquo;s single precision. 
+Beyond cubics the <i>x</i>&rsquo;s will be correct to within &plusmn;Tolerance, though will usually be better than that. 
+Roots of odd multiplicity are reported once as single roots (unless <i>x</i>&nbsp;=&nbsp;0); roots of even multiplicity are reported either once or not at all (again, unless <i>x</i>&nbsp;=&nbsp;0). 
+For high order polynomials it is not very fast, but is currently called for polynomials of order no greater than an octic.</p>
+
+<p><tt>PolynomialRoot<b>s</b></tt> computes multiple roots, and calls <tt>PolynomialRoot</tt> which finds a single root given a range containing that root. 
+<tt>PolynomialRoot</tt> uses a new algorithm, seemingly better than <a href="http://en.wikipedia.org/wiki/Brent%27s_method">Brent&rsquo;s Method</a>. 
+Assume that the Lower and Upper bounds on  <i>x</i> are <i>x</i><small><sub>L</sub></small> and <i>x</i><small><sub>U</sub></small>, with the values of the polynomial (or in the more general case of any function) being <i>f</i><small><sub>L</sub></small> and <i>f</i><small><sub>U</sub></small>, these having product &le;&nbsp;0. 
+Linear interpolation takes the next guess, <i>x</i>&prime;, to be <i>x</i><small><sub>L</sub></small> + (<i>x</i><small><sub>U</sub></small>&ndash;<i>x</i><small><sub>L</sub></small>)&nbsp;&times; <i>f</i><small><sub>L</sub></small>&nbsp;&divide;&nbsp;(<i>f</i><small><sub>L</sub></small>&ndash;<i>f</i><small><sub>U</sub></small>). 
+The new method (Wiseman&rsquo;s Method?) in alternate loops changes this to <i>x</i><small><sub>L</sub></small> + (<i>x</i><small><sub>U</sub></small>&ndash;<i>x</i><small><sub>L</sub></small>) &times; Max[ 0.143, Min[ 0.857, [<i>f</i><small><sub>L</sub></small> &divide; (<i>f</i><small><sub>L</sub></small>&ndash;<i>f</i><small><sub>U</sub></small>) ]]. 
+The optimal value for the constant is not known, but some simple experiments suggested that it is not far from one seventh (and one minus this). 
+Broadly, this method does linear interpolation, except when that might be mis-behaving, when the interval size typically diminishes by a factor &asymp;&nbsp;7.</p>
+
+<hr>
+<h2 id="debug"><a href="#top">&uArr;</a> <a href="#debug">&bull;</a> Debug</h2>
+<p>Routines, and one piece of code, that simplify debugging and improve the programming environment.</p>
+
+<h3 id="countgraphicsstack"><a href="#top">&uArr;</a> <a href="#debug">&uarr;</a> <a href="#countgraphicsstack">&bull;</a> CountGraphicsStack</h3>
+<p>- 
+<tt>CountGraphicsStack</tt> 
+<i>int</i></p>
+<p>The code that creates <tt>CountGraphicsStack</tt>, and initialises it to zero, 
+also redefines <tt>gsave</tt> (to increment <tt>CountGraphicsStack</tt>) and 
+<tt>grestore</tt> (to decrement). 
+Thereafter <tt>CountGraphicsStack</tt> plays a role analagous to that of <tt>countdictstack</tt>, 
+checking that <tt>gsave</tt>s and <tt>grestore</tt>s are balanced.
+Some help in writing <tt>CountGraphicsStack</tt> was received <a href="http://groups.google.com/group/comp.lang.postscript/browse_frm/thread/0d6932e989a34102/">here</a>.)
+</p>
+
+<h3 id="thingtodebugtext"><a href="#top">&uArr;</a> <a href="#debug">&uarr;</a> <a href="#thingtodebugtext">&bull;</a> ThingToDebugText</h3>
+<p><i>any</i> 
+<tt>ThingToDebugText</tt> 
+<i>string</i></p>
+<p><tt>ThingToDebugText</tt> creates a text representation of <i>any</i>, working well with code, names, 
+numbers, booleans, dictionaries, or arrays of anything which which it works well.</p>
+
+<h3 id="outputlogtopage"><a href="#top">&uArr;</a> <a href="#debug">&uarr;</a> <a href="#outputlogtopage">&bull;</a> OutputLogToPage</h3>
+<p>- 
+<tt>OutputLogToPage</tt> 
+<i>bool</i></p>
+<p><tt>OutputLogToPage</tt> is user-created boolean, controlling whether output to the log file is also sent to an extra page at the end of the PDF. 
+Users whose only PostScript interpreter does not produce a log file, such as Mac Preview, should  use this. 
+The boolean is tested by code at the end of 
+<a href="http://www.jdawiseman.com/papers/placemat/placemat.ps">the PostScript program</a>, 
+code that calls a variety of routines and parameters, including <a href="#setpapersize"><tt>SetPaperSize</tt></a>, 
+and the array <tt>OutputLog</tt> created early in the program (also copy-paste this creation which also makes <tt>OutputToLog</tt>).
+Most functions described in this page call <tt>OutputToLog</tt>: include this code in your program.</p>
+
+<h3 id="error_reporting"><a href="#top">&uArr;</a> <a href="#debug">&uarr;</a> <a href="#error_reporting">&bull;</a> Error reporting</h3>
+<p>The bulk of <a href="http://www.jdawiseman.com/papers/placemat/placemat.ps">the PostScript program</a> 
+lies within a piece of code that is <tt>exec</tt>&rsquo;d by a <tt>stopped</tt> command. 
+If this <tt>stopped</tt> returns true a block of code then calls <tt>OutputToLog</tt> with much of the contents of the <tt>$error</tt> dictionary. 
+This output is far more comprehensive than that output by default in Distiller or GhostScript. 
+Anybody writing a large PostScript program is strongly advised to use this block of code, or something similar.</p>
+
+
+<hr>
+<h2 id="shapes"><a href="#top">&uArr;</a> <a href="#shapes">&bull;</a> Shapes</h2>
+<h3 id="star"><a href="#top">&uArr;</a> <a href="#shapes">&uarr;</a> <a href="#star">&bull;</a> Star</h3>
+<p><tt>/Left</tt>|<tt>/Center</tt>|<tt>/Right</tt>  <tt>/Top</tt>|<tt>/Middle</tt>|<tt>/Bottom</tt> 
+<i>num</i><small><sub>1</sub></small>  <tt>/Radius</tt>|<tt>/Diameter</tt>|<tt>/Height</tt>|<tt>/Width</tt> 
+<i>num</i><small><sub>2</sub></small>  <i>int</i><small><sub>1</sub></small>  <i>int</i><small><sub>2</sub></small>  <i>DrawLinesInside</i>  <i>AntiClockwise</i>
+ &nbsp; &nbsp; <tt>Star</tt> &nbsp; &nbsp; <i>dict</i></p>
+<p align="right"><img width="431" height="216" align="right" src="stars.gif" alt="Example stars"></p>
+<p><tt>Star</tt> appends a star-shaped path to the currentpath. <ul>
+<li>The star is positioned with the <i>x</i> part of the <tt>currentpoint</tt> at the left, horizontal-center or right. 
+<li>The star is positioned with the <i>y</i> part of the <tt>currentpoint</tt> at the top, vertical-middle or bottom. 
+<li>The star has size <i>num</i><small><sub>1</sub></small>. 
+What does the &ldquo;size&rdquo; mean? Either the radius or diameter of the enclosing circle, or the height or width of the star. 
+<li>An angular offset is <i>num</i><small><sub>2</sub></small>: if this is 0, the star will have one point due up; if 90, there will be one point due right. 
+<li>The star has <i>int</i><small><sub>1</sub></small> outer points, each of which is connected to points <i>int</i><small><sub>2</sub></small> either side. 
+Hence 1&nbsp;&le;&nbsp;<i>int</i><small><sub>2</sub></small>&nbsp;&lt;&nbsp;<i>int</i><small><sub>1</sub></small>&divide;2. 
+<li>If the boolean <i>DrawLinesInside</i> is <tt>false</tt>, only the outside is drawn. If <tt>true</tt>, the entire line between points is drawn. 
+<li>If the boolean <i>AntiClockwise</i> is <tt>false</tt>, points go clockwise; if true, anticlockwise. This is useful if wishing to <tt>fill</tt> the annulus between two &lsquo;concentric&rsquo; stars.
+</ul><p>A dictionary is left on the stack, it having values for <tt>LeftX</tt> (of the vertices), <tt>CenterX</tt> (of the enclosing circle), <tt>RightX</tt>, <tt>BottomY</tt>, <tt>CenterY</tt> (circle), <tt>TopY</tt>, <tt>Radius</tt>, <tt>InnerRadius</tt>, and the boolean <tt>AntiClockwise</tt>.</p>
+<p>In the example on the right the columns have <i>int</i><small><sub>1</sub></small> from 5 to 10; 
+and rows have <i>num</i><small><sub>2</sub></small> being 2, 3 and 4; <i>DrawLinesInside</i> being <tt>false</tt>.</p>
+
+
+<h3 id="ArrowPath"><a href="#top">&uArr;</a> <a href="#shapes">&uarr;</a> <a href="#ArrowPath">&bull;</a> ArrowPath</h3>
+<p>An arrow, being a rectangle of tail with a simple triangle of head. 
+Perhaps with heads at both ends. 
+Parameters: <tt><i>X0 Y0 X1 Y1 HeadLength HeadWidth TailWidth Head0 Head1</i>&nbsp; ArrowPath&nbsp; -</tt>, returning nothing. 
+Of these <tt>Head0</tt> and <tt>Head1</tt> are Booleans (draw an arrow at that end?), and all other parameters are numeric: 
+<tt>X0&nbsp;Y0</tt> is the start of the arrow; 
+<tt>X1&nbsp;Y1</tt> is the end; <tt>HeadLength</tt>, 
+<tt>HeadWidth</tt>, and <tt>TailWidth</tt> size the pieces 
+(if in doubt in the ratio 3:3:1 for tip angle = 2&times;ArcTan[&frac12;]&nbsp;&asymp; 53.13&deg;).</p>
+<p>It makes the path: any <tt><span class="operator">stroke</span></tt>ing, <tt><span class="operator">fill</span></tt>ing, or <tt><span class="operator">clip</span></tt>ping are the responsibility of the calling code.</p>
+
+
+<h3 id="ApproximatingCurve"><a href="#top">&uArr;</a> <a href="#shapes">&uarr;</a> <a href="#ApproximatingCurve">&bull;</a> ApproximatingCurve</h3>
+<p>Assume existences of arbitrary functions X[<i>t</i>] and Y[<i>t</i>], both differentiable at least twice. 
+It is wanted to make a single B&eacute;zier curve approximating this for <i>t</i><small><sub>start</sub></small>&nbsp;&le;&nbsp;<i>t</i>&nbsp;&le;&nbsp;<i>t</i><small><sub>end</sub></small>. 
+Obviously the B&eacute;zier curve starts at (X[<i>t</i><small><sub>start</sub></small>],Y[<i>t</i><small><sub>start</sub></small>]) and ends at (X[<i>t</i><small><sub>end</sub></small>],Y[<i>t</i><small><sub>end</sub></small>]), but what are the middle control points? 
+Answered by <tt><i>Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe</i>&nbsp;  ApproximatingCurve&nbsp;  X1 Y1 X2 Y2</tt>, where &lsquo;d&rsquo; is a derivative wrt <i>t</i>, and &lsquo;s&rsquo;|&lsquo;e&rsquo; are the values at the start|end.</p>
+
+<h3 id="ArchimedeanSpiralPath"><a href="#top">&uArr;</a> <a href="#shapes">&uarr;</a> <a href="#ArchimedeanSpiralPath">&bull;</a> ArchimedeanSpiralPath</h3>
+<p>Makes a path of an Archimedean spiral, in pieces &le;60&deg;, by invoking <tt>ApproximatingCurve</tt>. 
+Parameters: <tt><i>NumArms AngOffset CentreX CentreY RadiusMax RadiusBetweenArms Clockwise</i>&nbsp; ArchimedeanSpiralPath&nbsp;  -</tt>, in which <tt><i>NumArms</i></tt> is integer, <tt><i>Clockwise</i></tt> is Boolean, and the others are real. If <tt><i>AngOffset</i></tt> is zero then one arm emerges vertically fromt he centre, and this is a sensible default.</p>
+
+<p align="right"><img width="96" height="144" align="right" src="analogueclock.gif" alt="Example analogue clock"></p>
+<h3 id="analogueclock"><a href="#top">&uArr;</a> <a href="#shapes">&uarr;</a> <a href="#analogueclock">&bull;</a> AnalogueClock</h3>
+<p><tt>/Left</tt>|<tt>/Center</tt>|<tt>/Right</tt>  <tt>/Top</tt>|<tt>/Middle</tt>|<tt>/Bottom</tt> 
+		<i>num</i><small><sub>1</sub></small> <i>num</i><small><sub>2</sub></small> 
+		<i>num</i><small><sub>3</sub></small> <i>num</i><small><sub>4</sub></small> <tt>true</tt> 
+AnalogueClock 
+-</p>
+<p><tt>/Left</tt>|<tt>/Center</tt>|<tt>/Right</tt>  <tt>/Top</tt>|<tt>/Middle</tt>|<tt>/Bottom</tt> 
+		<i>num</i><small><sub>1</sub></small> <i>num</i><small><sub>2</sub></small> <tt>false</tt> 
+<tt>AnalogueClock</tt> 
+-</p>
+<p><tt>AnalogueClock</tt>&rsquo;s first two parameters, both names, have the same role as in <a href="#star"><tt>Star</tt></a>; 
+<i>num</i><small><sub>1</sub></small> is the width, <i>num</i><small><sub>2</sub></small> is the height. 
+If the last parameter, the boolean, is <tt>true</tt>, then 
+<i>num</i><small><sub>3</sub></small> is the hours (0&nbsp;&le;&nbsp;<i>num</i><small><sub>3</sub></small>&nbsp;&le;&nbsp;12), and 
+<i>num</i><small><sub>4</sub></small> the minutes (0&nbsp;&le;&nbsp;<i>num</i><small><sub>4</sub></small>&nbsp;&le;&nbsp;60). 
+If the last parameter is <tt>false</tt> no hands are shown.</p>
+
+<p>In May 2011 this was removed from the main code, but can still be found at <a href="analogueclock.ps">www.jdawiseman.com/papers/placemat/analogueclock.ps</a>.</p>
+
+
+<hr>
+<h2 id="compoundobjects"><a href="#top">&uArr;</a> <a href="#compoundobjects">&bull;</a> Compound Objects</h2>
+<p>In many places <a href="http://www.jdawiseman.com/papers/placemat/placemat.ps">the PostScript program</a> 
+accepts parameters in the form of a &ldquo;compound object&rdquo;. 
+A compound object is any of the following.</p><ul>
+<li>A string;
+<li>The name of a glyph;
+<li>Any array of compound objects;
+<li>Code that does any of:<ul>
+	<li>Leave on the stack &ge;0 compound objects;
+	<li>Move the currentpoint by a distance proportional to <a href="#currentfontsize"><tt>CurrentFontSize</tt></a> (e.g., for kerning or superscripting);
+	<li>Change the typeface (probably with <tt>selectfont</tt>), the size of the new typeface being proportional to <a href="#currentfontsize"><tt>CurrentFontSize</tt></a>;
+	<li>Change the current colour (usually with <tt>setgray</tt> or <tt>setrgbcolor</tt>);
+	<li>Generate the path of a shape (without calling <tt>newpath</tt> or making any changes to the clipping path), the shape&rsquo;s position being determined by the currentpoint, and its size being proportional to <a href="#currentfontsize"><tt>CurrentFontSize</tt></a>;
+	<li>Optionally paint said shape with an un<tt>bind</tt>ed call to any of <tt>fill</tt>, <tt>eofill</tt>, <tt>stroke</tt>, <tt>ufill</tt>, <tt>ueofill</tt>, <tt>shfill</tt>.</ul></ul>
+<p>There are  a number of routines  handling compound objects described below.</p>
+<p>Note that the wide freedom allowed to code in a compound object causes some problems.</p>
+<ul>
+<li><p>A bug in at least one version of Distiller (Professional 8.1.0 (10/23/06) on Mac OSX) 
+causes paths made partly from <tt>charpath</tt> and partly from <tt>lineto</tt>s and <tt>curveto</tt>s 
+to be stroked incompletely (see <a href="http://groups.google.com/group/comp.lang.postscript/browse_thread/thread/8599a22cfa270e5f/">thread</a>).</p>
+<li><p>It seems natural to surround the size-measurement routines with a <tt>gsave&nbsp;nulldevice</tt> &hellip; <tt>grestore</tt>. 
+But, alas, <tt>nulldevice</tt> seems to cause the current path to be stored with integer coordinates, 
+thus causing <a href="#pathbbox"><tt>PathBBox</tt></a> (and indeed <tt>pathbbox</tt>) to return slightly incorrect values
+(<a href="http://groups.google.com/group/comp.lang.postscript/browse_thread/thread/ed1436710cbf93e6/">thread</a>).</p>
+</ul>
+
+<h3 id="glyphpath"><a href="#top">&uArr;</a> <a href="#compoundobjects">&uarr;</a> <a href="#glyphpath">&bull;</a> GlyphPath</h3>
+<p><i>glyphname</i>&nbsp;<i>bool</i> 
+<tt>GlyphPath</tt> 
+-</p>
+<p><tt>GlyphPath</tt> computes the path of a glyph, with the charpath-style boolean flag, destroying the currentpoint. 
+Its design was based on suggestions made in <a href="http://groups.google.com/group/comp.lang.postscript/browse_thread/thread/aef0067dbb1b2d5c/">this thread</a>.</p>
+
+<h3 id="glyphpathmoveto"><a href="#top">&uArr;</a> <a href="#compoundobjects">&uarr;</a> <a href="#glyphpathmoveto">&bull;</a> GlyphPathMoveto</h3>
+<p><i>glyphname</i>&nbsp;<i>bool</i> 
+<tt>GlyphPathMoveto</tt> 
+-</p>
+<p><tt>GlyphPathMoveto</tt> computes the path of a glyph, with the charpath-style boolean flag, moving the currentpoint as if after a <tt>show</tt>.</p>
+
+<h3 id="charpathrecursive"><a href="#top">&uArr;</a> <a href="#compoundobjects">&uarr;</a> <a href="#charpathrecursive">&bull;</a> CharPathRecursive</h3>
+<p><i>CompoundObject</i>&nbsp;<i>bool</i> 
+<tt>CharPathRecursive</tt> 
+-</p>
+<p><tt>CharPathRecursive</tt> computes the path of a compound object, with the charpath-style boolean flag, destroying the currentpoint.
+This, and several other functions taking a <i>CompoundObject</i>, must work around two different bugs in distiller; 
+<a href="http://groups.google.com/group/comp.lang.postscript/browse_thread/thread/8599a22cfa270e5f/">one about forming paths with both charpath and lineto</a>; 
+<a href="http://groups.google.com/group/comp.lang.postscript/browse_thread/thread/ed1436710cbf93e6/">the other about path construction differing after a call of <tt>nulldevice</tt></a>.
+<tt>CharPathRecursive</tt> calls <a href="#glyphpath"><tt>GlyphPath</tt></a>, <tt>CharPathRec</tt>, <tt>CharPathRecMoveto</tt> and <a href="#xcheckrecursive"><tt>XcheckRecursive</tt></a>.</p>
+
+<h3 id="charpathrecursivemoveto"><a href="#top">&uArr;</a> <a href="#compoundobjects">&uarr;</a> <a href="#charpathrecursivemoveto">&bull;</a> CharPathRecursiveMoveto</h3>
+<p><i>CompoundObject</i>&nbsp;<i>bool</i> 
+<tt>CharPathRecursiveMoveto</tt> 
+-</p>
+<p><tt>CharPathRecursiveMoveto</tt> computes the path of a compound object, with the charpath-style boolean flag, moving the currentpoint as if after a <tt>show</tt>.
+Other than not destroying the currentpoint, <tt>CharPathRecursiveMoveto</tt> closely resembles <a href="#charpathrecursive"><tt>CharPathRecursive</tt></a>. 
+<tt>CharPathRecursiveMoveto</tt> calls <a href="#glyphpathmoveto"><tt>GlyphPathMoveto</tt></a>, <tt>CharPathRecMoveto</tt> and <a href="#xcheckrecursive"><tt>XcheckRecursive</tt></a>.</p>
+
+<h3 id="stringheight"><a href="#top">&uArr;</a> <a href="#compoundobjects">&uarr;</a> <a href="#stringheight">&bull;</a> StringHeight</h3>
+<p><i>CompoundObject</i> 
+<tt>StringHeight</tt> 
+<i>num</i></p>
+<p><tt>StringHeight</tt> computes the height of its parameter, that is, the difference between the top and bottom of its bounding box. 
+Calls <a href="#pathbbox"><tt>PathBBox</tt></a>.</p>
+
+<h3 id="stringmiddleoffset"><a href="#top">&uArr;</a> <a href="#compoundobjects">&uarr;</a> <a href="#stringmiddleoffset">&bull;</a> StringMiddleOffset</h3>
+<p><i>CompoundObject</i> 
+<tt>StringMiddleOffset</tt> 
+<i>num</i></p>
+<p><tt>StringMiddleOffset</tt> computes the offset to the baseline required to centre the parameter vertically. 
+Calls <a href="#pathbbox"><tt>PathBBox</tt></a>.</p>
+
+<h3 id="stringtopoffset"><a href="#top">&uArr;</a> <a href="#compoundobjects">&uarr;</a> <a href="#stringtopoffset">&bull;</a> StringTopOffset</h3>
+<p><i>CompoundObject</i> 
+<tt>StringTopOffset</tt> 
+<i>num</i></p>
+<p><tt>StringTopOffset</tt> computes the offset to the baseline required to align the top of the parameter vertically against the <i>y</i> value of the currentpoint. 
+Calls <a href="#pathbbox"><tt>PathBBox</tt></a>.</p>
+
+<h3 id="stringwidthrecursive"><a href="#top">&uArr;</a> <a href="#compoundobjects">&uarr;</a> <a href="#stringwidthrecursive">&bull;</a> StringWidthRecursive</h3>
+<p><i>CompoundObject</i> 
+<tt>StringWidthRecursive</tt> 
+<i>num</i></p>
+<p><tt>StringWidthRecursive</tt> computes the width of the compound object. Unlike the operator <tt>stringwidth</tt>, it does not compute a vertical offset, 
+as compound objects are always shown horizontally. Other than this no-<i>y</i> computation, <tt>StringWidthRecursive</tt> and  <tt>stringwidth</tt> are analagous.
+Calls <tt>StringWidthRec</tt>.</p>
+
+<h3 id="showrecursive"><a href="#top">&uArr;</a> <a href="#compoundobjects">&uarr;</a> <a href="#showrecursive">&bull;</a> ShowRecursive</h3>
+<p><i>CompoundObject</i> 
+<tt>ShowRecursive</tt> 
+-</p>
+<p><tt>ShowRecursive</tt> is the compound-object version of <tt>show</tt>. 
+The compound object is shown starting at the currentpoint, and in the current font, though either of these might be changed by code within the compound object.</p>
+
+<h3 id="lengthcompoundobject"><a href="#top">&uArr;</a> <a href="#compoundobjects">&uarr;</a> <a href="#lengthcompoundobject">&bull;</a> LengthCompoundObject</h3>
+<p><i>CompoundObject</i> 
+<tt>LengthCompoundObject</tt> 
+-</p>
+<p><tt>LengthCompoundObject</tt> computes the width of the parameter in characters, and is hence meant to be analagous to <tt>length</tt>. 
+Before any code execution, <tt>EffectiveNumCharacters</tt> is set to zero. 
+After the code execution <tt>EffectiveNumCharacters</tt> is added to the length. 
+Hence code rendering a glyph or sequence of glyphs can set <tt>EffectiveNumCharacters</tt> 
+to be the effective number of &lsquo;characters&rsquo;, whatever that might be wanted to mean.</p>
+
+<h3 id="xcheckrecursive"><a href="#top">&uArr;</a> <a href="#compoundobjects">&uarr;</a> <a href="#xcheckrecursive">&bull;</a> XcheckRecursive</h3>
+<p><i>CompoundObject</i> 
+<tt>XcheckRecursive</tt> 
+<i>bool</i></p>
+<p><tt>XcheckRecursive</tt> returns true if the parameter contains any code, however deeply within nested arrays, otherwise <tt>false</tt>.</p>
+
+<h3 id="deglyphrecursive"><a href="#top">&uArr;</a> <a href="#compoundobjects">&uarr;</a> <a href="#deglyphrecursive">&bull;</a> DeGlyphRecursive</h3>
+<p><i>CompoundObject</i> 
+<tt>DeGlyphRecursive</tt> 
+<i>string</i></p>
+<p><tt>DeGlyphRecursive</tt> approximates a compound object with a string. 
+PDF pages can be named, but the name is passed to <tt>pdfmark</tt> as a string. 
+But page names might contain, for example, accents. 
+<tt>DeGlyphRecursive</tt> strips accents, and approximates other glyphs.</p>
+
+
+<hr>
+<h2 id="pathsoutput"><a href="#top">&uArr;</a> <a href="#pathsoutput">&bull;</a> Paths and Output</h2>
+<h3 id="pathbbox"><a href="#top">&uArr;</a> <a href="#pathsoutput">&uarr;</a> <a href="#pathbbox">&bull;</a> PathBBox</h3>
+<p>- 
+<tt>PathBBox</tt> 
+<i>llx</i> <i>lly</i> <i>urx</i> <i>ury</i></p>
+<p><tt>PathBBox</tt> is what the lower-case operator <tt>pathbbox</tt> should have been. 
+From <a href="http://www.adobe.com/products/postscript/pdfs/PLRM.pdf">PLRM3</a> on <tt>pathbbox</tt>: 
+&ldquo;If the user coordinate system is rotated 
+(other than by a multiple of 90 degrees) or skewed, the bounding box returned may be larger than expected.&rdquo;
+This is not so for <tt>PathBBox</tt> which, further, does not need a preceding <tt>flattenpath</tt>. 
+<tt>PathBBox</tt> works using <tt>pathforall</tt>, and for curve pieces solves the quadratic to compute precise turning points.</p>
+<p>If the current path contains any line or curves, isolated moves are ignored. 
+If the current path contains only isolated moves, the returned box includes all the moves.
+If the current path contains nothing, <tt>PathBBox</tt> invokes <tt>emptycurrentpath</tt>, which, 
+if not defined by calling code, will cause distillation to terminate with an error.</p>
+<p><tt>PathBBox</tt> is about a hundred times slower than <tt>flattenpath&nbsp;pathbbox</tt>, and was discussed in 
+<a href="http://groups.google.com/group/comp.lang.postscript/browse_thread/thread/a181d5c5a326aa39/">this thread</a>.</p> 
+
+<h3 id="setpapersize"><a href="#top">&uArr;</a> <a href="#pathsoutput">&uarr;</a> <a href="#setpapersize">&bull;</a> SetPaperSize</h3>
+<p><i>bool</i><small><sub>1</sub></small>&nbsp;<i>bool</i><small><sub>2</sub></small>&nbsp;<i>bool</i><small><sub>3</sub></small>&nbsp;<i>bool</i><small><sub>4</sub></small>&nbsp;<i>name</i><small><sub>1</sub></small>&nbsp;<i>name</i><small><sub>2</sub></small> 
+<tt>SetPaperSize</tt> 
+-</p>
+<p>The parameter <i>name</i><small><sub>1</sub></small> should be one of <tt>/A0</tt> though to <tt>/A9</tt>, 
+or <tt>/USL</tt> (for 8&frac12;&Prime;&times;11&Prime; US Letter), <tt>/USL2</tt> (for 11&Prime;&times;17&Prime; US Ledger), 
+<tt>/USLegal</tt> (for 8&frac12;&Prime;&times;14&Prime; US Legal), or <tt>/A4_USL</tt> (the width of A4, the 11&Prime; height of US Letter). 
+The parameter <i>name</i><small><sub>2</sub></small> should be one of <tt>/Landscape</tt> or <tt>/Portrait</tt>.
+If <i>bool</i><small><sub>1</sub></small> then crop marks might be painted, these being controlled by the likes of <tt>OuterGlassesMarginL</tt>. 
+If <i>bool</i><small><sub>2</sub></small> then the page is rotated 180&deg;.
+If <i>bool</i><small><sub>3</sub></small> then the page is mirrored.
+If <i>bool</i><small><sub>4</sub></small> then <tt>setpagedevice</tt> is called.
+Thus <tt>SetPaperSize</tt> sets the paper size. 
+Calls <tt>Dimensions</tt>; assumes existence of some margin parameters.</p>
+
+<p align="right"><img width="403" height="403" align="right" src="filltexts.png" alt="Example of titles filled with text"></p>
+<h3 id="repeatclippedwithin"><a href="#top">&uArr;</a> <a href="#pathsoutput">&uarr;</a> <a href="#repeatclippedwithin">&bull;</a> RepeatClippedWithin</h3>
+<p><i>num</i><small><sub><i>x</i></sub></small> <i>num</i><small><sub><i>y</i></sub></small>
+<i>CompoundObject</i> <i>num</i><small><sub><i>Spaces</i></sub></small>  <i>num</i><small><sub><i>LineStep</i></sub></small> 
+<i>num</i><small><sub><i>Angle</i></sub></small>  <i>int</i>  
+<i>code</i><small><sub>1</sub></small>  <i>code</i><small><sub>2</sub></small>
+<tt>RepeatClippedWithin</tt> - </p>
+<p><tt>RepeatClippedWithin</tt> paints repeated copies of a compound object within a path. 
+On calling <tt>RepeatClippedWithin</tt> there is a current font. 
+The current path is used as the clipping path, and remains the current path on exit. 
+The <i>CompoundObject</i> is the object shown repeatedly. 
+Horizontally, these are separated by <i>num</i><small><sub><i>Spaces</i></sub></small> space widths. 
+Lines are <i>num</i><small><sub><i>LineStep</i></sub></small> apart.
+The compound object is shown at angle <i>num</i><small><sub><i>Angle</i></sub></small>. 
+The <i>int</i> parameter  is the number of outlines shown.
+The innermost colour, that is the fill colour of the compound object, is set by <i>code</i><small><sub>1</sub></small>,
+and the other by <i>code</i><small><sub>2</sub></small>. 
+The <i>num</i><small><sub><i>x</i></sub></small> and <i>num</i><small><sub><i>y</i></sub></small> values
+determine a &lsquo;starting point&rsquo; for the filling. 
+In the example on the right <tt>RepeatClippedWithin</tt> has been called twice: the fills line up because the 
+<i>num</i><small><sub><i>x</i></sub></small> and <i>num</i><small><sub><i>y</i></sub></small> values were the same.
+(Help on insideness testing was received <a href="http://groups.google.com/group/comp.lang.postscript/browse_frm/thread/5de827bd6c03002e/">here</a>.)</p>
+
+<h3 id="transformpath"><a href="#top">&uArr;</a> <a href="#pathsoutput">&uarr;</a> <a href="#transformpath">&bull;</a> TransformPath</h3>
+<p><tt>{</tt><i>TransformFunction</i><tt>}</tt>&nbsp;<i>num</i> 
+<tt>TransformPath</tt> 
+-</p>
+<p><tt>TransformPath</tt> replaces the current path with a transformed version.
+The parameter <i>TransformFunction</i> does most of the work, it taking four parameters 
+<i>x</i>, <i>y</i>, <i>dx</i>, <i>dy</i> (the last two being a vector, or a direction pointing away from <i>x</i>,<i>y</i>), and converts them to 
+<i>x</i>', <i>y</i>', <i>dx</i>', <i>dy</i>'. Thus the  first parameter converts a position, and a direction from that position, 
+to a new position and a new direction.
+The second parameter, a number, is a distance in the transformed space that can be deemed small 
+(with 0.12, or one pixel at 600dpi, being sensible). 
+If <tt>TransformPath</tt> appears not to work, a likely cause is a failure by the calling routine to pass code that correctly computes <i>dx</i>', <i>dy</i>'. 
+Calls <tt>TransformMoveto</tt>, <tt>TransformLinetoClosepath</tt>, <tt>TransformLineto</tt>, <tt>TransformClosepath</tt> and <tt>TransformCurveto</tt>.</p> 
+
+<p>In May 2011 this was removed from the main code, but can still be found at <a href="transformpath.ps">www.jdawiseman.com/papers/placemat/transformpath.ps</a>.</p>
+
+<p align="right"><i>Julian D. A. Wiseman</i></p>
+
+<hr>
+
+<table width="100%" border="0" id="end">
+<tr>
+	<td width="40%" align="left"><a href="../../index.html">Main index</a></td>
+	<td width="20%" align="center"><a href="#top">Top</a></td>
+	<td width="40%" align="right"><a href="../../author.html">About author</a></td>
+</tr></table>
+
+</body>
+</html>
