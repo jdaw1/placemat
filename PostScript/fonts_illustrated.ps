@@ -1,0 +1,1610 @@
+%!PS
+
+% This version 21:15 Thursday 27th August 2020
+/CreationDateAdobeFormat (D:202008272115) def
+
+/FontStartNum 0 def   % ordered after all sorting
+/FontEndNum 2147483647 def % ordered after all sorting
+
+/ExampleText [
+	(G0123456789 The quick brown fox jumps over the lazy dog .,? ) /aacute /atilde /ccedilla ( )
+	/alpha /beta  % /gamma /delta /epsilon
+	/fi /fl /threequarters  % /lessequal
+	/dagger /lozenge
+	( QUICK BROWN FOX JUMPS OVER THE LAZY DOG)
+%	/alpha /beta /gamma /delta /epsilon /zeta /eta /theta /iota /kappa /lambda
+%	/mu /nu /xi /omicron /pi /rho /sigma /tau /upsilon /phi /chi /psi /omega
+%	( G0123456789)
+] def  % /ExampleText
+
+/MandatoryGlyphs [  % Must be glyph names rather than arbitrary strings
+%	/alpha /beta /gamma /delta /epsilon /zeta /eta /theta
+%	/iota /kappa /lambda /mu /nu /xi /omicron /pi
+%	/rho /sigma /tau /upsilon /phi /chi /psi /omega
+] def  % /MandatoryGlyphs
+
+/ForbidDescender_J false def
+/ForbidNarrow_I false def
+/ForbidItalic false def
+/ForbidOblique ForbidItalic def
+
+/HeightMatch false def
+/HeightMatchToleranceT 0.04 def  % Max deviation of character tops from baseline, as proportion font size
+/HeightMatchToleranceB HeightMatchToleranceT def  % Max deviation of character bottoms from baseline, as proportion font size
+/HeightMatchCharacters [(D) (F) (T) (0) (3) (5) (6) (7) (8)] def
+
+/TallnessSortBy HeightMatch def
+/TallnessString (85) def  % For sorting, by this string's Height/Width ratio
+/TallnessMin 0.75 def
+/TallnessMax 99999 def
+
+/SpecialFonts [ ] def  % For which some numbers logged   (FusiThinNormal)
+
+/DotFontsExclude true def  % If first character of name is a dot, exclude?
+
+/PaperType /A3 def  % /A4 /USL /A3 /USLegal /USL2
+/Orientation /Landscape def  % /Landscape /Portrait
+/MarginL 9      def  % Left
+/MarginR MarginL def  % Right
+/MarginT MarginL def  % Top
+/MarginB MarginT def  % Bottom
+
+/FontSize 18 def
+/LineStep FontSize 1.5 mul def
+/TabX TallnessSortBy {11} {8} ifelse FontSize mul MarginL add def
+/FontNameLabels /AvenirNextCondensed-Regular def
+
+/SortNameCaseSensitive false def
+
+/KnownBadFonts [
+	% Just too many: if ending in a hyphen test whether beginfgs with string except that terminal hyphen
+	(Anklepants)
+	(ArialHebrew-)
+	(Beijing-)
+	(ChineseRocksFree)
+	(CorsivaHebrew-)
+	(DFKaiShu-)
+	(FutoGoB101-)
+	(FutoMinA101-)
+	(GothicBBB-)
+	(GothicMB101-)
+	(HeiseiKakuGo-)
+	(HeiseiKakuGothic-)
+	(HeiseiMaruGo-)
+	(HeiseiMin-)
+	(HeiseiMincho-)
+	(HonMincho-)
+	(HYGoThic-)
+	(HYGungSo-)
+	(HYKHeadLine-)
+	(HYRGoThic-)
+	(HYSMyeongJo-)
+	(IrianisADF-)
+	(JCkg-)
+	(JCfg-)
+	(Jun101-)
+	(Jun34-)
+	(Jun501-)
+	(KozMin-)
+	(KyokaICA-)
+	(LiGothicMed-)
+	(LiSungLight-)
+	(LogoArl-)
+	(LogoCut-)
+	(LogoLine-)
+	(MaruGothic-)
+	(MHei-)
+	(MidashiGo-)
+	(MidashiMin-)
+	(Ming-Lt-)
+	(MingLiU-)
+	(MKai-)
+	(MSung-)
+	(Munhwa-)
+	(MunhwaGothic-)
+	(MyriadArabic-)
+	(MyriadHebrew-)
+	(Osaka-)
+	(PTSans-)
+	(PMingLiU-)
+	(Ryumin-)
+	(Seoul-)
+	(ShinGo-)
+	(ShinseiKai-)
+	(SIL-)
+	(SimHei-)
+	(SimSun-)
+	(SMGothic-)
+	(SMMyungjo-)
+	(STFangsong-)
+	(TFangsong-)
+	(STHeiti-)
+	(STHeitiTC-)
+	(STKaiti-)
+	(STKaitiSC-)
+	(STSong-)
+	(STSongti-)
+	(Taipei-)
+	(TBKomachiG-)
+	(TBKomachiM-)
+	(TBKomachiRG-)
+	(TBKoudoukenG-)
+	(TBKoudoukenM-)
+	(TBKoudoukenRG-)
+	(TBRyokanG-)
+	(TBRyokanM-)
+	(TBRyokanRG-)
+	(TBTsukijiG-)
+	(TBTsukijiM-)
+	(TBTsukijiRG-)
+	(TBYukinariG-)
+	(TBYukinariM-)
+	(TBYukinariRG-)
+	(TypeBankG-)
+	(TypeBankM-)
+	(TypeBankMaruG-)
+	(Walkway-)
+	(AdobeArabic-)
+	(AdobeDevanagari-)
+	(AdobeHebrew-)
+	(AdobeThai-)
+	(AppleBraille-)
+	(X0-)  (X1-)  (X2-)  (X3-)  (X4-)  (X5-)  (X6-)  (X7-)  (X8-)  (X9-)
+	(XA-)  (XB-)  (XC-)  (XD-)  (XE-)  (XF-)
+
+	% Fonts missing or broken
+	(NanumGothicExtraBold)
+	(Baghdad)
+	(HelveticaNeue)
+	(HelveticaNeue-Bold)
+	(HelveticaNeue-BoldItalic)
+	(HelveticaNeue-CondensedBlack)
+	(HelveticaNeue-CondensedBold)
+	(HelveticaNeue-Italic)
+	(HelveticaNeue-UltraLight)
+	(HelveticaNeue-UltraLightItalic)
+	(Kailasa)
+	(Kailasa-Bold)
+	(Nadeem)
+
+	% The following fonts just not text, not liked, or missing too many ordinary characters
+	(Israel)
+	(AbuelaGrillo)
+	(AcornInitials)
+	(HelloLarry)
+	(MonotypeSorts)
+	(MorrisInitialen)
+	(Showboat)
+	(Strait-Kcab)
+	(SybilGreen)
+	(TeryleneTop)
+	(Tsar-)
+	(WeissLapidar)
+	(ZapfDingbatsITC)
+	(ZentenarZier)
+	(AdobePiStd)
+	(AlBayan-)
+	(AlTarikh)
+	(AnnStone)
+	(ArabesqueInitialen)
+	(AristokratZierbuchstaben)
+	(AlNile-)
+	(AppleColorEmoji)
+	(Bar1Normal)  (Bar2Normal)
+	(BetsyFlanagan-)
+	(Bizarro)
+	(Blackletter-Shadow)
+	(Boron)
+	(BoxingBrophius)
+	(BroadcastTitling)
+	(Counterscraps)
+	(DavysDingbats-)  (DavysOtherDingbats)
+	(DecoratedRomanInitials)
+	(Digits)
+	(Ding1Normal)  (Ding2Normal)  (Ding3Normal)  (Ding4Normal)
+	(DriftWood)
+	(EgyptienneZierinitialien)
+	(Ehmcke-)
+	(EichenlaubInitialen)
+	(Eisenbahn)
+	(ElzevierCaps-Regular)
+	(GingerbreadInitials)
+	(GotischeInitialen)
+	(GroovyGhosties)
+	(Gujarati-)
+	(HazardSigns)
+	(HoeflerText-Ornaments)
+	(HumboldtFrakturInitialen)
+	(Inkpen2)  (Inkpen2Metronome)  (Inkpen2Special)  (Inkpen2Text)
+	(IowanOldStyle-Titling)
+	(JugendstilOrnamente)
+	(KeystoneNormal)
+	(Logger)
+	(LudlowDingbats)
+	(MSReferenceSpecialty)
+	(MT-Extra)
+	(Notes)
+	(Numberpile)
+	(NouveauDropCaps)
+	(Opus-)
+	(PantsPatrol)
+	(RedivivaZierbuchstaben)
+	(Rudelsberg-Initialen)  (Rudelsberg-Schmuck)
+	(SappyMugs)
+	(SloeGinRickey)
+	(TypographersHolidayfont)  (TypographerWoodcutInitialsOne)
+	(Unger-FrakturZierbuchstaben)
+	(UnsteadyOversteer)
+	(Webdings)
+	(PaulusFranckInitialen)
+	(Marlett)
+	(Beirut)
+	(BierundWein)
+	(BorderBaseFuture)
+	(CarrickCaps)
+	(Cardiff)
+	(Damascus-)
+	(DecoTypeNaskh)
+	(AndaleMono)
+	(Apple-Chancery)
+	(AppleSymbols)
+	(Ayuthaya)
+	(BanglaMN)
+	(BanglaMN-Bold)
+	(BanglaSangamMN)
+	(BanglaSangamMN-Bold)
+	(BodoniOrnamentsITCTT)
+	(BradleyHandITCTT-Bold)
+	(Chalkboard)
+	(Chalkboard-Bold)
+	(ChalkboardSE-Bold)
+	(ChalkboardSE-Light)
+	(ChalkboardSE-Regular)
+	(Chalkduster)
+	(ComicSansMS)
+	(ComicSansMS-Bold)
+	(Copperplate)
+	(Copperplate-Bold)
+	(Copperplate-Light)
+	(Devanagari-)
+	(Diwan-)
+	(EileenCaps-)
+	(Farah)
+	(Farisi)
+	(WWWWWWWWWWWW)
+	(EngraversMT)
+	(EngraversMT-Bold)
+	(GeezaPro-)
+	(GriffinDingbats-)
+	(Helsinki-)
+	(HippyStamp)
+	(HYFix)
+	(JournalDingbats-)
+	(Karma-)
+	(Kinder-Vignetten)
+	(KinigsteinCaps)
+	(KochInitialen)
+	(Kokonor)
+	(KonanurKaps)
+	(Kramer-)
+	(KufiStandardGK)
+	(LastResort)
+	(Lettresombreesornees)
+	(LiturgischZierbuchstaben)
+	(LuckyApe)
+	(MeteorGM)
+	(MonotypeGurmukhi)
+	(Mshtakan-)
+	(Muna)  (MunaBlack)  (MunaBold)
+	(NeugotischeInitialen)
+	(NewPeninimMT-)
+	(NotoNastaliqUrdu)
+	(OptimisticPessimist)
+	(PastorofMuppets-)
+	(Pointage)
+	(Poke)
+	(PositiveNhilism)
+	(PrintersOrnamentsOne)
+	(Raanana-)
+	(RadiosinMotion-)
+	(Roycroft-Initials)
+	(Sana)
+	(Sholom)
+	(SignsNormal)
+	(ToskanischeEgyptienneInitialen)
+	(TrollBait)
+	(TypekeysNormal)
+	(VictorianInitials-One)
+	(Waseem-)
+	(WelfareBrat)
+	(WieynkFrakturInitialen)  (WieynkFrakturVignetten)
+	(Wingdings-)
+	(ZallmanCaps)
+	(Zierinitialen-)
+	(Geneva)
+	(GujaratiSangamMN)
+	(GujaratiSangamMN-Bold)
+	(GurmukhiMN)
+	(GurmukhiMN-Bold)
+	(GurmukhiSangamMN)
+	(GurmukhiSangamMN-Bold)
+	(Henk)
+	(HelsinkiSpecial)
+	(Herculanum)
+	(HoeflerText-Regular)
+	(ImprintMT-Shadow)
+	(InaiMathi)
+	(InaiMathi-Bold)
+	(Inkpen2Chords)
+	(Ipe2eooe)
+	(KinoMT)
+	(Krungthep)
+	(LaoMN)
+	(LaoMN-Bold)
+	(LaoSangamMN)
+	(LatinWide)
+	(MarkerFelt-Thin)
+	(MarkerFelt-Wide)
+	(MaturaMTScriptCapitals)
+	(Menlo-Bold)
+	(Menlo-BoldItalic)
+	(Menlo-Italic)
+	(Menlo-Regular)
+	(Mistral)
+	(Monaco)
+	(MonotypeCorsiva)
+	(MyanmarMN)
+	(MyanmarMN-Bold)
+	(MyanmarSangamMN)
+	(MyanmarSangamMN-Bold)
+	(NotDefFont)
+	(Noteworthy-Bold)
+	(Noteworthy-Light)
+	(OCRB)
+	(Ou)
+	(OpusChords)
+	(OpusChordsSans)
+	(OpusChordsSansCondensed)
+	(OpusFiguredBass)
+	(OpusPlainChords)
+	(OpusRomanChords)
+	(OpusSpecial)
+	(OpusSpecialExtra)
+	(Opusex)
+	(OriyaMN)
+	(OriyaMN-Bold)
+	(OriyaSangamMN)
+ 	(OriyaSangamMN-Bold)
+	(PerpetuaTitlingMT-Bold)
+	(PerpetuaTitlingMT-Light)
+	(Phosphate-Inline)
+	(Phosphate-Solid)
+	(PlantagenetCherokee)
+	(Playbill)
+	(PTMono-Bold)
+	(PTMono-Regular)
+	(Rere)
+	(RepriseChords)
+	(RepriseMetronome)
+	(RepriseRehearsal)
+	(RepriseScript)
+	(RepriseSpecial)
+	(RepriseStamp)
+	(Reprise)
+	(RepriseText)
+	(RepriseTitle)
+	(Romantik)
+	(ShreeDev0714-Bold)
+	(ShreeDev0714-BoldItalic)
+	(Silom)
+	(SinhalaMN)
+	(SinhalaMN-Bold)
+	(SinhalaSangamMN)
+	(SinhalaSangamMN-Bold)
+	(Symbol)
+	(TamilMN-Bold)
+	(TamilSangamMN)
+	(TamilSangamMN-Bold)
+	(ThannhaeuserZier)
+	(Triac71)
+	(TypographerCaps)
+	(eluguMN)
+	(eluguMN-Bold)
+	(TeluguSangamMN)
+	(TeluguSangamMN-Bold)
+	(HorrorDingbats)
+
+	% ... could not be embedded because of licensing restrictions
+	(AlteSchwabacher-)
+	(Denver-Serial-)  % Cannot be embedded
+	(20thCentenaryFaux)
+	(ACutAboveTheRest)
+	(Aliensatemymum)
+	(ALoveofThunder)
+	(AlphaFlowers)
+	(AlphaRomanieG98)
+	(AlphaRomanieOutlineG98)
+	(AlteSchwabacher)
+	(AlteSchwabacherOSF)
+	(Aneirin)
+	(AnglicanText)
+	(ArgosGeorge)
+	(AYummyApology)
+	(Ayuthaya)
+	(Belshaw)
+	(Berthside)
+	(BlackletterExtraBold)
+	(BlacksmithDelight)
+	(BlobfontG98)
+	(BlownAway)
+	(BogStandard)
+	(Boneribbon)
+	(BraveNewEraflatG98)
+	(BraveNewEraG98)
+	(Cabaret)
+	(CabaretContour)
+	(CabaretShadow)
+	(CelticFrames)
+	(ChainzG98)
+	(Cimbrian)
+	(Cimbrian)
+	(CircusOrnate)
+	(CloisterBlack-)
+	(CoasterBlack)
+	(ColchesterBlack)
+	(CrinkleCutGlass)
+	(Cruickshank)
+	(CylonicCrossdraft)
+	(Drummon)
+	(DrummonNarrow)
+	(DuererGotisch)
+	(Dumbledor3)
+	(Dumbledor33D)
+	(Durwent)
+	(EarlyTickertape)
+	(ElfarNormalG98)
+	(Erthqake)
+	(Eurolayeee)
+	(FailedFont1Linemorph)
+	(FailedFont2Jigsaw)
+	(Fairytale)
+	(Fanfold)
+	(FenwickWoodtype)
+	(FetteEgyptienne)
+	(FetteThannhaeuser)
+	(FrederickText)
+	(FuzzyXmas)
+	(GebetsbuchInitialen)
+	(GemFontOne)
+	(GloucesterInitialen)
+	(GoudyInitialen)
+	(HansaGotisch)
+	(Harrowgate)
+	(Holla)
+	(Inninghamspread)
+	(IsildurHigh)
+	(Jerrybuilt)
+	(Jerusalem)
+	(Jhunwest)
+	(Jhunwest3D)
+	(JhunwestConvex)
+	(KaiserzeitGotisch)
+	(KanzleiLight)
+	(Kharnorric)
+	(KickAssinger)
+	(KingsCross)
+	(KnightsQuest)
+	(KnightsQuestShielded)
+	(KnurledGrips)
+	(KoenigsbergerGotisch)
+	(Layaway)
+	(LickcurlPetite)
+	(Maranallo)
+	(MarkerFelt)
+	(MiddleSaxonyText)
+	(MilleniGem)
+	(MorganTwentyNine)
+	(National-)
+	(NiewCroMagnon)
+	(NiewCroMagnonWide)
+	(ObtuseOne)
+	(OldCopperfield)
+	(Parkvane)
+	(Penelope)
+	(PhilteredPhont)
+	(PhoenixArise)
+	(PictureAlphabet)
+	(Plakat-)
+	(PneumaticsTallBRK)
+	(ProgressiveText)
+	(Quadlateral)
+	(QuentinCaps)
+	(QuiltedIndian)
+	(Riesling)
+	(RipplemereThinItalic)
+	(Roadgeek2000EM)
+	(Roadgeek2000SeriesB)
+	(Roadgeek2000SeriesC)
+	(Roadgeek2000SeriesD)
+	(Roadgeek2000SeriesE)
+	(Roadgeek2000SeriesEModified)
+	(Roadgeek2000SeriesF)
+	(ScalingtheDragon)
+	(Schmuck-)
+	(Sentinel)
+	(SeventyFlares)
+	(Siegfried)
+	(Simpleman)
+	(Skunkline)
+	(SnailnInk)
+	(Stargit)
+	(StargitVer2)
+	(StaticCharge)
+	(Stiltedman)
+	(Tear)
+	(Tearoff)
+	(Textapoint)
+	(Thor)
+	(TimePundits)
+	(Titania-)
+	(Trashed)
+	(Tribeca)
+	(Trilayered)
+	(Trocadero)
+	(UlseFreehand)
+	(UmSticks)
+	(Uncey)
+	(UniTortred)
+	(UponRequest)
+	(ValeShadow)
+	(Variant4GeM)
+	(VictorianText)
+	(WaifThin)
+	(WestminsterGotisch)
+	(Whackadoo)
+	(WhiteLineRolled)
+	(Whoosit)
+	(WideEyed)
+	(Wonkers)
+	(Woodbrush)
+	(Wormfont)
+	(Yonkers)
+	(YurineOverflow)
+	(ZappedSticks)
+	(ZillahModernLine)
+] def  % /KnownBadFonts
+
+/DeBugLevel 100 def  % Smaller numbers are smaller more-core routines.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Some standard subroutines
+
+/OuterMarginL 0 def  /OuterMarginR 0 def  /OuterMarginB 0 def  /OuterMarginT 0 def
+
+/execU /exec load def
+
+/Infinity 32767 def  % = 2^15-1, which in points ~= 11559mm, bigger than the ~7184mm diagonal of the 200"x200" largest allowed PDF page. Can be 8th-powered without overflow, as max float = 2 23 exp 1 sub 2 104 exp mul ~= 1.7*10^38.
+/Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, so about 419 times the single-precision minimum.
+
+%%BeginProlog
+/pdfmark where {pop}
+{
+	/globaldict where {pop globaldict} {userdict} ifelse
+	/pdfmark /cleartomark load put
+} ifelse
+%%EndProlog
+
+/OutputToLog {=} bind def
+
+% name|code  WatchExpression  -
+/WatchExpression
+{
+	1 dict begin   /param exch def
+	mark  /param load ToString  (   =   )  param /param load type /nametype eq {cvx exec} if  ConcatenateToMark  OutputToLog  end
+} bind def  % /WatchExpression
+
+/WatchExpressions { {WatchExpression} forall} bind def  % Plural
+
+% http://groups.google.com/group/comp.lang.postscript/browse_frm/thread/0d6932e989a34102/
+/CountGraphicsStack where {pop}
+{
+	/CountGraphicsStack 0 def
+	/NullDevices 31 array def  NullDevices 0 0 put  % In this code 5 would be enough
+	/gsave {/CountGraphicsStack CountGraphicsStack 1 add store  NullDevices CountGraphicsStack 2 copy 1 sub get put  gsave} bind def
+	/grestore {/CountGraphicsStack CountGraphicsStack 1 sub store  grestore} bind def
+	/nulldevice {NullDevices CountGraphicsStack 2 copy get 1 add put  nulldevice} bind def
+} ifelse  % /CountGraphicsStack where
+
+/mm {2.83464566929133858267716535433 mul} bind def  % 360 mul 127 div
+
+% PaperType Orientation  Dimensions  PageWidth PageHeight
+% https://groups.google.com/forum/#!topic/comp.lang.postscript/vlfF8eGOCMA
+/Dimensions
+{
+	DeBugLevel 10 le {(+Dimensions) OutputToLog} if
+	1 dict begin
+	exch /PaperType exch def
+	1 {
+		/A4      PaperType eq {595.2755905511811023622  841.889763779527559055  exit} if  % For speed start with the five values most often used.
+		/A3      PaperType eq {841.889763779527559055  1190.5511811023622047244 exit} if
+		/USL     PaperType eq {612     792     exit} if
+		/USLegal PaperType eq {612    1008     exit} if
+		/USL2    PaperType eq {792    1224     exit} if
+		PaperType type /arraytype eq {PaperType {execU} forall exit} if  % [ Small Large ]
+		/A4_USL PaperType eq {210 mm 792 exit} if  % Smaller of the A4/USL widths; smaller of the heights
+		/A0  PaperType eq { 841 mm 1189 mm  exit} if  % A0 can hold 112 glasses slightly larger than five on A4. Which is a large enough page size.
+		/A1  PaperType eq { 594 mm  841 mm  exit} if
+		/A2  PaperType eq { 420 mm  594 mm  exit} if
+		/A5  PaperType eq { 148 mm  210 mm  exit} if
+		/A6  PaperType eq { 105 mm  148 mm  exit} if
+		/A7  PaperType eq {  74 mm  105 mm  exit} if
+		/A8  PaperType eq {  52 mm   74 mm  exit} if
+		/A9  PaperType eq {  37 mm   52 mm  exit} if
+		/A10 PaperType eq {  26 mm   37 mm  exit} if  % Much much smaller than useful. Included for completeness.
+		/B0  PaperType eq {1000 mm 1414 mm  exit} if
+		/B1  PaperType eq { 707 mm 1000 mm  exit} if
+		/B2  PaperType eq { 500 mm  707 mm  exit} if
+		/B3  PaperType eq { 353 mm  500 mm  exit} if
+		/B4  PaperType eq { 250 mm  353 mm  exit} if
+		/B5  PaperType eq { 176 mm  250 mm  exit} if
+		/B6  PaperType eq { 125 mm  176 mm  exit} if
+		/B7  PaperType eq {  88 mm  125 mm  exit} if
+		/B8  PaperType eq {  62 mm   88 mm  exit} if
+		/B9  PaperType eq {  44 mm   62 mm  exit} if
+		/B10 PaperType eq {  31 mm   44 mm  exit} if
+		/C0  PaperType eq { 917 mm 1297 mm  exit} if
+		/C1  PaperType eq { 648 mm  917 mm  exit} if
+		/C2  PaperType eq { 458 mm  648 mm  exit} if
+		/C3  PaperType eq { 324 mm  458 mm  exit} if
+		/C4  PaperType eq { 229 mm  324 mm  exit} if
+		/C5  PaperType eq { 162 mm  229 mm  exit} if
+		/C6  PaperType eq { 114 mm  162 mm  exit} if
+		/C7  PaperType eq {  81 mm  114 mm  exit} if
+		/C8  PaperType eq {  57 mm   81 mm  exit} if
+		/C9  PaperType eq {  40 mm   57 mm  exit} if
+		/C10 PaperType eq {  28 mm   40 mm  exit} if
+		(Error: unknown paper type in Dimensions) OutputToLog
+		stop
+	} repeat  end  % 1
+	3 -1 roll /Landscape eq {exch} if
+	DeBugLevel 10 le {(-Dimensions) OutputToLog} if
+} bind def  % /Dimensions
+
+/DefaultOutputFaceUp currentpagedevice /OutputFaceUp 2 copy known {get} {pop pop //false} ifelse def
+
+% ShowCropMarks Rotate180 Mirror Callsetpagedevice PaperType Orientation  SetPaperSize  -
+% First two params ignored if Callsetpagedevice is false
+/SetPaperSize
+{
+	DeBugLevel 15 le {(+SetPaperSize) OutputToLog} if
+	Dimensions /PageHeight exch def  /PageWidth exch def
+
+	% Sets the page size; and attempts to disable duplex; draws crop marks
+	{
+		[PageWidth PageHeight] {14400 gt {(Warning: with a paper side > 14400pt = 16\'8\" = 5.08 metres, about to call setpagedevice, which might fail.) OutputToLog} if} forall
+		<<
+			/OutputFaceUp DefaultOutputFaceUp 4 index {not} if   /PageSize [PageWidth PageHeight]   /ImagingBBox //null
+		>> setpagedevice
+		/InitialMatrix matrix currentmatrix store
+		{
+			{[1 0 0 -1 0 PageHeight] concat}
+			{[-1 0 0 1 PageWidth 0] concat} ifelse  % Rotate180
+		}{
+			{[-1 0 0 -1 PageWidth PageHeight] concat} if  % Rotate180
+		} ifelse  % Mirror
+		/InitialMatrix matrix currentmatrix store
+	} {pop pop} ifelse  % Callsetpagedevice
+	{
+		OuterGlassesMarginL OuterGlassesMarginB translate
+		<< /PageWidth dup load OuterGlassesMarginL OuterGlassesMarginR add sub  /PageHeight dup load OuterGlassesMarginB OuterGlassesMarginT add sub >> begin    //false
+		OuterGlassesMarginL 0 gt
+		{
+			OuterGlassesMarginB 0 gt
+			{
+				OuterGlassesMarginL 108 ge {-36 0 -36 0} {OuterGlassesMarginL -3 div 0 2 copy} ifelse  moveto rlineto
+				OuterGlassesMarginB 108 ge {0 -36 0 -36} {0 OuterGlassesMarginB -3 div 2 copy} ifelse  moveto rlineto  pop //true
+			} if  % OuterGlassesMarginB 0 gt
+			OuterGlassesMarginT 0 gt
+			{
+				OuterGlassesMarginL 108 ge {-36 0 -36} {OuterGlassesMarginL -3 div 0 1 index} ifelse PageHeight  moveto rlineto
+				OuterGlassesMarginT 108 ge {0 36 0 36} {0 OuterGlassesMarginT 3 div 2 copy} ifelse PageHeight add  moveto rlineto  pop //true
+			} if  % OuterGlassesMarginB 0 gt
+		} if  % OuterGlassesMarginL 0 gt
+		OuterGlassesMarginR 0 gt
+		{
+			OuterGlassesMarginB 0 gt
+			{
+				OuterGlassesMarginR 108 ge {36 0 36} {OuterGlassesMarginR 3 div 0 1 index} ifelse PageWidth add 0  moveto rlineto
+				OuterGlassesMarginB 108 ge {0 -36 PageWidth -36} {0 OuterGlassesMarginB -3 div PageWidth 1 index} ifelse  moveto rlineto  pop //true
+			} if  % OuterGlassesMarginT 0 gt
+			OuterGlassesMarginT 0 gt
+			{
+				OuterGlassesMarginR 108 ge {36 0 36} {OuterGlassesMarginR 3 div dup 0 exch} ifelse PageWidth add PageHeight  moveto rlineto
+				OuterGlassesMarginT 108 ge {0 36} {0 OuterGlassesMarginT 3 div} ifelse dup PageHeight add PageWidth exch  moveto rlineto  pop //true
+			} if  % OuterGlassesMarginT 0 gt
+		} if  % OuterGlassesMarginR 0 gt
+		{0 setgray  0.24 setlinewidth  0 setlinecap  stroke} if  end  InitialMatrix setmatrix
+	} if  % show crop marks
+	DeBugLevel 15 le {(-SetPaperSize) OutputToLog} if
+} bind def  % /SetPaperSize
+
+/ConcatenateOverflowErrorsSuppressed false def
+/Concatenate
+{
+	2 copy type exch type
+	2 copy /stringtype ne exch /stringtype ne or
+	{
+		2 copy /arraytype eq exch /arraytype eq 4 2 roll /packedarraytype eq exch /packedarraytype eq
+		3 -1 roll or 3 1 roll or and not
+		{
+			(Error: Concatenate, types either unsuitable or non-matching) OutputToLog == == stop
+		} {false} ifelse  % not both arrays
+	} {pop pop true} ifelse  % either not a string
+	3 1 roll  2 copy  length exch length add dup 65535 le
+	{
+		4 -1 roll {string} {array} ifelse dup dup
+		0  5 index putinterval
+		4 -1 roll length 4 -1 roll putinterval
+	}
+	{
+		% bool A B joint-size
+		pop  3 -1 roll
+		{
+			1 index length 65535 ge
+			{
+				pop
+				ConcatenateOverflowErrorsSuppressed not
+				{
+					(Error: Concatenate, first string of maximal size. Suppressing reporting of further such errors.) OutputToLog
+					/ConcatenateOverflowErrorsSuppressed true store
+				} if  % ConcatenateOverflowErrorsSuppressed not
+			}
+			{
+				ConcatenateOverflowErrorsSuppressed not
+				{
+					(Error: Concatenate -- truncation, as objects jointly too long. Suppressing reporting of further such errors.) OutputToLog
+					/ConcatenateOverflowErrorsSuppressed true store
+				} if  % ConcatenateOverflowErrorsSuppressed not
+				65535 string dup dup  % A B string string string
+				0  5 index  putinterval  % A B string string
+				4 -1 roll length dup 65535 exch sub  % B string string |A| 65535-|A|
+				5 -1 roll 0 3 -1 roll getinterval  % string string |A| B'
+				dup length 0 gt {putinterval} {pop pop} ifelse  % string
+			} ifelse  % First object maximal length
+			dup 65532 (...) putinterval
+		}
+		{
+			ConcatenateOverflowErrorsSuppressed not
+			{
+				(Error: Concatenate, objects jointly too large, returning only first object. Suppressing reporting of further such errors.) OutputToLog
+				/ConcatenateOverflowErrorsSuppressed true store
+			} if  % ConcatenateOverflowErrorsSuppressed not
+			pop
+		} ifelse  % string
+	} ifelse  % fits within architectural limits
+} bind def  % /Concatenate
+
+% Immediate dependencies: ToString.
+% mark string|number|other ... string|number|other  ConcatenateToMark  string
+/ConcatenateToMark
+{
+	4 dict begin
+	counttomark /ctm exch def  /n 0 def
+	ctm {ToString  dup length n add /n exch def  ctm 1 roll} repeat
+	/p 0 def  /s n 65535 2 copy gt {exch} if pop string def
+	ctm  -1  0
+	{
+		dup 0 gt
+		{
+			-1 roll   dup length p add  65532 le
+				{s exch p exch dup length p add /p exch def putinterval}
+				{s exch p exch 0 65532 p sub getinterval putinterval  s 65532 (...) putinterval  cleartomark  s  exit}
+			ifelse  % too long
+		} {pop pop s} ifelse
+	} for
+	end
+} bind def  % /ConcatenateToMark
+
+% Immediate dependencies: ConcatenateToMark.
+% num int  FormatDecimalPlaces  string
+/FormatDecimalPlaces
+{
+	3 dict begin
+	/dp exch def
+	/num exch def
+	dp 0 gt
+	{
+		10 dp exp dup num mul round exch div  15 string cvs
+		0 1 dp {/i exch def dup dup length 1 sub i sub 1 getinterval (.) eq {exit} if} for  i dp lt {mark exch dp i sub {(0)} repeat ConcatenateToMark} if
+	}{
+		10 dp neg exp cvi dup num exch div round cvi exch mul  15 string cvs
+	} ifelse  % dp 0 gt
+	end
+} bind def  % FormatDecimalPlaces
+
+/ToString
+{
+	1 dict begin  dup type cvlit /Type exch def
+	1 {
+		Type /integertype  eq {11 string cvs exit} if
+		Type /realtype     eq {16 string cvs exit} if
+		Type /nametype     eq {dup length string cvs exit} if
+		Type /stringtype   eq {exit} if
+		Type /booleantype  eq {5 string cvs exit} if
+		Type /operatortype eq {127 string cvs exit} if
+		Type /marktype     eq {pop (mark) exit} if
+		Type /nulltype     eq {pop (null) exit} if
+		0 //true ThingToDebugText  % fall-back
+	} repeat  end
+} bind def  % /ToString
+
+% thing DepthOverWhichArraysAndDictsSeparatedWithNewlines  ThingToDebugText  -
+/ThingToDebugText
+{
+	4 dict begin
+	/depth exch def
+	/thing exch def
+	/separator ( ) def   depth 0 gt {separator 0 12 put} if
+
+	1  % 1 {} repeat, beacuse an exit is cleaner than nested ifelse's
+	{
+		/thing load dup xcheck  exch cvlit type /arraytype eq  and
+		{
+			({ ) /thing load cvlit {depth ThingToDebugText Concatenate} forall (} ) Concatenate % use same depth
+			exit
+		} if  % xcheck and array
+
+		/thing load type /operatortype eq
+		{
+			/thing load cvlit 127 string cvs ( ) Concatenate
+			exit
+		} if  % /operatortype
+
+		/thing load dup xcheck  exch cvlit type /nametype eq  and
+		{
+			/thing load cvlit 127 string cvs ( ) Concatenate
+			exit
+		} if  % /operatortype
+
+		/thing load type /nametype eq
+		{
+			/thing load 127 string cvs ( ) Concatenate dup 0 1 getinterval (/) ne {(/) exch Concatenate} if
+			exit
+		} if  % /nametype
+
+		/thing load type /stringtype eq
+		{
+			/thing load rcheck
+			{
+				(\() /thing load (\) ) Concatenate Concatenate exit
+			}
+			{(--string--)} ifelse  % /thing load rcheck
+		} if  % /stringtype
+
+		/thing load type dup /arraytype eq exch /packedarraytype eq  or
+		{
+			/thing load rcheck
+			{
+				([) separator Concatenate /thing load {    depth 0 gt {depth 1 sub} {0} ifelse ThingToDebugText Concatenate depth 0 gt {separator Concatenate} if} forall (]) separator Concatenate Concatenate
+			}
+			{
+				/thing load type /arraytype eq {(--array--)} {(--packedarray--)} ifelse
+			} ifelse  % /thing load rcheck
+			exit
+		} if  % /arraytype /packedarraytype
+
+		/thing load type /dicttype eq
+		{
+			/thing load rcheck
+			{
+				(<) separator Concatenate /thing load {pop depth 0 gt {depth 1 sub} {0} ifelse ThingToDebugText Concatenate depth 0 gt {separator Concatenate} if} forall (>) separator Concatenate Concatenate
+			}
+			{(--dict-- )} ifelse  % /thing load rcheck
+			exit
+		} if  % /dicttype
+
+		/thing load type /booleantype eq {/thing load {(true )} {(false )} ifelse exit} if
+
+		/thing load type dup /integertype eq exch /realtype eq  or
+		{
+			/thing load 12 string cvs ( ) Concatenate
+			exit
+		} if  % /integertype /realtype
+
+		/thing load type /marktype eq {(mark ) exit} if  % /marktype
+
+		/thing load type /nulltype eq {(--Null-- ) exit} if
+		/thing load type /filetype eq {(--file-- ) exit} if
+		/thing load type /fonttype eq {(--font-- ) exit} if
+		/thing load type /gstatetype eq {(--gstate-- ) exit} if
+		/thing load type /savetype eq {(--save-- ) exit} if
+
+		% otherwise
+		(--) /thing load type 127 string cvs (-- ) Concatenate Concatenate exit
+	} repeat  % 1
+	end
+} bind def  % /ThingToDebugText
+
+
+% -  PathBBox  llx lly urx ury
+% assesses only parts that will show visibly. I.e., proper handling of curves.
+/PathBBox
+{
+	DeBugLevel 10 le {(+PathBBox) OutputToLog} if
+	22 dict begin
+
+	1 {
+		/MinMaxDefinedX //false def
+		/MinMaxDefinedY //false def
+		/b //false def  % boolean playing two roles
+
+		/SetMinMaxX  % takes one parameter
+		{
+			/z exch def
+			MinMaxDefinedX
+				{MaxX z lt {/MaxX z def} {MinX z gt {/MinX z def} if} ifelse}  % test Max first as charpath typically drawn right-to-left
+				{/MaxX z def    /MinX z def    /MinMaxDefinedX //true def}
+			ifelse
+		} def  % SetMinMaxX
+		/SetMinMaxY  % takes one parameter
+		{
+			/z exch def
+			MinMaxDefinedY
+				{MaxY z lt {/MaxY z def} {MinY z gt {/MinY z def} if} ifelse}
+				{/MaxY z def    /MinY z def    /MinMaxDefinedY //true def}
+			ifelse
+		} def  % SetMinMaxY
+
+		% First rough bounds from a quick run-through, as doing so can save doing needless arithmetic in curve routine.
+		{
+			{ % start move
+				/y0 exch def    /x0 exch def
+				/b //true def
+			}  % end of move
+			{  % start line
+				/y1 exch def    /x1 exch def
+				b {x0 SetMinMaxX  y0 SetMinMaxY  /b //false def} if
+				x1 SetMinMaxX y1 SetMinMaxY
+			}  % end of line
+			{  % start curve
+				/y3 exch def  /x3 exch def  pop pop pop pop
+				b {x0 SetMinMaxX  y0 SetMinMaxY  /b //false def} if
+				x3 SetMinMaxX  y3 SetMinMaxY
+			}  % end of curve
+			{  % start close
+			}  % end of close
+			pathforall
+		} Stopped {(Warning: protected path in PathBBox, position 1) OutputToLog  GSave 0 setflat flattenpath pathbbox GRestore  exit} if
+
+		% Second a slower run-through, not redoing the above, but, where necessary, thinking hard about curves. Different role for b.
+		{
+			{ % start move
+				/y0 exch def    /x0 exch def
+				/b //true def
+			}  % end of move
+			{  % start line
+				/y0 exch def    /x0 exch def
+			}  % end of line
+			{  % start curve
+				/y3 exch def  /x3 exch def    /y2 exch def  /x2 exch def    /y1 exch def  /x1 exch def
+
+				x1 MaxX gt  x1 MinX lt  x2 MaxX gt  x2 MinX lt  or or or
+				{
+					% Cubic: a t^3 + b t^2 + c t + x0
+					/a x0 neg x1 3 mul add x2 3 mul sub x3 add def
+					/b x0 x1 2 mul sub x2 add 3 mul def
+					/c x1 x0 sub 3 mul def
+
+					% Solve first differential for zero
+					[ c  2 b mul  3 a mul ] 0 //true 1 //true //Epsilon PolynomialRoots {dup dup a mul b add mul c add mul x0 add SetMinMaxX} forall
+				} if  % x bounds outside MinX to MaxX
+
+				y1 MaxY gt  y1 MinY lt  y2 MaxY gt  y2 MinY lt  or or or
+				{
+					/a y0 neg y1 3 mul add y2 3 mul sub y3 add def
+					/b y0 y1 2 mul sub y2 add 3 mul def
+					/c y1 y0 sub 3 mul def
+					[ c  2 b mul  3 a mul ] 0 //true 1 //true //Epsilon PolynomialRoots {dup dup a mul b add mul c add mul y0 add SetMinMaxY} forall
+				} if  % y bounds outside MinY to MaxY
+				/y0 y3 def    /x0 x3 def
+			}  % end of curve
+			{  % start close
+			}  % end of close
+			pathforall
+		} Stopped {(Warning: protected path in PathBBox, position 2, which is weird unless a routine such as PolynomialRoots is missing.) OutputToLog  GSave 0 setflat flattenpath pathbbox GRestore  exit} if
+
+		MinMaxDefinedX MinMaxDefinedY and
+		{
+			MinX MinY MaxX MaxY
+		}{
+			b
+			{
+				% No lines, no curves, but some moves
+				{
+					{SetMinMaxY SetMinMaxX} {pop pop} {pop pop pop pop pop pop} {}  % the pop's should be redundant
+					pathforall
+				} Stopped {(Warning: protected path in PathBBox, position 3) OutputToLog  GSave 0 setflat flattenpath pathbbox GRestore  exit} if
+				MinX MinY MaxX MaxY
+			}{
+				% completely empty path
+				emptycurrentpath  % this may well cause execution to cease
+			} ifelse  % b
+		} ifelse  % MinMaxDefinedX MinMaxDefinedY and
+	} repeat  % 1
+
+	end
+	DeBugLevel 10 le {(-PathBBox) OutputToLog} if
+} bind def  % PathBBox
+
+% A valid parameter is a glyph name, a string, some code, or an array of valid paramters.
+% ShowRecursive shows the sequences of entities in the natural manner.
+/ShowRecursive
+{
+	DeBugLevel 20 le {(+ShowRecursive) OutputToLog} if
+	1 dict begin
+	/param exch def
+	1 {
+		/param load xcheck {[/param load execU] ShowRecursive exit} if  % in case the executable puts something on the stack
+		param type dup /integertype eq exch /realtype eq or {/param param ToString store} if  % no 'exit'.
+		param type /stringtype eq {param show exit} if
+		param type /nametype eq {param glyphshow exit} if
+		param type /arraytype eq {param {ShowRecursive} forall exit} if
+		mark  (Error: ShowRecursive parameter ) /param load 0 //true ThingToDebugText  ( is of type ) /param load type  ( rather than executable, string, name or array.)  ConcatenateToMark OutputToLog stop
+	} repeat
+	end
+	DeBugLevel 20 le {(-ShowRecursive) OutputToLog} if
+} bind def  % /ShowRecursive
+
+
+% [ thing thing ... ] {comparison code that takes two things and returns a boolean} HeapSort -
+% Sorts array such that for elements i and i+1 the comparison code returns true.
+% E.g.,   [2 0 4 3 1] dup {lt} HeapSort ==   outputs   [0 1 2 3 4]
+% Based on version by J. Plowes dated 06 Aug 1997.
+/HeapSort
+{
+	DeBugLevel 50 le {(+HeapSort) OutputToLog} if
+	% CAUTION: some editions of Recipes contain versions of HeapSort that
+	% don't work -- they don't quite finish the sort. Take care!
+	8 dict begin
+	/ComparisonCode exch def
+	/ra exch def
+	/n ra length def
+
+	n 1 gt
+	{
+		/l n 2 idiv 1 add def
+		/ir n def
+		% sorting loop
+		{
+			l 1 gt
+			{
+				% In hiring phase
+				/l l 1 sub def
+				/rra ra l 1 sub get def
+			}
+			{
+				% In retirement-and-promotion phase
+				/rra ra ir 1 sub get def  % Clear space at end of ra
+				ra ir 1 sub ra 0 get put  % Retire top element into space
+				/ir ir 1 sub def
+				ir 1 eq
+				{
+					ra 0 rra put  % Final element
+					exit          % Finished
+				} if
+			} ifelse  % l 1 gt
+
+			% Whichever phase we're in, need to sift rra down to proper level
+			/i l def
+			/j l 2 mul def
+
+			% enter the "while" loop:
+			{
+				% this loop & ifelse replicates the while used in Recipes
+				j ir gt {exit}
+				{
+					j ir lt {ra j 1 sub get  ra j get  ComparisonCode} {false} ifelse
+					{
+						/j j 1 add def
+					} if
+
+					rra  ra j 1 sub get  ComparisonCode
+					{
+						% Demote rra
+						ra i 1 sub ra j 1 sub get put
+						/i j def
+						/j j i add def
+					}
+					{
+						% This is rra's level. Set j to terminate sift-down
+						/j ir 1 add def
+					} ifelse  % rra  ra j 1 sub get  compcode
+				} ifelse  % j ir gt
+			} loop   % End of "while" loop
+			ra i 1 sub rra put % put rra into its slot
+		} loop % end of sorting loop
+	} if  % n 1 gt
+	end
+	DeBugLevel 50 le {(-HeapSort) OutputToLog} if
+} bind def  % /HeapSort
+
+% string string  ltStringsCaseInsensitive  bool
+/ltStringsCaseInsensitive
+{
+	2 dict begin
+	/sB exch def /sA exch def  % strings
+	sA length  sB length  lt
+	dup {sA} {sB} ifelse length 1 sub  0 exch  1 exch
+	{
+		dup sA exch get  dup dup 97 ge exch 122 le and {32 sub} if
+		exch sB exch get dup dup 97 ge exch 122 le and {32 sub} if
+		2 copy lt {pop pop pop true exit} {gt {pop false exit} if} ifelse
+	} for
+	end
+} bind def  % /ltStringsCaseInsensitive
+
+% Two uses.
+% Bug in Adobe Distiller 8.1.3 (23/10/2006). In attempting to treat paths derived from text as copyable text, it fails to cope with paths made partly thereby and partly from a upath.
+% Also, eliminates some types of problems with embedding fonts.
+/DeFontPath
+{
+	DeBugLevel 10 le {(+DeFontPath) OutputToLog} if
+	{
+		[ {/moveto cvx} {/lineto cvx} {/curveto cvx} {/closepath cvx} pathforall ] newpath cvx exec
+	} Stopped {(Warning: protected path in DeFontPath) OutputToLog} if
+	DeBugLevel 10 le {(-DeFontPath) OutputToLog} if
+} bind def  % /DeFontPath
+
+% Is this, or does this contain, an executable?
+/XcheckRecursive
+{
+	DeBugLevel 5 le {(+XcheckRecursive) OutputToLog} if
+	dup xcheck
+	{pop true}
+	{
+		dup type /arraytype eq
+			{false exch {XcheckRecursive {pop true exit} if} forall}
+			{pop false}
+		ifelse  % arraytype
+	} ifelse  % xcheck
+	DeBugLevel 5 le {(-XcheckRecursive) OutputToLog} if
+} bind def  % XcheckRecursive
+
+% Computes the path of a glyph, with the charpath-style boolean flag, destroying the currentpoint.
+/GlyphPath
+{
+	DeBugLevel 10 le {(+GlyphPath) OutputToLog} if
+	2 dict begin
+	/bln exch def
+	/glyphname exch def
+	currentfont
+	currentfont length dict begin
+	currentfont {1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding [ 256 {/.notdef} repeat ] def
+	Encoding 97 glyphname put  % ASCII a = 97
+	currentdict
+	end
+	/TemporaryFont exch definefont pop
+	/TemporaryFont 1 selectfont
+	(a) bln charpath
+	setfont
+	/TemporaryFont undefinefont
+	end
+	DeBugLevel 10 le {(-GlyphPath) OutputToLog} if
+} bind def  % /GlyphPath
+
+% Computes the path of a glyph, with the charpath-style boolean flag, moving the currentpoint as if after a show.
+/GlyphPathMoveto
+{
+	DeBugLevel 10 le {(+GlyphPathMoveto) OutputToLog} if
+	2 dict begin
+	/bln exch def
+	/glyphname exch def
+	currentfont
+	currentfont length dict begin
+	currentfont {1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding [ 256 {/.notdef} repeat ] def
+	Encoding 97 glyphname put  % ASCII a = 97
+	currentdict
+	end
+	/TemporaryFont exch definefont pop
+	/TemporaryFont 1 selectfont
+	currentpoint exch (a) stringwidth pop add exch
+	(a) bln charpath % (a) has been redefined
+	moveto
+	setfont
+	/TemporaryFont undefinefont
+	end
+	DeBugLevel 10 le {(-GlyphPathMoveto) OutputToLog} if
+} bind def  % /GlyphPathMoveto
+
+% A valid first parameter is a glyph name, a string, or an array of valid paramters.
+% CharPathRecMoveto computes the path, moving the currentpoint as if after a show.
+/CharPathRecMoveto
+{
+	DeBugLevel 10 le {(+CharPathRecMoveto) OutputToLog} if
+	2 dict begin
+	/bln exch def
+	/param exch def
+	/param load xcheck {[/param load PartlyDisableRenderingExecU] bln CharPathRecMoveto}
+	{
+	param type /stringtype eq
+	{
+		currentpoint exch param stringwidth pop add exch
+		param bln charpath
+		moveto
+	}
+	{
+	param type /nametype eq {param bln GlyphPathMoveto}
+	{
+	param type /arraytype eq
+	{
+		param {bln CharPathRecMoveto} forall
+	}
+	{
+		(Error: CharPathRecMoveto parameter ) /param load 0 ThingToDebugText Concatenate
+		( is of type ) Concatenate /param load type 16 string cvs Concatenate
+		( rather than executable, string, name or array.) Concatenate OutputToLog stop
+	} ifelse  % /arraytype
+	} ifelse  % /nametype
+	} ifelse  % /stringtype
+	} ifelse  % xcheck
+	end
+	DeBugLevel 10 le {(-CharPathRecMoveto) OutputToLog} if
+} bind def  % /CharPathRecMoveto
+
+% groups.google.com/group/comp.lang.postscript/browse_thread/thread/8599a22cfa270e5f/
+/CharPathRecursiveMoveto
+{
+	DeBugLevel 10 le {(+CharPathRecursiveMoveto) OutputToLog} if
+	1 index  XcheckRecursive  3 1 roll
+	CharPathRecMoveto
+	{DeFontPath} if
+	DeBugLevel 10 le {(-CharPathRecursiveMoveto) OutputToLog} if
+} bind def  % /CharPathRecursiveMoveto
+
+/PartlyDisableRenderingExecU  % executes the one parameter, without much rendering
+{
+	DeBugLevel 5 le {(+PartlyDisableRenderingExecU) OutputToLog} if
+	7 dict begin
+	[ /fill /eofill /stroke /newpath ] { {} def } forall
+	[/ufill /ueofill] { {uappend} bind def } forall
+	/shfill  {pop gsave clippath false upath grestore uappend} bind  def
+	execU
+	end
+	DeBugLevel 5 le {(-PartlyDisableRenderingExecU) OutputToLog} if
+} bind def  % /PartlyDisableRenderingExecU
+
+% A valid first parameter is a glyph name, a string, or an array of valid paramters.
+% CharPathRecMoveto computes the path, moving the currentpoint as if after a show.
+/CharPathRecMoveto
+{
+	DeBugLevel 10 le {(+CharPathRecMoveto) OutputToLog} if
+	2 dict begin
+	/bln exch def
+	/param exch def
+	/param load xcheck {[/param load PartlyDisableRenderingExecU] bln CharPathRecMoveto}
+	{
+	param type /stringtype eq
+	{
+		currentpoint exch param stringwidth pop add exch
+		param bln charpath
+		moveto
+	}
+	{
+	param type /nametype eq {param bln GlyphPathMoveto}
+	{
+	param type /arraytype eq
+	{
+		param {bln CharPathRecMoveto} forall
+	}
+	{
+		(Error: CharPathRecMoveto parameter ) /param load 0 ThingToDebugText Concatenate
+		( is of type ) Concatenate /param load type 16 string cvs Concatenate
+		( rather than executable, string, name or array.) Concatenate OutputToLog stop
+	} ifelse  % /arraytype
+	} ifelse  % /nametype
+	} ifelse  % /stringtype
+	} ifelse  % xcheck
+	end
+	DeBugLevel 10 le {(-CharPathRecMoveto) OutputToLog} if
+} bind def  % /CharPathRecMoveto
+
+% groups.google.com/group/comp.lang.postscript/browse_thread/thread/8599a22cfa270e5f/
+/CharPathRecursiveMoveto
+{
+	DeBugLevel 10 le {(+CharPathRecursiveMoveto) OutputToLog} if
+	1 index  XcheckRecursive  3 1 roll
+	CharPathRecMoveto
+	{DeFontPath} if
+	DeBugLevel 10 le {(-CharPathRecursiveMoveto) OutputToLog} if
+} bind def  % /CharPathRecursiveMoveto
+
+% A valid first parameter is a glyph name, a string, or an array of valid paramters.
+% CharPathRec computes the path, destroying the currentpoint.
+/CharPathRec
+{
+	DeBugLevel 9 le {(+CharPathRec) OutputToLog} if
+	9 dict begin
+	/bln exch def
+	/param exch def
+	/param load xcheck {[/param load PartlyDisableRenderingExecU] bln CharPathRec}
+	{
+	param type /stringtype eq {param bln charpath}
+	{
+	param type /nametype eq {param bln GlyphPath}
+	{
+	param type /arraytype eq
+	{
+		param length 0 gt
+		{
+			0 1 param length 2 sub
+			{
+				param exch get bln CharPathRecMoveto
+			} for
+			param  dup length 1 sub  get   bln CharPathRec
+		} if  % length 0 gt
+	}
+	{
+		(Error: CharPathRec parameter ) /param load 0 ThingToDebugText Concatenate
+		( is of type ) Concatenate /param load type 16 string cvs Concatenate
+		( rather than executable, string, name or array.) Concatenate OutputToLog stop
+	} ifelse  % arraytype
+	} ifelse  % nametype
+	} ifelse  % stringtype
+	} ifelse  % xcheck
+	end
+	DeBugLevel 9 le {(-CharPathRec) OutputToLog} if
+} bind def  % /CharPathRec
+
+% groups.google.com/group/comp.lang.postscript/browse_thread/thread/8599a22cfa270e5f/
+/CharPathRecursive
+{
+	DeBugLevel 10 le {(+CharPathRecursive) OutputToLog} if
+	1 index  XcheckRecursive  3 1 roll
+	CharPathRec
+	{DeFontPath} if
+	DeBugLevel 10 le {(-CharPathRecursive) OutputToLog} if
+} bind def  % /CharPathRecursive
+
+% name  GlyphMightBeGoodInCurrentFont  bool
+/GlyphMightBeGoodInCurrentFont
+{
+	1 dict begin
+	/GlyphToTest exch def
+	true
+	1 {
+		currentfont /FontType get 1 eq
+		{
+			currentfont /CharStrings get /GlyphToTest known not {pop false exit} if
+		} if  % Type 1
+	} repeat  % 1 {...} repeat  allows exit
+	end
+} bind def  % /GlyphMightBeGoodInCurrentFont
+
+% End standard subroutines
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% ShowCropMarks Rotate180 Mirror Callsetpagedevice PaperType Orientation  SetPaperSize  - 
+false false false true PaperType Orientation SetPaperSize
+
+mark
+	/CreationDate CreationDateAdobeFormat
+	/Title (Fonts available for use within PostScript)
+	/Author (Julian D. A. Wiseman)
+	/Subject (www.jdawiseman.com/papers/placemat/fonts_illustrated.ps)
+	/Keywords (PostScript, fonts, jdawiseman)
+	/Creator (PostScript by Julian D. A. Wiseman; code version ) CreationDateAdobeFormat dup length 2 sub 2 exch getinterval Concatenate
+/DOCINFO pdfmark
+mark /PageMode /UseThumbs /Page 1 /DOCVIEW pdfmark
+mark /PageMode /Fit /DOCVIEW pdfmark
+
+0 setgray   1 setlinecap   1 setlinejoin   [] 0 setdash
+
+/AsciiHyphen (-) 0 get def
+/AsciiPeriod (.) 0 get def
+
+DeBugLevel 100 le {(+ Populate FontNames) == flush} if
+/FontNames
+{[
+%	(*) {cvn 255 string cvs} 255 string /Font resourceforall
+	(+resourceforall) =
+	(*)
+	{
+		/This exch def
+		//true This {dup 32 lt exch 127 gt or {pop //false exit} if} forall
+		{
+			/ThisString This dup length string copy def
+			//true  //DotFontsExclude {ThisString 0 get //AsciiPeriod eq {pop //false} if} if
+			{
+				//true
+				//KnownBadFonts
+				{
+					/Baddie exch def
+					Baddie dup length 1 sub get  //AsciiHyphen  eq
+					{
+						ThisString length  Baddie length 1 sub  ge
+						{
+							Baddie     dup    length 1 sub 0 exch getinterval
+							ThisString Baddie length 1 sub 0 exch getinterval eq {pop //false exit} if
+						} if  % long enough
+					}{Baddie ThisString eq {pop //false exit} if} ifelse  % ...AsciiHyphen
+				} forall  % KnownBadFonts
+				{ThisString dup =} if  % Not a baddie
+			} if  % doesn't begin with dot
+		} if  % Only good characters, ASCII 32 to 127
+	}  % Code pased to resourceforall
+	1024 string
+	/Font
+	resourceforall
+	(-resourceforall) =
+]} bind exec  dup  SortNameCaseSensitive {/lt} {/ltStringsCaseInsensitive} ifelse load  HeapSort  def
+DeBugLevel 100 le {(- Populate FontNames) == flush} if
+6 {() OutputToLog} repeat
+/FontsGood FontNames length array def
+TallnessSortBy {/Tallnesses FontNames length array def} if
+
+/NumFontsPerPage  PageHeight MarginT sub MarginB sub  LineStep div floor cvi  def
+FontEndNum FontNames length ge {/FontEndNum FontNames length 1 sub def} if
+
+(There are ) FontNames length 8 string cvs Concatenate ( fonts. Running from font ) Concatenate
+FontStartNum 8 string cvs Concatenate ( to ) Concatenate FontEndNum 8 string cvs Concatenate (, with ) Concatenate
+NumFontsPerPage 10 string cvs Concatenate ( fonts per page, so a maximum of ) Concatenate
+FontEndNum FontStartNum sub 1 add NumFontsPerPage div ceiling cvi 8 string cvs Concatenate ( pages.) Concatenate =
+
+DeBugLevel 100 le {(+ Populate FontsGood) == flush} if
+0  1  FontNames length 1 sub
+{
+	/n exch def
+	//true  KnownBadFonts {FontNames n get eq {pop //false exit} if} forall
+	{
+		FontsGood n false put
+		/SpecialMarkJDAW
+		/cds countdictstack def
+		newpath gsave
+		1 {
+			{
+				DeBugLevel 100 le {FontNames n get == flush} if
+				/ThisFontPassesTests true def
+
+				ForbidItalic  ThisFontPassesTests and {FontNames n get length 6 sub -1 0 {FontNames n get exch 6 getinterval (Italic)  eq {/ThisFontPassesTests //false def exit} if} for} if
+				ForbidOblique ThisFontPassesTests and {FontNames n get length 7 sub -1 0 {FontNames n get exch 7 getinterval (Oblique) eq {/ThisFontPassesTests //false def exit} if} for} if
+
+				ThisFontPassesTests
+				{
+					/ThisFont FontNames n get findfont def
+					% http://help.adobe.com/en_US/acrobat/X/pro/using/WS58a04a822e3e50102bd615109794195ff-7f02.w.html
+					% "Note: Distiller does not support Type 32 fonts."
+					ThisFont /FontType 2 copy known {get 32 eq {stop} if} {pop pop} ifelse
+					ThisFont /WMode known {currentfont /WMode get 0 ne} {false} ifelse   {exit} if
+					ThisFont false  MandatoryGlyphs {GlyphMightBeGoodInCurrentFont not {pop true exit} if} forall {exit} if
+					ThisFont //FontSize scalefont setfont
+					0 0 moveto (W) true charpath flattenpath pathbbox newpath 3 -1 roll le 3 1 roll ge or {exit} if
+					/ThisFontSpecial false SpecialFonts {FontNames n get eq {pop true exit} if} forall def
+					ThisFontSpecial {() OutputToLog  FontNames n get OutputToLog  n OutputToLog} if
+					% gsave nulldevice 0 0 moveto ExampleText ShowRecursive grestore  % Capturing a class of errors
+				} if  % ThisFontPassesTests
+
+				TallnessSortBy ThisFontPassesTests and
+				{
+					0 0 moveto  TallnessString true charpath flattenpath pathbbox newpath
+					/ury exch def /urx exch def /lly exch def /llx exch def
+					urx llx le {exit} if
+					Tallnesses  n  ury lly sub urx llx sub div  put
+					Tallnesses n get dup TallnessMin lt exch TallnessMax gt or {/ThisFontPassesTests false def} if
+					ThisFontSpecial {Tallnesses n get OutputToLog} if
+				} if  % TallnessSortBy
+
+				HeightMatch ThisFontPassesTests and
+				{
+					/MinT Infinity def  /MaxT Infinity neg def
+					/MinB Infinity def  /MaxB Infinity neg def
+					HeightMatchCharacters
+					{
+						0 0 moveto  true charpath flattenpath pathbbox newpath
+						dup MinT lt {dup /MinT exch def} if  dup MaxT gt {/MaxT exch def} {pop} ifelse  pop
+						dup MinB lt {dup /MinB exch def} if  dup MaxB gt {/MaxB exch def} {pop} ifelse  pop
+					} forall  % HeightMatchCharacters
+					MaxT MinT sub HeightMatchToleranceT //FontSize mul gt
+					MaxB MinB sub HeightMatchToleranceB //FontSize mul gt  or {/ThisFontPassesTests false def} if
+					ThisFontSpecial {MaxB MinB sub //FontSize div OutputToLog MaxT MinT sub //FontSize div OutputToLog} if
+				} if  % HeightMatch ...
+
+				ForbidDescender_J ThisFontPassesTests and
+				{
+					0 0 moveto  (D) true charpath flattenpath pathbbox newpath  pop pop exch pop
+					0 0 moveto  (J) true charpath flattenpath pathbbox newpath  pop pop exch pop
+					sub HeightMatchToleranceT //FontSize mul gt {/ThisFontPassesTests //false def} if
+				} if  % ForbidDescender_J
+
+				ForbidNarrow_I ThisFontPassesTests and
+				{
+					0 0 moveto  (I) true charpath flattenpath pathbbox newpath  pop exch pop exch sub
+					0 0 moveto  (J) true charpath flattenpath pathbbox newpath  pop exch pop exch sub
+					2 div lt  {/ThisFontPassesTests //false def} if
+				} if  % ForbidNarrow_I
+
+				ThisFontPassesTests {FontsGood n true put} if
+			} stopped {exit} if  % inner exits reach this exit via invalidexit
+		} repeat  % so that 'exit' functions as 'continue'
+		grestore
+		{countdictstack cds le {exit} if end} loop  % stopped plays havoc with dictionary stack
+		{/SpecialMarkJDAW eq {exit} if} loop  % could use mark and cleartomark, but what if stop happens whilst array being constructed?
+	} if % ... KnownBadFonts ...
+} for  % n
+DeBugLevel 100 le {(- Populate FontsGood) == flush} if
+6 {() OutputToLog} repeat
+
+(FontsGood populated.) OutputToLog
+
+/FontShowOrdering FontNames length array def   0 1 FontShowOrdering length 1 sub {FontShowOrdering exch dup put} for
+TallnessSortBy
+{
+	FontShowOrdering
+	{
+		2 copy FontsGood exch get exch FontsGood exch get
+			{ {Tallnesses exch get exch Tallnesses exch get lt} {pop pop false} ifelse }
+			{ pop pop pop true }
+		ifelse
+	}
+	HeapSort
+} if  % TallnessSortBy
+
+/NumOnThisPage 0 def
+/PageNum 0 def
+FontStartNum 1 FontEndNum
+{
+	/nn exch def
+	/n  FontShowOrdering nn get  def
+	FontsGood n get
+	{
+		newpath gsave
+		newpath  MarginL  PageHeight MarginT sub  NumOnThisPage 1 add //LineStep mul sub  moveto
+		NumOnThisPage 0 eq
+		{
+			/PageDestName mark (Page) PageNum 100 lt {(0)} if PageNum 10 lt {(0)} if PageNum 5 string cvs ConcatenateToMark cvn def
+			mark
+				/Dest PageDestName  /View [/Fit]
+			/DEST pdfmark
+			mark
+				/Title  FontNames n get  TallnessSortBy {mark Tallnesses n get 3 FormatDecimalPlaces ( ) 4 -1 roll ConcatenateToMark} if
+				/Action /GoTo  /Dest PageDestName
+				/Color [0 0 0]  /F 0
+			/OUT pdfmark
+			mark
+				/Label TallnessSortBy
+					{Tallnesses n get 16 string cvs dup length 1 sub 0 exch 1 exch {2 copy 1 getinterval (.) eq {2 copy (p) putinterval} if pop} for}
+					{FontNames n get}
+				ifelse  % TallnessSortBy
+			/PAGELABEL pdfmark
+		} if  % NumOnThisPage 0 eq
+		/NumOnThisPage NumOnThisPage 1 add def
+		//FontNameLabels  FontSize 0.75 mul  selectfont
+		TallnessSortBy {nn 8 string cvs show  ( ) show} if
+		n 8 string cvs show  ( /) show
+
+		TabX currentpoint pop sub ( ) stringwidth pop sub  FontNames n get stringwidth pop  2 copy ge
+			{pop pop  FontNames n get show}
+			{gsave  div 1 scale  FontNames n get show  grestore}
+		ifelse  % Sufficient space for font name
+		TabX  currentpoint exch pop  moveto
+		FontNames n get  FontSize  selectfont
+		ExampleText ShowRecursive
+		nn 5 string cvs ( ) n 5 string cvs (: ) FontNames n get Concatenate Concatenate Concatenate Concatenate TallnessSortBy {(   ) Tallnesses n get 8 string cvs Concatenate Concatenate} if OutputToLog
+		NumOnThisPage NumFontsPerPage ge {showpage  /NumOnThisPage 0 def  /PageNum PageNum 1 add def} if
+		grestore
+	} if  % FontsGood n get
+} bind for  % nn, n
+NumOnThisPage 0 gt {showpage} if
+
+4 {() OutputToLog} repeat
+count              (     = count: this really should be 0\n)                    dup 0  4 -1 roll  6 string cvs  putinterval
+countexecstack     (     = countexecstack: can be 11 or 13 or 42 or other\n)    dup 0  4 -1 roll  6 string cvs  putinterval
+countdictstack     (     = countdictstack: this should be 3\n)                  dup 0  4 -1 roll  6 string cvs  putinterval  Concatenate
+CountGraphicsStack (     = CountGraphicsStack: this really should be 0\n)       dup 0  4 -1 roll  6 string cvs  putinterval  Concatenate exch Concatenate OutputToLog
+count 0 gt {(+pstack) = pstack (-pstack) =} if
