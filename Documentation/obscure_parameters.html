@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Glasses placemat: obscure parameters</title>
+<meta content="Labelled place settings for glasses used in a wine tasting: obscure parameters" name="description">
+<meta content="glasses, port, madeira, place setting, tasting, obscure parameters" name="keywords">
+<meta content="Julian D. A. Wiseman" name="author">
+<meta content="general" name="rating">
+<meta content="index,follow,noimageclick" name="robots">
+<meta content="8 hours" name="expires">
+<meta content="7 days" name="revisit"><link href="../../favicon.ico" rel="SHORTCUT ICON">
+<link rel="stylesheet" type="text/css" href="placemat.css">
+</head>
+
+<body bgcolor="#ffffff">
+<table width="100%" border="0" id="top">
+<tr>
+	<td width="30%" align="left"><a href="../../index.html">Main index</a></td>
+	<td width="40%" align="center"><a href="placemat.html">Placemat: main guide</a></td>
+	<td width="30%" align="right"><a href="../../author.html">About author</a></td>
+</tr></table>
+<hr>
+
+<div style="width: 88px;  float: right;  margin-top: 0;  padding-top: 0;"><p style="margin-top: 0;  padding-top: 0;"><a href="http://validator.w3.org/check?uri=http%3A%2F%2Fwww.jdawiseman.com%2Fpapers%2Fplacemat%2Fobscure_parameters.html"><img src="../../graphics/valid-html401.png" alt="Valid HTML 4.01 Transitional" height="31" width="88"></a></p></div>
+
+<h1>Glasses placemat: obscure parameters</h1>
+<p align="RIGHT"><i>Julian D. A. Wiseman</i></p>
+
+<p><b>Contents:</b> <a href="#pubhist">Publication history</a>; 
+<a href="#introduction">Introduction</a>; 
+<a href="#vertical_middling">VerticalMiddling&hellip;</a>; 
+<a href="#Filltexts">FillPrioritiseSmallFileSizeOverPortability</a>; 
+<a href="#EmptyGlassesPageAtStart">EmptyGlassesPageAtStart</a>; 
+<a href="#GlassesAnnotations">GlassesAnnotations</a>; 
+<a href="#GlassesPageWhiteCirclesBehind">GlassesPageWhiteCirclesBehind</a>.</p>
+
+<p id="pubhist"><b>Publication history:</b> only here. Usual <a href="../../index.html#disclaimer">disclaimer</a> and <a href="../../index.html#copyright">copyright</a> terms apply.</p>
+
+<hr>
+
+<h3 id="introduction"><a href="#introduction">&bull;</a> Introduction</h3>
+
+<p>There are some parameters that, in practice, would (or should) never be changed by non-expert users of the <a href="placemat.ps">the placemat program</a>. 
+To avoid excessive cluttering of the <a href="placemat.html">main guide</a>, these are described here.</p>
+
+<div style="clear: both;  float: right;"><table class="TableParameterSpecification" style="width: 347px;">
+<tr title="TitleFontSize = 173.525"><td style="text-align: center;"><div style="position: absolute;  width: 367px;  text-align: center; color: #999999;"><tt><span class="nametype">/MatchNone</span></tt></div><img   style="padding: 5px;" width="367" height="182" src="VerticalMiddlingTitles_MatchNone.png"   alt="/MatchNone"></td></tr>
+<tr title="TitleFontSize = 175.832"><td style="text-align: center;"><div style="position: absolute;  width: 367px;  text-align: center; color: #999999;"><tt><span class="nametype">/MatchRow</span></tt></div><img    style="padding: 5px;" width="367" height="182" src="VerticalMiddlingTitles_MatchRow.png"    alt="/MatchRow"></td></tr>
+<tr title="TitleFontSize = 176.642"><td style="text-align: center;"><div style="position: absolute;  width: 367px;  text-align: center; color: #999999;"><tt><span class="nametype">/MatchString</span></tt></div><img style="padding: 5px;" width="367" height="182" src="VerticalMiddlingTitles_MatchString.png" alt="/MatchString"></td></tr>
+</table></div>
+
+<h3 id="vertical_middling"><a href="#vertical_middling">&bull;</a> VerticalMiddling&hellip;</h3>
+<p>&loz; The parameters <tt>VerticalMiddling</tt>&hellip; control the vertical alignment of the <tt>Titles</tt>, and when <tt>OverlapSubtitlesOnTitles</tt> is <tt><span class="operator">true</span></tt>, of <tt>Subtitles</tt>. 
+Older versions of this code centred separately each title (and also each overlapped subtitle). 
+This is now done by setting <tt>VerticalMiddlingTitles</tt> to <tt><span class="nametype">/MatchNone</span></tt> (see diagram on right, baselines being shown in green, bounding boxes in orange-pink). 
+Alternatively the baselines (pedantically: as a proportion of the relevant font size) can be jointly computed with those of some other <tt>Titles</tt> (<tt><span class="nametype">/MatchRow</span></tt>, <tt><span class="nametype">/MatchPage</span></tt>, <tt><span class="nametype">/MatchAll</span></tt>), 
+or set to a fixed string (<tt>VerticalMiddlingStringTitles</tt>, defaulting to the port-friendly 4-free 5-free descender-free &ldquo;08W31T67G92F&rdquo;). 
+Particularly if there are descenders or accents (especially upper-case accents as might happen in a Burgundy tasting including &Eacute;chezeaux or &Eacute;pineuil), 
+it is worth setting <tt>VerticalMiddling</tt> to a value other than <tt><span class="nametype">/MatchNone</span></tt>.
+</p>
+
+<p>There is an over-ride: if a element of <tt>Titles</tt> &lsquo;equals&rsquo; (looking inside arrays) any element of <tt>VerticalMiddlingTitlesAlwaysMatchNone</tt>, then it is treated as <tt><span class="nametype">/MatchNone</span></tt>.
+And likewise <tt>Overtitles</tt> and <tt>VerticalMiddlingOvertitlesAlwaysMatchNone</tt>. 
+By default these comprise the non-text symbols 
+<tt><span class="stringtype">(+)</span></tt>, <tt><span class="stringtype">(++)</span></tt>, <tt><span class="stringtype">(+++)</span></tt>, <tt><span class="stringtype">(*)</span></tt>, <tt><span class="nametype">/multiply</span></tt>=&ldquo;&times;&rdquo;, <tt><span class="nametype">/bullet</span></tt>=&ldquo;&bull;&rdquo;, <tt><span class="nametype">/periodcentered</span></tt>=&ldquo;&middot;&rdquo;, <tt><span class="nametype">/lozenge</span></tt>=&ldquo;&loz;&rdquo;, <tt><span class="nametype">/dagger</span></tt>=&ldquo;&dagger;&rdquo;, <tt><span class="nametype">/daggerdbl</span></tt>=&ldquo;&Dagger;&rdquo;, <tt><span class="nametype">/spade</span></tt>=&ldquo;&spades;&rdquo;, <tt><span class="nametype">/heart</span></tt>=&ldquo;&hearts;&rdquo;, <tt><span class="nametype">/diamond</span></tt>=&ldquo;&diams;&rdquo;, <tt><span class="nametype">/club</span></tt>=&ldquo;&clubs;&rdquo;.</p>
+
+<p>There is also the technical and usually irrelevant parameter <tt>VerticalMiddlingIncludeBaselineTitles</tt>. 
+When computing the middle for a string or collection of strings, it computes the highest of the tops, and lowest of the the bottoms. 
+If these fail to straddle zero, as would happen if a Title/Subtitle were <tt><span class="stringtype">(-)</span></tt>, and <tt>VerticalMiddlingIncludeBaselineTitles</tt> is <tt><span class="operator">true</span></tt>, 
+then the nearer boundary is deemed moved to the baseline.</p>
+
+<p>&loz; Similar parameters control the vertical placement of overlapped <tt>Overtitles</tt>: <tt>VerticalMiddlingOvertitles</tt>, 
+<tt>VerticalMiddlingStringOvertitles</tt>, and <tt>VerticalMiddlingIncludeBaselineOvertitles</tt>.</p>
+
+
+<h3 id="Filltexts"><a href="#Filltexts">&bull;</a> FillPrioritiseSmallFileSizeOverPortability</h3>
+<p>If, a placemat using <tt><a href="placemat.html#filltexts">Filltexts</a></tt> does not print well on a machine other than the one on which it was distilled, 
+try setting <tt>FillPrioritiseSmallFileSizeOverPortability</tt> to <tt><span class="operator">false</span></tt>. 
+This causes the <tt>Filltexts</tt> to be replaced with their paths, stripped of font information.</p>
+
+
+<div class="BorderGraphic" style="clear: leftß;  float: left; margin-right: 4px;"><img height="316" width="223" src="EmptyGlassesPageAtStart.gif" alt="Fewer pages than before, so this page now omitted." title="Fewer pages than before, so this page now omitted."></div>
+<h3 id="EmptyGlassesPageAtStart"><a href="#EmptyGlassesPageAtStart">&bull;</a> EmptyGlassesPageAtStart</h3>
+<p>Placemats have been drafted. 
+Some images have been uploaded, which for this author typically means the one person&rsquo;s glasses pages (to show the wines), and also the first voting page (to show the people). 
+A phpbb post has been made, perhaps containing <span style="font-family: monospace;">[img]&hellip;_g0.png[/img] [img]&hellip;_g1.png[/img] [img]&hellip;_v0.png[/img]</span>. 
+That makes it easier for others to check that things are correct. 
+So far, so good.</p>
+<p>Then some bottles drop out, perhaps because some people have. 
+It happens. 
+There is no longer a second glasses page; there is no meaning to a <span style="font-family: monospace;">&hellip;_g1.png</span>. 
+One possibility would be to remove references to the <span style="font-family: monospace;">&hellip;_g1.png</span> image by editing every post. 
+But if some people have quoted the images, a non-admin won&rsquo;t be able to remove all references. 
+So instead <span style="font-family: monospace;">&hellip;_g1.png</span> needs to be emptied of content.</p>
+<p>Temporarily, <tt><span class="nametype">/EmptyGlassesPageAtStart</span> <span class="operator">true</span> <span class="operator">def</span></tt>. 
+Re-distill, after which the PDF&rsquo;s first page resembles that on the left. 
+(If the tasting&rsquo;s language is not English, change <tt>EmptyPageString</tt>). 
+Make an image from this page; name the image &hellip;_g1.png; upload the image (but not the PDF). 
+Then revert <tt>EmptyGlassesPageAtStart</tt> to <tt><span class="operator">false</span></tt>, with which the printed PDF should be generated.</p>
+<p>So <tt>EmptyGlassesPageAtStart</tt> should be <tt><span class="operator">true</span></tt> only &lsquo;temporarily&rsquo; (to make an image file), never &lsquo;permanently&rsquo; (because not to make the PDF used for printing and so not kept as part of the record of the tasting).</p>
+<p>The &lsquo;empty&rsquo; page is of size <tt>PaperType</tt> like the glasses pages, but of orientation <tt>EmptyGlassesPageOrientation</tt>.</p>
+
+<h3 id="GlassesAnnotations"><a href="#GlassesAnnotations">&bull;</a> GlassesAnnotations</h3>
+<p>Placemats have been made and printed and used. 
+During the tasting, an error is noticed! 
+There are two obvious desiderata: not to change the printed PDF (as the PDF, errors and all, is part of the record of the evening). 
+But also, not to leave this error lying around to cause confusion to future generations. 
+E.g., <a href="http://www.jdawiseman.com/2014/20140430_Crazy8s.pdf">placemats made by this author for a tasting on 30<small><sup>th</sup></small>&nbsp;April 2014</a> mistakenly included &ldquo;D78&rdquo;, even though Dow did not declare the full blend in 1978, instead declaring DB78, being Dow Quinta do Bomfim. 
+We don&rsquo;t want future generations erroneously believing that we drank Dow 1978, because we didn&rsquo;t. 
+So the &ldquo;D78&rdquo;s have been annotated to add a comment. 
+This is done with <tt>GlassesAnnotations</tt>, an array of even length, alternating <tt>WithinTitles</tt>-style integers pointing into the arrays such as <tt>Titles</tt>, and compound-string annotations.</p>
+
+<p>This feature could be used to annotate blind tastings, after the event, to label what was what.</p>
+
+<p>The existence of this feature is not unanimously regarded as a good thing: see 
+<a href="http://www.theportforum.com/viewtopic.php?t=175&amp;start=905">discussion that started on 28<small><sup>th</sup></small>&nbsp;March 2015</a>.</p>
+
+
+<h3 id="GlassesPageWhiteCirclesBehind"><a href="#GlassesPageWhiteCirclesBehind">&bull;</a> GlassesPageWhiteCirclesBehind</h3>
+<p>Sometimes part of the output is converted to a bitmap, for inclusion in a web page or a phpBB post. 
+If the bitmap is to have transparency, it might be that a white background is wanted behind each of the circles. 
+<tt><span class="nametype">/GlassesPageWhiteCirclesBehind</span> <span class="operator">true</span> <span class="operator">def</span></tt> adds white circles behind.</p>
+
+
+<hr style="clear: both;">
+
+<table width="100%" border="0" id="end">
+<tr>
+	<td width="40%" align="left"><a href="../../index.html">Main index</a></td>
+	<td width="20%" align="center"><a href="#top">Top</a></td>
+	<td width="40%" align="right"><a href="../../author.html">About author</a></td>
+</tr></table>
+
+</body>
+</html>

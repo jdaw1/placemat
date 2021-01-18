@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>/TimesNewRomanPS-BoldMT: accented characters and their PostScript glyphs</title>
+<meta content="Accented and diacritical characters available in /TimesNewRomanPS-BoldMT &asymp; /Times-Bold." name="description">
+<meta content="Accents, diacritics, Times Bold" name="keywords">
+<meta content="Julian D. A. Wiseman" name="author">
+<meta content="general" name="rating">
+<meta content="index,follow,noimageclick" name="robots">
+<meta content="8 hours" name="expires">
+<meta content="7 days" name="revisit"><link href="../../favicon.ico" rel="SHORTCUT ICON">
+<link rel="stylesheet" type="text/css" href="placemat.css">
+<style type="text/css">
+table.diacritics {
+	border-collapse: collapse; 
+	position: center; 
+	margin-left: auto; 
+	margin-right: auto;
+	text-align: center;
+	border: solid 3px;
+	border-color: #66BB66;
+}
+table.diacritics td, table.diacritics th {
+	border-bottom: solid 1px;
+	border-bottom-color: #66BB66;
+	padding: 0.15em 0.15em;
+}
+table.diacritics tr:first-child {
+	border-bottom: solid 3px;
+	border-bottom-color: #66BB66;
+}
+table.diacritics td:first-child {
+	border-right: solid 1px;
+	border-right-color: #66BB66;
+	text-align: left;
+}
+table.diacritics td:nth-child(odd), table.diacritics th:nth-child(odd) {
+	border-right: solid 1px;
+	border-right-color: #66BB66;
+}
+table.diacritics td:nth-child(even), table.diacritics th:nth-child(even) {
+	border-right: solid 1px;
+	border-right-color: #DDEEDD;
+}
+table.diacritics th:first-child {
+	border-right: solid 3px;
+	border-right-color: #66BB66;
+	text-align: left;
+}
+</style>
+
+</head>
+<body>
+<table width="100%" border="0" id="top">
+<tr>
+	<td width="30%" align="left"><a href="../../index.html">Main index</a></td>
+	<td width="40%" align="center"><a href="placemat.html">Placemat: main guide</a></td>
+	<td width="30%" align="right"><a href="../../author.html">About author</a></td>
+</tr></table>
+<hr>
+
+<div style="width: 88px;  float: right;  margin-top: 0;  padding-top: 0;"><p style="margin-top: 0;  padding-top: 0;"><a href="http://validator.w3.org/check?uri=http%3A%2F%2Fwww.jdawiseman.com%2Fpapers%2Fplacemat%2Fdiacritics_timesbold.html"><img src="../../graphics/valid-html401.png" alt="Valid HTML 4.01 Transitional" height="31" width="88"></a></p></div>
+
+<h1><tt>/TimesNewRomanPS-BoldMT</tt>: accented characters and their PostScript glyphs</h1>
+
+<p>In the <a href="placemat.html">placemat software</a> the default font is 
+<tt>/TimesNewRomanPS-BoldMT</tt>, which contains many characters with accents and other diacritics. 
+This document shows how to access these characters within PostScript.</p>
+
+<p>Accented characters consist of a <i>base character</i>, and a <i>diacritic</i>, 
+and the name of the glyph is the former followed by the latter. 
+For example, <tt>/acircumflex</tt> is &ldquo;&acirc;&rdquo;, and <tt>/Acircumflex</tt> is &ldquo;&Acirc;&rdquo;. 
+Observe the case sensitivity. 
+So the PostScript compound string <tt>[<span class="stringtype">(Ch)</span> /acircumflex <span class="stringtype">(teau L)</span> /eacute <span class="stringtype">(oville-Barton)</span>]</tt> 
+would be rendered as &ldquo;Ch&acirc;teau L&eacute;oville-Barton&rdquo;.</p>
+<p>The <a href="#timesnewromanps-boldmt">following table</a> shows the names of the diacritics, 
+and, in <tt>/TimesNewRomanPS-BoldMT</tt>, which of these are available with which base characters.</p>
+
+
+<table class="diacritics" id="timesnewromanps-boldmt">
+<tr><th style="text-align: right;" title="The name of the PostScript glyph is constructed by replacing the ellipsis in the row title with the character(s) in the column title.">&hellip;&nbsp;&rarr;</th><th title="/a&hellip;: &aacute; &acirc; &agrave; &auml; &atilde; &#259; &#257; &#261; &aring; &#507;"><tt>a</tt></th><th title="/A&hellip;: &Aacute; &Acirc; &Agrave; &Auml; &Atilde; &#258; &#256; &#260; &Aring; &#506;"><tt>A</tt></th><th title="/e&hellip;: &eacute; &ecirc; &egrave; &euml; &#277; &#275; &#281; &#283; &#279;"><tt>e</tt></th><th title="/E&hellip;: &Eacute; &Ecirc; &Egrave; &Euml; &#276; &#274; &#280; &#282; &#278;"><tt>E</tt></th><th title="/i&hellip;: &iacute; &icirc; &igrave; &iuml; &#297; &#301; &#299; &#303;"><tt>i</tt></th><th title="/I&hellip;: &Iacute; &Icirc; &Igrave; &Iuml; &#296; &#300; &#298; &#302; &#304;"><tt>I</tt></th><th title="/o&hellip;: &oacute; &ocirc; &ograve; &ouml; &otilde; &#335; &#333; &#337; &oslash;"><tt>o</tt></th><th title="/O&hellip;: &Oacute; &Ocirc; &Ograve; &Ouml; &Otilde; &#334; &#332; &#336; &Oslash;"><tt>O</tt></th><th title="/u&hellip;: &uacute; &ucirc; &ugrave; &uuml; &#361; &#365; &#363; &#371; &#369; &#367;"><tt>u</tt></th><th title="/U&hellip;: &Uacute; &Ucirc; &Ugrave; &Uuml; &#360; &#364; &#362; &#370; &#368; &#366;"><tt>U</tt></th><th title="/y&hellip;: &yacute; &#375; &#7923; &yuml;"><tt>y</tt></th><th title="/Y&hellip;: &Yacute; &#374; &#7922; &Yuml;"><tt>Y</tt></th><th title="/c&hellip;: &#263; &#265; &#269; &ccedil; &#267;"><tt>c</tt></th><th title="/C&hellip;: &#262; &#264; &#268; &Ccedil; &#266;"><tt>C</tt></th><th title="/d&hellip;: &#271; &#273;"><tt>d</tt></th><th title="/D&hellip;: &#270; &#272;"><tt>D</tt></th><th title="/g&hellip;: &#285; &#287; &#487; &#291; &#289;"><tt>g</tt></th><th title="/G&hellip;: &#284; &#286; &#486; &#290; &#288;"><tt>G</tt></th><th title="/h&hellip;: &#293; &#295;"><tt>h</tt></th><th title="/H&hellip;: &#292; &#294;"><tt>H</tt></th><th title="/j&hellip;: &#309;"><tt>j</tt></th><th title="/J&hellip;: &#308;"><tt>J</tt></th><th title="/k&hellip;: &#311;"><tt>k</tt></th><th title="/K&hellip;: &#310;"><tt>K</tt></th><th title="/l&hellip;: &#314; &#318; &#316; &#320; &#322;"><tt>l</tt></th><th title="/L&hellip;: &#313; &#317; &#315; &#319; &#321;"><tt>L</tt></th><th title="/n&hellip;: &#324; &ntilde; &#328; &#326;"><tt>n</tt></th><th title="/N&hellip;: &#323; &Ntilde; &#327; &#325;"><tt>N</tt></th><th title="/r&hellip;: &#341; &#345; &#343;"><tt>r</tt></th><th title="/R&hellip;: &#340; &#344; &#342;"><tt>R</tt></th><th title="/s&hellip;: &#347; &#349; &scaron; &#351; &#351;"><tt>s</tt></th><th title="/S&hellip;: &#346; &#348; &Scaron; &#350; &#350;"><tt>S</tt></th><th title="/t&hellip;: &#357; &#359; &#355;"><tt>t</tt></th><th title="/T&hellip;: &#356; &#358; &#354;"><tt>T</tt></th><th title="/w&hellip;: &#7811; &#373; &#7809; &#7813;"><tt>w</tt></th><th title="/W&hellip;: &#7810; &#372; &#7808; &#7812;"><tt>W</tt></th><th title="/z&hellip;: &#378; &#382; &#380;"><tt>z</tt></th><th title="/Z&hellip;: &#377; &#381; &#379;"><tt>Z</tt></th><th title="/ae&hellip;: &#509;"><tt>ae</tt></th><th title="/AE&hellip;: &#508;"><tt>AE</tt></th></tr>
+
+<tr><th title="/&hellip;acute: &aacute; &Aacute; &eacute; &Eacute; &iacute; &Iacute; &oacute; &Oacute; &uacute; &Uacute; &yacute; &Yacute; &#263; &#262; &#314; &#313; &#324; &#323; &#341; &#340; &#347; &#346; &#7811; &#7810; &#378; &#377; &#509; &#508;"><tt>/</tt>&hellip;<tt>acute</tt></th><td title="/aacute = &aacute;">&aacute;</td><td title="/Aacute = &Aacute;">&Aacute;</td><td title="/eacute = &eacute;">&eacute;</td><td title="/Eacute = &Eacute;">&Eacute;</td><td title="/iacute = &iacute;">&iacute;</td><td title="/Iacute = &Iacute;">&Iacute;</td><td title="/oacute = &oacute;">&oacute;</td><td title="/Oacute = &Oacute;">&Oacute;</td><td title="/uacute = &uacute;">&uacute;</td><td title="/Uacute = &Uacute;">&Uacute;</td><td title="/yacute = &yacute;">&yacute;</td><td title="/Yacute = &Yacute;">&Yacute;</td><td title="/cacute = &#263;">&#263;</td><td title="/Cacute = &#262;">&#262;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/lacute = &#314;">&#314;</td><td title="/Lacute = &#313;">&#313;</td><td title="/nacute = &#324;">&#324;</td><td title="/Nacute = &#323;">&#323;</td><td title="/racute = &#341;">&#341;</td><td title="/Racute = &#340;">&#340;</td><td title="/sacute = &#347;">&#347;</td><td title="/Sacute = &#346;">&#346;</td><td></td><td></td><td title="/wacute = &#7811;">&#7811;</td><td title="/Wacute = &#7810;">&#7810;</td><td title="/zacute = &#378;">&#378;</td><td title="/Zacute = &#377;">&#377;</td><td title="/aeacute = &#509;">&#509;</td><td title="/AEacute = &#508;">&#508;</td></tr>
+<tr><th title="/&hellip;circumflex: &acirc; &Acirc; &ecirc; &Ecirc; &icirc; &Icirc; &ocirc; &Ocirc; &ucirc; &Ucirc; &#375; &#374; &#265; &#264; &#285; &#284; &#293; &#292; &#309; &#308; &#349; &#348; &#373; &#372;"><tt>/</tt>&hellip;<tt>circumflex</tt></th><td title="/acircumflex = &acirc;">&acirc;</td><td title="/Acircumflex = &Acirc;">&Acirc;</td><td title="/ecircumflex = &ecirc;">&ecirc;</td><td title="/Ecircumflex = &Ecirc;">&Ecirc;</td><td title="/icircumflex = &icirc;">&icirc;</td><td title="/Icircumflex = &Icirc;">&Icirc;</td><td title="/ocircumflex = &ocirc;">&ocirc;</td><td title="/Ocircumflex = &Ocirc;">&Ocirc;</td><td title="/ucircumflex = &ucirc;">&ucirc;</td><td title="/Ucircumflex = &Ucirc;">&Ucirc;</td><td title="/ycircumflex = &#375;">&#375;</td><td title="/Ycircumflex = &#374;">&#374;</td><td title="/ccircumflex = &#265;">&#265;</td><td title="/Ccircumflex = &#264;">&#264;</td><td></td><td></td><td title="/gcircumflex = &#285;">&#285;</td><td title="/Gcircumflex = &#284;">&#284;</td><td title="/hcircumflex = &#293;">&#293;</td><td title="/Hcircumflex = &#292;">&#292;</td><td title="/jcircumflex = &#309;">&#309;</td><td title="/Jcircumflex = &#308;">&#308;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/scircumflex = &#349;">&#349;</td><td title="/Scircumflex = &#348;">&#348;</td><td></td><td></td><td title="/wcircumflex = &#373;">&#373;</td><td title="/Wcircumflex = &#372;">&#372;</td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;grave: &agrave; &Agrave; &egrave; &Egrave; &igrave; &Igrave; &ograve; &Ograve; &ugrave; &Ugrave; &#7923; &#7922; &#7809; &#7808;"><tt>/</tt>&hellip;<tt>grave</tt></th><td title="/agrave = &agrave;">&agrave;</td><td title="/Agrave = &Agrave;">&Agrave;</td><td title="/egrave = &egrave;">&egrave;</td><td title="/Egrave = &Egrave;">&Egrave;</td><td title="/igrave = &igrave;">&igrave;</td><td title="/Igrave = &Igrave;">&Igrave;</td><td title="/ograve = &ograve;">&ograve;</td><td title="/Ograve = &Ograve;">&Ograve;</td><td title="/ugrave = &ugrave;">&ugrave;</td><td title="/Ugrave = &Ugrave;">&Ugrave;</td><td title="/ygrave = &#7923;">&#7923;</td><td title="/Ygrave = &#7922;">&#7922;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/wgrave = &#7809;">&#7809;</td><td title="/Wgrave = &#7808;">&#7808;</td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;dieresis: &auml; &Auml; &euml; &Euml; &iuml; &Iuml; &ouml; &Ouml; &uuml; &Uuml; &yuml; &Yuml; &#7813; &#7812;"><tt>/</tt>&hellip;<tt>dieresis</tt></th><td title="/adieresis = &auml;">&auml;</td><td title="/Adieresis = &Auml;">&Auml;</td><td title="/edieresis = &euml;">&euml;</td><td title="/Edieresis = &Euml;">&Euml;</td><td title="/idieresis = &iuml;">&iuml;</td><td title="/Idieresis = &Iuml;">&Iuml;</td><td title="/odieresis = &ouml;">&ouml;</td><td title="/Odieresis = &Ouml;">&Ouml;</td><td title="/udieresis = &uuml;">&uuml;</td><td title="/Udieresis = &Uuml;">&Uuml;</td><td title="/ydieresis = &yuml;">&yuml;</td><td title="/Ydieresis = &Yuml;">&Yuml;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/wdieresis = &#7813;">&#7813;</td><td title="/Wdieresis = &#7812;">&#7812;</td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;tilde: &atilde; &Atilde; &#297; &#296; &otilde; &Otilde; &#361; &#360; &ntilde; &Ntilde;"><tt>/</tt>&hellip;<tt>tilde</tt></th><td title="/atilde = &atilde;">&atilde;</td><td title="/Atilde = &Atilde;">&Atilde;</td><td></td><td></td><td title="/itilde = &#297;">&#297;</td><td title="/Itilde = &#296;">&#296;</td><td title="/otilde = &otilde;">&otilde;</td><td title="/Otilde = &Otilde;">&Otilde;</td><td title="/utilde = &#361;">&#361;</td><td title="/Utilde = &#360;">&#360;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/ntilde = &ntilde;">&ntilde;</td><td title="/Ntilde = &Ntilde;">&Ntilde;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;breve: &#259; &#258; &#277; &#276; &#301; &#300; &#335; &#334; &#365; &#364; &#287; &#286;"><tt>/</tt>&hellip;<tt>breve</tt></th><td title="/abreve = &#259;">&#259;</td><td title="/Abreve = &#258;">&#258;</td><td title="/ebreve = &#277;">&#277;</td><td title="/Ebreve = &#276;">&#276;</td><td title="/ibreve = &#301;">&#301;</td><td title="/Ibreve = &#300;">&#300;</td><td title="/obreve = &#335;">&#335;</td><td title="/Obreve = &#334;">&#334;</td><td title="/ubreve = &#365;">&#365;</td><td title="/Ubreve = &#364;">&#364;</td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/gbreve = &#287;">&#287;</td><td title="/Gbreve = &#286;">&#286;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;macron: &#257; &#256; &#275; &#274; &#299; &#298; &#333; &#332; &#363; &#362;"><tt>/</tt>&hellip;<tt>macron</tt></th><td title="/amacron = &#257;">&#257;</td><td title="/Amacron = &#256;">&#256;</td><td title="/emacron = &#275;">&#275;</td><td title="/Emacron = &#274;">&#274;</td><td title="/imacron = &#299;">&#299;</td><td title="/Imacron = &#298;">&#298;</td><td title="/omacron = &#333;">&#333;</td><td title="/Omacron = &#332;">&#332;</td><td title="/umacron = &#363;">&#363;</td><td title="/Umacron = &#362;">&#362;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;ogonek: &#261; &#260; &#281; &#280; &#303; &#302; &#371; &#370;"><tt>/</tt>&hellip;<tt>ogonek</tt></th><td title="/aogonek = &#261;">&#261;</td><td title="/Aogonek = &#260;">&#260;</td><td title="/eogonek = &#281;">&#281;</td><td title="/Eogonek = &#280;">&#280;</td><td title="/iogonek = &#303;">&#303;</td><td title="/Iogonek = &#302;">&#302;</td><td></td><td></td><td title="/uogonek = &#371;">&#371;</td><td title="/Uogonek = &#370;">&#370;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;caron: &#283; &#282; &#269; &#268; &#271; &#270; &#487; &#486; &#318; &#317; &#328; &#327; &#345; &#344; &scaron; &Scaron; &#357; &#356; &#382; &#381;"><tt>/</tt>&hellip;<tt>caron</tt></th><td></td><td></td><td title="/ecaron = &#283;">&#283;</td><td title="/Ecaron = &#282;">&#282;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/ccaron = &#269;">&#269;</td><td title="/Ccaron = &#268;">&#268;</td><td title="/dcaron = &#271;">&#271;</td><td title="/Dcaron = &#270;">&#270;</td><td title="/gcaron = &#487;">&#487;</td><td title="/Gcaron = &#486;">&#486;</td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/lcaron = &#318;">&#318;</td><td title="/Lcaron = &#317;">&#317;</td><td title="/ncaron = &#328;">&#328;</td><td title="/Ncaron = &#327;">&#327;</td><td title="/rcaron = &#345;">&#345;</td><td title="/Rcaron = &#344;">&#344;</td><td title="/scaron = &scaron;">&scaron;</td><td title="/Scaron = &Scaron;">&Scaron;</td><td title="/tcaron = &#357;">&#357;</td><td title="/Tcaron = &#356;">&#356;</td><td></td><td></td><td title="/zcaron = &#382;">&#382;</td><td title="/Zcaron = &#381;">&#381;</td><td></td><td></td></tr>
+<tr><th title="/&hellip;cedilla: &ccedil; &Ccedil; &#291; &#290; &#311; &#310; &#316; &#315; &#326; &#325; &#343; &#342; &#351; &#350;"><tt>/</tt>&hellip;<tt>cedilla</tt></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/ccedilla = &ccedil;">&ccedil;</td><td title="/Ccedilla = &Ccedil;">&Ccedil;</td><td></td><td></td><td title="/gcedilla = &#291;">&#291;</td><td title="/Gcedilla = &#290;">&#290;</td><td></td><td></td><td></td><td></td><td title="/kcedilla = &#311;">&#311;</td><td title="/Kcedilla = &#310;">&#310;</td><td title="/lcedilla = &#316;">&#316;</td><td title="/Lcedilla = &#315;">&#315;</td><td title="/ncedilla = &#326;">&#326;</td><td title="/Ncedilla = &#325;">&#325;</td><td title="/rcedilla = &#343;">&#343;</td><td title="/Rcedilla = &#342;">&#342;</td><td title="/scedilla = &#351;">&#351;</td><td title="/Scedilla = &#350;">&#350;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;dot: &#279; &#278; &#304; &#320; &#319;"><tt>/</tt>&hellip;<tt>dot</tt></th><td></td><td></td><td title="/edot = &#279;">&#279;</td><td title="/Edot = &#278;">&#278;</td><td></td><td title="/Idot = &#304;">&#304;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/ldot = &#320;">&#320;</td><td title="/Ldot = &#319;">&#319;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;dotaccent: &#267; &#266; &#289; &#288; &#380; &#379;"><tt>/</tt>&hellip;<tt>dotaccent</tt></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/cdotaccent = &#267;">&#267;</td><td title="/Cdotaccent = &#266;">&#266;</td><td></td><td></td><td title="/gdotaccent = &#289;">&#289;</td><td title="/Gdotaccent = &#288;">&#288;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/zdotaccent = &#380;">&#380;</td><td title="/Zdotaccent = &#379;">&#379;</td><td></td><td></td></tr>
+<tr><th title="/&hellip;hungarumlaut: &#337; &#336; &#369; &#368;"><tt>/</tt>&hellip;<tt>hungarumlaut</tt></th><td></td><td></td><td></td><td></td><td></td><td></td><td title="/ohungarumlaut = &#337;">&#337;</td><td title="/Ohungarumlaut = &#336;">&#336;</td><td title="/uhungarumlaut = &#369;">&#369;</td><td title="/Uhungarumlaut = &#368;">&#368;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;slash: &oslash; &Oslash; &#322; &#321;"><tt>/</tt>&hellip;<tt>slash</tt></th><td></td><td></td><td></td><td></td><td></td><td></td><td title="/oslash = &oslash;">&oslash;</td><td title="/Oslash = &Oslash;">&Oslash;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/lslash = &#322;">&#322;</td><td title="/Lslash = &#321;">&#321;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;ring: &aring; &Aring; &#367; &#366;"><tt>/</tt>&hellip;<tt>ring</tt></th><td title="/aring = &aring;">&aring;</td><td title="/Aring = &Aring;">&Aring;</td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/uring = &#367;">&#367;</td><td title="/Uring = &#366;">&#366;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;bar: &#295; &#294; &#359; &#358;"><tt>/</tt>&hellip;<tt>bar</tt></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/hbar = &#295;">&#295;</td><td title="/Hbar = &#294;">&#294;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/tbar = &#359;">&#359;</td><td title="/Tbar = &#358;">&#358;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;commaaccent: &#351; &#350; &#355; &#354;"><tt>/</tt>&hellip;<tt>commaaccent</tt></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/scommaaccent = &#351;">&#351;</td><td title="/Scommaaccent = &#350;">&#350;</td><td title="/tcommaaccent = &#355;">&#355;</td><td title="/Tcommaaccent = &#354;">&#354;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;ringacute: &#507; &#506;"><tt>/</tt>&hellip;<tt>ringacute</tt></th><td title="/aringacute = &#507;">&#507;</td><td title="/Aringacute = &#506;">&#506;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th title="/&hellip;croat: &#273; &#272;"><tt>/</tt>&hellip;<tt>croat</tt></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td title="/dcroat = &#273;">&#273;</td><td title="/Dcroat = &#272;">&#272;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</table>
+
+<p>Some Roman-alphabet languages also use some other glyphs, 
+including <a href="#otherglyphs">the following</a>:</p>
+
+<table class="diacritics" id="otherglyphs">
+<tr><th>Glyph name</th><th>Glyph</th></tr>
+<tr><th><tt>/fi</tt></th><td>&#64257;</td></tr>
+<tr><th><tt>/fl</tt></th><td>&#64258;</td></tr>
+<tr><th><tt>/ae</tt></th><td>&aelig;</td></tr>
+<tr><th><tt>/AE</tt></th><td>&AElig;</td></tr>
+<tr><th><tt>/oe</tt></th><td>&oelig;</td></tr>
+<tr><th><tt>/OE</tt></th><td>&OElig;</td></tr>
+<tr><th><tt>/germandbls</tt></th><td>&szlig;</td></tr>
+<tr><th><tt>/dotlessi</tt></th><td>&#305;</td></tr>
+<tr><th><tt>/thorn</tt></th><td>&thorn;</td></tr>
+<tr><th><tt>/Thorn</tt></th><td>&THORN;</td></tr>
+<tr><th><tt>/eth</tt></th><td>&eth;</td></tr>
+<tr><th><tt>/Eth</tt></th><td>&ETH;</td></tr>
+<tr><th><tt>/napostrophe</tt></th><td>&#329;</td></tr>
+<tr><th><tt>/eng</tt></th><td>&#331;</td></tr>
+<tr><th><tt>/Eng</tt></th><td>&#330;</td></tr>
+<tr><th><tt>/kgreenlandic</tt></th><td>&#312;</td></tr>
+</table>
+
+<hr>
+<table width="100%" border="0" id="end">
+<tr>
+	<td width="40%" align="left"><a href="../../index.html">Main index</a></td>
+	<td width="20%" align="center"><a href="#top">Top</a></td>
+	<td width="40%" align="right"><a href="../../author.html">About author</a></td>
+</tr></table>
+
+</body>
+</html>
