@@ -14,6 +14,7 @@ And having done that, there might also be need for matching pages:
 * to record votes for the WOTN = **W**ine **O**f **T**he **N**ight, and  
 * to assist with computing the split of the costs, allowing for bottles provided.
 
-This PostScript program creates all the paperwork useful for managing such tastings, large or small.
+This PostScript program creates all the paperwork useful for managing such tastings, large or small. 
+Lots of output is at [jdawiseman.com](http://www.jdawiseman.com/papers/placemat/placemats_list.html).
 
 Code started November 2002 for the private use of J.&nbsp;D.&nbsp;A.&nbsp;Wiseman; in September 2005 uploaded to jdawiseman.com; in January 2021 transferred to GitHub.
