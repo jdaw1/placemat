@@ -124,3 +124,7 @@ The following is a possible organsisation, in which it is envisaged that:
 - There was a page of &ldquo;the infrequently updated list of re-usable routines&rdquo;: does that belong here at all?
 
 ----
+
+Links:  
+◊ [this page on GitHib](https://github.com/jdaw1/placemat/blob/main/meta/Documentation_organisation_plan.md);  
+◊ [issue 6 in which discussed](https://github.com/jdaw1/placemat/issues/6).
