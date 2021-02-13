@@ -1,11 +1,15 @@
 %!PS
 
-% This version 15:15 Saturday 13th February 2021
+% This version 18:30 Saturday 13th February 2021
 
-% Permission is given to make non-commercial use of this program, and to distribute its output. But not to distribute the code: refer interested parties to the latest version at the link below, where instructions can also be found.
-% Improvements to the code should be sent them to the author.  Inviting the author to the tastings is, well, almost compulsory! The code is mostly debugged, but errors surely remain. It is provided as-is, without liability: it is free.
-% The most recent version is available via http://www.jdawiseman.com/papers/placemat/placemat.html .  Copyright 1988 to 2021 Julian D. A. Wiseman who is contactable via www.jdawiseman.com/author.html
+% This sofware is licensed under the GNU General Public License v3.0.
+% Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
+% modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must
+% be preserved. Contributors provide an express grant of patent rights.
 
+% For these purposes a change in the parameters of the code does not need to be released.
+% Nor does any output: not PDF; nor images of such a document.
+% But it does include re-usable improvements to the body of the code.
 
 % Recommendation: move changed parameters to just above this line.
 
@@ -14,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202102131515) def
+/ParametersVersionDateTimeAdobeFormat (D:202102131830) def
 
 /Circlearrays [
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
@@ -72,7 +76,7 @@
 ] def  % /HeadersRight
 /ExternalLinks [  % Array, length a multiple of three:  indented0-boolean, (Descriptor0), (http://URL0),  indented1-boolean, (Descriptor1), (http://URL1),  ...
 	false   (Thread on ThePortForum.com)     (http://www.theportforum.com/viewtopic.php?t=00175&view=unread#unread)
-	false   (Latest version this placemat)   (http://www.jdawiseman.com/papers/placemat/placemat.pdf)
+%	false   (Latest version this placemat)   (http://www.jdawiseman.com/2021/    .pdf)
 %	true    (in list of placemats)           (http://www.jdawiseman.com/papers/placemat/placemats_list.html#a2021MMDD)
 	false   (Boot & Flogger)                 (http://www.davy.co.uk/wine-bar/boot-and-flogger/)
 	true    (SE1 1TA, streetmap.co.uk)       (http://www.streetmap.co.uk/map.srf?x=532409&y=180083&z=106&pc=SE1+1TA)
@@ -754,7 +758,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202102131515) def
+/SoftwareVersionDateTimeAdobeFormat (D:202102131830) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -4488,7 +4492,7 @@ currentdict /SmallCapsDict undef
 
 					NGiA 2 add dup mul  -1  0
 					{
-						0 le {/UpperR R def (Error: ProcessOnePackingType, Arch, extremely slow convergence. Please send PostScript file to the author. www.jdawiseman.com/author.html) OutputToLog exit} if
+						0 le {/UpperR R def (Error: ProcessOnePackingType, Arch, extremely slow convergence. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog exit} if
 						/DistSquaredMax 0 def
 						/DistSquaredMin H W add dup mul def
 						% Test for exit of jiggling of PositionsX & PositionsY
@@ -5352,7 +5356,7 @@ currentdict /SmallCapsDict undef
 
 			NGiA 2 add dup mul  -1  0
 			{
-				0 le {/UpperR R def (Error: CirclePacking, Arch, extremely slow convergence. Please send PostScript file to the author. www.jdawiseman.com/author.html) OutputToLog exit} if
+				0 le {/UpperR R def (Error: CirclePacking, Arch, extremely slow convergence. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog exit} if
 				/DistSquaredMax 0 def
 				/DistSquaredMin H W add dup mul def
 				% Test for exit of jiggling of PositionsX & PositionsY
@@ -5740,7 +5744,7 @@ currentdict /SmallCapsDict undef
 			{
 				[ 4 R mul S sub S mul NC 4 add NC mul 5 add 4 mul R R mul mul sub NC 2 add 8 mul R L mul mul add 4 L L mul mul sub  S 2 R mul sub 2 mul  3 ]
 				2 R mul //PrinterEpsilon sub  //false   L R 2 mul sub //PrinterEpsilon add  //false  //PrinterEpsilon  PolynomialRoots
-				dup length 0 eq {pop () (Error: CirclePacking, DiamondsPlus, failed to compute dist. Please send your code to the author: www.jdawiseman.com/author.html) () OutputToLog OutputToLog OutputToLog /dist R 2 mul def} {Min /dist exch def} ifelse
+				dup length 0 eq {pop () (Error: CirclePacking, DiamondsPlus, failed to compute dist. Please submit an issue to http://github.com/jdaw1/placemat/issues/) () OutputToLog OutputToLog OutputToLog /dist R 2 mul def} {Min /dist exch def} ifelse
 				/xstep R def
 			}{
 				/QuarticCoeffs
@@ -6280,7 +6284,7 @@ currentdict /SmallCapsDict undef
 			/Ang  DistCurrent CW 2 div add  Dists PartMiddle 1 sub get sub  Dists PartMiddle get Dists PartMiddle 1 sub get sub  div 90 mul  def
 			GRestore  matrix currentmatrix
 			[
-				{(Error: CirclearrayInSemiRoundedRectangleRec, impossible PartMiddle. Please send .ps file to the author, www.jdawiseman.com/author.html) OutputToLog stop}
+				{(Error: CirclearrayInSemiRoundedRectangleRec, impossible PartMiddle. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog stop}
 				{X W D add add  Y AD DistCurrent add add  moveto 90 rotate  0 VerticalOffset rmoveto}
 				{W R sub X add Ang cos R D add mul add   H R sub Y add Ang sin R D add mul add moveto  90  Ang add rotate  CW -2 div VerticalOffset rmoveto}
 				{X W R DistCurrent Dists 2 get sub add sub add   Y H D add add  moveto 180 rotate  0 VerticalOffset rmoveto}
@@ -6954,7 +6958,7 @@ currentdict /SmallCapsDict undef
 				} {pop} ifelse  % too close
 			} for  % WP
 		} for  % WithinPage
-		GlassPositionsBug {mark (Error in the computation of GlassPositions ) SheetNum ( get. Please send code and log file to the programmer: www.jdawiseman.com/author.html. Execution continuing.) ConcatenateToMark OutputToLog} if
+		GlassPositionsBug {mark (Error in the computation of GlassPositions ) SheetNum ( get. Please submit an issue to http://github.com/jdaw1/placemat/issues/ . Execution continuing.) ConcatenateToMark OutputToLog} if
 		UndefMgns
 		end
 	} bind def  % CodeCallCirclePacking
@@ -7291,7 +7295,7 @@ currentdict /SmallCapsDict undef
 		/CirclearraysProtoBestSheetNum null def
 		/CirclearraysProtoBestWithinPage null def
 		/CirclearraysProtoBestMinCopies null def
-		0 eq {(Warning: CirclearraysNScore not converging. Please send PostScript file to author, www.jdawiseman.com/author.html. Execution continuing.) OutputToLog} if
+		0 eq {(Warning: CirclearraysNScore not converging. Please submit an issue to http://github.com/jdaw1/placemat/issues/ . Execution continuing.) OutputToLog} if
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
@@ -7954,8 +7958,8 @@ currentdict /SmallCapsDict undef
 			{
 				mark FirstError {(\n)} if   (Error. With SheetNum=) SheetNum (, WithinPage=) WithinPage (, WithinTitles=) WithinTitles (, title=) Titles WithinTitles get ASCIIfy (: )
 				/FirstError //false def
-				a {(insufficient room for Abovetitles, which is weird. Please send PostScript to author, www.jdawiseman.com/author.html) (; )} if
-				b {(insufficient room for Belowtitles, which is weird. Please send PostScript to author, www.jdawiseman.com/author.html) (; )} if
+				a {(insufficient room for Abovetitles, which is weird. Please submit an issue to http://github.com/jdaw1/placemat/issues/ ) (; )} if
+				b {(insufficient room for Belowtitles, which is weird. Please submit an issue to http://github.com/jdaw1/placemat/issues/ ) (; )} if
 				pop (.) ConcatenateToMark OutputToLog
 			} if  % a b or
 
@@ -12619,7 +12623,7 @@ currentdict /SmallCapsDict undef
 							} for  % WithinPage, WithinTitles
 						} for  % SheetNum
 						NTNumPaintedThisPage 0 gt {AnnotatePDF ShowPage} if
-					} {(Error: NeckTags, NTBestRotatedness is null. No neck tags pages; otherwise continuing. Please send .ps file to the author: www.jdawiseman.com/author.html) OutputToLog} ifelse  % NTBestRotatedness //null ne
+					} {(Error: NeckTags, NTBestRotatedness is null. No neck tags pages; otherwise continuing. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog} ifelse  % NTBestRotatedness //null ne
 				} if  % NTNumGlasses 1 ge ...
 				end
 				DeBugLevel 100 le {(-NeckTags) OutputToLog} if
@@ -13356,7 +13360,7 @@ currentdict /SmallCapsDict undef
 	mark
 		/CreationDate ParametersVersionDateTimeAdobeFormat   /Title PDF_title ASCIIfy
 		/Author (Julian D. A. Wiseman)
-		/Creator (www.jdawiseman.com/papers/placemat/placemat.html)
+		/Creator (www.jdawiseman.com/author.html)
 		/Subject mark
 			(PostScript code by Julian D. A. Wiseman; software version ) SoftwareVersionDateTimeAdobeFormat dup length 2 sub 2 exch getinterval
 			(; parameters as of ) ParametersVersionDateTimeAdobeFormat dup length 2 sub 2 exch getinterval
@@ -13932,7 +13936,7 @@ currentdict /SmallCapsDict undef
 		} for  % i
 	} if  % ExternalLinks length 3 ge
 	mark  /Action << >>  /Color [0 0 0]  /Title ()  /F 0  /OUT  pdfmark
-	mark  /Action << /Subtype /URI /URI (http://www.jdawiseman.com/placemat.html) >>  /Color [0 0 0]  /Title (\247 Placemat software)  /F 2  /OUT  pdfmark
+	mark  /Action << /Subtype /URI /URI (http://github.com/jdaw1/placemat/) >>  /Color [0 0 0]  /Title (\247 Placemat software)  /F 2  /OUT  pdfmark
 	mark  /Action << >>  /Color [0.4 0.4 0.4]  /Title mark (\(ver: ) SoftwareVersionDateTimeAdobeFormat (\)) ConcatenateToMark  /F 1  /OUT  pdfmark
 	0  3  ExternalLinksExtras length 3 sub
 	{
@@ -14001,7 +14005,7 @@ OutputLogToAnnotation  ShownPages 0 gt  and
 		/Title   (Distillation log)
 		/Subj    (The log output from the progam that converted the PostScript to PDF. Mostly human-readable.)
 		/Contents  mark
-			(Placemat software:\nhttp://www.jdawiseman.com/placemat.html\nhttp://www.jdawiseman.com/papers/placemat/placemat.ps)
+			(Placemat software:\nhttp://github.com/jdaw1/placemat/)
 			OutputLog {dup type /stringtype eq {(\n\n) exch} {pop exit} ifelse} forall
 		ConcatenateToMark
 		/Name    /Comment
@@ -14032,8 +14036,10 @@ OutputLogToPage {false PageSuppressed not} {false} ifelse
 	/ForcedLineBreak //false def
 
 	/Courier-Bold FontSize selectfont   27 Y moveto  0 0 0.9333333 setrgbcolor  % #0000EE  http://www.w3.org/TR/html5/rendering.html  http://stackoverflow.com/questions/4774022/
-	0  [ (www.jdawiseman.com/papers/placemat/placemat.html)  (www.jdawiseman.com/placemat.html)  (www.jdawiseman.com/papers/placemat/placemat.ps) ] dup
-	PageWidth 54 sub exch {stringwidth pop sub} forall 2 div dup 3 -1 roll {show 0 rmoveto} forall  /AnythingOnPage //true def   /Y Y YlineStep sub YparaExtra sub def
+	/LogHeaders [ (http://github.com/jdaw1/placemat/)  (http://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps) ] def
+	/LogHeaderGap PageWidth 54 sub LogHeaders {stringwidth pop sub} forall LogHeaders length dup 2 ge {1 sub div} {pop} ifelse def
+	LogHeaders {show LogHeaderGap 0 rmoveto   /AnythingOnPage //true def} forall
+	/Y Y YlineStep sub YparaExtra sub def
 
 	/Courier FontSize selectfont  /WidthW (W) stringwidth pop def  0 setgray
 	OutputLog 0 OutputtedToLog getinterval
