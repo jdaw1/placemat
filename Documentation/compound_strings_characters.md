@@ -1,43 +1,54 @@
 # Compound Strings and non-ASCII characters
 
 **Documents**: 
-- [Introduction, and a first placemat](introduction_first_placemat.md); 
-- *Compound Strings and non-ASCII characters*;
-- [Fonts and glass decoration](fonts_glasses_decoration.md);
-- [Type sizes](type_sizes.md);
-- [Page-level controls](page_level.md).
+1. [Introduction, and a first placemat](introduction_first_placemat.md); 
+2. *Compound Strings and non-ASCII characters*;
+3. [Fonts and glass decoration](fonts_glasses_decoration.md);
+4. [Type sizes](type_sizes.md);
+5. [Page-level controls](page_level.md);
+6. [Arrangement of glasses on the page](PackingStyles.md);
+7. [Non-Glasses Pages](not_glasses.md);
+8. [Document-level controls](document.md);
+9. [Code injection](code_injection.md);
+10.[Bitmap images](bitmap_images.md).
 
 ----
 
-Some wanted text is more complciated than a plain [ASCII](http://en.wikipedia.org/wiki/ASCII) string. 
+Some wanted text is more complicated than a plain [ASCII](http://en.wikipedia.org/wiki/ASCII) string. 
+PostScript is an early-1980s language, and one of the ways in which it shows its age is its incompatibility with Unicode. 
 This document shows how to access non-ASCII characters, and the more general concept of a compound string.
+
 
 ## Strings, and compound strings
 
-The basic unit of Postscript text is the string, which are delimited with round brackets.  
-`(This is an unexciting PostScript string.)`  
+The basic unit of Postscript text is the string, which are delimited with round brackets.
+```PostScript
+(This is an unexciting PostScript string.)
+```  
 Strings can contain ASCII characters, of which there are almost a hundred. 
+
 Other characters can be accessed by their name. 
-E.g., `/acircumflex` is “&acirc;”; 
+E.g., `/acircumflex` is &ldquo;&acirc;&rdquo;; 
 `/dagger` is &ldquo;&dagger;&ldquo;; 
 `/sterling` is &ldquo;&pound;&ldquo;; and
 `/fi` is the ligature &ldquo;&#64257;&ldquo;, a single character which joins the &lsquo;f&rsquo; and &lsquo;i&rsquo; without an ugly collision between the tail of the former and the dot of the latter. 
 
-These concepts have been extended by the placemat software. 
-Almost all parameters that accept a string can accept a &lsquo;compound string&rsquo;. 
+These concepts have been unified and extended by the placemat software into a &lsquo;compound string&rsquo;. 
 A compound string is any of:
 * A string;
 * A glyph name;
-* Code, which can either change the graphics state, or leave strings on the stack;
+* Code, which can either change the graphics state, or leave compound strings on the stack;
 * An array, so bounded by square brackets = `[]`, containing other compound strings.
 
 Some examples:
+
+<div align="center">
 
 | Compound string | Rendered as |
 |:----------------|:------------|
 | `/dagger`       | &dagger;    |
 | `[/daggerdbl]`  | &Dagger;    |
-| `/sterling`     | &pound;    |
+| `/sterling`     | &pound;     |
 | `/dollar`       | $           |
 | `($)`           | $           |
 | `[ [/yen] ]`    | &yen;       |
@@ -46,12 +57,14 @@ Some examples:
 | `(JDAW)`                   | ![&lsquo;JDAW&rsquo;, not kerned](images/JDAW_unkerned.png) |
 | `[(JDA) {-0.06 Kern} (W)]` | ![&lsquo;JDAW&rsquo;, kerned](images/JDAW_kerned.png) |
 
+</div>
 
 These examples are not entirely idle. 
 Five glasses fit very elegantly on one sheet of A4. 
 So if there are four wines, a spare circle is labelled &dagger;. 
 If there are eight glasses on 2&times;A4, the spares are &dagger; &Dagger;. 
-Seven glasses on 2&times;A4 have three spares, usually &pound; $ &yen;. 
+Seven glasses on 2&times;A4 have three spares, usually &pound; $ &yen;.
+
 The last two rows of the table show the effect of `Kern`ing, code being in curly brackets `{}`, the number being the horizontal movement as a proportion of the font size (font = `/DejaVuSerif`). 
 
 Some fonts have thousands of glyphs. 
@@ -75,7 +88,7 @@ There follow a selection of the glyphs most likely to be useful to users of the 
 &sbquo;&nbsp;`/quotesinglbase`&nbsp;&nbsp;&nbsp;&nbsp; 
 &bdquo;&nbsp;`/quotedblbase`
 
-**Ligatures and characters**:&nbsp;&nbsp;&nbsp;&nbsp; 
+**Ligatures and letters**:&nbsp;&nbsp;&nbsp;&nbsp; 
 &#64257;&nbsp;`/fi`&nbsp;&nbsp;&nbsp;&nbsp; 
 &#64258;&nbsp;`/fl`&nbsp;&nbsp;&nbsp;&nbsp; 
 &aelig;&nbsp;`/ae`&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -83,13 +96,6 @@ There follow a selection of the glyphs most likely to be useful to users of the 
 &oelig;&nbsp;`/oe`&nbsp;&nbsp;&nbsp;&nbsp; 
 &OElig;&nbsp;`/OE`&nbsp;&nbsp;&nbsp;&nbsp; 
 &szlig;&nbsp;`/germandbls`&nbsp;&nbsp;&nbsp;&nbsp; 
-&#305;&nbsp;`/dotlessi`&nbsp;&nbsp;&nbsp;&nbsp; 
-&thorn;&nbsp;`/thorn`&nbsp;&nbsp;&nbsp;&nbsp; 
-&THORN;&nbsp;`/Thorn`&nbsp;&nbsp;&nbsp;&nbsp; 
-&eth;&nbsp;`/eth`&nbsp;&nbsp;&nbsp;&nbsp; 
-&ETH;&nbsp;`/Eth`&nbsp;&nbsp;&nbsp;&nbsp; 
-&#331;&nbsp;`/eng`&nbsp;&nbsp;&nbsp;&nbsp; 
-&#330;&nbsp;`/Eng`
 
 **Symbols**:&nbsp;&nbsp;&nbsp;&nbsp; 
 &dagger;&nbsp;`/dagger`&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -171,7 +177,7 @@ Some wines, and some people, have accents in their names.
 
 In PostScript the name of an accented character consists of a *base*, and a *diacritic*. 
 The name of the glyph is the former followed by the latter. 
-For example, `/atilde` is “&atilde;”, and `/Atilde` is “&Atilde;”. 
+For example, `/atilde` is &ldquo;&atilde;&rdquo;, and `/Atilde` is &ldquo;&Atilde;&rdquo;. 
 Observe the case sensitivity.
 
 The table shows the names of the diacritics, and with which base characters which of these are available in the font `/TimesNewRomanPS-BoldMT`.
@@ -212,3 +218,12 @@ The table shows the names of the diacritics, and with which base characters whic
 &#310;&nbsp;`/Kcedilla`&nbsp;&nbsp;&nbsp;&nbsp; 
 &#312;&nbsp;`/kgreenlandic`&nbsp;&nbsp;&nbsp;&nbsp; 
 &#329;&nbsp;`/napostrophe`
+
+**More extended Latin**:&nbsp;&nbsp;&nbsp;&nbsp; 
+&#305;&nbsp;`/dotlessi`&nbsp;&nbsp;&nbsp;&nbsp; 
+&thorn;&nbsp;`/thorn`&nbsp;&nbsp;&nbsp;&nbsp; 
+&THORN;&nbsp;`/Thorn`&nbsp;&nbsp;&nbsp;&nbsp; 
+&eth;&nbsp;`/eth`&nbsp;&nbsp;&nbsp;&nbsp; 
+&ETH;&nbsp;`/Eth`&nbsp;&nbsp;&nbsp;&nbsp; 
+&#331;&nbsp;`/eng`&nbsp;&nbsp;&nbsp;&nbsp; 
+&#330;&nbsp;`/Eng`

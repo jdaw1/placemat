@@ -1,21 +1,26 @@
 # Font size controls
 
 **Documents**: 
-- [Introduction, and a first placemat](introduction_first_placemat.md); 
-- [Compound Strings and non-ASCII characters](compound_strings_characters.md);
-- [Fonts and glass decoration](fonts_glasses_decoration.md);
-- *Type sizes*;
-- [Page-level controls](page_level.md).
+1. [Introduction, and a first placemat](introduction_first_placemat.md); 
+2. [Compound Strings and non-ASCII characters](compound_strings_characters.md);
+3. [Fonts and glass decoration](fonts_glasses_decoration.md);
+4. *Type sizes*;
+5. [Page-level controls](page_level.md);
+6. [Arrangement of glasses on the page](PackingStyles.md);
+7. [Non-Glasses Pages](Not_Glasses.md);
+8. [Document-level controls](Document.md);
+9. [Code injection](Code_injection.md);
+10.[Bitmap images](Bitmap_images.md).
 
 ----
 
 ## Introduction
 
 There are lots of fussy controls over the sizing of fonts. 
-A few of these controls are, or are sometimes, principal. 
-Many others are abeyant &mdash; of use not more than rarely.
+A few of these controls are, or are sometimes, *worthwhile*. 
+Many others are *superfluous* &mdash; of use not more than rarely.
 
-but before that distniction can be detailed, a flow of action is needed. 
+but before that distinction can be detailed, a flow of action is needed. 
 
 1. First, the circle text is sized. 
 There are two parameters givng an indicative size, and others controlling whether this may be improved. 
@@ -34,12 +39,12 @@ These should be tackled in order.
 
 ## Circlearrays sizing
 
-### Principal
+### Worthwhile
 
 The circle text is initially set to be the smaller of `CircletextMaxFontSizeAbsolute`, and radius &times; `CircletextMaxFontSizeProportionRadius`. 
 Also relevant is `CircletextsMinNumSpacesBetween`, the gap between the items of `Circlearrays`, measured in space widths. 
 
-### Abeyant
+### Superfluous
 
 Next, the font size can reduced to satisfy `CircletextsMinCopies`.
 
@@ -63,35 +68,36 @@ Typically this is most easily achieved by having it depend on `PageOrderingGlass
 
 Broadly, the `Titles` etc fit inside the `Circlearrays`. 
 
-### Abeyant
+### Superfluous
 
 Inside which there is a `ExclusionAnnulusProportionInnerRadiusTitlesAboveBelow`, defaulting to 0. 
 
 `TitleMaxHeightProportionInnerRadius` ensures that the likes of &ldquo;&dagger;&rdquo; isn&rsquo;t grossly outsized. 
 
 It would be ugly for there to be font sizes marginally different: 100pt, 104pt, 108pt, 108pt. 
-The next few controls defines sets define sets, the font size of all of which are reduced to the smallest in the set. 
+The next few controls define sets, the font size of all of which are reduced to the smallest in the set.
 
-### Principal
+### Worthwhile
 
 * If larger&divide;smaller &le;`FontSizesRatioTitlesMin` , then the larger is collapsed to the smaller. 
 Setting this to a large value causes all to be the same size. 
 Setting this to any value &le;1 causes this to be ignored. 
-Default is &#8732;2.
+Default is 1.1892 &asymp;&nbsp;&#8732;2. 
 It is one of the few sizing parameters which I do change.
 
-### Abeyant
+### Superfluous
 
-* `FontSizesTitlesNotSmallerIfTitlesNotLonger` constrains the size of a &lsquo;W&rsquo; to be no smaller than that of a &lsquo;II&rsquo;, and ensures that the latter&rsquo;s font size equals that of a &lsquo;WW&rsquo;.
+* `FontSizesTitlesNotSmallerIfTitlesNotLonger` is a Boolean, which can constrains the size of a &lsquo;W&rsquo; to be no smaller than that of a &lsquo;ii&rsquo;, and ensures that the latter&rsquo;s font size equals that of a &lsquo;SW&rsquo;. Observe that this being true compels `Titles` of the same character count to be the same size.
 
 * If two pages are in different sessions (lunch, evening) then there is no need for their sizes to be worked togther. 
-The default value of `FontSizesSetsGlassesPages` is `PageOrderingGlasses`, which is only used for separation into sessions.
+`FontSizesSetsGlassesPages` is an array, of the same length as `GlassesOnSheets`; pages are worked together if their elements are `eq`ual. 
+The default value of `FontSizesSetsGlassesPages` is `PageOrderingGlasses`, which is typically used for separation into sessions.
 
 * `FontSizesTitlesEquivalences` is the same length as `Titles`, and if two elements of this are `eq`ual then the font sizes must be equal.
 
 With the size of the Titles set, the space above and below can be used for the `Abovetitles` and `Belowtitles`, which are done jointly with the `Overtitles` (henceforth, **A**, **B**, **O**).
 
-### Principal
+### Worthwhile
 
 * Sizes are one-at-a-time constrained by `AbovetitleMaxFontSizeProportionTitles`, `BelowtitleMaxFontSizeProportionTitles`, and `OvertitleMaxFontSizeProportionTitles`.
 
@@ -100,9 +106,9 @@ With the size of the Titles set, the space above and below can be used for the `
 Equal elements &rArr; considered together. 
 As a guide, if different fonts &hArr; not together.
 
-### Abeyant
+### Superfluous
 
-Analagous to the &hellip;`Titles`&hellip;, are: 
+Analagous to the `…Titles…` are:
 
 * `ExclusionAnnulusProportionInnerRadiusTitlesAboveBelow`, `ExclusionAnnulusProportionInnerRadiusOvertitles`, and `FontSizesRatioAboveBelowOverMin`, the last of which defaults to 999, so forcing all to be the same size;
 
@@ -112,9 +118,9 @@ Analagous to the &hellip;`Titles`&hellip;, are:
 
 ## VerticalMiddling
 
-### Abeyant
+### Superfluous
 
-The VerticalMiddling parameters are for the fussy. 
+The VerticalMiddling parameters are for the fussy. 
 The default values will almost always suffice.
 
 How are the Titles to be vertically aligned? 
@@ -123,7 +129,11 @@ So some sets should have a common baseline.
 But even that is wrong: vertically aligning &ldquo;P&ccedil;&rdquo; and &ldquo;Pi&rdquo; looks wrong: the tail of the cedilla, or of a &lsquo;g&rsquo; or of a &lsquo;y&rsquo;, just seems aesthetically different. 
 So the vertical alignment should be to a no-descender string. 
 
+<div align="center">
+
 ![VerticalMiddling: three possibilities](images/VerticalMiddling.gif)
+
+</div>
 
 `VerticalMiddlingTitles` and `VerticalMiddlingOvertitles` must be one of `/MatchNone`, `/MatchRow`, `/MatchPage`, `/MatchAll`, or `/MatchString`. 
 The last of these causes it to use `VerticalMiddlingStringTitles` and `VerticalMiddlingStringOvertitles`. 
