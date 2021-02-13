@@ -21,13 +21,13 @@ Code started November 2002 for the private use of J.&nbsp;D.&nbsp;A.&nbsp;Wisema
 
 ## Documentation
 
-1.  [Introduction, and a first placemat](blob/main/Documentation/introduction_first_placemat.md);  
-2.  [Compound Strings and non-ASCII characters](blob/main/Documentation/compound_strings_characters.md);  
-3.  [Fonts and glass decoration](blob/main/Documentation/fonts_glasses_decoration.md);  
-4.  [Type sizes](blob/main/Documentation/type_sizes.md);  
-5.  [Page-level controls](blob/main/Documentation/page_level.md);  
-6.  [Arrangement of glasses on the page](blob/main/Documentation/PackingStyles.md);  
-7.  [Non-Glasses Pages](blob/main/Documentation/not_glasses.md);  
-8.  [Document-level controls](blob/main/Documentation/document.md);  
-9.  [Code injection](blob/main/Documentation/code_injection.md);  
-10. [Bitmap images](blob/main/Documentation/bitmap_images.md).
+1.  [Introduction, and a first placemat](Documentation/introduction_first_placemat.md);  
+2.  [Compound Strings and non-ASCII characters](Documentation/compound_strings_characters.md);  
+3.  [Fonts and glass decoration](Documentation/fonts_glasses_decoration.md);  
+4.  [Type sizes](Documentation/type_sizes.md);  
+5.  [Page-level controls](Documentation/page_level.md);  
+6.  [Arrangement of glasses on the page](Documentation/PackingStyles.md);  
+7.  [Non-Glasses Pages](Documentation/not_glasses.md);  
+8.  [Document-level controls](Documentation/document.md);  
+9.  [Code injection](Documentation/code_injection.md);  
+10. [Bitmap images](Documentation/bitmap_images.md).
