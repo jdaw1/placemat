@@ -1,32 +1,38 @@
 # Fonts and glass decoration
 
 **Documents**: 
-- [Introduction, and a first placemat](introduction_first_placemat.md); 
-- [Compound Strings and non-ASCII characters](compound_strings_characters.md);
-- *Fonts and glass decoration*;
-- [Type sizes](type_sizes.md);
-- [Page-level controls](page_level.md).
+1. [Introduction, and a first placemat](introduction_first_placemat.md); 
+2. [Compound Strings and non-ASCII characters](compound_strings_characters.md);
+3. *Fonts and glass decoration*;
+4. [Type sizes](type_sizes.md);
+5. [Page-level controls](page_level.md);
+6. [Arrangement of glasses on the page](PackingStyles.md);
+7. [Non-Glasses Pages](not_glasses.md);
+8. [Document-level controls](document.md);
+9. [Code injection](code_injection.md);
+10.[Bitmap images](bitmap_images.md).
 
 ----
 
 ## Abovetitles, Overtitles, and FillTexts
 
-<img align="right" width="546" height="545" src="images/Circlearrays_Titles_Abovetitles_Belowtitles_Overtitles_FillTexts.png">
+<img align="right" width="476" height="477" src="images/Circlearrays_Titles_Abovetitles_Belowtitles_Overtitles_FillTexts.png">
 
 The [Introduction](introduction_first_placemat.md) discussed the array parameters `Circlearrays`, `Titles`, and `Belowtitles`.
 Also there are analagous parameters `Abovetitles` and `Overtitles`, and text can also be put into `FillTexts`, as shown in the nearby image.
 
 This profusion of places to put information should be used sparsely, and consistently. 
 For example, in a vertical, the `Titles` might contain two-digit years, and the `Overtitles` a concise version of the name of the shipper or quinta or winery or ch&acirc;teau or distillery. 
-Most `Abovetitles` would be blank, only a few specifying a non-standard bottle size such as &ldquo;Double Magnum&rdquo;. 
-Most `Belowtitles` would be blank, only a few specifying the likes of “Cask Sample”.
+Most `Abovetitles` would be blank =&nbsp;`()`, only a few specifying a non-standard bottle size such as &ldquo;Double Magnum&rdquo;. 
+Most `Belowtitles` would be blank, only a few specifying the likes of &ldquo;Cask Sample&rdquo;.
 
-Extracts of code that made the image:
+Extracts of code that made the image, for later explanation:
 ```PostScript
 /ColourSchemeTitles /MidGrey def
 /FontSizesSetsAboveBelowOver [ 0 0 1 ] def
 /InlineTitles false def
 /FillTitles true def
+/CircletextMaxFontSizeAbsolute 11 def
 ```
 
 
@@ -79,8 +85,8 @@ and many others.
 There is another fussiness in this default. 
 Mostly, the curly brackets are unnceccessary. 
 Mostly, `/OvertitlesFont TitlesFont def` would work as well as `/OvertitlesFont {TitlesFont} def`. 
-The former sets `OvertitlesFont` to be a value. 
-The latter sets `OvertitlesFont` to be code, which is later executed. 
+The former sets `OvertitlesFont` to a value. 
+The latter sets `OvertitlesFont` to code, which is later executed. 
 If `TitlesFont` were itself code, such that its output depended on an internal variable such as `WithinTitles`, the latter would be necessary. 
 And indeed, `NamesFont` is set to a little code, that is executed each time `NamesFont` is needed. 
 (The `bind` is a slight optimisation, which could have been omitted.)
@@ -89,53 +95,13 @@ As of the third millennium, most programming environments frown on code injectio
 But in this PostScrpt program code injection is allowed, often encouraged, and occasionally necessary. 
 Those not comfortable with that may safely leave such parameters at their default values. 
 
-## FillTexts
-
-The `FillTexts` were enabled by
-```PostScript
-/FillTitles true def
-```
-The example shown also has `/FillTextAngle -30 def`, but this does not have to be numeric. 
-It also accepts some name values: `/LowerLeft`, `/LowerRight`, `/MiddleLeft`, `/UpperCenter`, `/UpperRight`, or `/Name`, the text being perpendicular to a line from from the value of  `FillTextAngle` to the centre of the circle. 
-Using one of these values, my favourite pehaps being `/Name`, causes each circle to have a different angle, but the pattern as a whole coheres aesthetically. 
-
-This structure is typical of many of the parameters: the user can choose a value; or can access some pre-written logic by name.
-
-There is another sense in which `FillTexts` is typical of many features. 
-There are a few essential controls. 
-And there are many other controls which can almost always remain at their default values, but which may be changed by a fussy user. 
-
-The Booleans `FillTitles`, `FillAbovetitles`, `FillBelowtitles`, `FillOvertitles`, and `FillPlaceNames` control whether their respective elements are filled with multiple copies of some text, outlined. 
-The filling texts are in the array `FillTexts`, which is of the same length as `Titles`, and each is outlined `FillTextNumOutlines` times. 
-Depending on the values of `ColourSchemeTitles` etc, the colours are either black and white, or 40% grey and white. 
-Each rendering of an item of `FillTexts` is suffixed with `FillTextNumSpaces` spaces.
-
-The `FillTexts` are set in the font `FillTextFont`, at a size of at least `FillTextMinFontSizeAbsolute`, and of a size of at least `FillTextMinFontSizeProportionLargestTitleAboveBelowOver` &times; the largest their font sizes.
-
-The formatting of the `PlaceNames`&hellip; generally matches that of the Titles, except that the filling text is `FillTextPlaceNames`, and the angle is `FillTextAnglePlaceNames`
-
-Use of FillTexts makes distillation slow, and produces files that can be too complicated for some printers. 
-The balance between these two can be influenced by the Boolean `FillTextPrintQuickerDistillSlower`. 
-For example, in a draft placemat with `FillTitles` and `PlaceNames`, changing `FillTextPrintQuickerDistillSlower` from `false` to `true` decreased the file size from 1013k to 871k, but increased the distill time from 64 seconds to 40 minutes. 
-If distilling the PostScript via the web the latter would definitely have timed out the browser. 
-And it might be that, on some printers, the print-slowly option (`false`) won’t print at all, whereas the print-quickly option (`true`) will. 
-But some printers can&rsquo;t cope with either; or the resolution is insufficient for the small grey text to look entirely satisfactory. 
-So test your printer; do not assume that anything will work first time; and do not assume that all larger more expensive printers cope better.
-
-It also appears that some versions of Adobe Distiller do not always distill or render perfectly these `FillTexts`. This problem can be fixed by opening the PostScript file with Preview on the Mac OS X, and then printing from Preview or saving the PDF file Preview makes and subsequently printing from Acrobat ([technical demonstration of error](http://groups.google.com/group/comp.lang.postscript/browse_frm/thread/d939df0dde60335c)).
-
-But there is also a problem with Preview on the Mac OS X, which crashes if the paths are too complicated. 
-The relevant constraint is on the complexity of the path of the item of FillTexts, plus the complexity of the path of the text that is filled (the item of `Titles` or of `Names`, as appropriate). 
-As `Names` are typically longer than `Titles`, the problem can typically be remedied by setting `FillPlaceNames` to `false`.
-
-
 ## CrossHatching
 
 <img align="right" width="485" height="266" src="images/CrossHatching.png">
 
 The SW63 example shows the check pattern CrossHatching, with `InlineTitles` also `true`. 
 There are multiple places this feature can go. 
-* Inside the Titles, Abovetitles, Belowtitles, or Overtitles (as in the example image). 
+* Within the Titles, Abovetitles, Belowtitles, or Overtitles (as in the example image). 
 * *Inside* the circle, but behind the large text pieces. 
 * In the &lsquo;unused&rsquo; space *Outside* the circles, i.e., between the circles. 
 Some parameters are consistent across these, so that they align, some differ. 
@@ -157,12 +123,22 @@ At a big tasting there can be multiple sheets of glasses, and it&rsquo;s more el
 For which `CrossHatchingCentreX` can be `/CenterSheetsSamePageOrdering`: if each person&rsquo;s glasses sheets for this session are in a single row, all the circles and lines originate from the common *x*-centre. 
 The *y* coordinate `CrossHatchingCentreY` has possible values `/Name`, `/Bottom`, `/Middle`, `/Top`, or points from the bottom of the page. 
 
+This structure is typical of many of the parameters: the user can choose a value; or can access some pre-written logic by name.
+
+There is another sense in which `CrossHatching` is typical of many features. 
+There are a few essential controls. 
+And there are many other controls which can almost always remain at their default values, but which may be changed by a fussy user. 
+In parts of this documentation such parameters are headed &ldquo;superfluous&rdquo;.
+
+### Superfluous
+
 The number of straight lines is `CrossHatchingNumRadialLines`, defaulting to 180 so 2&deg; apart. 
 The radii are chosen such that each cell has area `CrossHatchingCellArea`, defaulting to &asymp;491&nbsp;pt&sup2; &asymp; (7.8mm)&sup2;.
 
 `CrossHatchingOutsideToPaperEdge` is a Boolean affecting the &lsquo;Outside&rsquo; lines: to paper edge, or to the internal margin? 
 
-Lines are formatted and stroked by the code in `CrossHatchingTitlesStrokeCode` (the code must include the `stroke`, this requirement permitting the likes of &ldquo;`gsave` &hellip; `stroke` `grestore` &hellip; `stroke`&rdquo;). 
+Lines are formatted and stroked by the code in `CrossHatchingTitlesStrokeCode`. 
+The code must include the `stroke`, this requirement permitting the likes of `gsave 0 setgray 2.4 setlinewidth stroke grestore 1 setgray 0.96 setlinewidth stroke`. 
 And analogous `stroke`ing code `CrossHatchingAbovetitlesStrokeCode`, `CrossHatchingBelowtitlesStrokeCode`, and `CrossHatchingOvertitlesStrokeCode`, `CrossHatchingInsideStrokeCode`, `CrossHatchingOutsideStrokeCode` (`CrossHatchingPlaceNames` uses the sub-parameters of CrossHatchingTitles). 
 Sometimes used with `CrossHatchingInside` and `CrossHatchingOutside` is `CirclearraysFillBehind`, which fills behind the annulus containing the `Circlearrays` by executing `CirclearraysFillBehindCode`.
 
@@ -180,9 +156,9 @@ Extracts of code that made the image:
 
 ## Shapes: stars and flowers and hearts
 
-<img align="right" width="505" height="222" src="images/Shapes.png">
+<img align="right" width="504" height="222" src="images/Shapes.png">
 
-◊ In the image showing [QvA08](http://www.jdawiseman.com/papers/port_and_wine/quevedo_2008.html), the Titles and Belowtitles contain small random stars and flowers, with `InlineTitlesMaxNumberContours` at 2. 
+In the image showing [QvA08](http://www.jdawiseman.com/papers/port_and_wine/quevedo_2008.html), the Titles and Belowtitles contain small random stars and flowers, with `InlineTitlesMaxNumberContours` at 2. 
 
 These are enabled by Booleans `ShapesInTitles`, with obvious variations `ShapesInAbovetitles`, `ShapesInBelowtitles`, `ShapesInOvertitles`, and `ShapesInPlaceNames`. 
 The array `ShapesToUse` defaults to `[/Flower /Star /Heart]`, and must contain at least one of these.
@@ -208,7 +184,7 @@ A possible alternative value for ShapesStarsPointsAndStepsArray is `[[3 1.318] [
 
 For the flowers the number of petals is chosen randomly from `ShapesFlowersNumPetalsMin` to `ShapesFlowersNumPetalsMax`, and, as a proportion of 360&deg; divided by the number of petals, the angular width of each is chosen randomly from the range `ShapesFlowersAngularWidthMin` to `ShapesFlowersAngularWidthMax`.
 
-Extracts of code that made the image:
+Extracts of code that made the image for the Dow &rsquo;78:
 ```PostScript
 /ColourSchemeTitles /Black def
 /InlineTitles true def
@@ -218,7 +194,7 @@ Extracts of code that made the image:
 
 ## Spirals
 
-<img align="right" width="546" height="545" src="images/Spirals.png">
+<img align="right" width="477" height="477" src="images/Spirals.png">
 
 Another playful decoration, a background spiral, is engaged by the Boolean `Spirals`. 
 The number of arms is `SpiralNumArms`, and the whole pattern can be rotated by `SpiralAngleOffset`. 
@@ -239,7 +215,7 @@ Extracts of code that made the image:
 
 ## OutlineTitles
 
-<img align="right" width="543" height="546" src="images/Outline_Rotation.png">
+<img align="right" width="476" height="478" src="images/Outline_Rotation.png">
 
 This is a decorative possibility that has existed since early versions of this code. 
 But I now see it as too cluttered so am less fond of it now than when it first appeared: &#655;&#7437;&#7437;&#7456;.
@@ -248,10 +224,10 @@ It is engaged with the Boolean `OutlineTitles`.
 If that is, then also heeded are `OutlineTitlesAlsoAbovetitles`, `OutlineTitlesAlsoBelowtitles`, and `OutlineTitlesAlsoOvertitles`.
 
 The innermost white is of width `OutlineTitlesInnerWidthWhite`, and the innermost black of width `OutlineTitlesInnerWidthBlack`. 
-These grow in successive outlines by factors of `OutlineTitlesMultiplierWhite` (defaulting to (&radic;5&nbsp;&minus;&nbsp;1)&divide;2 = the golden ratio &asymp; 1.618) and `OutlineTitlesMultiplierBlack` (defaulting to 1, so all the black outlines have the same width). 
+These grow in successive outlines by factors of `OutlineTitlesMultiplierWhite` (defaulting to &frac12;(1&nbsp;+&nbsp;&radic;5) =&nbsp;the golden ratio &asymp;&nbsp;1.618) and `OutlineTitlesMultiplierBlack` (defaulting to 1, so all the black outlines have the same width). 
 
 The number of black ripples is capped at `OutlineTitlesMaxNum`. 
-The code attempts to stop sooner, but a good user constraint can only help, especialy of either multiplier is &lt;1. 
+The code attempts to stop sooner, but a good user constraint can only help, especialy if either multiplier is &lt;1. 
 
 OutlineTitles does not impose as high a burden on a printer as does FillTexts, but can still be difficult for some. Again, test your printer.
 
@@ -267,7 +243,7 @@ Extracts of code that made the image:
 
 ## Rotation
 
-The numeric parameter `RotationTitlesAboveBelowOverCirclearray` rotates the whole circle by that many degrees, in the QvA08  examle by `30`. 
+The numeric parameter `RotationTitlesAboveBelowOverCirclearray` rotates the whole circle by that many degrees, in the QvA08  example by `30`. 
 
 
 ## InlineTitles
@@ -277,17 +253,56 @@ This decoration is engaged by default, the relevant Booleans being `InlineTitles
 How many steps in should it go? 
 This is capped at `InlineTitlesMaxNumberContours`, `InlineAbovetitlesMaxNumberContours`, `InlineBelowtitlesMaxNumberContours`, and `InlineOvertitlesMaxNumberContours`. 
 (InlinePlaceNames uses the sub-parameters of InlineTitles.)
-By default his cap is an elegantly sparse `1`; the D78 example shows it at `2`. 
+By default his cap is an elegantly sparse `1`; the Dow&nbsp;&rsquo;78 example shows it at `3`. 
 
 In the Titles the lines have widths of `InlineTitlesBlackWidth` and `InlineTitlesWhiteWidth`; with obvious variations `InlineAbovetitlesBlackWidth`, `InlineAbovetitlesWhiteWidth`, `InlineBelowtitlesBlackWidth`, `InlineBelowtitlesWhiteWidth`, `InlineOvertitlesBlackWidth` and `InlineOvertitlesWhiteWidth`. 
-If the colour scheme is /MidGrey then “black” means the darker of the two shades, and “white” the lighter.
+If the colour scheme is /MidGrey then &ldquo;black&rdquo; means the darker of the two shades, and &ldquo;white&rdquo; the lighter.
 
 If the capped number of contours is large, then it becomes relevant that the code can attempt an estimate of how many contours are needed. 
 It does so if `InlineTitlesAttemptMinimiseNumContours` (or `InlineAboveBelowOverAttemptMinimiseNumContours` or `InlinePlaceNamesAttemptMinimiseNumContours`) is `true`. 
-If the code’s estimate is too low, as might happen if the lines are very thin, then the booleans should be false and the upper bounds set carefully. The attempted estimate is computed using a horrible algorithm, ‘discussed’ at [comp.lang.postscript](https://groups.google.com/forum/#!topic/comp.lang.postscript/86b7Sg8v7B0). 
+If the code&rsquo;s estimate is too low, as might happen if the lines are very thin, then the booleans should be false and the upper bounds set carefully. The attempted estimate is computed using a horrible algorithm, &lsquo;discussed&rsquo; at [comp.lang.postscript](https://groups.google.com/forum/#!topic/comp.lang.postscript/86b7Sg8v7B0). 
 
 If `InlinePrefillWhite`, all of the Titles/Abovetitles/Belowtitles/Overtitles are filled white before painting the &lsquo;Inlines&rsquo;, so are opaque. 
 This is good if there is CrossHatchingInside, but less good with BackgroundTextsGlasses.
+
+
+## FillTexts
+
+The `FillTexts`, shown in the top image, were enabled by
+```PostScript
+/FillTitles true def
+```
+The example shown also has `/FillTextAngle -30 def`, but this does not have to be numeric. 
+It also accepts some name values: `/LowerLeft`, `/LowerRight`, `/MiddleLeft`, `/UpperCenter`, `/UpperRight`, or `/Name`, the text being perpendicular to a line from from the value of  `FillTextAngle` to the centre of the circle. 
+Using one of these values, my favourite pehaps being `/Name`, causes each circle to have a different angle, but the pattern as a whole coheres aesthetically. 
+
+The Booleans `FillTitles`, `FillAbovetitles`, `FillBelowtitles`, `FillOvertitles`, and `FillPlaceNames` control whether their respective elements are filled with multiple copies of some text, outlined. 
+The filling texts are in the array `FillTexts`, which is of the same length as `Titles`, and each is outlined `FillTextNumOutlines` times. 
+Depending on the values of `ColourSchemeTitles` etc, the colours are either black and white, or 40% grey and white. 
+Each rendering of an item of `FillTexts` is suffixed with `FillTextNumSpaces` spaces.
+
+The `FillTexts` are set in the font `FillTextFont`, at a size of at least `FillTextMinFontSizeAbsolute`, and of a size of at least `FillTextMinFontSizeProportionLargestTitleAboveBelowOver` &times; the largest their font sizes.
+
+The formatting of the `PlaceNames` generally matches that of the Titles, except that the filling text is `FillTextPlaceNames`, and the angle is `FillTextAnglePlaceNames`
+
+### Problems with FillTexts
+
+`FillTexts` makes complicated painting paths inside complicated clipping paths. 
+This can cause difficulties for some software; this can cause difficulties for some printers.
+
+Use of `FillTexts` makes distillation slow, and produces files that can be too complicated for some printers. 
+The balance between these two can be influenced by the Boolean `FillTextPrintQuickerDistillSlower`. 
+For example, in a draft placemat with `FillTitles` and `PlaceNames`, changing `FillTextPrintQuickerDistillSlower` from `false` to `true` decreased the file size from 1013k to 871k, but increased the distill time from 64 seconds to 40 minutes. 
+If distilling the PostScript via the web the latter would definitely have timed out the browser. 
+And it might be that, on some printers, the print-slowly option (`false`) won&rsquo;t print at all, whereas the print-quickly option (`true`) will. 
+But some printers can&rsquo;t cope with either; or the resolution is insufficient for the small grey text to look entirely satisfactory. 
+So test your printer; do not assume that anything will work first time; and do not assume that all larger more expensive printers cope better.
+
+It also appears that some versions of Adobe Distiller do not always distill or render perfectly these `FillTexts`. This problem can be fixed by opening the PostScript file with Preview on the Mac OS X, and then printing from Preview or saving the PDF file Preview makes and subsequently printing from Acrobat ([technical demonstration of error](http://groups.google.com/group/comp.lang.postscript/browse_frm/thread/d939df0dde60335c)).
+
+But there is also a problem with Preview on the Mac OS X, which crashes if the paths are too complicated. 
+The relevant constraint is on the complexity of the path of the item of FillTexts, plus the complexity of the path of the text that is filled (the item of `Titles` or of `Names`, as appropriate). 
+As `Names` are typically longer than `Titles`, the problem can typically be remedied by setting `FillPlaceNames` to `false`.
 
 
 ## GlassesCirclesFadingFactor and GlassesCrossedOut
@@ -307,22 +322,25 @@ E.g.:
 } def
 ```
 
-## GlassesPageWhiteCirclesBehind
+## GlassesPageWhiteCirclesBehind and CirclearraysFillBehind
 
 Sometimes part of the output is converted to a bitmap, for inclusion in a web page or a phpBB post. 
 If the bitmap is to have transparency, it might be that a white background is wanted behind each of the circles. 
 The Boolean `GlassesPageWhiteCirclesBehind` does what it says.
 
+There can also be paint behind the Circlearrays, activated by the Boolean `CirclearraysFillBehind`. 
+The painting is done with `CirclearraysFillBehindCode`.
 
 ## GlassesAnnotations
 
 Placemats have been made and printed and used. 
 During the tasting, an error is noticed. 
 Ouch! 
-There are two obvious *desiderata*: not to change the printed PDF as it, errors and all, is part of the record of the evening. 
-But to confuse future generations would be unhelpful &mdash; so let&rsquo;s not do that.
+There are two obvious *desiderata*. 
+As the printed PDF is part of the record of the evening, it should not be changed. 
+But also it would be unhelpful to allow the errors to confuse future generations. 
 E.g., the author has attended a tasting at which the cork of a purported Smith Woodhouse 1963 showed the vintage to be 196**6**.
 
-An annotation can be added to the PDF, which won&rsquo;t change how it prints. 
+A non-printable annotation can be added to the PDF. 
 `GlassesAnnotations` is an array of even length, alternating `WithinTitles`-style integers pointing into the arrays such as `Titles`, and compound-string annotations.
 Be helpful to future historians: each anotation&rsquo;s text should include the date that the correction was added.

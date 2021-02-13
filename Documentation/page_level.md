@@ -1,11 +1,16 @@
 # Page-Level Controls
 
 **Documents**: 
-- [Introduction, and a first placemat](introduction_first_placemat.md); 
-- [Compound Strings and non-ASCII characters](compound_strings_characters.md);
-- [Fonts and glass decoration](fonts_glasses_decoration.md);
-- [Type sizes](type_sizes.md);
-- *Page-level controls*.
+1. [Introduction, and a first placemat](introduction_first_placemat.md); 
+2. [Compound Strings and non-ASCII characters](compound_strings_characters.md);
+3. [Fonts and glass decoration](fonts_glasses_decoration.md);
+4. [Type sizes](type_sizes.md);
+5. *Page-level controls*;
+6. [Arrangement of glasses on the page](PackingStyles.md);
+7. [Non-Glasses Pages](Not_Glasses.md);
+8. [Document-level controls](Document.md);
+9. [Code injection](Code_injection.md);
+10.[Bitmap images](Bitmap_images.md).
 
 ----
 
@@ -14,7 +19,7 @@
 Headers and footers can be added to the page. 
 Typically these will hold a date, a location, a title, and perhaps some branding&mdash;the author includes URLs. 
 There is a little intricacy, to allow tastings split into multiple sessions to have different headers and footers in each session. 
-The parameters doing most of the work are `HeadersLeft`, `HeadersCenter`, `HeadersRight`, and their `Footer`&hellip; equivalents, though using all of six of these text positions would be very cluttered. 
+The parameters doing most of the work are `HeadersLeft`, `HeadersCenter`, `HeadersRight`, and their `Footer…` equivalents, though using all of six of these text positions would be very cluttered. 
 Each is an array of even length. 
 
 First, the default simple case: make the first item 0, and the second item the required compound string. 
@@ -46,9 +51,9 @@ The placemat software creates this automatically.
 At the end of the outline are relevant external links. 
 The user can create these with the array `ExternalLinks`, which is an array of length a multiple of three: a boolean0, Descriptor0, URL0, boolean1, Descriptor1, URL1, etc &hellip;. 
 The first boolean must be `false`; subsequent booleans are true if the link is a &lsquo;child&rsquo; of the previous &lsquo;false&rsquo; link, and are `false` if a &lsquo;parent&rsquo; link. 
-(If the PDF viewer is showing the table of contents there is a small triangle beside the ‘parent’ link: pointing right if the children are hidden (&ldquo;&#9656;&rdquo;); pointing down if the children are visible (&ldquo;&#9662;&rdquo;); rotated between the two by being clicked on.) 
-The descriptions can be compound strings, [&hellip;]. 
-The URLs must be plain simple strings, (&hellip;), not arrays nor compound strings, and must start with a protocol such as &ldquo;http://&rdquo;. 
+(If the PDF viewer is showing the table of contents there is a small triangle beside the &lsquo;parent&rsquo; link: pointing right if the children are hidden (&ldquo;&#9656;&rdquo;); pointing down if the children are visible (&ldquo;&#9662;&rdquo;); rotated between the two by being clicked on.) 
+The descriptions can be compound strings, `[…]`. 
+The URLs must be plain simple strings, `(…)`, not arrays nor compound strings, and must start with a protocol such as &ldquo;http://&rdquo;. 
 
 
 
@@ -107,19 +112,23 @@ Then `BackgroundTextsGlassesTexts` is an array of the same length as `GlassesOnS
 The strings should be short: one or two characters is recommended, and are shown in font `BackgroundTextsFont`. 
 The text is aligned with `BackgroundTextsAlignmentVertical` being one of `/Middle`, `/Bottom`, `/Top)`; and `BackgroundTextsAlignmentHorizontal` being one of `/Centre`, `/Left`, `/Right`.
 
+<div align="center">
+
 ![Example 1977 tasting, with BackgroundTextsGlasses](images/BackgroundText.png)
+
+</div>
 
 The code chooses separate *x* and *y* sizes, each as large as possible, subject to the following.
 The ratio of the vertical and horizontal font sizes, *y*&divide;*x*, must lie between `BackgroundTextsSquooshMin` and `BackgroundTextsSquooshMax`. 
 For non-squooshed text, generally recommended, set both to 1. 
-This precise fitting can be done by inserting into the compound string some `{±x Kern}`. The amount of extra kerning required is computed, and appears in the output log—typically the last page of the PDF.
+This precise fitting can be done by inserting into the compound string some `{±x Kern}`. The amount of extra kerning required is computed, and appears in the output log &mdash; typically the last page of the PDF.
 
 `BackgroundTextsGlassesSameSizeIfAllOf` determines whether the background texts on different pages are compelled to be the same size. 
-They are if all the ‘conditions’ specified are true. 
+They are if all the &lsquo;conditions&rsquo; specified are true. 
 Valid conditions are `/False` (always false, so each is fitted separately); `/OnSheetWithSameNumberGlasses` (obvious meaning); `/OnSheetWithSameRadius` (ditto); `/SamePageOrdering` (ditto); `/SamePaperSize` (ditto); `/TextSameLength` (ditto); and `/RadiiShrunkToBeSame` (referring to `ShrinkRadii`).
 Neither the *x* nor the *y* size may exceed `BackgroundTextsFontSizeMax`, which defaults to large.
 
-`BackgroundTextsGlassesVerticalMiddling` determines whether the vertical alignment is determined jointly or separately, much like the `VerticalMiddling`&hellip; parameters. 
+`BackgroundTextsGlassesVerticalMiddling` determines whether the vertical alignment is determined jointly or separately, much like the `VerticalMiddling…` parameters. 
 `BackgroundTextsGlassesVerticalMiddling` must be one of `/MatchAll`, `/MatchSamePaperSize`, or `/MatchNone`.
 The bounding path of the text is constructed and then BackgroundTextsGlassesPaintCode is executed. 
 The default clips then strokes.
@@ -157,13 +166,17 @@ If there are multiple pages of glasses, by `GlassesOnSheets`, then on which of t
 For simplicity, `WaterBoxesOverrideShowEverySheet` being true overrides the complexity in the next few sentences, putting water boxes on every sheet (of glasses or of tasting notes, per `WaterBoxes`). 
 But if `WaterBoxesOverrideShowEverySheet` is false, the presence or absence is controlled, for the right handers, by the array of booleans `WaterBoxesShowRight`; and for the lefties by `WaterBoxesShowLeft`. 
 `WaterBoxesShowRight` and `WaterBoxesShowLeft` must be the same length as GlassesOnSheets. 
-The default values of `WaterBoxesShowRight` and `WaterBoxesShowLeft` refer to `PageOrderingGlasses`: `WaterBoxesShowRight` defaults to true for the last page in each ‘session’, and `WaterBoxesShowLeft` for the first. 
+The default values of `WaterBoxesShowRight` and `WaterBoxesShowLeft` refer to `PageOrderingGlasses`: `WaterBoxesShowRight` defaults to true for the last page in each &lsquo;session&rsquo;, and `WaterBoxesShowLeft` for the first. 
 There is an analgous parameter `WaterBoxesShowTN`, used for water boxes on the tasting-note sheets.
 
 
 ## Droplets
 
-<img align="right" width="549" height="797" src="images/Droplets.png">
+<div align="center">
+
+![Droplets](images/Droplets.png)
+
+</div>
 
 Droplets are a decorative amusement, flowing around the page as if attracted or repelled by charges. 
 Activate with the Boolean `Droplets`.
@@ -179,10 +192,10 @@ Starting locations of the drops have a distance apart of `DropletsAverageSeparat
 There is a little humour in having a small proportion of the droplets going backwards; a small proportion will be noticed only slowly by the uninitiated, increasing the humour. 
 (Visible in the example page are seventeen: seek!) 
 That proportion is controlled by `DropletsProportionBackwards`, which obviously should be &ge;0 and &le;1. 
-The default value is 0.0204 ≈ 1/49.
+The default value is 0.0204 &asymp; 1/49.
 
 The gray and width of each path is controlled by `DropletsOuterGrayEnd`, `DropletsOuterGrayStart`, `DropletsOuterWidthEnd`, `DropletsOuterWidthStart`, `DropletsInnerGrayEnd`, `DropletsInnerGrayStart`, `DropletsInnerWidthEnd`, and `DropletsInnerWidthStart`. 
-(But if `DropletsOuterGrayEnd` &ne; `DropletsOuterGrayStart`, or likewise &hellip;`Inner`&hellip;, the PDF can be multiple megabytes larger.) 
+(But if `DropletsOuterGrayEnd` &ne; `DropletsOuterGrayStart`, or likewise `…Inner…`, the PDF can be multiple megabytes larger.) 
 There are also Boolean parameters `PrePourShowDroplets`, `NeckTagsShowDroplets`, and `StickyLabelsShowDroplets`.
 
 ```PostScript
@@ -211,8 +224,16 @@ Further, though `FlightSeparationLines` is very much fit for purpose, both contr
 I advise that, for easiest control and best output, use only straight lines (no `/Curve`, no `Clockwise`, no `/Widdershins`).
 
 Let&rsquo;s start with an example, to give a sense of the range of what can be done, also also (part of) the code by which made.
+
+<div align="center">
+
 ![Example FlightSeparations](images/FlightSeparations.gif)
+
+</div>
+
 ```PostScript
+/LogThisExtra (Headers not shown on bitmap images, as would be too small, but present in PDF.) def
+
 /PackingNestingColumnMajor true def
 
 /FlightSeparations true def
@@ -248,9 +269,9 @@ Each line description is an array, pieces of which can be as follows.
 
 * The first, and only the first, item of a line description may be `/Closed`, which specifies that the line is a closed loop.
 * The typical piece is `[a b]`, a and b being integers, which specifies that the line runs through the mid-point of the glass positions a and b, the line being perpendicular to the line connecting the centres. 
-So if the circles touch then the line segment touches their joint tangent. Order doesn’t matter: `[a b]` and `[b a]` do the same job. 
+So if the circles touch then the line segment touches their joint tangent. Order doesn&rsquo;t matter: `[a b]` and `[b a]` do the same job. 
 The integer a can be replaced with `[xa ya]` (making `[[xa ya] b]`), and likewise b with `[xb yb]`.
-* There are other allowed interior pieces, including `[/HorizontalLeftwards ...]`. This is a horizontal line at a *y* specifed by the &lsquo;...&rsquo;, which is an average of at least one absolute level, perhaps &plusmn; some real number of radii. 
+* There are other allowed interior pieces, including `[/HorizontalLeftwards …]`. This is a horizontal line at a *y* specifed by the &lsquo;&hellip;&rsquo;, which is an average of at least one absolute level, perhaps &plusmn; some real number of radii. 
 Absolutes can be /Bottom (with obvious meaning); /Top (ditto); or an integer, in which case the *y* is that of the centre of that circle number. 
 Or several integers, in which case the *y* is the average of the centres of those circle numbers. 
 with supplemented by a real, that number of radii being added to the average. 
@@ -258,8 +279,8 @@ So `[/HorizontalLeftwards 0 3 -0.5]` is a horizontal line, at a *y* value of the
 This can be thought of as Average[Circle 0&rsquo;s bottom, Circle 3&rsquo;s centre]. 
 If the previous item is an arc, the /HorizontalLeftwards means that the left-most intersection is chosen. 
 Note that the integer 1 and the real 1.0 are therefore very different, the former referring to the centre of circle 1, the latter to an offset of +1.0 radii. *Mutatis mutandis*, `/HorizontalLeftwards` can be replaced with `/HorizontalRightwards`, `/VerticalDown`, or `/VerticalUp` (which allow absolute *x* positions of `/Left` and `/Right`).
-* `[/Left ...]` is like `[/HorizontalLeftwards ...]`, and at the same *y* value, except that it is certain to touch the left margin. 
-Again *mutatis mutandis*, `[/Right ...]`, `[/Top ...]`, and `[/Bottom ...]`. 
+* `[/Left …]` is like `[/HorizontalLeftwards …]`, and at the same *y* value, except that it is certain to touch the left margin. 
+Again *mutatis mutandis*, `[/Right …]`, `[/Top …]`, and `[/Bottom …]`. 
 `[/Left]`, with no specification of the *y* value, reaches the left margin at whatever angle the neighbouring segment causes the line to travel. 
 It is not sensible for more than one of these to occur consecutively. 
 With obvious variations, `[/Right]`, `[/Top]`, and `[/Bottom]`. 
@@ -281,7 +302,7 @@ The former is better if the format is not constant; the latter preferred if over
 
 Some control over the radius of the arcs is sometimes possible. If any circles touch, the radius of the arcs equals that of the circles. 
 If no circles touch (probably because of `MaxRadius` or `ShrinkRadii`) then `FlightSeparationArcRadiusControl` controls the radius. 
-`FlightSeparationArcRadiusControl` should be both ≥0 and ≤1; the default being the maximum: if it is 0, the radius of the arcs is that of the circles; if 1, the radius is the half the distance between the closest circles; if between, between.
+`FlightSeparationArcRadiusControl` should be both &ge;0 and &le;1; the default being the maximum: if it is 0, the radius of the arcs is that of the circles; if 1, the radius is the half the distance between the closest circles; if between, between.
 
 There is a [bug in (at least some versions of) Adobe Distiller](http://groups.google.com/forum/#!topic/comp.lang.postscript/amUp28S-JFM), such that if `FlightSeparationPaintSeparately` is `false` and there are multiple lines on one page (&hArr; `FlightSeparationLines SheetNum get length` &ge; 2), the apparent ends of some lines are controlled by `setlinejoin` rather than `setlinecap`. 
 It is a small aesthetic imperfection, but an aesthetic imperfection nonetheless. 
