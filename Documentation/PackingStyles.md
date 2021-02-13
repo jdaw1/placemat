@@ -1,16 +1,16 @@
 # Arrangement of glasses on the page
 
 **Documents**: 
-1. [Introduction, and a first placemat](introduction_first_placemat.md); 
-2. [Compound Strings and non-ASCII characters](compound_strings_characters.md);
-3. [Fonts and glass decoration](fonts_glasses_decoration.md);
-4. [Type sizes](type_sizes.md);
-5. [Page-level controls](page_level.md);
-6. *Arrangement of glasses on the page*;
-7. [Non-Glasses Pages](not_glasses.md);
-8. [Document-level controls](document.md);
-9. [Code injection](code_injection.md);
-10.[Bitmap images](bitmap_images.md).
+1.  [Introduction, and a first placemat](introduction_first_placemat.md);  
+2.  [Compound Strings and non-ASCII characters](compound_strings_characters.md);  
+3.  [Fonts and glass decoration](fonts_glasses_decoration.md);  
+4.  [Type sizes](type_sizes.md);  
+5.  [Page-level controls](page_level.md);  
+6.  *Arrangement of glasses on the page*;  
+7.  [Non-Glasses Pages](not_glasses.md);  
+8.  [Document-level controls](document.md);  
+9.  [Code injection](code_injection.md);  
+10. [Bitmap images](bitmap_images.md).
 
 ----
 
