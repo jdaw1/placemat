@@ -215,7 +215,7 @@ If there is lots of table space, and five wines per flight, then this can be arr
 But sometimes within-page division is necessary. 
 And if table space is tight, 14 on `/A3` is more efficient than 12 on 2&times;`/A4`, making it more useful the possibility of within-page division.
 
-This is enabled byt eh Boolean parameter `FlightSeparations`; the hard work of spcifying the lines happening with `FlightSeparationLines`. 
+This is enabled by the Boolean parameter `FlightSeparations`; the hard work of spcifying the lines happening with `FlightSeparationLines`. 
 
 `FlightSeparationLines` is fiddly. 
 If one wine is added or taken away then that page&rsquo;s element of `FlightSeparationLines` might need to be completely reworked. 
