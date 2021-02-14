@@ -331,6 +331,40 @@ This is controled by `ShrinkRadii`, which can be:
 There is also the simple numerical parameter `MaxRadius`, defaulting to 150 &rArr; diameter &le;&nbsp;300pt =&nbsp;4&#8537;&Prime; &asymp;&nbsp;106mm.
 
 
+## Page size and glass diameters
+
+Given the default value of `PackingStyles`, the following shows glass diameters for avrious numbers of glasses on various page sizes.
+
+| Num<br>Glasses | `/A4`<br>210mm&times;297mm | `/A3`<br>420mm&times;297mm | `/USLegal`<br>14&Prime;&times;8&frac12;&Prime; | `/USL`<br>8&frac12;&Prime;&times;11&Prime; | `/USL2`<br>17&Prime;&times;11&Prime; |
+|---:|---:|---:|---:|---:|---:|
+| 3 | 113.9mm<br>4.49&Prime; | 164.6mm<br>6.48&Prime; | 126.9mm<br>5.00&Prime; | 113.1mm<br>4.45&Prime; | 161.1mm<br>6.34&Prime; |
+| 4 | 105.1mm<br>4.14&Prime; | 151.6mm<br>5.97&Prime; | 112.8mm<br>4.44&Prime; | 105.6mm<br>4.16&Prime; | 145.6mm<br>5.73&Prime; |
+| 5 | 96.5mm<br>3.80&Prime; | 140.0mm<br>5.51&Prime; | 106.9mm<br>4.21&Prime; | 96.6mm<br>3.80&Prime; | 138.3mm<br>5.45&Prime; |
+| 6 | 92.7mm<br>3.65&Prime; | 134.4mm<br>5.29&Prime; | 101.4mm<br>3.99&Prime; | 88.6mm<br>3.49&Prime; | 130.2mm<br>5.13&Prime; |
+| 7 | 81.1mm<br>3.19&Prime; | 117.2mm<br>4.61&Prime; | 92.7mm<br>3.65&Prime; | 79.3mm<br>3.12&Prime; | 116.4mm<br>4.58&Prime; |
+| 8 | 77.2mm<br>3.04&Prime; | 111.2mm<br>4.38&Prime; | 87.0mm<br>3.42&Prime; | 76.5mm<br>3.01&Prime; | 109.7mm<br>4.32&Prime; |
+| 9 | 72.8mm<br>2.87&Prime; | 105.0mm<br>4.13&Prime; | 78.7mm<br>3.10&Prime; | 73.2mm<br>2.88&Prime; | 101.3mm<br>3.99&Prime; |
+| 10 | 70.7mm<br>2.78&Prime; | 100.8mm<br>3.97&Prime; | 76.7mm<br>3.02&Prime; | 67.2mm<br>2.64&Prime; | 97.2mm<br>3.83&Prime; |
+| 11 | 69.5mm<br>2.74&Prime; | 100.8mm<br>3.97&Prime; | 75.1mm<br>2.96&Prime; | 66.3mm<br>2.61&Prime; | 97.2mm<br>3.83&Prime; |
+| 12 | 64.4mm<br>2.53&Prime; | 94.7mm<br>3.73&Prime; | 72.8mm<br>2.86&Prime; | 65.1mm<br>2.56&Prime; | 92.2mm<br>3.63&Prime; |
+| 13 | 62.9mm<br>2.47&Prime; | 91.0mm<br>3.58&Prime; | 68.8mm<br>2.71&Prime; | 60.7mm<br>2.39&Prime; | 87.7mm<br>3.45&Prime; |
+| 14 | 59.7mm<br>2.35&Prime; | 86.4mm<br>3.40&Prime; | 67.7mm<br>2.67&Prime; | 57.9mm<br>2.28&Prime; | 86.8mm<br>3.42&Prime; |
+| 15 | 58.1mm<br>2.29&Prime; | 83.9mm<br>3.30&Prime; | 65.6mm<br>2.58&Prime; | 56.8mm<br>2.24&Prime; | 83.0mm<br>3.27&Prime; |
+| 16 | 55.7mm<br>2.19&Prime; | 80.4mm<br>3.16&Prime; | 60.4mm<br>2.38&Prime; | 55.9mm<br>2.20&Prime; | 77.6mm<br>3.06&Prime; |
+| 17 | 54.1mm<br>2.13&Prime; | 78.0mm<br>3.07&Prime; | 58.2mm<br>2.29&Prime; | 52.1mm<br>2.05&Prime; | 75.0mm<br>2.95&Prime; |
+| 18 | 54.1mm<br>2.13&Prime; | 78.0mm<br>3.07&Prime; | 58.2mm<br>2.29&Prime; | 52.1mm<br>2.05&Prime; | 75.0mm<br>2.95&Prime; |
+| 19 | 50.5mm<br>1.99&Prime; | 75.5mm<br>2.97&Prime; | 56.4mm<br>2.22&Prime; | 49.7mm<br>1.96&Prime; | 73.1mm<br>2.88&Prime; |
+| 20 | 50.5mm<br>1.99&Prime; | 73.3mm<br>2.89&Prime; | 56.4mm<br>2.22&Prime; | 49.7mm<br>1.96&Prime; | 73.1mm<br>2.88&Prime; |
+| 21 | 48.3mm<br>1.90&Prime; | 69.5mm<br>2.74&Prime; | 55.1mm<br>2.17&Prime; | 49.1mm<br>1.93&Prime; | 69.2mm<br>2.72&Prime; |
+
+The images show the packings for the diameters &le;4&frac12;&Prime;, down to slightly below 3&Prime;.
+
+[![A4](images/HowManyGlasses_A4.gif)](images/HowManyGlasses_A4.pdf) 
+[![A3](images/HowManyGlasses_A3.gif)](images/HowManyGlasses_A3.pdf) 
+[![USLegal](images/HowManyGlasses_USLegal.gif)](images/HowManyGlasses_USLegal.pdf) 
+[![USL](images/HowManyGlasses_USL.gif)](images/HowManyGlasses_USL.pdf) 
+[![USL2](images/HowManyGlasses_USL2.gif)](images/HowManyGlasses_USL2.pdf) 
+
 ## Code extracts
 
 Some extracts from the code used to make the many examples on this page.
