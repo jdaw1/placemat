@@ -11,6 +11,92 @@
 % Nor does any output: not PDF; nor images of such a document.
 % But it does include re-usable improvements to the body of the code.
 
+/PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /USL2 = 11"x17", [SmallerPts LargerPts]
+
+/ParametersVersionDateTimeAdobeFormat (D:202102142200) def
+
+/Test_NumGlasses_Min <<
+	/A4       3
+	/A3       8
+	/USLegal  4
+	/USL      3
+	/USL2     8
+>> PaperType get def
+
+/Test_NumGlasses_Max <<
+	/A4       9
+	/A3      19
+	/USLegal 11
+	/USL      9
+	/USL2    18
+>> PaperType get def
+
+/PortData
+[
+	[ (D)                       (Dow)               ]
+	[ (F)                       (Fonseca)           ]
+	[ (G)                       (Graham)            ]
+	[ (K)                       (Kopke)             ]
+	[ (N)                       (Quinta do Noval)   ]
+	[ (O)                       [(Of) /fl (ey Boa Vista)]  ]
+	[ (S)                       (Sandeman)          ]
+	[ (T)                       [(T) {-0.06 Kern} (aylor)]  ]
+	[ (W)                       [(Warre)]   ]
+
+	[ [(C) /aacute]             [(C) /aacute (lem)] ]
+	[ (Cr)                      (Croft)             ]
+	[ (Df)                      (Delaforce)         ]
+	[ (Fr)                      (Ferreira)          ]
+	[ (GC)                      (Gould Campbell)    ]
+	[ (Mz)                      (Martinez)          ]
+	[ (Ni)                      (Niepoort)          ]
+	[ (RP)                      (Ramos Pinto)       ]
+	[ [(S) {-0.01 Kern} (W)]    [(Smith Woodhouse)] ]
+	[ (TH)                      [(T) {-0.06 Kern} (uke Holdsworth)]  ]
+] def
+
+/Circlearrays [ PortData { [ exch 1 get ] } forall ] def
+/Titles [ PortData {0 get} forall ] def
+/Belowtitles [ Circlearrays length {()} repeat ] def
+/Names [
+	(Julian W.)
+] def
+
+/ThePortForumIconPlacement /None def  % /None
+
+/HeadersLeft [
+] def  % /HeadersLeft
+/HeadersCenter [
+	0  [(How many glasses fit?)]
+] def  % /HeadersCenter
+/HeadersRight [
+] def  % /HeadersRight
+
+/VoteRecorders false def
+/CorkDisplayNumCopies 0 def
+/NeckTagsNumCopies 0 def
+/TastingNotePagesNumCopies 0 def
+/DecantingNotesNumCopies 0 def
+
+/GlassesOnSheets [
+	Test_NumGlasses_Min 1 Test_NumGlasses_Max
+	{
+		[ exch 0 exch 1 exch 1 sub {} for ]
+	} for
+] def  % /GlassesOnSheets
+
+/CircletextFont /TrebuchetMS def
+/CircletextMaxFontSizeAbsolute 22 def
+/InlineTitles false def
+
+/PageOrderingGlasses [ 1 1 GlassesOnSheets length {} for ] def
+
+/ShrinkRadii /NotAtAll def  % /NotAtAll | /ToSmallest | /ToSmallestSamePageOrdering | array denoting equivalence classes
+/MaxRadius 9999 def  % Maximum radius of circles
+
+/OutputLogToPage false def
+
+
 % Recommendation: move changed parameters to just above this line.
 
 % % % % % % % %
@@ -18,62 +104,15 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202102141800) def
-
-/Circlearrays [
-	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
-	[ (Kopke)                    (1970)   (bot. Dolamore) ]
-	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
-	[ (Sandeman)                 (1970)  [(bot. A) {-0.06 Kern} (very)] ]
-	[ [(W) {-0.07 Kern} (arre)]  (1970)   (bot. Peatling & Cawdron) ]
-] def
-/Titles [
-	(F70)
-	(K70)
-	(N70)
-	(S70)
-	(W70)
-] def
-
-/Belowtitles [
-	(Justerini & Brooks)
-	(Dolamore)
-	(Wine Society)
-	[(A) {-0.04 Kern} (very)]
-	(Peatling & Cawdron)
-] def
-
-/Names [
-	(JDAW)
-	[(G) /uacute /edieresis (st ) /Ocircumflex /ntilde /egrave]
-	(Guest Two)
-	()
-] def
 /LeftHanders [ (RMW)  (RAW)  (SRG) (Simon G.)  (HEG) (Helen G.)  (CSD) (Chris D.)  (CFD) (Conan D.)  (NCG) (Marc Jackson)  (JG) (Jeff G.)  (ZDR) (Zak R.) ] def
 
-/PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /USL2 = 11"x17", [SmallerPts LargerPts]
 /TastingNotesPaperType /A4 def  % If this is /USL then the distiller log is also on 8.5"x11", otherwise log on /A4
 
-/ThePortForumIconPlacement /LowerNonWaterBox def  % /None
 /ThePortForumIconTastingNotePlacement /LowerNonName def  % /None
 
 /PDF_title (Placemats) def  % Names PDF file; appears as tab name in browser, and in search results
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
-/HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( May 2021)]
-] def  % /HeadersLeft
-/HeadersCenter [
-	0  [(1970s)]
-] def  % /HeadersCenter
-/HeadersRight [
-	0
-	[
-		(www) {-0.08 Kern} (.) {-0.08 Kern} (ThePortForum.com, )
-		% (www) {-0.08 Kern} (.) {-0.12 Kern} (W) {-0.08 Kern} (orldOf) {+0.12 Kern} (Port.de, )
-		(www) {-0.08 Kern} (.jdawiseman.com)
-	]
-] def  % /HeadersRight
 /ExternalLinks [  % Array, length a multiple of three:  indented0-boolean, (Descriptor0), (http://URL0),  indented1-boolean, (Descriptor1), (http://URL1),  ...
 	false   (Thread on ThePortForum.com)     (http://www.theportforum.com/viewtopic.php?t=00175&view=unread#unread)
 %	false   (Latest version this placemat)   (http://www.jdawiseman.com/2021/    .pdf)
@@ -90,15 +129,10 @@
 % Non-Glasses Pages %
 % % % % % % % % % % %
 
-/VoteRecorders true def
-/CorkDisplayNumCopies 1 def
-/NeckTagsNumCopies 1 def
 /PrePourNumCopies  Names length 12 ge {1} {0} ifelse def
 /PlaceNames false def
 /DecanterLabelsNumCopies 0 def
 /GlassesNumCopies 1 def
-/TastingNotePagesNumCopies 1 def
-/DecantingNotesNumCopies  Circlearrays length 15 ge {1} {0} ifelse  def
 /AccountsNumCopies  Names length 8 ge {1} {0} ifelse  def
 /StickyLabelsNumCopies 0 def
 /StickyLabelsTypes [0 1] def  % 0 = 2x4 on A4; 1 = 5x13 on A4
@@ -133,11 +167,6 @@
 
 % GlassesOnSheetsMaxPerSheet: 6 default, USLegal => 9; A3 or USL2 => 13. For all on one sheet replace with "/GlassesOnSheetsMaxPerSheet 999 def".
 /GlassesOnSheetsMaxPerSheet  6  /PaperType load dup /A3 eq exch /USL2 eq or {pop 14} if  /PaperType load /USLegal eq {pop 9} if  def
-/GlassesOnSheets [
-	% For a custom arrangement replace the next line  with something of the form "[0 1 2 3] [4 5 6 7 8 9] [10 11 12 13]"
-	% The code below spreads glasses evenly over the sheets, the sheets one glass larger being last. Replace "floor": with "ceiling" for larger sheets to be early; with "round" for them to be scattered.
-	<< /p Titles length GlassesOnSheetsMaxPerSheet div ceiling cvi  /g 0 >> begin 0 1 p 1 sub {[exch p sub g Titles length sub exch div floor cvi {g /g g 1 add store} repeat]} for end
-] def  % /GlassesOnSheets
 
 /GlassesOnSheetsMaxPerTNSheet  /TastingNotesPaperType load /PaperType load eq {GlassesOnSheetsMaxPerSheet} {7} ifelse  def  % just enough writing space for 8 TNs per page.
 /GlassesOnTastingNotePages [  % Consider "/GlassesOnTastingNotePages GlassesOnSheets def"; and see comment in GlassesOnSheets.
@@ -186,7 +215,6 @@
 if} bind def  % /VoteRecorderCrossedBox
 
 /Rotate180AlternateNames false def
-/PageOrderingGlasses [ GlassesOnSheets length {1} repeat ] def
 /PageOrderingTastingNotePages [ GlassesOnTastingNotePages length {1} repeat ] def
 
 /TastingNotesStarsNameColsRowsArrangement  % (ASCIIfied Name) NumCols NumRows /Alternating|/Sideways|/Upright
@@ -216,7 +244,6 @@ if} bind def  % /VoteRecorderCrossedBox
 % Others might be available to your interpreter; a list of PostScript names can be generated by decommenting the next line:
 % (*) {=} 255 string /Font resourceforall
 /TitlesFont          /TrebuchetMS-Bold def
-/CircletextFont      /Garamond def
 /AbovetitlesFont     {TitlesFont} def
 /BelowtitlesFont     {AbovetitlesFont} def
 /OvertitlesFont      {TitlesFont} def
@@ -263,7 +290,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /CircletextsTweakSize true def
 /CircletextMaxFontSizeMayBeSlightlyExceeded true def
 /CircletextMaxFontSizeProportionRadius 0.25 def
-/CircletextMaxFontSizeAbsolute 8 def
 /CircletextsSameFontSizeIfRadiiShrunkToBeSame true def
 
 
@@ -287,7 +313,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /CrossHatchingOvertitles {CrossHatchingTitles} def
 /CrossHatchingPlaceNames {CrossHatchingTitles} def
 
-/InlineTitles true def
 /InlineAbovetitles false def
 /InlineBelowtitles false def
 /InlineOvertitles false def
@@ -435,8 +460,6 @@ if} bind def  % /VoteRecorderCrossedBox
 % /ToSmallest, so all pages have the same radius; or
 % /ToSmallestSamePageOrdering, so the radius of each page in the same session, presumed to be equivalent to having the same value of PageOrderingGlasses, is shrunk to the smallest of that session's radii;
 % array the same length as GlassesOnSheets, each radius being shrunk to the smallest of the pages with equal array element.
-/ShrinkRadii /ToSmallestSamePageOrdering def  % /NotAtAll | /ToSmallest | /ToSmallestSamePageOrdering | array denoting equivalence classes
-/MaxRadius 150 def  % Maximum radius of circles
 /TitleMinHeightForAbovetitleProportionInnerRadius 0.4 def
 /TitleMinHeightForBelowtitleProportionInnerRadius 0.4 def
 /DecantersLabelsMinSpaceForAbovetitlesProportionSmaller 0.2 def
@@ -700,7 +723,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /LicensingAgreementTextPlacemats (This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International Licence.) def
 /LicensingAgreementLinkPlacemats (http://creativecommons.org/licenses/by-sa/4.0/deed.en) def
 /OutputLogToLog true def
-/OutputLogToPage true def
 /OutputLogToAnnotation OutputLogToPage not def
 /PageLabelOverride false def  % E.g., {/Glasses TypeOfPagesBeingRendered eq}
 /PageLabelOverrideWith {[(PageNum) ShownPages 5 string cvs]} def

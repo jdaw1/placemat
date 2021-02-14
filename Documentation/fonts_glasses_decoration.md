@@ -339,7 +339,7 @@ Ouch!
 There are two obvious *desiderata*. 
 As the printed PDF is part of the record of the evening, it should not be changed. 
 But also it would be unhelpful to allow the errors to confuse future generations. 
-(But see [discussion](http://www.theportforum.com/viewtopic.php?p=90575#p90575).) 
+(But see [discussion](http://www.theportforum.com/viewtopic.php?p=90575#p90575) and [more discussion](http://www.theportforum.com/viewtopic.php?p=92316#p92316).) 
 E.g., the author has attended a tasting at which the cork of a purported Smith Woodhouse 1963 showed the vintage to be 196**6**.
 
 A non-printable annotation can be added to the PDF. 
