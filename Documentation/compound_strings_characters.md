@@ -15,7 +15,7 @@
 ----
 
 Some wanted text is more complicated than a plain [ASCII](http://en.wikipedia.org/wiki/ASCII) string. 
-PostScript is an early-1980s language, and one of the ways in which it shows its age is its incompatibility with Unicode. 
+[PostScript](http://en.wikipedia.org/wiki/PostScript) is an early-1980s language, and one of the ways in which it shows its age is its incompatibility with Unicode. 
 This document shows how to access non-ASCII characters, and the more general concept of a compound string.
 
 
