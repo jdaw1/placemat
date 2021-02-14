@@ -333,7 +333,7 @@ There is also the simple numerical parameter `MaxRadius`, defaulting to 150 &rAr
 
 ## Page size and glass diameters
 
-Given the default value of `PackingStyles`, the following shows glass diameters for avrious numbers of glasses on various page sizes.
+Given the default value of `PackingStyles`, the following shows glass diameters for various numbers of glasses on various page sizes.
 
 | Num<br>Glasses | `/A4`<br>210mm&times;297mm | `/A3`<br>420mm&times;297mm | `/USLegal`<br>14&Prime;&times;8&frac12;&Prime; | `/USL`<br>8&frac12;&Prime;&times;11&Prime; | `/USL2`<br>17&Prime;&times;11&Prime; |
 |---:|---:|---:|---:|---:|---:|
@@ -356,6 +356,11 @@ Given the default value of `PackingStyles`, the following shows glass diameters 
 | 19 | 50.5mm<br>1.99&Prime; | 75.5mm<br>2.97&Prime; | 56.4mm<br>2.22&Prime; | 49.7mm<br>1.96&Prime; | 73.1mm<br>2.88&Prime; |
 | 20 | 50.5mm<br>1.99&Prime; | 73.3mm<br>2.89&Prime; | 56.4mm<br>2.22&Prime; | 49.7mm<br>1.96&Prime; | 73.1mm<br>2.88&Prime; |
 | 21 | 48.3mm<br>1.90&Prime; | 69.5mm<br>2.74&Prime; | 55.1mm<br>2.17&Prime; | 49.1mm<br>1.93&Prime; | 69.2mm<br>2.72&Prime; |
+
+Measure the diameter of your glasses. 
+Add something for two fingers. 
+Add something for the inebriation of the owner of the fingers. 
+Totalling your constraint.
 
 The images show the packings for the diameters &le;4&frac12;&Prime;, down to slightly below 3&Prime;.
 
