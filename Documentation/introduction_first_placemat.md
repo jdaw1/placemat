@@ -35,7 +35,7 @@ It consists of a single long text file, with user-chosen parameters at the top, 
 Those user-chosen parameters are written in Postscript, in PostScript syntax.
 
 
-Nonetheless, placemats can be and have been made by those with no prograaming expertise.
+Nonetheless, placemats can be and have been made by those with no programming expertise.
 
 ## First placemat: advice for beginners
 
