@@ -11,6 +11,43 @@
 % Nor does any output: not PDF; nor images of such a document.
 % But it does include re-usable improvements to the body of the code.
 
+/ParametersVersionDateTimeAdobeFormat (D:202102151900) def
+
+/TwoLineT (Rebello) def
+/TwoLineB [(V) {-0.12 Kern} (alente)] def
+
+/TwoLine [
+	{//TwoLineB StringWidthRecursive //TwoLineT StringWidthRecursive sub 2 div dup 0 lt {pop 0} if  CurrentFontSize 0.4375 mul  rmoveto}   //TwoLineT
+	{//TwoLineT StringWidthRecursive //TwoLineB StringWidthRecursive add -2 div                     CurrentFontSize -0.875 mul  rmoveto}   //TwoLineB
+	{//TwoLineT StringWidthRecursive //TwoLineB StringWidthRecursive sub 2 div dup 0 lt {pop 0} if  CurrentFontSize 0.4375 mul  rmoveto}
+] bind def  % /TwoLine
+
+/Circlearrays [
+	[ TwoLine  (1945) ]
+	[]
+	[]
+	[]
+	[]
+] def
+
+/Titles [
+	(45)
+	()
+	()
+	()
+	()
+] def
+
+/Belowtitles [
+	()
+	()
+	()
+	()
+	()
+] def
+
+
+
 % Recommendation: move changed parameters to just above this line.
 
 % % % % % % % %
@@ -18,30 +55,8 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202102151900) def
 
-/Circlearrays [
-	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
-	[ (Kopke)                    (1970)   (bot. Dolamore) ]
-	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
-	[ (Sandeman)                 (1970)  [(bot. A) {-0.06 Kern} (very)] ]
-	[ [(W) {-0.07 Kern} (arre)]  (1970)   (bot. Peatling & Cawdron) ]
-] def
-/Titles [
-	(F70)
-	(K70)
-	(N70)
-	(S70)
-	(W70)
-] def
 
-/Belowtitles [
-	(Justerini & Brooks)
-	(Dolamore)
-	(Wine Society)
-	[(A) {-0.04 Kern} (very)]
-	(Peatling & Cawdron)
-] def
 
 /Names [
 	(JDAW)

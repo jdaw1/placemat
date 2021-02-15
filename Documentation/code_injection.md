@@ -214,3 +214,95 @@ Several variables may well be available for inspection.
 
 * Special case: if `FlightSeparationPaintSeparately` then `FlightSeparationPaintCode` may read `FlightSeparationLineNum`.
 
+
+## More examples
+
+### Coloured hearts
+
+More flamboyant than the usual style, but this was for a tasting on the day of a royal wedding. 
+
+<div align="center">
+
+![coloured_hearts](images/coloured_hearts.png)
+
+</div>
+
+```PostScript
+/ShapesInTitles true def
+
+/ShapesToUse [ /Heart ] def
+
+/ShapesTitlesFill
+{
+	[
+		{0.9 setgray}                    % Silver
+		{0.784 0.063 0.18  setrgbcolor}  % Union-Jack red
+		{0.004 0.123 0.412 setrgbcolor}  % Union-Jack blue
+		{1     0.08  0.58  setrgbcolor}  % Pink
+		{1     0.843 0     setrgbcolor}  % Gold
+	] ShapesIntX 2 mul ShapesIntY add WithinTitles add 5 mod 5 add 5 mod get exec
+	fill
+} def  % /ShapesTitlesFill
+
+/ShapesTitlesStroke
+{
+	[
+		{0 setgray}                      % Black
+		dup                              % Black
+		{0.6 setgray}                    % Mid-gray
+		{0     1     0     setrgbcolor}  % Green
+		{0.722 0.451 0.2   setrgbcolor}  % Dark gold
+	] ShapesIntX 2 mul ShapesIntY add WithinTitles add 5 mod 5 add 5 mod get exec
+	stroke
+} def  % /ShapesTitlesStroke
+
+/InlineTitlesMaxNumberContours 2 def
+```
+
+
+
+### Two-line text
+
+
+Code can be complicated, especially if fighting against the general flow of the software&rsquo;s parameters. 
+For instance, the one-line structure of the text can be forced into two lines. 
+
+The code below works both for text in a straight line:
+
+<div align="center">
+
+![TwoLine_straight](images/TwoLine_straight.png)
+
+</div>
+
+and for that painted in a circle:
+
+<div align="center">
+
+![TwoLine_circle](images/TwoLine_circle.png)
+
+</div>
+
+```PostScript
+/TwoLineT (Rebello) def
+/TwoLineB [(V) {-0.12 Kern} (alente)] def
+
+/TwoLine [
+	{//TwoLineB StringWidthRecursive //TwoLineT StringWidthRecursive sub 2 div dup 0 lt {pop 0} if  CurrentFontSize 0.4375 mul  rmoveto}   //TwoLineT
+	{//TwoLineT StringWidthRecursive //TwoLineB StringWidthRecursive add -2 div                     CurrentFontSize -0.875 mul  rmoveto}   //TwoLineB
+	{//TwoLineT StringWidthRecursive //TwoLineB StringWidthRecursive sub 2 div dup 0 lt {pop 0} if  CurrentFontSize 0.4375 mul  rmoveto}
+] bind def  % /TwoLine
+
+/Circlearrays [
+	[ TwoLine  (1945) ]
+	[ TwoLine  (1947) ]
+	[ TwoLine  (1955) ]
+	[ TwoLine  (1960) ]
+	[ TwoLine  (1963) ]
+] def  % /Circlearrays
+```
+
+
+Aesthetically, this can look acceptable if the two words are of similar length and lack descenders (&lsquo;Rebello Valente&rsquo;, perhaps &lsquo;Ramos Pinto&rsquo;), but not if they are of very different lengths or have descenders (&lsquo;Smith Woodhouse&rsquo;, &lsquo;Tuke Holdsworth&rsquo;; &lsquo;Butler Nephew&rsquo;, &lsquo;Gonzalez Byass&rsquo;, &lsquo;Gould Campbell&rsquo;, &lsquo;Quarles Harris&rsquo;, &lsquo;Royal Oporto&rsquo;).
+
+This is fighting against the software&rsquo;s *programgeist*, so maybe just don&rsquo;t at all.

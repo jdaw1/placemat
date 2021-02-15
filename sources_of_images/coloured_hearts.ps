@@ -11,6 +11,52 @@
 % Nor does any output: not PDF; nor images of such a document.
 % But it does include re-usable improvements to the body of the code.
 
+/ParametersVersionDateTimeAdobeFormat (D:202102151900) def
+
+/Circlearrays [
+	[ (Dow) (1960) ]
+	dup dup dup
+	[]
+] def
+/Titles [
+	(D60)
+	dup dup dup dup
+] def
+
+/Belowtitles [
+	()
+	dup dup dup dup
+] def
+
+/ShapesInTitles true def
+/ShapesToUse [ /Heart ] def
+/ShapesTitlesFill
+{
+	[
+		{0.9 setgray}                    % Silver
+		{0.784 0.063 0.18  setrgbcolor}  % Union-Jack red
+		{0.004 0.123 0.412 setrgbcolor}  % Union-Jack blue
+		{1     0.08  0.58  setrgbcolor}  % Pink
+		{1     0.843 0     setrgbcolor}  % Gold
+	] ShapesIntX 2 mul ShapesIntY add WithinTitles add 5 mod 5 add 5 mod get exec
+	fill
+} def
+
+/ShapesTitlesStroke
+{
+	[
+		{0 setgray}                      % Black
+		dup                              % Black
+		{0.6 setgray}                    % Mid-gray
+		{0     1     0     setrgbcolor}  % Green
+		{0.722 0.451 0.2   setrgbcolor}  % Dark gold
+	] ShapesIntX 2 mul ShapesIntY add WithinTitles add 5 mod 5 add 5 mod get exec
+	stroke
+} def
+
+/InlineTitlesMaxNumberContours 2 def
+
+
 % Recommendation: move changed parameters to just above this line.
 
 % % % % % % % %
@@ -18,30 +64,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202102151900) def
 
-/Circlearrays [
-	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
-	[ (Kopke)                    (1970)   (bot. Dolamore) ]
-	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
-	[ (Sandeman)                 (1970)  [(bot. A) {-0.06 Kern} (very)] ]
-	[ [(W) {-0.07 Kern} (arre)]  (1970)   (bot. Peatling & Cawdron) ]
-] def
-/Titles [
-	(F70)
-	(K70)
-	(N70)
-	(S70)
-	(W70)
-] def
-
-/Belowtitles [
-	(Justerini & Brooks)
-	(Dolamore)
-	(Wine Society)
-	[(A) {-0.04 Kern} (very)]
-	(Peatling & Cawdron)
-] def
 
 /Names [
 	(JDAW)
@@ -271,12 +294,10 @@ if} bind def  % /VoteRecorderCrossedBox
 % Glasses: Decoration %
 % % % % % % % % % % % %
 
-/ShapesInTitles false def
 /ShapesInAbovetitles {ShapesInTitles} def
 /ShapesInBelowtitles {ShapesInTitles} def
 /ShapesInOvertitles  {ShapesInTitles} def
 /ShapesInPlaceNames  {ShapesInTitles} def
-/ShapesToUse [/Flower /Star /Heart] def  % At least one of: /Flower /Star /Heart
 /ShapesStarsPointsAndStepsArray [[5 2] [6 2] [7 2] [7 3] [8 3]] def  % Less-polygonal more-pointy: [[3 1.31844] [4 1.79214] [5 2.27823] [6 2.77012] [7 3.26502] [8 3.76162] [9 4.25925]]
 
 /CrossHatchingOutside false def
@@ -292,7 +313,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /InlineBelowtitles false def
 /InlineOvertitles false def
 /InlinePlaceNames {ShapesInTitles CrossHatchingTitles or InlineTitles and} bind def
-/InlineTitlesMaxNumberContours 1 def
 /InlineAbovetitlesMaxNumberContours 1 def
 /InlineBelowtitlesMaxNumberContours 1 def
 /InlineOvertitlesMaxNumberContours 1 def
@@ -470,8 +490,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /ShapesFlowersNumPetalsMax 9 def
 /ShapesFlowersAngularWidthMin 0.8 def  % as a proportion of 360 / num petals
 /ShapesFlowersAngularWidthMax 2 def  % as a proportion of 360 / num petals, and an upper limit of 109.47122 degrees is also applied
-/ShapesTitlesFill {1 setgray fill} def
-/ShapesTitlesStroke {ColourSchemeCurrent /MidGrey eq {0 setgray stroke} {InlineTitles {0.4 setgray stroke} {newpath} ifelse} ifelse} def
 /ShapesAbovetitlesFill {ShapesTitlesFill} def
 /ShapesBelowtitlesFill {ShapesTitlesFill} def
 /ShapesOvertitlesFill {ShapesTitlesFill} def
