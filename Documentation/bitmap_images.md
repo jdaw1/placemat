@@ -75,11 +75,11 @@ Let&rsquo;s show the code:
 				width -2 div height -2 div translate
 				<<
 					/DataSource  ImageColour_data << >> /DCTDecode filter  % data source usually needs changing
+					ImageColour_data 0 setfileposition  % data source usually needs changing
 					/ImageType 1
 					/Width width
 					/Height height
 					/ImageMatrix [1 0 0 -1 0 height]
-					ImageColour_data 0 setfileposition
 					/BitsPerComponent 8
 					/Decode [ currentcolorspace 0 get /DeviceGray eq {0 1} {0 1 0 1 0 1} ifelse ]
 				>> image
@@ -109,11 +109,11 @@ Let&rsquo;s show the code:
 				width -2 div height -2 div translate
 				<<
 					/DataSource  ImageGray_data << >> /DCTDecode filter  % data source usually needs changing
+					ImageGray_data 0 setfileposition  % data source usually needs changing
 					/ImageType 1
 					/Width width
 					/Height height
 					/ImageMatrix [1 0 0 -1 0 height]
-					ImageGray_data 0 setfileposition
 					/BitsPerComponent 8
 					/Decode [ currentcolorspace 0 get /DeviceGray eq {0 1} {0 1 0 1 0 1} ifelse ]
 				>> image

@@ -1,13 +1,13 @@
 %!PS
 
-% This version 15:15 Saturday 13th February 2021
+% This version 19:00 Monday 15th February 2021
 
 % Permission is given to make non-commercial use of this program, and to distribute its output. But not to distribute the code: refer interested parties to the latest version at the link below, where instructions can also be found.
 % Improvements to the code should be sent them to the author.  Inviting the author to the tastings is, well, almost compulsory! The code is mostly debugged, but errors surely remain. It is provided as-is, without liability: it is free.
 % The most recent version is available via http://www.jdawiseman.com/papers/placemat/placemat.html .  Copyright 1988 to 2021 Julian D. A. Wiseman who is contactable via www.jdawiseman.com/author.html
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202102131515) def
+/ParametersVersionDateTimeAdobeFormat (D:202102161940) def
 
 /PrePourNumCopies {WithinTitles 1 le {1} {0} ifelse} def
 
@@ -36,11 +36,11 @@
 				width -2 div height -2 div translate
 				<<
 					/DataSource  ImageColour_data << >> /DCTDecode filter  % data source usually needs changing
+					ImageColour_data 0 setfileposition  % data source usually needs changing
 					/ImageType 1
 					/Width width
 					/Height height
 					/ImageMatrix [1 0 0 -1 0 height]
-					ImageColour_data 0 setfileposition
 					/BitsPerComponent 8
 					/Decode [ currentcolorspace 0 get /DeviceGray eq {0 1} {0 1 0 1 0 1} ifelse ]
 				>> image
@@ -70,11 +70,11 @@
 				width -2 div height -2 div translate
 				<<
 					/DataSource  ImageGray_data << >> /DCTDecode filter  % data source usually needs changing
+					ImageGray_data 0 setfileposition  % data source usually needs changing
 					/ImageType 1
 					/Width width
 					/Height height
 					/ImageMatrix [1 0 0 -1 0 height]
-					ImageGray_data 0 setfileposition
 					/BitsPerComponent 8
 					/Decode [ currentcolorspace 0 get /DeviceGray eq {0 1} {0 1 0 1 0 1} ifelse ]
 				>> image
