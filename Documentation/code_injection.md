@@ -78,7 +78,7 @@ But the software does not prevent the user doing any of this: if you don&rsquo;t
 ### Kerning
 
 Some pairs of letters look better if nudged closer together. This is particularly true with an x-height letter either side of a &lsquo;W&rsquo; or a &lsquo;V&rsquo;, and even more if either of the neighbouring characters is an &lsquo;A&rsquo;. 
-E.g.L:
+E.g.:
 * `[(W) {-0.06 Kern} (arre)]`
 * `[(T) {-0.06 Kern} (aylor)]`
 * `[(Smith W) {-0.06 Kern} (oodhouse)]`
@@ -102,7 +102,105 @@ A compund string may change the current font:
 ]
 ```
 
-### Complications
+### Wine dependence
+
+If a tasting comprises two or three different types of wine, a subtle formatting variation between them can be elegant. 
+However, the variation should not more than slightly change the lightness or darkness, because doing so would impede comparison of wines. 
+
+The examples are self explanatory.
+
+```PostScript
+/InlineTitlesMaxNumberContours {Belowtitles WithinTitles get (LBV) eq {2} {1} ifelse} def
+```
+
+```PostScript
+/ShapesFlowersNumPetalsMin {Circlearrays WithinTitles get 1 get (LBV) eq {5} {6} ifelse} def
+/ShapesFlowersNumPetalsMax {ShapesFlowersNumPetalsMin} def
+```
+
+```PostScript
+/DecanterLabelsNumCopies
+{
+	Belowtitles WithinTitles get  dup
+	(Tappit Hen) eq
+		{pop 3}
+		{(Magnum) eq {2} {1} ifelse}
+	ifelse
+} def  % /DecanterLabelsNumCopies
+```
+
+If the string needs kerning, then at the start assign it to a variable with the likes of `
+/TappitHen [(T) {-0.06 Kern} (appit Hen)] def`; use in `/Belowtitles [ … () … TappitHen … ] def`; and test for equality to `TappitHen` rather than to the string `(Tappit Hen)`.
+
+Of course, variation can be purely decorative.
+
+```PostScript
+/SpiralCentreFromCentreProportionRadiiInside 0.75 def
+/SpiralCentreFromCentreAngle {360 WithinTitles 1 add mul Circlearrays length div} def
+```
+
+
+
+## Variables that parameters may inspect
+
+Many parameters may be set to code, and this code may access internal variables. 
+Multiple variables can be available for use.
+
+* At the page level:
+
+	- `TypeOfPagesBeingRendered`, possible values including:
+		* `/Glasses`; 
+		* `/TastingNotes`; 
+		* `/PlaceName`; 
+		* `/PrePour`; 
+		* `/StickyLabels`; 
+		* `/VoteRecorder`; 
+		* `/DecantingNotes`; 
+		* `/Accounts`; 
+		* `/CorkDisplay`; 
+		* `/DecanterLabels`; and 
+		* `/Multiple` if doing calculations applicable to multiple types of page.
+
+	- `PageWidth` and `PageHeight`, from which it might be necessary to subtract some of the current used margins: `MgnL`, `MgnR`, `MgnT`, `MgnB`. (Unless `SideBySideGlassesTastingNotes` is true, these will equal `MarginL`, `MarginR`, `MarginT`, `MarginB`.)
+
+	- On glasses sheets, `SheetNum`, an integer being the item of `GlassesOnSheets` currently being rendered. This also exists on pre-pour, neck-tag, and sticky-label pages.
+
+	- `Radii`, an array of reals holding the radii of the different glasses sheets. Also `RadiiCirclearrayBaseline` and `RadiiCirclearrayInside`, holding the distance from centre of the baseline and top of the `Circlearrays`.
+
+	- `GlassPositions`, a triple-depth array holding the positions of the glasses. `GlassPositions SheetNum get WithinPage get` is an array, `[x y]`, the position of the centre of the glass placement. 
+
+	- On tasting-note pages, `TastingSheetNum`, an integer being the item of `GlassesOnTastingNotePages` currently being rendered.
+
+	- On place-name pages, PlaceNameSetNum, an integer being the number of the sub-array of NamesPlaceNames currently being rendered.
+
+	- On pre-pour pages, `PrePourSheetNum`, an integer &ge;&nbsp;0 and &le;&nbsp;`PrePourNumCopies`&minus;1, being the number of the pre-pour sheet currently being rendered.
+
+	- On sticky-label pages, StickyLabelCopyNum, an integer &ge;&nbsp;0 and &le;&nbsp;`StickyLabelsNumCopies`&minus;1, being the number of the sticky label currently being rendered.
+
+	 - On vote-recorder pages, `VoteRecorderTopTextNum` and `VoteRecorderSheetNum`, less than the length of `GlassesClusteredOnVoteRecorders`.
+
+	- On decanting-notes pages, `DecantingNotesCopyNum`, an integer &ge;&nbsp;0 and &le;&nbsp;`DecantingNotesNumCopies`&minus;1, being the number of the copy of the page. Also `DecantingNotesSheetNum`, less than the length of `GlassesClusteredOnDecantingNotes`.
+
+	- Within each neck tag, `NeckTagsCopyNum`. If a tasting as many people and hence multiple bottles of each wine, of which each person tastes only one, the tags could be numbered: `/CirclearraysNeckTags [ Circlearrays {[ exch aload pop [(Bottle #) {NeckTagsCopyNum 1 add}] ]} forall ] def`. 
+
+	- `CircletextMaxFontSizes`, an array of reals with `CircletextMaxFontSizes SheetNum get` being the usual font size in which the `Circlearrays` are rendered (though the font size of any particular circle text might have been shrunk by `CircletextsMinCopies`, or altered by code within `Circlearrays`).
+
+	- `TitleFontSizes` and similar variables `AbovetitleFontSizes`, `BelowtitleFontSizes`, and `OvertitleFontSizes`, being nested arrays, the same shape as `GlassesOnSheets`. They contain the sizes of the font at the start of rendering the `Titles` etc.
+
+	- `NameNum`, an integer being the item of Names the page of which is being rendered, and `ThisName`, being `Names NameNum get`. Most things may **not** vary by `NameNum`. In particular, not elements of `Titles`, `Abovetitles`, `Belowtitles`, `Overtitles`, `FillTexts`, etc, nor their layout or formatting. So if trying to vary something by `NameNum` do test, and expect failure.
+
+* At the individual glass level (and thus available to glass-level settings such as `InlineTitlesMaxNumberContours`, as well as to one-glass situations such as the pre-pour pages) there will also be: 
+
+	- `WithinPage`, being number of the glass on this page, thus running from zero to one less than the number of glasses on page `SheetNum` or `TastingSheetNum`.
+
+	- `WithinTitles`, being number of item in the array `Titles` (and hence also of `Circlearrays`, `Abovetitles`, `Belowtitles`, `Overtitles`, `Subtitles`, and `FillTexts`).
+
+* Special case: if `FlightSeparationPaintSeparately` then `FlightSeparationPaintCode` may read `FlightSeparationLineNum`.
+
+
+## More examples
+
+### Berry Bros & Rudd Selection
 
 Berry Brothers&rsquo; name contains an abbreviation, shown as a small &lsquo;s&rsquo; above a dot. 
 This entails writing some PostScript.
@@ -156,111 +254,6 @@ Maybe, the first time, it wasn&rsquo;t worth the effort.
 But the code having been written, the effort of a copy-paste is justified by the elegance.
 
 
-## Variables that parameters may inspect
-
-Many parameters may be set to code, and this code may access internal variables. 
-E.g., `/InlineTitlesMaxNumberContours {WithinPage 2 mod 0 eq {1} {2} ifelse} def` will alternate the number of ripples inlined. 
-
-Several variables may well be available for inspection.
-
-* At the page level:
-
-	- `TypeOfPagesBeingRendered`, being:
-		* `/Glasses` if this is a glasses page; 
-		* `/TastingNotes` if this is a tasting-note page; 
-		* `/PlaceName` if a place-name page; 
-		* `/PrePour` if a pre-pour sheet; 
-		* `/StickyLabels` if a sticky-label page; 
-		* `/VoteRecorder` if a vote-recorder page; 
-		* `/DecantingNotes` if a decanting-notes page; 
-		* `/Accounts` if an accounts page; 
-		* `/CorkDisplay` if a cork-display page; 
-		* `/DecanterLabels` if a decanter-labels page; and 
-		* `/Multiple` if doing calculations applicable to multiple types of page.
-
-	- `PageWidth` and `PageHeight`, from which it might be necessary to subtract some of the current used margins: `MgnL`, `MgnR`, `MgnT`, `MgnB`. (Unless `SideBySideGlassesTastingNotes` is true, these will equal `MarginL`, `MarginR`, `MarginT`, `MarginB`.)
-
-	- On glasses sheets, `SheetNum`, an integer being the item of `GlassesOnSheets` currently being rendered. This also exists on pre-pour, neck-tag, and sticky-label pages.
-
-	- `Radii`, an array of reals holding the radii of the different glasses sheets. Also `RadiiCirclearrayBaseline` and `RadiiCirclearrayInside`, holding the distance from centre of the baseline and top of the `Circlearrays`.
-
-	- `GlassPositions`, a triple-depth array holding the positions of the glasses. `GlassPositions SheetNum get WithinPage get` is an array, `[x y]`, the position of the centre of the glass placement. 
-
-	- On tasting-note pages, `TastingSheetNum`, an integer being the item of `GlassesOnTastingNotePages` currently being rendered.
-
-	- On place-name pages, PlaceNameSetNum, an integer being the number of the sub-array of NamesPlaceNames currently being rendered.
-
-	- On pre-pour pages, `PrePourSheetNum`, an integer &ge;&nbsp;0 and &le;&nbsp;`PrePourNumCopies`&minus;1, being the number of the pre-pour sheet currently being rendered.
-
-	- On sticky-label pages, StickyLabelCopyNum, an integer &ge;&nbsp;0 and &le;&nbsp;`StickyLabelsNumCopies`&minus;1, being the number of the sticky label currently being rendered.
-
-	 - On vote-recorder pages, `VoteRecorderTopTextNum` and `VoteRecorderSheetNum`, less than the length of `GlassesClusteredOnVoteRecorders`.
-
-	- On decanting-notes pages, `DecantingNotesCopyNum`, an integer &ge;&nbsp;0 and &le;&nbsp;`DecantingNotesNumCopies`&minus;1, being the number of the copy of the page. Also `DecantingNotesSheetNum`, less than the length of `GlassesClusteredOnDecantingNotes`.
-
-	- Within each neck tag, `NeckTagsCopyNum`. If a tasting as many people and hence multiple bottles of each wine, of which each person tastes only one, the tags could be numbered: `/CirclearraysNeckTags [ Circlearrays {[ exch aload pop [(Bottle #) {NeckTagsCopyNum 1 add}] ]} forall ] def`. 
-
-	- `CircletextMaxFontSizes`, an array of reals with `CircletextMaxFontSizes SheetNum get` being the usual font size in which the `Circlearrays` are rendered (though the font size of any particular circle text might have been shrunk by `CircletextsMinCopies`, or altered by code within `Circlearrays`).
-
-	- `TitleFontSizes` and similar variables `AbovetitleFontSizes`, `BelowtitleFontSizes`, and `OvertitleFontSizes`, being nested arrays, the same shape as `GlassesOnSheets`. They contain the sizes of the font at the start of rendering the `Titles` etc.
-
-	- `NameNum`, an integer being the item of Names the page of which is being rendered, and `ThisName`, being `Names NameNum get`. Most things may **not** vary by `NameNum`. In particular, not elements of `Titles`, `Abovetitles`, `Belowtitles`, `Overtitles`, `FillTexts`, etc, nor their layout or formatting. So if trying to vary something by `NameNum` do test, and expect failure.
-
-* At the individual glass level (and thus available to glass-level settings such as `InlineTitlesMaxNumberContours`, as well as to one-glass situations such as the pre-pour pages) there will also be: 
-
-	- `WithinPage`, being number of the glass on this page, thus running from zero to one less than the number of glasses on page `SheetNum` or `TastingSheetNum`.
-
-	- `WithinTitles`, being number of item in the array `Titles` (and hence also of `Circlearrays`, `Abovetitles`, `Belowtitles`, `Overtitles`, `Subtitles`, and `FillTexts`).
-
-* Special case: if `FlightSeparationPaintSeparately` then `FlightSeparationPaintCode` may read `FlightSeparationLineNum`.
-
-
-## More examples
-
-### Coloured hearts
-
-More flamboyant than the usual style, but this was for a tasting on the day of a royal wedding. 
-
-<div align="center">
-
-![coloured_hearts](images/coloured_hearts.png)
-
-</div>
-
-```PostScript
-/ShapesInTitles true def
-
-/ShapesToUse [ /Heart ] def
-
-/ShapesTitlesFill
-{
-	[
-		{0.9 setgray}                    % Silver
-		{0.784 0.063 0.18  setrgbcolor}  % Union-Jack red
-		{0.004 0.123 0.412 setrgbcolor}  % Union-Jack blue
-		{1     0.08  0.58  setrgbcolor}  % Pink
-		{1     0.843 0     setrgbcolor}  % Gold
-	] ShapesIntX 2 mul ShapesIntY add WithinTitles add 5 mod 5 add 5 mod get exec
-	fill
-} def  % /ShapesTitlesFill
-
-/ShapesTitlesStroke
-{
-	[
-		{0 setgray}                      % Black
-		dup                              % Black
-		{0.6 setgray}                    % Mid-gray
-		{0     1     0     setrgbcolor}  % Green
-		{0.722 0.451 0.2   setrgbcolor}  % Dark gold
-	] ShapesIntX 2 mul ShapesIntY add WithinTitles add 5 mod 5 add 5 mod get exec
-	stroke
-} def  % /ShapesTitlesStroke
-
-/InlineTitlesMaxNumberContours 2 def
-```
-
-
-
 ### Two-line text
 
 
@@ -306,3 +299,47 @@ and for that painted in a circle:
 Aesthetically, this can look acceptable if the two words are of similar length and lack descenders (&lsquo;Rebello Valente&rsquo;, perhaps &lsquo;Ramos Pinto&rsquo;), but not if they are of very different lengths or have descenders (&lsquo;Smith Woodhouse&rsquo;, &lsquo;Tuke Holdsworth&rsquo;; &lsquo;Butler Nephew&rsquo;, &lsquo;Gonzalez Byass&rsquo;, &lsquo;Gould Campbell&rsquo;, &lsquo;Quarles Harris&rsquo;, &lsquo;Royal Oporto&rsquo;).
 
 This is fighting against the software&rsquo;s *programgeist*, so maybe just don&rsquo;t at all.
+
+
+### Coloured hearts
+
+More flamboyant than the usual style, but this was for a tasting on the day of a royal wedding. 
+Of course, if precise hue of colour is important, do not assume that screen and print colours will match: test on the actual printer. 
+
+<div align="center">
+
+![coloured_hearts](images/coloured_hearts.png)
+
+</div>
+
+```PostScript
+/ShapesInTitles true def
+
+/ShapesToUse [ /Heart ] def
+
+/ShapesTitlesFill
+{
+	[
+		{0.9 setgray}                    % Silver
+		{0.784 0.063 0.18  setrgbcolor}  % Union-Jack red
+		{0.004 0.123 0.412 setrgbcolor}  % Union-Jack blue
+		{1     0.08  0.58  setrgbcolor}  % Pink
+		{1     0.843 0     setrgbcolor}  % Gold
+	] ShapesIntX 2 mul ShapesIntY add WithinTitles add 5 mod 5 add 5 mod get exec
+	fill
+} def  % /ShapesTitlesFill
+
+/ShapesTitlesStroke
+{
+	[
+		{0   setgray}                    % Black
+		dup                              % Black
+		{0.6 setgray}                    % Mid-gray
+		{0     1     0     setrgbcolor}  % Green
+		{0.722 0.451 0.2   setrgbcolor}  % Dark gold
+	] ShapesIntX 2 mul ShapesIntY add WithinTitles add 5 mod 5 add 5 mod get exec
+	stroke
+} def  % /ShapesTitlesStroke
+
+/InlineTitlesMaxNumberContours 2 def
+```
