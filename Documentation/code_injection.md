@@ -7,10 +7,10 @@
 4.  [Type sizes](type_sizes.md);  
 5.  [Page-level controls](page_level.md);  
 6.  [Arrangement of glasses on the page](PackingStyles.md);  
-7.  [Non-Glasses Pages](Not_Glasses.md);  
+7.  [Non-Glasses Pages](not_glasses.md);  
 8.  [Document-level controls](document.md);  
 9.  *Code injection*;  
-10. [Bitmap images](Bitmap_images.md).
+10. [Bitmap images](bitmap_images.md).
 
 ----
 
