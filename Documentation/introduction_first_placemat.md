@@ -195,6 +195,7 @@ There are hundreds more parameters, that:
 * decorate;
 * enable and control non-glass page types; 
 * organise the document, useful for tastings over several sessions; 
+* embed &copy; copyright information; 
 * are code to be executed at specified times (code injection being explicitly allowed); 
 * do other things, whether between these categories or wholly outside them.
 
