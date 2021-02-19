@@ -17,7 +17,7 @@
 ## Introduction
 
 The core purpose of the software is to have a place to put glasses. 
-Already known are the PaperType (e.g., `/A3`), and how many glasses are to go on the page. 
+Already known are the PaperType (e.g., `/A3`), the margins, and how many glasses are to go on the page. 
 The user has much control over the layout of the glasses.
 
 The user specifies an array, `PackingStyles`, which is a list of packing styles. 
@@ -26,7 +26,7 @@ Broadly, if a later-tested style allows a larger radius than the current best, t
 
 If the element of `PackingStyles` is just the style, it doesn&rsquo;t need to be in an array. 
 But the elements of `PackingStyles` can have constraints and small variations. 
-If an element of `PackingStyles` has an such extra detail, then that element must be an array, starting with the style name. 
+If an element of `PackingStyles` is to have such extra detail, then that element must be an array, starting with the style name. 
 E.g.,: `[ /Diamonds  /OnlyIfSheetNumMin 1  /OnlyIfSheetNumMax 1  /GlassesNumMin 3  /GlassesNumMax 3  /OnlyIfOrientation /Landscape  /RowsNumMin 3  /RowsNumMax 4  /Mirror ]`. 
 
 The general mathematical problem, largest possible radius for *n* non-overlapping circles in a particular rectangle, is difficult (see [PackoMania](http://www.packomania.com/) for solutions to many special cases). 
@@ -39,7 +39,7 @@ In such a case the default value of `GlassesOnSheetsMaxPerSheet` would cause `Gl
 But if table space were tight, it could be better to have fifteen on an `/A3`, six on an `/A4`, and three on the right side of an `/A4`, so using table space of only 210mm&times;3&frac12; = 735mm per person.
 
 There follow descriptions and pictures of the various allowable styles. 
-(The two PDFs ([non-`/Array`](images/PackingStyles.pdf), [`/Array`](images/PackingStyles_Array.pdf)) from which the bitmaps were made show the element of `PackingStyles` in the header.)
+(The two PDFs ([non-`/Array`](images/PackingStyles.pdf), [`/Array`](images/PackingStyles_Array.pdf)), from which the bitmaps were made, show the element of `PackingStyles` in the header.)
 
 ## Efficient packings
 
@@ -56,11 +56,11 @@ If some of these are not wanted, for whatever reason, control is possible by the
 
 | Example | `PackingStyles` element<br>`PaperType` = *width*&times;*height* |
 |:-------:|:---------------------------------------|
-| ![A4_04_Diamonds](images/A4_04_Diamonds.png) | `/Diamonds`<br>`/A4` = 210mm&times;297mm |
-| ![A4_05_Diamonds](images/A4_05_Diamonds.png) | `/Diamonds`<br>`/A4` = 210mm&times;297mm |
-| ![A3_13_Diamonds](images/A3_13_Diamonds.png) | `/Diamonds`<br>`/A3` = 420mm&times;297mm |
-| ![USLegal_09_Diamonds](images/USLegal_09_Diamonds.png) | `/Diamonds`<br>`/USLegal` = 14&Prime;&times;8&frac12;&Prime; |
-| ![USLegal_09_Diamonds_Mirror](images/USLegal_09_Diamonds_Mirror.png) | `[ /Diamonds /Mirror ]`<br>`/USLegal` = 14&Prime;&times;8&frac12;&Prime; |
+| ![A4_04_Diamonds](images/A4_04_Diamonds.png) | `/Diamonds`<br>Four glasses<br>`/A4` = 210mm&times;297mm |
+| ![A4_05_Diamonds](images/A4_05_Diamonds.png) | `/Diamonds`<br>Five glasses<br>`/A4` = 210mm&times;297mm |
+| ![A3_13_Diamonds](images/A3_13_Diamonds.png) | `/Diamonds`<br>Thirteen glasses<br>`/A3` = 420mm&times;297mm |
+| ![USLegal_09_Diamonds](images/USLegal_09_Diamonds.png) | `/Diamonds`<br>Nine glasses<br>`/USLegal` = 14&Prime;&times;8&frac12;&Prime; |
+| ![USLegal_09_Diamonds_Mirror](images/USLegal_09_Diamonds_Mirror.png) | `[ /Diamonds /Mirror ]`<br>Nine glasses<br>`/USLegal` = 14&Prime;&times;8&frac12;&Prime; |
 
 </div>
 
@@ -72,10 +72,10 @@ If some of these are not wanted, for whatever reason, control is possible by the
 
 | Example | `PackingStyles` element<br>`PaperType` = *width*&times;*height* |
 |:-------:|:---------------------------------------|
-| ![A4_05_RectangularDislocation](images/A4_05_RectangularDislocation.png) | `/RectangularDislocation`<br>`/A4` = 210mm&times;297mm |
-| ![A4_06_RectangularDislocation](images/A4_06_RectangularDislocation.png) | `/RectangularDislocation`<br>`/A4` = 210mm&times;297mm |
-| ![A3_11_RectangularDislocation](images/A3_11_RectangularDislocation.png) | `/RectangularDislocation`<br>`/A3` = 420mm&times;297mm |
-| ![A3_11_RectangularDislocation_Mirror](images/A3_11_RectangularDislocation_Mirror.png) | `[ /RectangularDislocation /Mirror ]`<br>`/A3` = 420mm&times;297mm |
+| ![A4_05_RectangularDislocation](images/A4_05_RectangularDislocation.png) | `/RectangularDislocation`<br>Five glasses<br>`/A4` = 210mm&times;297mm |
+| ![A4_06_RectangularDislocation](images/A4_06_RectangularDislocation.png) | `/RectangularDislocation`<br>Six glasses<br>`/A4` = 210mm&times;297mm |
+| ![A3_11_RectangularDislocation](images/A3_11_RectangularDislocation.png) | `/RectangularDislocation`<br>Eleven glasses<br>`/A3` = 420mm&times;297mm |
+| ![A3_11_RectangularDislocation_Mirror](images/A3_11_RectangularDislocation_Mirror.png) | `[ /RectangularDislocation /Mirror ]`<br>Eleven glasses<br>`/A3` = 420mm&times;297mm |
 
 </div>
 
@@ -91,7 +91,7 @@ Obviously either `/Justify` can allow distances to differ.
 
 | Example | `PackingStyles` element<br>`PaperType` = *width*&times;*height* |
 |:-------:|:---------------------------------------|
-| ![USL_06_SquareGrid](images/USL_06_SquareGrid.png) | `/SquareGrid`<br>`/A4` = 210mm&times;297mm |
+| ![USL_06_SquareGrid](images/USL_06_SquareGrid.png) | `/SquareGrid`<br>Six glasses<br>`/A4` = 210mm&times;297mm |
 
 </div>
 
@@ -104,11 +104,11 @@ The diamonds can be offset from the diamonds either vertically or horizontally.
 
 | Example | `PackingStyles` element<br>`PaperType` = *width*&times;*height* |
 |:-------:|:---------------------------------------|
-| ![A3_14_DiamondsAndRectangular](images/A3_14_DiamondsAndRectangular.png) | `/DiamondsAndRectangular`<br>`/A3` = 420mm&times;297mm |
-| ![A3_14_DiamondsAndRectangular_RectColsToLeftOrRowsBelow_0](images/A3_14_DiamondsAndRectangular_RectColsToLeftOrRowsBelow_0.png) | `[ /DiamondsAndRectangular /RectColsToLeftOrRowsBelow 0 ]`<br>`/A3` = 420mm&times;297mm |
-| ![A3_14_DiamondsAndRectangular_RectColsToLeftOrRowsBelow_2](images/A3_14_DiamondsAndRectangular_RectColsToLeftOrRowsBelow_2.png) | `[ /DiamondsAndRectangular /RectColsToLeftOrRowsBelow 2 ]`<br>`/A3` = 420mm&times;297mm |
-| ![USL2_14_DiamondsAndRectangular](images/USL2_14_DiamondsAndRectangular.png) | `/DiamondsAndRectangular`<br>`/USL2` = 17&Prime;&times;11&Prime; |
-| ![USLegal_09_DiamondsAndRectangular](images/USLegal_09_DiamondsAndRectangular.png) | `/DiamondsAndRectangular`<br>`/USL2` = 14&Prime;&times;8&frac12;&Prime; |
+| ![A3_14_DiamondsAndRectangular](images/A3_14_DiamondsAndRectangular.png) | `/DiamondsAndRectangular`<br>Fourteen glasses<br>`/A3` = 420mm&times;297mm |
+| ![A3_14_DiamondsAndRectangular_RectColsToLeftOrRowsBelow_0](images/A3_14_DiamondsAndRectangular_RectColsToLeftOrRowsBelow_0.png) | `[ /DiamondsAndRectangular /RectColsToLeftOrRowsBelow 0 ]`<br>Fourteen glasses<br>`/A3` = 420mm&times;297mm |
+| ![A3_14_DiamondsAndRectangular_RectColsToLeftOrRowsBelow_2](images/A3_14_DiamondsAndRectangular_RectColsToLeftOrRowsBelow_2.png) | `[ /DiamondsAndRectangular /RectColsToLeftOrRowsBelow 2 ]`<br>Fourteen glasses<br>`/A3` = 420mm&times;297mm |
+| ![USL2_14_DiamondsAndRectangular](images/USL2_14_DiamondsAndRectangular.png) | `/DiamondsAndRectangular`<br>Fourteen glasses<br>`/USL2` = 17&Prime;&times;11&Prime; |
+| ![USLegal_09_DiamondsAndRectangular](images/USLegal_09_DiamondsAndRectangular.png) | `/DiamondsAndRectangular`<br>Nine glasses<br>`/USL2` = 14&Prime;&times;8&frac12;&Prime; |
 
 </div>
 
@@ -123,7 +123,7 @@ There is a generalisation of `/DiamondsPlus` over any odd number of rows (column
 
 | Example | `PackingStyles` element<br>`PaperType` = *width*&times;*height* |
 |:-------:|:---------------------------------------|
-| ![A4_07_DiamondsPlus](images/A4_07_DiamondsPlus.png) | `/DiamondsPlus`<br>`/A4` = 210mm&times;297mm |
+| ![A4_07_DiamondsPlus](images/A4_07_DiamondsPlus.png) | `/DiamondsPlus`<br>Seven glasses<br>`/A4` = 210mm&times;297mm |
 
 </div>
 
@@ -134,8 +134,8 @@ There is a generalisation of `/DiamondsPlus` over any odd number of rows (column
 Thus `/RectangularAlternateNudge` is a small deviation away from greater symmetry, about which the the author is unenthusiastic. 
 Because of this non-enthusiasm, by default, `/RectangularAlternateNudge` comes with a sub-parameter: `[ /RectangularAlternateNudge /ImprovementPointsMin 2 ]`. 
 This imposes an additional requirement: this packing style is chosen only if it is an improvement on the previous best radius of &ge;&nbsp;2pt &asymp;&nbsp;0.7mm. 
-The next four examples show six glasses on:
-* `/USL` = 8&frac12;&Prime;&times;11&Prime;, with margins of 24pt = &#8531;&Prime; and space of 6pt for the header, using the packing styles /Diamonds (radius &asymp; 117.465);
+The next four examples show six glasses on `/USL` = 8&frac12;&Prime;&times;11&Prime;, with margins of 24pt = &#8531;&Prime; and space of 6pt for the header, using the packing styles:
+*  `/Diamonds` (radius &asymp; 117.465);
 * `/SquareGrid` and `/RectangularDislocation` (radius = 123); and 
 * `/RectangularAlternateNudge` (radius &asymp; 125.568). 
 
@@ -146,10 +146,10 @@ But on `/A4` the improvement in the radius is much less: only &asymp; 0.28pt &as
 
 | Example | `PackingStyles` element<br>`PaperType` = *width*&times;*height* | Radius |
 |:-------:|:---------------------------------------|:---|
-| ![USL_06_Diamonds](images/USL_06_Diamonds.png) | `/Diamonds`<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; | 117.465pt<br>41.44mm |
-| ![USL_06_SquareGrid](images/USL_06_SquareGrid.png) | `/SquareGrid`<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; | 123pt<br>43.39mm |
-| ![USL_06_RectangularDislocation](images/USL_06_RectangularDislocation.png) | `/RectangularDislocation`<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; | 123pt<br>43.39mm |
-| ![USL_06_RectangularAlternateNudge](images/USL_06_RectangularAlternateNudge.png) | `/RectangularAlternateNudge`<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; | 125.568pt<br>44.30mm |
+| ![USL_06_Diamonds](images/USL_06_Diamonds.png) | `/Diamonds`<br>Six glasses<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; | 117.465pt<br>41.44mm |
+| ![USL_06_SquareGrid](images/USL_06_SquareGrid.png) | `/SquareGrid`<br>Six glasses<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; | 123pt<br>43.39mm |
+| ![USL_06_RectangularDislocation](images/USL_06_RectangularDislocation.png) | `/RectangularDislocation`<br>Six glasses<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; | 123pt<br>43.39mm |
+| ![USL_06_RectangularAlternateNudge](images/USL_06_RectangularAlternateNudge.png) | `/RectangularAlternateNudge`<br>Six glasses<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; | 125.568pt<br>44.30mm |
 
 </div>
 
@@ -161,9 +161,9 @@ But on `/A4` the improvement in the radius is much less: only &asymp; 0.28pt &as
 
 | Example | `PackingStyles` element<br>`PaperType` = *width*&times;*height* |
 |:-------:|:---------------------------------------|
-| ![USL2_10_RectangularAlternateSplitNudge](images/USL2_10_RectangularAlternateSplitNudge.png) | `/RectangularAlternateSplitNudge`<br>`/USL2` = 17&Prime;&times;11&Prime; |
-| ![USL2_12_RectangularAlternateSplitNudge](images/USL2_12_RectangularAlternateSplitNudge.png) | `/RectangularAlternateSplitNudge`<br>`/USL2` = 17&Prime;&times;11&Prime; |
-| ![USL2_12_RectangularAlternateSplitNudge_Mirror](images/USL2_12_RectangularAlternateSplitNudge_Mirror.png) | `[ /RectangularAlternateSplitNudge /Mirror ]`<br>`/USL2` = 17&Prime;&times;11&Prime; |
+| ![USL2_10_RectangularAlternateSplitNudge](images/USL2_10_RectangularAlternateSplitNudge.png) | `/RectangularAlternateSplitNudge`<br>Ten glasses<br>`/USL2` = 17&Prime;&times;11&Prime; |
+| ![USL2_12_RectangularAlternateSplitNudge](images/USL2_12_RectangularAlternateSplitNudge.png) | `/RectangularAlternateSplitNudge`<br>Twelve glasses<br>`/USL2` = 17&Prime;&times;11&Prime; |
+| ![USL2_12_RectangularAlternateSplitNudge_Mirror](images/USL2_12_RectangularAlternateSplitNudge_Mirror.png) | `[ /RectangularAlternateSplitNudge /Mirror ]`<br>Twelve glasses<br>`/USL2` = 17&Prime;&times;11&Prime; |
 
 </div>
 
@@ -179,10 +179,10 @@ Obviously using both would be strange.
 
 | Example | `PackingStyles` element<br>`PaperType` = *width*&times;*height* |
 |:-------:|:---------------------------------------|
-| ![A4_05_Bespoke5](images/A4_05_Bespoke5.png) | `/Bespoke5`<br>`/A4` = 297mm&times;210mm |
-| ![A4_05_Bespoke5_Mirror](images/A4_05_Bespoke5_Mirror.png) | `[ /Bespoke5 /Mirror ]`<br>`/A4` = 297mm&times;210mm |
-| ![USLegal_07_Bespoke7](images/USLegal_07_Bespoke7.png) | `/Bespoke7`<br>`/USLegal` = 14&Prime;&times;8&frac12;&Prime; |
-| ![USLegal_07_Bespoke7_Mirror](images/USLegal_07_Bespoke7_Mirror.png) | `[ /Bespoke7 /Mirror ]`<br>`/USLegal` = 14&Prime;&times;8&frac12;&Prime; |
+| ![A4_05_Bespoke5](images/A4_05_Bespoke5.png) | `/Bespoke5`<br>Five glasses<br>`/A4` = 297mm&times;210mm |
+| ![A4_05_Bespoke5_Mirror](images/A4_05_Bespoke5_Mirror.png) | `[ /Bespoke5 /Mirror ]`<br>Five glasses<br>`/A4` = 297mm&times;210mm |
+| ![USLegal_07_Bespoke7](images/USLegal_07_Bespoke7.png) | `/Bespoke7`<br>Seven glasses<br>`/USLegal` = 14&Prime;&times;8&frac12;&Prime; |
+| ![USLegal_07_Bespoke7_Mirror](images/USLegal_07_Bespoke7_Mirror.png) | `[ /Bespoke7 /Mirror ]`<br>Seven glasses<br>`/USLegal` = 14&Prime;&times;8&frac12;&Prime; |
 
 </div>
 
@@ -195,9 +195,9 @@ The sub-parameter `/TempleExtraColsToLeftOrRowsBelow` is followed by one integer
 
 | Example | `PackingStyles` element<br>`PaperType` = *width*&times;*height* |
 |:-------:|:---------------------------------------|
-| ![USL_10_Temple](images/USL_10_Temple.png) | `/Temple`<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; |
-| ![USLegal_13_Temple](images/USLegal_13_Temple.png) | `/Temple`<br>`/USLegal` = 14&Prime;&times;8&frac12;&Prime; |
-| ![USL2_13_Temple_TempleExtraColsToLeftOrRowsBelow_0](images/USL2_13_Temple_TempleExtraColsToLeftOrRowsBelow_0.png) | `/Temple`<br>`/USL2` = 17&Prime;&times;11&Prime; |
+| ![USL_10_Temple](images/USL_10_Temple.png) | `/Temple`<br>Ten glasses<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; |
+| ![USLegal_13_Temple](images/USLegal_13_Temple.png) | `/Temple`<br>Thirteen glasses<br>`/USLegal` = 14&Prime;&times;8&frac12;&Prime; |
+| ![USL2_13_Temple_TempleExtraColsToLeftOrRowsBelow_0](images/USL2_13_Temple_TempleExtraColsToLeftOrRowsBelow_0.png) | `/Temple`<br>Thirteen glasses<br>`/USL2` = 17&Prime;&times;11&Prime; |
 
 </div>
 
@@ -215,9 +215,9 @@ This design might be particularly appropriate if the central circles held the ca
 
 | Example | `PackingStyles` element<br>`PaperType` = *width*&times;*height* |
 |:-------:|:---------------------------------------|
-| ![A3_10_Arch_CentralGlasses_3](images/A3_10_Arch_CentralGlasses_3.png) | `[ /Arch /CentralGlasses 3 ]`<br>`/A3` = 420mm&times;297mm |
-| ![A3_08_PostsAndLintel_CentralGlasses_1](images/A3_08_PostsAndLintel_CentralGlasses_1.png) | `[ /PostsAndLintel /CentralGlasses 1 ]`<br>`/A3` = 420mm&times;297mm |
-| ![A3_10_PostsAndLintel_CentralGlasses_2_Mirror](images/A3_10_PostsAndLintel_CentralGlasses_2_Mirror.png) | `[ /PostsAndLintel /CentralGlasses 2 /Mirror ]`<br>`/A3` = 420mm&times;297mm |
+| ![A3_10_Arch_CentralGlasses_3](images/A3_10_Arch_CentralGlasses_3.png) | `[ /Arch /CentralGlasses 3 ]`<br>Seven + three = ten glasses<br>`/A3` = 420mm&times;297mm |
+| ![A3_08_PostsAndLintel_CentralGlasses_1](images/A3_08_PostsAndLintel_CentralGlasses_1.png) | `[ /PostsAndLintel /CentralGlasses 1 ]`<br>Seven + one = eight glasses<br>`/A3` = 420mm&times;297mm |
+| ![A3_10_PostsAndLintel_CentralGlasses_2_Mirror](images/A3_10_PostsAndLintel_CentralGlasses_2_Mirror.png) | `[ /PostsAndLintel /CentralGlasses 2 /Mirror ]`<br>Eight + two = ten glasses<br>`/A3` = 420mm&times;297mm |
 
 </div>
 
@@ -237,12 +237,12 @@ Example item of PackingStyles: `[ /RightSide /GlassesNumMax 3 /SuppressNonRightO
 
 | Example | `PackingStyles` element<br>`PaperType` = *width*&times;*height* |
 |:-------:|:---------------------------------------|
-| ![A3_06_Sides](images/A3_06_Sides.png) | `Sides`<br>`/A3` = 420mm&times;297mm |
-| ![A3_04_TopRow](images/A3_04_TopRow.png) | `TopRow`<br>`/A3` = 420mm&times;297mm |
-| ![A3_04_BottomRow](images/A3_04_BottomRow.png) | `BottomRow`<br>`/A3` = 420mm&times;297mm |
-| ![A3_04_MiddleRow](images/A3_04_MiddleRow.png) | `MiddlemRow`<br>`/A3` = 420mm&times;297mm |
-| ![A4_03_LeftSide](images/A4_03_LeftSide.png) | `/LeftSide`<br>`/A4` = 297mm&times;210mm |
-| ![A4_03_RightSide](images/A4_03_RightSide.png) | `/RightSide`<br>`/A4` = 297mm&times;210mm |
+| ![A3_06_Sides](images/A3_06_Sides.png) | `Sides`<br>Six glasses<br>`/A3` = 420mm&times;297mm |
+| ![A3_04_TopRow](images/A3_04_TopRow.png) | `TopRow`<br>Four glasses<br>`/A3` = 420mm&times;297mm |
+| ![A3_04_BottomRow](images/A3_04_BottomRow.png) | `BottomRow`<br>Four glasses<br>`/A3` = 420mm&times;297mm |
+| ![A3_04_MiddleRow](images/A3_04_MiddleRow.png) | `MiddlemRow`<br>Four glasses<br>`/A3` = 420mm&times;297mm |
+| ![A4_03_LeftSide](images/A4_03_LeftSide.png) | `/LeftSide`<br>Three glasses<br>`/A4` = 297mm&times;210mm |
+| ![A4_03_RightSide](images/A4_03_RightSide.png) | `/RightSide`<br>Three glasses<br>`/A4` = 297mm&times;210mm |
 
 </div>
 
@@ -264,7 +264,7 @@ The first two elements are used, as before, and fix the radius and the canvas.
 The circle at (*x*,*y*) is then moved in a straight line towards (*x'*,*y'*). 
 A circle stops moving if it collides with another circle (a tangential touch not being a collision); if it collides with the edge of the page; or it arrives at (*x'*,*y'*).
 
-The example image shows an alternation of the previous code extract, with:
+The example image shows, on `/A3`, an alternation of the previous code extract to:
 ```Postscript
 [ /Array /Positions [0 2] [2 2 3 2] [4 2 3 2] [6 2]  [0 1] [3 1] [6 1]  [0 0] [3 0] [6 0] ]
 ```

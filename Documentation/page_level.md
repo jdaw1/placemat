@@ -178,14 +178,14 @@ There is an analgous parameter `WaterBoxesShowTN`, used for water boxes on the t
 
 </div>
 
-Droplets are a decorative amusement, flowing around the page as if attracted or repelled by charges. 
+Droplets are a decorative amusement, flowing around the page as if attracted or repelled by spinning charges. 
 Activate with the Boolean `Droplets`.
 
 The array `DropletsCharges` is of a length that is a multiple of four, as follows. 
-0 An integerm a value of `SheetNum` for this charge, or `/All` meaning all sheets. 
-1 A location: this can be an integer, the centre of the `WithinPage` circle on that sheet; or a length array of length two, `[x y]` in which `[0 0]` is bottom-left of the page. 
-2 A numeric charge, droplets flowing away from &minus;ve charges and to +ve charges. 
-3 A numeric spin; with +ve charge and +ve spin the droplets approach clockwise.
+0: An integer, a value of `SheetNum` for this charge, or `/All` meaning all sheets. 
+1: A location: this can be an integer, the centre of the `WithinPage` circle on that sheet; or a length array of length two, `[x y]` in which `[0 0]` is bottom-left of the page. 
+2: A numeric charge, droplets flowing away from &minus;ve charges and to +ve charges. 
+3: A numeric spin; with +ve charge and +ve spin the droplets approach clockwise.
 
 Starting locations of the drops have a distance apart of `DropletsAverageSeparation` adjusted by a random fraction of `DropletsAverageMaxTweakPlusMinus`, and path length is `DropletsPathLength`.
 
@@ -213,17 +213,17 @@ There are also Boolean parameters `PrePourShowDroplets`, `NeckTagsShowDroplets`,
 It is often natural to split a tasting into &lsquo;flights&rsquo; of a few wines. 
 If there is lots of table space, and five wines per flight, then this can be arranged as one flight per `/A4` or `/USl` page. 
 But sometimes within-page division is necessary. 
-And if table space is tight, 14 on `/A3` is more efficient than 12 on 2&times;`/A4`, making it more useful the possibility of within-page division.
+And if table space is tight, 14 on `/A3` is more efficient than 12 on 2&times;`/A4`, making more useful the possibility of within-page division.
 
-This is enabled by the Boolean parameter `FlightSeparations`; the hard work of spcifying the lines happening with `FlightSeparationLines`. 
+This is enabled by the Boolean parameter `FlightSeparations`; the hard work of specifying the lines happening with `FlightSeparationLines`. 
 
 `FlightSeparationLines` is fiddly. 
 If one wine is added or taken away then that page&rsquo;s element of `FlightSeparationLines` might need to be completely reworked. 
 Hence it is recommended that division into flights be saved until late in the planning.
 Further, though `FlightSeparationLines` is very much fit for purpose, both controls using and output from `/Curve` are less than perfect. 
-I advise that, for easiest control and best output, use only straight lines (no `/Curve`, no `Clockwise`, no `/Widdershins`).
+I advise that, for easiest control and best output, use only straight lines (no `/Curve`, no `/Clockwise`, no `/Widdershins`).
 
-Let&rsquo;s start with an example, to give a sense of the range of what can be done, also also (part of) the code by which made.
+Let&rsquo;s start with an example, to give a sense of the range of what can be done, and also (part of) the code by which made.
 
 <div align="center">
 
@@ -274,7 +274,7 @@ The integer a can be replaced with `[xa ya]` (making `[[xa ya] b]`), and likewis
 * There are other allowed interior pieces, including `[/HorizontalLeftwards …]`. This is a horizontal line at a *y* specifed by the &lsquo;&hellip;&rsquo;, which is an average of at least one absolute level, perhaps &plusmn; some real number of radii. 
 Absolutes can be /Bottom (with obvious meaning); /Top (ditto); or an integer, in which case the *y* is that of the centre of that circle number. 
 Or several integers, in which case the *y* is the average of the centres of those circle numbers. 
-with supplemented by a real, that number of radii being added to the average. 
+optionally supplemented by a real, that number of radii being added to the average. 
 So `[/HorizontalLeftwards 0 3 -0.5]` is a horizontal line, at a *y* value of the average of those of circles 0 and 3, minus half a radius. 
 This can be thought of as Average[Circle 0&rsquo;s bottom, Circle 3&rsquo;s centre]. 
 If the previous item is an arc, the /HorizontalLeftwards means that the left-most intersection is chosen. 
@@ -289,10 +289,10 @@ It is easiest to think about these margin specifications as being of two types: 
 (&ldquo;Widdershins&rdquo;? [Widdershins](http://en.wikipedia.org/wiki/Widdershins)!) 
 There are variants, `[/Clockwise a b c]` and `[/Widdershins a b c]`, in which the radius of the arc is half the distance between the centres of circles b and c. 
 As above, the integer a can be replaced with [xa ya].
-* Between two pieces the non-array item `/Curve` causes what would have been a straight line to be replaced with a B&eacute;zier curve made with the PostScript command `curveto`. 
+* Between two pieces the non-array item `/Curve` causes what would have been two straight lines to be replaced with a B&eacute;zier curve made with the PostScript command `curveto`. 
 
 In [the PDF of examples](images/FlightSeparations.pdf) the header shows that page&rsquo;s item of `FlightSeparationLines` (i.e., `FlightSeparationLines` is an array one deeper than the header). 
-If using `FlightSeparations` it is strongly recommended that these PDF examples be examined and appropriate parts used as a starting draft. 
+If using `FlightSeparations` it is strongly recommended that these examples be examined and appropriate parts used as a starting draft. 
 
 The path can be `stroke`d, `clip`ped or `fill`ed by the code `FlightSeparationPaintCode`, which has a default stroke that is complicated but elegant. 
 Use of `fill` is discouraged, as it impedes comparison of colours of the wines. 

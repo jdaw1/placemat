@@ -28,7 +28,7 @@ And having done that, there might also be need for matching pages:
 * to assist with computing the split of the costs, allowing for bottles provided.
 
 This PostScript program creates all the paperwork useful for managing such tastings, large or small. 
-Lots of output is at [jdawiseman.com](http://www.jdawiseman.com/placemats_list.html).
+Many examples from previous tastings are at [jdawiseman.com/placemats_list.html](http://www.jdawiseman.com/placemats_list.html).
 
 It is a program written wholly in [PostScript](http://en.wikipedia.org/wiki/PostScript), and does not hide that. 
 It consists of a single long text file, with user-chosen parameters at the top, and PostScript code underneath. 
@@ -60,7 +60,7 @@ import shutil;import urllib.request;import os;import tempfile;l='https://raw.git
 
 Bookmark this manual, and download to your machine a copy of [the PostScript code](http://raw.githubusercontent.com/jdaw1/placemat/main/PostScript/placemat.ps) (update this copy every time: new versions fix bugs; add features; improve default settings). 
 Store it in a directory named something like &ldquo;placemats&rdquo;. 
-Give the PostScript file a name which will make sense in aeons to come, perhaps YYYYMMDD.ps, or YYYYMMDD_TastingName.ps (as if it will become the first item in your placemat archive).
+Give the PostScript file a name which will make sense in aeons to come, perhaps YYYYMMDD.ps, or YYYYMMDD_TastingName.ps, as if it will become the first item in your placemat archive.
 
 ### Converting the .ps to PDF
 
@@ -70,7 +70,7 @@ Let&rsquo;s master the latter.
 On a Mac right-click the file, and &lsquo;Open With&rsquo; Preview. 
 It should convert to a PDF. 
 On a PC, in your preferred web browser, open [online2pdf.com/convert-ps-to-pdf](http://online2pdf.com/convert-ps-to-pdf) (or, with fewer fonts available, [ps2pdf.org](http://www.ps2pdf.com/convert-ps-to-pdf)); &lsquo;Select files&hellip;&rsquo;; and &lsquo;Convert&rsquo; it. 
-If it that has made a PDF resembling [this](PDFs/placemat.pdf), then you can successfully convert the PostScript to PDF: hurray!
+If it that has made a PDF resembling [this](images/placemat.pdf), then you can successfully convert the PostScript to PDF: hurray!
 
 <div align="center">
 

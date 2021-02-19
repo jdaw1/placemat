@@ -59,8 +59,8 @@ The tasting-note pages use `CirclearraysTastingNotes` and `TitlesTastingNotes`, 
 Why?
 Consider a vertical, so multiple years of one house. 
 Space is tight in the glasses circles, so the `Titles` might well be two-digit years. 
-There is much more space on the tasting-note pages, so `TitlesTastingNotes` can well hold four-digit years.
-Indeed, it is quite usual to generate this automatically, as in the following code fragment which repays study. 
+There is much more space on the tasting-note pages, so `TitlesTastingNotes` could hold four-digit years. 
+Indeed, it is quite usual to generate this automatically, as in the following code fragment, which repays study. 
 ```PostScript
 /Circlearrays [
 	[ (1927) (Niepoort) ]
@@ -79,7 +79,7 @@ The complicated default picks, one element at a time, the first non-empty from `
 
 Optionally, there can be a row of stars: circle to score. 
 This can nudge those not prone to scoring into doing so. 
-But different people use different scoring systems, so the parameter `TastingNotesStarsNameColsRowsArrangement` determines things by elemens of `Names`.
+But different people use different scoring systems, so the parameter `TastingNotesStarsNameColsRowsArrangement` determines things by elements of `Names`.
 
 ```PostScript
 /TastingNotesStarsNameColsRowsArrangement
@@ -148,7 +148,7 @@ Pages require three folds. First, fold in half; then fold and press hard along t
 The side with the small-writing header and footer should face the named person; the side without should face away. 
 
 Pages to facilitate this are produced using the Boolean `PlaceNames` parameter. 
-Typically, this is the only this parameter is touched. 
+Typically, this is the only of these parameters that is touched.
 
 There can be multiple copies of the place names, with different names, so `NamesPlaceNames` is an array of arrays of names, by default containing just one sub-array, `Names`. 
 Why the multiple sets of names? 
