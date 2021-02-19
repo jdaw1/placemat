@@ -21,6 +21,9 @@
 The [Introduction](introduction_first_placemat.md) discussed the array parameters `Circlearrays`, `Titles`, and `Belowtitles`.
 Also there are analagous parameters `Abovetitles` and `Overtitles`, and text can also be put into `FillTexts`, as shown in the nearby image.
 
+All these arrays must be of the same length. 
+If they are not, distillation will output some explanation to the log, and then terminate.
+
 This profusion of places to put information should be used sparsely, and consistently. 
 For example, in a vertical, the `Titles` might contain two-digit years, and the `Overtitles` a concise version of the name of the shipper or quinta or winery or ch&acirc;teau or distillery. 
 Most `Abovetitles` would be blank =&nbsp;`()`, only a few specifying a non-standard bottle size such as &ldquo;Double Magnum&rdquo;. 
