@@ -59,8 +59,8 @@ Almost any &lsquo;string&rsquo; parameter may be a &lsquo;[compound string](comp
 The exception are URLs, as appear in `ExternalLinks` and `LicensingAgreementLinkPlacemats`. 
 
 The code in a compound string may do any of the following.
-* Put on the stack &ge;0 further compound strings to be rendered.
-* `rmoveto` the currentpoint, probably by an amount proportional to `CurrentFontSize` (for which there is a shortcut: `{-0.09 Kern}` being equivalent to `{-0.09 CurrentFontSize mul 0 rmoveto}`).
+* Put on the stack &ge;0 further compound strings to be painted.
+* `rmoveto` the currentpoint, probably by an amount proportional to `CurrentFontSize` (for the horizontal direction of which there is a shortcut: `{-0.09 Kern}` being equivalent to `{-0.09 CurrentFontSize mul 0 rmoveto}`).
 * Change the current font or size, probably by `selectfont`, and to a size proportional to `CurrentFontSize`, and after storing the original status to permit reversion.
 * Draw a shape, of a size proportional to `CurrentFontSize`, at the current point, and leaving an extant current point at its lower-right. 
 Such a shape should be `fill`ed, but non-`bind`edly, so that `fill` can be redefined to allow the software to establish the size of the shape.
@@ -89,7 +89,7 @@ Obviously, the optically best kern amount varies by font.
 ### Superscript
 
 To help with superscripting there are routines `SuperscriptOn` and `SuperscriptOff`:
-* `[(Saturday 6) {SuperscriptOn} (th) {SuperscriptOff} ( February 2021, London)]`
+* `[(T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( May 2021)` = ![Tue_18_May_2021](images/Tue_18_May_2021.png)
 
 ### Typeface changing
 
