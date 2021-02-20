@@ -203,6 +203,22 @@ If viewing a PDF in a web browser, the tab will typically show that title, and i
 `PDF_title` hlds that string.
 
 
+## External Links
+
+It might be that in the future somebody finds, somewhere on the web, a copy of the placemat PDF. 
+There should be a route home. 
+A PDF document can have an &lsquo;outline&rsquo;, usually shown in a sidebar, that summarises the document structure and provides internal navigation. 
+The placemat software creates this automatically. 
+
+
+At the end of the outline are relevant external links. 
+The user can create these with the array `ExternalLinks`, which is an array of length a multiple of three: a boolean0, Descriptor0, URL0, boolean1, Descriptor1, URL1, etc &hellip;. 
+The first boolean must be `false`; subsequent booleans are true if the link is a &lsquo;child&rsquo; of the previous &lsquo;false&rsquo; link, and are `false` if a &lsquo;parent&rsquo; link. 
+(If the PDF viewer is showing the table of contents there is a small triangle beside the &lsquo;parent&rsquo; link: pointing right if the children are hidden (&ldquo;&#9656;&rdquo;); pointing down if the children are visible (&ldquo;&#9662;&rdquo;); rotated between the two by being clicked on.) 
+The descriptions can be compound strings, `[…]`. 
+The URLs must be plain simple strings, `(…)`, not arrays nor compound strings, and must start with a protocol such as &ldquo;http://&rdquo;. 
+
+
 ### PageOrdering, sections
 
 PageOrdering sections can be lightly titled. 
