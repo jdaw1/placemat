@@ -190,7 +190,7 @@ The array `DropletsCharges` is of a length that is a multiple of four, as follow
 Starting locations of the drops have a distance apart of `DropletsAverageSeparation` adjusted by a random fraction of `DropletsAverageMaxTweakPlusMinus`, and path length is `DropletsPathLength`.
 
 There is a little humour in having a small proportion of the droplets going backwards; a small proportion will be noticed only slowly by the uninitiated, increasing the humour. 
-(Visible in the example page are seventeen: seek!) 
+(In the example page are seventeen: seek! Or [peek](images/Droplets_DropletsWhichReversed.png).) 
 That proportion is controlled by `DropletsProportionBackwards`, which obviously should be &ge;0 and &le;1. 
 The default value is 0.0204 &asymp; 1/49.
 
