@@ -20,6 +20,9 @@ The core purpose of the software is to have a place to put glasses.
 Already known are the PaperType (e.g., `/A3`), the margins, and how many glasses are to go on the page. 
 The user has much control over the layout of the glasses.
 
+The user has much control, but the default is also good. 
+Unless there is a compelling need to change things, users are encouraged to take the easy course of letting the defaults do their work.
+
 The user specifies an array, `PackingStyles`, which is a list of packing styles. 
 In turn each style from the list is taken, and each allowed variation is tested. 
 Broadly, if a later-tested style allows a larger radius than the current best, then the old best is replaced by this better style.
