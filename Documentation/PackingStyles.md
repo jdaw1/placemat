@@ -142,16 +142,17 @@ The next four examples show six glasses on `/USL` = 8&frac12;&Prime;&times;11&Pr
 So the radius improves by &asymp; 2.6pt&nbsp;&asymp;0.9mm, and hence the diameter by &asymp; 1.8mm. 
 But on `/A4` the improvement in the radius is much less: only &asymp; 0.28pt &asymp; 0.098mm, which seems insufficient to justify the asymmetry&rsquo;s aesthetic damage.
 
-<div align="center">
+<div align="center" style="font-size: smaller;">
 
-| Example | `PackingStyles` element<br>`PaperType` = *width*&times;*height* | Radius |
-|:-------:|:---------------------------------------|:---|
-| ![USL_06_Diamonds](images/USL_06_Diamonds.png) | `/Diamonds`<br>Six glasses<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; | 117.465pt<br>41.44mm |
-| ![USL_06_SquareGrid](images/USL_06_SquareGrid.png) | `/SquareGrid`<br>Six glasses<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; | 123pt<br>43.39mm |
-| ![USL_06_RectangularDislocation](images/USL_06_RectangularDislocation.png) | `/RectangularDislocation`<br>Six glasses<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; | 123pt<br>43.39mm |
-| ![USL_06_RectangularAlternateNudge](images/USL_06_RectangularAlternateNudge.png) | `/RectangularAlternateNudge`<br>Six glasses<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; | 125.568pt<br>44.30mm |
+| Pattern | `/USL` | `/USL` | `/A4` | `/A4` |
+| :------:|:------:|-------:|:-----:|------:|
+| `/Diamonds` | ![USL_06_Diamonds](images/USL_06_Diamonds.png) | *Radius:*<br>117.47pt<br>1.631&Prime;<br>41.44mm<br><br>*Diameter:*<br>234.93pt<br>3.263&Prime;<br>82.88mm | ![A4_06_Diamonds](images/A4_06_Diamonds.png) | *Radius:*<br>119.58pt<br>1.661&Prime;<br>42.18mm<br><br>*Diameter:*<br>239.15pt<br>3.322&Prime;<br>84.37mm |
+| `/SquareGrid` | ![USL_06_SquareGrid](images/USL_06_SquareGrid.png) | *Radius:*<br>123pt<br>1.708&Prime;<br>43.39mm<br><br>*Diameter:*<br>246pt<br>3.417&Prime;<br>86.78mm | ![A4_06_SquareGrid](images/A4_06_SquareGrid.png) | *Radius:*<br>131.32pt<br>1.824&Prime;<br>46.33mm<br><br>*Diameter:*<br>262.63pt<br>3.648&Prime;<br>92.65mm |
+| `RectangularDislocation` | ![USL_06_RectangularDislocation](images/USL_06_RectangularDislocation.png) | *Radius:*<br>123pt<br>1.708&Prime;<br>43.39mm<br><br>*Diameter:*<br>246pt<br>3.417&Prime;<br>86.78mm | ![A4_06_RectangularDislocation](images/A4_06_RectangularDislocation.png) | *Radius:*<br>131.32pt<br>1.824&Prime;<br>46.33mm<br><br>*Diameter:*<br>262.63pt<br>3.648&Prime;<br>92.65mm |
+| `RectangularAlternateNudge` | ![USL_06_RectangularAlternateNudge](images/USL_06_RectangularAlternateNudge.png) | *Radius:*<br>125.57pt<br>1.744&Prime;<br>44.30mm<br><br>*Diameter:*<br>251.14pt<br>3.488&Prime;<br>88.60mm | ![A4_06_RectangularAlternateNudge](images/A4_06_RectangularAlternateNudge.png) | *Radius:*<br>131.59pt<br>1.828&Prime;<br>46.42mm<br><br>*Diameter:*<br>263.18pt<br>3.655&Prime;<br>92.85mm |
 
 </div>
+
 
 ### RectangularAlternateSplitNudge
 
