@@ -89,7 +89,7 @@ Tasting-note pages are configured similarly, with the integer `GlassesOnSheetsMa
 
 ## BackgroundTexts
 
-Tastings typically have a theme. 
+Tastings typically have a theme, something shared by most of the wines. 
 It is possible to add a background text, scaled to fit the whole page, such as &ldquo;S&rdquo;, &ldquo;RV&rdquo;, or &ldquo;85&rdquo;. 
 This is activated by setting `BackgroundTextsGlasses` to `true`. 
 Then `BackgroundTextsGlassesTexts` is an array of the same length as `GlassesOnSheets`, containing the strings to be shown on glasses pages. 

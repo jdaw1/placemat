@@ -27,7 +27,7 @@ There are some controls that effect most or all of the document.
 
 ### Numbers of copies
 
-Some page types are controlled by integer numbers of copies, others by Booleans.
+Some page types are controlled by Booleans, others by integer numbers of copies.
 
 Integers:
 * `GlassesNumCopies`;
