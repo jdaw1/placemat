@@ -120,7 +120,7 @@ The diamonds can be offset from the diamonds either vertically or horizontally.
 `/DiamondsPlus` is mostly three-row diamonds (or, if `/Portrait`, three-column), with two extras set between the three rows (columns). 
 It is the best packing of seven or ten glasses on several paper sizes.
 
-There is a generalisation of `/DiamondsPlus` over any odd number of rows (columns), not yet coded.
+There is a generalisation of `/DiamondsPlus` over any number of rows (columns), [not yet coded](https://github.com/jdaw1/placemat/issues/38).
 
 <div align="center">
 
