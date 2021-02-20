@@ -363,7 +363,7 @@ Add something for the inebriation of the owner of the fingers.
 Suggestion: &le;6 on `/A4`; &le;15 on `/A3`; &le;8 on `/USLegal`; &le;6 on `/USL`; &le;15 on `/USL2`. 
 But sometimes table space is a binding constraint, in which case there must be less paper area, hence smaller circles.
 
-The images show the packings for the diameters &le;4&frac12;&Prime;, down to slightly below 3&Prime;.
+The images show the packings for the diameters &le;&nbsp;4&frac12;&Prime; &asymp;&nbsp;114mm, down to slightly below 3&Prime; &asymp;&nbsp;76mm.
 
 [![A4](images/HowManyGlasses_A4.gif)](images/HowManyGlasses_A4.pdf) 
 [![A3](images/HowManyGlasses_A3.gif)](images/HowManyGlasses_A3.pdf) 
