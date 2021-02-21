@@ -7,7 +7,7 @@
 % The most recent version is available via http://www.jdawiseman.com/papers/placemat/placemat.html .  Copyright 1988 to 2021 Julian D. A. Wiseman who is contactable via www.jdawiseman.com/author.html
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202102201300) def
+/ParametersVersionDateTimeAdobeFormat (D:202102211830) def
 
 /OutputForBitmap false def  % Not part of the official code; merely the user doing PostScript. Which is allowed, perhaps even encouraged.
 
@@ -93,7 +93,7 @@
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [] def  % /HeadersLeft
 /HeadersCenter [
-	OutputForBitmap not {0   {PackingStylesData SheetNum get 3 get 0 true 999 ThingToDebugTextRecursive} bind} if
+	0   {PackingStylesData SheetNum get 3 get 0 true 999 ThingToDebugTextRecursive} bind
 ] def  % /HeadersCenter
 /HeadersRight [] def  % /HeadersRight
 
