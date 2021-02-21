@@ -145,7 +145,7 @@ The next four examples show six glasses on `/USL` = 8&frac12;&Prime;&times;11&Pr
 So the radius improves by &asymp; 2.6pt&nbsp;&asymp;0.9mm, and hence the diameter by &asymp; 1.8mm. 
 But on `/A4` the improvement in the radius is much less: only &asymp; 0.28pt &asymp; 0.098mm, which seems insufficient to justify the asymmetry&rsquo;s aesthetic damage.
 
-<div align="center" style="font-size: smaller;">
+<div align="center"  style="font-size: smaller;">
 
 | `/USL` =<br>8&frac12;&Prime;&times;11&Prime; | `/USL`:<br>pt; inch; mm | `/A4` =<br>210mm&times;297mm | `/A4`:<br>pt; inch; mm |
 |:------:|:------:|:-----:|:-----:|
