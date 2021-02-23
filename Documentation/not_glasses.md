@@ -314,7 +314,7 @@ Of course, any financial rebalancing will have been computed in advance, audited
 Of course.
 
 Except that it rarely works like that. 
-At the last moment extra bottles are added, perhaps an extra attendee, and the food bill itself is not unknown until late in the evening, after much drinking. 
+At the last moment extra bottles are added, perhaps an extra attendee, and the food bill itself is not known until late in the evening, after much drinking. 
 An Accounts pages can assist those doing the computations.
 
 <div align="center">
