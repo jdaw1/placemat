@@ -1,17 +1,13 @@
 %!PS
 
-% This version 15:15 Saturday 13th February 2021
+% This version 19:00 Monday 15th February 2021
 
 % Permission is given to make non-commercial use of this program, and to distribute its output. But not to distribute the code: refer interested parties to the latest version at the link below, where instructions can also be found.
 % Improvements to the code should be sent them to the author.  Inviting the author to the tastings is, well, almost compulsory! The code is mostly debugged, but errors surely remain. It is provided as-is, without liability: it is free.
 % The most recent version is available via http://www.jdawiseman.com/papers/placemat/placemat.html .  Copyright 1988 to 2021 Julian D. A. Wiseman who is contactable via www.jdawiseman.com/author.html
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202102131515) def
-
-/OutputForBitmap false def  % Not part of the official code; merely the user doing PostScript. Which is allowed, perhaps even encouraged.
-
-/LogThisExtra (Headers not shown on bitmap images, as would be too small, but present in PDF.) def
+/ParametersVersionDateTimeAdobeFormat (D:202102232030) def
 
 /Circlearrays [
 	[ (A0) ]
@@ -27,6 +23,10 @@
 ] def
 /Titles [ Circlearrays {0 get} forall ] def
 /Belowtitles [ Circlearrays {dup length 2 eq {1 get} {pop ()} ifelse} forall ] def 
+/Abovetitles [
+	{[([) PackingStyles 0 get exec WithinPage 2 add get {( )} forall pop (])] ASCIIfy}
+	Belowtitles length 1 sub {dup} repeat
+] def
 
 /Names [ [(JDAW)] ] def
 
@@ -36,7 +36,7 @@
 
 /HeadersLeft [] def  % /HeadersLeft
 /HeadersCenter [
-	OutputForBitmap not {0   {PackingStyles 0 get exec 0 true 999 ThingToDebugTextRecursive} bind} if
+	0   {PackingStyles 0 get exec 0 true 999 ThingToDebugTextRecursive} bind
 ] def  % /HeadersCenter
 /HeadersRight [] def  % /HeadersRight
 
@@ -114,7 +114,6 @@
 /StickyLabelsNumCopies 0 def
 /StickyLabelsTypes [0 1] def  % 0 = 2x4 on A4; 1 = 5x13 on A4
 
-/Abovetitles [ Titles length {()} repeat ] def
 /Overtitles [ Titles length {()} repeat ] def
 /TitlesTastingNotes Titles def
 /TitlesVoteRecorder Titles def
@@ -739,7 +738,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202102131515) def
+/SoftwareVersionDateTimeAdobeFormat (D:202102151900) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -3221,7 +3220,7 @@ currentdict /SmallCapsDict undef
 % Returned array is of points that are, approximately, maximally far from the edge.
 % In a typical case, the most distant point will be on the edge of the circle. So these points are denser.
 % But if the path is the likes of a large letter 'O', the relevant point could be internal, so there are plenty fo these as well.
-% http://www.ThePortForum.com/viewtopic.php?p=55028#p55028 (reason for doing this computation)
+% http://www.ThePortForum.com/viewtopic.php?t=6608&p=55028#p55028 (reason for doing this computation)
 % https://groups.google.com/forum/#!topic/comp.lang.postscript/86b7Sg8v7B0 (non-discussion about how to do it)
 /LineWidthThatCoversCircle
 {
@@ -4114,11 +4113,11 @@ currentdict /SmallCapsDict undef
 				dup  /Mirror                           eq {pop  /i i 1 add store  exit} if
 				dup  /SuppressNonLeftOrnaments         eq {pop  /i i 1 add store  exit} if
 				dup  /SuppressNonRightOrnaments        eq {pop  /i i 1 add store  exit} if
-				dup  /VerticalAlignment                eq {pop  /i i 2 add store  exit} if
+				dup  /VerticalAlignment                eq {pop  /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=79314#p79314
 				dup  /HorizontalAlignment              eq {pop  /i i 2 add store  exit} if
 				dup  /RectColsToLeftOrRowsBelow        eq {pop  /i i 2 add store  exit} if
 				dup  /PackingNestingColumnMajor        eq {pop  /i i 2 add store  exit} if
-				dup  /PackingDirectionTopToBottom      eq {pop  /i i 2 add store  exit} if
+				dup  /PackingDirectionTopToBottom      eq {pop  /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=73641#p73641
 				dup  /PackingDirectionLeftToRight      eq {pop  /i i 2 add store  exit} if
 				dup  /TempleExtraColsToLeftOrRowsBelow eq {pop  /i i 2 add store  exit} if
 				mark exch (Warning: an item of PackingStyles contains the non-recognised sub-parameter ) exch 256 string cvs ConcatenateToMark OutputToLog
@@ -4381,6 +4380,7 @@ currentdict /SmallCapsDict undef
 		} if  % /RectangularDislocation
 
 
+		% Discussion of name: http://www.theportforum.com/viewtopic.php?t=175&p=57297#p57297
 		/PostsAndLintel BaseStyle eq
 		{
 			DeBugLevel 50 le {( ProcessOnePackingType, /PostsAndLintel) OutputToLog} if
@@ -4428,6 +4428,7 @@ currentdict /SmallCapsDict undef
 
 		/Arch BaseStyle eq
 		{
+			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=56857#p56857
 			DeBugLevel 50 le {( ProcessOnePackingType, /Arch) OutputToLog} if
 			/NGiA  NG CentralGlasses sub  def  % Number Glasses in Arch
 			NGiA 3 ge
@@ -4473,7 +4474,7 @@ currentdict /SmallCapsDict undef
 
 					NGiA 2 add dup mul  -1  0
 					{
-						0 le {/UpperR R def (Error: ProcessOnePackingType, Arch, extremely slow convergence. Please send PostScript file to the author. www.jdawiseman.com/author.html) OutputToLog exit} if
+						0 le {/UpperR R def (Error: ProcessOnePackingType, Arch, extremely slow convergence. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog exit} if
 						/DistSquaredMax 0 def
 						/DistSquaredMin H W add dup mul def
 						% Test for exit of jiggling of PositionsX & PositionsY
@@ -4902,11 +4903,11 @@ currentdict /SmallCapsDict undef
 				dup  /ShoveLeft                         eq {pop  /ShoveLeft  //true store  /i i 1 add store  exit} if
 				dup  /ShoveRight                        eq {pop  /ShoveRight //true store  /i i 1 add store  exit} if
 				dup  /CentralGlasses                    eq {pop  /CentralGlasses                    PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
-				dup  /VerticalAlignment                 eq {pop  /VerticalAlignment                 PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
+				dup  /VerticalAlignment                 eq {pop  /VerticalAlignment                 PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=79314#p79314
 				dup  /HorizontalAlignment               eq {pop  /HorizontalAlignment               PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /RectColsToLeftOrRowsBelow         eq {pop  /RectColsToLeftOrRowsBelow         PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /PackingNestingColumnMajor         eq {pop  /PackingNestingColumnMajor         PackingDescriptor i 1 add GetEU def    /i i 2 add store  exit} if
-				dup  /PackingDirectionTopToBottom       eq {pop  /PackingDirectionTopToBottom       PackingDescriptor i 1 add GetEU def    /i i 2 add store  exit} if
+				dup  /PackingDirectionTopToBottom       eq {pop  /PackingDirectionTopToBottom       PackingDescriptor i 1 add GetEU def    /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=73641#p73641
 				dup  /PackingDirectionLeftToRight       eq {pop  /PackingDirectionLeftToRight       PackingDescriptor i 1 add GetEU def    /i i 2 add store  exit} if
 				dup  /TempleExtraColsToLeftOrRowsBelow  eq {pop  /TempleExtraColsToLeftOrRowsBelow  PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /Positions                         eq {pop  /i PackingDescriptor length store  exit} if
@@ -5337,7 +5338,7 @@ currentdict /SmallCapsDict undef
 
 			NGiA 2 add dup mul  -1  0
 			{
-				0 le {/UpperR R def (Error: CirclePacking, Arch, extremely slow convergence. Please send PostScript file to the author. www.jdawiseman.com/author.html) OutputToLog exit} if
+				0 le {/UpperR R def (Error: CirclePacking, Arch, extremely slow convergence. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog exit} if
 				/DistSquaredMax 0 def
 				/DistSquaredMin H W add dup mul def
 				% Test for exit of jiggling of PositionsX & PositionsY
@@ -5725,7 +5726,7 @@ currentdict /SmallCapsDict undef
 			{
 				[ 4 R mul S sub S mul NC 4 add NC mul 5 add 4 mul R R mul mul sub NC 2 add 8 mul R L mul mul add 4 L L mul mul sub  S 2 R mul sub 2 mul  3 ]
 				2 R mul //PrinterEpsilon sub  //false   L R 2 mul sub //PrinterEpsilon add  //false  //PrinterEpsilon  PolynomialRoots
-				dup length 0 eq {pop () (Error: CirclePacking, DiamondsPlus, failed to compute dist. Please send your code to the author: www.jdawiseman.com/author.html) () OutputToLog OutputToLog OutputToLog /dist R 2 mul def} {Min /dist exch def} ifelse
+				dup length 0 eq {pop () (Error: CirclePacking, DiamondsPlus, failed to compute dist. Please submit an issue to http://github.com/jdaw1/placemat/issues/) () OutputToLog OutputToLog OutputToLog /dist R 2 mul def} {Min /dist exch def} ifelse
 				/xstep R def
 			}{
 				/QuarticCoeffs
@@ -6265,7 +6266,7 @@ currentdict /SmallCapsDict undef
 			/Ang  DistCurrent CW 2 div add  Dists PartMiddle 1 sub get sub  Dists PartMiddle get Dists PartMiddle 1 sub get sub  div 90 mul  def
 			GRestore  matrix currentmatrix
 			[
-				{(Error: CirclearrayInSemiRoundedRectangleRec, impossible PartMiddle. Please send .ps file to the author, www.jdawiseman.com/author.html) OutputToLog stop}
+				{(Error: CirclearrayInSemiRoundedRectangleRec, impossible PartMiddle. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog stop}
 				{X W D add add  Y AD DistCurrent add add  moveto 90 rotate  0 VerticalOffset rmoveto}
 				{W R sub X add Ang cos R D add mul add   H R sub Y add Ang sin R D add mul add moveto  90  Ang add rotate  CW -2 div VerticalOffset rmoveto}
 				{X W R DistCurrent Dists 2 get sub add sub add   Y H D add add  moveto 180 rotate  0 VerticalOffset rmoveto}
@@ -6939,7 +6940,7 @@ currentdict /SmallCapsDict undef
 				} {pop} ifelse  % too close
 			} for  % WP
 		} for  % WithinPage
-		GlassPositionsBug {mark (Error in the computation of GlassPositions ) SheetNum ( get. Please send code and log file to the programmer: www.jdawiseman.com/author.html. Execution continuing.) ConcatenateToMark OutputToLog} if
+		GlassPositionsBug {mark (Error in the computation of GlassPositions ) SheetNum ( get. Please submit an issue to http://github.com/jdaw1/placemat/issues/ . Execution continuing.) ConcatenateToMark OutputToLog} if
 		UndefMgns
 		end
 	} bind def  % CodeCallCirclePacking
@@ -7276,7 +7277,7 @@ currentdict /SmallCapsDict undef
 		/CirclearraysProtoBestSheetNum null def
 		/CirclearraysProtoBestWithinPage null def
 		/CirclearraysProtoBestMinCopies null def
-		0 eq {(Warning: CirclearraysNScore not converging. Please send PostScript file to author, www.jdawiseman.com/author.html. Execution continuing.) OutputToLog} if
+		0 eq {(Warning: CirclearraysNScore not converging. Please submit an issue to http://github.com/jdaw1/placemat/issues/ . Execution continuing.) OutputToLog} if
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
@@ -7939,8 +7940,8 @@ currentdict /SmallCapsDict undef
 			{
 				mark FirstError {(\n)} if   (Error. With SheetNum=) SheetNum (, WithinPage=) WithinPage (, WithinTitles=) WithinTitles (, title=) Titles WithinTitles get ASCIIfy (: )
 				/FirstError //false def
-				a {(insufficient room for Abovetitles, which is weird. Please send PostScript to author, www.jdawiseman.com/author.html) (; )} if
-				b {(insufficient room for Belowtitles, which is weird. Please send PostScript to author, www.jdawiseman.com/author.html) (; )} if
+				a {(insufficient room for Abovetitles, which is weird. Please submit an issue to http://github.com/jdaw1/placemat/issues/ ) (; )} if
+				b {(insufficient room for Belowtitles, which is weird. Please submit an issue to http://github.com/jdaw1/placemat/issues/ ) (; )} if
 				pop (.) ConcatenateToMark OutputToLog
 			} if  % a b or
 
@@ -8851,7 +8852,7 @@ currentdict /SmallCapsDict undef
 		DeBugLevel 25 le {(-DropletPath) OutputToLog} if
 	} bind def  % /DropletPath
 
-	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&start=1136
+	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=112214#p112214
 	{Droplets} MightBeTrue
 	{
 		DeBugLevel 50 le {(+DropletPaths computation) OutputToLog} if
@@ -9474,6 +9475,7 @@ currentdict /SmallCapsDict undef
 	/TitlesAboveBelowOverInlinePaleStrokeCode {1 currentlinejoin ne {1 setlinejoin} if  1 setgray stroke} bind def
 	/TitlesAboveBelowOverInlineDarkStrokeCode {1 currentlinejoin ne {1 setlinejoin} if  ColourSchemeCurrent /MidGrey eq {0.4} {0} ifelse setgray stroke} bind def
 
+	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=90575#p90575
 	/AnnotateGlass
 	{
 		3 dict begin
@@ -10408,6 +10410,7 @@ currentdict /SmallCapsDict undef
 					def  % /VoteRecorderWidthColFirst
 					/VoteRecorderColWidth  PageWidth MgnL MgnR add sub VoteRecorderWidthColFirst sub VoteRecorderNumNames div  def
 
+					% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=80997#p80997
 					VoteRecorderNamesOrientation dup /Horizontal eq  exch /Vertical ne VoteRecorderColWidth VoteRecorderHeightFirstRow 0.9375 mul ge and  or
 					{
 						% Might as well show VoteRecorderNames horizontally. So can shrink VoteRecorderHeightFirstRow.
@@ -10553,6 +10556,7 @@ currentdict /SmallCapsDict undef
 
 					NamesFont VoteRecorderNamesFontSize selectfont
 					0 setgray
+					% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=80997#p80997
 					VoteRecorderNamesOrientation dup /Horizontal eq  exch /Vertical ne VoteRecorderColWidth VoteRecorderHeightFirstRow ge and  or
 					{
 						% Horizontal
@@ -10617,6 +10621,7 @@ currentdict /SmallCapsDict undef
 	} if  % ... VoteRecorders ...
 
 
+	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=42615#p42615
 	{DecantingNotesNumCopies 1 ge} MightBeTrue
 	{
 		DeBugLevel 100 le {( Main: DecantingNotesForms) OutputToLog} if
@@ -11430,6 +11435,7 @@ currentdict /SmallCapsDict undef
 		0  1  SheetLengths SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
+			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=94014#p94014
 			GlassesCirclesFadingFactor dup //Epsilon ge  CirclearraysFillBehind  and
 			{
 				newpath   GSave
@@ -11525,6 +11531,7 @@ currentdict /SmallCapsDict undef
 				ifelse  % PaintBackgroundInsideGlassCircles ... length 0 gt
 				TitleAboveBelowOverForms SheetNum get WithinPage get  execform  AnnotateGlass
 				GRestore
+				% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=94014#p94014
 				GlassesCrossedOut
 				{
 					2 dict begin
@@ -11628,6 +11635,7 @@ currentdict /SmallCapsDict undef
 			0  4  TastingNotesStarsNameColsRowsArrangement length 4 sub
 			{
 				/i exch def
+				% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=69275#p69275
 				ThisNameASCII TastingNotesStarsNameColsRowsArrangement i get ASCIIfy eq
 				{
 					/TNcols TastingNotesStarsNameColsRowsArrangement i 1 add GetEU def
@@ -12005,7 +12013,7 @@ currentdict /SmallCapsDict undef
 							//false  //false  MirrorPagesVoteRecorder VoteRecorderSheetNum GetEU  //true  VoteRecorderPaperType  VoteRecorderOrientation  SetPaperSize
 							//true DefStoreMgns
 							DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
-							/VoteRecorderTopTextHeight PageHeight MgnB MgnT add sub 50 div  def  % embedded constant
+							/VoteRecorderTopTextHeight PageHeight MgnB MgnT add sub 50 div  def  % Embedded constant. Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=56967#p56967
 							VoteRecorderTopTextHeight 0 gt
 							{
 								HeaderFont VoteRecorderTopTextHeight selectfont
@@ -12064,7 +12072,8 @@ currentdict /SmallCapsDict undef
 			} if  % ... DecantingNotesNumCopies 1 ge ...
 
 
-			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&start=1051
+			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=96950#p96950
+
 			AccountsNumCopies 1 ge
 			{
 				35 dict begin
@@ -12186,6 +12195,7 @@ currentdict /SmallCapsDict undef
 			} if   % AccountsNumCopies 1 ge
 
 
+			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=45400#p45400
 			{CorkDisplayNumCopies 1 ge} MightBeTrue
 			{
 				DeBugLevel 100 le {(+CorkDisplay) OutputToLog} if
@@ -12604,7 +12614,7 @@ currentdict /SmallCapsDict undef
 							} for  % WithinPage, WithinTitles
 						} for  % SheetNum
 						NTNumPaintedThisPage 0 gt {AnnotatePDF ShowPage} if
-					} {(Error: NeckTags, NTBestRotatedness is null. No neck tags pages; otherwise continuing. Please send .ps file to the author: www.jdawiseman.com/author.html) OutputToLog} ifelse  % NTBestRotatedness //null ne
+					} {(Error: NeckTags, NTBestRotatedness is null. No neck tags pages; otherwise continuing. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog} ifelse  % NTBestRotatedness //null ne
 				} if  % NTNumGlasses 1 ge ...
 				end
 				DeBugLevel 100 le {(-NeckTags) OutputToLog} if
@@ -13119,6 +13129,7 @@ currentdict /SmallCapsDict undef
 										0  1  1
 										{
 											/Top0Bottom1 exch def
+											% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=91779#p91779
 											StickyLabelsByNameWhichReplaceCirclearrays Top0Bottom1 1 eq and
 												{/ThisFont NamesFont      def  /ThisCirclearray  [/ThisName load]              def}
 												{/ThisFont CircletextFont def  /ThisCirclearray  CirclearraysStickyLabels WithinTitles get def}
@@ -13341,7 +13352,7 @@ currentdict /SmallCapsDict undef
 	mark
 		/CreationDate ParametersVersionDateTimeAdobeFormat   /Title PDF_title ASCIIfy
 		/Author (Julian D. A. Wiseman)
-		/Creator (www.jdawiseman.com/papers/placemat/placemat.html)
+		/Creator (www.jdawiseman.com/author.html)
 		/Subject mark
 			(PostScript code by Julian D. A. Wiseman; software version ) SoftwareVersionDateTimeAdobeFormat dup length 2 sub 2 exch getinterval
 			(; parameters as of ) ParametersVersionDateTimeAdobeFormat dup length 2 sub 2 exch getinterval
@@ -13917,7 +13928,7 @@ currentdict /SmallCapsDict undef
 		} for  % i
 	} if  % ExternalLinks length 3 ge
 	mark  /Action << >>  /Color [0 0 0]  /Title ()  /F 0  /OUT  pdfmark
-	mark  /Action << /Subtype /URI /URI (http://www.jdawiseman.com/placemat.html) >>  /Color [0 0 0]  /Title (\247 Placemat software)  /F 2  /OUT  pdfmark
+	mark  /Action << /Subtype /URI /URI (http://github.com/jdaw1/placemat/) >>  /Color [0 0 0]  /Title (\247 Placemat software)  /F 2  /OUT  pdfmark
 	mark  /Action << >>  /Color [0.4 0.4 0.4]  /Title mark (\(ver: ) SoftwareVersionDateTimeAdobeFormat (\)) ConcatenateToMark  /F 1  /OUT  pdfmark
 	0  3  ExternalLinksExtras length 3 sub
 	{
@@ -13986,7 +13997,7 @@ OutputLogToAnnotation  ShownPages 0 gt  and
 		/Title   (Distillation log)
 		/Subj    (The log output from the progam that converted the PostScript to PDF. Mostly human-readable.)
 		/Contents  mark
-			(Placemat software:\nhttp://www.jdawiseman.com/placemat.html\nhttp://www.jdawiseman.com/papers/placemat/placemat.ps)
+			(Placemat software:\nhttp://github.com/jdaw1/placemat/)
 			OutputLog {dup type /stringtype eq {(\n\n) exch} {pop exit} ifelse} forall
 		ConcatenateToMark
 		/Name    /Comment
@@ -14017,8 +14028,10 @@ OutputLogToPage {false PageSuppressed not} {false} ifelse
 	/ForcedLineBreak //false def
 
 	/Courier-Bold FontSize selectfont   27 Y moveto  0 0 0.9333333 setrgbcolor  % #0000EE  http://www.w3.org/TR/html5/rendering.html  http://stackoverflow.com/questions/4774022/
-	0  [ (www.jdawiseman.com/papers/placemat/placemat.html)  (www.jdawiseman.com/placemat.html)  (www.jdawiseman.com/papers/placemat/placemat.ps) ] dup
-	PageWidth 54 sub exch {stringwidth pop sub} forall 2 div dup 3 -1 roll {show 0 rmoveto} forall  /AnythingOnPage //true def   /Y Y YlineStep sub YparaExtra sub def
+	/LogHeaders [ (http://github.com/jdaw1/placemat/)  (http://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps) ] def
+	/LogHeaderGap PageWidth 54 sub LogHeaders {stringwidth pop sub} forall LogHeaders length dup 2 ge {1 sub div} {pop} ifelse def
+	LogHeaders {show LogHeaderGap 0 rmoveto   /AnythingOnPage //true def} forall
+	/Y Y YlineStep sub YparaExtra sub def
 
 	/Courier FontSize selectfont  /WidthW (W) stringwidth pop def  0 setgray
 	OutputLog 0 OutputtedToLog getinterval

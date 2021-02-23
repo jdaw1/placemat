@@ -40,22 +40,6 @@ Likewise `FooterLeftText`, `FooterCenterText`, and `FooterRightText` are shown i
 Very rarely one might want the centre heading non-centred (e.g.). 
 This can be controlled with `HeaderFooterCenterX`, which is x position of the centre of the relevant item of `HeadersCenter` and of `FootersCenter`.
 
-## External Links
-
-It might be that in the future somebody finds, somewhere on the web, a copy of the placemat PDF. 
-There should be a route home. 
-A PDF document can have an &lsquo;outline&rsquo;, usually shown in a sidebar, that summarises the document structure and provides internal navigation. 
-The placemat software creates this automatically. 
-
-
-At the end of the outline are relevant external links. 
-The user can create these with the array `ExternalLinks`, which is an array of length a multiple of three: a boolean0, Descriptor0, URL0, boolean1, Descriptor1, URL1, etc &hellip;. 
-The first boolean must be `false`; subsequent booleans are true if the link is a &lsquo;child&rsquo; of the previous &lsquo;false&rsquo; link, and are `false` if a &lsquo;parent&rsquo; link. 
-(If the PDF viewer is showing the table of contents there is a small triangle beside the &lsquo;parent&rsquo; link: pointing right if the children are hidden (&ldquo;&#9656;&rdquo;); pointing down if the children are visible (&ldquo;&#9662;&rdquo;); rotated between the two by being clicked on.) 
-The descriptions can be compound strings, `[…]`. 
-The URLs must be plain simple strings, `(…)`, not arrays nor compound strings, and must start with a protocol such as &ldquo;http://&rdquo;. 
-
-
 
 ## GlassesOnSheets and GlassesOnTastingNotePages
 
@@ -105,7 +89,7 @@ Tasting-note pages are configured similarly, with the integer `GlassesOnSheetsMa
 
 ## BackgroundTexts
 
-Tastings typically have a theme. 
+Tastings typically have a theme, something shared by most of the wines. 
 It is possible to add a background text, scaled to fit the whole page, such as &ldquo;S&rdquo;, &ldquo;RV&rdquo;, or &ldquo;85&rdquo;. 
 This is activated by setting `BackgroundTextsGlasses` to `true`. 
 Then `BackgroundTextsGlassesTexts` is an array of the same length as `GlassesOnSheets`, containing the strings to be shown on glasses pages. 
