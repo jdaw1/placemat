@@ -290,7 +290,7 @@ The arrays used are `NamesVoteRecorder`, `CirclearraysVoteRecorder`, `TitlesVote
 
 <img align="right" width="298" height="146" src="images/NonGlasses_DN.png">
 
-If decanting is done cebntrally, those decanting should record the time each bottle is decanted, as well as the condition of the cork and perhaps the qualities of the sediment. 
+If decanting is done centrally, those decanting should record the time each bottle is decanted, as well as the condition of the cork and perhaps the qualities of the sediment. 
 Pages to hold these notes are activated by setting `DecantingNotesNumCopies` to &ge;&nbsp;1. 
 
 ### Superfluous
