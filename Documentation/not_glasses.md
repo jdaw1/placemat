@@ -203,7 +203,7 @@ Then the pourer knows what to pour; and those moving the glasses to the table kn
 The number of copies of these pre-pour sheets is `PrePourNumCopies,` the default being 1 if the length of Names is &ge;12, otherwise 0. 
 In an awkward working space `/PrePourNumCopies 2 def` might be useful.
 
-In a typical vertical tastings, the oldest wines come first in the list, so as to be top-left of the sheet. But decanting is in the reverse order, youngest to oldest, so it is convenient to reverse the order of the pre-pour sheets. This is controlled by PrePourReverseOrder, which defaults to true. 
+In a typical vertical tastings, the oldest wines come first in the list, so as to be top-left of the sheet. But decanting is in the reverse order, youngest to oldest, so it is convenient to reverse the order of the pre-pour sheets. This is controlled by `PrePourReverseOrder`, which defaults to true. 
 
 ### Superfluous
 
@@ -211,7 +211,7 @@ The other parameters are changed rarely.
 
 Collation of multiple copies is controlled by the Boolean `PrePourCollate`: if true then PrePourNumCopies is outside `SheetNum` and `WithinPage`/`WithinTitles`; if false then PrePourNumCopies is inside.
 
-There are also obvious parameters PrePourPaperType and PrePourOrientation.
+There are also obvious parameters `PrePourPaperType` and `PrePourOrientation`.
 
 For some layouts, it may be desirable for a specific bottle to appear on more than one glasses sheet (e.g. when using overlapping sheets). The consequent duplication of pre-pour sheets is removed by `PrePourRemoveDuplicatesByWithinTitles` being true, its default value. The guillotine-and-overlap trick also messes with the order of the pre-pour sheets, sometimes fixable with `PrePourSortByWithinTitles`.
 
