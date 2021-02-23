@@ -209,7 +209,7 @@ In a typical vertical tastings, the oldest wines come first in the list, so as t
 
 The other parameters are changed rarely. 
 
-Collation of multiple copies is controlled by the Boolean `PrePourCollate`: if true then PrePourNumCopies is outside `SheetNum` and `WithinPage`/`WithinTitles`; if false then PrePourNumCopies is inside.
+Collation of multiple copies is controlled by the Boolean `PrePourCollate`: if true then `PrePourNumCopies` is outside `SheetNum` and `WithinPage`/`WithinTitles`; if false then `PrePourNumCopies` is inside.
 
 There are also obvious parameters `PrePourPaperType` and `PrePourOrientation`.
 
