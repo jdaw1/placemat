@@ -139,9 +139,10 @@ Because of this non-enthusiasm, by default, `/RectangularAlternateNudge` comes w
 This imposes an additional requirement: this packing style is chosen only if it is an improvement on the previous best radius of &ge;&nbsp;2pt &asymp;&nbsp;0.7mm. 
 
 The next table of examples shows six glasses on `/USL` = 8&frac12;&Prime;&times;11&Prime; and on `/A4` = 210mm&times;297mm, in all cases with margins of 24pt = &#8531;&Prime; and space of 6pt for the header. 
+
 It shows four packing styles: `/Diamonds`; `/SquareGrid`; `/RectangularDislocation`; and `/RectangularAlternateNudge`. 
 
-So the radius improves by &asymp; 2.6pt&nbsp;&asymp;0.9mm, and hence the diameter by &asymp; 1.8mm. 
+On `/USL`, `/RectangularAlternateNudge` improves the radius by &asymp; 2.6pt&nbsp;&asymp;0.9mm, and hence the diameter by &asymp; 1.8mm. 
 But on `/A4` the improvement in the radius is much less: only &asymp; 0.28pt &asymp; 0.098mm, which seems insufficient to justify the asymmetry&rsquo;s aesthetic damage.
 
 <div align="center"  style="font-size: smaller;">
