@@ -310,7 +310,7 @@ And the self-explnatory parameters `DecantingNotesPaperType` and `DecantingNotes
 
 ## Accounts
 
-Of course, any financial rebalancing will have been computed in advance, audited in accordance with the [1844 Companies Act](https://en.wikipedia.org/wiki/Joint_Stock_Companies_Act_1844), and settled using a designated system under the [The Financial Markets and Insolvency (Settlement Finality) Regulations 1999](https://www.legislation.gov.uk/uksi/1999/2979/contents/made)]. 
+Of course, any financial rebalancing will have been computed in advance, audited in accordance with the [1844 Companies Act](https://en.wikipedia.org/wiki/Joint_Stock_Companies_Act_1844), and settled using a system designated under the [The Financial Markets and Insolvency (Settlement Finality) Regulations 1999](https://www.legislation.gov.uk/uksi/1999/2979/contents/made). 
 Of course.
 
 Except that it rarely works like that. 
