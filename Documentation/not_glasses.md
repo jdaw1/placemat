@@ -299,15 +299,9 @@ There are some further parameters, all of which work as on the other page types.
 
 Arrays used are `CirclearraysDecantingNotes`, `TitlesDecantingNotes`, and `SubtitlesDecantingNotes`. 
 
-The text at the top of the page is `DecantingNotesTopText`, the two colymns being titled `DecantingNotesColumnHeadingTimes` and `DecantingNotesColumnHeadingNotes`.
+The text at the top of the page is `DecantingNotesTopText`, the two columns being titled `DecantingNotesColumnHeadingTimes` and `DecantingNotesColumnHeadingNotes`.
 
 `GlassesClusteredOnDecantingNotes` has the same structure as `GlassesClusteredOnVoteRecorders`.
-
-/GlassesClusteredOnDecantingNotes [ GlassesOnTastingNotePages ] def
-/DecantingNotesPaperType /VoteRecorderPaperType load def
-/DecantingNotesOrientation /Portrait def
-/DecantingNotesTitlesFontSizeMax 24 def
-/DecantingNotesSubtitleFontSizeProportionTitles VoteRecorderSubtitleFontSizeProportionTitles def
 
 And the self-explnatory parameters `DecantingNotesPaperType` and `DecantingNotesOrientation`; and `DecantingNotesTitlesFontSizeMax` and `DecantingNotesSubtitleFontSizeProportionTitles` (a positive number or /Automatic).
 
@@ -316,9 +310,11 @@ And the self-explnatory parameters `DecantingNotesPaperType` and `DecantingNotes
 
 ## Accounts
 
-Of course, any financial rebalancing will have been computed in advance, audited in accordance with the 1844 Companies Act, and settled. 
+Of course, any financial rebalancing will have been computed in advance, audited in accordance with the [1844 Companies Act](https://en.wikipedia.org/wiki/Joint_Stock_Companies_Act_1844), and settled using a designated system under the [The Financial Markets and Insolvency (Settlement Finality) Regulations 1999](https://www.legislation.gov.uk/uksi/1999/2979/contents/made)]. 
+Of course.
+
 Except that it rarely works like that. 
-At the last moment extra bottles are added, perhaps an extra attendee, and the food bill itself not unknown until late in the evening, after much drinking. 
+At the last moment extra bottles are added, perhaps an extra attendee, and the food bill itself is not unknown until late in the evening, after much drinking. 
 An Accounts pages can assist those doing the computations.
 
 <div align="center">
