@@ -6,37 +6,130 @@
 % Improvements to the code should be sent them to the author.  Inviting the author to the tastings is, well, almost compulsory! The code is mostly debugged, but errors surely remain. It is provided as-is, without liability: it is free.
 % The most recent version is available via http://www.jdawiseman.com/papers/placemat/placemat.html .  Copyright 1988 to 2021 Julian D. A. Wiseman who is contactable via www.jdawiseman.com/author.html
 
+
 /ParametersVersionDateTimeAdobeFormat (D:202102131515) def
 
-/PrePourNumCopies 1 def
-/DecanterLabelsNumCopies 1 def
-/PlaceNames true def
-/DecantingNotesNumCopies 1 def
-/AccountsNumCopies 1 def
-/StickyLabelsNumCopies 1 def
+% Inspired by versions of 15th and 18th Sep 2009
 
-/EmptyGlassesPageAtStart true def
+/Circlearrays
+[
+	[ [(Po) /ccedilla (as)] (1970) ]
+	[ (Delaforce) (1970) ]
+] def  % /Circlearrays
+/Titles
+[
+	[(P) /ccedilla]
+	[(Df)]
+] def  % /Titles
+
+/Belowtitles [ () dup ] def
 
 /Names [
-	(JDAW)
-	[(G) /uacute /edieresis (st ) /Ocircumflex /ntilde /egrave]
-	(Guest Two)
-	()
-] def
+	{
+		/SheetNum where
+		{
+			pop
+			{NamesFont CircletextMaxFontSizes 0 get 1.618033988749895 mul selectfont}
+			VerticalMiddlingTitles 20 string cvs (/) exch Concatenate
+			SheetNum 2 eq
+			{
+				[ exch
+					( )
+					{/Menlo-Regular CircletextMaxFontSizes 0 get 1.618033988749895 mul selectfont}
+					/arrowdblright
+					{NamesFont CircletextMaxFontSizes 0 get 1.618033988749895 mul selectfont}
+					( )
+					VerticalMiddlingStringTitles
+				]
+			} if  % SheetNum 2 eq
+		} {(Name)} ifelse  % /SheetNum where
+	}
+] def  % /Names
 
-/NamesPlaceNames [  [ [(Julian W) {-0.17 Kern} (.)] ]  ] def
-/PlaceNamesShowNameAsFooter [ false ] def
+% Gives exactly the same radius as five on A4, 136.819, but is more easily viewed.
+/PaperType [
+	210 360 mul 254 div 24 add
+	210 360 mul 127 div
+] def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /USL2 = 11"x17", [SmallerPts LargerPts]
+/Orientation /Landscape def  % /Landscape /Portrait
 
+/ThePortForumIconPlacement /None def  % /None
+/WaterBoxes /None def  % /Glasses /TastingNotes /Both, any other value being none
 
-/TastingNotesStarsNameColsRowsArrangement  % (ASCIIfied Name) NumCols NumRows /Alternating|/Sideways|/Upright
-[
-	Names 1 get  5 1 /Upright
-	Names 2 get  5 1 /Sideways
-	Names 3 get  5 1 /Alternating
-] def  % /TastingNotesStarsNameColsRowsArrangement
+/HeadersLeft [] def  % /HeadersLeft
+/HeadersCenter [] def  % /HeadersCenter
+/HeadersRight [] def  % /HeadersRight
 
+/VoteRecorders false def
+/CorkDisplayNumCopies 0 def
+/NeckTagsNumCopies 0 def
+/TastingNotePagesNumCopies 0 def
 
-/NeckTagsHoleLineWidth 1 def   % So visible on bitmap
+/GlassesOnSheets [
+	[0 1]
+	dup
+	dup
+] def  % /GlassesOnSheets
+
+/NamesFont {TitlesFont} def
+/NamesFontSizeMin {CircletextMaxFontSizes 0 get 1.5 mul} def
+/NamesFontSizeMax {NamesFontSizeMin} def
+
+/FontSizesSetsGlassesPages [0 1 2] def
+
+/InlineTitles false def
+
+/VerticalMiddlingTitles { [/MatchNone /MatchRow /MatchString] SheetNum get } def
+
+/PaintBackgroundCode
+{
+	0 1 1
+	{
+		6 dict begin
+		/WithinPage exch def
+		/BaseColour {1 0 0 setrgbcolor} def
+		/BoxColour {0 0.8 0 setrgbcolor} def
+		GlassPositions SheetNum get WithinPage get aload pop  /YY exch def  /XX exch def
+		/ThisFontSize  TitleFontSizes SheetNum get WithinPage get  def
+		1 setlinewidth  1 setlinejoin  0 setlinecap
+		BoxColour   XX  YY  Radii SheetNum                    get  0 360 arc stroke
+		BaseColour  XX  YY  RadiiCirclearrayBaseline SheetNum get  0 360 arc stroke
+		BoxColour   XX  YY  RadiiCirclearrayInside SheetNum   get  0 360 arc stroke
+
+		BaseColour
+		TitleOffsetsProportionFontSizeVertical SheetNum get WithinPage get
+		TitleFontSizes SheetNum get WithinPage get  mul  YY add
+		XX Radii SheetNum get 6 add sub exch moveto
+		2  Radii SheetNum get 6 add mul 0    rlineto   stroke
+
+		BoxColour
+
+		TitleOffsetsProportionFontSizeVertical   SheetNum get WithinPage get
+		TitleProportionFontSizeT SheetNum get WithinPage get 
+		TitleProportionFontSizeB SheetNum get WithinPage get add 2 div add ThisFontSize mul  YY add
+		dup
+		TitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get
+		TitleProportionFontSizeL                 SheetNum get WithinPage get  add ThisFontSize mul XX add
+		exch moveto -16 0 rlineto
+		TitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get
+		TitleProportionFontSizeR                 SheetNum get WithinPage get  add ThisFontSize mul XX add
+		exch moveto +16 0 rlineto
+		stroke
+
+		TitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get
+		TitleProportionFontSizeL                 SheetNum get WithinPage get  add ThisFontSize mul XX add
+		TitleOffsetsProportionFontSizeVertical   SheetNum get WithinPage get
+		TitleProportionFontSizeB                 SheetNum get WithinPage get  add ThisFontSize mul YY add
+		TitleProportionFontSizeR SheetNum get WithinPage get
+		TitleProportionFontSizeL SheetNum get WithinPage get sub ThisFontSize mul
+		TitleProportionFontSizeT SheetNum get WithinPage get 
+		TitleProportionFontSizeB SheetNum get WithinPage get sub ThisFontSize mul
+		rectstroke
+		end
+	} for  % WithinPage
+} bind def  % /PaintBackgroundCode
+
+/OutputLogToPage false def
 
 
 % Recommendation: move changed parameters to just above this line.
@@ -47,54 +140,15 @@
 
 
 
-/Circlearrays [
-	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
-	[ (Kopke)                    (1970)   (bot. Dolamore) ]
-	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
-	[ (Sandeman)                 (1970)  [(bot. A) {-0.06 Kern} (very)] ]
-	[ [(W) {-0.07 Kern} (arre)]  (1970)   (bot. Peatling & Cawdron) ]
-] def
-/Titles [
-	(F70)
-	(K70)
-	(N70)
-	(S70)
-	(W70)
-] def
-
-/Belowtitles [
-	(Justerini & Brooks)
-	(Dolamore)
-	(Wine Society)
-	[(A) {-0.04 Kern} (very)]
-	(Peatling & Cawdron)
-] def
-
 /LeftHanders [ (RMW)  (RAW)  (SRG) (Simon G.)  (HEG) (Helen G.)  (CSD) (Chris D.)  (CFD) (Conan D.)  (NCG) (Marc Jackson)  (JG) (Jeff G.)  (ZDR) (Zak R.) ] def
 
-/PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /USL2 = 11"x17", [SmallerPts LargerPts]
 /TastingNotesPaperType /A4 def  % If this is /USL then the distiller log is also on 8.5"x11", otherwise log on /A4
 
-/ThePortForumIconPlacement /LowerNonWaterBox def  % /None
 /ThePortForumIconTastingNotePlacement /LowerNonName def  % /None
 
 /PDF_title (Placemats) def  % Names PDF file; appears as tab name in browser, and in search results
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
-/HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( May 2021)]
-] def  % /HeadersLeft
-/HeadersCenter [
-	0  [(1970s)]
-] def  % /HeadersCenter
-/HeadersRight [
-	0
-	[
-		(www) {-0.08 Kern} (.) {-0.08 Kern} (ThePortForum.com, )
-		% (www) {-0.08 Kern} (.) {-0.12 Kern} (W) {-0.08 Kern} (orldOf) {+0.12 Kern} (Port.de, )
-		(www) {-0.08 Kern} (.jdawiseman.com)
-	]
-] def  % /HeadersRight
 /ExternalLinks [  % Array, length a multiple of three:  indented0-boolean, (Descriptor0), (http://URL0),  indented1-boolean, (Descriptor1), (http://URL1),  ...
 	false   (Thread on ThePortForum.com)     (http://www.theportforum.com/viewtopic.php?t=00175&view=unread#unread)
 	false   (Latest version this placemat)   (http://www.jdawiseman.com/papers/placemat/placemat.pdf)
@@ -111,11 +165,13 @@
 % Non-Glasses Pages %
 % % % % % % % % % % %
 
-/VoteRecorders true def
-/CorkDisplayNumCopies 1 def
-/NeckTagsNumCopies 1 def
+/PrePourNumCopies  Names length 12 ge {1} {0} ifelse def
+/PlaceNames false def
+/DecanterLabelsNumCopies 0 def
 /GlassesNumCopies 1 def
-/TastingNotePagesNumCopies 1 def
+/DecantingNotesNumCopies  Circlearrays length 15 ge {1} {0} ifelse  def
+/AccountsNumCopies  Names length 8 ge {1} {0} ifelse  def
+/StickyLabelsNumCopies 0 def
 /StickyLabelsTypes [0 1] def  % 0 = 2x4 on A4; 1 = 5x13 on A4
 
 /Abovetitles [ Titles length {()} repeat ] def
@@ -140,6 +196,7 @@
 /NamesVoteRecorder Names def
 /NamesAccounts     Names def
 /NamesStickyLabels Names def
+/NamesPlaceNames [ Names ] def
 
 % % % % % % % % % % % % % % % % % % % % % % %
 % Page Organisation and Page-Level Features %
@@ -147,11 +204,6 @@
 
 % GlassesOnSheetsMaxPerSheet: 6 default, USLegal => 9; A3 or USL2 => 13. For all on one sheet replace with "/GlassesOnSheetsMaxPerSheet 999 def".
 /GlassesOnSheetsMaxPerSheet  6  /PaperType load dup /A3 eq exch /USL2 eq or {pop 14} if  /PaperType load /USLegal eq {pop 9} if  def
-/GlassesOnSheets [
-	% For a custom arrangement replace the next line  with something of the form "[0 1 2 3] [4 5 6 7 8 9] [10 11 12 13]"
-	% The code below spreads glasses evenly over the sheets, the sheets one glass larger being last. Replace "floor": with "ceiling" for larger sheets to be early; with "round" for them to be scattered.
-	<< /p Titles length GlassesOnSheetsMaxPerSheet div ceiling cvi  /g 0 >> begin 0 1 p 1 sub {[exch p sub g Titles length sub exch div floor cvi {g /g g 1 add store} repeat]} for end
-] def  % /GlassesOnSheets
 
 /GlassesOnSheetsMaxPerTNSheet  /TastingNotesPaperType load /PaperType load eq {GlassesOnSheetsMaxPerSheet} {7} ifelse  def  % just enough writing space for 8 TNs per page.
 /GlassesOnTastingNotePages [  % Consider "/GlassesOnTastingNotePages GlassesOnSheets def"; and see comment in GlassesOnSheets.
@@ -184,7 +236,6 @@
 	% [ /Arch            /CentralGlasses 1  /GlassesNumMin 6  /OnlyIfOrientation /Landscape ]
 ] def  % /PackingStyles
 
-/WaterBoxes { {GlassesNumCopies 0 le} MightBeTrue {/Both} {/Glasses} ifelse} bind def  % /Glasses /TastingNotes /Both, any other value being none
 /WaterBoxesNum 15 def  % triangle number most elegant: 6, 10, 15, 21
 
 /SideBySideGlassesTastingNotes false def  % If true TastingNotesPaperType and TastingNotesOrientation ignored
@@ -203,6 +254,18 @@ if} bind def  % /VoteRecorderCrossedBox
 /PageOrderingGlasses [ GlassesOnSheets length {1} repeat ] def
 /PageOrderingTastingNotePages [ GlassesOnTastingNotePages length {1} repeat ] def
 
+/TastingNotesStarsNameColsRowsArrangement  % (ASCIIfied Name) NumCols NumRows /Alternating|/Sideways|/Upright
+[
+	(DRT)  5 1 /Upright      (Derek T.)    4 copy pop
+	(CSD)  5 1 /Upright      (Chris D.)    4 copy pop
+	(WPS)  5 1 /Sideways     (Wolfgang S.) 4 copy pop
+	(PW)   5 1 /Sideways     (Phil W.)     4 copy pop
+	(DJ)   5 1 /Sideways     (Daniel J.)   4 copy pop
+	(IDJ)  5 1 /Alternating  (Ian J.)      4 copy pop
+	(DRL)  5 1 /Alternating  (Dave L.)     4 copy pop
+	(TC)   5 1 /Alternating  (Tony C.)     4 copy pop
+	(MPM)  5 1 /Alternating  (Mike M.)     4 copy pop
+] def  % /TastingNotesStarsNameColsRowsArrangement
 
 /PlaceNamesFirstAndThirdFoldsFromEdge 0 def  % Use 0 if printing on stiff card, 36 if printing on paper.
 
@@ -222,7 +285,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /AbovetitlesFont     {TitlesFont} def
 /BelowtitlesFont     {AbovetitlesFont} def
 /OvertitlesFont      {TitlesFont} def
-/NamesFont           {PlaceNames {TitlesFont} {CircletextFont} ifelse} bind def
 /SubtitlesFont       {OvertitlesFont} def
 /FillTextFont        {TitlesFont} def
 
@@ -244,7 +306,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /OvertitleMaxFontSizeProportionTitles  0.4 def
 /ExclusionAnnulusProportionInnerRadiusTitlesAboveBelow 0 def
 /ExclusionAnnulusProportionInnerRadiusOvertitles 0 def
-/FontSizesSetsGlassesPages {PageOrderingGlasses} def
 /FontSizesSetsAboveBelowOver [ 0 0 0 ] def  % Array of length 3, representing which of Abovetitles, Belowtitles, and Overtitles are considered together for font-size purposes
 /FontSizesRatioTitlesMin 1.1892 def  % If font sizes closer than this ratio ~= 2^0.25, then collapsed to smaller.
 /FontSizesRatioAboveBelowOverMin 999 def  % If font sizes closer than this ratio, then collapsed to smaller.
@@ -289,7 +350,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /CrossHatchingOvertitles {CrossHatchingTitles} def
 /CrossHatchingPlaceNames {CrossHatchingTitles} def
 
-/InlineTitles true def
 /InlineAbovetitles false def
 /InlineBelowtitles false def
 /InlineOvertitles false def
@@ -362,7 +422,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /FlightSeparationArcRadiusControl 1 def  % In range 0 to 1 inclusive. 0 = radius of circle; 1 = half-way to nearest glass. If glasses circles touch, irrelevant.
 
 /PaintBackgroundInsideGlassCircles {} def  % Paints a background pattern. Called with centre of circle translated to 0,0; and clipped to radius Radii SheetNum get.
-/PaintBackgroundCode {} def  % Paints a background pattern. Will probably refer to TypeOfPagesBeingRendered and then to SheetNum or TastingSheetNum.
 /PaintForegroundCode {} def  % Paints a pattern on top of everything. Will probably refer to TypeOfPagesBeingRendered and then to SheetNum or TastingSheetNum.
 
 
@@ -431,7 +490,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /MarginT MarginL [ /HeadersLeft /HeadersCenter /HeadersRight ] {load length 0 ne {HeaderFontSize add exit} if} forall def
 /MarginB MarginL [ /FootersLeft /FootersCenter /FootersRight ] {load length 0 ne {FooterFontSize add exit} if} forall def
 
-/Orientation {SideBySideGlassesTastingNotes {/Landscape} {PaperType /A4 eq PaperType /USL eq or {/Portrait} {/Landscape} ifelse} ifelse} bind def  % /Landscape /Portrait
 % ShrinkRadii can take values:
 % /NotAtAll, so each page's radius is determined independently;
 % /ToSmallest, so all pages have the same radius; or
@@ -451,7 +509,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /CirclearraysFillBehind false def
 /CirclearraysFillBehindCode {0.9375 setgray fill} def
 
-/VerticalMiddlingTitles /MatchString def % /MatchNone /MatchRow /MatchPage /MatchAll /MatchString
 /VerticalMiddlingIncludeBaselineTitles false def
 /VerticalMiddlingStringTitles (D20T83) def  % Benchmark characters, deliberately not including those prone to having a 'tail' in some fonts
 /VerticalMiddlingOvertitles {VerticalMiddlingTitles} def % /MatchNone /MatchRow /MatchPage /MatchAll /MatchString
@@ -557,9 +614,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /WaterBoxesShowRight [ 0 1 GlassesOnSheets length 1 sub {<< exch /i exch >> begin true  i 1 add 1 GlassesOnSheets length 1 sub {PageOrderingGlasses exch get PageOrderingGlasses i get eq {pop false exit} if} for end} for ] def
 /WaterBoxesShowTN [ 0 1 GlassesOnTastingNotePages length 1 sub {<< exch /i exch >> begin true PageOrderingTastingNotePages 0 i getinterval {PageOrderingTastingNotePages i get eq {pop false exit} if} forall end} for ] def
 
-/NamesFontSizeMin 18 def
-/NamesFontSizeMax 24 def
-
 /DecanterLabelsPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /USL2
 /DecanterLabelsOrientation /Automatic def  % of labels, not of paper. /Landscape /Portrait /Automatic
 
@@ -580,6 +634,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /TastingNotesReplaceNameWithPageNum false def
 /TastingNotesPageNumFontSizeFactor 0.333333333 def
 
+/PlaceNamesShowNameAsFooter [ NamesPlaceNames {/Names load ne} forall ] def
 /PlaceNamesPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /USL2
 /PlaceNamesOrientation /Landscape def  % /Landscape /Portrait
 /PlaceNamesMaxFontSizeAbsolute 192 def
@@ -624,6 +679,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /NeckTagsMinHeight 350 def
 /NeckTagsMaxHeight 400 def
 /NeckTagsHoleRadius {54  //false [Abovetitles Belowtitles Overtitles] {WithinTitles get (Magnum) eq or} forall Circlearrays WithinTitles get {(Magnum) eq {pop //true exit} if} forall {1.2 mul} if} bind def  % 19mm/23mm radius
+/NeckTagsHoleLineWidth 0.12 def
 /NeckTagsSpaceAboveHole 60 def
 /NeckTagsSpaceAboveTitlesEtc 48 def
 /NeckTagsSpaceBelowTitlesEtc 12 def
@@ -700,12 +756,12 @@ if} bind def  % /VoteRecorderCrossedBox
 /LicensingAgreementTextPlacemats (This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International Licence.) def
 /LicensingAgreementLinkPlacemats (http://creativecommons.org/licenses/by-sa/4.0/deed.en) def
 /OutputLogToLog true def
-/OutputLogToPage true def
 /OutputLogToAnnotation OutputLogToPage not def
 /PageLabelOverride false def  % E.g., {/Glasses TypeOfPagesBeingRendered eq}
 /PageLabelOverrideWith {[(PageNum) ShownPages 5 string cvs]} def
 /PrologueCode {} def  % Executed once, just before painting pages
 /EpilogueCode {} def  % Executed once, just after painting pages
+/EmptyGlassesPageAtStart false def
 /EmptyGlassesPageOrientation /Portrait def
 /TestingSuppressPageTypes [ ] def  % Useful value: [ /Glasses 1 /TastingNotes 1 /PlaceName 1 /PrePour 1 /StickyLabels 1 /VoteRecorder 1 /DecantingNotes 1 /CorkDisplay 1 /NeckTags 1 ]. Can also /DistillerLog without an integer.
 /TestingMaxNumPagesToShow 2147483647 def  % maximum integer
