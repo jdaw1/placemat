@@ -30,19 +30,19 @@ These are subject to one-at-a-time constraints.
 That could still leave an ugly profusion of type sizes: one would not want different circles having their `Titles` set in 100pt, 104pt, 108pt, 108pt. 
 So then there are constraints on which sets must be the same. 
 For each set, all are set to the type size of the smallest. 
-The process sis repeated over the various sets, until it terminates. 
+The process is repeated over the various sets, until it terminates.
 
 3. Then the `Abovetitles`, `Belowtitles`, and `Overitles` are sized. 
-Again there are one-at-a-time constraints, and equality constraints. 
+Again there are one-at-a-time constraints, and equality constraints.
 
-These should be tackled in order. 
+These should be tackled in order.
 
 ## Circlearrays sizing
 
 ### Worthwhile
 
 The circle text is initially set to be the smaller of `CircletextMaxFontSizeAbsolute`, and radius &times; `CircletextMaxFontSizeProportionRadius`. 
-Also relevant is `CircletextsMinNumSpacesBetween`, the gap between the items of `Circlearrays`, measured in space widths. 
+Also relevant is `CircletextsMinNumSpacesBetween`, the gap between the items of `Circlearrays`, measured in space widths.
 
 ### Superfluous
 
@@ -50,15 +50,15 @@ Next, the font size can reduced to satisfy `CircletextsMinCopies`.
 
 Assume that these cause an item of `Circlearrays` to fit around its circle 2.999 times. 
 This would be truncated to 2 times, with white space occupying the &lsquo;0.999&rsquo; remainder. 
-Self-evidently, it would be aesthetically better to reduce the font size slightly, such that the text fits 3+&epsilon; times, makig the gaps very close to `CircletextsMinNumSpacesBetween` space widths. 
+Self-evidently, it would be aesthetically better to reduce the font size slightly, such that the text fits 3+&epsilon; times, makig the gaps very close to `CircletextsMinNumSpacesBetween` space widths.
 
 By default, the font size is slightly adjusted for better aesthetics. 
 Unless you need the font size to equal some exact value, allow this optimisation to do its magic.
 
 This tweaking of the font size is enabled by the Boolean `CircletextsTweakSize`. 
-There would be merit to allowing the first step of the optimusation to be an increase, permitted by the Boolean `CircletextMaxFontSizeMayBeSlightlyExceeded`. 
+There would be merit to allowing the first step of the optimusation to be an increase, permitted by the Boolean `CircletextMaxFontSizeMayBeSlightlyExceeded`.
 
-The number of copies of the `Circletexts` is bounded above by `CircletextsMaxCopies`; when this is invoked the the number of copies that would otherwise appear is on the top of the stack, so `CircletextsMaxCopies` could be code referring to it, such code advisedly starting with a &ldquo;`dup`&rdquo;. 
+The number of copies of the `Circletexts` is bounded above by `CircletextsMaxCopies`; when this is invoked the the number of copies that would otherwise appear is on the top of the stack, so `CircletextsMaxCopies` could be code referring to it, such code advisedly starting with a &ldquo;`dup`&rdquo;.
 
 Relevant when glasses spill over multiple pages, `CircletextsSameFontSizeIfRadiiShrunkToBeSame`, constrains the size over pages compelled to have the same radius (see `ShrinkRadii`).
 (Technical note: `CircletextsSameFontSizeIfRadiiShrunkToBeSame` should have the same Boolean value over any such set of pages. 
@@ -127,7 +127,7 @@ How are the Titles to be vertically aligned?
 Centring each by itself causes their baselines to be misaligned, sometimes by an annoying small amount. 
 So some sets should have a common baseline. 
 But even that is wrong: vertically aligning &ldquo;P&ccedil;&rdquo; and &ldquo;Pi&rdquo; looks wrong: the tail of the cedilla, or of a &lsquo;g&rsquo; or of a &lsquo;y&rsquo;, just seems aesthetically different. 
-So the vertical alignment should be to a no-descender string. 
+So the vertical alignment should be to a no-descender string.
 
 <div align="center">
 
@@ -136,7 +136,7 @@ So the vertical alignment should be to a no-descender string.
 </div>
 
 `VerticalMiddlingTitles` and `VerticalMiddlingOvertitles` must be one of `/MatchNone`, `/MatchRow`, `/MatchPage`, `/MatchAll`, or `/MatchString`. 
-The last of these causes it to use `VerticalMiddlingStringTitles` and `VerticalMiddlingStringOvertitles`. 
+The last of these causes it to use `VerticalMiddlingStringTitles` and `VerticalMiddlingStringOvertitles`.
 
 But there are exceptions. 
 Whatever the alignment of &ldquo;W09&rdquo;, the likes of &ldquo;&dagger;&rdquo; feel somehow different, and should be independently vertically centred. 
