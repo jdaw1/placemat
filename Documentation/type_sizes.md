@@ -20,7 +20,7 @@ There are lots of fussy controls over the sizing of fonts.
 A few of these controls are, or are sometimes, *worthwhile*. 
 Many others are *superfluous* &mdash; of use not more than rarely.
 
-but before that distinction can be detailed, a flow of action is needed. 
+But, before that distinction can be detailed, a flow of action is needed.
 
 1. First, the circle text is sized. 
 There are two parameters givng an indicative size, and others controlling whether this may be improved. 
