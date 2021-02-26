@@ -10,7 +10,8 @@
 7.  [Non-Glasses Pages](not_glasses.md);  
 8.  [Document-level controls](document.md);  
 9.  *Code injection*;  
-10. [Bitmap images](bitmap_images.md).
+10. [Bitmap images](bitmap_images.md);
+11. [Translations](translations.md).
 
 ----
 

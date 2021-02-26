@@ -10,7 +10,8 @@ v# Document-level controls
 7.  [Non-Glasses Pages](not_glasses.md);  
 8.  *Document-level controls*;  
 9.  [Code injection](code_injection.md);  
-10. [Bitmap images](bitmap_images.md).
+10. [Bitmap images](bitmap_images.md);
+11. [Translations](translations.md).
 
 ----
 

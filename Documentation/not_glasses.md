@@ -10,7 +10,8 @@
 7.  *Non-Glasses Pages*;  
 8.  [Document-level controls](document.md);  
 9.  [Code injection](code_injection.md);  
-10. [Bitmap images](bitmap_images.md).
+10. [Bitmap images](bitmap_images.md);
+11. [Translations](translations.md).
 
 ----
 
@@ -122,7 +123,7 @@ This feature has never been used.
 ### Side-by-side Glasses
 
 
-If having a mini tasting of only three wines, one might wish to print everything on one sheetm especially if liked to need to squeeze everything onto a small round bar table. 
+If having a mini tasting of only three wines, one might wish to print everything on one sheet, especially if liked to need to squeeze everything onto a small round bar table. 
 For right handers the three glasses would be on the left of the tasting-notes; for lefties, glasses to the right &mdash; as in the images on the right. 
 This small-tasting layout is enabled by setting the boolean constant `SideBySideGlassesTastingNotes` to true. 
 
