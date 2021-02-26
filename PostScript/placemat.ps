@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:00 Monday 15th February 2021
+% This version 19:00 Friday 26th February 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202102151900) def
+/ParametersVersionDateTimeAdobeFormat (D:202102261900) def
 
 /Circlearrays [
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
@@ -364,41 +364,43 @@ if} bind def  % /VoteRecorderCrossedBox
 /PaintForegroundCode {} def  % Paints a pattern on top of everything. Will probably refer to TypeOfPagesBeingRendered and then to SheetNum or TastingSheetNum.
 
 
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-% Needing to be translated (also VoteRecorderTopTexts and other params above).  %
-% Please send good translations to the author, www.jdawiseman.com/author.html   %
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-
-/TastingNotesColumnHeadings [ (Times) (Eye) (Nose) (Mouth) (Score) ] def  % German: [ (Zeiten) (Auge) (Nase) (Gaumen) (Punkte) ]   Danish: [ (Gange) (Eye) [(N) /ae (se)] (Mund) (Score) ]   Dutch: [ (Tijd) (Kleur) (Geur) (Smaak) (Punten) ]
-/TastingNotesPageNumCompoundString [(Page ) {TastingSheetNum 1 add 5 string cvs}] def
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% These parameters, and VoteRecorderTopTexts etc above, might need to be translated.            %
+% Some translations at http://github.com/jdaw1/placemat/blob/main/Documentation/translations.md %
+% Please submit others to http://github.com/jdaw1/placemat/issues                               %
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 /VoteRecorderInstruction {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU {()} {(Record points, not rank.)} ifelse} bind def
 /VoteRecorderTotalColTitle [(T) {-0.06 Kern} (otal)] def
 /VoteRecorderTotalRowTitle [(T) {-0.09 Kern} (otal)] def
+/VoteRecorderMonkeyName (Monkey) def
 
-/DecantingNotesTopText (Decanting Notes) def  % German: [(V) {-0.06 Kern} (erkostungsnotizen)]
-/DecantingNotesColumnHeadingTimes (Decant Time) def  % German: (Dekantierzeit)
-/DecantingNotesColumnHeadingNotes (Cork condition, branding, etc) def  % German: (Korken, branding, etc)
+/TastingNotesColumnHeadings [  (Times)  (Eye)  (Nose)  (Mouth)  (Score)  ] def
+/TastingNotesPageNumCompoundString [(Page ) {TastingSheetNum 1 add 5 string cvs}] def
 
-/AccountsTopText (The Accounts) def  % German: Die Accounts
+/DecantingNotesTopText (Decanting Notes) def
+/DecantingNotesColumnHeadingTimes (Decant Time) def
+/DecantingNotesColumnHeadingNotes (Cork condition, branding, etc) def
+
+/AccountsTopText (The Accounts) def
 /AccountsColumnGroupHeadings [
-	[/emdash ( Bestowals ) /emdash]    [/emdash ( Share of costs ) /emdash]   [/emdash ( Settlement ) /emdash]
-	% German: [/emdash ( Geschenke ) /emdash]    [/emdash ( Kosten wurden geteilt ) /emdash]   [/emdash ( Einigung ) /emdash]
+	[/emdash ( Bestowals ) /emdash]
+	[/emdash ( Share of costs ) /emdash]
+	[/emdash ( Settlement ) /emdash]
 ] def
 /AccountsSubColumnHeadings [
 	[  (Already paid)   (Wines)  ]
 	[  (Wines)   (Food etc)  ]
 	[  (Owes)   (Is owed)     [(P) {-0.02 Kern} (aid?)]  ]
-	% German: [ (Bereits bezahlt)  [(W) {-0.06 Kern} (eine)] ]  [ [(W) {-0.06 Kern} (eine)]  (Essen etc) ] [ (Schuldet)  (Ist geschuldet)  (Bezahlt?) ] and maybe change AccountsColumnRelativeWidths
 ] def  % Must be same length as AccountsColumnGroupHeadings
 
-/CorkDisplayTopText (The Corks) def  % German: (Die Korken)
-
-/VoteRecorderMonkeyName (Monkey) def  % German: Affe
+/CorkDisplayTopText (The Corks) def
 
 /DecanterLabelsTopText (Decanter labels: cut; paste to business cards; allow to dry; punch holes; hang on clean decanters; fill decanters; wait; pour; drink; enjoy. Also drink plenty of water.) def
 
 /EmptyPageString (Fewer pages than before, so this page now omitted.) def
+
+/LicensingAgreementTextPlacemats (This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International Licence.) def  % To be consistent with LicensingAgreementLinkPlacemats
 
 
 % % % % % % % % % % % % % % % % % % % %
@@ -697,8 +699,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /PagesToBeInsertedDescriptions [ (Food order) ] def
 
 /LogThisExtra () def
-/LicensingAgreementTextPlacemats (This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International Licence.) def
-/LicensingAgreementLinkPlacemats (http://creativecommons.org/licenses/by-sa/4.0/deed.en) def
+/LicensingAgreementLinkPlacemats (http://creativecommons.org/licenses/by-sa/4.0/deed.en) def  % To be consistent with LicensingAgreementTextPlacemats
 /OutputLogToLog true def
 /OutputLogToPage true def
 /OutputLogToAnnotation OutputLogToPage not def
@@ -724,7 +725,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /OuterMarginT 0 def
 /OuterMarginB 0 def
 
-1 srand  % Change for different randomisation (1 is the starting value for both GhostScript and Adobe Distiller).
+1 srand  % Change for different randomisation (1 is the iniital value for both GhostScript and Adobe Distiller).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -758,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202102151900) def
+/SoftwareVersionDateTimeAdobeFormat (D:202102261900) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
