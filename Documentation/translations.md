@@ -35,7 +35,7 @@ Alas, Asian languages are [too difficult in PostScript](http://groups.google.com
 	[ (Wine Of The Night?)  /questiondown ]
 	% [ (What is it?) ]  % If uncommenting this, insert a 'true' into the VoteRecorderShowTotalRow array.
 ] def  % Must be same length as GlassesClusteredOnVoteRecorders, each sub-array containing some number of TopTexts
-/VoteRecorderInstruction {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU {()} {(Record points, not rank.)} ifelse} bind def
+/VoteRecorderInstruction {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU {()} {(Record points, not rank.)} ifelse} def
 /VoteRecorderTotalColTitle [(T) {-0.06 Kern} (otal)] def
 /VoteRecorderTotalRowTitle [(T) {-0.09 Kern} (otal)] def
 /VoteRecorderMonkeyName (Monkey) def
@@ -78,7 +78,7 @@ If you can, please translate and post in [an issue](http://github.com/jdaw1/plac
 	[ [(W) {-0.06 Kern} (ein der Nacht?)]  /questiondown ]
 	% [ (Was ist es?) ]  % If uncommenting this, insert a 'true' into the VoteRecorderShowTotalRow array.
 ] def  % Must be same length as GlassesClusteredOnVoteRecorders, each sub-array containing some number of TopTexts
-/VoteRecorderInstruction {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU {()} {(Rekordpunkte, nicht Rang.)} ifelse} bind def
+/VoteRecorderInstruction {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU {()} {(Rekordpunkte, nicht Rang.)} ifelse} def
 /VoteRecorderMonkeyName (Affe) def
 
 /TastingNotesColumnHeadings [  (Zeiten)  (Auge)  (Nase) (Gaumen)  (Punkte)  ] def
@@ -101,6 +101,56 @@ If you can, please translate and post in [an issue](http://github.com/jdaw1/plac
 
 /CorkDisplayTopText (Die Korken) def
 ```
+
+
+## French = fran&ccedil;ais
+
+Derived from [issue 70](http://github.com/jdaw1/placemat/issues/70), and discussion with its author.
+
+```PostScript
+/VoteRecorderTopTexts [  % Must be same length as GlassesClusteredOnVoteRecorders, each sub-array containing some number of TopTexts
+	[ [(Vin de la soir) /eacute (e ?)]  /questiondown ]
+	% [ [(Qu) /quoteright {-0.06 Kern} (est-ce que c) /quoteright {-0.06 Kern} (est ?)] ]  % If uncommenting this, insert a 'true' into the VoteRecorderShowTotalRow array.
+] def  % Must be same length as GlassesClusteredOnVoteRecorders
+
+/VoteRecorderInstruction {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU {()} {(Noter les points, pas le classement.)} ifelse} def
+/VoteRecorderTotalColTitle [(T) {-0.06 Kern} (otal)] def
+/VoteRecorderTotalRowTitle [(T) {-0.09 Kern} (otal)] def
+/VoteRecorderMonkeyName (Singe) def
+
+/TastingNotesColumnHeadings [  (Heure)  [(V) {-0.06 Kern} (ue)]  (Odorat)  [(Go) /ucircumflex (t)]  (Points)  ] def
+/TastingNotesPageNumCompoundString [(Page ) {TastingSheetNum 1 add 5 string cvs}] def
+
+/DecantingNotesTopText [(Notes de d) /eacute (cantation)] def
+/DecantingNotesColumnHeadingTimes (Heure) def
+/DecantingNotesColumnHeadingNotes [/Eacute (tat du li) /egrave (ge, marquage, etc)] def
+
+/AccountsTopText (Les comptes) def
+/AccountsColumnGroupHeadings [
+	[/emdash ( Dons ) /emdash]
+	[/emdash ( Partage des co) /ucircumflex (ts ) /emdash]
+	[/emdash ( R) /egrave (glement ) /emdash]
+] def
+/AccountsSubColumnHeadings [
+	[  [(D) /eacute (j) /agrave ( pay) /eacute]   (Vins)  ]
+	[  (Vins)   (Aliments etc)  ]
+	[  (Doit)   [(Est d) /ucircumflex]   [(P) {-0.02 Kern} (ay) /eacute {( ) stringwidth pop 2 div 0 rmoveto} (?)]  ]
+] def  % Must be same length as AccountsColumnGroupHeadings
+
+/CorkDisplayTopText [(Les Li) /egrave (ges)] def
+
+/DecanterLabelsTopText [
+	/Eacute (tiquettes de carafe: couper; coller sur des cartes de visite; laisser s) /eacute (cher; percer les trous; )
+	(remplir les carafes; attendre; verser; boire; d) /eacute (guster. Boire beaucoup d) /quoteright {-0.06 Kern} (eau.)
+] def
+
+/EmptyPageString [(Moins de pages qu) /quoteright (avant, donc cette page est d) /eacute (sormais supprim) /eacute (e.)] def
+
+% Alas no accents. To be consistent with LicensingAgreementLinkPlacemats
+/LicensingAgreementTextPlacemats (Ce travail est concede sous une licence Creative Commons Attribution-ShareAlike 4.0 International Licence.) def
+```
+
+
 
 ## Danish = dansk
 
