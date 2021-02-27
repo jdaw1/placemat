@@ -21,7 +21,7 @@ Some of the parameters contain text in English.
 Of these, some belong to the wines or to the event and so will vary by tasting (e.g., `Circlearrays`, `HeadersLeft`, `ExternalLinks`, `CopyrightStatementPlacemats`, `BackgroundTextsGlassesTexts`). 
 But others could have a more fixed translation, as suggested below.
 
-Many languages are missing; all are incomplete; some are improvable. 
+Many languages are missing; most are incomplete; some are improvable. 
 If you have the skills and enthusiasm to repair, please provide translations in [an issue](http://github.com/jdaw1/placemat/issues). 
 (Obviously each `(string)` needs translating, not any of the `/ParameterName`.)
 
