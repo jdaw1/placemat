@@ -23,10 +23,16 @@ But others could have a more fixed translation, as suggested below.
 
 Many languages are missing; most are incomplete; some are improvable. 
 If you have the skills and enthusiasm to repair, please provide translations in [an issue](http://github.com/jdaw1/placemat/issues). 
-(Obviously each `(string)` needs translating, not any of the `/ParameterName`.)
+For translators, at the end of this document is the English, in non-PastScript plain text. 
+(Obviously the `/ParameterName` do not need translating.)
 
-The only languages eligible for this page are those written in (extended) Latin, Greek, or Cyrillic. 
+The only languages eligible for this page are those written in (extended) Latin. 
 Alas, Asian languages are [too difficult in PostScript](http://groups.google.com/g/comp.lang.postscript/c/ktoR1NrLsEc/m/UjOyVOfyPKwJ).
+
+The PostScript code contains some kerning, of the form `{-0.06 Kern}`. 
+The optimal amount of kerning varies by font, even by version of font: do inspect output and if necessary adjust the kerning.
+
+
 
 ## English
 
@@ -35,6 +41,7 @@ Alas, Asian languages are [too difficult in PostScript](http://groups.google.com
 	[ (Wine Of The Night?)  /questiondown ]
 	% [ (What is it?) ]  % If uncommenting this, insert a 'true' into the VoteRecorderShowTotalRow array.
 ] def  % Must be same length as GlassesClusteredOnVoteRecorders, each sub-array containing some number of TopTexts
+
 /VoteRecorderInstruction {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU {()} {(Record points, not rank.)} ifelse} def
 /VoteRecorderTotalColTitle [(T) {-0.06 Kern} (otal)] def
 /VoteRecorderTotalRowTitle [(T) {-0.09 Kern} (otal)] def
@@ -68,6 +75,8 @@ Alas, Asian languages are [too difficult in PostScript](http://groups.google.com
 /LicensingAgreementTextPlacemats (This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International Licence.) def  % To be consistent with LicensingAgreementLinkPlacemats
 ```
 
+
+
 ## German = Deutsche
 
 To be translated: `TastingNotesPageNumCompoundString`, `VoteRecorderTotalColTitle` = `VoteRecorderTotalRowTitle`, `DecanterLabelsTopText`, `EmptyPageString`, and `LicensingAgreementTextPlacemats`. 
@@ -78,6 +87,7 @@ If you can, please translate and post in [an issue](http://github.com/jdaw1/plac
 	[ [(W) {-0.06 Kern} (ein der Nacht?)]  /questiondown ]
 	% [ (Was ist es?) ]  % If uncommenting this, insert a 'true' into the VoteRecorderShowTotalRow array.
 ] def  % Must be same length as GlassesClusteredOnVoteRecorders, each sub-array containing some number of TopTexts
+
 /VoteRecorderInstruction {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU {()} {(Rekordpunkte, nicht Rang.)} ifelse} def
 /VoteRecorderMonkeyName (Affe) def
 
@@ -101,6 +111,7 @@ If you can, please translate and post in [an issue](http://github.com/jdaw1/plac
 
 /CorkDisplayTopText (Die Korken) def
 ```
+
 
 
 ## French = fran&ccedil;ais
@@ -155,18 +166,57 @@ Derived from [issue 70](http://github.com/jdaw1/placemat/issues/70), and discuss
 ## Danish = dansk
 
 This little was done long ago, when there were fewer page types and fewer parameters. 
-If you can translate the &lsquo;new&rsquo; parameters into Danish, please post them in [an issue](http://github.com/jdaw1/placemat/issues).
 
 ```PostScript
 /TastingNotesColumnHeadings [  (Gange)  (Eye)  [(N) /ae (se)]  (Mund)  (Score)  ] def
 ```
 
 
+
 ## Dutch = Nederlands
 
 This little was done long ago, when there were fewer page types and fewer parameters. 
-If you can translate the &lsquo;new&rsquo; parameters into Dutch, please post them in [an issue](http://github.com/jdaw1/placemat/issues).
 
 ```PostScript
 /TastingNotesColumnHeadings [  (Tijd)  (Kleur)  (Geur)  (Smaak)  (Punten)  ] def
 ```
+
+
+
+## English, plain text, for translators
+
+Finally, to help non-programmers translating into other langages, the English to be translated follows in non-PostScript *italic* text. 
+It should be possible to copy this into a text file, for ease of editing. 
+Please do post translations as [an issue](http://github.com/jdaw1/placemat/issues).
+
+* `VoteRecorderTopTexts`:
+	- *Wine Of The Night?*
+	- *What is it?*
+* `VoteRecorderInstruction`: *Record points, not rank.*
+* `VoteRecorderTotalColTitle` = `VoteRecorderTotalRowTitle`: *Total*
+* `VoteRecorderMonkeyName`: *Monkey*
+* `TastingNotesColumnHeadings`:
+	- *Times*
+	- *Eye*
+	- *Nose*
+	- *Mouth*
+	- *Score*
+* `TastingNotesPageNumCompoundString`: *Page*
+* `DecantingNotesTopText`: *Decanting Notes*
+* `DecantingNotesColumnHeadingTimes`: *Decant Time*
+* `DecantingNotesColumnHeadingNotes`: *Cork condition, branding, etc*
+* `AccountsTopText`: *The Accounts*
+* `AccountsColumnGroupHeadings`, `AccountsSubColumnHeadings`:
+	- *Bestowals*
+		* *Already paid*
+		* *Wines*
+	- *Share of costs*
+		* *Wines*
+		* *Food etc*
+	- *Settlement*
+		* *Owes*
+		* *Is owed*
+		* *Paid?*
+* `CorkDisplayTopText`: *The Corks*
+* `DecanterLabelsTopText`: *Decanter labels: cut; paste to business cards; allow to dry; punch holes; hang on clean decanters; fill decanters; wait; pour; drink; enjoy. Also drink plenty of water.*
+* `LicensingAgreementTextPlacemats`: *This work is licensed under a* 
