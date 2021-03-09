@@ -31,10 +31,10 @@ Broadly, if a later-tested style allows a larger radius than the current best, t
 If the element of `PackingStyles` is just the style, it doesn&rsquo;t need to be in an array. 
 But the elements of `PackingStyles` can have constraints and small variations. 
 If an element of `PackingStyles` is to have such extra detail, then that element must be an array, starting with the style name. 
-E.g.,: `[ /Diamonds  /OnlyIfSheetNumMin 1  /OnlyIfSheetNumMax 1  /GlassesNumMin 3  /GlassesNumMax 3  /OnlyIfOrientation /Landscape  /RowsNumMin 3  /RowsNumMax 4  /Mirror ]`. 
+E.g. (which is unrealistically verbose to show some of the possibilities): `[ /Diamonds  /OnlyIfSheetNumMin 1  /OnlyIfSheetNumMax 1  /GlassesNumMin 3  /GlassesNumMax 3  /OnlyIfOrientation /Landscape  /RowsNumMin 3  /RowsNumMax 4  /Mirror ]`. 
 
 The general mathematical problem, largest possible radius for *n* non-overlapping circles in a particular rectangle, is difficult (see [PackoMania](http://www.packomania.com/) for solutions to many special cases). 
-This code has enough generality that it often finds the best, and when it can&rsquo;t, such as 14 glasses on `/A3`, its solution is within 1% of the mathematical optimal, and usually much closer. 
+This code has enough generality that it often finds the best, and when it can&rsquo;t, such as 14 glasses on `/A3`, its radius is not much smaller than the mathematical optimum.
 
 For many possible tastings, `PackingStyles` can be left at its default value. 
 For example, if there are 24 different Madeiras over four `/A4` pages, the defaults work (though, of course, very important, don&rsquo;t forget to invite [me](http://www.jdawiseman.com/author.html)). 

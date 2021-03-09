@@ -1,0 +1,228 @@
+%!
+
+% Removed in May 2011 from the code at
+% www.jdawiseman.com/papers/placemat/placemat.ps
+% the manual of which is at
+% www.jdawiseman.com/papers/placemat/placemat.html
+
+% {TransformFunction} Tolerance  TransformPath  -
+% where:
+% TransformFunction maps x,y,dx,dy to x',y',dx',dy', i.e., it describes the transformation of a point and a direction from that point.
+% If dx=dy=0 then calling function will be ignoring direction.
+% Tolerance is a permitted error in destination space: using 0.12 is sensible.
+/TransformPath
+{
+	DeBugLevel 20 le {(+TransformPath) OutputToLog} if
+	6 dict begin
+	dup mul /Tolerance2 exch def
+	/TransformFunction exch def
+	/x0 /Null def
+	/y0 /Null def
+	/xm /Null def
+	/ym /Null def
+	{
+		[
+			{{TransformMoveto}} {{TransformLineto}} {{TransformCurveto}} {{TransformClosepath}} pathforall
+		] newpath {exec} forall
+	} Stopped {(Warning: protected path in TransformPath. No transform done. Probably caused by font: consider changing.) OutputToLog} if
+	end
+	DeBugLevel 20 le {(-TransformPath) OutputToLog} if
+} bind def  % /TransformPath
+
+% x0 y0 is previous point. xm and ym are where a closepath would moveto.
+
+% To be called by TransformPath
+/TransformMoveto
+{
+	DeBugLevel 10 le {(+TransformMoveto) OutputToLog} if
+	/y0 exch store  /x0 exch store
+	/ym y0 store  /xm x0 store
+	x0 y0 0 0 TransformFunction pop pop moveto
+	DeBugLevel 10 le {(-TransformMoveto) OutputToLog} if
+} bind def  % /TransformMoveto
+
+
+% To be called by TransformLineto and TransformClosepath which are called by TransformPath
+/TransformLinetoClosepath
+{
+	DeBugLevel 10 le {(+TransformLinetoClosepath) OutputToLog} if
+	12 dict begin
+	/TerminatingClosepath exch def
+	/y1 exch def  /x1 exch def
+
+	x0  y0  x1 x0 sub  y1 y0 sub  TransformFunction
+	/y0v exch def  /x0v exch def  /y0t exch def  /x0t exch def
+	x1  y1  x0 x1 sub  y0 y1 sub  TransformFunction
+	/y1v exch def  /x1v exch def  /y1t exch def  /x1t exch def
+
+	TerminatingClosepath {x0t x1t sub dup mul  y0t y1t sub dup mul  add Tolerance2  le} {false} ifelse
+	{
+		closepath
+	}
+	{
+		% Should this line be converted into a curve? Yes if the end vectors aren't parallel.
+		% Yes if transformed mid-points on line aren't collinear with x0t,y0t and x1t,y1t.
+
+		% Are both end vectors parallel to vector connecting transformed end points
+		y1t y0t sub x0v mul  x1t x0t sub y0v mul  sub  1E-4  le
+		y1t y0t sub x1v mul  x1t x0t sub y1v mul  sub  1E-4  le  and
+
+		% Boolean on stack saying whether end vectors parallel
+		{
+			true
+			[ 0.5  0.25 0.75  0.375 0.625 0.125 0.875 ]
+			{
+				/t exch def
+				x0 t mul x1 1 t sub mul add
+				y0 t mul y1 1 t sub mul add
+				0 0 TransformFunction pop pop
+				y0t t mul y1t 1 t sub mul add  sub dup mul  exch
+				x0t t mul x1t 1 t sub mul add  sub dup mul  add Tolerance2 gt
+					{pop false exit}
+				if
+			} forall  % t
+		}
+		{
+			false
+		} ifelse  % parallel
+
+		% Boolean on stack saying whether transformed straight line is straight
+		{
+			TerminatingClosepath
+			{
+				closepath
+				/y0 /Null store  /x0 /Null store
+				/ym /Null store  /xm /Null store
+			}
+			{
+				x1t y1t lineto
+				/x0 x1 store  /y0 y1 store
+			} ifelse  % TerminatingClosepath
+		}
+		{
+			x0 2 mul x1 add 3 div
+			y0 2 mul y1 add 3 div
+			x1 2 mul x0 add 3 div
+			y1 2 mul y0 add 3 div
+			x1 y1 TransformCurveto
+			TerminatingClosepath {closepath} if
+		} ifelse  % transformed straight line is straight
+	} ifelse  % Tolerance2 => closepath ?
+	end
+	DeBugLevel 10 le {(-TransformLinetoClosepath) OutputToLog} if
+} bind def  % /TransformLinetoClosepath
+
+% To be called by TransformPath
+/TransformLineto
+{
+	DeBugLevel 10 le {(+TransformLineto) OutputToLog} if
+	false TransformLinetoClosepath
+	DeBugLevel 10 le {(-TransformLineto) OutputToLog} if
+} bind def  % /TransformLineto
+
+% To be called by TransformPath
+/TransformClosepath
+{
+	DeBugLevel 10 le {(+TransformClosepath) OutputToLog} if
+	xm ym true TransformLinetoClosepath
+	DeBugLevel 10 le {(-TransformClosepath) OutputToLog} if
+} bind def  % /TransformClosepath
+
+% To be called by TransformPath
+/TransformCurveto
+{
+	DeBugLevel 10 le {(+TransformCurveto) OutputToLog} if
+	34 dict begin
+	/y3 exch def  /x3 exch def  /y2 exch def  /x2 exch def  /y1 exch def  /x1 exch def
+
+	% parameters of untransformed spline
+	/ax x0 neg x1 3 mul add x2 3 mul sub x3 add def
+	/bx x0 x1 2 mul sub x2 add 3 mul def
+	/cx x1 x0 sub 3 mul def
+	/ay y0 neg y1 3 mul add y2 3 mul sub y3 add def
+	/by y0 y1 2 mul sub y2 add 3 mul def
+	/cy y1 y0 sub 3 mul def
+
+	% To where does t=0.5 transform?
+	ax 0.5 mul bx add 0.5 mul cx add 0.5 mul x0 add
+	ay 0.5 mul by add 0.5 mul cy add 0.5 mul y0 add
+	0 0 TransformFunction pop pop /y05t exch def /x05t exch def
+
+	% Require that new curve start at transformed 0 and 3 points, and
+	% be heading in direction of transformed 0->1 and 3->2 vectors
+	x0   y0   x1 x0 sub   y1 y0 sub   TransformFunction
+	/y0v exch def /x0v exch def  /y0t exch def  /x0t exch def
+	x3   y3   x2 x3 sub   y2 y3 sub   TransformFunction
+	/y3v exch def /x3v exch def  /y3t exch def  /x3t exch def
+
+	x1  y1  0 0 TransformFunction pop pop  /y1t exch def  /x1t exch def
+	x2  y2  0 0 TransformFunction pop pop  /y2t exch def  /x2t exch def
+
+	% Now solve for these constraints, with points 1 (2) going to nearest point on vector out of 0 (3)
+	/denominator  x0v dup mul y0v dup mul add  def
+	denominator  0  ne
+	{
+		x0v x1t mul y0v y1t mul add x0v mul  x0t y0v mul y0t x0v mul sub y0v mul  add  denominator div  % x1t
+		y0v y1t mul x0v x1t mul add y0v mul  y0t x0v mul x0t y0v mul sub x0v mul  add  denominator div  % y1t
+		/y1t exch def  /x1t exch def
+	} if  % denominator  0  ne
+	/denominator  x3v dup mul y3v dup mul add  def
+	denominator  0  ne
+	{
+		x3v x2t mul y3v y2t mul add x3v mul  x3t y3v mul y3t x3v mul sub y3v mul  add  denominator div  % x2t
+		y3v y2t mul x3v x2t mul add y3v mul  y3t x3v mul x3t y3v mul sub x3v mul  add  denominator div  % y2t
+		/y2t exch def  /x2t exch def
+	} if  % denominator  0  ne
+
+	% parameters of transformed spline
+	/axt x0t neg x1t 3 mul add x2t 3 mul sub x3t add def
+	/bxt x0t x1t 2 mul sub x2t add 3 mul def
+	/cxt x1t x0t sub 3 mul def
+	/ayt y0t neg y1t 3 mul add y2t 3 mul sub y3t add def
+	/byt y0t y1t 2 mul sub y2t add 3 mul def
+	/cyt y1t y0t sub 3 mul def
+
+	% Now test that within tolerance for some carefully-ordered values of t
+	% This test is excessively hard: not just point close to line, but close to transformed same-t point
+	true
+	[ 0.5  0.25 0.75  0.375 0.625 0.125 0.875 ]
+	{
+		/t exch def
+		ax t mul bx add t mul cx add t mul x0 add
+		ay t mul by add t mul cy add t mul y0 add
+		0 0 TransformFunction pop pop
+		ayt t mul byt add t mul cyt add t mul y0t add  sub dup mul  exch
+		axt t mul bxt add t mul cxt add t mul x0t add  sub dup mul  add Tolerance2 gt
+			{pop false exit}
+		if
+	} forall  % t, leaving boolean on stack
+
+	{
+		x1t y1t x2t y2t x3t y3t curveto
+		/x0 x3 store  /y0 y3 store
+	}
+	{
+		% Failed tolerance test, so must split curve into two and transform each.
+		% Will reuse names x1t etc, but here meaning x1split etc
+
+		% for first part, just replace ax by ax 8 div, bx by bx 4 div, and cx by cx 2 div
+		/x1t x0  cx 2 div 3 div  add  def
+		/y1t y0  cy 2 div 3 div  add  def
+		/x2t cx 2 div bx 4 div add 3 div x1t add def
+		/y2t cy 2 div by 4 div add 3 div y1t add def
+		/x3t cx 2 div bx 4 div add ax 8 div add x0 add def
+		/y3t cy 2 div by 4 div add ay 8 div add y0 add def
+		x1t y1t x2t y2t x3t y3t TransformCurveto
+		/y0 y3t store  /x0 x3t store
+
+		% a little more algebra in second part
+		/x1t x0  ax 3 mul 8 div bx 2 div add cx 2 div add  3 div  add def
+		/y1t y0  ay 3 mul 8 div by 2 div add cy 2 div add  3 div  add def
+		/x2t x1t  ax 3 mul 4 div bx 3 mul 4 div add cx 2 div add  3 div  add def
+		/y2t y1t  ay 3 mul 4 div by 3 mul 4 div add cy 2 div add  3 div  add def
+		x1t y1t x2t y2t x3 y3 TransformCurveto
+		/y0 y3 store  /x0 x3 store
+	} ifelse
+	end
+	DeBugLevel 10 le {(-TransformCurveto) OutputToLog} if
+} bind def  % /TransformCurveto
