@@ -1,0 +1,89 @@
+%!
+
+% Removed in May 2011 from the code at
+% www.jdawiseman.com/papers/placemat/placemat.ps
+% the manual of which is at
+% www.jdawiseman.com/papers/placemat/placemat.html
+
+% /Left|/Center|/Right  /Top|/Middle|/Bottom  Width  Height  Hours Minutes true    AnalogueClock ...
+% /Left|/Center|/Right  /Top|/Middle|/Bottom  Width  Height  false    AnalogueClock ...
+% both formats returning        LeftX CenterX RightX BottomY MiddleY TopY
+/AnalogueClock
+{
+	DeBugLevel 30 le {(+AnalogueClock) OutputToLog} if
+	16 dict begin
+
+	/PaintHands exch def
+	PaintHands
+	{
+		/Minutes exch def
+		/Hours exch def
+	} if  % PaintHands
+	/H exch def
+	/W exch def
+	/yyMeaning exch def
+	/xxMeaning exch def
+
+	currentpoint  /yy exch def  /xx exch def
+
+	/m matrix currentmatrix def
+	/MinWH  W H lt {W} {H} ifelse  def
+
+	/x xx def /y yy def
+	xxMeaning /Left   eq {/x xx W 2 div add def} if
+	xxMeaning /Right  eq {/x xx W 2 div sub def} if
+	yyMeaning /Bottom eq {/y yy H 2 div add def} if
+	yyMeaning /Top    eq {/y yy H 2 div sub def} if
+
+	x y translate
+	W 2 div  H 2 div scale
+	0 1 moveto
+	0 0 1 90 450 arc closepath
+	m setmatrix
+	x y translate
+	W 2 div MinWH 60 div sub  H 2 div MinWH 60 div sub  scale
+	0 1 moveto
+	0 0 1 450 90 arcn closepath
+	m setmatrix
+
+	% InnerRadius OuterRadius Width angle  DoIt  -
+	/DoIt
+	{
+		x y translate
+		neg rotate
+		dup -2 div  4 -1 roll  moveto  % OR W
+		dup  0  rlineto  % OR W
+		dup 2 div  3 -1 roll  lineto  % W
+		neg 0 rlineto
+		closepath
+		m setmatrix
+	} def  % /DoIt
+
+	0 30 359  % Hour ticks
+	{
+		/a exch def
+		/d 1 a sin W div dup mul a cos H div dup mul add div sqrt 2 div def
+		d MinWH 0.125 mul 2 div sub   d MinWH 60 div 0.95 mul sub   MinWH 120 div   a   DoIt
+	} for  % 0 30 359
+
+	PaintHands
+	{
+		MinWH 20 div -2 div   MinWH 2 div 0.500 mul   1 index -2 mul   Hours 30 mul   DoIt
+		MinWH 30 div -2 div   MinWH 2 div 0.875 mul   1 index -2 mul   Minutes 6 mul   DoIt
+	}
+	{
+		% centre dot
+		x y MinWH 60 div add moveto
+		x y MinWH 60 div 90 450 arc closepath
+	} ifelse  % PaintHands
+
+	% Outputs left on stack: LeftX CenterX RightX BottomY MiddleY TopY
+	xxMeaning /Left   eq {xx} {x W 2 div sub} ifelse  % LeftX
+	x                                                 % CenterX
+	xxMeaning /Right  eq {xx} {x W 2 div add} ifelse  % RightX
+	xxMeaning /Bottom eq {yy} {y H 2 div sub} ifelse  % BottomY
+	y                                                 % CenterY
+	xxMeaning /Top    eq {yy} {y H 2 div add} ifelse  % TopY
+	end
+	DeBugLevel 30 le {(-AnalogueClock) OutputToLog} if
+} def  % /AnalogueClock

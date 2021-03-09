@@ -1,0 +1,257 @@
+%!
+
+/Font /Helvetica-Bold def
+
+/KernCharacter (I) def
+/GapProportionKernCharacter 1 4 div def
+/ForbidPositiveKern true def
+
+/Characters [ (I) (V) (X) (L) (C) (D) (M) ] def
+/PairsToOmit [ (VV) (VX) (VL) (VC) (VD) (VM) (LL) (LC) (LD) (LM) (DD) (DM) ] def
+
+/VariablePrefix (NumberRomanUpperKern) def
+
+/InitialString (\% Kernings calculated by www.jdawiseman.com/papers/placemat/kernings_calculator.ps) def
+/VersionString (www.jdawiseman.com/papers/placemat/kernings_calculator.ps as of 7th June 2014) def
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/DeBugLevel 65535 def
+
+/SqrtSqrt2   1.1892071150027210667 def
+
+% mark string ... string  ConcatenateToMark  string
+/ConcatenateToMark
+{
+	4 dict begin
+	counttomark /ctm exch def  /n 0 def
+	ctm {ToString  dup length n add /n exch def  ctm 1 roll} repeat
+	/p 0 def  /s n 65535 2 copy gt {exch} if pop string def
+	ctm  -1  0
+	{
+		dup 0 gt
+		{
+			-1 roll   dup length p add  65532 le
+				{s exch p exch dup length p add /p exch def putinterval}
+				{s exch p exch 0 65532 p sub getinterval putinterval  s 65532 (...) putinterval  cleartomark  s  exit}
+			ifelse  % too long
+		} {pop pop s} ifelse
+	} for
+	end
+} bind def  % /ConcatenateToMark
+
+/ToString
+{
+	1 dict begin  dup type cvlit /Type exch def
+	1 {
+		Type /integertype  eq {11 string cvs exit} if
+		Type /realtype     eq {16 string cvs exit} if
+		Type /nametype     eq {dup length string cvs exit} if
+		Type /stringtype   eq {exit} if
+		Type /booleantype  eq {5 string cvs exit} if
+		Type /operatortype eq {127 string cvs exit} if
+		Type /marktype     eq {pop (mark) exit} if
+		Type /nulltype     eq {pop (null) exit} if
+		0 true ThingToDebugText  % fall-back
+	} repeat  end
+} bind def  % /ToString
+
+
+/Stopped {countdictstack exch /StoppedStackMarker exch stopped
+	{{/StoppedStackMarker eq {exit} if} loop  countdictstack sub neg {end} repeat  //true}
+	{count 1 sub 0 exch 1 exch {dup 1 add index /StoppedStackMarker eq {exit} {pop} ifelse} for  2 add -2 roll pop pop  //false}
+ifelse} bind def
+
+/PathBBox
+{
+	DeBugLevel 10 le {(+PathBBox) OutputToLog} if
+	22 dict begin
+
+	1 {
+		/MinMaxDefinedX //false def
+		/MinMaxDefinedY //false def
+		/b //false def  % boolean playing two roles
+
+		/SetMinMaxX  % takes one parameter
+		{
+			/z exch def
+			MinMaxDefinedX
+				{MaxX z lt {/MaxX z def} {MinX z gt {/MinX z def} if} ifelse}  % test Max first as charpath typically drawn right-to-left
+				{/MaxX z def    /MinX z def    /MinMaxDefinedX //true def}
+			ifelse
+		} def  % SetMinMaxX
+		/SetMinMaxY  % takes one parameter
+		{
+			/z exch def
+			MinMaxDefinedY
+				{MaxY z lt {/MaxY z def} {MinY z gt {/MinY z def} if} ifelse}
+				{/MaxY z def    /MinY z def    /MinMaxDefinedY //true def}
+			ifelse
+		} def  % SetMinMaxY
+
+		% First rough bounds from a quick run-through, as doing so can save doing needless arithmetic in curve routine.
+		{
+			{ % start move
+				/y0 exch def    /x0 exch def
+				/b //true def
+			}  % end of move
+			{  % start line
+				/y1 exch def    /x1 exch def
+				b {x0 SetMinMaxX  y0 SetMinMaxY  /b //false def} if
+				x1 SetMinMaxX y1 SetMinMaxY
+			}  % end of line
+			{  % start curve
+				/y3 exch def  /x3 exch def  pop pop pop pop
+				b {x0 SetMinMaxX  y0 SetMinMaxY  /b //false def} if
+				x3 SetMinMaxX  y3 SetMinMaxY
+			}  % end of curve
+			{  % start close
+			}  % end of close
+			pathforall
+		} Stopped
+		{
+			(Warning: protected path in PathBBox, position 1) OutputToLog
+			GSave flattenpath pathbbox GRestore
+			exit
+		} if  % Stopped
+
+		% Second a slower run-through, not redoing the above, but, where necessary, thinking hard about curves. Different role for b.
+		{
+			{ % start move
+				/y0 exch def    /x0 exch def
+				/b //true def
+			}  % end of move
+			{  % start line
+				/y0 exch def    /x0 exch def
+			}  % end of line
+			{  % start curve
+				/y3 exch def  /x3 exch def    /y2 exch def  /x2 exch def    /y1 exch def  /x1 exch def
+
+				x1 MaxX gt  x1 MinX lt  x2 MaxX gt  x2 MinX lt  or or or
+				{
+					% Cubic: a t^3 + b t^2 + c t + x0
+					/a x0 neg x1 3 mul add x2 3 mul sub x3 add def
+					/b x0 x1 2 mul sub x2 add 3 mul def
+					/c x1 x0 sub 3 mul def
+
+					% Solve first differential for zero
+					[ c  2 b mul  3 a mul ] 0 1 0 PolynomialRoots {dup dup a mul b add mul c add mul x0 add SetMinMaxX} forall
+				} if  % x bounds outside MinX to MaxX
+
+				y1 MaxY gt  y1 MinY lt  y2 MaxY gt  y2 MinY lt  or or or
+				{
+					/a y0 neg y1 3 mul add y2 3 mul sub y3 add def
+					/b y0 y1 2 mul sub y2 add 3 mul def
+					/c y1 y0 sub 3 mul def
+					[ c  2 b mul  3 a mul ] 0 1 0 PolynomialRoots {dup dup a mul b add mul c add mul y0 add SetMinMaxY} forall
+				} if  % y bounds outside MinY to MaxY
+				/y0 y3 def    /x0 x3 def
+			}  % end of curve
+			{  % start close
+			}  % end of close
+			pathforall
+		} Stopped {(Warning: protected path in PathBBox, position 2) OutputToLog  GSave flattenpath pathbbox GRestore  exit} if
+
+		MinMaxDefinedX MinMaxDefinedY and
+		{
+			MinX MinY MaxX MaxY
+		}
+		{
+			b
+			{
+				% No lines, no curves, but some moves
+				{
+					{SetMinMaxY SetMinMaxX} {pop pop} {pop pop pop pop pop pop} {}  % the pop's should be redundant
+					pathforall
+				} Stopped
+				{
+					(Warning: protected path in PathBBox, position 3) OutputToLog
+					GSave flattenpath pathbbox GRestore  exit
+				} if  % Stopped
+				MinX MinY MaxX MaxY
+			}
+			{
+				% completely empty path
+				emptycurrentpath  % this may well cause execution to cease
+			} ifelse  % b
+		} ifelse  % MinMaxDefinedX MinMaxDefinedY and
+	} repeat  % 1 {...} repeat to enable exit
+
+	end
+	DeBugLevel 10 le {(-PathBBox) OutputToLog} if
+} bind def  % PathBBox
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/PageHeight 90000 127 div SqrtSqrt2 mul def
+/PageWidth  90000 127 div SqrtSqrt2 div def
+/LogFontSize 10 def
+
+/MeasurementFontSize 128 def
+
+() = VersionString = Font = () =
+Font MeasurementFontSize selectfont
+
+0 0 moveto  KernCharacter false charpath  PathBBox pop exch pop exch sub GapProportionKernCharacter mul /WantedGap exch def
+
+/CharacterBoxes [ Characters { [ exch 0 0 moveto false charpath  PathBBox newpath ] } forall ] def
+/CharacterWidths [ Characters {stringwidth pop} forall ] def
+
+/FontT 0 CharacterBoxes {3 get 2 copy lt {exch} if pop} forall MeasurementFontSize div def
+/FontB 0 CharacterBoxes {1 get 2 copy gt {exch} if pop} forall MeasurementFontSize div def
+
+/LogPageEmpty true def
+/OutputToLog
+{
+	dup =
+	Font LogFontSize selectfont
+	LogPageEmpty
+	{
+		<< /PageSize [PageWidth PageHeight] >> setpagedevice
+		/LogPageY PageHeight 27 sub FontT LogFontSize mul sub store
+		27 LogPageY moveto  VersionString show
+		/LogPageY LogPageY FontT FontB sub LogFontSize mul 4 mul sub store
+		27 LogPageY moveto  Font dup length string cvs show
+		/LogPageY LogPageY FontT FontB sub LogFontSize mul 4 mul sub store
+		/LogPageEmpty false store
+	} if
+	27 LogPageY moveto  show
+	/LogPageY LogPageY FontT FontB sub LogFontSize mul 2 mul sub store
+	LogPageY FontB LogFontSize mul add  27 lt {showpage /LogPageEmpty true def} if
+} bind def  % OutputToLog
+
+() OutputToLog
+mark (\% Font = ) Font (; KernChar = ") KernCharacter ("; GapProportionKernChar = ) GapProportionKernCharacter  ForbidPositiveKern {(; Forbid +ve kern)} if  ConcatenateToMark OutputToLog
+InitialString OutputToLog
+
+
+/InnerLoop
+{
+	true PairsToOmit {dup 0 get Characters i get 0 get eq exch 1 get Characters j get 0 get eq and {pop false exit} if} forall
+	{
+		mark (/) VariablePrefix Characters i get Characters j get ( {)
+		CharacterWidths i get  CharacterBoxes j get 0 get add   CharacterBoxes i get 2 get sub
+		WantedGap sub  MeasurementFontSize div neg
+		dup 0 ge ForbidPositiveKern and
+			{(} def  \% {) exch ( Kern})}
+			{( Kern} def)}
+		ifelse  ConcatenateToMark OutputToLog
+	} if  % not omitted
+} bind def  % /InnerLoop
+
+0 1 Characters length 1 sub
+{
+	/z exch def
+
+	/j z def   z 1 sub -1 0 {/i exch def  InnerLoop} for
+	/i z def   0 1 z        {/j exch def  InnerLoop} for
+} for  % z
+
+
+LogPageEmpty not {showpage} if
+
+() = Font = () =
+count mark exch (count = ) exch ConcatenateToMark =
