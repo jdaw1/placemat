@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Tuesday 9th March 2021
+% This version 20:30 Wednesday 10th March 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202103092300) def
+/ParametersVersionDateTimeAdobeFormat (D:202103102030) def
 
 /Circlearrays [
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
@@ -759,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202103092300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202103092030) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1687,13 +1687,13 @@ currentdict /ForReverseBinaryDict undef
 % Please don't. If you want code to be open source, respect this wish of an author who has released code for free. Thank you.
 /ExternalLinksExtras [
 	false   (GitHub)              (http://github.com/jdaw1/placemat)
-	false   (Raw PostScript)      (http://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps)
+	false   (PostScript)          (http://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps)
 	false   (Documentation start) (http://github.com/jdaw1/placemat/blob/main/Documentation/introduction_first_placemat.md)
 	false   (Placemats, list)     (http://www.jdawiseman.com/papers/placemat/placemats_list.html)
 	false   (Author)              (http://www.jdawiseman.com/author.html)
 ] def % /ExternalLinksExtras
 
-/mm {2.83464566929 mul} bind def  % 360 mul 127 div
+/mm {2.83464566929 mul} bind def  % 360 127 div
 
 % PaperType Orientation  Dimensions  PageWidth PageHeight
 % https://groups.google.com/forum/#!topic/comp.lang.postscript/vlfF8eGOCMA
@@ -1703,11 +1703,11 @@ currentdict /ForReverseBinaryDict undef
 	1 dict begin
 	exch /PaperType exch def
 	1 {
-		/A4      PaperType eq {595.27559   841.88976 exit} if  % For speed start with the five values most often used.
-		/A3      PaperType eq {841.88976  1190.55118 exit} if
-		/USL     PaperType eq {612     792     exit} if
-		/USLegal PaperType eq {612    1008     exit} if
-		/USL2    PaperType eq {792    1224     exit} if
+		/A4      PaperType eq {595.27559   841.88976 exit} if  % 210mm by 297mm. For speed start with the five values most often used.
+		/A3      PaperType eq {841.88976  1190.55118 exit} if  % 297mm by 420mm
+		/USL     PaperType eq {612         792       exit} if  % 8.5" by 11"
+		/USLegal PaperType eq {612        1008       exit} if  % 8.5" by 14"
+		/USL2    PaperType eq {792        1224       exit} if  % 11"  by 17"
 		PaperType type /arraytype eq {PaperType {execU} forall exit} if  % [ Small Large ]
 		/A4_USL PaperType eq {210 mm 792 exit} if  % Smaller of the A4/USL widths; smaller of the heights
 		/A0  PaperType eq { 841 mm 1189 mm  exit} if  % A0 can hold 112 glasses slightly larger than five on A4. Which is a large enough page size.
@@ -6088,7 +6088,7 @@ currentdict /SmallCapsDict undef
 
 	CircletextFont FontSize selectfont
 
-	/CircletextArrayWidths [ CircletextArray {StringPathBBox pop exch pop exch sub} forall ] def
+	/CircletextArrayWidths [ CircletextArray {StringWidthRecursive} forall ] def
 	/CircletextArraySumWidths  0 CircletextArrayWidths {add} forall  def
 
 	CircletextArraySumWidths 0 gt  NumCopies 1 ge  and
@@ -6189,7 +6189,7 @@ currentdict /SmallCapsDict undef
 		{
 			/i exch def
 			FontSettingCode
-			PieceW  i  Circlearray i get StringPathBBox pop exch pop exch sub  put
+			PieceW  i  Circlearray i get StringWidthRecursive  put
 			GSave 16384 dup scale newpath 0 0 moveto  Circlearray i get //true CharPathRecursive PathBBox GRestore
 			dup AscenderMax  gt {/AscenderMax  exch def} {pop} ifelse
 			PieceR exch  i exch  put
@@ -6308,7 +6308,7 @@ currentdict /SmallCapsDict undef
 			ThingIsString {thing length 1 ge} {//true} ifelse
 			{
 				matrix currentmatrix
-				/WidthChar0  thing ThingIsString {0 1 getinterval} if StringPathBBox pop exch pop exch sub  def
+				/WidthChar0  thing ThingIsString {0 1 getinterval} if StringWidthRecursive  def
 				1 1 Dists length 1 sub {/PartMiddleChar0 exch def   DistCurrent WidthChar0 2 div add Dists PartMiddleChar0 get lt {exit} if} for
 				PartMiddleChar0 2 mod 1 eq  % On a straight
 				{
@@ -6331,7 +6331,7 @@ currentdict /SmallCapsDict undef
 						{X R add Ang sin R D add mul sub         H R sub Y add Ang cos R D add mul add moveto  180 Ang add rotate  WidthChar0 -2 div VerticalOffset rmoveto}
 					ifelse  % PartMiddleChar0 2 eq
 				} ifelse  % PartMiddleChar0 2 mod 1 eq
-				/DistCurrent dup load  thing ThingIsString {0 CharsToShow getinterval dup show} {dup glyphshow} ifelse StringPathBBox pop exch pop exch sub  add store
+				/DistCurrent dup load  thing ThingIsString {0 CharsToShow getinterval dup show} {dup glyphshow} ifelse StringWidthRecursive  add store
 				setmatrix
 				ThingIsString {CharsToShow thing length lt {thing CharsToShow thing length CharsToShow sub getinterval CirclearrayInSemiRoundedRectangleRec} if} if
 			} if  % ... thing length 1 ge ...
@@ -6377,7 +6377,7 @@ currentdict /SmallCapsDict undef
 		{
 			/i exch def
 			FontSettingCode
-			PieceW  i  Circlearray i get StringPathBBox pop exch pop exch sub  put
+			PieceW  i  Circlearray i get StringWidthRecursive  put
 			GSave 16384 dup scale newpath 0 0 moveto  Circlearray i get //true CharPathRecursive PathBBox GRestore
 			pop  PieceR exch  i exch  put
 			pop  PieceL exch  i exch  put
@@ -7107,7 +7107,7 @@ currentdict /SmallCapsDict undef
 			WithinPage-WithinTitles-def
 			CircletextsMinCopiesIndividually SheetNum get WithinPage CircletextsMinCopies put
 			CircletextFont 1000 selectfont
-			0  Circlearrays WithinTitles get {StringPathBBox pop exch pop exch sub add} forall 1000 div  % if an item of the array is a user path then joining the paths would fail
+			0  Circlearrays WithinTitles get {StringWidthRecursive add} forall 1000 div  % if an item of the array is a user path then joining the paths would fail
 			dup CirclearraysW SheetNum get exch WithinPage exch put
 			( ) stringwidth pop  CircletextsMinNumSpacesBetween mul  Circlearrays WithinTitles get length mul  1000 div
 			add  CirclearraysPaddedW SheetNum get exch WithinPage exch put
