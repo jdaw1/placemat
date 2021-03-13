@@ -272,7 +272,8 @@ The default value is empty if `GlassesOnTastingNotePages` is empty, otherwise `[
 Then there is the complicated `VoteRecorderCrossedBox`. 
 Obviously, I don&rsquo; guess the wine I know. 
 It&rsquo;s elegant for that box to be crossed. 
-So `VoteRecorderCrossedBox` is code returning a Boolean, it usually accessing internal variables such as `WithinTitles` and `ThisName`, as well as `VoteRecorderShowTotalRow`.
+So `VoteRecorderCrossedBox` is code returning a Boolean, it usually accessing internal variables such as `WithinTitles` and `ThisName`, as well as `VoteRecorderShowTotalRow`. 
+(`VoteRecorderCrossedBox` is not intuitive to use: please suggest improvements in [issue 80](../../../issues/80/).)
 
 ### Superfluous
 
