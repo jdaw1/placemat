@@ -270,7 +270,7 @@ Within this are integers pointing to wines.
 The default value is empty if `GlassesOnTastingNotePages` is empty, otherwise `[GlassesOnTastingNotePages]`, so the cluster divisions (some 25% grey backgrounding) on the vote recorder are page divisions between the tasting-note pages.
 
 Then there is the complicated `VoteRecorderCrossedBox`. 
-Obviously, I don&rsquo; guess the wine I know. 
+Obviously, I am not to guess the wine I know. 
 It&rsquo;s elegant for that box to be crossed. 
 So `VoteRecorderCrossedBox` is code returning a Boolean, it usually accessing internal variables such as `WithinTitles` and `ThisName`, as well as `VoteRecorderShowTotalRow`. 
 (`VoteRecorderCrossedBox` is not intuitive to use: please suggest improvements in [issue 80](../../../issues/80/).)
