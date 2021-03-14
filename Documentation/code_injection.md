@@ -344,3 +344,42 @@ Of course, if precise hue of colour is important, do not assume that screen and 
 
 /InlineTitlesMaxNumberContours 2 def
 ```
+
+
+## Code, not injected
+
+### Auto-populating Names
+
+There are tastings to which everybody brings something, and sometimes some people bring more than one thing. 
+A standard presentation is to have the name of the person bringing the wine as the last item of the sub-arrays of `Circlearrays`. 
+For such tastings it&rsquo;s natural to populate `Names` from `Circlearrays`. 
+However, there&rsquo;s sometimes a blank or spare circle, for which the element of Circlearrays resembles `[ /dagger ]`.
+
+This code gets the last item of each sub-array of `Circlearrays`; discards those of which the type is `/nametype`; removes duplicates; and appends a spare-guest `()`.
+
+```PostScript
+/Names  % Non-duplicate non-nametypes from last items of Circlearrays' sub-arrays
+[
+	Circlearrays
+	{
+		dup length 1 sub get dup type /nametype eq
+			{pop}
+			{counttomark 1 sub -1 1 {index 1 index eq {pop exit} if} for}
+		ifelse  % /nametype
+	} forall  % Circlearrays
+	()
+] def  % /Names
+```
+
+Observe that this code is executed at parameter assignment; it is not injected.
+
+It has two imperfections. 
+
+* In PostScript strings are `eq`ual, but arrays are not. 
+I.e. `(Julian) (Julian) eq` returns true, but `[(Julian)] [(Julian)] eq` returns false. 
+So names that are compound strings, so all those with kerning or accents, should be assigned to a variable and that variable used. E.g., &ldquo;Jo&atilde;o&rdquo; should be organised via `/Joao [(J) {-0.02 Kern} (o) /atilde (o)] def`.
+
+* If `CircletextFont` &ne; `NamesFont`, then presence or quantities of kerning might need to differ. 
+In this case, `Names` must be set manually.
+
+
