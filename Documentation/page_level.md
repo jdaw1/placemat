@@ -277,7 +277,7 @@ It is easiest to think about these margin specifications as being of two types: 
 (&ldquo;Widdershins&rdquo;? [Widdershins](http://en.wikipedia.org/wiki/Widdershins)!) 
 There are variants, `[/Clockwise a b c]` and `[/Widdershins a b c]`, in which the radius of the arc is half the distance between the centres of circles b and c. 
 As above, the integer a can be replaced with [xa ya].
-* Between two pieces the non-array item `/Corner` causes there the sharp corner between two straight lines to be replaced with an arc, with radius `FlightSeparationsCornerRadius`. 
+* Between two pieces the non-array item `/Corner` causes the sharp join between two straight lines to be replaced with a soft corner, an arc, with radius `FlightSeparationsCornerRadius`. 
 * Between two pieces the non-array item `/Curve` causes what would have been two straight lines to be replaced with a B&eacute;zier curve made with the PostScript command `curveto`. 
 Perhaps this is now deprecated, `/Corner` being preferred.
 
