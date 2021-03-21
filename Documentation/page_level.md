@@ -217,8 +217,6 @@ Let&rsquo;s start with an example, to give a sense of the range of what can be d
 </div>
 
 ```PostScript
-/LogThisExtra (Headers not shown on bitmap images, as would be too small, but present in PDF.) def
-
 /PackingNestingColumnMajor true def
 
 /FlightSeparations true def
@@ -231,21 +229,26 @@ Let&rsquo;s start with an example, to give a sense of the range of what can be d
 		[ [/Bottom 5 7 +0.3]  [5 7]  [4 7]  [4 6]  [3 6]  [/Top 3 6 +0.3] ]
 		[ /Closed  [/Bottom 7 10 -0.3]  [7 10]  [9 10]  [9 12]  [8 11]  [/Right 11 +1.0]  [/Bottom 13 +1.0] ]
 	]  % - SheetNum = 0
-
 	[  % + SheetNum = 1
-		% Bezier cubics, so softer than straight, without clinging to the circles
+		% Gentle softening of corners, without clinging to the circles
+		[ [/Bottom 2 5]  /Corner  [2 5]  /Corner  [1 4]  /Corner  [3 4]  [3 6]  /Corner  [/Top 3 6 +0.3] ]
+		[ [/Bottom 5 7 +0.3]  /Corner  [5 7]  /Corner  [4 7]  /Corner  [4 6]  [3 6]  /Corner  [/Top 3 6 +0.3] ]
+		[ /Closed  [/Bottom 7 10 -0.3]  /Corner  [7 10]  /Corner  [9 10]  /Corner  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  [/Bottom 13 +1.0] ]
+	]  % - SheetNum = 1
+	[  % + SheetNum = 2
+		% Bezier cubics, so softer than /Corner
 		[ [/Bottom 2 5]  /Curve  [2 5]  /Curve  [1 4]  /Curve  [3 4]  /Curve  [3 6]  /Curve  [/Top 3 6 +0.3] ]
 		[ [/Bottom 5 7 +0.3]  /Curve  [5 7]  /Curve  [4 7]  /Curve  [4 6]  /Curve  [3 6]  /Curve  [/Top 3 6 +0.3] ]
 		[ /Closed  [/Bottom 7 10 -0.3]  /Curve  [7 10]  /Curve  [9 10]  /Curve  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  /Curve  [/Bottom 13 +1.0] ]
-	]  % - SheetNum = 1
-
-	[  % + SheetNum = 2
+	]  % - SheetNum = 2
+	[  % + SheetNum = 3
 		% Clinging tightly to the circles
 		[ [/Bottom 2 5]  [2 5]  [1 4]  [/Clockwise 4]  [/Widdershins 3]  [/Top 3 +1.0] ]
 		[ [/Bottom 5 +1.0]  [/Widdershins 5]  [/Clockwise 7]  [/Widdershins 4]  [/Clockwise 6]  [/Widdershins 3]  [/Top 3 +1.0] ]
 		[ /Closed  [/Bottom 10]  [/Clockwise 10]  [/HorizontalRightwards 10 +1.0]  [/VerticalUp 11 -1.0]  [/Clockwise 11]  [/Right 11]  [/Right 13]  [/Clockwise 13]  [/Bottom 13] ]
-	]  % - SheetNum = 2
+	]  % - SheetNum = 3
 ] def  % /FlightSeparationLines
+
 ```
 `FlightSeparationLines` is an array nested about four deep. 
 `FlightSeparationLines` is of the same length as GlassesOnSheets. 
@@ -274,7 +277,9 @@ It is easiest to think about these margin specifications as being of two types: 
 (&ldquo;Widdershins&rdquo;? [Widdershins](http://en.wikipedia.org/wiki/Widdershins)!) 
 There are variants, `[/Clockwise a b c]` and `[/Widdershins a b c]`, in which the radius of the arc is half the distance between the centres of circles b and c. 
 As above, the integer a can be replaced with [xa ya].
+* Between two pieces the non-array item `/Corner` causes there the sharp corner between two straight lines to be replaced with an arc, with radius `FlightSeparationsCornerRadius`. 
 * Between two pieces the non-array item `/Curve` causes what would have been two straight lines to be replaced with a B&eacute;zier curve made with the PostScript command `curveto`. 
+Perhaps this is now deprecated, `/Corner` being preferred.
 
 In [the PDF of examples](images/FlightSeparations.pdf) the header shows that page&rsquo;s item of `FlightSeparationLines` (i.e., `FlightSeparationLines` is an array one deeper than the header). 
 If using `FlightSeparations` it is strongly recommended that these examples be examined and appropriate parts used as a starting draft. 
@@ -285,7 +290,7 @@ If `FlightSeparationPaintSeparately` then `FlightSeparationPaintCode` is invoked
 If `FlightSeparationPaintSeparately not`, then all the lines on the current page are drawn, after which is the single call of `FlightSeparationPaintCode`. 
 The former is better if the format is not constant; the latter preferred if overlapping or crossing lines are to be double-stroked.
 
-Some control over the radius of the arcs is sometimes possible. If any circles touch, the radius of the arcs equals that of the circles. 
+Some control over the radius of the `/Clockwise`/`/Widdershins` arcs is sometimes possible. If any circles touch, the radius of the arcs equals that of the circles. 
 If no circles touch (probably because of `MaxRadius` or `ShrinkRadii`) then `FlightSeparationArcRadiusControl` controls the radius. 
 `FlightSeparationArcRadiusControl` should be both &ge;0 and &le;1; the default being the maximum: if it is 0, the radius of the arcs is that of the circles; if 1, the radius is the half the distance between the closest circles; if between, between.
 
