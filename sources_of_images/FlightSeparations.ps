@@ -1,14 +1,17 @@
 %!PS
 
-% This version 15:15 Saturday 13th February 2021
+% This version 17:00 Sunday 21st March 2021
 
-% Permission is given to make non-commercial use of this program, and to distribute its output. But not to distribute the code: refer interested parties to the latest version at the link below, where instructions can also be found.
-% Improvements to the code should be sent them to the author.  Inviting the author to the tastings is, well, almost compulsory! The code is mostly debugged, but errors surely remain. It is provided as-is, without liability: it is free.
-% The most recent version is available via http://www.jdawiseman.com/papers/placemat/placemat.html .  Copyright 1988 to 2021 Julian D. A. Wiseman who is contactable via www.jdawiseman.com/author.html
+% This sofware is licensed under the GNU General Public License v3.0.
+% Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
+% modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must
+% be preserved. Contributors provide an express grant of patent rights.
 
-/ParametersVersionDateTimeAdobeFormat (D:202102131515) def
+% For these purposes a change in the parameters of the code does not need to be released.
+% Nor does any output: not PDF; nor images of such a document.
+% But it does include re-usable improvements to the body of the code.
 
-/OutputForBitmap false def  % Not part of the official code; merely the user doing PostScript. Which is allowed, perhaps even encouraged.
+/ParametersVersionDateTimeAdobeFormat (D:202103211715) def
 
 /LogThisExtra (Headers not shown on bitmap images, as would be too small, but present in PDF.) def
 
@@ -60,17 +63,13 @@
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [] def  % /HeadersLeft
 /HeadersCenter [
-	OutputForBitmap not
-	{
-		-999 
-		{TypeOfPagesBeingRendered /Glasses ne {()} {[ ([     ) FlightSeparationLines SheetNum get {0 false ThingToDebugText (     ) } forall (]) ]} ifelse}
-	} if
+	-999   {TypeOfPagesBeingRendered /Glasses ne {()} {[ ([     ) FlightSeparationLines SheetNum get {0 false ThingToDebugText (     ) } forall (]) ]} ifelse}
 ] def
 /HeadersRight [] def  % /HeadersRight
 
 /GlassesOnSheets [
 	[ 0  1  Titles length 1 sub {} for ]
-	dup dup
+	dup dup dup
 ] def  % /GlassesOnSheets
 
 /PackingNestingColumnMajor true def  % Default value, which can be overridden at the level of the individual item of PackingStyles
@@ -90,29 +89,36 @@
 		[ /Closed  [/Bottom 7 10 -0.3]  [7 10]  [9 10]  [9 12]  [8 11]  [/Right 11 +1.0]  [/Bottom 13 +1.0] ]
 	]  % - SheetNum = 0
 	[  % + SheetNum = 1
-		% Bezier cubics, so softer than straight, without clinging to the circles
+		% Gentle softening of corners, without clinging to the circles
+		[ [/Bottom 2 5]  /Corner  [2 5]  /Corner  [1 4]  /Corner  [3 4]  [3 6]  /Corner  [/Top 3 6 +0.3] ]
+		[ [/Bottom 5 7 +0.3]  /Corner  [5 7]  /Corner  [4 7]  /Corner  [4 6]  [3 6]  /Corner  [/Top 3 6 +0.3] ]
+		[ /Closed  [/Bottom 7 10 -0.3]  /Corner  [7 10]  /Corner  [9 10]  /Corner  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  [/Bottom 13 +1.0] ]
+	]  % - SheetNum = 1
+	[  % + SheetNum = 2
+		% Bezier cubics, so softer than /Corner
 		[ [/Bottom 2 5]  /Curve  [2 5]  /Curve  [1 4]  /Curve  [3 4]  /Curve  [3 6]  /Curve  [/Top 3 6 +0.3] ]
 		[ [/Bottom 5 7 +0.3]  /Curve  [5 7]  /Curve  [4 7]  /Curve  [4 6]  /Curve  [3 6]  /Curve  [/Top 3 6 +0.3] ]
 		[ /Closed  [/Bottom 7 10 -0.3]  /Curve  [7 10]  /Curve  [9 10]  /Curve  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  /Curve  [/Bottom 13 +1.0] ]
-	]  % - SheetNum = 1
-	[  % + SheetNum = 2
+	]  % - SheetNum = 2
+	[  % + SheetNum = 3
 		% Clinging tightly to the circles
 		[ [/Bottom 2 5]  [2 5]  [1 4]  [/Clockwise 4]  [/Widdershins 3]  [/Top 3 +1.0] ]
 		[ [/Bottom 5 +1.0]  [/Widdershins 5]  [/Clockwise 7]  [/Widdershins 4]  [/Clockwise 6]  [/Widdershins 3]  [/Top 3 +1.0] ]
 		[ /Closed  [/Bottom 10]  [/Clockwise 10]  [/HorizontalRightwards 10 +1.0]  [/VerticalUp 11 -1.0]  [/Clockwise 11]  [/Right 11]  [/Right 13]  [/Clockwise 13]  [/Bottom 13] ]
-	]  % - SheetNum = 2
+	]  % - SheetNum = 3
 	counttomark GlassesOnSheets length exch sub {[]} repeat
 ] def  % /FlightSeparationLines
 
 /CircletextsMaxCopies 9999 def
 
-/OutputLogToPage OutputForBitmap not def
+/OutputLogToPage false def
 
 % Recommendation: move changed parameters to just above this line.
 
 % % % % % % % %
 % Essentials  %
 % % % % % % % %
+
 
 
 /LeftHanders [ (RMW)  (RAW)  (SRG) (Simon G.)  (HEG) (Helen G.)  (CSD) (Chris D.)  (CFD) (Conan D.)  (NCG) (Marc Jackson)  (JG) (Jeff G.)  (ZDR) (Zak R.) ] def
@@ -123,9 +129,10 @@
 
 /PDF_title (Placemats) def  % Names PDF file; appears as tab name in browser, and in search results
 
+% Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /ExternalLinks [  % Array, length a multiple of three:  indented0-boolean, (Descriptor0), (http://URL0),  indented1-boolean, (Descriptor1), (http://URL1),  ...
 	false   (Thread on ThePortForum.com)     (http://www.theportforum.com/viewtopic.php?t=00175&view=unread#unread)
-	false   (Latest version this placemat)   (http://www.jdawiseman.com/papers/placemat/placemat.pdf)
+%	false   (Latest version this placemat)   (http://www.jdawiseman.com/2021/    .pdf)
 %	true    (in list of placemats)           (http://www.jdawiseman.com/papers/placemat/placemats_list.html#a2021MMDD)
 	false   (Boot & Flogger)                 (http://www.davy.co.uk/wine-bar/boot-and-flogger/)
 	true    (SE1 1TA, streetmap.co.uk)       (http://www.streetmap.co.uk/map.srf?x=532409&y=180083&z=106&pc=SE1+1TA)
@@ -386,6 +393,7 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /FlightSeparationPaintCode {gsave 0 setlinecap 2.4 setlinewidth 0.75 setgray stroke grestore 1 setlinecap 0.96 setlinewidth 1 setgray stroke} def
 /FlightSeparationPaintSeparately false def
+/FlightSeparationsCornerRadius {Radii SheetNum get 4 div} def
 /FlightSeparationArcRadiusControl 1 def  % In range 0 to 1 inclusive. 0 = radius of circle; 1 = half-way to nearest glass. If glasses circles touch, irrelevant.
 
 /PaintBackgroundInsideGlassCircles {} def  % Paints a background pattern. Called with centre of circle translated to 0,0; and clipped to radius Radii SheetNum get.
@@ -393,41 +401,43 @@ if} bind def  % /VoteRecorderCrossedBox
 /PaintForegroundCode {} def  % Paints a pattern on top of everything. Will probably refer to TypeOfPagesBeingRendered and then to SheetNum or TastingSheetNum.
 
 
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-% Needing to be translated (also VoteRecorderTopTexts and other params above).  %
-% Please send good translations to the author, www.jdawiseman.com/author.html   %
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-
-/TastingNotesColumnHeadings [ (Times) (Eye) (Nose) (Mouth) (Score) ] def  % German: [ (Zeiten) (Auge) (Nase) (Gaumen) (Punkte) ]   Danish: [ (Gange) (Eye) [(N) /ae (se)] (Mund) (Score) ]   Dutch: [ (Tijd) (Kleur) (Geur) (Smaak) (Punten) ]
-/TastingNotesPageNumCompoundString [(Page ) {TastingSheetNum 1 add 5 string cvs}] def
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% These parameters, and VoteRecorderTopTexts etc above, might need to be translated.            %
+% Some translations at http://github.com/jdaw1/placemat/blob/main/Documentation/translations.md %
+% Please submit others to http://github.com/jdaw1/placemat/issues                               %
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 /VoteRecorderInstruction {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU {()} {(Record points, not rank.)} ifelse} bind def
 /VoteRecorderTotalColTitle [(T) {-0.06 Kern} (otal)] def
 /VoteRecorderTotalRowTitle [(T) {-0.09 Kern} (otal)] def
+/VoteRecorderMonkeyName (Monkey) def
 
-/DecantingNotesTopText (Decanting Notes) def  % German: [(V) {-0.06 Kern} (erkostungsnotizen)]
-/DecantingNotesColumnHeadingTimes (Decant Time) def  % German: (Dekantierzeit)
-/DecantingNotesColumnHeadingNotes (Cork condition, branding, etc) def  % German: (Korken, branding, etc)
+/TastingNotesColumnHeadings [  (Times)  (Eye)  (Nose)  (Mouth)  (Score)  ] def
+/TastingNotesPageNumCompoundString [(Page ) {TastingSheetNum 1 add 5 string cvs}] def
 
-/AccountsTopText (The Accounts) def  % German: Die Accounts
+/DecantingNotesTopText (Decanting Notes) def
+/DecantingNotesColumnHeadingTimes (Decant Time) def
+/DecantingNotesColumnHeadingNotes (Cork condition, branding, etc) def
+
+/AccountsTopText (The Accounts) def
 /AccountsColumnGroupHeadings [
-	[/emdash ( Bestowals ) /emdash]    [/emdash ( Share of costs ) /emdash]   [/emdash ( Settlement ) /emdash]
-	% German: [/emdash ( Geschenke ) /emdash]    [/emdash ( Kosten wurden geteilt ) /emdash]   [/emdash ( Einigung ) /emdash]
+	[/emdash ( Bestowals ) /emdash]
+	[/emdash ( Share of costs ) /emdash]
+	[/emdash ( Settlement ) /emdash]
 ] def
 /AccountsSubColumnHeadings [
 	[  (Already paid)   (Wines)  ]
 	[  (Wines)   (Food etc)  ]
 	[  (Owes)   (Is owed)     [(P) {-0.02 Kern} (aid?)]  ]
-	% German: [ (Bereits bezahlt)  [(W) {-0.06 Kern} (eine)] ]  [ [(W) {-0.06 Kern} (eine)]  (Essen etc) ] [ (Schuldet)  (Ist geschuldet)  (Bezahlt?) ] and maybe change AccountsColumnRelativeWidths
 ] def  % Must be same length as AccountsColumnGroupHeadings
 
-/CorkDisplayTopText (The Corks) def  % German: (Die Korken)
-
-/VoteRecorderMonkeyName (Monkey) def  % German: Affe
+/CorkDisplayTopText (The Corks) def
 
 /DecanterLabelsTopText (Decanter labels: cut; paste to business cards; allow to dry; punch holes; hang on clean decanters; fill decanters; wait; pour; drink; enjoy. Also drink plenty of water.) def
 
 /EmptyPageString (Fewer pages than before, so this page now omitted.) def
+
+/LicensingAgreementTextPlacemats (This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International Licence.) def  % To be consistent with LicensingAgreementLinkPlacemats
 
 
 % % % % % % % % % % % % % % % % % % % %
@@ -723,8 +733,8 @@ if} bind def  % /VoteRecorderCrossedBox
 /PagesToBeInsertedNumPages [ 1 ] def
 /PagesToBeInsertedDescriptions [ (Food order) ] def
 
-/LicensingAgreementTextPlacemats (This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International Licence.) def
-/LicensingAgreementLinkPlacemats (http://creativecommons.org/licenses/by-sa/4.0/deed.en) def
+/LogThisExtra () def
+/LicensingAgreementLinkPlacemats (http://creativecommons.org/licenses/by-sa/4.0/deed.en) def  % To be consistent with LicensingAgreementTextPlacemats
 /OutputLogToLog true def
 /OutputLogToAnnotation OutputLogToPage not def
 /PageLabelOverride false def  % E.g., {/Glasses TypeOfPagesBeingRendered eq}
@@ -749,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /OuterMarginT 0 def
 /OuterMarginB 0 def
 
-1 srand  % Change for different randomisation (1 is the starting value for both GhostScript and Adobe Distiller).
+1 srand  % Change for different randomisation (1 is the iniital value for both GhostScript and Adobe Distiller).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -783,7 +793,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202102131515) def
+/SoftwareVersionDateTimeAdobeFormat (D:202103211700) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1711,13 +1721,13 @@ currentdict /ForReverseBinaryDict undef
 % Please don't. If you want code to be open source, respect this wish of an author who has released code for free. Thank you.
 /ExternalLinksExtras [
 	false   (GitHub)              (http://github.com/jdaw1/placemat)
-	false   (Raw PostScript)      (http://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps)
+	false   (PostScript)          (http://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps)
 	false   (Documentation start) (http://github.com/jdaw1/placemat/blob/main/Documentation/introduction_first_placemat.md)
 	false   (Placemats, list)     (http://www.jdawiseman.com/papers/placemat/placemats_list.html)
 	false   (Author)              (http://www.jdawiseman.com/author.html)
 ] def % /ExternalLinksExtras
 
-/mm {2.83464566929 mul} bind def  % 360 mul 127 div
+/mm {2.83464566929 mul} bind def  % 360 127 div
 
 % PaperType Orientation  Dimensions  PageWidth PageHeight
 % https://groups.google.com/forum/#!topic/comp.lang.postscript/vlfF8eGOCMA
@@ -1727,11 +1737,11 @@ currentdict /ForReverseBinaryDict undef
 	1 dict begin
 	exch /PaperType exch def
 	1 {
-		/A4      PaperType eq {595.27559   841.88976 exit} if  % For speed start with the five values most often used.
-		/A3      PaperType eq {841.88976  1190.55118 exit} if
-		/USL     PaperType eq {612     792     exit} if
-		/USLegal PaperType eq {612    1008     exit} if
-		/USL2    PaperType eq {792    1224     exit} if
+		/A4      PaperType eq {595.27559   841.88976 exit} if  % 210mm by 297mm. For speed start with the five values most often used.
+		/A3      PaperType eq {841.88976  1190.55118 exit} if  % 297mm by 420mm
+		/USL     PaperType eq {612         792       exit} if  % 8.5" by 11"
+		/USLegal PaperType eq {612        1008       exit} if  % 8.5" by 14"
+		/USL2    PaperType eq {792        1224       exit} if  % 11"  by 17"
 		PaperType type /arraytype eq {PaperType {execU} forall exit} if  % [ Small Large ]
 		/A4_USL PaperType eq {210 mm 792 exit} if  % Smaller of the A4/USL widths; smaller of the heights
 		/A0  PaperType eq { 841 mm 1189 mm  exit} if  % A0 can hold 112 glasses slightly larger than five on A4. Which is a large enough page size.
@@ -3265,7 +3275,7 @@ currentdict /SmallCapsDict undef
 % Returned array is of points that are, approximately, maximally far from the edge.
 % In a typical case, the most distant point will be on the edge of the circle. So these points are denser.
 % But if the path is the likes of a large letter 'O', the relevant point could be internal, so there are plenty fo these as well.
-% http://www.ThePortForum.com/viewtopic.php?p=55028#p55028 (reason for doing this computation)
+% http://www.ThePortForum.com/viewtopic.php?t=6608&p=55028#p55028 (reason for doing this computation)
 % https://groups.google.com/forum/#!topic/comp.lang.postscript/86b7Sg8v7B0 (non-discussion about how to do it)
 /LineWidthThatCoversCircle
 {
@@ -4158,11 +4168,11 @@ currentdict /SmallCapsDict undef
 				dup  /Mirror                           eq {pop  /i i 1 add store  exit} if
 				dup  /SuppressNonLeftOrnaments         eq {pop  /i i 1 add store  exit} if
 				dup  /SuppressNonRightOrnaments        eq {pop  /i i 1 add store  exit} if
-				dup  /VerticalAlignment                eq {pop  /i i 2 add store  exit} if
+				dup  /VerticalAlignment                eq {pop  /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=79314#p79314
 				dup  /HorizontalAlignment              eq {pop  /i i 2 add store  exit} if
 				dup  /RectColsToLeftOrRowsBelow        eq {pop  /i i 2 add store  exit} if
 				dup  /PackingNestingColumnMajor        eq {pop  /i i 2 add store  exit} if
-				dup  /PackingDirectionTopToBottom      eq {pop  /i i 2 add store  exit} if
+				dup  /PackingDirectionTopToBottom      eq {pop  /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=73641#p73641
 				dup  /PackingDirectionLeftToRight      eq {pop  /i i 2 add store  exit} if
 				dup  /TempleExtraColsToLeftOrRowsBelow eq {pop  /i i 2 add store  exit} if
 				mark exch (Warning: an item of PackingStyles contains the non-recognised sub-parameter ) exch 256 string cvs ConcatenateToMark OutputToLog
@@ -4425,6 +4435,7 @@ currentdict /SmallCapsDict undef
 		} if  % /RectangularDislocation
 
 
+		% Discussion of name: http://www.theportforum.com/viewtopic.php?t=175&p=57297#p57297
 		/PostsAndLintel BaseStyle eq
 		{
 			DeBugLevel 50 le {( ProcessOnePackingType, /PostsAndLintel) OutputToLog} if
@@ -4472,6 +4483,7 @@ currentdict /SmallCapsDict undef
 
 		/Arch BaseStyle eq
 		{
+			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=56857#p56857
 			DeBugLevel 50 le {( ProcessOnePackingType, /Arch) OutputToLog} if
 			/NGiA  NG CentralGlasses sub  def  % Number Glasses in Arch
 			NGiA 3 ge
@@ -4517,7 +4529,7 @@ currentdict /SmallCapsDict undef
 
 					NGiA 2 add dup mul  -1  0
 					{
-						0 le {/UpperR R def (Error: ProcessOnePackingType, Arch, extremely slow convergence. Please send PostScript file to the author. www.jdawiseman.com/author.html) OutputToLog exit} if
+						0 le {/UpperR R def (Error: ProcessOnePackingType, Arch, extremely slow convergence. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog exit} if
 						/DistSquaredMax 0 def
 						/DistSquaredMin H W add dup mul def
 						% Test for exit of jiggling of PositionsX & PositionsY
@@ -4946,11 +4958,11 @@ currentdict /SmallCapsDict undef
 				dup  /ShoveLeft                         eq {pop  /ShoveLeft  //true store  /i i 1 add store  exit} if
 				dup  /ShoveRight                        eq {pop  /ShoveRight //true store  /i i 1 add store  exit} if
 				dup  /CentralGlasses                    eq {pop  /CentralGlasses                    PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
-				dup  /VerticalAlignment                 eq {pop  /VerticalAlignment                 PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
+				dup  /VerticalAlignment                 eq {pop  /VerticalAlignment                 PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=79314#p79314
 				dup  /HorizontalAlignment               eq {pop  /HorizontalAlignment               PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /RectColsToLeftOrRowsBelow         eq {pop  /RectColsToLeftOrRowsBelow         PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /PackingNestingColumnMajor         eq {pop  /PackingNestingColumnMajor         PackingDescriptor i 1 add GetEU def    /i i 2 add store  exit} if
-				dup  /PackingDirectionTopToBottom       eq {pop  /PackingDirectionTopToBottom       PackingDescriptor i 1 add GetEU def    /i i 2 add store  exit} if
+				dup  /PackingDirectionTopToBottom       eq {pop  /PackingDirectionTopToBottom       PackingDescriptor i 1 add GetEU def    /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=73641#p73641
 				dup  /PackingDirectionLeftToRight       eq {pop  /PackingDirectionLeftToRight       PackingDescriptor i 1 add GetEU def    /i i 2 add store  exit} if
 				dup  /TempleExtraColsToLeftOrRowsBelow  eq {pop  /TempleExtraColsToLeftOrRowsBelow  PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /Positions                         eq {pop  /i PackingDescriptor length store  exit} if
@@ -5381,7 +5393,7 @@ currentdict /SmallCapsDict undef
 
 			NGiA 2 add dup mul  -1  0
 			{
-				0 le {/UpperR R def (Error: CirclePacking, Arch, extremely slow convergence. Please send PostScript file to the author. www.jdawiseman.com/author.html) OutputToLog exit} if
+				0 le {/UpperR R def (Error: CirclePacking, Arch, extremely slow convergence. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog exit} if
 				/DistSquaredMax 0 def
 				/DistSquaredMin H W add dup mul def
 				% Test for exit of jiggling of PositionsX & PositionsY
@@ -5769,7 +5781,7 @@ currentdict /SmallCapsDict undef
 			{
 				[ 4 R mul S sub S mul NC 4 add NC mul 5 add 4 mul R R mul mul sub NC 2 add 8 mul R L mul mul add 4 L L mul mul sub  S 2 R mul sub 2 mul  3 ]
 				2 R mul //PrinterEpsilon sub  //false   L R 2 mul sub //PrinterEpsilon add  //false  //PrinterEpsilon  PolynomialRoots
-				dup length 0 eq {pop () (Error: CirclePacking, DiamondsPlus, failed to compute dist. Please send your code to the author: www.jdawiseman.com/author.html) () OutputToLog OutputToLog OutputToLog /dist R 2 mul def} {Min /dist exch def} ifelse
+				dup length 0 eq {pop () (Error: CirclePacking, DiamondsPlus, failed to compute dist. Please submit an issue to http://github.com/jdaw1/placemat/issues/) () OutputToLog OutputToLog OutputToLog /dist R 2 mul def} {Min /dist exch def} ifelse
 				/xstep R def
 			}{
 				/QuarticCoeffs
@@ -6309,7 +6321,7 @@ currentdict /SmallCapsDict undef
 			/Ang  DistCurrent CW 2 div add  Dists PartMiddle 1 sub get sub  Dists PartMiddle get Dists PartMiddle 1 sub get sub  div 90 mul  def
 			GRestore  matrix currentmatrix
 			[
-				{(Error: CirclearrayInSemiRoundedRectangleRec, impossible PartMiddle. Please send .ps file to the author, www.jdawiseman.com/author.html) OutputToLog stop}
+				{(Error: CirclearrayInSemiRoundedRectangleRec, impossible PartMiddle. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog stop}
 				{X W D add add  Y AD DistCurrent add add  moveto 90 rotate  0 VerticalOffset rmoveto}
 				{W R sub X add Ang cos R D add mul add   H R sub Y add Ang sin R D add mul add moveto  90  Ang add rotate  CW -2 div VerticalOffset rmoveto}
 				{X W R DistCurrent Dists 2 get sub add sub add   Y H D add add  moveto 180 rotate  0 VerticalOffset rmoveto}
@@ -6983,7 +6995,7 @@ currentdict /SmallCapsDict undef
 				} {pop} ifelse  % too close
 			} for  % WP
 		} for  % WithinPage
-		GlassPositionsBug {mark (Error in the computation of GlassPositions ) SheetNum ( get. Please send code and log file to the programmer: www.jdawiseman.com/author.html. Execution continuing.) ConcatenateToMark OutputToLog} if
+		GlassPositionsBug {mark (Error in the computation of GlassPositions ) SheetNum ( get. Please submit an issue to http://github.com/jdaw1/placemat/issues/ . Execution continuing.) ConcatenateToMark OutputToLog} if
 		UndefMgns
 		end
 	} bind def  % CodeCallCirclePacking
@@ -7116,7 +7128,6 @@ currentdict /SmallCapsDict undef
 	/CirclearraysB [ SheetLengths {array} forall ] def
 	/CirclearraysT [ SheetLengths {array} forall ] def
 	/CirclearraysDescenderMin [ NumSheets {0} repeat ] def
-	/CircletextsTweakSizeScores null def
 	18 dict begin
 	/CirclearraysW [ SheetLengths {array} forall ] def
 	/CirclearraysPaddedW [ SheetLengths {array} forall ] def
@@ -7308,19 +7319,17 @@ currentdict /SmallCapsDict undef
 		end
 	} bind def  % /CirclearraysNScore
 
-	CirclearraysNScore /CirclearraysBestScore exch def
-	/CirclearraysUnroundedNBest [ CirclearraysUnroundedN {[ exch {} forall ]} forall ] def
-	CircletextsTweakSize {/CircletextsTweakSizeScores mark (CircletextMaxFontSizeAbsolute = ) /CircletextMaxFontSizeAbsolute load (; CircletextMaxFontSizeProportionRadius = ) /CircletextMaxFontSizeProportionRadius load
-	(; CircletextMaxFontSizeMayBeSlightlyExceeded = ) CircletextMaxFontSizeMayBeSlightlyExceeded (.\nCircletextsTweakSizeScores: Score=) CirclearraysBestScore ( and FontSizes=) ConcatenateToMark CirclearraysFontSizes SizeArrayOutput store} if
+	/CirclearraysBestScore CirclearraysNScore def
 	64  CircletextsTweakSize {-1} {1} ifelse  0
 	{
 		/CirclearraysAnyImprovement //false def
+		/CirclearraysUnroundedNBest [ CirclearraysUnroundedN {[ exch {} forall ]} forall ] def
 		/CirclearraysProtoBestFontSize 0 def
 		/CirclearraysProtoBestScore null def
 		/CirclearraysProtoBestSheetNum null def
 		/CirclearraysProtoBestWithinPage null def
 		/CirclearraysProtoBestMinCopies null def
-		0 eq {(Warning: CirclearraysNScore not converging. Please send PostScript file to author, www.jdawiseman.com/author.html. Execution continuing.) OutputToLog} if
+		0 eq {(Warning: CirclearraysNScore not converging. Please submit an issue to http://github.com/jdaw1/placemat/issues/ . Execution continuing.) OutputToLog} if
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
@@ -7349,10 +7358,6 @@ currentdict /SmallCapsDict undef
 
 		CirclearraysAnyImprovement
 		{
-			/CircletextsTweakSizeScores mark CircletextsTweakSizeScores (; Score=) CirclearraysProtoBestScore ( \() CirclearraysProtoBestSheetNum (,) CirclearraysProtoBestWithinPage (,)
-			GlassesOnSheets CirclearraysProtoBestSheetNum GetEU CirclearraysProtoBestWithinPage GetEU (,) Titles 2 index get ASCIIfy (: )
-			CirclearraysUnroundedNBest CirclearraysProtoBestSheetNum get CirclearraysProtoBestWithinPage get ( to ) CirclearraysProtoBestMinCopies
-			( so +) 1 index 4 index div ln 100 mul (\% and FontSize=) CirclearraysProtoBestFontSize (\)) ConcatenateToMark store
 			/CirclearraysBestScore CirclearraysProtoBestScore store
 			CircletextsMinCopiesIndividually CirclearraysProtoBestSheetNum get CirclearraysProtoBestWithinPage CirclearraysProtoBestMinCopies put
 			CirclearraysNScore pop   0 1 NumSheets 1 sub {dup CirclearraysUnroundedN exch get exch CirclearraysUnroundedNBest exch get copy pop} for
@@ -7362,8 +7367,7 @@ currentdict /SmallCapsDict undef
 	end
 	{GlassesNumCopies 1 ge PrePourNumCopies 1 ge or NumSheets 1 ge and} MightBeTrue  {GlassesOnTastingNotePages length 1 ge TastingNotePagesNumCopies 1 ge TastingNotesCirclesBehind and and} MightBeTrue  or
 	{
-		mark  CircletextsTweakSize {CircletextsTweakSizeScores (\n)} if
-		(CirclearraysFontSizes = ) CirclearraysFontSizes SizeArrayOutput TrimSpaces (.  CirclearraysFontSizes/Radii = ) CirclearraysFontSizes Radii {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces
+		mark  (CirclearraysFontSizes = ) CirclearraysFontSizes SizeArrayOutput TrimSpaces (.  CirclearraysFontSizes/Radii = ) CirclearraysFontSizes Radii {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces
 		(.\nCirclearraysUnroundedN = ) CirclearraysUnroundedN SizeArrayOutput TrimSpaces (.\nCirclearraysN = ) CirclearraysN SizeArrayOutput TrimSpaces (.) ConcatenateToMark OutputToLog
 		mark (RadiiCirclearrayBaseline = ) RadiiCirclearrayBaseline SizeArrayOutput TrimSpaces (. RadiiCirclearrayInside = ) RadiiCirclearrayInside SizeArrayOutput TrimSpaces (.) ConcatenateToMark OutputToLog
 	} if  % ... GlassesNumCopies 1 ge PrePourNumCopies 1 ge or NumSheets 1 ge and ...
@@ -7983,8 +7987,8 @@ currentdict /SmallCapsDict undef
 			{
 				mark FirstError {(\n)} if   (Error. With SheetNum=) SheetNum (, WithinPage=) WithinPage (, WithinTitles=) WithinTitles (, title=) Titles WithinTitles get ASCIIfy (: )
 				/FirstError //false def
-				a {(insufficient room for Abovetitles, which is weird. Please send PostScript to author, www.jdawiseman.com/author.html) (; )} if
-				b {(insufficient room for Belowtitles, which is weird. Please send PostScript to author, www.jdawiseman.com/author.html) (; )} if
+				a {(insufficient room for Abovetitles, which is weird. Please submit an issue to http://github.com/jdaw1/placemat/issues/ ) (; )} if
+				b {(insufficient room for Belowtitles, which is weird. Please submit an issue to http://github.com/jdaw1/placemat/issues/ ) (; )} if
 				pop (.) ConcatenateToMark OutputToLog
 			} if  % a b or
 
@@ -8251,7 +8255,7 @@ currentdict /SmallCapsDict undef
 		/Connections_dLength2 [ fsl length {0} repeat ] def
 		/Connections_dAi fsl length array def  % ingress angle
 		/Connections_dAe fsl length array def  % egress angle
-		/Connections_Type [ fsl length {/Straight} repeat ] def  % /Point, /Straight, /Curve, /Clockwise, /Widdershins. Note that /Straight /Curve are from previous.
+		/Connections_Type [ fsl length {/Straight} repeat ] def  % /Point, /Straight, /Curve, /Clockwise, /Widdershins. Note that /Straight /Curve /Corner are from previous.
 		/Connections_Radius [ /FlightSeparationArcRadius cvx  fsl length {dup} repeat  pop ] def
 		/Connections_linetoXY [ fsl length {//true} repeat ] def  % Is a line to or from _X,_Y permitted?
 		/Connections_num 0 def
@@ -8263,7 +8267,7 @@ currentdict /SmallCapsDict undef
 			/fsl_i exch def
 			/ThisFSPiece fsl fsl_i GetEU def
 
-			ThisFSPiece /Curve eq {Connections_Type Connections_num ThisFSPiece put  Connections_fsl Connections_num ThisFSPiece put} if
+			ThisFSPiece dup /Corner eq exch /Curve eq or {Connections_Type Connections_num ThisFSPiece put  Connections_fsl Connections_num ThisFSPiece put} if
 
 			ThisFSPiece type /arraytype eq {ThisFSPiece length 0 gt} {//false} ifelse
 			{
@@ -8388,7 +8392,7 @@ currentdict /SmallCapsDict undef
 			Connections_dX   Connections_num  Connections_dX  0 get neg  put
 			Connections_dY   Connections_num  Connections_dY  0 get neg  put
 			Connections_dLength2  Connections_num  Connections_dLength2 0 get  put
-			Connections_Type 0 get /Curve eq {Connections_Type Connections_num /Curve put} if
+			Connections_Type 0 get dup dup /Corner eq exch /Curve eq or {Connections_Type exch Connections_num exch put} {pop} ifelse
 			/Connections_num Connections_num 1 add def
 		} if  % ... /Closed ... Connections_Done_First  and
 
@@ -8412,7 +8416,7 @@ currentdict /SmallCapsDict undef
 					/dL1 Connections_dLength2 Connections1 get def
 					j 0 lt {Connections_dAi} {Connections_dAe} ifelse  Connections0  Y1 Y0 sub  X1 X0 sub  atan  put  % default
 					1 {
-						Connections_Type Connections1 get dup /Straight eq exch /Curve eq or
+						Connections_Type Connections1 get dup dup /Corner eq exch /Straight eq or exch /Curve eq or
 						{
 							j 0 lt {Connections_dAi} {Connections_dAe} ifelse  Connections0  % to match with following 'put'
 							Connections_X Connections1 get abs //PrinterEpsilon lt
@@ -8439,7 +8443,7 @@ currentdict /SmallCapsDict undef
 							dup dX1 mul X1 add exch dY1 mul Y1 add  Y0 sub exch X0 sub atan   put
 							Connections_dX  Connections1  dX1 neg  put
 							Connections_dY  Connections1  dY1 neg  put
-						} if  % ... Connections1 ... /Straight ... /Curve ...
+						} if  % ... Connections1 ... /Corner ... /Straight ... /Curve ...
 					} repeat  % 1
 				} for  % back one, forward one: j
 			} if  % ... Connections0 ... /Clockwise ... /Widdershins ...
@@ -8482,14 +8486,21 @@ currentdict /SmallCapsDict undef
 				dX1 mul X1 add  /Xh1 exch def
 				dY1 mul Y1 add  /Yh1 exch def
 
+				Connections_Type Connections0 get /Corner eq
+				{
+					DirectionsParallel not DirectionsBothNonZero and
+					Connections_linetoXY Connections0 get
+						{{Xj Yj} {Xh1 Xh0 add 2 div Yh1 Yh0 add 2 div} ifelse X0 Y0 2 copy 6 2 roll FlightSeparationsCornerRadius arct lineto}
+						{{Xj Yj lineto} if}
+					ifelse  % Connections_linetoXY Connections0 get
+				} if  % /Corner
 				Connections_Type Connections0 get /Curve eq
 				{
-
 					DirectionsParallel not DirectionsBothNonZero and
 					Connections_linetoXY Connections0 get
 						{{Xj Yj Xj Yj} {Xh1 Yh1 Xh0 Yh0} ifelse X0 Y0 curveto}
 						{{Xj Yj lineto} if}
-					ifelse  % DirectionsParallel not DirectionsBothNonZero and
+					ifelse  % Connections_linetoXY Connections0 get
 				} if  % /Curve
 				Connections_Type Connections0 get /Straight eq
 				{
@@ -8895,7 +8906,7 @@ currentdict /SmallCapsDict undef
 		DeBugLevel 25 le {(-DropletPath) OutputToLog} if
 	} bind def  % /DropletPath
 
-	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&start=1136
+	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=112214#p112214
 	{Droplets} MightBeTrue
 	{
 		DeBugLevel 50 le {(+DropletPaths computation) OutputToLog} if
@@ -9518,6 +9529,7 @@ currentdict /SmallCapsDict undef
 	/TitlesAboveBelowOverInlinePaleStrokeCode {1 currentlinejoin ne {1 setlinejoin} if  1 setgray stroke} bind def
 	/TitlesAboveBelowOverInlineDarkStrokeCode {1 currentlinejoin ne {1 setlinejoin} if  ColourSchemeCurrent /MidGrey eq {0.4} {0} ifelse setgray stroke} bind def
 
+	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=90575#p90575
 	/AnnotateGlass
 	{
 		3 dict begin
@@ -10373,10 +10385,10 @@ currentdict /SmallCapsDict undef
 						/ThisVoteRecorderTitle ThisRowTotalRow {()} {TitlesVoteRecorder WithinTitles get} ifelse  def
 						/ThisVoteRecorderSubtitle ThisRowTotalRow {()} {SubtitlesVoteRecorder WithinTitles get} ifelse  def
 						TitlesFont VoteRecorderTitlesFontSize selectfont
-						VoteRecorderTitleWidths  WithinPage  /ThisVoteRecorderTitle load StringWidthRecursive
+						VoteRecorderTitleWidths  WithinPage  /ThisVoteRecorderTitle load StringPathBBox pop exch pop exch sub
 						/VoteRecorderTitleWidthsMax dup load 2 index lt {1 index store} {pop} ifelse   put
 						SubtitlesFont  VoteRecorderTitlesFontSize  selectfont
-						VoteRecorderSubtitleWidths  WithinPage  /ThisVoteRecorderSubtitle load StringWidthRecursive
+						VoteRecorderSubtitleWidths  WithinPage  /ThisVoteRecorderSubtitle load StringPathBBox pop exch pop exch sub
 						/VoteRecorderSubtitleWidthsMax dup load 2 index lt {1 index store} {pop} ifelse   put
 						/WithinPage WithinPage 1 add def
 					} for  % WithinCluster, WithinTitles
@@ -10452,6 +10464,7 @@ currentdict /SmallCapsDict undef
 					def  % /VoteRecorderWidthColFirst
 					/VoteRecorderColWidth  PageWidth MgnL MgnR add sub VoteRecorderWidthColFirst sub VoteRecorderNumNames div  def
 
+					% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=80997#p80997
 					VoteRecorderNamesOrientation dup /Horizontal eq  exch /Vertical ne VoteRecorderColWidth VoteRecorderHeightFirstRow 0.9375 mul ge and  or
 					{
 						% Might as well show VoteRecorderNames horizontally. So can shrink VoteRecorderHeightFirstRow.
@@ -10466,7 +10479,7 @@ currentdict /SmallCapsDict undef
 					/x   PageWidth MgnL MgnR add sub VoteRecorderWidthColFirst sub  NameNum mul  VoteRecorderNumNames div   MgnL add  VoteRecorderWidthColFirst add   def
 					x MgnB moveto  x PageHeight MgnT sub VoteRecorderTopTextHeight sub lineto
 					VoteRecorderShowTotalCol VoteRecorderSheetNum GetEU NameNum VoteRecorderNumNames 1 sub eq and  NameNum 0 eq  or {VoteRecorderWideLineWidth}
-						{VoteRecorderNumNames 6 ge  VoteRecorderNumNames 3 mod 0 eq {0} {2} ifelse NameNum 3 mod eq  and {VoteRecorderMiddleLineWidth} {VoteRecorderNarrowLineWidth} ifelse}
+						{VoteRecorderNumNames 7 ge  VoteRecorderNumNames 3 mod 0 eq {0} {2} ifelse NameNum 3 mod eq  and {VoteRecorderMiddleLineWidth} {VoteRecorderNarrowLineWidth} ifelse}
 					ifelse dup currentlinewidth ne {setlinewidth} {pop} ifelse  stroke
 				} for  % NameNum
 				currentdict /NameNum undef
@@ -10597,6 +10610,7 @@ currentdict /SmallCapsDict undef
 
 					NamesFont VoteRecorderNamesFontSize selectfont
 					0 setgray
+					% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=80997#p80997
 					VoteRecorderNamesOrientation dup /Horizontal eq  exch /Vertical ne VoteRecorderColWidth VoteRecorderHeightFirstRow ge and  or
 					{
 						% Horizontal
@@ -10661,6 +10675,7 @@ currentdict /SmallCapsDict undef
 	} if  % ... VoteRecorders ...
 
 
+	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=42615#p42615
 	{DecantingNotesNumCopies 1 ge} MightBeTrue
 	{
 		DeBugLevel 100 le {( Main: DecantingNotesForms) OutputToLog} if
@@ -10720,10 +10735,10 @@ currentdict /SmallCapsDict undef
 						/WithinCluster exch def
 						/WithinTitles DecantingNotesThisSheet ClusterNum GetEU WithinCluster GetEU def
 						TitlesFont DecantingNotesTitlesFontSize selectfont
-						DecantingNotesTitleWidths  WithinPage  TitlesDecantingNotes WithinTitles get StringWidthRecursive
+						DecantingNotesTitleWidths  WithinPage  TitlesDecantingNotes WithinTitles get StringPathBBox pop exch pop exch sub
 						/DecantingNotesTitleWidthsMax dup load 2 index lt {1 index store} {pop} ifelse   put
 						SubtitlesFont  DecantingNotesTitlesFontSize selectfont
-						DecantingNotesSubtitleWidths  WithinPage  SubtitlesDecantingNotes WithinTitles get StringWidthRecursive
+						DecantingNotesSubtitleWidths  WithinPage  SubtitlesDecantingNotes WithinTitles get StringPathBBox pop exch pop exch sub
 						/DecantingNotesSubtitleWidthsMax dup load 2 index lt {1 index store} {pop} ifelse   put
 						/WithinPage WithinPage 1 add def
 					} for  % WithinCluster, WithinTitles
@@ -11474,6 +11489,7 @@ currentdict /SmallCapsDict undef
 		0  1  SheetLengths SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
+			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=94014#p94014
 			GlassesCirclesFadingFactor dup //Epsilon ge  CirclearraysFillBehind  and
 			{
 				newpath   GSave
@@ -11569,6 +11585,7 @@ currentdict /SmallCapsDict undef
 				ifelse  % PaintBackgroundInsideGlassCircles ... length 0 gt
 				TitleAboveBelowOverForms SheetNum get WithinPage get  execform  AnnotateGlass
 				GRestore
+				% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=94014#p94014
 				GlassesCrossedOut
 				{
 					2 dict begin
@@ -11672,6 +11689,7 @@ currentdict /SmallCapsDict undef
 			0  4  TastingNotesStarsNameColsRowsArrangement length 4 sub
 			{
 				/i exch def
+				% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=69275#p69275
 				ThisNameASCII TastingNotesStarsNameColsRowsArrangement i get ASCIIfy eq
 				{
 					/TNcols TastingNotesStarsNameColsRowsArrangement i 1 add GetEU def
@@ -12049,7 +12067,7 @@ currentdict /SmallCapsDict undef
 							//false  //false  MirrorPagesVoteRecorder VoteRecorderSheetNum GetEU  //true  VoteRecorderPaperType  VoteRecorderOrientation  SetPaperSize
 							//true DefStoreMgns
 							DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
-							/VoteRecorderTopTextHeight PageHeight MgnB MgnT add sub 50 div  def  % embedded constant
+							/VoteRecorderTopTextHeight PageHeight MgnB MgnT add sub 50 div  def  % Embedded constant. Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=56967#p56967
 							VoteRecorderTopTextHeight 0 gt
 							{
 								HeaderFont VoteRecorderTopTextHeight selectfont
@@ -12108,7 +12126,8 @@ currentdict /SmallCapsDict undef
 			} if  % ... DecantingNotesNumCopies 1 ge ...
 
 
-			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&start=1051
+			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=96950#p96950
+
 			AccountsNumCopies 1 ge
 			{
 				35 dict begin
@@ -12230,6 +12249,7 @@ currentdict /SmallCapsDict undef
 			} if   % AccountsNumCopies 1 ge
 
 
+			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=45400#p45400
 			{CorkDisplayNumCopies 1 ge} MightBeTrue
 			{
 				DeBugLevel 100 le {(+CorkDisplay) OutputToLog} if
@@ -12648,7 +12668,7 @@ currentdict /SmallCapsDict undef
 							} for  % WithinPage, WithinTitles
 						} for  % SheetNum
 						NTNumPaintedThisPage 0 gt {AnnotatePDF ShowPage} if
-					} {(Error: NeckTags, NTBestRotatedness is null. No neck tags pages; otherwise continuing. Please send .ps file to the author: www.jdawiseman.com/author.html) OutputToLog} ifelse  % NTBestRotatedness //null ne
+					} {(Error: NeckTags, NTBestRotatedness is null. No neck tags pages; otherwise continuing. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog} ifelse  % NTBestRotatedness //null ne
 				} if  % NTNumGlasses 1 ge ...
 				end
 				DeBugLevel 100 le {(-NeckTags) OutputToLog} if
@@ -13163,6 +13183,7 @@ currentdict /SmallCapsDict undef
 										0  1  1
 										{
 											/Top0Bottom1 exch def
+											% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=91779#p91779
 											StickyLabelsByNameWhichReplaceCirclearrays Top0Bottom1 1 eq and
 												{/ThisFont NamesFont      def  /ThisCirclearray  [/ThisName load]              def}
 												{/ThisFont CircletextFont def  /ThisCirclearray  CirclearraysStickyLabels WithinTitles get def}
@@ -13385,7 +13406,7 @@ currentdict /SmallCapsDict undef
 	mark
 		/CreationDate ParametersVersionDateTimeAdobeFormat   /Title PDF_title ASCIIfy
 		/Author (Julian D. A. Wiseman)
-		/Creator (www.jdawiseman.com/papers/placemat/placemat.html)
+		/Creator (www.jdawiseman.com/author.html)
 		/Subject mark
 			(PostScript code by Julian D. A. Wiseman; software version ) SoftwareVersionDateTimeAdobeFormat dup length 2 sub 2 exch getinterval
 			(; parameters as of ) ParametersVersionDateTimeAdobeFormat dup length 2 sub 2 exch getinterval
@@ -13961,7 +13982,7 @@ currentdict /SmallCapsDict undef
 		} for  % i
 	} if  % ExternalLinks length 3 ge
 	mark  /Action << >>  /Color [0 0 0]  /Title ()  /F 0  /OUT  pdfmark
-	mark  /Action << /Subtype /URI /URI (http://www.jdawiseman.com/placemat.html) >>  /Color [0 0 0]  /Title (\247 Placemat software)  /F 2  /OUT  pdfmark
+	mark  /Action << /Subtype /URI /URI (http://github.com/jdaw1/placemat/) >>  /Color [0 0 0]  /Title (\247 Placemat software)  /F 2  /OUT  pdfmark
 	mark  /Action << >>  /Color [0.4 0.4 0.4]  /Title mark (\(ver: ) SoftwareVersionDateTimeAdobeFormat (\)) ConcatenateToMark  /F 1  /OUT  pdfmark
 	0  3  ExternalLinksExtras length 3 sub
 	{
@@ -14030,7 +14051,7 @@ OutputLogToAnnotation  ShownPages 0 gt  and
 		/Title   (Distillation log)
 		/Subj    (The log output from the progam that converted the PostScript to PDF. Mostly human-readable.)
 		/Contents  mark
-			(Placemat software:\nhttp://www.jdawiseman.com/placemat.html\nhttp://www.jdawiseman.com/papers/placemat/placemat.ps)
+			(Placemat software:\nhttp://github.com/jdaw1/placemat/)
 			OutputLog {dup type /stringtype eq {(\n\n) exch} {pop exit} ifelse} forall
 		ConcatenateToMark
 		/Name    /Comment
@@ -14061,8 +14082,10 @@ OutputLogToPage {false PageSuppressed not} {false} ifelse
 	/ForcedLineBreak //false def
 
 	/Courier-Bold FontSize selectfont   27 Y moveto  0 0 0.9333333 setrgbcolor  % #0000EE  http://www.w3.org/TR/html5/rendering.html  http://stackoverflow.com/questions/4774022/
-	0  [ (www.jdawiseman.com/papers/placemat/placemat.html)  (www.jdawiseman.com/placemat.html)  (www.jdawiseman.com/papers/placemat/placemat.ps) ] dup
-	PageWidth 54 sub exch {stringwidth pop sub} forall 2 div dup 3 -1 roll {show 0 rmoveto} forall  /AnythingOnPage //true def   /Y Y YlineStep sub YparaExtra sub def
+	/LogHeaders [ (http://github.com/jdaw1/placemat/)  (http://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps) ] def
+	/LogHeaderGap PageWidth 54 sub LogHeaders {stringwidth pop sub} forall LogHeaders length dup 3 ge {1 sub div} {pop} ifelse def
+	LogHeaders {show LogHeaderGap 0 rmoveto   /AnythingOnPage //true def} forall
+	/Y Y YlineStep sub YparaExtra sub def
 
 	/Courier FontSize selectfont  /WidthW (W) stringwidth pop def  0 setgray
 	OutputLog 0 OutputtedToLog getinterval
