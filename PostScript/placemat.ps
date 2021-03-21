@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:20 Friday 12th March 2021
+% This version 17:00 Sunday 21st March 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202103121920) def
+/ParametersVersionDateTimeAdobeFormat (D:202103211700) def
 
 /Circlearrays [
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
@@ -357,6 +357,7 @@ if} bind def  % /VoteRecorderCrossedBox
 ] def  % /FlightSeparationLines
 /FlightSeparationPaintCode {gsave 0 setlinecap 2.4 setlinewidth 0.75 setgray stroke grestore 1 setlinecap 0.96 setlinewidth 1 setgray stroke} def
 /FlightSeparationPaintSeparately false def
+/FlightSeparationsCornerRadius {Radii SheetNum get 4 div} def
 /FlightSeparationArcRadiusControl 1 def  % In range 0 to 1 inclusive. 0 = radius of circle; 1 = half-way to nearest glass. If glasses circles touch, irrelevant.
 
 /PaintBackgroundInsideGlassCircles {} def  % Paints a background pattern. Called with centre of circle translated to 0,0; and clipped to radius Radii SheetNum get.
@@ -759,7 +760,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202103121920) def
+/SoftwareVersionDateTimeAdobeFormat (D:202103211700) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -8221,7 +8222,7 @@ currentdict /SmallCapsDict undef
 		/Connections_dLength2 [ fsl length {0} repeat ] def
 		/Connections_dAi fsl length array def  % ingress angle
 		/Connections_dAe fsl length array def  % egress angle
-		/Connections_Type [ fsl length {/Straight} repeat ] def  % /Point, /Straight, /Curve, /Clockwise, /Widdershins. Note that /Straight /Curve are from previous.
+		/Connections_Type [ fsl length {/Straight} repeat ] def  % /Point, /Straight, /Curve, /Clockwise, /Widdershins. Note that /Straight /Curve /Corner are from previous.
 		/Connections_Radius [ /FlightSeparationArcRadius cvx  fsl length {dup} repeat  pop ] def
 		/Connections_linetoXY [ fsl length {//true} repeat ] def  % Is a line to or from _X,_Y permitted?
 		/Connections_num 0 def
@@ -8233,7 +8234,7 @@ currentdict /SmallCapsDict undef
 			/fsl_i exch def
 			/ThisFSPiece fsl fsl_i GetEU def
 
-			ThisFSPiece /Curve eq {Connections_Type Connections_num ThisFSPiece put  Connections_fsl Connections_num ThisFSPiece put} if
+			ThisFSPiece dup /Corner eq exch /Curve eq or {Connections_Type Connections_num ThisFSPiece put  Connections_fsl Connections_num ThisFSPiece put} if
 
 			ThisFSPiece type /arraytype eq {ThisFSPiece length 0 gt} {//false} ifelse
 			{
@@ -8358,7 +8359,7 @@ currentdict /SmallCapsDict undef
 			Connections_dX   Connections_num  Connections_dX  0 get neg  put
 			Connections_dY   Connections_num  Connections_dY  0 get neg  put
 			Connections_dLength2  Connections_num  Connections_dLength2 0 get  put
-			Connections_Type 0 get /Curve eq {Connections_Type Connections_num /Curve put} if
+			Connections_Type 0 get dup dup /Corner eq exch /Curve eq or {Connections_Type exch Connections_num exch put} {pop} ifelse
 			/Connections_num Connections_num 1 add def
 		} if  % ... /Closed ... Connections_Done_First  and
 
@@ -8382,7 +8383,7 @@ currentdict /SmallCapsDict undef
 					/dL1 Connections_dLength2 Connections1 get def
 					j 0 lt {Connections_dAi} {Connections_dAe} ifelse  Connections0  Y1 Y0 sub  X1 X0 sub  atan  put  % default
 					1 {
-						Connections_Type Connections1 get dup /Straight eq exch /Curve eq or
+						Connections_Type Connections1 get dup dup /Corner eq exch /Straight eq or exch /Curve eq or
 						{
 							j 0 lt {Connections_dAi} {Connections_dAe} ifelse  Connections0  % to match with following 'put'
 							Connections_X Connections1 get abs //PrinterEpsilon lt
@@ -8409,7 +8410,7 @@ currentdict /SmallCapsDict undef
 							dup dX1 mul X1 add exch dY1 mul Y1 add  Y0 sub exch X0 sub atan   put
 							Connections_dX  Connections1  dX1 neg  put
 							Connections_dY  Connections1  dY1 neg  put
-						} if  % ... Connections1 ... /Straight ... /Curve ...
+						} if  % ... Connections1 ... /Corner ... /Straight ... /Curve ...
 					} repeat  % 1
 				} for  % back one, forward one: j
 			} if  % ... Connections0 ... /Clockwise ... /Widdershins ...
@@ -8452,14 +8453,21 @@ currentdict /SmallCapsDict undef
 				dX1 mul X1 add  /Xh1 exch def
 				dY1 mul Y1 add  /Yh1 exch def
 
+				Connections_Type Connections0 get /Corner eq
+				{
+					DirectionsParallel not DirectionsBothNonZero and
+					Connections_linetoXY Connections0 get
+						{{Xj Yj} {Xh1 Xh0 add 2 div Yh1 Yh0 add 2 div} ifelse X0 Y0 2 copy 6 2 roll FlightSeparationsCornerRadius arct lineto}
+						{{Xj Yj lineto} if}
+					ifelse  % Connections_linetoXY Connections0 get
+				} if  % /Corner
 				Connections_Type Connections0 get /Curve eq
 				{
-
 					DirectionsParallel not DirectionsBothNonZero and
 					Connections_linetoXY Connections0 get
 						{{Xj Yj Xj Yj} {Xh1 Yh1 Xh0 Yh0} ifelse X0 Y0 curveto}
 						{{Xj Yj lineto} if}
-					ifelse  % DirectionsParallel not DirectionsBothNonZero and
+					ifelse  % Connections_linetoXY Connections0 get
 				} if  % /Curve
 				Connections_Type Connections0 get /Straight eq
 				{
