@@ -231,12 +231,12 @@ Let&rsquo;s start with an example, to give a sense of the range of what can be d
 	]  % - SheetNum = 0
 	[  % + SheetNum = 1
 		% Gentle softening of corners, without clinging to the circles
-		[ [/Bottom 2 5]  /Corner  [2 5]  /Corner  [1 4]  /Corner  [3 4]  [3 6]  /Corner  [/Top 3 6 +0.3] ]
-		[ [/Bottom 5 7 +0.3]  /Corner  [5 7]  /Corner  [4 7]  /Corner  [4 6]  [3 6]  /Corner  [/Top 3 6 +0.3] ]
-		[ /Closed  [/Bottom 7 10 -0.3]  /Corner  [7 10]  /Corner  [9 10]  /Corner  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  [/Bottom 13 +1.0] ]
+		[ [/Bottom 2 5]  /Arc  [2 5]  /Arc  [1 4]  /Arc  [3 4]  [3 6]  /Arc  [/Top 3 6 +0.3] ]
+		[ [/Bottom 5 7 +0.3]  /Arc  [5 7]  /Arc  [4 7]  /Arc  [4 6]  [3 6]  /Arc  [/Top 3 6 +0.3] ]
+		[ /Closed  [/Bottom 7 10 -0.3]  /Arc  [7 10]  /Arc  [9 10]  /Arc  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  [/Bottom 13 +1.0] ]
 	]  % - SheetNum = 1
 	[  % + SheetNum = 2
-		% Bezier cubics, so softer than /Corner
+		% Bezier cubics, so softer than /Arc
 		[ [/Bottom 2 5]  /Curve  [2 5]  /Curve  [1 4]  /Curve  [3 4]  /Curve  [3 6]  /Curve  [/Top 3 6 +0.3] ]
 		[ [/Bottom 5 7 +0.3]  /Curve  [5 7]  /Curve  [4 7]  /Curve  [4 6]  /Curve  [3 6]  /Curve  [/Top 3 6 +0.3] ]
 		[ /Closed  [/Bottom 7 10 -0.3]  /Curve  [7 10]  /Curve  [9 10]  /Curve  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  /Curve  [/Bottom 13 +1.0] ]
@@ -277,9 +277,9 @@ It is easiest to think about these margin specifications as being of two types: 
 (&ldquo;Widdershins&rdquo;? [Widdershins](http://en.wikipedia.org/wiki/Widdershins)!) 
 There are variants, `[/Clockwise a b c]` and `[/Widdershins a b c]`, in which the radius of the arc is half the distance between the centres of circles b and c. 
 As above, the integer a can be replaced with [xa ya].
-* Between two pieces the non-array item `/Corner` causes the sharp join between two straight lines to be replaced with a soft corner, an arc, with radius `FlightSeparationsCornerRadius`. 
+* Between two pieces the non-array item `/Arc` causes the sharp join between two straight lines to be replaced with a soft corner, an arc, with radius `FlightSeparationsArcProportionRadius` &times; the radius of the circles. 
 * Between two pieces the non-array item `/Curve` causes what would have been two straight lines to be replaced with a B&eacute;zier curve made with the PostScript command `curveto`. 
-Perhaps this is now deprecated ([issue #87](http://github.com/jdaw1/placemat/issues/87)), `/Corner` being preferred.
+Perhaps this is now deprecated ([issue #87](http://github.com/jdaw1/placemat/issues/87)), `/Arc` being preferred.
 
 In [the PDF of examples](images/FlightSeparations.pdf) the header shows that page&rsquo;s item of `FlightSeparationLines` (i.e., `FlightSeparationLines` is an array one deeper than the header). 
 If using `FlightSeparations` it is strongly recommended that these examples be examined and appropriate parts used as a starting draft. 
