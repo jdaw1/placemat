@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Tuesday 23rd March 2021
+% This version 22:15 Tuesday 23rd March 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202103232000) def
+/ParametersVersionDateTimeAdobeFormat (D:202103232215) def
 
 /Circlearrays [
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
@@ -355,7 +355,7 @@ if} bind def  % /VoteRecorderCrossedBox
 [
 	GlassesOnSheets length {[]} repeat
 ] def  % /FlightSeparationLines
-/FlightSeparationPaintCode {gsave 0 setlinecap 2.4 setlinewidth 0.75 setgray stroke grestore 1 setlinecap 0.96 setlinewidth 1 setgray stroke} def
+/FlightSeparationPaintCode {gsave 2.4 setlinewidth 0.75 setgray stroke grestore 1 setlinecap 1 setlinejoin 0.96 setlinewidth 1 setgray stroke} def
 /FlightSeparationPaintSeparately false def
 /FlightSeparationsArcProportionRadius 0.5 def  % strictly >0; <=1
 /FlightSeparationArcRadiusControl 1 def  % In range 0 to 1 inclusive. 0 = radius of circle; 1 = half-way to nearest glass. If glasses circles touch, irrelevant.
@@ -760,7 +760,9 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202103232000) def
+
+/SoftwareVersionDateTimeAdobeFormat (D:202103232215) def
+
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -9525,7 +9527,7 @@ currentdict /SmallCapsDict undef
 						/FlightSeparationLineNum exch def
 						/FlightSeparationArcRadius 1 FlightSeparationArcRadiusControl sub Radii SheetNum get mul FlightSeparationArcRadiusControl MaxPossibleArcRadius mul add def
 						FlightSeparationLines SheetNum GetEU FlightSeparationLineNum GetEU FlightSeparationPath
-						currentdash pop length 0 ne {[] 0 setdash} if  1 currentlinejoin ne {1 setlinejoin} if  0 currentlinecap ne {0 setlinecap} if  0.96 dup currentlinewidth ne {setlinewidth} {pop} ifelse  0.6 setgray  % sensible defaults
+						currentdash pop length 0 ne {[] 0 setdash} if  0 currentlinejoin ne {0 setlinejoin} if  0 currentlinecap ne {0 setlinecap} if  0.96 dup currentlinewidth ne {setlinewidth} {pop} ifelse  0.6 setgray  % sensible defaults
 						FlightSeparationPaintSeparately {/FlightSeparationPaintCode load execU} if
 					} for  % FlightSeparationLineNum
 					currentdict /FlightSeparationLineNum undef
