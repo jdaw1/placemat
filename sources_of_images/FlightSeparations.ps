@@ -1,6 +1,6 @@
 %!PS
 
-% This version 17:00 Sunday 21st March 2021
+% This version 20:00 Tuesday 23rd March 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
@@ -11,9 +11,7 @@
 % Nor does any output: not PDF; nor images of such a document.
 % But it does include re-usable improvements to the body of the code.
 
-/ParametersVersionDateTimeAdobeFormat (D:202103211715) def
-
-/LogThisExtra (Headers not shown on bitmap images, as would be too small, but present in PDF.) def
+/ParametersVersionDateTimeAdobeFormat (D:202103232000) def
 
 /Circlearrays [
 	[ (A)  (0) ]
@@ -90,12 +88,12 @@
 	]  % - SheetNum = 0
 	[  % + SheetNum = 1
 		% Gentle softening of corners, without clinging to the circles
-		[ [/Bottom 2 5]  /Corner  [2 5]  /Corner  [1 4]  /Corner  [3 4]  [3 6]  /Corner  [/Top 3 6 +0.3] ]
-		[ [/Bottom 5 7 +0.3]  /Corner  [5 7]  /Corner  [4 7]  /Corner  [4 6]  [3 6]  /Corner  [/Top 3 6 +0.3] ]
-		[ /Closed  [/Bottom 7 10 -0.3]  /Corner  [7 10]  /Corner  [9 10]  /Corner  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  [/Bottom 13 +1.0] ]
+		[ [/Bottom 2 5]  /Arc  [2 5]  /Arc  [1 4]  /Arc  [3 4]  [3 6]  /Arc  [/Top 3 6 +0.3] ]
+		[ [/Bottom 5 7 +0.3]  /Arc  [5 7]  /Arc  [4 7]  /Arc  [4 6]  [3 6]  /Arc  [/Top 3 6 +0.3] ]
+		[ /Closed  [/Bottom 7 10 -0.3]  /Arc  [7 10]  /Arc  [9 10]  /Arc  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  [/Bottom 13 +1.0] ]
 	]  % - SheetNum = 1
 	[  % + SheetNum = 2
-		% Bezier cubics, so softer than /Corner
+		% Bezier cubics, so softer than /Arc
 		[ [/Bottom 2 5]  /Curve  [2 5]  /Curve  [1 4]  /Curve  [3 4]  /Curve  [3 6]  /Curve  [/Top 3 6 +0.3] ]
 		[ [/Bottom 5 7 +0.3]  /Curve  [5 7]  /Curve  [4 7]  /Curve  [4 6]  /Curve  [3 6]  /Curve  [/Top 3 6 +0.3] ]
 		[ /Closed  [/Bottom 7 10 -0.3]  /Curve  [7 10]  /Curve  [9 10]  /Curve  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  /Curve  [/Bottom 13 +1.0] ]
@@ -118,7 +116,6 @@
 % % % % % % % %
 % Essentials  %
 % % % % % % % %
-
 
 
 /LeftHanders [ (RMW)  (RAW)  (SRG) (Simon G.)  (HEG) (Helen G.)  (CSD) (Chris D.)  (CFD) (Conan D.)  (NCG) (Marc Jackson)  (JG) (Jeff G.)  (ZDR) (Zak R.) ] def
@@ -393,7 +390,7 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /FlightSeparationPaintCode {gsave 0 setlinecap 2.4 setlinewidth 0.75 setgray stroke grestore 1 setlinecap 0.96 setlinewidth 1 setgray stroke} def
 /FlightSeparationPaintSeparately false def
-/FlightSeparationsCornerRadius {Radii SheetNum get 4 div} def
+/FlightSeparationsArcProportionRadius 0.5 def  % strictly >0; <=1
 /FlightSeparationArcRadiusControl 1 def  % In range 0 to 1 inclusive. 0 = radius of circle; 1 = half-way to nearest glass. If glasses circles touch, irrelevant.
 
 /PaintBackgroundInsideGlassCircles {} def  % Paints a background pattern. Called with centre of circle translated to 0,0; and clipped to radius Radii SheetNum get.
@@ -793,7 +790,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202103211700) def
+/SoftwareVersionDateTimeAdobeFormat (D:202103232000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1322,26 +1319,26 @@ currentdict /ShellSortGapsLength1Subs undef
 /GlyphToASCII <<
 	/adieresis (ae)  /Adieresis (Ae)  /odieresis (oe)  /Odieresis (Oe)  /udieresis (ue)  /Udieresis (Ue)
 	/aring (aa)  /Aring (Aa)  /oslash (oe)  /Oslash (Oe) /scaron (sh)  /Scaron (Sh) /zcaron (zh)  /Zcaron (Zh)
-	/quotedbl    (\")  /quotedblleft 1 index  /quotedblright 1 index  /second 1 index
-	/quotesingle (\')  /quoteleft    1 index  /quoteright    1 index  /minute 1 index
+	/quotedbl    (")  /quotedblleft 1 index  /quotedblright 1 index  /second 1 index
+	/quotesingle (')  /quoteleft    1 index  /quoteright    1 index  /minute 1 index
 	/question (?)  /questiondown (?)  /exclam (!)  /exclamdown (!)
-	/less (<)  /greater (>)  /lessequal (<=)  /greaterequal (>=)  /approxequal (=)  /multiply (*)  /divide (/)  /plus (+)  /fraction (/)
+	/less (<)  /greater (>)  /lessequal (<=)  /greaterequal (>=)  /approxequal (~=)  /multiply (*)  /divide (/)  /plus (+)  /fraction (/)
 	/dagger (+)  /daggerdbl (++)  /lozenge (<>)  /bullet (O)
 	/bar (|)  /verticalbar (|)  /brokenbar (|)  /periodcentered (.)
 	/club (Club)  /diamond (Diamond)  /heart (Heart)  /spade (Spade)
-	/sterling (GBP)  /dollar ($)  /Euro (EUR)  /euro 1 index  /yen (Y)  % last can be JPY or CNY
+	/sterling (GBP)  /dollar ($)  /Euro (EUR)  /euro 1 index  /yen (Y)  % yen can be JPY or CNY
 	/ellipsis (...)  /emdash (--)  /endash (-)  /minus (-)
 	/eth (d)  /Eth (D)  /dotlessi (i)
 	/oneeighth ( 1/8 )  /onequarter ( 1/4 )  /onethird ( 1/3 )  /threeeighths ( 3/8 )  /onehalf  ( 1/2 )  /fiveeighths ( 5/8 )  /twothirds ( 2/3 )  /threequarters ( 3/4 )  /seveneighths ( 7/8 )
 	/registered (\(R\))  /trademark  (\(TM\))
-	/arrowup (^)  /arrowdown (\\\/)  /arrowleft (<--)  /arrowright (-->)  /arrowboth (<-->)
+	/arrowup (^)  /arrowdown (\\/)  /arrowleft (<--)  /arrowright (-->)  /arrowboth (<-->)
 	/zerosuperior (^0)  /onesuperior (^1)  /twosuperior (^2)  /threesuperior (^3)  /foursuperior (^4)  /fivesuperior (^5)  /sixsuperior (^6)  /sevensuperior (^7)  /eightsuperior (^8)  /ninesuperior (^9)
 	/zeroinferior (_0)  /oneinferior (_1)  /twoinferior (_2)  /threeinferior (_3)  /fourinferior (_4)  /fiveinferior (_5)  /sixinferior (_6)  /seveninferior (_7)  /eightinferior (_8)  /nineinferior (_9)
 	/a (a)  /b (b)  /c (c)  /d (d)  /e (e)  /f (f)  /g (g)  /h (h)  /i (i)  /j (j)  /k (k)  /l (l)  /m (m)  /n (n)  /o (o)  /p (p)  /q (q)  /r (r)  /s (s)  /t (t)  /u (u)  /v (v)  /w (w)  /x (x)  /y (y)  /z (z)
 	/A (A)  /B (B)  /C (C)  /D (D)  /E (E)  /F (F)  /G (G)  /H (H)  /I (I)  /J (J)  /K (K)  /L (L)  /M (M)  /N (N)  /O (O)  /P (P)  /Q (Q)  /R (R)  /S (S)  /T (T)  /U (U)  /V (V)  /W (W)  /X (X)  /Y (Y)  /Z (Z)
 	/zero (0)  /one (1)  /two (2)  /three (3)  /four (4)  /five (5)  /six (6)  /seven (7)  /eight (8)  /nine (9)
-	/parenleft (\()  /parenright (\))  /bracketleft (\[)  /bracketright (\])   /braceleft (\{)  /braceright (\})  /comma (,)  /semicolon (;)  /colon (:)  /period (.)
-	/equal (=)  /asterisk (*)  /hyphen (-)  /percent (\%)  /asciicircum (^)  /ampersand (&)  /slash (\/)  /backslash (\\)  /grave (`)  /numbersign (#)  /at (@)
+	/parenleft (\()  /parenright (\))  /bracketleft ([)  /bracketright (])   /braceleft ({)  /braceright (})  /comma (,)  /semicolon (;)  /colon (:)  /period (.)
+	/equal (=)  /asterisk (*)  /hyphen (-)  /percent (%)  /asciicircum (^)  /ampersand (&)  /slash (/)  /backslash (\\)  /grave (`)  /numbersign (#)  /at (@)
 	/uni1D00 (A)  /uni0299 (B)  /uni1D04 (C)  /uni1D05 (D)  /uni1D07 (E)  /uniA730 (F)  /uni0262 (G)  /uni029C (H)  /uni026A (I)  /uni1D0A (J)  /uni1D0B (K)  /uni029F (L)  /uni1D0D (M)
 	/uni0274 (N)  /uni1D0F (O)  /uni1D18 (P)  /uni0280 (R)  /uniA731 (S)  /uni1D1B (T)  /uni1D1C (U)  /uni1D20 (V)  /uni1D21 (W)  /uni028F (Y)  /uni1D22 (Z)  /uni1D01  (AE)  /uni0276  (OE)
 	/uni2626 (Orthodox cross)  /uni2628 (Lorraine cross)  /uni2629 (Jerusalem cross)  /uni2670 (West Syriac cross)  /uni2671 (East Syriac cross)  /uni2720 (Maltese cross)  % These few lines best in font /Menlo-Regular or /Menlo-Bold
@@ -1471,9 +1468,9 @@ currentdict /ShellSortGapsLength1Subs undef
 			dup dup {dup 31 le {/CharsBelow dup load 1 add store} if  128 ge {/CharsAbove dup load 1 add store} if} forall
 			CharsBelow 0 gt  CharsAbove 0 gt  or
 			{
-				mark exch (Warning: the string fragment \") exch (\", perhaps part of a compound string, contains )
+				mark exch (Warning: the string fragment ") exch (", perhaps part of a compound string, contains )
 				CharsBelow 0 gt {(ASCII control characters)  CharsAbove 0 gt {(, and )} if} if
-				CharsAbove 0 gt {(non-ASCII characters \(which should be specified in a form resembling \"[\(C\) \/aacute \(lem\)]\"\))} if
+				CharsAbove 0 gt {(non-ASCII characters \(which should be specified in a form resembling "[\(C\) /aacute \(lem\)]"\))} if
 				(. Continuing, but the output should be carefully checked.) ConcatenateToMark OutputToLog
 			} {pop} ifelse  end  pop //true exit  % CharsBelow 0 gt  CharsAbove 0 gt  or
 		} if  % /stringtype
@@ -1541,14 +1538,14 @@ TestingMaxNumPagesToShow 2147483647 lt  TestingSuppressPageTypes length 0 gt  or
 	mark  (Nota bene: some pages might be suppressed = not shown, perhaps because this is an example or a test.)
 	(\n\(At the end there might be an extra page, blank, caused by a bug in erasepage.\))
 	TestingMaxNumPagesToShow 2147483647 lt {(\nTestingMaxNumPagesToShow = ) TestingMaxNumPagesToShow} if
-	TestingSuppressPageTypes length 0 gt {(\nTestingSuppressPageTypes = \[) TestingSuppressPageTypes {dup type /nametype eq {( /) exch} if ( )} forall (\])} if
+	TestingSuppressPageTypes length 0 gt {(\nTestingSuppressPageTypes = [) TestingSuppressPageTypes {dup type /nametype eq {( /) exch} if ( )} forall (\])} if
 	ConcatenateToMark OutputToLog
 } if  % TestingMaxNumPagesToShow ... TestingSuppressPageTypes ... or
 
 % Changes RGB black to proper CMYK printers' black. http://groups.google.com/forum/#!topic/comp.lang.postscript/6JW6VamdVlw
 CMYK0001replacesRGB000   /setcolor load type /operatortype eq   and
 {
-	(Black is a printers\' black with \"0 0 0 1 setcmykcolor\" rather than screen black with \"0 setgray\", by CMYK0001replacesRGB000.) OutputToLog
+	(Black is a printers' black with "0 0 0 1 setcmykcolor" rather than screen black with "0 setgray", by CMYK0001replacesRGB000.) OutputToLog
 	/ClrSpcOrig currentcolorspace def
 
 	[
@@ -1793,14 +1790,26 @@ currentdict /ForReverseBinaryDict undef
 		{
 			/z exch def
 			1 {
-				z 18  div dup round sub abs //Epsilon le {z 18 div round cvi dup 4 idiv exch 4 mod [(\") (\274\") (\275\") (\276\")] exch get exit} if  % quarter inch
-				z 7.2 div dup round sub abs //Epsilon le {z 72 div 1 FormatDecimalPlaces (\") exit} if  % 0.1 inch
+				z 18  div dup round sub abs //Epsilon le {z 18 div round cvi dup 4 idiv exch 4 mod [(") (\274") (\275") (\276")] exch get exit} if  % quarter inch
+				z 7.2 div dup round sub abs //Epsilon le {z 72 div 1 FormatDecimalPlaces (") exit} if  % 0.1 inch
 				z 127 mul 360 div dup round sub abs //Epsilon le {z 127 mul 360 div round cvi (mm) exit} if  % mm
 				z dup type /realtype eq {1 FormatDecimalPlaces} if (pt)  % othewise in points, rounded to 0.1
 			} repeat  (\327)
 		} forall   pop ConcatenateToMark end
 	} {ThisPaperType ToString} ifelse  % ISO 216
 } bind def  % /PaperTypeStringShortPDF
+
+/OuterMarginLogs 1024 array def
+/OuterMarginLogsNum 0 def
+% string  OuterMarginLogsAdd  -
+/OuterMarginLogsAdd
+{
+	1 dict begin
+	/str exch ASCIIfy def
+	//true  OuterMarginLogs 0 OuterMarginLogsNum getinterval {str eq {pop //false exit} if} forall
+	{OuterMarginLogs OuterMarginLogsNum str put  /OuterMarginLogsNum OuterMarginLogsNum 1 add store} if
+	end
+} bind def  % OuterMarginLogsAdd
 /PaperTypeString  % Unlike PaperTypeStringShortPDF, takes one parameter
 {
 	2 dict begin
@@ -1811,9 +1820,9 @@ currentdict /ForReverseBinaryDict undef
 	{
 		/z exch def
 		1 {
-			z 72 div dup round sub abs //Epsilon le {z 72 div round cvi (\") exit} if  % 1 inch
-			z 7.2 div dup round sub abs //Epsilon le {z 72 div 1 FormatDecimalPlaces (\") exit} if  % 0.1 inch
-			z 3.6 div dup round sub abs //Epsilon le {z 72 div 2 FormatDecimalPlaces (\") exit} if  % 0.05 inch
+			z 72 div dup round sub abs //Epsilon le {z 72 div round cvi (") exit} if  % 1 inch
+			z 7.2 div dup round sub abs //Epsilon le {z 72 div 1 FormatDecimalPlaces (") exit} if  % 0.1 inch
+			z 3.6 div dup round sub abs //Epsilon le {z 72 div 2 FormatDecimalPlaces (") exit} if  % 0.05 inch
 			z 127 mul 360 div dup round sub abs //Epsilon le {z 127 mul 360 div round cvi (mm) exit} if  % mm
 			z dup type /realtype eq {1 FormatDecimalPlaces} if (pt)  % othewise in points, rounded to 0.1
 		} repeat  (*)
@@ -1830,55 +1839,112 @@ currentdict /ForReverseBinaryDict undef
 /SetPaperSize
 {
 	DeBugLevel 15 le {(+SetPaperSize) OutputToLog} if
-	Dimensions /PageHeight exch def  /PageWidth exch def
+	2 copy Dimensions /PageHeight exch def  /PageWidth exch def
+	14 dict begin
+	pop  /PaperType exch def  /Callsetpagedevice exch def  /Mirror exch def  /Rotate180 exch def  /ShowCropMarks exch def
 
-	% Sets the page size; and attempts to disable duplex; draws crop marks
+	Callsetpagedevice  % Sets the page size; and attempts to disable duplex; draws crop marks
 	{
-		[PageWidth PageHeight] {14400 gt {(Warning: with a paper side > 14400pt = 16\'8\" = 5.08 metres, about to call setpagedevice, which might fail.) OutputToLog} if} forall
+		[PageWidth PageHeight] {14400 gt {(Warning: with a paper side > 14400pt = 16'8" = 5.08 metres, about to call setpagedevice, which might fail.) OutputToLog} if} forall
 		<<
-			/OutputFaceUp DefaultOutputFaceUp 4 index {not} if   /PageSize [PageWidth PageHeight]   /ImagingBBox //null
+			/OutputFaceUp DefaultOutputFaceUp Mirror {not} if   /PageSize [PageWidth PageHeight]   /ImagingBBox //null
 			//true [/TastingNotes /PrePour /VoteRecorder /DecantingNotes /Accounts /DistillerLog] {TypeOfPagesBeingRendered eq {pop //false exit} if} forall  {/Duplex //false} if
 		>> setpagedevice
 		/InitialMatrix matrix currentmatrix store
-		{
-			{[1 0 0 -1 0 PageHeight] concat}
-			{[-1 0 0 1 PageWidth 0] concat} ifelse  % Rotate180
-		}{
-			{[-1 0 0 -1 PageWidth PageHeight] concat} if  % Rotate180
-		} ifelse  % Mirror
+		Mirror
+			{Rotate180  {[1 0 0 -1 0 PageHeight] concat}  {[-1 0 0 1 PageWidth 0] concat}  ifelse}
+			{Rotate180  {[-1 0 0 -1 PageWidth PageHeight] concat}  if}
+		ifelse  % Mirror
 		/InitialMatrix matrix currentmatrix store
-	} {pop pop} ifelse  % Callsetpagedevice
+	} if  % Callsetpagedevice
+	ShowCropMarks
 	{
-		OuterGlassesMarginL OuterGlassesMarginB translate
-		<< /PageWidth dup load OuterGlassesMarginL OuterGlassesMarginR add sub  /PageHeight dup load OuterGlassesMarginB OuterGlassesMarginT add sub >> begin    //false
-		OuterGlassesMarginL 0 gt
+		/Glasses TypeOfPagesBeingRendered eq
+			{OuterGlassesMarginL OuterGlassesMarginR OuterGlassesMarginB OuterGlassesMarginT}
+			{       OuterMarginL        OuterMarginR        OuterMarginB        OuterMarginT}
+		ifelse  /OMT exch def  /OMB exch def  /OMR exch def  /OML exch def
+
+		OML OMB translate
+		<< /PageWidth dup load OML OMR add sub  /PageHeight dup load OMB OMT add sub >> begin    //false
+		OML 0 gt
 		{
-			OuterGlassesMarginB 0 gt
+			OMB 0 gt
 			{
-				OuterGlassesMarginL 108 ge {-36 0 -36 0} {OuterGlassesMarginL -3 div 0 2 copy} ifelse  moveto rlineto
-				OuterGlassesMarginB 108 ge {0 -36 0 -36} {0 OuterGlassesMarginB -3 div 2 copy} ifelse  moveto rlineto  pop //true
-			} if  % OuterGlassesMarginB 0 gt
-			OuterGlassesMarginT 0 gt
+				OML 108 ge {-36 0 -36 0} {OML -3 div 0 2 copy} ifelse  moveto rlineto
+				OMB 108 ge {0 -36 0 -36} {0 OMB -3 div 2 copy} ifelse  moveto rlineto  pop //true
+			} if  % OMB 0 gt
+			OMT 0 gt
 			{
-				OuterGlassesMarginL 108 ge {-36 0 -36} {OuterGlassesMarginL -3 div 0 1 index} ifelse PageHeight  moveto rlineto
-				OuterGlassesMarginT 108 ge {0 36 0 36} {0 OuterGlassesMarginT 3 div 2 copy} ifelse PageHeight add  moveto rlineto  pop //true
-			} if  % OuterGlassesMarginB 0 gt
-		} if  % OuterGlassesMarginL 0 gt
-		OuterGlassesMarginR 0 gt
+				OML 108 ge {-36 0 -36} {OML -3 div 0 1 index} ifelse PageHeight  moveto rlineto
+				OMT 108 ge {0 36 0 36} {0 OMT 3 div 2 copy} ifelse PageHeight add  moveto rlineto  pop //true
+			} if  % OMB 0 gt
+		} if  % OML 0 gt
+		OMR 0 gt
 		{
-			OuterGlassesMarginB 0 gt
+			OMB 0 gt
 			{
-				OuterGlassesMarginR 108 ge {36 0 36} {OuterGlassesMarginR 3 div 0 1 index} ifelse PageWidth add 0  moveto rlineto
-				OuterGlassesMarginB 108 ge {0 -36 PageWidth -36} {0 OuterGlassesMarginB -3 div PageWidth 1 index} ifelse  moveto rlineto  pop //true
-			} if  % OuterGlassesMarginT 0 gt
-			OuterGlassesMarginT 0 gt
+				OMR 108 ge {36 0 36} {OMR 3 div 0 1 index} ifelse PageWidth add 0  moveto rlineto
+				OMB 108 ge {0 -36 PageWidth -36} {0 OMB -3 div PageWidth 1 index} ifelse  moveto rlineto  pop //true
+			} if  % OMT 0 gt
+			OMT 0 gt
 			{
-				OuterGlassesMarginR 108 ge {36 0 36} {OuterGlassesMarginR 3 div dup 0 exch} ifelse PageWidth add PageHeight  moveto rlineto
-				OuterGlassesMarginT 108 ge {0 36} {0 OuterGlassesMarginT 3 div} ifelse dup PageHeight add PageWidth exch  moveto rlineto  pop //true
-			} if  % OuterGlassesMarginT 0 gt
-		} if  % OuterGlassesMarginR 0 gt
+				OMR 108 ge {36 0 36} {OMR 3 div dup 0 exch} ifelse PageWidth add PageHeight  moveto rlineto
+				OMT 108 ge {0 36} {0 OMT 3 div} ifelse dup PageHeight add PageWidth exch  moveto rlineto  pop //true
+			} if  % OMT 0 gt
+		} if  % OMR 0 gt
 		{0 setgray  0.24 dup currentlinewidth ne {setlinewidth} {pop} ifelse  0 currentlinecap ne {0 setlinecap} if  stroke} if  end  InitialMatrix setmatrix
+
+		/TrimInstructionsFontSize 8 def  /Courier TrimInstructionsFontSize selectfont  0.25 setgray
+		OMT MarginT TrimInstructionsFontSize 1.5 mul add gt
+		{
+			PageWidth OML OMR sub add 2 div  PageHeight MarginT sub  moveto
+			[
+				(Top trim ) OMT 127 mul 360 div 1 FormatDecimalPlaces (mm )
+				/approxequal ( ) OMT 72 div 2 FormatDecimalPlaces (" )
+				/approxequal ( ) OMT round cvi (pt below top edge of )
+				PaperType 2 string cvs ( paper.)
+			] dup OuterMarginLogsAdd  dup StringPathBBox  /T exch def  /R exch def  pop  /L exch def
+			R L sub  PageWidth OMR OML add MarginR MarginL add add sub  le {R L add -2 div T neg rmoveto ShowRecursive} {pop} ifelse
+		} if  % OMT ... gt
+		OML MarginL TrimInstructionsFontSize 1.5 mul add gt
+		{
+			matrix currentmatrix
+			MarginL   PageHeight OMB OMT sub add 2 div  translate -90 rotate  0 0 moveto
+			[
+				(Left trim ) OML 127 mul 360 div 1 FormatDecimalPlaces (mm )
+				/approxequal ( ) OML 72 div 2 FormatDecimalPlaces (" )
+				/approxequal ( ) OML round cvi (pt from left edge of )
+				PaperType 2 string cvs ( paper.)
+			] dup OuterMarginLogsAdd  dup StringPathBBox  pop  /R exch def  /B exch def  /L exch def
+			R L sub  PageHeight OMT OMB add MarginT MarginB add add sub  le {R L add -2 div B neg rmoveto ShowRecursive} {pop} ifelse
+			setmatrix
+		} if  % OML ... gt
+		OMB MarginB TrimInstructionsFontSize 1.5 mul add gt
+		{
+			PageWidth OML OMR sub add 2 div  MarginB  moveto
+			[
+				(Bottom trim ) OMB 127 mul 360 div 1 FormatDecimalPlaces (mm )
+				/approxequal ( ) OMB 72 div 2 FormatDecimalPlaces (" )
+				/approxequal ( ) OMB round cvi (pt above bottom edge of )
+				PaperType 2 string cvs ( paper.)
+			] dup OuterMarginLogsAdd  dup StringPathBBox  pop  /R exch def  /B exch def  /L exch def
+			R L sub  PageWidth OMR OML add MarginR MarginL add add sub  le {R L add -2 div B neg rmoveto ShowRecursive} {pop} ifelse
+		} if  % OMB ... gt
+		OMR MarginR TrimInstructionsFontSize 1.5 mul add gt
+		{
+			matrix currentmatrix
+			PageWidth MarginR sub   PageHeight OMB OMT sub add 2 div  translate 90 rotate  0 0 moveto
+			[
+				(Right trim ) OMR 127 mul 360 div 1 FormatDecimalPlaces (mm )
+				/approxequal ( ) OMR 72 div 2 FormatDecimalPlaces (" )
+				/approxequal ( ) OMR round cvi (pt from right edge of )
+				PaperType 2 string cvs ( paper.)
+			] dup OuterMarginLogsAdd  dup StringPathBBox  pop  /R exch def  /B exch def  /L exch def
+			R L sub  PageHeight OMT OMB add MarginT MarginB add add sub  le {R L add -2 div B neg rmoveto ShowRecursive} {pop} ifelse
+			setmatrix
+		} if  % OMR ... gt
 	} if  % show crop marks
+	end
 	DeBugLevel 15 le {(-SetPaperSize) OutputToLog} if
 } bind def  % /SetPaperSize
 
@@ -4644,8 +4710,8 @@ currentdict /SmallCapsDict undef
 					R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
 					R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and
 					{
-						mark (DiamondsPlus improves radius by ) R PriorBestRadius sub dup (pt = ) exch 72 div dup (\" = ) exch 25.4 mul (mm )
-						PriorBestRadius 0 gt {(= ) R PriorBestRadius div 1 sub 100 mul (\% )} if (to ) R (pt from ) PriorBestRadius (pt on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
+						mark (DiamondsPlus improves radius by ) R PriorBestRadius sub dup (pt = ) exch 72 div dup (" = ) exch 25.4 mul (mm )
+						PriorBestRadius 0 gt {(= ) R PriorBestRadius div 1 sub 100 mul (% )} if (to ) R (pt from ) PriorBestRadius (pt on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
 						/BestRadius R store
 						BestParamsDict {pop BestParamsDict exch undef} forall
 						BestParamsDict /PackingDescriptor PackingDescriptor put
@@ -4763,8 +4829,8 @@ currentdict /SmallCapsDict undef
 							R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
 							R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
 							{
-								mark (RectangularAlternateSplitNudge improves radius by ) R PriorBestRadius sub dup (pt = ) exch 72 div dup (\" = ) exch 25.4 mul (mm )
-								PriorBestRadius 0 gt {(= ) R PriorBestRadius div 1 sub 100 mul (\% )} if (to ) R (pt from ) PriorBestRadius (pt on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
+								mark (RectangularAlternateSplitNudge improves radius by ) R PriorBestRadius sub dup (pt = ) exch 72 div dup (" = ) exch 25.4 mul (mm )
+								PriorBestRadius 0 gt {(= ) R PriorBestRadius div 1 sub 100 mul (% )} if (to ) R (pt from ) PriorBestRadius (pt on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
 								/BestRadius R store
 								BestParamsDict {pop BestParamsDict exch undef} forall
 								BestParamsDict /PackingDescriptor dup load put
@@ -4811,8 +4877,8 @@ currentdict /SmallCapsDict undef
 					R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
 					R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
 					{
-						mark (RectangularAlternateNudge improves radius by ) R PriorBestRadius sub dup (pt = ) exch 72 div dup (\" = ) exch 25.4 mul (mm )
-						PriorBestRadius 0 gt {(= ) R PriorBestRadius div 1 sub 100 mul (\% )} if (to ) R (pt from ) PriorBestRadius (pt on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
+						mark (RectangularAlternateNudge improves radius by ) R PriorBestRadius sub dup (pt = ) exch 72 div dup (" = ) exch 25.4 mul (mm )
+						PriorBestRadius 0 gt {(= ) R PriorBestRadius div 1 sub 100 mul (% )} if (to ) R (pt from ) PriorBestRadius (pt on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
 						/BestRadius R store
 						BestParamsDict {pop BestParamsDict exch undef} forall
 						BestParamsDict /PackingDescriptor dup load put
@@ -7072,7 +7138,7 @@ currentdict /SmallCapsDict undef
 	} bind def  % /TwoArraysEqual
 
 	mark (Radii = ) Radii SizeArrayOutput TrimSpaces ( => diameters ~= )
-	() [ Radii {mark exch dup 127 mul 180 div 1 FormatDecimalPlaces exch 36 div 2 FormatDecimalPlaces (mm~=) exch (\") ConcatenateToMark} forall ] SizeArrayOutput TrimSpaces (.) ConcatenateToMark OutputToLog
+	() [ Radii {mark exch dup 127 mul 180 div 1 FormatDecimalPlaces exch 36 div 2 FormatDecimalPlaces (mm~=) exch (") ConcatenateToMark} forall ] SizeArrayOutput TrimSpaces (.) ConcatenateToMark OutputToLog
 
 	/GlassesOnSheetsAndTastingNotePagesEqual GlassesOnSheets GlassesOnTastingNotePages TwoArraysEqual def
 	/ByRearrangementArrayString
@@ -7093,9 +7159,9 @@ currentdict /SmallCapsDict undef
 		} for  ]
 		RearrangementArray length 1 le
 		{
-			DescriptionString ( = \[  )  3 -1 roll aload pop ( \])
+			DescriptionString ( = [  )  3 -1 roll aload pop ( ])
 		}{
-			DescriptionString ( =\n\[)  3 -1 roll {(\n\t) exch} forall   (\n\])
+			DescriptionString ( =\n[)  3 -1 roll {(\n\t) exch} forall   (\n])
 		} ifelse  % RearrangementArray length 1 le
 		end
 	} bind def  % /ByRearrangementArrayString
@@ -8255,7 +8321,7 @@ currentdict /SmallCapsDict undef
 		/Connections_dLength2 [ fsl length {0} repeat ] def
 		/Connections_dAi fsl length array def  % ingress angle
 		/Connections_dAe fsl length array def  % egress angle
-		/Connections_Type [ fsl length {/Straight} repeat ] def  % /Point, /Straight, /Curve, /Clockwise, /Widdershins. Note that /Straight /Curve /Corner are from previous.
+		/Connections_Type [ fsl length {/Straight} repeat ] def  % /Point, /Straight, /Curve, /Clockwise, /Widdershins. Note that /Straight /Curve /Arc are from previous.
 		/Connections_Radius [ /FlightSeparationArcRadius cvx  fsl length {dup} repeat  pop ] def
 		/Connections_linetoXY [ fsl length {//true} repeat ] def  % Is a line to or from _X,_Y permitted?
 		/Connections_num 0 def
@@ -8267,7 +8333,7 @@ currentdict /SmallCapsDict undef
 			/fsl_i exch def
 			/ThisFSPiece fsl fsl_i GetEU def
 
-			ThisFSPiece dup /Corner eq exch /Curve eq or {Connections_Type Connections_num ThisFSPiece put  Connections_fsl Connections_num ThisFSPiece put} if
+			ThisFSPiece dup /Arc eq exch /Curve eq or {Connections_Type Connections_num ThisFSPiece put  Connections_fsl Connections_num ThisFSPiece put} if
 
 			ThisFSPiece type /arraytype eq {ThisFSPiece length 0 gt} {//false} ifelse
 			{
@@ -8284,7 +8350,7 @@ currentdict /SmallCapsDict undef
 						(, position ) fsl_i
 						( in the parameter to FlightSeparationPath, references two circles, ) ThisFSPiece 0 GetEU
 						( and ) ThisFSPiece 1 GetEU
-						(, that are apart by more than  Radii SheetNum get 2 mul //Sqrt3 mul.) ConcatenateToMark OutputToLog
+						(, that are apart by more than  Radii SheetNum get 2 mul Sqrt3 mul.) ConcatenateToMark OutputToLog
 					} if  % More than Radii SheetNum get*2*Sqrt[3] apart
 					/Connections_num Connections_num 1 add def
 				}{
@@ -8392,7 +8458,7 @@ currentdict /SmallCapsDict undef
 			Connections_dX   Connections_num  Connections_dX  0 get neg  put
 			Connections_dY   Connections_num  Connections_dY  0 get neg  put
 			Connections_dLength2  Connections_num  Connections_dLength2 0 get  put
-			Connections_Type 0 get dup dup /Corner eq exch /Curve eq or {Connections_Type exch Connections_num exch put} {pop} ifelse
+			Connections_Type 0 get dup dup /Arc eq exch /Curve eq or {Connections_Type exch Connections_num exch put} {pop} ifelse
 			/Connections_num Connections_num 1 add def
 		} if  % ... /Closed ... Connections_Done_First  and
 
@@ -8416,7 +8482,7 @@ currentdict /SmallCapsDict undef
 					/dL1 Connections_dLength2 Connections1 get def
 					j 0 lt {Connections_dAi} {Connections_dAe} ifelse  Connections0  Y1 Y0 sub  X1 X0 sub  atan  put  % default
 					1 {
-						Connections_Type Connections1 get dup dup /Corner eq exch /Straight eq or exch /Curve eq or
+						Connections_Type Connections1 get dup dup /Arc eq exch /Straight eq or exch /Curve eq or
 						{
 							j 0 lt {Connections_dAi} {Connections_dAe} ifelse  Connections0  % to match with following 'put'
 							Connections_X Connections1 get abs //PrinterEpsilon lt
@@ -8443,7 +8509,7 @@ currentdict /SmallCapsDict undef
 							dup dX1 mul X1 add exch dY1 mul Y1 add  Y0 sub exch X0 sub atan   put
 							Connections_dX  Connections1  dX1 neg  put
 							Connections_dY  Connections1  dY1 neg  put
-						} if  % ... Connections1 ... /Corner ... /Straight ... /Curve ...
+						} if  % ... Connections1 ... /Arc ... /Straight ... /Curve ...
 					} repeat  % 1
 				} for  % back one, forward one: j
 			} if  % ... Connections0 ... /Clockwise ... /Widdershins ...
@@ -8486,14 +8552,18 @@ currentdict /SmallCapsDict undef
 				dX1 mul X1 add  /Xh1 exch def
 				dY1 mul Y1 add  /Yh1 exch def
 
-				Connections_Type Connections0 get /Corner eq
+				Connections_Type Connections0 get /Arc eq
 				{
 					DirectionsParallel not DirectionsBothNonZero and
 					Connections_linetoXY Connections0 get
-						{{Xj Yj} {Xh1 Xh0 add 2 div Yh1 Yh0 add 2 div} ifelse X0 Y0 2 copy 6 2 roll FlightSeparationsCornerRadius arct lineto}
-						{{Xj Yj lineto} if}
-					ifelse  % Connections_linetoXY Connections0 get
-				} if  % /Corner
+					{
+						{Xj Yj} {Xh1 Xh0 add 2 div Yh1 Yh0 add 2 div} ifelse
+						dup Y0 ne  2 index X0 ne  or
+							{X0 Y0 2 copy 6 2 roll Radii SheetNum get FlightSeparationsArcProportionRadius mul arct lineto}
+							{pop pop}
+						ifelse  % Identical points produces /undefinedresult
+					} {{Xj Yj lineto} if} ifelse  % Connections_linetoXY Connections0 get
+				} if  % /Arc
 				Connections_Type Connections0 get /Curve eq
 				{
 					DirectionsParallel not DirectionsBothNonZero and
@@ -8642,7 +8712,7 @@ currentdict /SmallCapsDict undef
 						PageType 0 eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TastingSheetNum} ifelse  get  LengthCompoundObject 2 ge
 						{
 							PageWidth MgnL MgnR add sub PageHeight MgnB MgnT add sub   PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TastingSheetNum} ifelse get {exch} if div  BgT BgB sub mul BgR BgL sub sub
-							dup abs 0.0001 ge  {( \(for snug fit insert \"\{)  exch  dup 0 gt {(+) exch} if  ( Kern\}\"\))}  {pop ( \(which fits snugly\))}  ifelse  % If so small that would be shown in scientific notation, don't show. And on A3 1E-4 ~= 0.1pt
+							dup abs 0.0001 ge  {( \(for snug fit insert "{)  exch  dup 0 gt {(+) exch} if  ( Kern}"\))}  {pop ( \(which fits snugly\))}  ifelse  % If so small that would be shown in scientific notation, don't show. And on A3 1E-4 ~= 0.1pt
 						} if  % at least two characters
 						(.)  ConcatenateToMark OutputToLog
 					}  if  % Not previous logged
@@ -13449,8 +13519,8 @@ currentdict /SmallCapsDict undef
 			{
 				begin
 				PagesToBeInsertedDest type /nametype eq {mark  /Action /GoTo  /Dest PagesToBeInsertedDest  /Title [PagesToBeInsertedDescription ( \(p) PagesToBeInsertedPageNum 1 add (\))] PDFDocEncodingify  /Count 0  /F 0  /OUT  pdfmark} if
-				/PagesToBeInsertedWarning dup load mark exch ( \") PagesToBeInsertedDescription ASCIIfy (\", p) PagesToBeInsertedPageNum 1 add
-				PagesToBeInsertedDest type /nametype eq {(, containing \'Dest\' \") PagesToBeInsertedDest (\")} if  (;)  ConcatenateToMark store
+				/PagesToBeInsertedWarning dup load mark exch ( ") PagesToBeInsertedDescription ASCIIfy (", p) PagesToBeInsertedPageNum 1 add
+				PagesToBeInsertedDest type /nametype eq {(, containing 'Dest' ") PagesToBeInsertedDest (")} if  (;)  ConcatenateToMark store
 				end
 			} forall  % PagesToBeInsertedData
 			TypeOfPagesBeingRendered dup dup /Glasses eq exch /TastingNotes eq or exch /PlaceName eq or
@@ -13995,6 +14065,8 @@ currentdict /SmallCapsDict undef
 	} for  % i
 
 	DeBugLevel 50 le {(-Outline construction, and other pdfmark's) OutputToLog} if
+
+	OuterMarginLogsNum 0 gt {mark OuterMarginLogs 0 OuterMarginLogsNum getinterval {(\n)} forall pop ConcatenateToMark OutputToLog} if
 
 	AnyFillTextingAtAll {( Main: finish: usertime = ) usertime ToString Concatenate OutputToLog} if
 
