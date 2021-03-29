@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:05 Monday 29th March 2021
+% This version 21:10 Monday 29th March 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202103292105) def
+/ParametersVersionDateTimeAdobeFormat (D:202103292110) def
 
 /Circlearrays [
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
@@ -760,7 +760,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202103292105) def
+/SoftwareVersionDateTimeAdobeFormat (D:202103292110) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1508,7 +1508,7 @@ TestingMaxNumPagesToShow 2147483647 lt  TestingSuppressPageTypes length 0 gt  or
 	mark  (Nota bene: some pages might be suppressed = not shown, perhaps because this is an example or a test.)
 	(\n\(At the end there might be an extra page, blank, caused by a bug in erasepage.\))
 	TestingMaxNumPagesToShow 2147483647 lt {(\nTestingMaxNumPagesToShow = ) TestingMaxNumPagesToShow} if
-	TestingSuppressPageTypes length 0 gt {(\nTestingSuppressPageTypes = [) TestingSuppressPageTypes {dup type /nametype eq {( /) exch} if ( )} forall (\])} if
+	TestingSuppressPageTypes length 0 gt {(\nTestingSuppressPageTypes = [) TestingSuppressPageTypes {dup type /nametype eq {( /) exch} if ( )} forall (])} if
 	ConcatenateToMark OutputToLog
 } if  % TestingMaxNumPagesToShow ... TestingSuppressPageTypes ... or
 
@@ -2116,7 +2116,7 @@ end
 		//true 0 1 3 index length 1 sub << /thing1 8 -2 roll /thing2 exch >> begin  {dup /thing1 load exch get exch /thing2 load exch get eqArray not {pop //false exit} if} for  end
 	} repeat  % 1
 } bind def  % /eqArray
-mark (Array equalities:  \{)  4 dict begin
+mark (Array equalities:  {)  4 dict begin
 /ArraysToCompare [
 	/Circlearrays /Titles /Abovetitles /Belowtitles /Overtitles  AnyFillTextingAtAll {/FillTexts} if
 	{GlassesOnTastingNotePages length 0 gt} MightBeTrue {TastingNotePagesNumCopies 1 ge} MightBeTrue and {/CirclearraysTastingNotes /TitlesTastingNotes /SubtitlesTastingNotes /Names /NamesTastingNotes} {/Names} ifelse
@@ -2152,7 +2152,7 @@ mark (Array equalities:  \{)  4 dict begin
 				{( = )  ArraysToCompare j get ToString TrimSpaces  ArraysRemaining j //false put}
 			if  % ... i ... j ... eq
 		} for  % j
-		(\}) (;   \{)
+		(}) (;   {)
 	} if  % ArraysRemaining i get
 } bind for  % i
 end pop (.) ConcatenateToMark OutputToLog
@@ -13432,7 +13432,7 @@ currentdict /SmallCapsDict undef
 			(=) Names length (*)  //true 1 1 NumSheets 1 sub {dup 1 sub SheetLengths exch get exch SheetLengths exch get eq and} for  {NumSheets (*) SheetLengths 0 get}  {(\() SheetLengths {(+)} forall pop (\))}  ifelse
 			GlassesNumCopies dup 1 gt {(*) exch} {pop} ifelse
 		} if} if  % Sensible to express as a multiplication
-		( glass-circle zooms of the form Circle_#NameNum_#SheetNum_#WithinPage)  {GlassesNumCopies 2 ge} MightBeTrue {(\[_#GlassesCopyNum\])} if
+		( glass-circle zooms of the form Circle_#NameNum_#SheetNum_#WithinPage)  {GlassesNumCopies 2 ge} MightBeTrue {([_#GlassesCopyNum])} if
 		(, the first being )  ShownGlassesCirclesData 0 get /GlassesCircleDestName get ( and the last being ) ShownGlassesCirclesData ShownGlassesCircles 1 sub get /GlassesCircleDestName get (.)
 		IsDistiller not {( \(But distillation might be in Ghostscript, so these # tags might be missing: check.\))} if
 	} {(.)} ifelse   1 index mark ne {ConcatenateToMark () OutputToLog OutputToLog} {cleartomark} ifelse
