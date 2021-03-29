@@ -309,3 +309,4 @@ Alternatively, for multiple icons on the page, ThePortForumIconPlacement can be 
 Icons on the tasting-note pages are controlled by ThePortForumIconTastingNotePlacement, with permitted values `/None`, `/LowerLeft`, `/LowerRight`, `/UpperLeft`, `/UpperRight`, `/LowerNonName`, `/UpperNonName` and `/UpperName`. 
 Whether or not the icons are shown in colour is set by the boolean `ThePortForumIconColour`.
 
+These parameters are mentioned in [issue 97](http://github.com/jdaw1/placemat/issues/97), re other websites&rsquo; icons.
