@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:10 Monday 29th March 2021
+% This version 21:15 Monday 29th March 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202103292110) def
+/ParametersVersionDateTimeAdobeFormat (D:202103292115) def
 
 /Circlearrays [
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
@@ -760,7 +760,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202103292110) def
+/SoftwareVersionDateTimeAdobeFormat (D:202103292115) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -2101,7 +2101,7 @@ end
 	{BackgroundTextsGlasses PrePourShowBackgroundTexts BackgroundTextsTastingNotes or or} MightBeTrue {/BackgroundTextsFont} if
 ]  {[ exch dup /fv exch def fv load ValueIfAscertainable not {fv load} if ]} forall ] def % FontData
 mark (Fonts: )
-0 1 FontData length 1 sub {/i exch def FontData i get 1 get dup //null ne {dup type /nametype eq {(\/) exch} if  ( \() FontData i get 0 get (, )
+0 1 FontData length 1 sub {/i exch def FontData i get 1 get dup //null ne {dup type /nametype eq {(/) exch} if  ( \() FontData i get 0 get (, )
 	i 1 add 1 FontData length 1 sub {/j exch def FontData i get 1 get FontData j get 1 get eq {FontData j get 0 get (, )  FontData j get 1 //null put} if} for  pop (\)) (; )
 } {pop} ifelse} for  pop (; and perhaps others.) ConcatenateToMark OutputToLog
 end
