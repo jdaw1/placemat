@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:15 Monday 29th March 2021
+% This version 18:30 Wednesday 31st March 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202103292115) def
+/ParametersVersionDateTimeAdobeFormat (D:202103311830) def
 
 /Circlearrays [
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
@@ -760,7 +760,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202103292115) def
+/SoftwareVersionDateTimeAdobeFormat (D:202103311830) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -8090,14 +8090,20 @@ currentdict /SmallCapsDict undef
 	{
 		Titles NonEmptyCompoundObject
 		{
+			4 dict begin
 			(TitleFontSizes = ) TitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)
 			/TitleFontSizesUnique [ TitleFontSizes { {counttomark 1 sub -1 1 {index 1 index sub abs //PrinterEpsilon le {pop exit} if} for} forall} forall ] dup {le} ShellSort def  % Unique font sizes
 			TitleFontSizesUnique length 1 gt
 			{
 				(TitleFontSizes, equality classes: )
-					[ TitleFontSizes { [ exch {0 1 TitleFontSizesUnique length 1 sub {2 copy TitleFontSizesUnique exch get sub abs //PrinterEpsilon le {exch pop exit} {pop} ifelse} for} forall ] } forall ]
-				TrimSpaces (.) (\n)
+				[ TitleFontSizes { [ exch {0 1 TitleFontSizesUnique length 1 sub {2 copy TitleFontSizesUnique exch get sub abs //PrinterEpsilon le {exch pop exit} {pop} ifelse} for} forall ] } forall ] (; )
+				/TitleFontSizesFrequencies [ TitleFontSizesUnique length {0} repeat ] def
+				TitleFontSizes {{/TFS exch def 0 1 TitleFontSizesUnique length 1 sub {/i exch def TitleFontSizesUnique i get TFS sub abs //PrinterEpsilon le {TitleFontSizesFrequencies i 2 copy get 1 add put exit} if} for} forall} forall
+				(frequencies=) TitleFontSizesFrequencies (; )
+				TitleFontSizesUnique length 1 sub  -1  1 {dup 1 sub 2 copy (#) 5 1 roll (/#) 4 1 roll (=) 3 1 roll TitleFontSizesUnique exch get exch TitleFontSizesUnique exch get exch div (, )} for
+				pop (.) (\n)
 			} if  % At least two different values in TitleFontSizes
+			end
 			TitleMaxHeightProportionInnerRadiusRelevantNum 0 gt
 			{
 				(TitleMaxHeightProportionInnerRadius directly relevant for these WithinTitles and Titles: )
