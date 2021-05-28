@@ -340,7 +340,7 @@ There is also the simple numerical parameter `MaxRadius`, defaulting to 150 &rAr
 
 Given the default value of `PackingStyles`, the following shows glass diameters for various numbers of glasses on various page sizes.
 
-| Num<br>Glasses | `/A4`<br>210mm&times;297mm | `/A3`<br>420mm&times;297mm | `/USLegal`<br>14&Prime;&times;8&frac12;&Prime; | `/USLegal`<br>8&frac12;&Prime;&times;11&Prime; | `/USL2`<br>17&Prime;&times;11&Prime; |
+| Num<br>Glasses | `/A4`<br>210mm&times;297mm | `/A3`<br>420mm&times;297mm | `/USLegal`<br>14&Prime;&times;8&frac12;&Prime; | `/USL`<br>8&frac12;&Prime;&times;11&Prime; | `/USL2`<br>17&Prime;&times;11&Prime; |
 |---:|---:|---:|---:|---:|---:|
 | 3 | 113.9mm, 4.49&Prime; | 164.6mm, 6.48&Prime; | 126.9mm, 5.00&Prime; | 113.1mm, 4.45&Prime; | 161.1mm, 6.34&Prime; |
 | 4 | 105.1mm, 4.14&Prime; | 151.6mm, 5.97&Prime; | 112.8mm, 4.44&Prime; | 105.6mm, 4.16&Prime; | 145.6mm, 5.73&Prime; |

@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Tuesday 23rd March 2021
+% This version 22:30 Friday 28th May 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
@@ -11,7 +11,7 @@
 % Nor does any output: not PDF; nor images of such a document.
 % But it does include re-usable improvements to the body of the code.
 
-/ParametersVersionDateTimeAdobeFormat (D:202103232000) def
+/ParametersVersionDateTimeAdobeFormat (D:202105282230) def
 
 /Circlearrays [
 	[ (A)  (0) ]
@@ -47,7 +47,9 @@
 ] def
 
 /Belowtitles [ Titles length {()} repeat ] def
-/Names [ (JDAW) ] def
+/Names [
+	[(JDA) {-0.06 Kern} (W)]
+] def
 
 /PaperType /A3 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /USL2 = 11"x17", [SmallerPts LargerPts]
 
@@ -67,7 +69,7 @@
 
 /GlassesOnSheets [
 	[ 0  1  Titles length 1 sub {} for ]
-	dup dup dup
+	dup
 ] def  % /GlassesOnSheets
 
 /PackingNestingColumnMajor true def  % Default value, which can be overridden at the level of the individual item of PackingStyles
@@ -92,19 +94,6 @@
 		[ [/Bottom 5 7 +0.3]  /Arc  [5 7]  /Arc  [4 7]  /Arc  [4 6]  [3 6]  /Arc  [/Top 3 6 +0.3] ]
 		[ /Closed  [/Bottom 7 10 -0.3]  /Arc  [7 10]  /Arc  [9 10]  /Arc  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  [/Bottom 13 +1.0] ]
 	]  % - SheetNum = 1
-	[  % + SheetNum = 2
-		% Bezier cubics, so softer than /Arc
-		[ [/Bottom 2 5]  /Curve  [2 5]  /Curve  [1 4]  /Curve  [3 4]  /Curve  [3 6]  /Curve  [/Top 3 6 +0.3] ]
-		[ [/Bottom 5 7 +0.3]  /Curve  [5 7]  /Curve  [4 7]  /Curve  [4 6]  /Curve  [3 6]  /Curve  [/Top 3 6 +0.3] ]
-		[ /Closed  [/Bottom 7 10 -0.3]  /Curve  [7 10]  /Curve  [9 10]  /Curve  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  /Curve  [/Bottom 13 +1.0] ]
-	]  % - SheetNum = 2
-	[  % + SheetNum = 3
-		% Clinging tightly to the circles
-		[ [/Bottom 2 5]  [2 5]  [1 4]  [/Clockwise 4]  [/Widdershins 3]  [/Top 3 +1.0] ]
-		[ [/Bottom 5 +1.0]  [/Widdershins 5]  [/Clockwise 7]  [/Widdershins 4]  [/Clockwise 6]  [/Widdershins 3]  [/Top 3 +1.0] ]
-		[ /Closed  [/Bottom 10]  [/Clockwise 10]  [/HorizontalRightwards 10 +1.0]  [/VerticalUp 11 -1.0]  [/Clockwise 11]  [/Right 11]  [/Right 13]  [/Clockwise 13]  [/Bottom 13] ]
-	]  % - SheetNum = 3
-	counttomark GlassesOnSheets length exch sub {[]} repeat
 ] def  % /FlightSeparationLines
 
 /CircletextsMaxCopies 9999 def
@@ -388,10 +377,13 @@ if} bind def  % /VoteRecorderCrossedBox
 ] def  % DropletsCharges
 /DropletsProportionBackwards 0.0204 def  % Keeping this small adds humour to their discovery. ("Naughty creatures being rebellious. It's like herding cats!")
 
-/FlightSeparationPaintCode {gsave 0 setlinecap 2.4 setlinewidth 0.75 setgray stroke grestore 1 setlinecap 0.96 setlinewidth 1 setgray stroke} def
+% The usual error is too shallow nesting of arrays. There is the outer array. Containing an array for each SheetNum. Each containing arrays, one per line. Each containing the line pieces.
+% Example line descriptions (so FlightSeparations to be two deeper):
+% --  [ [/Left 3] [0 3] [/Top 3] ]
+% --  [ [/Top 4] [1 4] [/VerticalUp 1 1 1 1 4] [4 6] [/Bottom 4] ]
+/FlightSeparationPaintCode {gsave 2.4 setlinewidth 0.75 setgray stroke grestore 1 setlinecap 1 setlinejoin 0.96 setlinewidth 1 setgray stroke} def
 /FlightSeparationPaintSeparately false def
 /FlightSeparationsArcProportionRadius 0.5 def  % strictly >0; <=1
-/FlightSeparationArcRadiusControl 1 def  % In range 0 to 1 inclusive. 0 = radius of circle; 1 = half-way to nearest glass. If glasses circles touch, irrelevant.
 
 /PaintBackgroundInsideGlassCircles {} def  % Paints a background pattern. Called with centre of circle translated to 0,0; and clipped to radius Radii SheetNum get.
 /PaintBackgroundCode {} def  % Paints a background pattern. Will probably refer to TypeOfPagesBeingRendered and then to SheetNum or TastingSheetNum.
@@ -790,7 +782,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202103232000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202105282230) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1538,7 +1530,7 @@ TestingMaxNumPagesToShow 2147483647 lt  TestingSuppressPageTypes length 0 gt  or
 	mark  (Nota bene: some pages might be suppressed = not shown, perhaps because this is an example or a test.)
 	(\n\(At the end there might be an extra page, blank, caused by a bug in erasepage.\))
 	TestingMaxNumPagesToShow 2147483647 lt {(\nTestingMaxNumPagesToShow = ) TestingMaxNumPagesToShow} if
-	TestingSuppressPageTypes length 0 gt {(\nTestingSuppressPageTypes = [) TestingSuppressPageTypes {dup type /nametype eq {( /) exch} if ( )} forall (\])} if
+	TestingSuppressPageTypes length 0 gt {(\nTestingSuppressPageTypes = [) TestingSuppressPageTypes {dup type /nametype eq {( /) exch} if ( )} forall (])} if
 	ConcatenateToMark OutputToLog
 } if  % TestingMaxNumPagesToShow ... TestingSuppressPageTypes ... or
 
@@ -2131,7 +2123,7 @@ end
 	{BackgroundTextsGlasses PrePourShowBackgroundTexts BackgroundTextsTastingNotes or or} MightBeTrue {/BackgroundTextsFont} if
 ]  {[ exch dup /fv exch def fv load ValueIfAscertainable not {fv load} if ]} forall ] def % FontData
 mark (Fonts: )
-0 1 FontData length 1 sub {/i exch def FontData i get 1 get dup //null ne {dup type /nametype eq {(\/) exch} if  ( \() FontData i get 0 get (, )
+0 1 FontData length 1 sub {/i exch def FontData i get 1 get dup //null ne {dup type /nametype eq {(/) exch} if  ( \() FontData i get 0 get (, )
 	i 1 add 1 FontData length 1 sub {/j exch def FontData i get 1 get FontData j get 1 get eq {FontData j get 0 get (, )  FontData j get 1 //null put} if} for  pop (\)) (; )
 } {pop} ifelse} for  pop (; and perhaps others.) ConcatenateToMark OutputToLog
 end
@@ -2146,7 +2138,7 @@ end
 		//true 0 1 3 index length 1 sub << /thing1 8 -2 roll /thing2 exch >> begin  {dup /thing1 load exch get exch /thing2 load exch get eqArray not {pop //false exit} if} for  end
 	} repeat  % 1
 } bind def  % /eqArray
-mark (Array equalities:  \{)  4 dict begin
+mark (Array equalities:  {)  4 dict begin
 /ArraysToCompare [
 	/Circlearrays /Titles /Abovetitles /Belowtitles /Overtitles  AnyFillTextingAtAll {/FillTexts} if
 	{GlassesOnTastingNotePages length 0 gt} MightBeTrue {TastingNotePagesNumCopies 1 ge} MightBeTrue and {/CirclearraysTastingNotes /TitlesTastingNotes /SubtitlesTastingNotes /Names /NamesTastingNotes} {/Names} ifelse
@@ -2182,7 +2174,7 @@ mark (Array equalities:  \{)  4 dict begin
 				{( = )  ArraysToCompare j get ToString TrimSpaces  ArraysRemaining j //false put}
 			if  % ... i ... j ... eq
 		} for  % j
-		(\}) (;   \{)
+		(}) (;   {)
 	} if  % ArraysRemaining i get
 } bind for  % i
 end pop (.) ConcatenateToMark OutputToLog
@@ -8120,14 +8112,20 @@ currentdict /SmallCapsDict undef
 	{
 		Titles NonEmptyCompoundObject
 		{
+			4 dict begin
 			(TitleFontSizes = ) TitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)
 			/TitleFontSizesUnique [ TitleFontSizes { {counttomark 1 sub -1 1 {index 1 index sub abs //PrinterEpsilon le {pop exit} if} for} forall} forall ] dup {le} ShellSort def  % Unique font sizes
 			TitleFontSizesUnique length 1 gt
 			{
 				(TitleFontSizes, equality classes: )
-					[ TitleFontSizes { [ exch {0 1 TitleFontSizesUnique length 1 sub {2 copy TitleFontSizesUnique exch get sub abs //PrinterEpsilon le {exch pop exit} {pop} ifelse} for} forall ] } forall ]
-				TrimSpaces (.) (\n)
+				[ TitleFontSizes { [ exch {0 1 TitleFontSizesUnique length 1 sub {2 copy TitleFontSizesUnique exch get sub abs //PrinterEpsilon le {exch pop exit} {pop} ifelse} for} forall ] } forall ] (; )
+				/TitleFontSizesFrequencies [ TitleFontSizesUnique length {0} repeat ] def
+				TitleFontSizes {{/TFS exch def 0 1 TitleFontSizesUnique length 1 sub {/i exch def TitleFontSizesUnique i get TFS sub abs //PrinterEpsilon le {TitleFontSizesFrequencies i 2 copy get 1 add put exit} if} for} forall} forall
+				(frequencies=) TitleFontSizesFrequencies (; )
+				TitleFontSizesUnique length 1 sub  -1  1 {dup 1 sub 2 copy (#) 5 1 roll (/#) 4 1 roll (=) 3 1 roll TitleFontSizesUnique exch get exch TitleFontSizesUnique exch get exch div (, )} for
+				pop (.) (\n)
 			} if  % At least two different values in TitleFontSizes
+			end
 			TitleMaxHeightProportionInnerRadiusRelevantNum 0 gt
 			{
 				(TitleMaxHeightProportionInnerRadius directly relevant for these WithinTitles and Titles: )
@@ -8319,10 +8317,7 @@ currentdict /SmallCapsDict undef
 		/Connections_dX [ fsl length {0} repeat ] def
 		/Connections_dY [ fsl length {0} repeat ] def
 		/Connections_dLength2 [ fsl length {0} repeat ] def
-		/Connections_dAi fsl length array def  % ingress angle
-		/Connections_dAe fsl length array def  % egress angle
-		/Connections_Type [ fsl length {/Straight} repeat ] def  % /Point, /Straight, /Curve, /Clockwise, /Widdershins. Note that /Straight /Curve /Arc are from previous.
-		/Connections_Radius [ /FlightSeparationArcRadius cvx  fsl length {dup} repeat  pop ] def
+		/Connections_Type [ fsl length {/Straight} repeat ] def  % /Point, /Straight, /Arc. Note that /Straight /Arc are from previous.
 		/Connections_linetoXY [ fsl length {//true} repeat ] def  % Is a line to or from _X,_Y permitted?
 		/Connections_num 0 def
 		/Connections_Done_First //false def
@@ -8333,7 +8328,7 @@ currentdict /SmallCapsDict undef
 			/fsl_i exch def
 			/ThisFSPiece fsl fsl_i GetEU def
 
-			ThisFSPiece dup /Arc eq exch /Curve eq or {Connections_Type Connections_num ThisFSPiece put  Connections_fsl Connections_num ThisFSPiece put} if
+			ThisFSPiece /Arc eq {Connections_Type Connections_num ThisFSPiece put  Connections_fsl Connections_num ThisFSPiece put} if
 
 			ThisFSPiece type /arraytype eq {ThisFSPiece length 0 gt} {//false} ifelse
 			{
@@ -8357,7 +8352,7 @@ currentdict /SmallCapsDict undef
 					% So not [i j] nor [[xi, yi], j] nor [i, [xj, yj]] nor [[xi, yi], [xj, yj]]
 					Connections_fsl  Connections_num  ThisFSPiece 0 get  put
 					1 {
-						//false [/Left /Right /HorizontalLeftwards /HorizontalRightwards] {ThisFSPiece 0 get eq {pop //true exit} if} forall
+						//false [/Left /Right] {ThisFSPiece 0 get eq {pop //true exit} if} forall
 						{
 							/SumReals 0 def  /SumPointeds 0 def  /CountPointeds 0 def
 							1  1  ThisFSPiece length 1 sub
@@ -8368,10 +8363,10 @@ currentdict /SmallCapsDict undef
 								SubPiece type /integertype eq {/SumPointeds GlassPositions SheetNum get SubPiece get 1 get SumPointeds add def  /CountPointeds CountPointeds 1 add def} if
 								SubPiece type /realtype eq {/SumReals SubPiece SumReals add def} if
 							} for  % ThisFSPiece
-							Connections_X  Connections_num  ThisFSPiece 0 get /Right eq {PageWidth MgnR sub} {MgnL} ifelse put  % HorizontalRightwards on far left
+							Connections_X  Connections_num  ThisFSPiece 0 get /Right eq {PageWidth MgnR sub} {MgnL} ifelse put
 							CountPointeds 0 gt
 							{
-								Connections_Y  Connections_num  SumReals FlightSeparationArcRadius mul  SumPointeds CountPointeds div add  put
+								Connections_Y  Connections_num  SumReals Radii SheetNum get mul SumPointeds CountPointeds div add  put
 								Connections_dX Connections_num 1 put
 								Connections_dY Connections_num 0 put
 							}{
@@ -8379,21 +8374,14 @@ currentdict /SmallCapsDict undef
 								Connections_Y  Connections_num  PageHeight MgnT MgnB sub add 2 div  put
 								Connections_dX Connections_num 0 put
 								Connections_dY Connections_num 1 put
-								ThisFSPiece 0 GetEU dup /HorizontalLeftwards eq exch /HorizontalRightwards eq or
-								{
-									mark  (Error in FlightSeparationPath: with SheetNum = ) SheetNum
-									(, position ) fsl_i
-									( in the parameter to FlightSeparationPath, references /Horizontal... without specifying a y position.) ConcatenateToMark OutputToLog
-								} if  % /Horizontal...
 							} ifelse  % CountPointeds 0 gt
 							Connections_dLength2  Connections_num  Connections_dX Connections_num get dup mul Connections_dY Connections_num get dup mul add  put
-							ThisFSPiece 0 GetEU dup /HorizontalLeftwards eq exch /HorizontalRightwards eq or {Connections_linetoXY Connections_num //false put} if
 							currentdict /CountPointeds undef  currentdict /SumPointeds undef  currentdict /SumReals undef
 							/Connections_num Connections_num 1 add def
 							exit
 						} if  % /Left or /Right or /Horizontal...
 
-						//false [/Bottom /Top /VerticalDown /VerticalUp] {ThisFSPiece 0 get eq {pop //true exit} if} forall
+						//false [/Bottom /Top] {ThisFSPiece 0 get eq {pop //true exit} if} forall
 						{
 							/SumReals 0 def  /SumPointeds 0 def  /CountPointeds 0 def
 							1  1  ThisFSPiece length 1 sub
@@ -8407,7 +8395,7 @@ currentdict /SmallCapsDict undef
 							Connections_Y  Connections_num  ThisFSPiece 0 get /Top eq {PageHeight MgnT sub} {MgnB} ifelse put  % /VerticalUp has Y at bottom
 							CountPointeds 0 gt
 							{
-								Connections_X  Connections_num  SumReals FlightSeparationArcRadius mul  SumPointeds CountPointeds div add  put
+								Connections_X  Connections_num  SumReals Radii SheetNum get mul  SumPointeds CountPointeds div add  put
 								Connections_dX Connections_num 0 put
 								Connections_dY Connections_num 1 put
 							}{
@@ -8415,33 +8403,12 @@ currentdict /SmallCapsDict undef
 								Connections_X  Connections_num  PageWidth MgnR MgnL sub add 2 div  put
 								Connections_dX Connections_num 1 put
 								Connections_dY Connections_num 0 put
-								ThisFSPiece 0 GetEU dup /VerticalDown eq exch /VerticalUp eq or
-								{
-									mark  (Error in FlightSeparationPath: with SheetNum = ) SheetNum  (, position ) fsl_i
-									( in the parameter to FlightSeparationPath, references /Vertical... without specifying an x position.) ConcatenateToMark OutputToLog
-								} if  % /Horizontal...
 							} ifelse  % CountPointeds 0 gt
 							Connections_dLength2  Connections_num  Connections_dX Connections_num get dup mul Connections_dY Connections_num get dup mul add  put
-							ThisFSPiece 0 GetEU dup /VerticalDown eq exch /VerticalUp eq or {Connections_linetoXY Connections_num //false put} if
 							currentdict /CountPointeds undef  currentdict /SumPointeds undef  currentdict /SumReals undef
 							/Connections_num Connections_num 1 add def
 							exit
 						} if  % /Top or /Bottom
-
-						ThisFSPiece 0 get dup /Clockwise eq exch /Widdershins eq  or
-						{
-							Connections_Type  Connections_num  ThisFSPiece 0 get  put
-							ThisFSPiece 1 get execU dup type /integertype eq {GlassPositions SheetNum get exch get} if  {execU} forall  % integer WithinPage, or array [x y]
-							Connections_Y exch Connections_num exch put
-							Connections_X exch Connections_num exch put
-							ThisFSPiece length 4 eq
-							{
-								Connections_Radius  Connections_num   GlassPositions SheetNum get  ThisFSPiece  2 copy  2 GetEU GetEU aload pop  4 2 roll  3 GetEU GetEU aload pop  3 -1 roll  sub dup mul  3 1 roll sub dup mul add sqrt 2 div  put
-							} if  % ThisFSPiece length 4 eq
-							/Connections_Done_First //true def
-							/Connections_num Connections_num 1 add def
-							exit
-						} if  % ... /Clockwise ... /Widdershins ... or
 
 						(Error in FlightSeparationPath: invalid item ) ThisFSPiece 0 //true ThingToDebugText Concatenate OutputToLog
 					} repeat  % 1
@@ -8458,62 +8425,9 @@ currentdict /SmallCapsDict undef
 			Connections_dX   Connections_num  Connections_dX  0 get neg  put
 			Connections_dY   Connections_num  Connections_dY  0 get neg  put
 			Connections_dLength2  Connections_num  Connections_dLength2 0 get  put
-			Connections_Type 0 get dup dup /Arc eq exch /Curve eq or {Connections_Type exch Connections_num exch put} {pop} ifelse
+			Connections_Type 0 get dup /Arc eq {Connections_Type exch Connections_num exch put} {pop} ifelse
 			/Connections_num Connections_num 1 add def
 		} if  % ... /Closed ... Connections_Done_First  and
-
-		% Populate Connections_dAi and Connections_dAe
-		DeBugLevel 49 le {( FlightSeparationPath: Connections_dAi (ingress), Connections_dAe (egress)) OutputToLog} if
-		0  1  Connections_num 1 sub
-		{
-			/Connections0 exch def
-			/X0  Connections_X  Connections0 get def  /Y0  Connections_Y  Connections0 get def
-			/dX0 Connections_dX Connections0 get def  /dY0 Connections_dY Connections0 get def
-			/dL0 Connections_dLength2 Connections0 get def
-
-			Connections_Type Connections0 get dup /Clockwise eq exch /Widdershins eq or
-			{
-				-1  2  1
-				{
-					/j exch def
-					/Connections1 Connections0 j add def  % So Connections1 is Connections0 plus or minus 1
-					/X1  Connections_X  Connections1 get def  /Y1  Connections_Y  Connections1 get def
-					/dX1 Connections_dX Connections1 get def  /dY1 Connections_dY Connections1 get def
-					/dL1 Connections_dLength2 Connections1 get def
-					j 0 lt {Connections_dAi} {Connections_dAe} ifelse  Connections0  Y1 Y0 sub  X1 X0 sub  atan  put  % default
-					1 {
-						Connections_Type Connections1 get dup dup /Arc eq exch /Straight eq or exch /Curve eq or
-						{
-							j 0 lt {Connections_dAi} {Connections_dAe} ifelse  Connections0  % to match with following 'put'
-							Connections_X Connections1 get abs //PrinterEpsilon lt
-							{
-								Connections_fsl Connections1 get /Right eq {0 put exit} if
-								Connections_fsl Connections1 get /Left eq {180 put exit} if
-							} if  % Connections_X approx 0
-							Connections_Y Connections1 get abs //PrinterEpsilon lt
-							{
-								Connections_fsl Connections1 get /Top eq {90 put exit} if
-								Connections_fsl Connections1 get /Bottom eq {270 put exit} if
-							} if  % Connections_Y approx 0
-							/a  dX1 dup mul  dY1 dup mul  add  def
-							/b  X1 X0 sub dX1 mul  Y1 Y0 sub dY1 mul  add 2 mul  def
-							/c  X1 X0 sub dup mul  Y1 Y0 sub dup mul  add  Connections_Radius Connections0 GetEU dup mul  sub  def
-							% Needs to be reworked to use PolynomialRoots
-							/d  b b mul 4 a mul c mul sub  def  % determinant
-							d 0 gt
-							{
-								d sqrt dup
-								b neg add 2 div a div   exch b add neg 2 div a div
-								2 copy abs exch abs   j 0 lt {lt} {//false [/HorizontalLeftwards /HorizontalRightwards /VerticalUp /VerticalDown] {Connections_fsl Connections1 get eq {pop //true exit} if} forall {gt} {lt} ifelse} ifelse   {exch} if pop
-							} {b neg 2 div a div} ifelse  % d 0 gt
-							dup dX1 mul X1 add exch dY1 mul Y1 add  Y0 sub exch X0 sub atan   put
-							Connections_dX  Connections1  dX1 neg  put
-							Connections_dY  Connections1  dY1 neg  put
-						} if  % ... Connections1 ... /Arc ... /Straight ... /Curve ...
-					} repeat  % 1
-				} for  % back one, forward one: j
-			} if  % ... Connections0 ... /Clockwise ... /Widdershins ...
-		} for  % Connections0
 
 		DeBugLevel 49 le {( FlightSeparationPath: path construction) OutputToLog} if
 		0  1  Connections_num 1 sub
@@ -8564,25 +8478,11 @@ currentdict /SmallCapsDict undef
 						ifelse  % Identical points produces /undefinedresult
 					} {{Xj Yj lineto} if} ifelse  % Connections_linetoXY Connections0 get
 				} if  % /Arc
-				Connections_Type Connections0 get /Curve eq
-				{
-					DirectionsParallel not DirectionsBothNonZero and
-					Connections_linetoXY Connections0 get
-						{{Xj Yj Xj Yj} {Xh1 Yh1 Xh0 Yh0} ifelse X0 Y0 curveto}
-						{{Xj Yj lineto} if}
-					ifelse  % Connections_linetoXY Connections0 get
-				} if  % /Curve
 				Connections_Type Connections0 get /Straight eq
 				{
 					DirectionsParallel not DirectionsBothNonZero and {Xj Yj lineto} if
 					Connections_linetoXY Connections0 get {X0 Y0 lineto} if
 				} if  % ... /Straight ...
-				Connections_Type Connections0 get dup /Clockwise eq exch /Widdershins eq or
-				{
-					X0 Y0  Connections_Radius Connections0 GetEU
-					Connections_dAi Connections0 get  Connections_dAe Connections0 get
-					Connections_Type Connections0 get /Clockwise eq {arcn} {arc} ifelse
-				} if  % ... /Clockwise ... /Widdershins ...
 			} ifelse  % ... /Point ...
 		} for  % Connections0
 		fsl length 1 ge {fsl 0 get /Closed eq {closepath} if} if
@@ -9553,9 +9453,8 @@ currentdict /SmallCapsDict undef
 					0  1  FlightSeparationLines SheetNum GetEU length 1 sub
 					{
 						/FlightSeparationLineNum exch def
-						/FlightSeparationArcRadius 1 FlightSeparationArcRadiusControl sub Radii SheetNum get mul FlightSeparationArcRadiusControl MaxPossibleArcRadius mul add def
 						FlightSeparationLines SheetNum GetEU FlightSeparationLineNum GetEU FlightSeparationPath
-						currentdash pop length 0 ne {[] 0 setdash} if  1 currentlinejoin ne {1 setlinejoin} if  0 currentlinecap ne {0 setlinecap} if  0.96 dup currentlinewidth ne {setlinewidth} {pop} ifelse  0.6 setgray  % sensible defaults
+						currentdash pop length 0 ne {[] 0 setdash} if  0 currentlinejoin ne {0 setlinejoin} if  0 currentlinecap ne {0 setlinecap} if  0.96 dup currentlinewidth ne {setlinewidth} {pop} ifelse  0.6 setgray  % sensible defaults
 						FlightSeparationPaintSeparately {/FlightSeparationPaintCode load execU} if
 					} for  % FlightSeparationLineNum
 					currentdict /FlightSeparationLineNum undef
@@ -13462,7 +13361,7 @@ currentdict /SmallCapsDict undef
 			(=) Names length (*)  //true 1 1 NumSheets 1 sub {dup 1 sub SheetLengths exch get exch SheetLengths exch get eq and} for  {NumSheets (*) SheetLengths 0 get}  {(\() SheetLengths {(+)} forall pop (\))}  ifelse
 			GlassesNumCopies dup 1 gt {(*) exch} {pop} ifelse
 		} if} if  % Sensible to express as a multiplication
-		( glass-circle zooms of the form Circle_#NameNum_#SheetNum_#WithinPage)  {GlassesNumCopies 2 ge} MightBeTrue {(\[_#GlassesCopyNum\])} if
+		( glass-circle zooms of the form Circle_#NameNum_#SheetNum_#WithinPage)  {GlassesNumCopies 2 ge} MightBeTrue {([_#GlassesCopyNum])} if
 		(, the first being )  ShownGlassesCirclesData 0 get /GlassesCircleDestName get ( and the last being ) ShownGlassesCirclesData ShownGlassesCircles 1 sub get /GlassesCircleDestName get (.)
 		IsDistiller not {( \(But distillation might be in Ghostscript, so these # tags might be missing: check.\))} if
 	} {(.)} ifelse   1 index mark ne {ConcatenateToMark () OutputToLog OutputToLog} {cleartomark} ifelse
