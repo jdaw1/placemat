@@ -205,8 +205,6 @@ This is enabled by the Boolean parameter `FlightSeparations`; the hard work of s
 `FlightSeparationLines` is fiddly. 
 If one wine is added or taken away then that page&rsquo;s element of `FlightSeparationLines` might need to be completely reworked. 
 Hence it is recommended that division into flights be saved until late in the planning.
-Further, though `FlightSeparationLines` is very much fit for purpose, both controls using and output from `/Curve` are less than perfect. 
-I advise that, for easiest control and best output, use only straight lines (no `/Curve`, no `/Clockwise`, no `/Widdershins`).
 
 Let&rsquo;s start with an example, to give a sense of the range of what can be done, and also (part of) the code by which made.
 
@@ -235,18 +233,6 @@ Let&rsquo;s start with an example, to give a sense of the range of what can be d
 		[ [/Bottom 5 7 +0.3]  /Arc  [5 7]  /Arc  [4 7]  /Arc  [4 6]  [3 6]  /Arc  [/Top 3 6 +0.3] ]
 		[ /Closed  [/Bottom 7 10 -0.3]  /Arc  [7 10]  /Arc  [9 10]  /Arc  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  [/Bottom 13 +1.0] ]
 	]  % - SheetNum = 1
-	[  % + SheetNum = 2
-		% Bezier cubics, so softer than /Arc
-		[ [/Bottom 2 5]  /Curve  [2 5]  /Curve  [1 4]  /Curve  [3 4]  /Curve  [3 6]  /Curve  [/Top 3 6 +0.3] ]
-		[ [/Bottom 5 7 +0.3]  /Curve  [5 7]  /Curve  [4 7]  /Curve  [4 6]  /Curve  [3 6]  /Curve  [/Top 3 6 +0.3] ]
-		[ /Closed  [/Bottom 7 10 -0.3]  /Curve  [7 10]  /Curve  [9 10]  /Curve  [9 12]  [8 11]  [/Top 8 11]  [/Right 11 +1.0]  /Curve  [/Bottom 13 +1.0] ]
-	]  % - SheetNum = 2
-	[  % + SheetNum = 3
-		% Clinging tightly to the circles
-		[ [/Bottom 2 5]  [2 5]  [1 4]  [/Clockwise 4]  [/Widdershins 3]  [/Top 3 +1.0] ]
-		[ [/Bottom 5 +1.0]  [/Widdershins 5]  [/Clockwise 7]  [/Widdershins 4]  [/Clockwise 6]  [/Widdershins 3]  [/Top 3 +1.0] ]
-		[ /Closed  [/Bottom 10]  [/Clockwise 10]  [/HorizontalRightwards 10 +1.0]  [/VerticalUp 11 -1.0]  [/Clockwise 11]  [/Right 11]  [/Right 13]  [/Clockwise 13]  [/Bottom 13] ]
-	]  % - SheetNum = 3
 ] def  % /FlightSeparationLines
 
 ```
@@ -257,29 +243,19 @@ Each line description is an array, pieces of which can be as follows.
 
 * The first, and only the first, item of a line description may be `/Closed`, which specifies that the line is a closed loop.
 * The typical piece is `[a b]`, a and b being integers, which specifies that the line runs through the mid-point of the glass positions a and b, the line being perpendicular to the line connecting the centres. 
-So if the circles touch then the line segment touches their joint tangent. Order doesn&rsquo;t matter: `[a b]` and `[b a]` do the same job. 
+So if the circles touch then the line segment touches their joint tangent. Order doesn&rsquo;t matter: `[a b]` and `[b a]` are equivalent. 
 The integer a can be replaced with `[xa ya]` (making `[[xa ya] b]`), and likewise b with `[xb yb]`.
-* There are other allowed interior pieces, including `[/HorizontalLeftwards …]`. This is a horizontal line at a *y* specifed by the &lsquo;&hellip;&rsquo;, which is an average of at least one absolute level, perhaps &plusmn; some real number of radii. 
+* Between two pieces the non-array item `/Arc` causes the sharp corner between two straight lines to be replaced with a soft arc having radius `FlightSeparationsArcProportionRadius` &times; the radius of the circles. 
+* The last or first non-`/Closed` piece may be `[/Left …]`. 
+This goes to the far left of the page, at a *y* specifed by the &lsquo;&hellip;&rsquo;, which is an average of at least one absolute level, perhaps &plusmn; some real number of radii. 
 Absolutes can be /Bottom (with obvious meaning); /Top (ditto); or an integer, in which case the *y* is that of the centre of that circle number. 
 Or several integers, in which case the *y* is the average of the centres of those circle numbers. 
-optionally supplemented by a real, that number of radii being added to the average. 
-So `[/HorizontalLeftwards 0 3 -0.5]` is a horizontal line, at a *y* value of the average of those of circles 0 and 3, minus half a radius. 
+Optionally there may also be a real, that number of radii being added to the average. 
+So `[/Left 0 3 -0.5]` is a horizontal line to the left of the page, at a *y* value of the average of those of circles 0 and 3, minus half a radius. 
 This can be thought of as Average[Circle 0&rsquo;s bottom, Circle 3&rsquo;s centre]. 
-If the previous item is an arc, the /HorizontalLeftwards means that the left-most intersection is chosen. 
-Note that the integer 1 and the real 1.0 are therefore very different, the former referring to the centre of circle 1, the latter to an offset of +1.0 radii. *Mutatis mutandis*, `/HorizontalLeftwards` can be replaced with `/HorizontalRightwards`, `/VerticalDown`, or `/VerticalUp` (which allow absolute *x* positions of `/Left` and `/Right`).
-* `[/Left …]` is like `[/HorizontalLeftwards …]`, and at the same *y* value, except that it is certain to touch the left margin. 
-Again *mutatis mutandis*, `[/Right …]`, `[/Top …]`, and `[/Bottom …]`. 
-`[/Left]`, with no specification of the *y* value, reaches the left margin at whatever angle the neighbouring segment causes the line to travel. 
-It is not sensible for more than one of these to occur consecutively. 
-With obvious variations, `[/Right]`, `[/Top]`, and `[/Bottom]`. 
-It is easiest to think about these margin specifications as being of two types: if the position is specified, the line is perpendicular to the margin; if unspecified, parallel.
-* `[/Clockwise a]` draws a part of clockwise circle centered on glass position a; `[/Widdershins a]` being anti-clockwise. 
-(&ldquo;Widdershins&rdquo;? [Widdershins](http://en.wikipedia.org/wiki/Widdershins)!) 
-There are variants, `[/Clockwise a b c]` and `[/Widdershins a b c]`, in which the radius of the arc is half the distance between the centres of circles b and c. 
-As above, the integer a can be replaced with [xa ya].
-* Between two pieces the non-array item `/Arc` causes the sharp join between two straight lines to be replaced with a soft corner, an arc, with radius `FlightSeparationsArcProportionRadius` &times; the radius of the circles. 
-* Between two pieces the non-array item `/Curve` causes what would have been two straight lines to be replaced with a B&eacute;zier curve made with the PostScript command `curveto`. 
-Perhaps this is now deprecated ([issue #87](http://github.com/jdaw1/placemat/issues/87)), `/Arc` being preferred.
+Note that the integer 1 and the real 1.0 are therefore very different, the former referring to the centre of circle 1, the latter to an offset of +1.0 radii.
+* *Mutatis mutandis*, `[/Right …]`. 
+* And, *mutatis mutandis*, `[/Top …]`, and `[/Bottom …]`, for which the value &lsquo;&hellip;&rsquo; is the *x*, integers referring to that circle&rsquo;s *x* centre, and allowed components including `/Left` and `/Right`.
 
 In [the PDF of examples](images/FlightSeparations.pdf) the header shows that page&rsquo;s item of `FlightSeparationLines` (i.e., `FlightSeparationLines` is an array one deeper than the header). 
 If using `FlightSeparations` it is strongly recommended that these examples be examined and appropriate parts used as a starting draft. 
@@ -289,10 +265,6 @@ Use of `fill` is discouraged, as it impedes comparison of colours of the wines.
 If `FlightSeparationPaintSeparately` then `FlightSeparationPaintCode` is invoked after each line, the variable `FlightSeparationLineNum` being set to the appropriate integer &ge;0. 
 If `FlightSeparationPaintSeparately not`, then all the lines on the current page are drawn, after which is the single call of `FlightSeparationPaintCode`. 
 The former is better if the format is not constant; the latter preferred if overlapping or crossing lines are to be double-stroked.
-
-Some control over the radius of the `/Clockwise`/`/Widdershins` arcs is sometimes possible. If any circles touch, the radius of the arcs equals that of the circles. 
-If no circles touch (probably because of `MaxRadius` or `ShrinkRadii`) then `FlightSeparationArcRadiusControl` controls the radius. 
-`FlightSeparationArcRadiusControl` should be both &ge;0 and &le;1; the default being the maximum: if it is 0, the radius of the arcs is that of the circles; if 1, the radius is the half the distance between the closest circles; if between, between.
 
 There is a [bug in (at least some versions of) Adobe Distiller](http://groups.google.com/forum/#!topic/comp.lang.postscript/amUp28S-JFM), such that if `FlightSeparationPaintSeparately` is `false` and there are multiple lines on one page (&hArr; `FlightSeparationLines SheetNum get length` &ge; 2), the apparent ends of some lines are controlled by `setlinejoin` rather than `setlinecap`. 
 It is a small aesthetic imperfection, but an aesthetic imperfection nonetheless. 
