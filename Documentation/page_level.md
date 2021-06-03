@@ -59,7 +59,7 @@ PostSript arrays start at zero, so if `Titles` etc are of length *n* then the in
 The example has two pages. 
 
 Because this is the standard pattern, there is help, in the form of `GlassesOnSheetsMaxPerSheet`. 
-The default assignment of `GlassesOnSheets` uses this number, spreading glasses evenly over sheets subjcet to ths constraint. 
+The default assignment of `GlassesOnSheets` uses this number, spreading glasses evenly over sheets subject to this constraint. 
 And the default value of `GlassesOnSheetsMaxPerSheet` itself depends on `PaperType`:
 
 
@@ -253,15 +253,15 @@ Or several integers, in which case the *y* is the average of the centres of thos
 Optionally there may also be a real, that number of radii being added to the average. 
 So `[/Left 0 3 -0.5]` is a horizontal line to the left of the page, at a *y* value of the average of those of circles 0 and 3, minus half a radius. 
 This can be thought of as Average[Circle 0&rsquo;s bottom, Circle 3&rsquo;s centre]. 
-Note that the integer 1 and the real 1.0 are therefore very different, the former referring to the centre of circle 1, the latter to an offset of +1.0 radii.
+Hence the integer `1` and the real `1.0` are very different, the former referring to the centre of circle 1, the latter to an offset of +1.0 radii.
 * *Mutatis mutandis*, `[/Right …]`. 
-* And, *mutatis mutandis*, `[/Top …]`, and `[/Bottom …]`, for which the value &lsquo;&hellip;&rsquo; is the *x*, integers referring to that circle&rsquo;s *x* centre, and allowed components including `/Left` and `/Right`.
+* And, *mutatis mutandis*, `[/Top …]`, and `[/Bottom …]`, for which the value &lsquo;&hellip;&rsquo; is the *x*, integers referring to that circle&rsquo;s *x* centre; allowed components including `/Left` and `/Right`.
 
 In [the PDF of examples](images/FlightSeparations.pdf) the header shows that page&rsquo;s item of `FlightSeparationLines` (i.e., `FlightSeparationLines` is an array one deeper than the header). 
 If using `FlightSeparations` it is strongly recommended that these examples be examined and appropriate parts used as a starting draft. 
 
 The path can be `stroke`d, `clip`ped or `fill`ed by the code `FlightSeparationPaintCode`, which has a default stroke that is complicated but elegant. 
-Use of `fill` is discouraged, as it impedes comparison of colours of the wines. 
+Use of `fill` is discouraged, as it impedes comparison of colours of the wines; use of `clip` is likely to require non-trivial PostScript programming. 
 If `FlightSeparationPaintSeparately` then `FlightSeparationPaintCode` is invoked after each line, the variable `FlightSeparationLineNum` being set to the appropriate integer &ge;0. 
 If `FlightSeparationPaintSeparately not`, then all the lines on the current page are drawn, after which is the single call of `FlightSeparationPaintCode`. 
 The former is better if the format is not constant; the latter preferred if overlapping or crossing lines are to be double-stroked.
