@@ -11,7 +11,7 @@ And having done that, there might also be need for matching pages:
 * to organise pre-pouring,  
 * to display the corks,  
 * to label each person&rsquo;s place-setting (so everybody knows who everybody else is, even late in the tasting),  
-* to record votes for the WOTN = **W**ine **O**f **T**he **N**ight, and  
+* to record votes for the Wine Of The Night, and  
 * to assist with computing the split of the costs, allowing for bottles provided.
 
 This PostScript program creates all the paperwork useful for managing such tastings, large or small. 
