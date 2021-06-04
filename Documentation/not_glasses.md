@@ -158,14 +158,16 @@ When the food is about to arrive, switch them, so that waiters and waitresses se
 That done, switch back. 
 This might be achieved with parameters resembling:
 ```PostScript
-/Names [ (Alex) (Ben) (Chris) (Derek) ] def
+/Names [ (Julian) (Alice) (Ben) (Caroline) (Derek) (Elizabeth) ] def
 /NamesPlaceNames [
 	Names  % People
 	[
-		(Steak & kidney pie)   % Alex
-		(Filet, medium-rare)   % Ben
-		(Roast beef, lots)     % Chris
+		(Steak & kidney pie)   % Julian
+		(Roast beef, lots)     % Alice
+		(Fillet, blue)         % Ben
+		(Fillet, medium-rare)  % Caroline
 		(Low-salt diet salad)  % Derek
+		(Burger & chips)       % Elizabeth
 	]  % Foods, and food-free foods
 ] def  % /NamesPlaceNames
 ```
@@ -317,7 +319,7 @@ Of course.
 
 Except that it rarely works like that. 
 At the last moment extra bottles are added, perhaps an extra attendee, and the food bill itself is not known until late in the evening, after much drinking. 
-An Accounts pages can assist those doing the computations.
+An Accounts page can assist those doing the computations.
 
 <div align="center">
 

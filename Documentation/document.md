@@ -295,12 +295,12 @@ It is intended that the latter two, or at least the least, will be embedded in t
 
 ### Distillation log
 
-various liog outputs are produced by the software. 
+Various log outputs are produced by the software. 
 Some might help bebugging. 
 Others, such as listing fonts used, are to help those using old placemats as inspiration for new. 
 The log can go to three places, controlled by three Booleans.
 * `OutputLogToLog`: there is no reason not to do this. 
-* `OutputLogToPage`: appears at the end, and generally a good idea, except when the pafges are to be comnerted to a GIF animation. 
+* `OutputLogToPage`: appears at the end, and generally a good idea, except when the pages are to be converted to a GIF animation. 
 * `OutputLogToAnnotation`, a small pop-up text box on the last page of the PDF &mdash; necessary only when `OutputLogToPage` is false. 
 
 `LogThisExtra` contains a string, perhaps a multi-line string, which is output to the log file. 
