@@ -51,7 +51,7 @@ Next, the font size can reduced to satisfy `CircletextsMinCopies`.
 
 Assume that these cause an item of `Circlearrays` to fit around its circle 2.999 times. 
 This would be truncated to 2 times, with white space occupying the &lsquo;0.999&rsquo; remainder. 
-Self-evidently, it would be aesthetically better to reduce the font size slightly, such that the text fits 3+&epsilon; times, makig the gaps very close to `CircletextsMinNumSpacesBetween` space widths.
+Self-evidently, it would be aesthetically better to reduce the font size slightly, such that the text fits 3+&epsilon; times, making the gaps very close to `CircletextsMinNumSpacesBetween` space widths.
 
 By default, the font size is slightly adjusted for better aesthetics. 
 Unless you need the font size to equal some exact value, allow this optimisation to do its magic.

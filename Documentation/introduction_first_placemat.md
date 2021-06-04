@@ -144,7 +144,7 @@ Each of these arrays is evenly spaced around the perimeter of each glass&rsquo;s
 Each person&rsquo;s paperwork is named, and `Names` also appear on some of the other page types, such as the vote recorders. 
 Names is an array, not necessarily of the same length as the previous three. 
 ```PostScript
-/Names [ (Julian) (Alice) (Ben) (Caroline) (David) (Elizabeth) () ] def
+/Names [ (Julian) (Alice) (Ben) (Caroline) (Derek) (Elizabeth) () ] def
 ```
 
 Including a blank name, `()`, is very strongly recommended: last-minute changes to the guest list do happen.

@@ -196,7 +196,7 @@ There are also Boolean parameters `PrePourShowDroplets`, `NeckTagsShowDroplets`,
 ## Separating flights within a page
 
 It is often natural to split a tasting into &lsquo;flights&rsquo; of a few wines. 
-If there is lots of table space, and five wines per flight, then this can be arranged as one flight per `/A4` or `/USl` page. 
+If there is lots of table space, and five wines per flight, then this can be arranged as one flight per `/A4` or `/USL` page. 
 But sometimes within-page division is necessary. 
 And if table space is tight, 14 on `/A3` is more efficient than 12 on 2&times;`/A4`, making more useful the possibility of within-page division.
 
@@ -254,8 +254,8 @@ Optionally there may also be a real, that number of radii being added to the ave
 So `[/Left 0 3 -0.5]` is a horizontal line to the left of the page, at a *y* value of the average of those of circles 0 and 3, minus half a radius. 
 This can be thought of as Average[Circle 0&rsquo;s bottom, Circle 3&rsquo;s centre]. 
 Hence the integer `1` and the real `1.0` are very different, the former referring to the centre of circle 1, the latter to an offset of +1.0 radii.
-* *Mutatis mutandis*, `[/Right …]`. 
-* And, *mutatis mutandis*, `[/Top …]`, and `[/Bottom …]`, for which the value &lsquo;&hellip;&rsquo; is the *x*, integers referring to that circle&rsquo;s *x* centre; allowed components including `/Left` and `/Right`.
+* Likewise `[/Right …]`. 
+* And `[/Top …]` and `[/Bottom …]`, for which the value &lsquo;&hellip;&rsquo; is the *x*, integers referring to that circle&rsquo;s *x* centre; allowed components including `/Left` and `/Right`.
 
 In [the PDF of examples](images/FlightSeparations.pdf) the header shows that page&rsquo;s item of `FlightSeparationLines` (i.e., `FlightSeparationLines` is an array one deeper than the header). 
 If using `FlightSeparations` it is strongly recommended that these examples be examined and appropriate parts used as a starting draft. 
