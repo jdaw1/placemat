@@ -1,4 +1,4 @@
-v# Document-level controls
+# Document-level controls
 
 **Documents**: 
 1.  [Introduction, and a first placemat](introduction_first_placemat.md);  

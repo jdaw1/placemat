@@ -1,4 +1,4 @@
-# Font size controls
+# Type sizes
 
 **Documents**: 
 1.  [Introduction, and a first placemat](introduction_first_placemat.md);  
