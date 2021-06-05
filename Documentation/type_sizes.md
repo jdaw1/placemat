@@ -21,9 +21,6 @@ There are lots of fussy controls over the sizing of fonts.
 A few of these controls are, or are sometimes, *worthwhile*. 
 Many others are *superfluous* &mdash; of use not more than rarely.
 
-<<<<<<< Updated upstream
-But, before that distinction can be detailed, a flow of action is needed.
-=======
 The controls more likely to be useful are sectioned *worthwhile*, the very fussy *superfluous*.
 
 In the author&rsquo;s old placemats, the most often changed, in order from most to least, are as follows.
@@ -36,8 +33,8 @@ In the author&rsquo;s old placemats, the most often changed, in order from most 
 
 * `CircletextMaxFontSizeAbsolute` to values `6`&ndash;`16`, big values also necessitating `/CircletextMaxFontSizeProportionRadius 1 def`.
 
-Before detail can be explained, a flow of action is needed.
->>>>>>> Stashed changes
+
+But, before detail can be explained, a flow of action is needed.
 
 1. First, the circle text is sized. 
 There are two parameters givng an indicative size, and others controlling whether this may be improved. 
