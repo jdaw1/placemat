@@ -18,7 +18,8 @@
 ## Introduction
 
 There are lots of fussy controls over the sizing of fonts. 
-Non-expert users of the software could choose to leave these at their default behaviour &mdash; if that is non-optimal, it will be only slightly non-optimal.
+A few of these controls are, or are sometimes, *worthwhile*. 
+Many others are *superfluous* &mdash; of use not more than rarely.
 
 The controls more likely to be useful are sectioned *worthwhile*, the very fussy *superfluous*.
 
@@ -78,7 +79,11 @@ Typically this is most easily achieved by having it depend on `PageOrderingGlass
 
 ## Titles sizing
 
-Broadly, the `Titles` etc fit inside the `Circlearrays`. Inside which there is a `ExclusionAnnulusProportionInnerRadiusTitlesAboveBelow`, defaulting to 0. 
+Broadly, the `Titles` etc fit inside the `Circlearrays`. 
+
+### Superfluous
+
+Inside which there is a `ExclusionAnnulusProportionInnerRadiusTitlesAboveBelow`, defaulting to 0. 
 
 `TitleMaxHeightProportionInnerRadius` ensures that the likes of &ldquo;&dagger;&rdquo; isn&rsquo;t grossly outsized. 
 
