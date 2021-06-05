@@ -28,7 +28,7 @@ In the author&rsquo;s old placemats, the most often changed, in order from most 
 
 * `TitleMaxHeightProportionInnerRadius`, typical values being either `2` (&rArr; &infin;), or in the range `1.25`&ndash;`1.75`. 
 
-* `BelowtitleMaxFontSizeProportionTitles`, to values in the range `1.6666`&ndash;`0.5`. Also, but less often, and to similar values, `OvertitleMaxFontSizeProportionTitles` and `AbovetitleMaxFontSizeProportionTitles`.
+* `BelowtitleMaxFontSizeProportionTitles`, to values in the range `0.6666`&ndash;`0.5`. Also, but less often, and to similar values, `OvertitleMaxFontSizeProportionTitles` and `AbovetitleMaxFontSizeProportionTitles`.
 
 * `CircletextMaxFontSizeAbsolute` to values `6`&ndash;`16`, big values also necessitating `/CircletextMaxFontSizeProportionRadius 1 def`.
 
