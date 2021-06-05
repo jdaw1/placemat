@@ -21,7 +21,23 @@ There are lots of fussy controls over the sizing of fonts.
 A few of these controls are, or are sometimes, *worthwhile*. 
 Many others are *superfluous* &mdash; of use not more than rarely.
 
+<<<<<<< Updated upstream
 But, before that distinction can be detailed, a flow of action is needed.
+=======
+The controls more likely to be useful are sectioned *worthwhile*, the very fussy *superfluous*.
+
+In the author&rsquo;s old placemats, the most often changed, in order from most to least, are as follows.
+
+* `FontSizesRatioTitlesMin`, typical values being `99` (&rArr; all forced to same size), `1` (&rArr; no effect), and other values &ge;`1.05` and &le;`2`.
+
+* `TitleMaxHeightProportionInnerRadius`, typical values being either `2` (&rArr; &infin;), or in the range `1.25`&ndash;`1.75`. 
+
+* `BelowtitleMaxFontSizeProportionTitles`, to values in the range `0.6666`&ndash;`0.5`. Also, but less often, and to similar values, `OvertitleMaxFontSizeProportionTitles` and `AbovetitleMaxFontSizeProportionTitles`.
+
+* `CircletextMaxFontSizeAbsolute` to values `6`&ndash;`16`, big values also necessitating `/CircletextMaxFontSizeProportionRadius 1 def`.
+
+Before detail can be explained, a flow of action is needed.
+>>>>>>> Stashed changes
 
 1. First, the circle text is sized. 
 There are two parameters givng an indicative size, and others controlling whether this may be improved. 
