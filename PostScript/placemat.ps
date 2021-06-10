@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:30 Friday 28th May 2021
+% This version 20:00 Thursday 10th June 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202105282230) def
+/ParametersVersionDateTimeAdobeFormat (D:202106102000) def
 
 /Circlearrays [
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
@@ -61,7 +61,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( May 2021)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 19) {SuperscriptOn} (th) {SuperscriptOff} ( October 2021)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -758,7 +758,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202105282230) def
+/SoftwareVersionDateTimeAdobeFormat (D:202106102000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1501,14 +1501,16 @@ mark
 	mark  WizardLongName (, version =  ) WizardVersionDateTimeAdobeFormat (  =  ) 1 index AdobeFormatDateToString ConcatenateToMark OutputToLog
 } if} if
 
-TestingMaxNumPagesToShow 2147483647 lt  TestingSuppressPageTypes length 0 gt  or
+TestingMaxNumPagesToShow 2147483647 lt  TestingShowThesePagesOnly null ne  TestingSuppressPageTypes length 0 gt  or or
 {
 	mark  (Nota bene: some pages might be suppressed = not shown, perhaps because this is an example or a test.)
-	(\n\(At the end there might be an extra page, blank, caused by a bug in erasepage.\))
+	(\nAt the end there might be an extra page, blank, caused by a bug in erasepage.)
+	(\nhttp://groups.google.com/forum/#!topic/comp.lang.postscript/HVZVz0eBwrw)
 	TestingMaxNumPagesToShow 2147483647 lt {(\nTestingMaxNumPagesToShow = ) TestingMaxNumPagesToShow} if
-	TestingSuppressPageTypes length 0 gt {(\nTestingSuppressPageTypes = [) TestingSuppressPageTypes {dup type /nametype eq {( /) exch} if ( )} forall (])} if
+	TestingShowThesePagesOnly   null    ne {(\nTestingShowThesePagesOnly = ) TestingShowThesePagesOnly} if
+	TestingSuppressPageTypes  length 0  gt {(\nTestingSuppressPageTypes = [) TestingSuppressPageTypes {dup type /nametype eq {( /) exch} if ( )} forall (])} if
 	ConcatenateToMark OutputToLog
-} if  % TestingMaxNumPagesToShow ... TestingSuppressPageTypes ... or
+} if  % TestingMaxNumPagesToShow ... TestingShowThesePagesOnly ... TestingSuppressPageTypes ... or or
 
 % Changes RGB black to proper CMYK printers' black. http://groups.google.com/forum/#!topic/comp.lang.postscript/6JW6VamdVlw
 CMYK0001replacesRGB000   /setcolor load type /operatortype eq   and
