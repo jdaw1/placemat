@@ -122,7 +122,10 @@ There are several parameters that allow this.
 
 * `TestingShowThesePagesOnly`: Either `null`, in which case having no effect; or an array of integers, in which case showing only those.
 The `TestingSuppressPageTypes` array can also include `/DistillerLog`, which does not take an integer as it suppresses all log pages.
-* `TestingSuppressPageTypes`, probably the most useful of these controls, shows only the first so many of each page type. 
+
+* `TestingSuppressPageTypes` has been by far the most useful of these controls. 
+For most page types, an entry, which is a page type then integer, shows only the first so many of that page type. 
+For the log file only, `/DistillerLog`, it has no parameter and suppresses the whole log.
 E.g., to show only the first page of each type, and none of the log: 
 ```PostScript
 /TestingSuppressPageTypes [
