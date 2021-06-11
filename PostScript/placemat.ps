@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Thursday 10th June 2021
+% This version 19:00 Friday 11th June 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202106102000) def
+/ParametersVersionDateTimeAdobeFormat (D:202106111900) def
 
 /Circlearrays [
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
@@ -708,7 +708,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /EpilogueCode {} def  % Executed once, just after painting pages
 /EmptyGlassesPageAtStart false def
 /EmptyGlassesPageOrientation /Portrait def
-/TestingSuppressPageTypes [ ] def  % Useful value: [ /Glasses 1 /TastingNotes 1 /PlaceName 1 /PrePour 1 /StickyLabels 1 /VoteRecorder 1 /DecantingNotes 1 /CorkDisplay 1 /NeckTags 1 ]. Can also /DistillerLog without an integer.
+/TestingSuppressPageTypes [ ] def  % Useful value: [ /Glasses 1  /TastingNotes 1  /VoteRecorder 1  /DecantingNotes 1  /Accounts 1  /CorkDisplay 1  /NeckTags 1  /PrePour 1  /PlaceName 1  /DecanterLabels 1  /StickyLabels 1 ]. Also, no int, /DistillerLog
 /TestingMaxNumPagesToShow 2147483647 def  % maximum integer
 /TestingShowThesePagesOnly null def   % Either null, in which case having no effect, or an array of integers. If making a PDF for insertion to another doc, perhaps also "/pdfmark {cleartomark} def".
 
@@ -758,7 +758,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202106102000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202106111900) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1505,6 +1505,7 @@ TestingMaxNumPagesToShow 2147483647 lt  TestingShowThesePagesOnly null ne  Testi
 {
 	mark  (Nota bene: some pages might be suppressed = not shown, perhaps because this is an example or a test.)
 	(\nAt the end there might be an extra page, blank, caused by a bug in erasepage.)
+	(\nhttp://github.com/jdaw1/placemat/issues/109)
 	(\nhttp://groups.google.com/forum/#!topic/comp.lang.postscript/HVZVz0eBwrw)
 	TestingMaxNumPagesToShow 2147483647 lt {(\nTestingMaxNumPagesToShow = ) TestingMaxNumPagesToShow} if
 	TestingShowThesePagesOnly   null    ne {(\nTestingShowThesePagesOnly = ) TestingShowThesePagesOnly} if
