@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:00 Friday 11th June 2021
+% This version 20:00 Saturday 12th June 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202106111900) def
+/ParametersVersionDateTimeAdobeFormat (D:202106122000) def
 
 /Circlearrays [
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
@@ -758,7 +758,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202106111900) def
+/SoftwareVersionDateTimeAdobeFormat (D:202106122000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -12304,6 +12304,7 @@ currentdict /SmallCapsDict undef
 									{
 										//false  //false  MirrorPagesCorkDisplay CorkDisplaySetNum GetEU  //true  CorkDisplayPaperType  CDBestOrientation  SetPaperSize
 										//true DefStoreMgns
+										DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 										HeadersAndFooters PaintHeadersFooters
 										CorkDisplayTopTextHeight 0 gt {HeaderFont CDTopTextFontSize selectfont   PageWidth MgnL MgnR sub CDTopTextL CDTopTextR add sub add 2 div  PageHeight MgnT CDTopTextT add sub  moveto 0 setgray CorkDisplayTopText ShowRecursive} if
 									} if  % WithinPage 0 eq
@@ -12359,12 +12360,20 @@ currentdict /SmallCapsDict undef
 									} if  % WithinTitles type /integertype eq
 									/CorkDisplayThisPageTitles dup load  dup length 0 gt {(; ) Concatenate} if  Titles WithinTitles get PDFDocEncodingify Concatenate  def  % Deliberately Titles rather than TitlesCorkDisplay
 									/WithinPage WithinPage 1 add def
-									WithinPage CDBestNumRows CDBestNumCols mul ge {ShowPage  /WithinPage 0 def  /CorkDisplayThisPageTitles () def} if
+									WithinPage CDBestNumRows CDBestNumCols mul ge
+									{
+										DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+										ShowPage  /WithinPage 0 def  /CorkDisplayThisPageTitles () def
+									} if
 								} repeat  % ... CorkDisplayNumCopies ...
 							} forall
 							WithinPage 0 gt {CDSpareHoles  CDBestNumCols CDBestNumRows mul WithinPage sub  2 copy ge {sub /CDSpareHoles exch def  ShowPage  /WithinPage 0 def  /CorkDisplayThisPageTitles () def} {pop pop} ifelse} if
 						} forall
-						WithinPage 0 gt {ShowPage} if
+						WithinPage 0 gt
+						{
+							DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+							ShowPage
+						} if
 					} if  % CorkDisplayPaperType ... PageOrderingCorkDisplay ... and ... CorkDisplayNumCopies 1 ge
 				} for  % CorkDisplaySetNum
 				end
