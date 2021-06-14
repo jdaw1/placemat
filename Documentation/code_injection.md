@@ -353,6 +353,43 @@ Of course, if precise hue of colour is important, do not assume that screen and 
 ```
 
 
+### Postponed
+
+Tasting postponed by an extention of covid lockdowns? 
+Multiple links to placemats, so reluctant to remove placemats from web? 
+Nonetheless, wanting to mark &ldquo;Postponed&rdquo;? 
+It can be done.
+
+```PostScript
+/PaintBackgroundCode {
+	5 dict begin
+	/BackgroundText (POSTPONED) def
+	gsave  0 0.6 0 setrgbcolor
+	TitlesFont 48 selectfont
+
+	BackgroundText StringPathBBox  /T exch def  /R exch def  /B exch def  /L exch def
+
+	gsave  MarginL  PageHeight MarginT sub  translate  % Margin, not Mgn
+	T SqrtHalf mul  L R sub T sub SqrtHalf mul  translate 45 rotate L neg 0 moveto
+	BackgroundText show grestore
+
+	PageWidth MarginR sub  MarginB  translate
+	L R sub B add SqrtHalf mul  B neg SqrtHalf mul  translate 45 rotate L neg 0 moveto
+	BackgroundText show
+
+	grestore end
+} bind def  % /PaintBackgroundCode
+```
+
+<div align="center">
+
+![Postponed: example](images/postponed.png) 
+
+</div>
+
+Fancier would be a pale background in the `PaintBackgroundCode`, and a darker edge in the `PaintForegroundCode`.
+
+
 ## Code, not injected
 
 ### Auto-populating Names
