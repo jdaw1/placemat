@@ -11,7 +11,8 @@
 8.  *Document-level controls*;  
 9.  [Code injection](code_injection.md);  
 10. [Bitmap images](bitmap_images.md);
-11. [Translations](translations.md).
+11. [Translations](translations.md);
+12. [Debugging](debugging.md).
 
 ----
 
@@ -145,6 +146,8 @@ E.g., to show only the first page of each type, and none of the log:
 ```
 
 If using these, put them at the very top of the changed parameters, to help not forgetting to undo them. 
+
+Sometimes page suppression can produce one extra blank page, as discussed in [issue 109](http://github.com/jdaw1/placemat/issues/109).
 
 ### CMYK black
 
