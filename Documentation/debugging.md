@@ -77,7 +77,7 @@ But sometimes errors are fiddlier, especially with [injected code](code_injectio
 
 ### Basics
 
-Failures can happen in the software because of bugs int he software itself, or because of a bug in [injected code](code_injection.md). 
+Failures can happen in the software because of bugs in the software itself, or because of a bug in [injected code](code_injection.md). 
 
 As with the built-in error support, the log will show the error, and the state of the stack. 
 It will also show the value of `TypeOfPagesBeingRendered`, though the value `/DistillerLog` can mean a generic page. 
@@ -104,7 +104,11 @@ There are also a few similar lines beginning with a space, within (rather at the
 
 So if `DeBugLevel` is &le;100, the code will log its progress. 
 Smaller numbers are smaller more-core routines, causing the log to be more verbose. 
-`DeBugLevel` is primarily for the programmer rather than users, but can be if use to the latter.
+`DeBugLevel` is primarily for the programmer rather than users, but can be of use to the latter. 
+If I&rsquo;m having difficulty, standard practice is:
+```PostScript
+DeBugLevel 40 def
+```
 
 
 ## Bugs
