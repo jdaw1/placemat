@@ -107,7 +107,7 @@ Smaller numbers are smaller more-core routines, causing the log to be more verbo
 `DeBugLevel` is primarily for the programmer rather than users, but can be of use to the latter. 
 If I&rsquo;m having difficulty, standard practice is:
 ```PostScript
-DeBugLevel 40 def
+/DeBugLevel 40 def
 ```
 
 
