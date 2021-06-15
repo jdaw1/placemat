@@ -123,7 +123,7 @@ This feature has never been used.
 ### Side-by-side Glasses
 
 
-If having a mini tasting of only three wines, one might wish to print everything on one sheet, especially if liked to need to squeeze everything onto a small round bar table. 
+If having a mini tasting of only three wines, one might wish to print everything on one sheet, especially if everything must be squeezed onto a small round bar table. 
 For right handers the three glasses would be on the left of the tasting-notes; for lefties, glasses to the right &mdash; as in the images on the right. 
 This small-tasting layout is enabled by setting the boolean constant `SideBySideGlassesTastingNotes` to true. 
 
@@ -193,7 +193,7 @@ Distillation over the web will almost certainly time out: use local conversion.
 If a tasting is attended by six people, decanters can circulate and people help themselves. 
 But at a tasting for fourteen people the portion size is a mere 5cl (75cl bottle, less the angels&rsquo; share, less a little loss during decanting, &divide;&nbsp;14). 
 So wine must be pre-poured. 
-This could be a source of confusion: &ldquo;&ldquo;What did you pour into these fourteen glasses?&rdquo;, &ldquo;Err, I think&nbsp;&hellip;&rdquo;. 
+This could be a source of confusion: &ldquo;What did you pour into these fourteen glasses?&rdquo;, &ldquo;Err, I think&nbsp;&hellip;&rdquo;. 
 Instead glasses are arranged on or close to a page that labels them. 
 Then the pourer knows what to pour; and those moving the glasses to the table know what has been poured.
 
@@ -206,7 +206,7 @@ Then the pourer knows what to pour; and those moving the glasses to the table kn
 The number of copies of these pre-pour sheets is `PrePourNumCopies,` the default being 1 if the length of Names is &ge;12, otherwise 0. 
 In an awkward working space `/PrePourNumCopies 2 def` might be useful.
 
-In a typical vertical tastings, the oldest wines come first in the list, so as to be top-left of the sheet. But decanting is in the reverse order, youngest to oldest, so it is convenient to reverse the order of the pre-pour sheets. This is controlled by `PrePourReverseOrder`, which defaults to true. 
+In a typical vertical tasting, the oldest wines come first in the list, so as to be top-left of the sheet. But decanting is in the reverse order, youngest to oldest, so it is convenient to reverse the order of the pre-pour sheets. This is controlled by `PrePourReverseOrder`, which defaults to true. 
 
 ### Superfluous
 
@@ -260,8 +260,8 @@ For WOTN, they are not by person.
 But for guesses of wines served blind, they are totalled by person. 
 The array `VoteRecorderShowTotalRow` is of the same length as `VoteRecorderTopTexts`, and holds Booleans. 
 
-There is a blind-tasting mischief in adding control guesses, as a dscipline on those attending. 
-This could be a constant guess &mdash the first few times this was done by [ThePortForum](http://www.theportforum.com/viewforum.php?f=4) crowd, the &lsquo;Monkey&rsquo; always guessed Dow 1970. 
+There is a blind-tasting mischief in adding control guesses, as a discipline on those attending. 
+This could be a constant guess &mdash; the first few times this was done by [ThePortForum](http://www.theportforum.com/viewforum.php?f=4) crowd, the &lsquo;Monkey&rsquo; always guessed Dow 1970. 
 Or somebody not present could be asked to guess. 
 The appearance of the monkey column is controlled by `VoteRecorderMonkeyWhenShowTotalRow`, and the name of the Monkey is `/VoteRecorderMonkeyName`.
 
@@ -273,15 +273,15 @@ The default value is empty if `GlassesOnTastingNotePages` is empty, otherwise `[
 
 Then there is the complicated `VoteRecorderCrossedBox`. 
 Obviously, I am not to guess the wine I know. 
-It&rsquo;s elegant for that box to be crossed. 
+It is elegant for that box to be crossed. 
 So `VoteRecorderCrossedBox` is code returning a Boolean, it usually accessing internal variables such as `WithinTitles` and `ThisName`, as well as `VoteRecorderShowTotalRow`. 
 (`VoteRecorderCrossedBox` is not intuitive to use: please suggest improvements in [issue 80](../../../issues/80/).)
 
 ### Superfluous
 
-VoteRecorderNamesOrientation controls the orientation of the NamesVoteRecorder, with allowed values /Horizontal, /Vertical, or the default value of /Either.
+`VoteRecorderNamesOrientation` controls the orientation of the `NamesVoteRecorder`, with allowed values /Horizontal, /Vertical, or the default value of /Either.
 
-`VoteRecorderShowTotalCol`is like `VoteRecorderShowTotalRow`, defaulting to an array of `true`. 
+`VoteRecorderShowTotalCol` is like `VoteRecorderShowTotalRow`, defaulting to an array of `true`. 
 
 And the self-explnatory parameters `VoteRecorderPaperType` and `VoteRecorderOrientation`; and `VoteRecorderTitlesFontSizeMax` and `VoteRecorderSubtitleFontSizeProportionTitles` (a positive number or /Automatic).
 The &lsquo;Total&rsquo; strings are `VoteRecorderTotalColTitle`, `VoteRecorderTotalRowTitle`: there might be changes for `Kern`ning or different languages. 
@@ -349,6 +349,8 @@ There are also the obvious parameters `AccountsTopText`, `AccountsColumnHeadings
 </div>
 
 Bottles having been decanted, corks should be put on display, for which pages are activated by setting `CorkDisplayNumCopies` to be positive. 
+
+### Superfluous
 
 Each rectangle is at least `CorkDisplayMinWidth` wide, and at least `CorkDisplayMinHeight` high; and the corks shown are in `GlassesClusteredOnCorkDisplay`, a triple-depth array resembling `GlassesClusteredOnVoteRecorders`. 
 
@@ -461,7 +463,7 @@ If not using a default, the user must change the specification of the label layo
 * `StickyLabelsColumnsChangeFaster` controls the ordering of the row and column loops: `true` &rArr; columns change faster then true; `false` &rArr; the rows change faster.
 * `StickyLabelsWithPagePortraitGapBetweenRows` is the gap between the rows of labels; and `StickyLabelsWithPagePortraitGapBetweenCols` is the gap between the columns of labels. Either of these could be zero; neither may be negative.
 * `StickyLabelsWithPagePortraitGapL` is the margin on the left of the page, that is, the gap between the edge of the page and the left edge of the leftmost column of labels. *Mutatis mutandis*, `StickyLabelsWithPagePortraitGapR`, `StickyLabelsWithPagePortraitGapT`, and `StickyLabelsWithPagePortraitGapB`.
-* `StickyLabelsPaperType` is the paper type of the sticky labels, accepting values such as /A4 or /USL, and defaulting to /A4.
+* `StickyLabelsPaperType` is the paper type of the sticky labels, accepting values such as `/A4` or `/USL`, and defaulting to `/A4`.
 * Printing is not to the edge of the labels: a little spare space should left on the inside of the edges of the label, this being specified by `StickyLabelsPaddingWithPagePortraitTB` (top and bottom) and `StickyLabelsPaddingWithPagePortraitRL` (right and left).
 * `StickyLabelsOrientation` is the desired orientation of the labels. That is not necessarily the same as the orientation of the page: if, with the page held portrait, labels are wider than they are high, it will be the opposite. Allowed values are `/Landscape`, `/Portrait`, and `/Automatic`. If `/Automatic` then the orientation is chosen automatically, the code choosing `/Landscape` unless switching to `/Portrait` would increase the linear size of the text by &ge;&#8732;2.
 * If one has a part-used sheet of labels, it can help to specify the where on the first page of sticky labels to start, as if `StickyLabelsFirstPageStartPosition` labels have already been used.

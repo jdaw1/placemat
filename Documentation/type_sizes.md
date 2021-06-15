@@ -37,10 +37,9 @@ In the author&rsquo;s old placemats, the most often changed, in order from most 
 But, before detail can be explained, a flow of action is needed.
 
 1. First, the circle text is sized. 
-There are two parameters givng an indicative size, and others controlling whether this may be improved. 
+There are two parameters giving an indicative size, and others controlling whether this may be improved. 
 
-2. Then the `Titles` are sized, to use all the available space. 
-These are subject to one-at-a-time constraints. 
+2. Then the `Titles` are sized, to use all the available space, subject to one-at-a-time constraints. 
 That could still leave an ugly profusion of type sizes: one would not want different circles having their `Titles` set in 100pt, 104pt, 108pt, 108pt. 
 So then there are constraints on which sets must be the same. 
 For each set, all are set to the type size of the smallest. 
@@ -72,7 +71,7 @@ Unless you need the font size to equal some exact value, allow this optimisation
 This tweaking of the font size is enabled by the Boolean `CircletextsTweakSize`. 
 There would be merit to allowing the first step of the optimusation to be an increase, permitted by the Boolean `CircletextMaxFontSizeMayBeSlightlyExceeded`.
 
-The number of copies of the `Circletexts` is bounded above by `CircletextsMaxCopies`; when this is invoked the the number of copies that would otherwise appear is on the top of the stack, so `CircletextsMaxCopies` could be code referring to it, such code advisedly starting with a &ldquo;`dup`&rdquo;.
+The number of copies of the `Circletexts` is bounded above by `CircletextsMaxCopies`; when this is invoked the the number of copies that would otherwise appear is on the top of the stack, so `CircletextsMaxCopies` could be code referring to it, such code usually starting with a &ldquo;`dup`&rdquo;.
 
 Relevant when glasses spill over multiple pages, `CircletextsSameFontSizeIfRadiiShrunkToBeSame`, constrains the size over pages compelled to have the same radius (see `ShrinkRadii`).
 (Technical note: `CircletextsSameFontSizeIfRadiiShrunkToBeSame` should have the same Boolean value over any such set of pages. 
@@ -109,6 +108,8 @@ The default value of `FontSizesSetsGlassesPages` is `PageOrderingGlasses`, which
 
 * `FontSizesTitlesEquivalences` is the same length as `Titles`, and if two elements of this are `eq`ual then the font sizes must be equal.
 
+These four bullets are repeatedly applied until there are no more changes.
+
 With the size of the Titles set, the space above and below can be used for the `Abovetitles` and `Belowtitles`, which are done jointly with the `Overtitles` (henceforth, **A**, **B**, **O**).
 
 ### Worthwhile
@@ -118,7 +119,7 @@ With the size of the Titles set, the space above and below can be used for the `
 * Should the sizes of the A, B, and O be independent? 
 `FontSizesSetsAboveBelowOver` is an array of length 3, the elements referring to A, B, and O. 
 Equal elements &rArr; considered together. 
-As a guide, if different fonts &hArr; not together.
+As a guide, if fonts from different families &hArr; not together (i.e., work `/Gotham-Book` with `/GothamNarrow-Bold`, but neither with `/Garamond`).
 
 ### Superfluous
 
@@ -153,11 +154,11 @@ So the vertical alignment should be to a no-descender string.
 The last of these causes it to use `VerticalMiddlingStringTitles` and `VerticalMiddlingStringOvertitles`.
 
 But there are exceptions. 
-Whatever the alignment of &ldquo;W09&rdquo;, the likes of &ldquo;&dagger;&rdquo; feel somehow different, and should be independently vertically centred. 
+Whatever the alignment of &ldquo;W09&rdquo;, somehow &ldquo;&dagger;&rdquo; is different, and should be independently vertically centred. 
 So `VerticalMiddlingTitlesAlwaysMatchNone` and `VerticalMiddlingOvertitlesAlwaysMatchNone`are an array of exceptions, by default including:
-&dagger; &Dagger; $ &pound; &euro; &yen; + ++ +++ *  &spades; &hearts; &diams; &clubs; &times; &bull; &middot; &loz; 
+&dagger;&#xFE0E; &Dagger;&#xFE0E; $ &pound;&#xFE0E; &euro;&#xFE0E; &yen;&#xFE0E; + ++ +++ * &spades;&#xFE0E; &hearts;&#xFE0E; &diams;&#xFE0E; &clubs;&#xFE0E; &times;&#xFE0E; &bull;&#xFE0E; &middot;&#xFE0E; &loz;&#xFE0E; 
 &alpha; &beta; &gamma; &delta; &epsilon; &zeta; &eta; &theta; &iota; &kappa; &lambda; &mu; &nu; &xi; &omicron; &pi; &rho; &sigma; &tau; &upsilon; &phi; &chi; &psi; &omega; 
-&#x2609; &#x263F; &#x2640; &#x2641; &#x2642; &#x2643; &#x2644; &#x2645; &#x2646; &#x2647;
+&#x2609;&#xFE0E; &#x263F;&#xFE0E; &#x2640;&#xFE0E; &#x2641;&#xFE0E; &#x2642;&#xFE0E; &#x2643;&#xFE0E; &#x2644;&#xFE0E; &#x2645;&#xFE0E; &#x2646;&#xFE0E; &#x2647;&#xFE0E;
 
 
 The even more pedantic parameters `VerticalMiddlingIncludeBaselineTitles` and `VerticalMiddlingIncludeBaselineOvertitles` say that, if the relevant string is wholly outside the baseline (i.e., bottom is positive or top is negative), the baseline is nonetheless included.
