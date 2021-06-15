@@ -162,7 +162,7 @@ But really, is modern software written in PostScript?
 
 * `PrologueCode` is executed just once, just before painting pages, which means after many of the internal variables have been computed. 
 
-* `EpilogueCode` is also executed just once, at te end after painting pages.
+* `EpilogueCode` is also executed just once, at the end after painting pages.
 
 * `PaintBackgroundCode` is executed once per page, just before other painting begins. Usually, the painting is to happen only on the glasses pages, for which the code might resemble:
 ```PostScript
@@ -226,7 +226,7 @@ The user can create these with the array `ExternalLinks`, which is an array of l
 The first boolean must be `false`; subsequent booleans are true if the link is a &lsquo;child&rsquo; of the previous &lsquo;false&rsquo; link, and are `false` if a &lsquo;parent&rsquo; link. 
 (If the PDF viewer is showing the table of contents there is a small triangle beside the &lsquo;parent&rsquo; link: pointing right if the children are hidden (&ldquo;&#9656;&rdquo;); pointing down if the children are visible (&ldquo;&#9662;&rdquo;); rotated between the two by being clicked on.) 
 The descriptions can be compound strings, `[…]`. 
-The URLs must be plain simple strings, `(…)`, not arrays nor compound strings, and must start with a protocol such as &ldquo;http://&rdquo;. 
+The URLs must be plain simple strings, `(...)`, not arrays nor compound strings, and must start with a protocol such as &ldquo;http://&rdquo;. 
 
 
 ### PageOrdering, sections
@@ -271,7 +271,7 @@ Links for other types of pages are shown in the table.
 The log file also contains a list of the &ldquo;URL # tags&rdquo; added to the PDF.
 
 If `GlassesDestForEachCircle` is true, there are also # tags for individual glass circles, as detailed in the log. 
-(But not all PDF viewers correctly zoom to these circles: see bugs in Apple Preview and Google Chrome.) 
+(But not all PDF viewers correctly zoom to these circles: see bugs [in Apple Preview](http://discussions.apple.com/thread/7234631) and [in Google Chrome](http://bugs.chromium.org/p/chromium/issues/detail?id=535978).) 
 For some actual placemats, changing `GlassesDestForEachCircle` from false to true increased the file size from &asymp;&nbsp;360k to &asymp;&nbsp;400k, &asymp;&nbsp;11%: not tiny. 
 These &lsquo;Dest&rsquo;s are most useful for the placemat maker, speeding the checking of an individual circle&mdash;but there&rsquo;s no need to check the same circle on multiples `Names`, because they are all the same. 
 So GlassesDestForEachCircle&rsquo;s default value is `NameNum 0 eq}`, which makes them for only the first of the `Names`.
