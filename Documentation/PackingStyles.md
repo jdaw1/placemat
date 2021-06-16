@@ -32,7 +32,10 @@ Broadly, if a later-tested style allows a larger radius than the current best, t
 If the element of `PackingStyles` is just the style, it doesn&rsquo;t need to be in an array. 
 But the elements of `PackingStyles` can have constraints and small variations. 
 If an element of `PackingStyles` is to have such extra detail, then that element must be an array, starting with the style name. 
-E.g. (which is unrealistically verbose to show some of the possibilities): `[ /Diamonds  /OnlyIfSheetNumMin 1  /OnlyIfSheetNumMax 1  /GlassesNumMin 3  /GlassesNumMax 3  /OnlyIfOrientation /Landscape  /RowsNumMin 3  /RowsNumMax 4  /Mirror ]`. 
+E.g. (which is unrealistically verbose to show some of the possibilities): 
+```PostScript
+[ /Diamonds  /OnlyIfSheetNumMin 1  /OnlyIfSheetNumMax 1  /GlassesNumMin 3  /GlassesNumMax 3  /OnlyIfOrientation /Landscape  /RowsNumMin 3  /RowsNumMax 4  /Mirror ]
+``` 
 
 The general mathematical problem, largest possible radius for *n* non-overlapping circles in a particular rectangle, is difficult (see [PackoMania](http://www.packomania.com/) for solutions to many special cases). 
 This code has enough generality that it often finds the best, and when it can&rsquo;t, such as 14 glasses on `/A3`, its radius is not much smaller than the mathematical optimum.
@@ -140,7 +143,7 @@ Thus `/RectangularAlternateNudge` is a small deviation away from greater symmetr
 Because of this non-enthusiasm, by default, `/RectangularAlternateNudge` comes with a sub-parameter: `[ /RectangularAlternateNudge /ImprovementPointsMin 2 ]`. 
 This imposes an additional requirement: this packing style is chosen only if it is an improvement on the previous best radius of &ge;&nbsp;2pt &asymp;&nbsp;0.7mm. 
 
-The next table of examples shows six glasses on `/USL` = 8&frac12;&Prime;&times;11&Prime; and on `/A4` = 210mm&times;297mm, in all cases with margins of 24pt = &#8531;&Prime; and space of 6pt for the header. 
+The next table of examples shows six glasses on `/USL` = 8&frac12;&Prime;&times;11&Prime; and on `/A4` = 210mm&times;297mm, in all cases with margins of 24pt = &#8531;&Prime; &asymp; 8.5mm, and space of 6pt &asymp; 2.1mm for the header. 
 
 It shows four packing styles: `/Diamonds`; `/SquareGrid`; `/RectangularDislocation`; and `/RectangularAlternateNudge`. 
 
@@ -237,7 +240,10 @@ This could be set as 6 + 6 + 5 on 3&times;`/A4`.
 But if table space were tight, 14 on 1&times;`/A3` and 3 on 1&times;`/RightSide` `/A4` would use only 2&frac12; `/A4` widths, if the unused half of the `/A4` were tucked under the `/A3`. 
 Suppressing the ornaments tucked under the `/A3`, such as `HeadersCenter`, would look neater. 
 This can be done by adding to the array an extra flag, `/SuppressNonRightOrnaments` (or `/SuppressNonLeftOrnaments`), which for the pages using that packing style suppresses the unwanted headers, footers, icons, and water boxes. 
-Example item of PackingStyles: `[ /RightSide /GlassesNumMax 3 /SuppressNonRightOrnaments ]`.
+Example item of PackingStyles:
+```PostScript
+[ /RightSide  /GlassesNumMax 3  /SuppressNonRightOrnaments ]
+```
 
 <div align="center">
 

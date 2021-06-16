@@ -223,7 +223,7 @@ Extracts of code that made the image:
 <img align="right" width="476" height="478" src="images/Outline_Rotation.png">
 
 This is a decorative possibility that has existed since early versions of this code. 
-But I now see it as too cluttered so am less fond of it now than when it first appeared: &#655;&#7437;&#7437;&#7456;.
+But I now see it as too cluttered so am less fond of it than when it first appeared: &#655;&#7437;&#7437;&#7456;.
 
 It is engaged with the Boolean `OutlineTitles`. 
 If that is, then also heeded are `OutlineTitlesAlsoAbovetitles`, `OutlineTitlesAlsoBelowtitles`, and `OutlineTitlesAlsoOvertitles`.
