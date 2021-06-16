@@ -28,14 +28,14 @@ There are multiple types of printable page.
 * `/DecantingNotes`: observations of those doing the decanting.
 * `/Accounts`: organises the tawdry financial matters. 
 * `/CorkDisplay`: as named.
-* `/NeckTags`: used at blind tastings around the neck of a wrapped bottle; also helpful when decanting to label de-capsuled bottles. 
+* `/NeckTags`: used at blind tastings around the neck of a wrapped bottle; also to label de-capsuled bottles when decanting. 
 * `/DecanterLabels`: cut; paste to back of old business cards; allow to dry; punch holes; hang on decanters; fill decanters; wait; drink.
-* `/StickyLabels`: at a tasting with more wines than glasses, these can be attached tot he foot of a glass to show both owner and current contents. Larger stickies also useful on bottles.
+* `/StickyLabels`: at a tasting with more wines than glasses, these can be attached to the foot of a glass to show both owner and current contents. Larger stickies also useful on bottles.
 
 To make the glasses pages required information about wines, about people, and about formatting. 
 That information is reused to make the other pages.
 
-Each of the non-glasses pages has a few controls, but only a few, described below.
+Each of the non-glasses pages has a few controls, but only a few, as described below.
 
 
 
@@ -140,7 +140,7 @@ Ignored parameters include `TastingNotesPaperType` and `TastingNotesOrientation`
 
 <p style="clear: both;">
 
-## PlaceName
+## Place names
 
 <img align="right" width="210" height="149" src="images/NonGlasses_PN.png">
 

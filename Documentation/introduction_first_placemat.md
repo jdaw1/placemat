@@ -105,7 +105,7 @@ This `def`ines `Titles` to be an array, so delimited with square brackets, `[…
 Each of the items of the array &mdash; this configuration having five &mdash; is a string, so delimited with round brackets, `(string)`. 
 Between these strings there can be arbitrary white space: spaces, tabs, newlines. 
 Change the `Titles` to match your tasting. 
-If there are more than six wines, the numbers of pages will grow commensurately.
+If there are more than six wines, the number of pages will grow commensurately.
 
 In each circle, below the `Titles`, are the `Belowtitles`. 
 This is also an array, which must be the same length as `Titles`. 

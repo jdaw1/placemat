@@ -99,37 +99,37 @@ There follow a selection of the glyphs most likely to be useful to users of the 
 &szlig;&nbsp;`/germandbls`&nbsp;&nbsp;&nbsp;&nbsp; 
 
 **Symbols**:&nbsp;&nbsp;&nbsp;&nbsp; 
-&dagger;&nbsp;`/dagger`&nbsp;&nbsp;&nbsp;&nbsp; 
-&Dagger;&nbsp;`/daggerdbl`&nbsp;&nbsp;&nbsp;&nbsp; 
-&loz;&nbsp;`/lozenge`&nbsp;&nbsp;&nbsp;&nbsp; 
-&bull;&nbsp;`/bullet`&nbsp;&nbsp;&nbsp;&nbsp; 
-&middot;&nbsp;`/periodcentered`&nbsp;&nbsp;&nbsp;&nbsp; 
-&sect;&nbsp;`/section`&nbsp;&nbsp;&nbsp;&nbsp; 
-&copy;&nbsp;`/copyright`&nbsp;&nbsp;&nbsp;&nbsp; 
-&reg;&nbsp;`/registered`&nbsp;&nbsp;&nbsp;&nbsp; 
-&trade;&nbsp;`/trademark`&nbsp;&nbsp;&nbsp;&nbsp; 
-&spades;&nbsp;`/spade`&nbsp;&nbsp;&nbsp;&nbsp; 
-&hearts;&nbsp;`/heart`&nbsp;&nbsp;&nbsp;&nbsp; 
-&diams;&nbsp;`/diamond`&nbsp;&nbsp;&nbsp;&nbsp; 
-&clubs;&nbsp;`/club`
+&dagger;&#xFE0E;&nbsp;`/dagger`&nbsp;&nbsp;&nbsp;&nbsp; 
+&Dagger;&#xFE0E;&nbsp;`/daggerdbl`&nbsp;&nbsp;&nbsp;&nbsp; 
+&loz;&#xFE0E;&nbsp;`/lozenge`&nbsp;&nbsp;&nbsp;&nbsp; 
+&bull;&#xFE0E;&nbsp;`/bullet`&nbsp;&nbsp;&nbsp;&nbsp; 
+&middot;&#xFE0E;&nbsp;`/periodcentered`&nbsp;&nbsp;&nbsp;&nbsp; 
+&sect;&#xFE0E;&nbsp;`/section`&nbsp;&nbsp;&nbsp;&nbsp; 
+&copy;&#xFE0E;&nbsp;`/copyright`&nbsp;&nbsp;&nbsp;&nbsp; 
+&reg;&#xFE0E;&nbsp;`/registered`&nbsp;&nbsp;&nbsp;&nbsp; 
+&trade;&#xFE0E;&nbsp;`/trademark`&nbsp;&nbsp;&nbsp;&nbsp; 
+&spades;&#xFE0E;&nbsp;`/spade`&nbsp;&nbsp;&nbsp;&nbsp; 
+&hearts;&#xFE0E;&nbsp;`/heart`&nbsp;&nbsp;&nbsp;&nbsp; 
+&diams;&#xFE0E;&nbsp;`/diamond`&nbsp;&nbsp;&nbsp;&nbsp; 
+&clubs;&#xFE0E;&nbsp;`/club`
 
 **Currencies, fractions, maths**:&nbsp;&nbsp;&nbsp;&nbsp; 
-&pound;&nbsp;`/sterling`&nbsp;&nbsp;&nbsp;&nbsp; 
-&euro;&nbsp;`/Euro`&nbsp;&nbsp;&nbsp;&nbsp; 
-&yen;&nbsp;`/yen`&nbsp;&nbsp;&nbsp;&nbsp; 
-&#8361;&nbsp;`/won`&nbsp;&nbsp;&nbsp;&nbsp; 
-&cent;&nbsp;`/cent`&nbsp;&nbsp;&nbsp;&nbsp; 
-&frac12;&nbsp;`/onehalf`&nbsp;&nbsp;&nbsp;&nbsp; 
-&frac14;&nbsp;`/onequarter`&nbsp;&nbsp;&nbsp;&nbsp; 
-&frac34;&nbsp;`/threequarters`&nbsp;&nbsp;&nbsp;&nbsp; 
-&#8539;&nbsp;`/oneeighth`&nbsp;&nbsp;&nbsp;&nbsp; 
-&#8540;&nbsp;`/threeeighths`&nbsp;&nbsp;&nbsp;&nbsp; 
-&#8532;&nbsp;`/twothirds`&nbsp;&nbsp;&nbsp;&nbsp; 
-&asymp;&nbsp;`/approxequal`&nbsp;&nbsp;&nbsp;&nbsp; 
-&ge;&nbsp;`/greaterequal`&nbsp;&nbsp;&nbsp;&nbsp; 
-&le;&nbsp;`/lessequal`&nbsp;&nbsp;&nbsp;&nbsp; 
-&times;&nbsp;`/multiply`&nbsp;&nbsp;&nbsp;&nbsp; 
-&divide;&nbsp;`/divide`
+&pound;&#xFE0E;&nbsp;`/sterling`&nbsp;&nbsp;&nbsp;&nbsp; 
+&euro;&#xFE0E;&nbsp;`/Euro`&nbsp;&nbsp;&nbsp;&nbsp; 
+&yen;&#xFE0E;&nbsp;`/yen`&nbsp;&nbsp;&nbsp;&nbsp; 
+&#8361;&#xFE0E;&nbsp;`/won`&nbsp;&nbsp;&nbsp;&nbsp; 
+&cent;&#xFE0E;&nbsp;`/cent`&nbsp;&nbsp;&nbsp;&nbsp; 
+&frac12;&#xFE0E;&nbsp;`/onehalf`&nbsp;&nbsp;&nbsp;&nbsp; 
+&frac14;&#xFE0E;&nbsp;`/onequarter`&nbsp;&nbsp;&nbsp;&nbsp; 
+&frac34;&#xFE0E;&nbsp;`/threequarters`&nbsp;&nbsp;&nbsp;&nbsp; 
+&#8539;&#xFE0E;&nbsp;`/oneeighth`&nbsp;&nbsp;&nbsp;&nbsp; 
+&#8540;&#xFE0E;&nbsp;`/threeeighths`&nbsp;&nbsp;&nbsp;&nbsp; 
+&#8532;&#xFE0E;&nbsp;`/twothirds`&nbsp;&nbsp;&nbsp;&nbsp; 
+&asymp;&#xFE0E;&nbsp;`/approxequal`&nbsp;&nbsp;&nbsp;&nbsp; 
+&ge;&#xFE0E;&nbsp;`/greaterequal`&nbsp;&nbsp;&nbsp;&nbsp; 
+&le;&#xFE0E;&nbsp;`/lessequal`&nbsp;&nbsp;&nbsp;&nbsp; 
+&times;&#xFE0E;&nbsp;`/multiply`&nbsp;&nbsp;&nbsp;&nbsp; 
+&divide;&#xFE0E;&nbsp;`/divide`
 
 **Greeks**:&nbsp;&nbsp;&nbsp;&nbsp; 
 &alpha;&nbsp;`/alpha`&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -160,16 +160,16 @@ There follow a selection of the glyphs most likely to be useful to users of the 
 etc
 
 **Arrows**:&nbsp;&nbsp;&nbsp;&nbsp; 
-&rarr;&nbsp;`/arrowright`&nbsp;&nbsp;&nbsp;&nbsp; 
-&larr;&nbsp;`/arrowleft`&nbsp;&nbsp;&nbsp;&nbsp; 
-&uarr;&nbsp;`/arrowup`&nbsp;&nbsp;&nbsp;&nbsp; 
-&darr;&nbsp;`/arrowdown`&nbsp;&nbsp;&nbsp;&nbsp; 
-&harr;&nbsp;`/arrowboth`&nbsp;&nbsp;&nbsp;&nbsp; 
-&rArr;&nbsp;`/arrowdblright`&nbsp;&nbsp;&nbsp;&nbsp; 
-&lArr;&nbsp;`/arrowdblleft`&nbsp;&nbsp;&nbsp;&nbsp; 
-&uArr;&nbsp;`/arrowdblup`&nbsp;&nbsp;&nbsp;&nbsp; 
-&dArr;&nbsp;`/arrowdbldown`&nbsp;&nbsp;&nbsp;&nbsp; 
-&hArr;&nbsp;`/arrowdblboth`
+&rarr;&#xFE0E;&nbsp;`/arrowright`&nbsp;&nbsp;&nbsp;&nbsp; 
+&larr;&#xFE0E;&nbsp;`/arrowleft`&nbsp;&nbsp;&nbsp;&nbsp; 
+&uarr;&#xFE0E;&nbsp;`/arrowup`&nbsp;&nbsp;&nbsp;&nbsp; 
+&darr;&#xFE0E;&nbsp;`/arrowdown`&nbsp;&nbsp;&nbsp;&nbsp; 
+&harr;&#xFE0E;&nbsp;`/arrowboth`&nbsp;&nbsp;&nbsp;&nbsp; 
+&rArr;&#xFE0E;&nbsp;`/arrowdblright`&nbsp;&nbsp;&nbsp;&nbsp; 
+&lArr;&#xFE0E;&nbsp;`/arrowdblleft`&nbsp;&nbsp;&nbsp;&nbsp; 
+&uArr;&#xFE0E;&nbsp;`/arrowdblup`&nbsp;&nbsp;&nbsp;&nbsp; 
+&dArr;&#xFE0E;&nbsp;`/arrowdbldown`&nbsp;&nbsp;&nbsp;&nbsp; 
+&hArr;&#xFE0E;&nbsp;`/arrowdblboth`
 
 
 ## Accents and diacritics
