@@ -347,6 +347,8 @@ There is also the simple numerical parameter `MaxRadius`, defaulting to 150 &rAr
 
 Given the default value of `PackingStyles`, the following shows glass diameters for various numbers of glasses on various page sizes.
 
+<div align="center">
+
 | Num<br>Glasses | `/A4`<br>210mm&times;297mm | `/A3`<br>420mm&times;297mm | `/USLegal`<br>14&Prime;&times;8&frac12;&Prime; | `/USL`<br>8&frac12;&Prime;&times;11&Prime; | `/USL2`<br>17&Prime;&times;11&Prime; |
 |---:|---:|---:|---:|---:|---:|
 | 3 | 113.9mm, 4.49&Prime; | 164.6mm, 6.48&Prime; | 126.9mm, 5.00&Prime; | 113.1mm, 4.45&Prime; | 161.1mm, 6.34&Prime; |
@@ -368,6 +370,8 @@ Given the default value of `PackingStyles`, the following shows glass diameters 
 | 19 | 50.5mm, 1.99&Prime; | 75.5mm, 2.97&Prime; | 56.4mm, 2.22&Prime; | 49.7mm, 1.96&Prime; | 73.1mm, 2.88&Prime; |
 | 20 | 50.5mm, 1.99&Prime; | 73.3mm, 2.89&Prime; | 56.4mm, 2.22&Prime; | 49.7mm, 1.96&Prime; | 73.1mm, 2.88&Prime; |
 | 21 | 48.3mm, 1.90&Prime; | 69.5mm, 2.74&Prime; | 55.1mm, 2.17&Prime; | 49.1mm, 1.93&Prime; | 69.2mm, 2.72&Prime; |
+
+</div>
 
 Measure the diameter of your glasses. 
 Add something for two fingers. 
