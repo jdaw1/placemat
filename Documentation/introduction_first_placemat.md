@@ -60,7 +60,7 @@ import shutil;import urllib.request;import os;import tempfile;l='https://raw.git
 
 ### Download the .ps file
 
-Bookmark this manual, and download to your machine a copy of [the PostScript code](http://raw.githubusercontent.com/jdaw1/placemat/main/PostScript/placemat.ps) (update this copy every time: new versions fix bugs; add features; improve default settings). 
+Bookmark this manual, and download to your machine a copy of [the PostScript code](../PostScript/placemat.ps?raw=1) (update this copy every time: new versions fix bugs; add features; improve default settings). 
 Store it in a directory named something like &ldquo;placemats&rdquo;. 
 Give the PostScript file a name which will make sense in aeons to come, perhaps YYYYMMDD.ps, or YYYYMMDD_TastingName.ps, as if it will become the first item in your placemat archive.
 
