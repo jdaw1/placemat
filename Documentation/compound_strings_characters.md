@@ -184,6 +184,8 @@ Observe the case sensitivity.
 
 The table shows the names of the diacritics, and with which base characters which of these are available in the font `/TimesNewRomanPS-BoldMT`.
 
+<div align="center">
+
 |                      | `a` | `A` | `e` | `E` | `i` | `I` | `o` | `O` | `u` | `U` | `y` | `Y` | `c` | `C` | `g` | `G` | `h` | `H` | `l` | `L` | `n` | `N` | `r` | `R` | `s` | `S` | `t` | `T` | `w` | `W` | `z` | `Z` |
 |:---------------------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | `acute` | &aacute; | &Aacute; | &eacute; | &Eacute; | &iacute; | &Iacute; | &oacute; | &Oacute; | &uacute; | &Uacute; | &yacute; | &Yacute; | &#263; | &#262; |  |  |  |  | &#314; | &#313; | &#324; | &#323; | &#341; | &#340; | &#347; | &#346; |  |  | &#7811; | &#7810; | &#378; | &#377; |
@@ -204,6 +206,7 @@ The table shows the names of the diacritics, and with which base characters whic
 | `bar` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | &#295; | &#294; |  |  |  |  |  |  |  |  | &#359; | &#358; |  |  |  |  |
 | `commaaccent` |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | &#351; | &#350; | &#355; | &#354; |  |  |  |  |
 
+</div>
 
 **More accents and diacritics**:&nbsp;&nbsp;&nbsp;&nbsp; 
 &#509;&nbsp;`/aeacute`&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -218,7 +221,6 @@ The table shows the names of the diacritics, and with which base characters whic
 &#308;&nbsp;`/Jcircumflex`&nbsp;&nbsp;&nbsp;&nbsp; 
 &#311;&nbsp;`/kcedilla`&nbsp;&nbsp;&nbsp;&nbsp; 
 &#310;&nbsp;`/Kcedilla`&nbsp;&nbsp;&nbsp;&nbsp; 
-&#312;&nbsp;`/kgreenlandic`&nbsp;&nbsp;&nbsp;&nbsp; 
 &#329;&nbsp;`/napostrophe`
 
 **More extended Latin**:&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -228,4 +230,18 @@ The table shows the names of the diacritics, and with which base characters whic
 &eth;&nbsp;`/eth`&nbsp;&nbsp;&nbsp;&nbsp; 
 &ETH;&nbsp;`/Eth`&nbsp;&nbsp;&nbsp;&nbsp; 
 &#331;&nbsp;`/eng`&nbsp;&nbsp;&nbsp;&nbsp; 
-&#330;&nbsp;`/Eng`
+&#330;&nbsp;`/Eng`&nbsp;&nbsp;&nbsp;&nbsp; 
+&#312;&nbsp;`/kgreenlandic`
+
+
+## Unicode
+
+Some fonts allow access to some characters by their unicode hexadecimal number. 
+Typically four hex digits are prefixed with &ldquo;`/uni`&rdquo;; five hex digits are prefixed with &ldquo;`/u`&rdquo;. 
+E.g.,&nbsp;`/uni1D00` =&nbsp;&ldquo;&#x1D00;&rdquo; =&nbsp;[small&#8209;caps&nbsp;A](http://www.fileformat.info/info/unicode/char/1d00/index.htm); 
+`/u1D538` =&nbsp;&ldquo;&#x1D538;&rdquo; =&nbsp;[double&#8209;struck&nbsp;A](http://www.fileformat.info/info/unicode/char/1d538/index.htm).
+
+But this glyph naming is not consistently available: not in all fonts; not necessarily all glyphs within a font. 
+The usual advice applies: carefully check the output.
+
+As a small assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in line&nbsp;12.
