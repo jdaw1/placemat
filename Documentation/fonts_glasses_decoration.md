@@ -56,7 +56,7 @@ The code may access any fonts appropriately installed on the machine doing the P
 Fonts are accessed by their PostScript name. 
 On a Mac, in the application *Font Book*, select a font and its PostScript name is shown. 
 It is more difficult on Windows &mdash; a search engine can assist. 
-Or distill the file [fonts_illustrated.ps](../code/fonts_illustrated.ps), which makes a document showcasing the available fonts. 
+Or distill the file [fonts_illustrated.ps](../PostScript/fonts_illustrated.ps), which makes a document showcasing the available fonts. 
 
 By default fonts are set as follows.
 ```PostScript
