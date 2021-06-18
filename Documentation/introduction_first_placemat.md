@@ -42,8 +42,9 @@ Nonetheless, placemats can be and have been made by those with no programming ex
 ## First placemat: advice for beginners
 
 ### A week in advance
+
 Don&rsquo;t try to make your first placemats with little time to spare. 
-Start a week in advance, to allow time for learning and improvements, and to avoid the other things that need doing just before a tasting. 
+Start at least a week in advance, to allow time for learning and improvements, and to avoid the other things that need doing just before a tasting. 
 Yes, it can be done quickly &mdash; but not your first placemats.
 
 ### Editing a file

@@ -52,9 +52,9 @@ It is possible to make these pages without the glasses page by making the glasse
 
 ### Margins
 
-There is a margin between then left edge of painted ink, and the physical edge of the page. 
-These are `MarginL`, `MarginR`, `MarginB`, and `MarginT`, defaulting to 24pt =&nbsp;&#8531;&Prime; &asymp;&nbsp;8.5mm.  
-But if referencing margins within injected code, use `MgnL`, etc, as these are appropriately modified when `SideBySideGlassesTastingNotes` is true.
+There is a margin between the left edge of painted ink, and the physical edge of the page. 
+These are `MarginL` (left), `MarginR` (right), `MarginB` (bottom), and `MarginT` (top), defaulting to 24pt =&nbsp;&#8531;&Prime; &asymp;&nbsp;8.5mm. 
+But if referencing margins within injected code, use `MgnL` etc, as these are appropriately modified when `SideBySideGlassesTastingNotes` is true.
 
 If adding crop marks, it is easiest to add them into white space around the logical page. 
 This can be done for just the glasses page (the only page type for which the author has used this), `OuterGlassesMarginL` etc, or around the other page types, `OuterMarginL`, etc. 
@@ -63,7 +63,7 @@ There is also the setting `OuterGlassesCropMarks`.
 
 ### Rotate180AlternateNames
 
-At a large tasting there can be three or four glasses pages each, and most of the same number of tasting notes pages. 
+At a large tasting there can be three or four glasses pages each, and most of the same number of tasting-note pages. 
 Setup can be slightly swifter if the boundary between sets of papers is slightly sharper, done by rotating 180&deg; the papers of alternate people. 
 For this, `/Rotate180AlternateNames true def`.
 
@@ -109,13 +109,14 @@ For a multi-session tasting, it is worth the effort of changing these.
 ### MirrorPages&hellip;
 
 If printing a page to the underside of acetate, the page would need to be mirrored. 
-For this there are `MirrorPages…` parameters, arrays of Booleans, of the same length as the similarly named `PageOrdering…` parameters.
+For this there are `MirrorPages…` parameters, arrays of Booleans, of the same length as the similarly named `PageOrdering…` parameters. 
+(Added to code in September 2009; as of June 2021 never used live.)
 
 
 ### Suppressing pages
 
 Consider making placemats for somebody else. 
-Sometimes, a question for the commissioner might be answerable by inspection of a small number of pages. 
+Sometimes, a question of style or design for the commissioner might be answerable by inspection of a small number of pages. 
 It can be useful to suppress some pages, but in a manner than is easily reversed, and which allows the maker of the placemats to be easily convinced that the reversal has fully happened. 
 
 There are several parameters that allow this. 
@@ -151,14 +152,14 @@ Sometimes page suppression can produce one extra blank page, as discussed in [is
 
 ### CMYK black
 
-`/CMYK0001replacesRGB000 true def` replaces RGB black with printers&rsquo; CMYK black.
+`/CMYK0001replacesRGB000 true def` replaces RGB black (`0 setgray`) with printers&rsquo; CMYK black (`0 0 0 1 setcmykcolor`).
 
 
 ## High-level code insertion
 
-The software allows, perhaps even encourages, code injection. 
+The software allows, perhaps even encourages, [code injection](code_injection.md). 
 No, this isn&rsquo;t the modern idiom for software. 
-But really, is modern software written in PostScript?
+But really, modern software isn&rsquo;t written in PostScript.
 
 * `PrologueCode` is executed just once, just before painting pages, which means after many of the internal variables have been computed. 
 
@@ -196,7 +197,7 @@ Your post with the PNGs is quoted by somebody else.
 People drop out; the number of wines shrinks; the number of glasses pages drops by one. 
 The PDF and PNGs are updated, and re-uploaded; the PNG of the former last page is deleted from the server. 
 
-wBut there is still that quote of your post, that quote attempting to show the now-missing last PNG. 
+But there is still that quote of your post, that quote attempting to show the now-missing last PNG. 
 This might not be liked by the aesthetically sensitive. 
 
 So `/EmptyGlassesPageAtStart true def` adds an &lsquo;empty&rsquo; page to the start. 
@@ -204,13 +205,15 @@ Convert to PNG and upload, and then reset to `/EmptyGlassesPageAtStart false def
 
 It uses `EmptyGlassesPageOrientation` and `EmptyPageString`, and re-uses `TastingNotesPaperType` and `HeaderFont`. 
 
+
 ## PDF properties
+
 
 ### PDF_title
 
 PDFs can have a title, embedded within its DocInfo. 
 If viewing a PDF in a web browser, the tab will typically show that title, and it is also seen and shown by search engines. 
-`PDF_title` hlds that string.
+`PDF_title` holds that string.
 
 
 ## External Links
@@ -222,7 +225,7 @@ The placemat software creates this automatically.
 
 
 At the end of the outline are relevant external links. 
-The user can create these with the array `ExternalLinks`, which is an array of length a multiple of three: a boolean0, Descriptor0, URL0, boolean1, Descriptor1, URL1, etc &hellip;. 
+The user can create these with the array `ExternalLinks`, which is an array of length a multiple of three: Boolean0, Descriptor0, URL0; Boolean1, Descriptor1, URL1; &hellip;. 
 The first boolean must be `false`; subsequent booleans are true if the link is a &lsquo;child&rsquo; of the previous &lsquo;false&rsquo; link, and are `false` if a &lsquo;parent&rsquo; link. 
 (If the PDF viewer is showing the table of contents there is a small triangle beside the &lsquo;parent&rsquo; link: pointing right if the children are hidden (&ldquo;&#9656;&rdquo;); pointing down if the children are visible (&ldquo;&#9662;&rdquo;); rotated between the two by being clicked on.) 
 The descriptions can be compound strings, `[…]`. 
@@ -236,6 +239,20 @@ If the PageOrdering parameters have split the paperwork into a few sessions, the
 
 The parameter `PageOrderingSections` is an array of even length, alternately page-ordering numbers and compound strings, that adds extra rows to the PDF reader&rsquo;s table of contents. 
 The compound strings appear immediately before the page orderings with which they are paired.
+[E.g.](http://www.jdawiseman.com/2013/20131011_1963_ahb.pdf):
+
+```PostScript
+/PageOrderingSections [
+	  0  ()
+	  0  [/section ( Friday evening, The Hotel)]
+	 10  ()
+	 10  [/section ( Saturday afternoon, The Pub)]
+	 20  ()
+	 20  [/section ( Saturday evening, The Hotel)]
+	200  ()
+	200  [/section ( Multiple sessions)]
+] def  % Array of even length, alternately elements of the PageOrder...s, and compound strings
+```
 
 
 ### PagesToBeInserted
@@ -254,7 +271,7 @@ ToC entries appear before a page of one of the types in the sub-arrays of `Pages
 The double-depth array allows some flexibility by *de facto* merging several types; and instance 0 is the first such block of these types, 1 the second, etc.
 
 If the element of PagesToBeInsertedDests is a name, so beginning with a &ldquo;`/`&rdquo;, there will be a ToC entry pointing to this &lsquo;DEST&rsquo;, titled with the element of `PagesToBeInsertedDescriptions`. 
-And the number of pages being inserted is the element of `PagesToBeInsertedNumPages`, which allows the page numbering to be correct.
+And the number of pages being inserted is the element of `PagesToBeInsertedNumPages`, which allows the page numbering to be correct. 
 
 
 ### #Linking to specific pages within the PDF
@@ -298,7 +315,7 @@ Sticky labels   | `/StickyLabels`   | &hellip;#StickyLabels_0   |
 
 The `CopyrightStatementPlacemats`, `LicensingAgreementTextPlacemats`, and `LicensingAgreementLinkPlacemats` are all output to the log. 
 
-It is intended that the latter two, or at least the least, will be embedded in the PDF in a machine-readable searchable filterable manner.  
+It is intended that the latter two, or at least the least, will be embedded in the PDF in a machine-readable searchable filterable manner, per [issue 16](http://github.com/jdaw1/placemat/issues/16).  
 
 ## Debugging and documentation generation
 
