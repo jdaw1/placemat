@@ -62,7 +62,7 @@ There is also the setting `OuterGlassesCropMarks`.
 
 ### Rotate180AlternateNames
 
-At a large tasting there can be three or four glasses pages each, and most of the same number of tasting-note pages. 
+At a large tasting there can be three or four glasses pages each, and a similar number of tasting-note pages. 
 Setup can be slightly swifter if the boundary between sets of papers is slightly sharper, done by rotating 180&deg; the papers of alternate people. 
 For this, `/Rotate180AlternateNames true def`.
 

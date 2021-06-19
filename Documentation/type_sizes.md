@@ -11,7 +11,8 @@
 8.  [Document-level controls](document.md);  
 9.  [Code injection](code_injection.md);  
 10. [Bitmap images](bitmap_images.md);
-11. [Translations](translations.md).
+11. [Translations](translations.md);
+12. [Debugging](debugging.md).
 
 ----
 
@@ -32,7 +33,6 @@ In the author&rsquo;s old placemats, the most often changed, in order from most 
 * `BelowtitleMaxFontSizeProportionTitles`, to values in the range `0.16666`&ndash;`0.5`. Also, but less often, and to similar values, `OvertitleMaxFontSizeProportionTitles` and `AbovetitleMaxFontSizeProportionTitles`.
 
 * `CircletextMaxFontSizeAbsolute` to values `6`&ndash;`16`, big values also necessitating `/CircletextMaxFontSizeProportionRadius 1 def`.
-
 
 But, before detail can be explained, a flow of action is needed.
 

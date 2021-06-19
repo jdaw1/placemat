@@ -11,7 +11,8 @@
 8.  [Document-level controls](document.md);  
 9.  [Code injection](code_injection.md);  
 10. [Bitmap images](bitmap_images.md);
-11. [Translations](translations.md).
+11. [Translations](translations.md);
+12. [Debugging](debugging.md).
 
 ----
 
@@ -473,4 +474,3 @@ To make sticky labels for wines not appearing on a glasses sheet, see GlassesNum
 There are also settings `StickyLabelsReverseOrder`, `StickyLabelsRemoveDuplicatesByWithinTitles`, `StickyLabelsSortByWithinTitles`, `StickyLabelsShowBackgroundTexts`, `StickyLabelsShowDroplets`, and `StickyLabelsShowCirclearraysInCircle` (as well as in the straight lines top and bottom). 
 
 <div style="clear: both;"></div>
-
