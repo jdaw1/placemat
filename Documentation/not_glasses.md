@@ -474,4 +474,3 @@ To make sticky labels for wines not appearing on a glasses sheet, see GlassesNum
 There are also settings `StickyLabelsReverseOrder`, `StickyLabelsRemoveDuplicatesByWithinTitles`, `StickyLabelsSortByWithinTitles`, `StickyLabelsShowBackgroundTexts`, `StickyLabelsShowDroplets`, and `StickyLabelsShowCirclearraysInCircle` (as well as in the straight lines top and bottom). 
 
 <div style="clear: both;"></div>
-
