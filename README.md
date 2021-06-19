@@ -12,7 +12,8 @@
 8.  [Document-level controls](Documentation/document.md);  
 9.  [Code injection](Documentation/code_injection.md);  
 10. [Bitmap images](Documentation/bitmap_images.md);
-11. [Translations](Documentation/translations.md).
+11. [Translations](Documentation/translations.md);
+12. [Debugging](Documentation/debugging.md).
 
 
 ## About

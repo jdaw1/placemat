@@ -11,6 +11,26 @@
 % Nor does any output: not PDF; nor images of such a document.
 % But it does include re-usable improvements to the body of the code.
 
+/ParametersVersionDateTimeAdobeFormat (D:202106142115) def
+
+/PaintBackgroundCode {
+	5 dict begin
+	/BackgroundText (POSTPONED) def
+	gsave  0 0.6 0 setrgbcolor
+	TitlesFont 48 selectfont
+
+	BackgroundText StringPathBBox  /T exch def  /R exch def  /B exch def  /L exch def
+
+	gsave  MarginL  PageHeight MarginT sub  translate  % Margin, not Mgn
+	T SqrtHalf mul  L R sub T sub SqrtHalf mul  translate 45 rotate L neg 0 moveto
+	BackgroundText show grestore
+
+	PageWidth MarginR sub  MarginB  translate
+	L R sub B add SqrtHalf mul  B neg SqrtHalf mul  translate 45 rotate L neg 0 moveto
+	BackgroundText show
+
+	grestore end
+} bind def
 % Recommendation: move changed parameters to just above this line.
 
 % % % % % % % %
@@ -18,7 +38,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202106122000) def
+
 
 /Circlearrays [
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
@@ -359,7 +379,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /FlightSeparationsArcProportionRadius 0.5 def  % strictly >0; <=1
 
 /PaintBackgroundInsideGlassCircles {} def  % Paints a background pattern. Called with centre of circle translated to 0,0; and clipped to radius Radii SheetNum get.
-/PaintBackgroundCode {} def  % Paints a background pattern. Will probably refer to TypeOfPagesBeingRendered and then to SheetNum or TastingSheetNum.
 /PaintForegroundCode {} def  % Paints a pattern on top of everything. Will probably refer to TypeOfPagesBeingRendered and then to SheetNum or TastingSheetNum.
 
 

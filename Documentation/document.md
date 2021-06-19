@@ -11,7 +11,8 @@
 8.  *Document-level controls*;  
 9.  [Code injection](code_injection.md);  
 10. [Bitmap images](bitmap_images.md);
-11. [Translations](translations.md).
+11. [Translations](translations.md);
+12. [Debugging](debugging.md).
 
 ----
 
@@ -122,24 +123,32 @@ There are several parameters that allow this.
 * `TestingMaxNumPagesToShow` suppresses pages after this integer. 
 
 * `TestingShowThesePagesOnly`: Either `null`, in which case having no effect; or an array of integers, in which case showing only those.
+The `TestingSuppressPageTypes` array can also include `/DistillerLog`, which does not take an integer as it suppresses all log pages.
 
-* `TestingSuppressPageTypes`, probably the most useful of these controls, shows only the first so many of each page type. E.g., to show only the first page of each type use: 
+* `TestingSuppressPageTypes` has been by far the most useful of these controls. 
+For most page types, an entry, which is a page type then integer, shows only the first so many of that page type. 
+For the log file only, `/DistillerLog`, it has no parameter and suppresses the whole log.
+E.g., to show only the first page of each type, and none of the log: 
 ```PostScript
 /TestingSuppressPageTypes [
 	/Glasses        1
 	/TastingNotes   1
-	/PlaceName      1
-	/PrePour        1
-	/StickyLabels   1
-	/Accounts       1
 	/VoteRecorder   1
 	/DecantingNotes 1
+	/Accounts       1
 	/CorkDisplay    1
 	/NeckTags       1
+	/PrePour        1
+	/PlaceName      1
+	/DecanterLabels 1
+	/StickyLabels   1
+	/DistillerLog
 ] def  % /TestingSuppressPageTypes
 ```
 
 If using these, put them at the very top of the changed parameters, to help not forgetting to undo them. 
+
+Sometimes page suppression can produce one extra blank page, as discussed in [issue 109](http://github.com/jdaw1/placemat/issues/109).
 
 ### CMYK black
 
