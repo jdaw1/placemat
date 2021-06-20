@@ -1,15 +1,16 @@
 %!PS
 
-% This version 20:00 Thursday 10th June 2021
+% This version 13:45 Sunday 20th June 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
-% Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
-% modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must
-% be preserved. Contributors provide an express grant of patent rights.
+% Permissions of this strong copyleft license are conditioned on making available complete source code of 
+% licensed works and modifications, which include larger works using a licensed work, under the same license. 
+% Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
 
 % For these purposes a change in the parameters of the code does not need to be released.
 % Nor does any output: not PDF; nor images of such a document.
 % But it does include re-usable improvements to the body of the code.
+
 
 % Recommendation: move changed parameters to just above this line.
 
@@ -18,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202106102000) def
+/ParametersVersionDateTimeAdobeFormat (D:202106201345) def
 
 /Circlearrays [
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
@@ -708,7 +709,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /EpilogueCode {} def  % Executed once, just after painting pages
 /EmptyGlassesPageAtStart false def
 /EmptyGlassesPageOrientation /Portrait def
-/TestingSuppressPageTypes [ ] def  % Useful value: [ /Glasses 1 /TastingNotes 1 /PlaceName 1 /PrePour 1 /StickyLabels 1 /VoteRecorder 1 /DecantingNotes 1 /CorkDisplay 1 /NeckTags 1 ]. Can also /DistillerLog without an integer.
+/TestingSuppressPageTypes [ ] def  % Useful value: [ /Glasses 1  /TastingNotes 1  /VoteRecorder 1  /DecantingNotes 1  /Accounts 1  /CorkDisplay 1  /NeckTags 1  /PrePour 1  /PlaceName 1  /DecanterLabels 1  /StickyLabels 1 ]. Also, no int, /DistillerLog
 /TestingMaxNumPagesToShow 2147483647 def  % maximum integer
 /TestingShowThesePagesOnly null def   % Either null, in which case having no effect, or an array of integers. If making a PDF for insertion to another doc, perhaps also "/pdfmark {cleartomark} def".
 
@@ -758,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202106102000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202106201345) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1505,6 +1506,7 @@ TestingMaxNumPagesToShow 2147483647 lt  TestingShowThesePagesOnly null ne  Testi
 {
 	mark  (Nota bene: some pages might be suppressed = not shown, perhaps because this is an example or a test.)
 	(\nAt the end there might be an extra page, blank, caused by a bug in erasepage.)
+	(\nhttp://github.com/jdaw1/placemat/issues/109)
 	(\nhttp://groups.google.com/forum/#!topic/comp.lang.postscript/HVZVz0eBwrw)
 	TestingMaxNumPagesToShow 2147483647 lt {(\nTestingMaxNumPagesToShow = ) TestingMaxNumPagesToShow} if
 	TestingShowThesePagesOnly   null    ne {(\nTestingShowThesePagesOnly = ) TestingShowThesePagesOnly} if
@@ -3310,7 +3312,7 @@ currentdict /SmallCapsDict undef
 % WidthMin is known to be less than this distance. WidthMax might be greater.
 % Returned array is of points that are, approximately, maximally far from the edge.
 % In a typical case, the most distant point will be on the edge of the circle. So these points are denser.
-% But if the path is the likes of a large letter 'O', the relevant point could be internal, so there are plenty fo these as well.
+% But if the path is the likes of a large letter 'O', the relevant point could be internal, so there are plenty of these as well.
 % http://www.ThePortForum.com/viewtopic.php?t=6608&p=55028#p55028 (reason for doing this computation)
 % https://groups.google.com/forum/#!topic/comp.lang.postscript/86b7Sg8v7B0 (non-discussion about how to do it)
 /LineWidthThatCoversCircle
@@ -3864,6 +3866,8 @@ currentdict /SmallCapsDict undef
 } bind def  % /CheckMark
 
 
+% Mis-formatted in Sublime Text? http://github.com/sublimehq/sublime_text/issues/4493
+% http://forum.sublimetext.com/t/mis-parse-language-formatting-bundle/59051
 /ThePortForumIconForm  % Fits in box with lower-left at (0,0) and unit sides. Calling code to translate and scale and revert.
 <<
 	/FormType 1
@@ -12303,6 +12307,7 @@ currentdict /SmallCapsDict undef
 									{
 										//false  //false  MirrorPagesCorkDisplay CorkDisplaySetNum GetEU  //true  CorkDisplayPaperType  CDBestOrientation  SetPaperSize
 										//true DefStoreMgns
+										DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 										HeadersAndFooters PaintHeadersFooters
 										CorkDisplayTopTextHeight 0 gt {HeaderFont CDTopTextFontSize selectfont   PageWidth MgnL MgnR sub CDTopTextL CDTopTextR add sub add 2 div  PageHeight MgnT CDTopTextT add sub  moveto 0 setgray CorkDisplayTopText ShowRecursive} if
 									} if  % WithinPage 0 eq
@@ -12358,12 +12363,20 @@ currentdict /SmallCapsDict undef
 									} if  % WithinTitles type /integertype eq
 									/CorkDisplayThisPageTitles dup load  dup length 0 gt {(; ) Concatenate} if  Titles WithinTitles get PDFDocEncodingify Concatenate  def  % Deliberately Titles rather than TitlesCorkDisplay
 									/WithinPage WithinPage 1 add def
-									WithinPage CDBestNumRows CDBestNumCols mul ge {ShowPage  /WithinPage 0 def  /CorkDisplayThisPageTitles () def} if
+									WithinPage CDBestNumRows CDBestNumCols mul ge
+									{
+										DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+										ShowPage  /WithinPage 0 def  /CorkDisplayThisPageTitles () def
+									} if
 								} repeat  % ... CorkDisplayNumCopies ...
 							} forall
 							WithinPage 0 gt {CDSpareHoles  CDBestNumCols CDBestNumRows mul WithinPage sub  2 copy ge {sub /CDSpareHoles exch def  ShowPage  /WithinPage 0 def  /CorkDisplayThisPageTitles () def} {pop pop} ifelse} if
 						} forall
-						WithinPage 0 gt {ShowPage} if
+						WithinPage 0 gt
+						{
+							DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+							ShowPage
+						} if
 					} if  % CorkDisplayPaperType ... PageOrderingCorkDisplay ... and ... CorkDisplayNumCopies 1 ge
 				} for  % CorkDisplaySetNum
 				end
