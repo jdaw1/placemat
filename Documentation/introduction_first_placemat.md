@@ -96,11 +96,11 @@ The `Titles` should be short, ideally 2 or 3 characters, certainly &le;5 charact
 In the initial state of the code, assuming synchronised documentation, they are defined as:
 ```PostScript
 /Titles [
-	(F70)
-	(K70)
 	(N70)
-	(S70)
+	(K70)
 	(W70)
+	(S70)
+	(F70)
 ] def
 ```
 This `def`ines `Titles` to be an array, so delimited with square brackets, `[…]`. 
@@ -113,11 +113,11 @@ In each circle, below the `Titles`, are the `Belowtitles`.
 This is also an array, which must be the same length as `Titles`. 
 ```PostScript
 /Belowtitles [
-	(Justerini & Brooks)
-	(Dolamore)
 	(Wine Society)
-	[(A) {-0.04 Kern} (very)]
+	(Dolamore)
 	(Peatling & Cawdron)
+	[(A) {-0.04 Kern} (very)]
+	(Justerini & Brooks)
 ] def
 ```
 The fourth item of `Belowtitles` is more complicated than a plain string. 
@@ -134,11 +134,11 @@ The next essential parameter is `Circlearrays`, which is an array of arrays.
 Each of these arrays is evenly spaced around the perimeter of each glass&rsquo;s circle. 
 ```PostScript
 /Circlearrays [
-	[ (1970)  (Fonseca)                  (bot. Justerini & Brooks) ]
-	[ (1970)  (Kopke)                    (bot. Dolamore) ]
-	[ (1970)  (Quinta do Noval)          (bot. Wine Society) ]
-	[ (1970)  (Sandeman)                [(bot. A) {-0.06 Kern} (very)] ]
-	[ (1970)  [(W) {-0.07 Kern} (arre)]  (bot. Peatling & Cawdron) ]
+	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
+	[ (Kopke)                    (1970)   (bot. Dolamore) ]
+	[ [(W) {-0.07 Kern} (arre)]  (1970)   (bot. Peatling & Cawdron) ]
+	[ (Sandeman)                 (1970)  [(bot. A) {-0.06 Kern} (very)] ]
+	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
 ] def
 ```
 `Circlearrays` must be the same length as `Titles`, but its sub-arrays can be of different lengths. 

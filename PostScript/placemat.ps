@@ -1,15 +1,16 @@
 %!PS
 
-% This version 20:00 Saturday 12th June 2021
+% This version 21:15 Monday 21st June 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
-% Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and
-% modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must
-% be preserved. Contributors provide an express grant of patent rights.
+% Permissions of this strong copyleft license are conditioned on making available complete source code of 
+% licensed works and modifications, which include larger works using a licensed work, under the same license. 
+% Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
 
 % For these purposes a change in the parameters of the code does not need to be released.
 % Nor does any output: not PDF; nor images of such a document.
 % But it does include re-usable improvements to the body of the code.
+
 
 % Recommendation: move changed parameters to just above this line.
 
@@ -18,29 +19,29 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202106122000) def
+/ParametersVersionDateTimeAdobeFormat (D:202106212115) def
 
 /Circlearrays [
-	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
-	[ (Kopke)                    (1970)   (bot. Dolamore) ]
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
-	[ (Sandeman)                 (1970)  [(bot. A) {-0.06 Kern} (very)] ]
+	[ (Kopke)                    (1970)   (bot. Dolamore) ]
 	[ [(W) {-0.07 Kern} (arre)]  (1970)   (bot. Peatling & Cawdron) ]
+	[ (Sandeman)                 (1970)  [(bot. A) {-0.06 Kern} (very)] ]
+	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
 ] def
 /Titles [
-	(F70)
-	(K70)
 	(N70)
-	(S70)
+	(K70)
 	(W70)
+	(S70)
+	(F70)
 ] def
 
 /Belowtitles [
-	(Justerini & Brooks)
-	(Dolamore)
 	(Wine Society)
-	[(A) {-0.04 Kern} (very)]
+	(Dolamore)
 	(Peatling & Cawdron)
+	[(A) {-0.04 Kern} (very)]
+	(Justerini & Brooks)
 ] def
 
 /Names [
@@ -246,7 +247,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /FontSizesSetsAboveBelowOver [ 0 0 0 ] def  % Array of length 3, representing which of Abovetitles, Belowtitles, and Overtitles are considered together for font-size purposes
 /FontSizesRatioTitlesMin 1.1892 def  % If font sizes closer than this ratio ~= 2^0.25, then collapsed to smaller.
 /FontSizesRatioAboveBelowOverMin 999 def  % If font sizes closer than this ratio, then collapsed to smaller.
-/FontSizesTitlesNotSmallerIfTitlesNotLonger true def  % If using FontSizesTitlesEquivalences then this probably should be false. If true then font size of "W" cannot be smaller than that of "II"; and "Df" must be same as "Dl".
+/FontSizesTitlesNotSmallerIfTitlesNotLonger false def  % If using FontSizesTitlesEquivalences then this probably should be false. If true then font size of "W" cannot be smaller than that of "II"; and "Df" must be same as "Dl".
 /FontSizesAboveBelowOverNotSmallerIfTitlesNotLonger false def
 /FontSizesTitlesEquivalences [ 0 1 Titles length 1 sub {} for ] def  % If using this then FontSizesTitlesNotSmallerIfTitlesNotLonger probably should be false.
 /FontSizesAbovetitlesEquivalences FontSizesTitlesEquivalences def
@@ -758,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202106122000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202106212115) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -3311,7 +3312,7 @@ currentdict /SmallCapsDict undef
 % WidthMin is known to be less than this distance. WidthMax might be greater.
 % Returned array is of points that are, approximately, maximally far from the edge.
 % In a typical case, the most distant point will be on the edge of the circle. So these points are denser.
-% But if the path is the likes of a large letter 'O', the relevant point could be internal, so there are plenty fo these as well.
+% But if the path is the likes of a large letter 'O', the relevant point could be internal, so there are plenty of these as well.
 % http://www.ThePortForum.com/viewtopic.php?t=6608&p=55028#p55028 (reason for doing this computation)
 % https://groups.google.com/forum/#!topic/comp.lang.postscript/86b7Sg8v7B0 (non-discussion about how to do it)
 /LineWidthThatCoversCircle
@@ -3865,6 +3866,8 @@ currentdict /SmallCapsDict undef
 } bind def  % /CheckMark
 
 
+% Mis-formatted in Sublime Text? http://github.com/sublimehq/sublime_text/issues/4493
+% http://forum.sublimetext.com/t/mis-parse-language-formatting-bundle/59051
 /ThePortForumIconForm  % Fits in box with lower-left at (0,0) and unit sides. Calling code to translate and scale and revert.
 <<
 	/FormType 1
