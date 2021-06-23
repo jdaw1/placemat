@@ -229,7 +229,7 @@ If `RotationTitlesAboveBelowOverCirclearray`&nbsp;&ne;&nbsp;0, then small arrows
 
 ## VoteRecorder
 
-<img align="right" width="298" height="208" src="images/NonGlasses_VR.png">
+<img align="right" width="397" height="247" src="images/NonGlasses_VR.png">
 
 
 At the end of a tasting there is typically a vote for the Wine Of The Night (WOTN), and for large tastings there might also be a vote after each flight or page. 
