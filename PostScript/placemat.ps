@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:15 Monday 21st June 2021
+% This version 20:30 Thurday 24th June 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202106212115) def
+/ParametersVersionDateTimeAdobeFormat (D:202106242030) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -661,7 +661,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /StickyLabelsPaddingWithPagePortraitRL {[6 3] StickyLabelsTypeThis get} bind def
 /StickyLabelsShowBackgroundTexts {[true false] StickyLabelsTypeThis get} bind def
 /StickyLabelsShowDroplets {[false false] StickyLabelsTypeThis get} bind def
-/StickyLabelsShowCirclearraysInCircle {/StickyLabelsShowBackgroundTexts load exec GlassesNumCopies 1 ge and} bind def
+/StickyLabelsShowCirclearraysInCircle {[false false] StickyLabelsTypeThis get} bind def
 /StickyLabelsReverseOrder false def
 /StickyLabelsRemoveDuplicatesByWithinTitles true def
 /StickyLabelsSortByWithinTitles true def
@@ -759,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202106212115) def
+/SoftwareVersionDateTimeAdobeFormat (D:202106242030) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -12830,7 +12830,7 @@ currentdict /SmallCapsDict undef
 												/Vertices [ 2 index aload pop 4 copy 6 -2 roll 5 -2 roll exch  DLRSW {2 copy 0.5 //PrinterEpsilon add add} {8 -2 roll 2 copy exch 0.5 //PrinterEpsilon add add exch} ifelse 10 4 roll ]  % +width/2 to bring into corner
 												/Subtype /PolyLine
 												/BS  << /Type /Border  /W 1  /S /D  /D [DLDashInk dup 2 mul] >>
-												/Subj [ () Circlearrays WithinTitles GetEU {(  )} forall pop ] PDFDocEncodingify
+												/Title  [ Titles WithinTitles get (: left top right of decanter label) ] PDFDocEncodingify
 												/ModDate ParametersVersionDateTimeAdobeFormat
 												/F 64 128 add  % ReadOnly + Locked. PDFReference16.pdf page 574
 												/Color [ 1 0.8 0.4 ]
@@ -12849,7 +12849,7 @@ currentdict /SmallCapsDict undef
 												]
 												/Subtype /PolyLine
 												/BS  << /Type /Border  /W 1.5  /S /D  /D [DLDashInk dup 2 mul] >>  % PDF 32000-1:2008, p387: "The dash phase is not specified and shall be assumed to be 0."
-												/Subj [ () Circlearrays WithinTitles GetEU {(  )} forall pop ] PDFDocEncodingify
+												/Title  [ Titles WithinTitles get (: bottom of decanter label) ] PDFDocEncodingify
 												/ModDate ParametersVersionDateTimeAdobeFormat
 												/F 64 128 add  % ReadOnly + Locked. PDFReference16.pdf page 574
 												/Color [ 1 0.2 0.1 ]
@@ -13046,10 +13046,10 @@ currentdict /SmallCapsDict undef
 											]
 											/Subtype /Polygon
 											/BS  << /Type /Border  /W 1  /S /S >>
-											/Subj [ () CirclearraysStickyLabels WithinTitles GetEU {(  )} forall pop ] PDFDocEncodingify
 											/ModDate ParametersVersionDateTimeAdobeFormat
 											/F 64 128 add  % ReadOnly + Locked. PDFReference16.pdf page 574
 										counttomark 1 add copy
+											/Title  [ Titles WithinTitles get (: edge of sticky label) ] PDFDocEncodingify
 											/Vertices [
 												StickyLabelX StickyLabelsWithPagePortraitWidth 2 div sub  StickyLabelY StickyLabelsWithPagePortraitHeight 2 div sub   2 copy StickyLabelsPaddingWithPagePortraitTB add 4 2 roll exch StickyLabelsPaddingWithPagePortraitRL add exch
 												StickyLabelX StickyLabelsWithPagePortraitWidth 2 div add  StickyLabelY StickyLabelsWithPagePortraitHeight 2 div sub   2 copy exch StickyLabelsPaddingWithPagePortraitRL sub exch 4 2 roll StickyLabelsPaddingWithPagePortraitTB add
@@ -13058,6 +13058,7 @@ currentdict /SmallCapsDict undef
 											]
 											/Color [ 0.6 0.6 1.0 ]
 										/ANN pdfmark
+											/Title  [ Titles WithinTitles get (: printable rectangle within sticky label) ] PDFDocEncodingify
 											/Vertices [
 												StickyLabelX StickyLabelsWithPagePortraitWidth 2 div sub StickyLabelsPaddingWithPagePortraitRL add  StickyLabelY StickyLabelsWithPagePortraitHeight 2 div sub StickyLabelsPaddingWithPagePortraitTB add
 												StickyLabelX StickyLabelsWithPagePortraitWidth 2 div add StickyLabelsPaddingWithPagePortraitRL sub  StickyLabelY StickyLabelsWithPagePortraitHeight 2 div sub StickyLabelsPaddingWithPagePortraitTB add
@@ -14011,7 +14012,7 @@ OutputLogToAnnotation  ShownPages 0 gt  and
 		/SrcPg   ShownPages
 		/Rect    [ ShownPagesData ShownPages 1 sub get begin  PageWidth MgnR sub  MgnB  end  2 copy ]
 		/Title   (Distillation log)
-		/Subj    (The log output from the progam that converted the PostScript to PDF. Mostly human-readable.)
+		/Subject (The log output from the progam that converted the PostScript to PDF. Mostly human-readable.)
 		/Contents  mark
 			(Placemat software:\nhttp://github.com/jdaw1/placemat/)
 			OutputLog {dup type /stringtype eq {(\n\n) exch} {pop exit} ifelse} forall
