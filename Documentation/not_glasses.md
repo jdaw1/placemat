@@ -276,7 +276,7 @@ Then there is the complicated `VoteRecorderCrossedBox`.
 Obviously, I am not to guess the wine I know. 
 It is elegant for that box to be crossed. 
 So `VoteRecorderCrossedBox` is code returning a Boolean, it usually accessing internal variables such as `WithinTitles` and `ThisName`, as well as `VoteRecorderShowTotalRow`. 
-(`VoteRecorderCrossedBox` is not intuitive to use: please suggest improvements in [issue 80](../../../issues/80/).)
+(`VoteRecorderCrossedBox` is not intuitive to use: please suggest improvements in [issue&nbsp;80](../../../issues/80/).)
 
 ### Superfluous
 
