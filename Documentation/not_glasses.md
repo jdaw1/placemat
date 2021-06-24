@@ -393,7 +393,7 @@ The tags are on paper `NeckTagsPaperType`.
 
 ## DecanterLabels
 
-<img align="right" width="383" height="190" src="images/NonGlasses_DL.png">
+<img align="right" width="243" height="190" src="images/NonGlasses_DL.png">
 
 Decanter labels are enabled by setting `DecanterLabelsNumCopies` to positive. 
 Having two sets of decanter labels, pasted to both sides of the business cards, sometimes allows those sitting &lsquo;behind&rsquo; the labels a clue as to contents.
