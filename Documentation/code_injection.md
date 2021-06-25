@@ -312,7 +312,7 @@ This is fighting against the software&rsquo;s *programgeist*, so maybe just don&
 
 ### Coloured hearts
 
-More flamboyant than the usual style, but this was for a tasting on the day of a royal wedding. 
+More flamboyant than the usual style, but this was for a [tasting on the day of a royal wedding](http://www.theportforum.com/viewtopic.php?t=12440). 
 Of course, if precise hue of colour is important, do not assume that screen and print colours will match: test on the actual printer. 
 
 <div align="center">
