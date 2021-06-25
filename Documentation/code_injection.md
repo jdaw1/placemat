@@ -22,29 +22,28 @@
 
 ## Introduction
 
-The software allows, even encourages, code injection. 
-this document gives some examples of this. 
+The software allows, even encourages, code injection, of which this document gives some examples.
 
-Mostly, this document describes what may be done with code inside compound strings. 
+Mostly, this document describes what may be done with code inside compound strings.
 
 However, other parameters are intended to hold code: 
 * To `stroke` lines (e.g., `SpiralStrokeCode`, `ShapesTitlesStroke`, `CrossHatchingOutsideStrokeCode`, `TastingNotesColumnStrokeCode`);
 * To make a more general use of a path (e.g., `BackgroundTextsGlassesPaintCode`, `FlightSeparationPaintCode`, `CirclearraysFillBehindCode`);
-* And without a path being provided, as a generic code-injection point (e.g., `PrologueCode`, `EpilogueCode`, `PaintBackgroundCode`, `PaintForegroundCode`, `PaintBackgroundInsideGlassCircles`). 
+* And without a path being provided, as a generic code-injection point (e.g., `PrologueCode`, `EpilogueCode`, `PaintBackgroundCode`, `PaintForegroundCode`, `PaintBackgroundInsideGlassCircles`).
 
 Further, the majority of the several hundred parameters may hold code.
 
 ## Difficulties
 
 Much software has a clear specification. 
-If the input meets the specification, the output will behave as promised. 
+If the input meets the specification, the output will behave as promised.
 
-Indeed, that is at least partly true of this software. 
+Indeed, that is at least partly true of this software.
 
 But not with code injection. 
 E.g., assume a tasting is of several vintages of three wines. 
 The makers of the three wines each have their own branding, each in a different font. 
-It would be entirely natural to define something like `/CircletextFont {Circlearrays WithinTitles get 0 get dup (WineA) eq {pop /FontA} {(WineB) eq {/FontB} {/FontC} ifelse} ifelse} def`. 
+It would be entirely natural to define something like `/CircletextFont {Circlearrays WithinTitles get 0 get dup (WineA) eq {pop /FontA} {(WineB) eq {/FontB} {/FontC} ifelse} ifelse} def`.
 
 
 Except that the default values of `NamesFont` and `HeaderFont` use `{CircletextFont}`. 
@@ -53,14 +52,14 @@ Yes, these errors can be located via &#8984;F and trial-and-fail.
 But the point is that code injection is not always cleanly defined.
 
 It might also be that, occasionally in the software, work is done with a usually-constant parameter outside a loop, when it could be done inside. 
-Multiple instances of this &lsquo;bug&rsquo; have been discovered in the past. 
+Multiple instances of this &lsquo;bug&rsquo; have been discovered in the past.
 
 ## Code inside compound strings
 
 ### Summary
 
 Almost any &lsquo;string&rsquo; parameter may be a &lsquo;[compound string](compound_strings_characters.md)&rsquo;. 
-The exception are URLs, as appear in `ExternalLinks` and `LicensingAgreementLinkPlacemats`. 
+The exception are URLs, as appear in `ExternalLinks` and `LicensingAgreementLinkPlacemats`.
 
 The code in a compound string may do any of the following.
 * Put on the stack &ge;0 further compound strings to be painted.
@@ -109,7 +108,7 @@ A compund string may change the current font:
 ### Wine dependence
 
 If a tasting comprises two or three different types of wine, a subtle formatting variation between them can be elegant. 
-However, the variation should not more than slightly change the lightness or darkness, because doing so would impede comparison of wines. 
+However, the variation should not more than slightly change the lightness or darkness, because doing so would impede comparison of wines.
 
 The examples are self explanatory.
 
@@ -148,7 +147,7 @@ Of course, variation can be purely decorative.
 `FontSizesTitlesNotSmallerIfTitlesNotLonger` causes the font size to be affected by the length of a string, measured in characters. 
 That means it must be known how many deemed characters is something painted by user code. 
 This can be set within the code, as `/EffectiveNumCharacters 1 def` (or other integer &ge;0). 
-This has been used very rarely, indeed, prior to April 2021, exactly once.
+This has been used very rarely, indeed, prior to June 2021, exactly once.
 
 
 ## Variables that parameters may inspect
