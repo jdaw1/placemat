@@ -20,6 +20,13 @@
 &#9654;&#xFE0E;&nbsp;[Debugging](Documentation/debugging.md)
 
 
+## Links to PostScript software
+
+&#9654;&#xFE0E;&nbsp;**The main program, [placemat.ps](PostScript/placemat.ps?raw=1)**. 
+&#9654;&#xFE0E;&nbsp;To demonstrate the available fonts, [fonts_illustrated.ps](PostScript/fonts_illustrated.ps?raw=1). 
+&#9654;&#xFE0E;&nbsp;To list the glyphs available in a single font, [glyph_log.ps](PostScript/glyph_log.ps?raw=1).
+
+
 ## About
 
 This PostScript program makes placemats for tastings of Port, of Madeira, whisky, beer, wine, etc.
