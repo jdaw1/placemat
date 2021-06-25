@@ -1,18 +1,20 @@
 # Code injection
 
-**Documents**: 
-1.  [Introduction, and a first placemat](introduction_first_placemat.md);  
-2.  [Compound Strings and non-ASCII characters](compound_strings_characters.md);  
-3.  [Fonts and glass decoration](fonts_glasses_decoration.md);  
-4.  [Type sizes](type_sizes.md);  
-5.  [Page-level controls](page_level.md);  
-6.  [Arrangement of glasses on the page](PackingStyles.md);  
-7.  [Non-Glasses Pages](not_glasses.md);  
-8.  [Document-level controls](document.md);  
-9.  *Code injection*;  
-10. [Bitmap images](bitmap_images.md);
-11. [Translations](translations.md);
-12. [Debugging](debugging.md).
+**Link to the main program**: [placemat.ps](PostScript/placemat.ps?raw=1)
+
+**Links to documentation**: 
+&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md) 
+&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md) 
+&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md) 
+&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md) 
+&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md) 
+&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md) 
+&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md) 
+&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md) 
+&#9654;&#xFE0E;&nbsp;[Translations](translations.md) 
+&#9655;&#xFE0E;&nbsp;*Code&nbsp;injection* 
+&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md) 
+&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md)
 
 ----
 
