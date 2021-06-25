@@ -1,7 +1,6 @@
 # Placemat Software
 
-**Links to software**: 
-&#9654;&#xFE0E;&nbsp;**The main program, [placemat.ps](PostScript/placemat.ps?raw=1)** 
+**Links to software**: &#9654;&#xFE0E;&nbsp;**The main program, [placemat.ps](PostScript/placemat.ps?raw=1)** 
 &#9654;&#xFE0E;&nbsp;To demonstrate the available fonts, [fonts_illustrated.ps](PostScript/fonts_illustrated.ps?raw=1) 
 &#9654;&#xFE0E;&nbsp;To list the glyphs available in a single font, [glyph_log.ps](PostScript/glyph_log.ps?raw=1)
 
