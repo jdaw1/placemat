@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:30 Thurday 24th June 2021
+% This version 20:15 Friday 25th June 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202106242030) def
+/ParametersVersionDateTimeAdobeFormat (D:202106252015) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -759,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202106242030) def
+/SoftwareVersionDateTimeAdobeFormat (D:202106252015) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1235,22 +1235,21 @@ currentdict /ShellSortGapsLength1Subs undef
 
 /TruncateTo255 {dup length 255 gt {0 254 getinterval (\203) Concatenate} if} bind def
 
-% name|code  WatchExpression  -
-/WatchExpression
+% name|code  WatchExpression_MakeString  (string)
+/WatchExpression_MakeString
 {
 	1 dict begin   /param exch def  mark  /param load ToString
-	/param load dup type /nametype eq exch xcheck or {(   =   )  param /param load type /nametype eq {cvx exec} if} {(WatchExpression: ) exch} ifelse   ConcatenateToMark  OutputToLog  end
-} bind def  % /WatchExpression
+	/param load dup type /nametype eq exch xcheck or
+		{(   =   )  param /param load type /nametype eq {dup where {pop cvx exec} {pop (--Undefined--)} ifelse} if}
+		{(WatchExpression: ) exch}
+	ifelse  end   ConcatenateToMark
+} bind def  % /WatchExpression_MakeString
 
-/WatchExpressions
-{
-	1 dict begin   mark exch   () exch
-	{
-		/param exch def   /param load ToString
-		/param load dup type /nametype eq exch xcheck or {(   =   )  param /param load type /nametype eq {cvx exec} if} {(WatchExpression: ) exch} ifelse  (\n)
-	} forall
-	pop ConcatenateToMark  OutputToLog  end
-} bind def  % WatchExpressions, plural
+% name|code  WatchExpression  -
+/WatchExpression {WatchExpression_MakeString OutputToLog} def
+
+% [ name|code  ... ]  WatchExpressions  -
+/WatchExpressions {mark exch ()  exch {WatchExpression_MakeString (\n)} forall	pop ConcatenateToMark OutputToLog} bind def  % WatchExpressions, plural
 
 % array, perhaps nested  AllEqual, returning either  false  or  value true
 /AllEqual
@@ -10631,6 +10630,7 @@ currentdict /SmallCapsDict undef
 	{
 		DeBugLevel 100 le {( Main: DecantingNotesForms) OutputToLog} if
 		/TypeOfPagesBeingRendered /DecantingNotes store
+		/ThisName (Decanting notes) def
 		/DecantingNotesForms [ GlassesClusteredOnDecantingNotes length {6 dict} repeat ] def
 		0  1  GlassesClusteredOnDecantingNotes length 1 sub
 		{
@@ -10646,11 +10646,10 @@ currentdict /SmallCapsDict undef
 			{
 				DeBugLevel 100 le {(+DecantingNotesForms: PaintProc) OutputToLog} if
 				pop  % dictionary parameter of execform
-				29 dict begin
+				30 dict begin
 				/DecantingNotesSheetNum DecantingNotesSheetNum def
 				/TypeOfPagesBeingRendered /DecantingNotes store
-
-				/TypeOfPagesBeingRendered /DecantingNotes store  % only those elements of names with non-zero TN pages
+				/ThisName (Decanting notes) def
 
 				HeadersAndFooters PaintHeadersFooters
 
@@ -11998,9 +11997,10 @@ currentdict /SmallCapsDict undef
 			% See http://www.theportforum.com/viewtopic.php?t=175&start=166
 			/VoteRecorders load MightBeTrue
 			{
-				16 dict begin
+				17 dict begin
 				DeBugLevel 100 le {(+VoteRecorder) OutputToLog} if
 				/TypeOfPagesBeingRendered /VoteRecorder store
+				/ThisName (Vote recorder) def
 
 				0  1  GlassesClusteredOnVoteRecorders length 1 sub
 				{
@@ -12639,6 +12639,8 @@ currentdict /SmallCapsDict undef
 			{
 				/TypeOfPagesBeingRendered /PrePour store
 				17 dict begin
+				/NameNum 0 def
+				/ThisName (Pre-pour) def
 				/PrePourSheetNumWithinPageWithinTitles
 				[
 				NumSheets 1 sub  PrePourReverseOrder {-1 0} {0 exch 1 exch} ifelse
@@ -12668,8 +12670,6 @@ currentdict /SmallCapsDict undef
 						PrePourSheetNumWithinPageWithinTitles
 						{
 							aload pop /WithinTitles exch def  /WithinPage exch def  /SheetNum exch def
-							/NameNum 0 def
-							/ThisName (PrePour holding) def
 							0  1  PrePourCollate {PrePourSheetNum PrePourNumCopies lt {0} {-1} ifelse} {PrePourNumCopies 1 sub} ifelse
 							{
 								//false PageSuppressed {pop exit} if
@@ -12698,7 +12698,7 @@ currentdict /SmallCapsDict undef
 			{DecanterLabelsNumCopies 1 ge} MightBeTrue
 			{
 				/DLRotations dup where {pop pop} {[ SheetLengths {array} forall ] def} ifelse
-				44 dict begin
+				45 dict begin
 
 				//false
 				0  1  NumSheets 1 sub
@@ -12709,6 +12709,7 @@ currentdict /SmallCapsDict undef
 				{
 					AnyFillTextingAtAll DeBugLevel 100 le or {(+DecanterLabels: usertime = ) usertime ToString Concatenate OutputToLog} if
 					/TypeOfPagesBeingRendered /DecanterLabels store  //false //false //false //false DecanterLabelsPaperType /Portrait SetPaperSize   //true DefStoreMgns
+					/ThisName (Decanter labels) def
 					/DecanterLabelsGap 8 def  % embedded constant
 
 					/DecanterLabelsTopTextFontSize 6 def
@@ -12988,6 +12989,7 @@ currentdict /SmallCapsDict undef
 						}{
 							pop
 							/NameNum 0 def
+							/ThisName (Sticky lLabels) def
 						} ifelse  % StickyLabelsByNameWhichReplaceCirclearrays
 						0  1  StickyLabelsSheetNumWithinPageWithinTitles length 1 sub
 						{

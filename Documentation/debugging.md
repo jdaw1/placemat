@@ -111,6 +111,20 @@ If I&rsquo;m having difficulty, standard practice is:
 ```
 
 
+## WatchExpression
+
+Two small routines can help debug injected code. 
+
+* `WatchExpression` is a simple monitor of a variable. E.g., `/WithinTitles WatchExpression` outputs to the log a line resembling `WithinTitles   =   2`. The item passed can be a name, or `{code}`. If it is an undefined name, then that is safely reported as &ldquo;&#8209;&#8209;Undefined&#8209;&#8209;&rdquo;. But if the parameter is code then the user is not shielded from it failing.
+
+* `WatchExpressions`, plural, takes an array, each item of which is as for `WatchExpression`. E.g.:
+```PostScript 
+[ /TypeOfPagesBeingRendered  /NameNum /ThisName  /SheetNum /WithinPage /WithinTitles ]  WatchExpressions
+```
+
+A few `WatchExpressions` can ease the debugging of injected code.
+
+
 ## Bugs
 
 If the bug is in the software, please raise an [issue](http://github.com/jdaw1/placemat/issues). 
