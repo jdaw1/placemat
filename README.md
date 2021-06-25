@@ -1,26 +1,23 @@
 # Placemat Software
 
-## Links to PostScript software
+**Links to software**: 
+&#9654;&#xFE0E;&nbsp;**The main program, [placemat.ps](PostScript/placemat.ps?raw=1)** 
+&#9654;&#xFE0E;&nbsp;To demonstrate the available fonts, [fonts_illustrated.ps](PostScript/fonts_illustrated.ps?raw=1) 
+&#9654;&#xFE0E;&nbsp;To list the glyphs available in a single font, [glyph_log.ps](PostScript/glyph_log.ps?raw=1)
 
-&#9654;&#xFE0E;&nbsp;**The main program, [placemat.ps](PostScript/placemat.ps?raw=1)**. 
-&#9654;&#xFE0E;&nbsp;To demonstrate the available fonts, [fonts_illustrated.ps?raw=1](PostScript/fonts_illustrated.ps). 
-&#9654;&#xFE0E;&nbsp;To list the glyphs available in a single font, [glyph_log.ps?raw=1](PostScript/glyph_log.ps).
-
-
-## Links to documentation
-
-1.  [Introduction, and a first placemat](Documentation/introduction_first_placemat.md);  
-2.  [Compound Strings and non-ASCII characters](Documentation/compound_strings_characters.md);  
-3.  [Fonts and glass decoration](Documentation/fonts_glasses_decoration.md);  
-4.  [Type sizes](Documentation/type_sizes.md);  
-5.  [Page-level controls](Documentation/page_level.md);  
-6.  [Arrangement of glasses on the page](Documentation/PackingStyles.md);  
-7.  [Non-Glasses Pages](Documentation/not_glasses.md);  
-8.  [Document-level controls](Documentation/document.md);  
-9.  [Code injection](Documentation/code_injection.md);  
-10. [Bitmap images](Documentation/bitmap_images.md);
-11. [Translations](Documentation/translations.md);
-12. [Debugging](Documentation/debugging.md).
+**Links to documentation**: 
+&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](Documentation/introduction_first_placemat.md) 
+&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](Documentation/fonts_glasses_decoration.md) 
+&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](Documentation/compound_strings_characters.md) 
+&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](Documentation/type_sizes.md) 
+&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](Documentation/page_level.md) 
+&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](Documentation/PackingStyles.md) 
+&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](Documentation/not_glasses.md) 
+&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](Documentation/document.md) 
+&#9654;&#xFE0E;&nbsp;[Translations](Documentation/translations.md) 
+&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](Documentation/code_injection.md) 
+&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](Documentation/bitmap_images.md) 
+&#9654;&#xFE0E;&nbsp;[Debugging](Documentation/debugging.md)
 
 
 ## About
