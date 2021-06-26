@@ -1,6 +1,6 @@
 # Introduction, and a first placemat
 
-**Link to the main program**: [placemat.ps](PostScript/placemat.ps?raw=1)
+**Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
 &#9655;&#xFE0E;&nbsp;*Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat* 
