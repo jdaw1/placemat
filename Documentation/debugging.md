@@ -79,7 +79,7 @@ But sometimes errors are fiddlier, especially with [injected code](code_injectio
 
 ### Basics
 
-Failures can happen in the software because of bugs in the software itself, or because of a bug in [injected code](code_injection.md). 
+Failures can happen in the software because of bugs in the software itself, or because of a type error in a parameter, or because of a bug in [injected code](code_injection.md). 
 
 As with the built-in error support, the log will show the error, and the state of the stack. 
 It will also show the value of `TypeOfPagesBeingRendered`, though the value `/DistillerLog` can mean a generic page. 
@@ -90,7 +90,7 @@ Values of these variables can help more.
 
 ### DeBugLevel
 
-Finally, one of the first names defined within the code, so shortly below the parameters, is `DeBugLevel`. 
+One of the first names defined within the code, so shortly below the parameters, is `DeBugLevel`. 
 `DeBugLevel` defaults to 65535, and all values larger than 100 are equivalent do-nothing values.
 
 Most sub-routines in the code begin with a line resembling
