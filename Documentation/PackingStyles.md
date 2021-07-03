@@ -41,7 +41,7 @@ E.g. (which is unrealistically verbose to show some of the possibilities):
 
 The general mathematical problem, largest possible radius for *n* non-overlapping circles in a particular rectangle, is difficult (see [PackoMania](http://www.packomania.com/) for solutions to many special cases). 
 This code has enough generality that it often finds the best, and when it can&rsquo;t, its radius is not much smaller than the mathematical optimum. 
-E.g., for 14 glasses on `/A3`, the mathematical optimum is bigger by &asymp;0.46%, increasing the diameter by &asymp;0.39mm, but comes at the aesthetic cost of a loss of symmetry ([svg](images/14_on_A3.svg), [nb](../Supporting_code/14_on_A3.nb), [pdf](images/14_on_A3.pdf)).
+E.g., for 14 glasses on `/A3` see discussion in [issue&ndsp;151](http://github.com/jdaw1/placemat/issues/151).
 
 For many possible tastings, `PackingStyles` can be left at its default value. 
 For example, if there are 24 different Madeiras over four `/A4` pages, the defaults work (though, of course, very important, don&rsquo;t forget to invite [me](http://www.jdawiseman.com/author.html)). 
