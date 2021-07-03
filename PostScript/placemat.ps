@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:15 Friday 25th June 2021
+% This version 16:00 Saturday 3rd July 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202106252015) def
+/ParametersVersionDateTimeAdobeFormat (D:202107031600) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -759,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202106252015) def
+/SoftwareVersionDateTimeAdobeFormat (D:202107031600) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -952,7 +952,7 @@ currentdict /ShellSortGapsLength1Subs undef
 	DeBugLevel 5 le {(-PolynomialRoot) OutputToLog} if
 } bind def  % PolynomialRoot
 
-% Immediate dependencies: DeBugLevel; OutputToLog; IntegerMax; OneThird; Cbrt; PolynomialRoot; ShellSort; Stopped.
+% Immediate dependencies: DeBugLevel; OutputToLog; IntegerMax; Epsilon; OneThird; Cbrt; PolynomialRoot; ShellSort; Stopped.
 % [ c0 c1 ... ] LimitLower StrictLower LimitUpper StrictUpper Tolerance  PolynomialRoots  [ in-range values of x ]
 % For polynomials of degree up to cubic, all roots found analytically, and Tolerance ignored.
 % Of higher degree: to within Tolerance; repeated roots can be problematic; out-of-range errors possible as PostScript's maximum float ~= 1.7 * 10^38.
