@@ -1,6 +1,6 @@
 %!PS
 
-% This version 16:00 Saturday 3rd July 2021
+% This version 23:00 Wednesday 7th July 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202107031600) def
+/ParametersVersionDateTimeAdobeFormat (D:202107072300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -759,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202107031600) def
+/SoftwareVersionDateTimeAdobeFormat (D:202107072300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -787,7 +787,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /ArcCosMinusOneThird 109.471220634490691369 def  % In degrees
 /ArcTanOneQuarter    14.03624346792647858289 def  % In degrees
 /ArcTanFiveEighths   32.00538320808349556079 def  % In degrees
-/Infinity 32767 def  % = 2^15-1, which in points ~= 11559mm, bigger than the ~7184mm diagonal of the 200"x200" largest allowed PDF page. Can be 8th-powered without overflow, as max float = 2 23 exp 1 sub 2 104 exp mul ~= 1.7*10^38.
+/Infinity 32767 def  % = 2^15-1, which in points ~= 11559mm, bigger than the ~7184mm diagonal of the 200"x200" largest allowed PDF page. Can be 8th-powered without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.4*10^38.
 /InfinityNeg Infinity neg def
 /PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi, and less at less. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
 /Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, so about 419 times the single-precision minimum.
