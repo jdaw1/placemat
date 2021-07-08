@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Wednesday 7th July 2021
+% This version 19:00 Thursday 8th July 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202107072300) def
+/ParametersVersionDateTimeAdobeFormat (D:202107081900) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -304,7 +304,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /OutlineTitlesAlsoOvertitles true def  % ignored if OutlineTitles is false
 
 /Spirals false def
-/SpiralNumArms {SpiralCentreFromCentreProportionRadiiInside 0 eq {CirclearraysN SheetNum get WithinPage get dup 5 mod 0 eq {pop 5} {dup 3 mod 0 eq {pop 6} {dup 4 mod 0 eq {pop 4} {5} ifelse} ifelse} ifelse} {5} ifelse} bind def
+/SpiralNumArms {5   SpiralCentreFromCentreProportionRadiiInside 0 eq {CirclearraysN SheetNum get WithinPage get dup 4 mod 0 eq  {pop pop 4}  {3 mod 0 eq {pop 6} if}  ifelse} if} bind def
 /SpiralAngleOffset 0 def
 /SpiralRadiusBetweenArms 18 def
 /SpiralClockwise true def
@@ -759,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202107072300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202107081900) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
