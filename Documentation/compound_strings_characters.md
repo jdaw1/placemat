@@ -30,7 +30,7 @@ The basic unit of Postscript text is the string, which are delimited with round 
 (This is an unexciting PostScript string.)
 ```  
 
-Strings can contain any of the ninety-six ASCII characters, so those numbered 32&ndash;127.
+Strings can contain any of the ninety-five printable ASCII characters, so those numbered 32&ndash;126.
 
 Other characters can be accessed by their name. 
 E.g., `/acircumflex` is &ldquo;&acirc;&rdquo;; 
