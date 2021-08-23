@@ -166,7 +166,8 @@ There follow a selection of the glyphs most likely to be useful to users of the 
 &psi;&nbsp;`/psi`&nbsp;&nbsp;&nbsp;&nbsp; 
 &omega;&nbsp;`/omega`&nbsp;&nbsp;&nbsp;&nbsp; 
 &Alpha;&nbsp;`/Alpha`&nbsp;&nbsp;&nbsp;&nbsp; 
-etc
+&hellip;&nbsp;&nbsp;&nbsp;&nbsp; 
+&Omega;&nbsp;`/Omega`
 
 **Arrows**:&nbsp;&nbsp;&nbsp;&nbsp; 
 &rarr;&#xFE0E;&nbsp;`/arrowright`&nbsp;&nbsp;&nbsp;&nbsp; 
