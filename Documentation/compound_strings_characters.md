@@ -29,7 +29,8 @@ The basic unit of Postscript text is the string, which are delimited with round 
 ```PostScript
 (This is an unexciting PostScript string.)
 ```  
-Strings can contain ASCII characters, of which there are almost a hundred. 
+
+Strings can contain any of the ninety-six ASCII characters, so those numbered 32&ndash;127.
 
 Other characters can be accessed by their name. 
 E.g., `/acircumflex` is &ldquo;&acirc;&rdquo;; 
@@ -56,8 +57,13 @@ Some examples:
 | `/dollar`       | $           |
 | `($)`           | $           |
 | `[ [/yen] ]`    | &yen;       |
-| `[(Quinta do Bom) /fi (m)]` | Quinta do Bom&#64257;m |
+| `[(Croft Quinta da Ro) /ecircumflex (da)]` | Croft Quinta da Ro&ecirc;da |
+| `[(C) /aacute (lem)]` | C&aacute;lem |
+| `[(Roz) /egrave (s)]` | Roz&egrave;s | 
+| `[(Po) /ccedilla (as)]` | Po&ccedil;as |
+| `[(Mo) /edieresis (t & Chandon)]` | Mo&euml;t & Chandon |
 | `[(Ch) /acircumflex (teau L) /eacute (oville-Barton)]` | Ch&acirc;teau L&eacute;oville-Barton |
+| `[(Quinta do Bom) /fi (m)]` | Quinta do Bom&#64257;m |
 | `(JDAW)`                   | ![&lsquo;JDAW&rsquo;, not kerned](images/JDAW_unkerned.png) |
 | `[(JDA) {-0.06 Kern} (W)]` | ![&lsquo;JDAW&rsquo;, kerned](images/JDAW_kerned.png) |
 
@@ -181,7 +187,7 @@ Some wines, and some people, have accents in their names.
 
 In PostScript the name of an accented character consists of a *base*, and a *diacritic*. 
 The name of the glyph is the former followed by the latter. 
-For example, `/atilde` is &ldquo;&atilde;&rdquo;, and `/Atilde` is &ldquo;&Atilde;&rdquo;. 
+For example, &atilde;&nbsp;=&nbsp;`/atilde` and &Atilde;&nbsp;=&nbsp;`/Atilde`. 
 Observe the case sensitivity.
 
 The table shows the names of the diacritics, and with which base characters which of these are available in the font `/TimesNewRomanPS-BoldMT`.
