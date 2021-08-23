@@ -165,7 +165,7 @@ Extracts of code that made the image:
 
 <img align="right" width="504" height="222" src="images/Shapes.png">
 
-In the image showing [QvA08](http://www.jdawiseman.com/papers/port_and_wine/quevedo_2008.html), the Titles and Belowtitles contain small random stars and flowers, with `InlineTitlesMaxNumberContours` at 2. 
+In the image optimistically showing D78, the Titles and Belowtitles contain small random stars and flowers, with `InlineTitlesMaxNumberContours` at 2. 
 
 These are enabled by Booleans `ShapesInTitles`, with obvious variations `ShapesInAbovetitles`, `ShapesInBelowtitles`, `ShapesInOvertitles`, and `ShapesInPlaceNames`. 
 The array `ShapesToUse` defaults to `[/Flower /Star /Heart]`, and must contain at least one of these.
@@ -224,7 +224,7 @@ Extracts of code that made the image:
 
 <img align="right" width="476" height="478" src="images/Outline_Rotation.png">
 
-This is a decorative possibility that has existed since early versions of this code. 
+This decorative possibility, shown in the [QvA08](http://www.jdawiseman.com/papers/port_and_wine/quevedo_2008.html) image, has existed since early versions of this code. 
 But I now see it as too cluttered so am less fond of it than when it first appeared: &#655;&#7437;&#7437;&#7456;.
 
 It is engaged with the Boolean `OutlineTitles`. 
