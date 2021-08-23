@@ -199,6 +199,7 @@ Extracts of code that made the image for the Dow &rsquo;78:
 /ShapesInTitles true def
 ```
 
+
 ## Spirals
 
 <img align="right" width="477" height="477" src="images/Spirals.png">
@@ -219,6 +220,9 @@ Extracts of code that made the image:
 /SpiralNumArms 5 def
 /SpiralCentreFromCentreProportionRadiiInside 0.618 def
 ```
+
+Spirals are mentioned in [issue&nbsp;17](http://github.com/jdaw1/placemat/issues/17).
+
 
 ## OutlineTitles
 
@@ -248,6 +252,8 @@ Extracts of code that made the image:
 /OutlineTitles true def
 ```
 
+The outlining code would be improved by the routine requested in [issue&nbsp;18](http://github.com/jdaw1/placemat/issues/18).
+
 ## Rotation
 
 The numeric parameter `RotationTitlesAboveBelowOverCirclearray` rotates the whole circle by that many degrees, in the QvA08  example by `30`. 
@@ -267,10 +273,11 @@ If the colour scheme is /MidGrey then &ldquo;black&rdquo; means the darker of th
 
 If the capped number of contours is large, then it becomes relevant that the code can attempt an estimate of how many contours are needed. 
 It does so if `InlineTitlesAttemptMinimiseNumContours` (or `InlineAboveBelowOverAttemptMinimiseNumContours` or `InlinePlaceNamesAttemptMinimiseNumContours`) is `true`. 
-If the code&rsquo;s estimate is too low, as might happen if the lines are very thin, then the booleans should be false and the upper bounds set carefully. The attempted estimate is computed using a horrible algorithm, &lsquo;discussed&rsquo; at [comp.lang.postscript](https://groups.google.com/forum/#!topic/comp.lang.postscript/86b7Sg8v7B0). 
+If the code&rsquo;s estimate is too low, as might happen if the lines are very thin, then the booleans should be false and the upper bounds set carefully. The attempted estimate is computed using a horrible algorithm, &lsquo;discussed&rsquo; at [comp.lang.postscript](http://groups.google.com/g/comp.lang.postscript/c/86b7Sg8v7B0). 
 
 If `InlinePrefillWhite`, all of the Titles/Abovetitles/Belowtitles/Overtitles are filled white before painting the &lsquo;Inlines&rsquo;, so are opaque. 
-This is good if there is CrossHatchingInside, but less good with BackgroundTextsGlasses.
+This is good if there is CrossHatchingInside, but less good with BackgroundTextsGlasses. 
+Again, the routine requested in [issue&nbsp;18](http://github.com/jdaw1/placemat/issues/18) would be a blessing.
 
 
 ## FillTexts
@@ -347,7 +354,7 @@ There are two obvious *desiderata*.
 As the printed PDF is part of the record of the evening, it should not be changed. 
 But also it would be unhelpful to allow the errors to confuse future generations. 
 (But see [discussion](http://www.theportforum.com/viewtopic.php?p=90575#p90575) and [more discussion](http://www.theportforum.com/viewtopic.php?p=92316#p92316).) 
-E.g., the author has attended a tasting at which the cork of a purported Smith Woodhouse 1963 showed the vintage to be 196**6**.
+E.g., the author has attended [a&nbsp;tasting](http://www.theportforum.com/viewtopic.php?t=11196) at which the cork of a purported Smith Woodhouse 1963 showed the vintage to be 196**6**.
 
 A non-printable annotation can be added to the PDF. 
 `GlassesAnnotations` is an array of even length, alternating `WithinTitles`-style integers pointing into the arrays such as `Titles`, and compound-string annotations.
