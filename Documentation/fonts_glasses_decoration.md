@@ -165,7 +165,7 @@ Extracts of code that made the image:
 
 <img align="right" width="504" height="222" src="images/Shapes.png">
 
-In the image optimistically showing D78, the Titles and Belowtitles contain small random stars and flowers, with `InlineTitlesMaxNumberContours` at 2. 
+In the image optimistically showing D78, the Titles and Belowtitles contain small random stars and flowers, with `InlineTitlesMaxNumberContours` at 3. 
 
 These are enabled by Booleans `ShapesInTitles`, with obvious variations `ShapesInAbovetitles`, `ShapesInBelowtitles`, `ShapesInOvertitles`, and `ShapesInPlaceNames`. 
 The array `ShapesToUse` defaults to `[/Flower /Star /Heart]`, and must contain at least one of these.
@@ -175,7 +175,7 @@ After which `ShapesTitlesStroke` (or `ShapesAbovetitlesStroke`, `ShapesBelowtitl
 The internal variables `ShapesIntX` and `ShapesIntY` hold that shape&rsquo;s position within the whole; these can be accessed by the painting-code parameters to choose from amongst a set of colourings. 
 
 The radius of each shapes&rsquo;s enclosing circle is random in the range `ShapesEnclosingCircleRadiusMin` to `ShapesEnclosingCircleRadiusMax`. 
-An approximation to the typical separation between the shapes is `ShapesAverageSeparation`; a parameter controlling how far stars are moved from a regular grid is `ShapesAverageMaxTweakPlusMinus`. 
+An approximation to the typical centre-to-centre separation between adjacent shapes is `ShapesAverageSeparation`; a parameter controlling how far stars are moved from a regular grid is `ShapesAverageMaxTweakPlusMinus`. 
 The pattern generates some shapes that are not shown, that are clipped away: if `ShapesPrintQuickerDistillSlower` is `true` these are removed, reducing file size and improving print speed at the price of slowing distillation.
 
 Sometimes, albeit rarely, this `clip`ping is not wanted. 
