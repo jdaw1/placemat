@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:00 Thursday 8th July 2021
+% This version 20:20 Tuesday 24th August 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202107081900) def
+/ParametersVersionDateTimeAdobeFormat (D:202108242020) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -759,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202107081900) def
+/SoftwareVersionDateTimeAdobeFormat (D:202108242020) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -4214,7 +4214,7 @@ currentdict /SmallCapsDict undef
 				dup  /PackingDirectionTopToBottom      eq {pop  /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=73641#p73641
 				dup  /PackingDirectionLeftToRight      eq {pop  /i i 2 add store  exit} if
 				dup  /TempleExtraColsToLeftOrRowsBelow eq {pop  /i i 2 add store  exit} if
-				mark exch (Warning: an item of PackingStyles contains the non-recognised sub-parameter ) exch 256 string cvs ConcatenateToMark OutputToLog
+				mark exch (Warning: an item of PackingStyles contains the non-recognised sub-parameter ) exch ToString ConcatenateToMark OutputToLog
 				/i i 1 add store
 			} repeat  % 1
 		} loop
@@ -12793,12 +12793,11 @@ currentdict /SmallCapsDict undef
 							{
 								/SheetNum exch def
 								DecanterLabelsPaperType ThisPaperType  eq   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and
-								CircleNonEmpty SheetNum get WithinPage get   and
 								{
 									0  1  SheetLengths SheetNum get 1 sub
 									{
 										WithinPage-WithinTitles-def   /DLRSW DLRotations SheetNum get WithinPage get def
-										0  1  DecanterLabelsNumCopies 1 sub
+										0  1  DecanterLabelsNumCopies 1 sub    CircleNonEmpty SheetNum get WithinPage get not {pop -1} if
 										{
 											//false PageSuppressed {pop exit} if
 											0 eq
@@ -12894,9 +12893,9 @@ currentdict /SmallCapsDict undef
 											/TypeOfPagesBeingRendered /DecanterLabels store  //false //false //false //false DecanterLabelsPaperType  DLOrientation {/Portrait} {/Landscape} ifelse  SetPaperSize   //true DefStoreMgns    MatrixDL setmatrix
 											DLNumOnPage 0 eq {HeadersAndFooters PaintHeadersFooters   MgnL PageHeight MgnT DecanterLabelsTopTextT add sub  moveto  HeaderFont DecanterLabelsTopTextFontSize selectfont  DecanterLabelsTopText ShowRecursive} if
 											/DLNumOnPage dup load 1 add def    DLNumOnPage DLNumRows DLNumCols mul ge {ShowPage  /DLNumOnPage 0 store  /DecanterLabelsThisPageTitles () store} if
-										} for  % DecanterLabelsNumCopies
+										} for  % DecanterLabelsNumCopies, if CircleNonEmpty
 									} for  % WithinPage, WithinTitles
-								} if  % ... ThisPaperType ... ThisPageOrdering ... and CircleNonEmpty ... and
+								} if  % ... ThisPaperType ... ThisPageOrdering ... and
 							} for  % /SheetNum
 							DLNumOnPage 0 gt {ShowPage} if
 						} if  % DLTotalNumCopies 1 gt
