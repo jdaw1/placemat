@@ -30,7 +30,7 @@ First, the default simple case: make the first item 0, and the second item the r
 Usually elegance is enhanced by having left and right headers of approximately equal length.
 
 To have different headers on different pages, each array consists of alternate items as in the simple example: number; compound string; number; compound string; &hellip;. 
-The number is a page ordering, with the immediately following compound string to be used only if the page ordering is at least this (unless over-ruled by a larger number that is still not bigger than the page ordering).
+The number is a [page ordering](document.md#pageordering), with the immediately following compound string to be used only if the page ordering is at least this (unless over-ruled by a larger number that is still not bigger than the page ordering).
 
 ```PostScript
 /HeadersLeft [
@@ -43,6 +43,8 @@ Headers are shown in font `HeaderFont`, at size `HeaderFontSize`, with the basel
 Likewise `FooterLeftText`, `FooterCenterText`, and `FooterRightText` are shown in `FooterFont` at size `FooterFontSize`, with the top of the footer a distance FooterTopFromPageBottom from page bottom (which should be inside the bottom margin). 
 Very rarely one might want the centre heading non-centred (e.g.). 
 This can be controlled with `HeaderFooterCenterX`, which is x position of the centre of the relevant item of `HeadersCenter` and of `FootersCenter`.
+
+Also see [`/SuppressNonRightOrnaments`](PackingStyles.md#sides-leftside-rightside-toprow-middlerow-bottomrow) and `/SuppressNonLeftOrnaments`, being flags usable within `PackingStyles`.
 
 
 ## GlassesOnSheets and GlassesOnTastingNotePages
