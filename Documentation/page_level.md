@@ -71,18 +71,18 @@ And the default value of `GlassesOnSheetsMaxPerSheet` itself depends on `PaperTy
 
 <div align="center">
 
-| `PaperType` |             Size, inches              |            Size, mm           | Default value of<br>`GlassesOnSheetsMaxPerSheet` |
-|:-----------:|:-------------------------------------:|:-----------------------------:|:--:|
-|    `/A4`    | &asymp; 8.27&nbsp;&times;&nbsp;11.69  | 210&nbsp;&times;&nbsp;297     |  6 |
-|    `/USL`   | 8&frac12;&nbsp;&times;&nbsp;11        | 215.9&nbsp;&times;&nbsp;279.4 |  6 |
-|  `/USLegal` | 14&nbsp;&times;&nbsp;8&frac12;        | 215.9&nbsp;&times;&nbsp;355.6 |  9 |
-|    `/A3`    | &asymp; 16.54&nbsp;&times;&nbsp;11.69 | 420&nbsp;&times;&nbsp;297     | 14 |
-|   `/USL2`   |        17&nbsp;&times;&nbsp;11        | 431.8&nbsp;&times;&nbsp;279.4 | 14 |
+| `PaperType` |            Size, mm           |             Size, inches              | Default value of<br>`GlassesOnSheetsMaxPerSheet` | Diameter if &lsquo;full&rsquo;<br>&amp; margins=24pt |
+|:-----------:|:-----------------------------:|:-------------------------------------:|:--:| :--:|
+|    `/A4`    | 210&nbsp;&times;&nbsp;297     | &asymp; 8.27&nbsp;&times;&nbsp;11.69  |  6 | 92.7mm, 3.65&Prime; |
+|    `/USL`   | 215.9&nbsp;&times;&nbsp;279.4 | 8&frac12;&nbsp;&times;&nbsp;11        |  6 | 88.6mm, 3.49&Prime; |
+|  `/USLegal` | 215.9&nbsp;&times;&nbsp;355.6 | 14&nbsp;&times;&nbsp;8&frac12;        |  9 | 78.7mm, 3.10&Prime; |
+|    `/A3`    | 420&nbsp;&times;&nbsp;297     | &asymp; 16.54&nbsp;&times;&nbsp;11.69 | 14 | 86.4mm, 3.40&Prime; |
+|   `/USL2`   | 431.8&nbsp;&times;&nbsp;279.4 |        17&nbsp;&times;&nbsp;11        | 14 | 86.8mm, 3.42&Prime; |
 
 </div>
 
 But the `PaperType` can vary. 
-E.g., not unusual for 15&ndash;20 glasses:
+E.g., not unusual for 17&ndash;20 glasses:
 ```PostScript
 /PaperType {SheetNum 0 eq {/A3} {/A4} ifelse} def
 ```
