@@ -61,7 +61,7 @@ Consider:
 ] def
 ```
 
-PostSript arrays start at zero, so if `Titles` etc are of length *n* then the integers mst be &ge;&nbsp;0 and &le;&nbsp;*n*&minus;1. 
+PostSript arrays start at zero, so if `Titles` etc are of length *n* then the integers must be &ge;&nbsp;0 and &le;&nbsp;*n*&minus;1. 
 The example has two pages. 
 
 Because this is the standard pattern, there is help, in the form of `GlassesOnSheetsMaxPerSheet`. 
