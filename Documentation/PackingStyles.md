@@ -388,10 +388,10 @@ The images show the packings for the diameters &le;&nbsp;4&frac12;&Prime; &asymp
 
 <div align="center">
 
-| `PaperType`(s) | Examples |
-|:---:|---:|
+|    `PaperType`(s)    | Examples |
+|:--------------------:|---------:|
 | `/A4`&nbsp; `/A3`    | [![A4](images/HowManyGlasses_A4.gif)](images/HowManyGlasses_A4.pdf) [![A3](images/HowManyGlasses_A3.gif)](images/HowManyGlasses_A3.pdf) |
-| `USLegal`            | [![USLegal](images/HowManyGlasses_USLegal.gif)](images/HowManyGlasses_USLegal.pdf) |
+| `/USLegal`           | [![USLegal](images/HowManyGlasses_USLegal.gif)](images/HowManyGlasses_USLegal.pdf) |
 | `/USL`&nbsp; `/USL2` | [![USL](images/HowManyGlasses_USL.gif)](images/HowManyGlasses_USL.pdf) [![USL2](images/HowManyGlasses_USL2.gif)](images/HowManyGlasses_USL2.pdf) |
 
 </div>
