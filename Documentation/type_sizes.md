@@ -36,6 +36,8 @@ In the author&rsquo;s old placemats, the most often changed, in order from most 
 
 * `CircletextMaxFontSizeAbsolute` to values `6`&ndash;`16`, big values also necessitating `/CircletextMaxFontSizeProportionRadius 1 def`.
 
+* `FontSizesSetsAboveBelowOver`, from `[ 0 0 0 ]` to `[ 0 0 1 ]`.
+
 But, before detail can be explained, a flow of action is needed.
 
 1. First, the circle text is sized. 

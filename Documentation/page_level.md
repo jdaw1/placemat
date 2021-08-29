@@ -22,6 +22,7 @@
 
 Headers and footers can be added to the page. 
 Typically these will hold a date, a location, a title, and perhaps some branding&mdash;the author includes URLs. 
+
 There is a little intricacy, to allow tastings split into multiple sessions to have different headers and footers in each session. 
 The parameters doing most of the work are `HeadersLeft`, `HeadersCenter`, `HeadersRight`, and their `Footer…` equivalents, though using all of six of these text positions would be very cluttered. 
 Each is an array of even length. 
@@ -42,7 +43,7 @@ The number is a [page ordering](document.md#pageordering), with the immediately 
 Headers are shown in font `HeaderFont`, at size `HeaderFontSize`, with the baseline of the characters a distance `HeaderBaselineFromPageTop` from the top of the page (which should be inside the top margin). 
 Likewise `FooterLeftText`, `FooterCenterText`, and `FooterRightText` are shown in `FooterFont` at size `FooterFontSize`, with the top of the footer a distance FooterTopFromPageBottom from page bottom (which should be inside the bottom margin). 
 Very rarely one might want the centre heading non-centred (e.g.). 
-This can be controlled with `HeaderFooterCenterX`, which is x position of the centre of the relevant item of `HeadersCenter` and of `FootersCenter`.
+This can be controlled with `HeaderFooterCenterX`, which is the *x* position of the centre of the relevant item of `HeadersCenter` and of `FootersCenter`.
 
 Also see [`/SuppressNonRightOrnaments`](PackingStyles.md#sides-leftside-rightside-toprow-middlerow-bottomrow) and `/SuppressNonLeftOrnaments`, being flags usable within `PackingStyles`.
 
@@ -50,7 +51,7 @@ Also see [`/SuppressNonRightOrnaments`](PackingStyles.md#sides-leftside-rightsid
 ## GlassesOnSheets and GlassesOnTastingNotePages
 
 More than six or seven glasses would be too many for one sheet of `/A4` or `/USL`. 
-If the PaperType is one of these, there must be two sheets, or more. 
+If the PaperType is one of these, there must be &ge;2 sheets.
 
 Consider:
 ```PostScript
@@ -112,6 +113,8 @@ The text is aligned with `BackgroundTextsAlignmentVertical` being one of `/Middl
 
 </div>
 
+### Superfluous
+
 The code chooses separate *x* and *y* sizes, each as large as possible, subject to the following.
 The ratio of the vertical and horizontal font sizes, *y*&divide;*x*, must lie between `BackgroundTextsSquooshMin` and `BackgroundTextsSquooshMax`. 
 For non-squooshed text, generally recommended, set both to 1. 
@@ -124,7 +127,7 @@ Neither the *x* nor the *y* size may exceed `BackgroundTextsFontSizeMax`, which 
 
 `BackgroundTextsGlassesVerticalMiddling` determines whether the vertical alignment is determined jointly or separately, much like the `VerticalMiddling…` parameters. 
 `BackgroundTextsGlassesVerticalMiddling` must be one of `/MatchAll`, `/MatchSamePaperSize`, or `/MatchNone`.
-The bounding path of the text is constructed and then BackgroundTextsGlassesPaintCode is executed. 
+The bounding path of the text is constructed and then `BackgroundTextsGlassesPaintCode` is executed. 
 The default clips then strokes.
 
 Extracts from code that made the example: 
@@ -150,15 +153,18 @@ By default the glasses pages have a set of little glass icons with which to reco
 Even better, use a diagonal slash for a half glass and a cross for a whole.
 
 This is activated by the parameter WaterBoxes, which takes one of the values: `/Glasses` (so the water boxes appear on the glasses pages); `/TastingNotes` (on the tasting-note pages); `/Both`; or `/None`. 
-The number of boxes is WaterBoxesNum, each of which is no bigger than WaterBoxesSizeMax on each side, the gap&divide;box ratio being `WaterBoxesGapProportionSize`.
+The number of boxes is `WaterBoxesNum`, each of which is no bigger than `WaterBoxesSizeMax` on each side, the gap&divide;box ratio being `WaterBoxesGapProportionSize`.
 
 On glasses pages boxes should appear on the lower-right of the page for right-handed drinkers, and lower-left for left-handers. 
 Tasters&rsquo; handedness is set by `LeftHanders`, an array of the text of the name of known left-handers, whether or not at this tasting. 
 If a name within `Names` is duplicated, and both are to be left-handed, that name must appear twice within `LeftHanders`.
 
+### Superfluous
+
 If there are multiple pages of glasses, by `GlassesOnSheets`, then on which of these pages should water boxes they appear? 
-For simplicity, `WaterBoxesOverrideShowEverySheet` being true overrides the complexity in the next few sentences, putting water boxes on every sheet (of glasses or of tasting notes, per `WaterBoxes`). 
-But if `WaterBoxesOverrideShowEverySheet` is false, the presence or absence is controlled, for the right handers, by the array of booleans `WaterBoxesShowRight`; and for the lefties by `WaterBoxesShowLeft`. 
+For simplicity, `WaterBoxesOverrideShowEverySheet` being true overrides the complexity in the next paragraph, putting water boxes on every sheet (of glasses or of tasting notes, per `WaterBoxes`). 
+
+If `WaterBoxesOverrideShowEverySheet` is false, the presence or absence is controlled, for the right handers, by the array of booleans `WaterBoxesShowRight`; and for the lefties by `WaterBoxesShowLeft`. 
 `WaterBoxesShowRight` and `WaterBoxesShowLeft` must be the same length as GlassesOnSheets. 
 The default values of `WaterBoxesShowRight` and `WaterBoxesShowLeft` refer to `PageOrderingGlasses`: `WaterBoxesShowRight` defaults to true for the last page in each &lsquo;session&rsquo;, and `WaterBoxesShowLeft` for the first. 
 There is an analgous parameter `WaterBoxesShowTN`, used for water boxes on the tasting-note sheets.
@@ -175,11 +181,11 @@ There is an analgous parameter `WaterBoxesShowTN`, used for water boxes on the t
 Droplets are a decorative amusement, flowing around the page as if attracted or repelled by spinning charges. 
 Activate with the Boolean `Droplets`.
 
-The array `DropletsCharges` is of a length that is a multiple of four, as follows. 
-0: An integer, a value of `SheetNum` for this charge, or `/All` meaning all sheets. 
-1: A location: this can be an integer, the centre of the `WithinPage` circle on that sheet; or a length array of length two, `[x y]` in which `[0 0]` is bottom-left of the page. 
-2: A numeric charge, droplets flowing away from &minus;ve charges and to +ve charges. 
-3: A numeric spin; with +ve charge and +ve spin the droplets approach clockwise.
+The array `DropletsCharges` is of a length that is a multiple of four, as follows.  
+* 0: An integer, a value of `SheetNum` for this charge, or `/All` meaning all sheets.  
+* 1: A location: this can be an integer, the centre of the `WithinPage` circle on that sheet; or a length array of length two, `[x y]` in which `[0 0]` is bottom-left of the page.  
+* 2: A numeric charge, droplets flowing away from &minus;ve charges and to +ve charges.  
+* 3: A numeric spin; with +ve charge and +ve spin the droplets approach clockwise.
 
 Starting locations of the drops have a distance apart of `DropletsAverageSeparation` adjusted by a random fraction of `DropletsAverageMaxTweakPlusMinus`, and path length is `DropletsPathLength`.
 
@@ -246,12 +252,12 @@ Let&rsquo;s start with an example, to give a sense of the range of what can be d
 
 ```
 `FlightSeparationLines` is an array nested about four deep. 
-`FlightSeparationLines` is of the same length as GlassesOnSheets. 
-Each item of FlightSeparationLines is an array, each of which holds line descriptions, as many as there are lines on that page. 
+`FlightSeparationLines` is of the same length as `GlassesOnSheets`. 
+Each item of `FlightSeparationLines` is an array, each of which holds line descriptions, as many as there are lines on that page. 
 Each line description is an array, pieces of which can be as follows.
 
 * The first, and only the first, item of a line description may be `/Closed`, which specifies that the line is a closed loop.
-* The typical piece is `[a b]`, a and b being integers, which specifies that the line runs through the mid-point of the glass positions a and b, the line being perpendicular to the line connecting the centres. 
+* The typical piece is `[a b]`, a and b being integers &ge;0, and strictly less than the number of circles on the page. The line runs through the mid-point of the glass positions a and b, the line being perpendicular to the line connecting the centres. 
 So if the circles touch then the line segment touches their joint tangent. Order doesn&rsquo;t matter: `[a b]` and `[b a]` are equivalent. 
 The integer a can be replaced with `[xa ya]` (making `[[xa ya] b]`), and likewise b with `[xb yb]`.
 * Between two pieces the non-array item `/Arc` causes the sharp corner between two straight lines to be replaced with a soft arc having radius `FlightSeparationsArcProportionRadius` &times; the radius of the circles. 
@@ -270,7 +276,7 @@ In [the PDF of examples](images/FlightSeparations.pdf) the header shows that pag
 If using `FlightSeparations` it is strongly recommended that these examples be examined and appropriate parts used as a starting draft. 
 
 The path can be `stroke`d, `clip`ped or `fill`ed by the code `FlightSeparationPaintCode`, which has a default stroke that is complicated but elegant. 
-Use of `fill` is discouraged, as it impedes comparison of colours of the wines; use of `clip` is likely to require non-trivial PostScript programming. 
+Use of `fill` is discouraged, as it impedes comparison of colours of the wines; use of `clip` is likely to require non-trivial PostScript programming ([e.g.](http://www.theportforum.com/viewtopic.php?p=77355#p77355)). 
 If `FlightSeparationPaintSeparately` then `FlightSeparationPaintCode` is invoked after each line, the variable `FlightSeparationLineNum` being set to the appropriate integer &ge;0. 
 If `FlightSeparationPaintSeparately not`, then all the lines on the current page are drawn, after which is the single call of `FlightSeparationPaintCode`. 
 The former is better if the format is not constant; the latter preferred if overlapping or crossing lines are to be double-stroked.
