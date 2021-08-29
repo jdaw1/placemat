@@ -27,7 +27,7 @@ The user has much control over the layout of the glasses.
 The user has much control, but the default is also good. 
 Unless there is a compelling need to change things, users are encouraged to take the easy course of letting the defaults do their work.
 
-The user specifies an array, `PackingStyles`, which is a list of packing styles. 
+The user specifies an array, `PackingStyles`, which is a list of generic packing styles. 
 In turn each style from the list is taken, and each allowed variation is tested. 
 Broadly, if a later-tested style allows a larger radius than the current best, then the old best is replaced by this better style.
 
@@ -74,6 +74,8 @@ If some of these are not wanted, for whatever reason, control is possible by the
 | `[ /Diamonds /Mirror ]`<br>Nine glasses<br>`/USLegal` = 14&Prime;&times;8&frac12;&Prime; | ![USLegal_09_Diamonds_Mirror](images/USLegal_09_Diamonds_Mirror.png) |
 
 </div>
+
+The `/Mirror` flag chooses the alternate chirality, if that has a sensible meaning.
 
 ### RectangularDislocation
 
@@ -144,7 +146,7 @@ There is a generalisation of `/DiamondsPlus` over any number of rows (columns), 
 
 Thus `/RectangularAlternateNudge` is a small deviation away from greater symmetry, about which the the author is unenthusiastic. 
 Because of this non-enthusiasm, by default, `/RectangularAlternateNudge` comes with a sub-parameter: `[ /RectangularAlternateNudge /ImprovementPointsMin 2 ]`. 
-This imposes an additional requirement: this packing style is chosen only if it is an improvement on the previous best radius of &ge;&nbsp;2pt &asymp;&nbsp;0.7mm. 
+This imposes an additional requirement: this packing style is chosen only if it is an improvement on the previous best radius of &ge;&nbsp;2pt &asymp;&nbsp;0.7mm &asymp;&nbsp;0.028&Prime;. 
 
 The next table of examples shows six glasses on `/USL` = 8&frac12;&Prime;&times;11&Prime; and on `/A4` = 210mm&times;297mm, in all cases with margins of 24pt = &#8531;&Prime; &asymp; 8.5mm, and space of 6pt &asymp; 2.1mm for the header. 
 
