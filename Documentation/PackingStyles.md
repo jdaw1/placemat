@@ -21,7 +21,7 @@
 ## Introduction
 
 The core purpose of the software is to have a place to put glasses. 
-Already known are the PaperType (e.g., `/A3`), the margins, and how many glasses are to go on the page. 
+Already known are the `PaperType` (e.g., `/A3`), the margins, and how many glasses are to go on the page. 
 The user has much control over the layout of the glasses.
 
 The user has much control, but the default is also good. 
@@ -331,7 +331,7 @@ If outside range, this packing specification not used.
 * `/OnlyIfOrientation name`, the sub-parameter being one of `/Landscape`, `/Portrait`, or `/Either`, the last being the default if this sub-parameter absent. 
 If `Orientation` not matching, this packing specification not used.
 
-* `/ImprovementPointsMin num` and `/ImprovementProportionMin num`: this specification used only if beating previous best by the required amount, either absolute (e.g., 2 points) or as a proportion (e.g., 0.01 = 1%).
+* `/ImprovementPointsMin num` and `/ImprovementProportionMin num`: this specification used only if beating previous best radius by the required amount, either absolute (e.g., 2&nbsp;points) or as a proportion (e.g., 0.01&nbsp;=&nbsp;1%).
 
 If `PackingStyles` is empty, or contains only invalid/impossible layouts, then instead several of the regular layouts are tried.
 
@@ -339,7 +339,7 @@ If `PackingStyles` is empty, or contains only invalid/impossible layouts, then i
 ## Radius constraints
 
 There is aesthetic merit in imposing that radii are consistent across pages within a single session. 
-This is controled by `ShrinkRadii`, which can be:
+This is controlled by `ShrinkRadii`, which can be:
 * `/NotAtAll`, which leaves each page at its own best possible;
 * `/ToSmallestSamePageOrdering`, which ensures consistency within each session;
 * `/ToSmallest`, which ensures consistency over the whole document;
@@ -381,16 +381,20 @@ Given the default value of `PackingStyles`, the following shows glass diameters 
 Measure the diameter of your glasses. 
 Add something for two fingers. 
 Add something for the inebriation of the owner of the fingers. 
-Suggestion: &le;6 on `/A4`; &le;15 on `/A3`; &le;8 on `/USLegal`; &le;6 on `/USL`; &le;15 on `/USL2`. 
+Suggestion: &le;6 on `/A4`; &le;14 on `/A3`; &le;9 on `/USLegal`; &le;6 on `/USL`; &le;14 on `/USL2`. 
 But sometimes table space is a binding constraint, in which case there must be less paper area, hence smaller circles.
 
 The images show the packings for the diameters &le;&nbsp;4&frac12;&Prime; &asymp;&nbsp;114mm, down to slightly below 3&Prime; &asymp;&nbsp;76mm.
 
-[![A4](images/HowManyGlasses_A4.gif)](images/HowManyGlasses_A4.pdf) 
-[![A3](images/HowManyGlasses_A3.gif)](images/HowManyGlasses_A3.pdf) 
-[![USLegal](images/HowManyGlasses_USLegal.gif)](images/HowManyGlasses_USLegal.pdf) 
-[![USL](images/HowManyGlasses_USL.gif)](images/HowManyGlasses_USL.pdf) 
-[![USL2](images/HowManyGlasses_USL2.gif)](images/HowManyGlasses_USL2.pdf) 
+<div align="center">
+
+| `PaperType`(s) | Examples |
+|:---:|---:|
+| `/A4`&nbsp; `/A3`    | [![A4](images/HowManyGlasses_A4.gif)](images/HowManyGlasses_A4.pdf) [![A3](images/HowManyGlasses_A3.gif)](images/HowManyGlasses_A3.pdf) |
+| `USLegal`            | [![USLegal](images/HowManyGlasses_USLegal.gif)](images/HowManyGlasses_USLegal.pdf) |
+| `/USL`&nbsp; `/USL2` | [![USL](images/HowManyGlasses_USL.gif)](images/HowManyGlasses_USL.pdf) [![USL2](images/HowManyGlasses_USL2.gif)](images/HowManyGlasses_USL2.pdf) |
+
+</div>
 
 ## Code extracts
 
