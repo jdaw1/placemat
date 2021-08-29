@@ -26,12 +26,12 @@ There are multiple types of printable page.
 * `/Glasses`: labels glass positions;
 * `/TastingNotes`: for those who record TNs with a pen on paper. 
 * `/PlaceName`: At a large formal tasting it is appropriate to label each person&rsquo;s place-setting, so everybody knows who everybody else is, even late in the tasting.
-* `/PrePour`: to help with the pre-opouring of portion s necessary at at tastings with many people. 
+* `/PrePour`: to help with the pre-pouring of portions &mdash; necessary at at tastings with many people. 
 * `/VoteRecorder`: to record the votes for Wine Of The Night, and to record guesses of blinded wines.
 * `/DecantingNotes`: observations of those doing the decanting.
-* `/Accounts`: organises the tawdry financial matters. 
-* `/CorkDisplay`: as named.
-* `/NeckTags`: used at blind tastings around the neck of a wrapped bottle; also to label de-capsuled bottles when decanting. 
+* `/Accounts`: tawdry financial matters, organised. 
+* `/CorkDisplay` as described.
+* `/NeckTags`: to label de-capsuled bottles when decanting; also around the neck of a wrapped bottle at blind tastings. 
 * `/DecanterLabels`: cut; paste to back of old business cards; allow to dry; punch holes; hang on decanters; fill decanters; wait; drink.
 * `/StickyLabels`: at a tasting with more wines than glasses, these can be attached to the foot of a glass to show both owner and current contents. Larger stickies also useful on bottles.
 
@@ -55,10 +55,10 @@ These have a few parameters which might want changing, and others which are almo
 
 Page size is `TastingNotesPaperType`, which North Americans should change from the default of `/A4` to `/USL`&nbsp;= 8&frac12;&Prime;&times;11&Prime;. 
 
-Which wines appear on which TN pages is controlled by `GlassesOnTastingNotePages`, a depth-two array of the same structure as `GlassesOnSheets`. 
+Which wines appear on which TN pages is controlled by `GlassesOnTastingNotePages`, a depth-two array of the same structure as [`GlassesOnSheets`](page_level.md#glassesonsheets-and-glassesontastingnotepages). 
 E.g., a possible non-default value might be `/GlassesOnTastingNotePages [  [0 2 4 6 8 10] [1 3 5 7 9 11]  ] def`, which puts alternate wines over two pages.
 
-The glasses page uses arrays `Circlearrays`, `Titles`, `Abovetitles`, `Belowtitles`, `Overtitles`. 
+The glasses page uses arrays `Circlearrays` and `Titles`. 
 The tasting-note pages use `CirclearraysTastingNotes` and `TitlesTastingNotes`, which by default equal `Circlearrays` and `Titles` respectively. 
 Why?
 Consider a vertical, so multiple years of one house. 
@@ -104,27 +104,27 @@ The fourth of each set of four is one of:
 
 ### Superfluous
 
-The decorative boolean `TastingNotesCirclesBehind` repeats the elements from the glasses pages, faded by a factor of either `TastingNotesCirclesBehindFadingFactorIfAnyGrey` or `TastingNotesCirclesBehindFadingFactorIfAllBlack`, according to whether `ColourSchemeTitles` is ever `/MidGrey`. 
-By default `TastingNotesCirclesBehind` is true if distilling with Distiller, false otherwise (because of an [awkward technical interaction between Mac Preview and GhostScript](https://groups.google.com/forum/#!topic/comp.lang.postscript/NJLAfvN_jwU)). 
-The circles are in a straight line, the *x* position at the top being `TastingNotesCirclesBehindTopX` (0&nbsp;&rArr;&nbsp;left, 1&nbsp;&rArr;&nbsp;right), and at the bottom is `TastingNotesCirclesBehindBottomX`. 
-The complication of the default values causes, over multiple TN pages, some variation to the visual effect. 
-The boolean `TastingNotesCirclesBehindFitAndCentreInRow` controls whether the circles fit between the horizontal lines made by the Circlearrays (`true`), or whether they are as large as possible (`false`).
+The elements of `TitlesTastingNotes` are shown at a size not exceeding `TastingNotesTitlesFontSizeMax`, and the elements of `SubtitlesTastingNotes` are shown at `TastingNotesSubtitleFontSizeProportionTitles` times the size of the `TitlesTastingNotes`. 
+The vertical separation between the `CirclearraysTastingNotes` and `TitlesTastingNotes`, and between the `TitlesTastingNotes` and `SubtitlesTastingNotes`, is `TastingNotesLineGap`.
 
 The tasting-note pages are lightly divided into columns, the number of columns and the column headings being determined by the array `TastingNotesColumnHeadings`, by default this being `[ (Times) (Eye) (Nose) (Mouth) (Score) ]`, the first of these being intended to hold times of decanting and sampling. 
 These column headings are rendered in the font `HeaderFont` at size `TastingNotesColumnHeadingsFontSize`. 
 The columns have widths proportionate to `TastingNotesColumnRelativeWidths`, an array of the same length as `TastingNotesColumnHeadings`. 
 `TastingNotesColumnStrokeCode` formats and strokes the lines that separate the columns.
 
-The elements of `TitlesTastingNotes` are shown at a size not exceeding `TastingNotesTitlesFontSizeMax`, and the elements of `SubtitlesTastingNotes` are shown at `TastingNotesSubtitleFontSizeProportionTitles` times the size of the `TitlesTastingNotes`. 
-The vertical separation between the `CirclearraysTastingNotes` and `TitlesTastingNotes`, and between the `TitlesTastingNotes` and `SubtitlesTastingNotes`, is `TastingNotesLineGap`.
+The decorative boolean `TastingNotesCirclesBehind` repeats the elements from the glasses pages, faded by a factor of either `TastingNotesCirclesBehindFadingFactorIfAnyGrey` or `TastingNotesCirclesBehindFadingFactorIfAllBlack`, according to whether `ColourSchemeTitles` is ever `/MidGrey`. 
+By default `TastingNotesCirclesBehind` is true if distilling with Distiller, false otherwise (because of an [awkward technical interaction between Mac Preview and GhostScript](http://groups.google.com/g/comp.lang.postscript/c/NJLAfvN_jwU)). 
+The circles are in a straight line, the *x* position at the top being `TastingNotesCirclesBehindTopX` (0&nbsp;&rArr;&nbsp;left, 1&nbsp;&rArr;&nbsp;right), and at the bottom is `TastingNotesCirclesBehindBottomX`. 
+The complication of the default values causes, over multiple TN pages, some variation to the visual effect. 
+The boolean `TastingNotesCirclesBehindFitAndCentreInRow` controls whether the circles fit between the horizontal lines made by the Circlearrays (`true`), or whether they are as large as possible (`false`).
 
-There has been discussion of printing A6 booklets to hold the tasting-note pages, one wine per page. To aid this it is possible to replace the names with page numbers via `TastingNotesReplaceNameWithPageNum`, the page-number string being defined in `TastingNotesPageNumCompoundString`, and being shown in a font size reduced by a factor of `TastingNotesPageNumFontSizeFactor`. 
+There has been [discussion](http://www.theportforum.com/viewtopic.php?t=175&p=51344#p51344) of printing A6 booklets to hold the tasting-note pages, one wine per page. To aid this it is possible to replace the names with page numbers via `TastingNotesReplaceNameWithPageNum`, the page-number string being defined in `TastingNotesPageNumCompoundString`, and being shown in a font size reduced by a factor of `TastingNotesPageNumFontSizeFactor`. 
 This feature has never been used.
 
 <img align="right" width="421" height="595" src="images/SideBySideGlassesTastingNotes.png">
 
-### Side-by-side Glasses
 
+### Side-by-side Glasses
 
 If having a mini tasting of only three wines, one might wish to print everything on one sheet, especially if everything must be squeezed onto a small round bar table. 
 For right handers the three glasses would be on the left of the tasting-notes; for lefties, glasses to the right &mdash; as in the images on the right. 
@@ -181,7 +181,7 @@ There is also the parameter `PlaceNamesShowNameAsFooter`, an array of Booleans t
 If the big writing says &ldquo;Low-salt diet salad&rdquo;, it can simplify set-up to have a very small &ldquo;Derek&rdquo; written on the page.
 
 These place-name pages are set on pages of size `PlaceNamesPaperType` (defaulting to `TastingNotesPaperType`), and orientation `PlaceNamesOrientation` (default `/Landscape`). 
-The lines marking the anti-curling folds are a distance `PlaceNamesFirstAndThirdFoldsFromEdge` away from the top and bottom edges, defaulting to 36 = &frac12;&Prime; = 12.7mm, which should be changed to 0 if printing to stiff card. 
+The lines marking the anti-curling folds are a distance `PlaceNamesFirstAndThirdFoldsFromEdge` away from the top and bottom edges, defaulting to 36 = &frac12;&Prime; = 12.7mm, which should be changed to `0` if printing to stiff card. 
 The Names are set in font `PlaceNamesFont` (defaulting to `NamesFont`, though sometimes `TitlesFont` would be more appropriate), at the largest size that fits subject to an upper bound of `PlaceNamesMaxFontSizeAbsolute` (defaulting to 192). 
 The colour scheme used is `ColourSchemePlaceNames`, this functioning in the same manner as `ColourSchemeTitles`. 
 Because these names are usually larger than the Titles, various details such as line-widths are set larger by a factor of `PlaceNamesDetailsScalingFactor`; but, messily, this parameter is used partly in the code, and partly in the default values of other parameters.
@@ -238,7 +238,7 @@ At the end of a tasting there is typically a vote for the Wine Of The Night (WOT
 The vote-recorder design records public votes; it is not a ballot paper. 
 To assist the &lsquo;returning officer&rsquo; there is paper on which votes can be recorded. 
 For WOTN it is the points that should be recorded, rather than the ranks, as doing so simplifies the addition of the totals. 
-(There is also benefit in there being agreement as to what is recorded: if you record, but I retain the vote-recorder sheet and enter it into a description of the tasting, it is useful that &ldquo;3&rdquo; be unambiguously first place three points.)
+(There is also benefit in there being agreement as to what is recorded: if you record, but I retain the vote-recorder sheet and enter it into a description of the tasting, it is useful that &ldquo;3&rdquo; be unambiguously &lsquo;first place three points&rsquo;.)
 
 Vote recorder sheets can also be used to hold, in a blind tasting, guesstimates of which is what.
 
@@ -264,7 +264,7 @@ But for guesses of wines served blind, they are totalled by person.
 The array `VoteRecorderShowTotalRow` is of the same length as `VoteRecorderTopTexts`, and holds Booleans. 
 
 There is a blind-tasting mischief in adding control guesses, as a discipline on those attending. 
-This could be a constant guess &mdash; the first few times this was done by [ThePortForum](http://www.theportforum.com/viewforum.php?f=4) crowd, the &lsquo;Monkey&rsquo; always guessed Dow 1970. 
+This could be a constant guess &mdash; the first few times this was done by [ThePortForum](http://www.theportforum.com/viewtopic.php?t=11769&p=105522#p105522) crowd, the &lsquo;Monkey&rsquo; always guessed Dow 1970. 
 Or somebody not present could be asked to guess. 
 The appearance of the monkey column is controlled by `VoteRecorderMonkeyWhenShowTotalRow`, and the name of the Monkey is `/VoteRecorderMonkeyName`.
 
@@ -272,21 +272,36 @@ The appearance of the monkey column is controlled by `VoteRecorderMonkeyWhenShow
 The outermost array is one per vote-recorder page: voting on separate days, with different people or wines, or different total-column-row flags, should be recorded on separate sheets. 
 Within this are &lsquo;clusters&rsquo;, intended to align with tasting-note pages. 
 Within this are integers pointing to wines. 
-The default value is empty if `GlassesOnTastingNotePages` is empty, otherwise `[GlassesOnTastingNotePages]`, so the cluster divisions (some 25% grey backgrounding) on the vote recorder are page divisions between the tasting-note pages.
+The default value is empty if `GlassesOnTastingNotePages` is empty, otherwise `[GlassesOnTastingNotePages]`, so the cluster divisions (25% grey backgrounding) on the vote recorder are page divisions between the tasting-note pages.
+
+The most [complicated definition of `/GlassesClusteredOnVoteRecorders`](http://www.jdawiseman.com/papers/placemat/placemats_list.html#a20131011) has been:
+
+```PostScript
+/GlassesClusteredOnVoteRecorders
+[
+	GlassesOnTastingNotePages 0 3 getinterval
+	GlassesOnTastingNotePages 3 3 getinterval
+	GlassesOnTastingNotePages 6 3 getinterval
+	GlassesOnTastingNotePages
+] def
+```
+
+
+
 
 Then there is the complicated `VoteRecorderCrossedBox`. 
 Obviously, I am not to guess the wine I know. 
 It is elegant for that box to be crossed. 
 So `VoteRecorderCrossedBox` is code returning a Boolean, it usually accessing internal variables such as `WithinTitles` and `ThisName`, as well as `VoteRecorderShowTotalRow`. 
-(`VoteRecorderCrossedBox` is not intuitive to use: please suggest improvements in [issue&nbsp;80](../../../issues/80/).)
+(`VoteRecorderCrossedBox` is not intuitive to use: please suggest improvements in [issue&nbsp;80](http://github.com/jdaw1/placemat/issues/80).)
 
 ### Superfluous
 
-`VoteRecorderNamesOrientation` controls the orientation of the `NamesVoteRecorder`, with allowed values /Horizontal, /Vertical, or the default value of /Either.
+`VoteRecorderNamesOrientation` controls the orientation of the `NamesVoteRecorder`, with allowed values `/Horizontal`, `/Vertical`, or the default value of `/Either`.
 
 `VoteRecorderShowTotalCol` is like `VoteRecorderShowTotalRow`, defaulting to an array of `true`. 
 
-And the self-explnatory parameters `VoteRecorderPaperType` and `VoteRecorderOrientation`; and `VoteRecorderTitlesFontSizeMax` and `VoteRecorderSubtitleFontSizeProportionTitles` (a positive number or /Automatic).
+And the self-explnatory parameters `VoteRecorderPaperType` and `VoteRecorderOrientation`; and `VoteRecorderTitlesFontSizeMax` and `VoteRecorderSubtitleFontSizeProportionTitles` (a positive number or `/Automatic`).
 The &lsquo;Total&rsquo; strings are `VoteRecorderTotalColTitle`, `VoteRecorderTotalRowTitle`: there might be changes for `Kern`ning or different languages. 
 
 The arrays used are `NamesVoteRecorder`, `CirclearraysVoteRecorder`, `TitlesVoteRecorder`, and `SubtitlesVoteRecorder`.
@@ -310,14 +325,14 @@ The text at the top of the page is `DecantingNotesTopText`, the two columns bein
 
 `GlassesClusteredOnDecantingNotes` has the same structure as `GlassesClusteredOnVoteRecorders`.
 
-And the self-explnatory parameters `DecantingNotesPaperType` and `DecantingNotesOrientation`; and `DecantingNotesTitlesFontSizeMax` and `DecantingNotesSubtitleFontSizeProportionTitles` (a positive number or /Automatic).
+And the self-explnatory parameters `DecantingNotesPaperType` and `DecantingNotesOrientation`; and `DecantingNotesTitlesFontSizeMax` and `DecantingNotesSubtitleFontSizeProportionTitles` (a positive number or `/Automatic`).
 
 
 <div style="clear: both;"></div>
 
 ## Accounts
 
-Of course, any financial rebalancing will have been computed in advance, audited in accordance with the [1844 Companies Act](https://en.wikipedia.org/wiki/Joint_Stock_Companies_Act_1844), and settled using a system designated under the [The Financial Markets and Insolvency (Settlement Finality) Regulations 1999](https://www.legislation.gov.uk/uksi/1999/2979/contents/made). 
+Of course, any financial rebalancing will have been computed in advance, audited in accordance with the [1844&nbsp;Companies&nbsp;Act](https://en.wikipedia.org/wiki/Joint_Stock_Companies_Act_1844), and settled using a system designated under the [The Financial Markets and Insolvency (Settlement Finality) Regulations 1999](https://www.legislation.gov.uk/uksi/1999/2979/contents/made). 
 Of course.
 
 Except that it rarely works like that. 
@@ -383,7 +398,7 @@ The circle to be cut is of radius `NeckTagsHoleRadius`, defaulting to 54pt &rArr
 
 The width of the dashed line is `NeckTagsHoleLineWidth` which defaults to 0.12pt = 1 pixel on a 600 d.p.i. printer. 
 
-From the top of that hole to the top of the whole tag is `NeckTagsSpaceAboveHole`; between hole and top of the Title/Abovetitle/etc is at least `NeckTagsSpaceAboveTitlesEtc`; and between bottom of the Title/Belowtitle/etc and the inside of the bordering text (an element of `CirclearraysNeckTags`) is at least NeckTagsSpaceBelowTitlesEtc.
+From the top of that hole to the top of the whole tag is `NeckTagsSpaceAboveHole`; between hole and top of the Title/Abovetitle/etc is at least `NeckTagsSpaceAboveTitlesEtc`; and between bottom of the Title/Belowtitle/etc and the inside of the bordering text (an element of `CirclearraysNeckTags`) is at least `NeckTagsSpaceBelowTitlesEtc`.
 
 If there are `BackgroundTextsGlasses` then whether those background texts appear in the neck tags is controlled by `NeckTagsShowBackgroundTexts`. 
 Likewise for `OutlineTitles`, by `NeckTagsShowOutlineTitles`; and for `CrossHatchingInside`, by `NeckTagsShowCrossHatchingInside`. 
@@ -406,7 +421,6 @@ Decanter labels are to fit within a rectangle of size `DecanterLabelsMaxSmallerD
 
 Orientation, of labels not page, is controlled by DecanterLabelsOrientation, with allowed values `/Landscape`, `/Portrait`, and `/Automatic`. 
 The Boolean parameter `DecanterLabelsGuillotineMarks` controls whether small cut marks are shown: useful if guillotining. 
- (this text being in the parameter ).
 The decanter label pages include instructions of `DecanterLabelsTopText`, defaulting to &ldquo;Decanter labels: cut; paste to business cards; allow to dry; punch holes; hang on decanters; fill decanters; wait; drink.&rdquo;
 
 
@@ -428,7 +442,7 @@ The decanter labels are on paper `DecanterLabelsPaperType`.
 </div>
 
 Sticky labels can be intricate to use. 
-But before that, what is there purpose that isn&rsquo;t handled by the decanter labels?
+But before that, what is their purpose that isn&rsquo;t handled by the decanter labels?
 There are two.
 
 1. At the start of decanting, some bottles will be clearly labelled. 
@@ -436,7 +450,7 @@ Others might have little more than a capsule, so after opening, could be entirel
 Confusion can be prevented by a sticky label, or by a neck tag, or by a decanter label.
 
 2. Some tastings have many more wines than glasses. 
-At such an event it can help to stick to the foot of the glass (always foot, never bowl) a small sticky label identifying the current contents and the glass&rsquo;s owner. 
+At such an event it can help to stick to the foot of the glass (always foot; never bowl) a small sticky label identifying the current contents and the glass&rsquo;s owner. 
 
 Specifying either of these requires describing the sheet of labels. 
 The defaults specify the sizes for sheets of sticky labels readily avaialble in the UK. 
@@ -471,7 +485,7 @@ If not using a default, the user must change the specification of the label layo
 * `StickyLabelsOrientation` is the desired orientation of the labels. That is not necessarily the same as the orientation of the page: if, with the page held portrait, labels are wider than they are high, it will be the opposite. Allowed values are `/Landscape`, `/Portrait`, and `/Automatic`. If `/Automatic` then the orientation is chosen automatically, the code choosing `/Landscape` unless switching to `/Portrait` would increase the linear size of the text by &ge;&#8732;2.
 * If one has a part-used sheet of labels, it can help to specify the where on the first page of sticky labels to start, as if `StickyLabelsFirstPageStartPosition` labels have already been used.
 
-To make sticky labels for wines not appearing on a glasses sheet, see GlassesNumCopies.
+To make sticky labels for wines not appearing on a glasses sheet, see [`GlassesNumCopies`](document.md#printable).
 
 There are also settings `StickyLabelsReverseOrder`, `StickyLabelsRemoveDuplicatesByWithinTitles`, `StickyLabelsSortByWithinTitles`, `StickyLabelsShowBackgroundTexts`, `StickyLabelsShowDroplets`, and `StickyLabelsShowCirclearraysInCircle` (as well as in the straight lines top and bottom). 
 
