@@ -48,8 +48,12 @@ Booleans:
 * `VoteRecorders`;
 * `PlaceNames`.
 
-Three page types reproduce what is on the glasses pages: pre-pour; neck tags; sticky labels. 
-It is possible to make these pages without the glasses page by making the glasses pages, and then not showing them, by `/GlassesNumCopies 0 def`.
+Three page types reproduce what is on the glasses pages:  
+* pre-pour;  
+* neck tags;  
+* sticky labels.
+
+It is possible to make these pages without the glasses page by making the glasses pages, and `/GlassesNumCopies 0 def` to not show them.
 
 
 ### Margins
@@ -60,13 +64,13 @@ But if referencing margins within injected code, use `MgnL` etc, as these are ap
 
 If adding crop marks, it is easiest to add them into white space around the logical page. 
 This can be done for just the glasses page (the only page type for which the author has used this), `OuterGlassesMarginL` etc, or around the other page types, `OuterMarginL`, etc. 
-There is also the setting `OuterGlassesCropMarks`.
+There is also the Boolean setting `OuterGlassesCropMarks`.
 
 
 ### Rotate180AlternateNames
 
 At a large tasting there can be three or four glasses pages each, and a similar number of tasting-note pages. 
-Setup can be slightly swifter if the boundary between sets of papers is slightly sharper, done by rotating 180&deg; the papers of alternate people. 
+Setup can be slightly swifter if the boundary between sets of papers is sharper, done by rotating 180&deg; the papers of alternate people. 
 For this, `/Rotate180AlternateNames true def`.
 
 ### PageOrdering&hellip;
@@ -77,7 +81,7 @@ It simplifies one task.
 
 * Each page has a value of its PageOrdering. Smaller numbers are printed first. 
 
-* Within each PageOrdering, pages are sorted by the paper size, to keep same sizes together. 
+* Within each PageOrdering, pages are sorted by the paper size, for ease of handling. 
 
 * Within each PageOrdering and paper size, printing order is:
     - Loop over all the names, printing for each in turn the glasses, then the tasting notes, then the place names;
@@ -99,8 +103,8 @@ The default values are as follows.
 | `PageOrderingNeckTags`         |  `GlassesOnSheets`                  | 1 | |
 | `PageOrderingPrePourPages`     |  `GlassesOnSheets`                  | 1 | |
 | `PageOrderingPlaceNames`       |  `NamesPlaceNames`                  | 100 | Late, for folding. |
-| `PageOrderingDecanterLabels`   |  `GlassesOnSheets`                  | 200 | Near-last for cutting and gluing before the tasting day. |
-| `PageOrderingStickyLabels`     |  `GlassesOnSheets`                  | 300 | Last for manual change of paper in the printer. |
+| `PageOrderingDecanterLabels`   |  `GlassesOnSheets`                  | 200 | Near-last, for cutting and gluing before the tasting day. |
+| `PageOrderingStickyLabels`     |  `GlassesOnSheets`                  | 300 | Last, for manual change of paper in the printer. |
 
 </div>
 
@@ -112,7 +116,7 @@ For a multi-session tasting, it is worth the effort of changing these.
 
 If printing a page to the underside of acetate, the page would need to be mirrored. 
 For this there are `MirrorPages…` parameters, arrays of Booleans, of the same length as the similarly named `PageOrdering…` parameters. 
-(Added to code in September 2009; as of June 2021 never used live.)
+(Added to code in September 2009; as of August 2021 never used live.)
 
 
 ### Suppressing pages
@@ -154,7 +158,7 @@ Sometimes page suppression can produce one extra blank page, as discussed in [is
 
 ### CMYK black
 
-`/CMYK0001replacesRGB000 true def` replaces RGB black (`0 setgray`) with printers&rsquo; CMYK black (`0 0 0 1 setcmykcolor`).
+`/CMYK0001replacesRGB000 true def` replaces RGB black =&nbsp;`0 setgray` with printers&rsquo; CMYK black =&nbsp;`0 0 0 1 setcmykcolor`.
 
 
 ## High-level code insertion
@@ -182,14 +186,14 @@ But really, modern software isn&rsquo;t written in PostScript.
 ```
 * `PaintForegroundCode` is executed once per page, just after other painting is finished.
 
-* `PaintBackgroundInsideGlassCircles` is called once per circle on the glasses page. Called with centre of circle translated to 0,0; and clipped to a radius of Radii SheetNum get.
+* `PaintBackgroundInsideGlassCircles` is called once per circle on the glasses page. Called with centre of circle translated to 0,0; and clipped to a radius of `Radii SheetNum get`.
 
 
 ### An empty page
 
 <img align="right" width="248" height="351" src="images/NonGlasses_E.png">
 
-The empty-page feature is for a rarely-used specialist purpose, and when used is meant to be used temporarily. 
+The empty-page feature is for a fussy rarely-used specialist purpose, and when used is meant to be used temporarily. 
 
 Assume the following. 
 You are making placemats for a team tasting. 
@@ -210,6 +214,7 @@ It uses `EmptyGlassesPageOrientation` and `EmptyPageString`, and re-uses `Tastin
 
 ## PDF properties
 
+Some non-printable properties of the PDF can be controlled or affected by parameters.
 
 ### PDF_title
 
@@ -227,7 +232,11 @@ The placemat software creates this automatically.
 
 
 At the end of the outline are relevant external links. 
-The user can create these with the array `ExternalLinks`, which is an array of length a multiple of three: Boolean0, Descriptor0, URL0; Boolean1, Descriptor1, URL1; &hellip;. 
+The user can create these with the array `ExternalLinks`, which is an array of length a multiple of three:  
+* Boolean0, Descriptor0, URL0;  
+* Boolean1, Descriptor1, URL1;  
+* &hellip;.
+
 The first boolean must be `false`; subsequent booleans are true if the link is a &lsquo;child&rsquo; of the previous &lsquo;false&rsquo; link, and are `false` if a &lsquo;parent&rsquo; link. 
 (If the PDF viewer is showing the table of contents there is a small triangle beside the &lsquo;parent&rsquo; link: pointing right if the children are hidden (&ldquo;&#9656;&rdquo;); pointing down if the children are visible (&ldquo;&#9662;&rdquo;); rotated between the two by being clicked on.) 
 The descriptions can be compound strings, `[…]`. 
@@ -293,7 +302,7 @@ If `GlassesDestForEachCircle` is true, there are also # tags for individual glas
 (But not all PDF viewers correctly zoom to these circles: see bugs [in Apple Preview](http://discussions.apple.com/thread/7234631) and [in Google Chrome](http://bugs.chromium.org/p/chromium/issues/detail?id=535978).) 
 For some actual placemats, changing `GlassesDestForEachCircle` from false to true increased the file size from &asymp;&nbsp;360k to &asymp;&nbsp;400k, &asymp;&nbsp;11%: not tiny. 
 These &lsquo;Dest&rsquo;s are most useful for the placemat maker, speeding the checking of an individual circle&mdash;but there&rsquo;s no need to check the same circle on multiples `Names`, because they are all the same. 
-So GlassesDestForEachCircle&rsquo;s default value is `NameNum 0 eq}`, which makes them for only the first of the `Names`.
+So `GlassesDestForEachCircle`&rsquo;s default value is `{NameNum 0 eq}`, which makes them for only the first of the `Names`.
 
 <div align="center">
 
@@ -317,7 +326,8 @@ Sticky labels   | `/StickyLabels`   | &hellip;#StickyLabels_0   |
 
 The `CopyrightStatementPlacemats`, `LicensingAgreementTextPlacemats`, and `LicensingAgreementLinkPlacemats` are all output to the log. 
 
-It is intended that the latter two, or at least the least, will be embedded in the PDF in a machine-readable searchable filterable manner, per [issue 16](http://github.com/jdaw1/placemat/issues/16).  
+It is intended that the latter two, or at least the least, will be embedded in the PDF in a machine-readable searchable filterable manner, per [issue 16](http://github.com/jdaw1/placemat/issues/16). 
+(Expert help wanted: be not shy about replying to an issue.)
 
 ## Debugging and documentation generation
 
@@ -328,7 +338,7 @@ Some might help bebugging.
 Others, such as listing fonts used, are to help those using old placemats as inspiration for new. 
 The log can go to three places, controlled by three Booleans.
 * `OutputLogToLog`: there is no reason not to do this. 
-* `OutputLogToPage`: appears at the end, and generally a good idea, except when the pages are to be converted to a GIF animation. 
+* `OutputLogToPage`: appears at the end, and generally a good idea (except when the pages are to be converted to a GIF animation, or if many copies are to be printed by somebody inattentive). 
 * `OutputLogToAnnotation`, a small pop-up text box on the last page of the PDF &mdash; necessary only when `OutputLogToPage` is false. 
 
 `LogThisExtra` contains a string, perhaps a multi-line string, which is output to the log file. 
@@ -341,8 +351,8 @@ Indeed, perhaps only for making documentation.
 PDFs allow page labels. 
 In some PDF viewers the page labels appear beneath the thumbnails in the sidebar. 
 They have another purpose: if a PDF has been imported by [Lemke Software&rsquo;s GraphicConverter](http://www.lemkesoft.de/en/products/graphicconverter/), and all the pages are output, the page labels become the file names of the separate bitmap files. 
-So if, for example, making documentation for the [PackingStyles](PackingStyles.md) function, having the parameters control the page labels would eliminate possible copy-paste errors in the naming of the files. 
+So if, for example, making [documentation for the `PackingStyles`](PackingStyles.md) function, having the parameters control the page labels would eliminate possible copy-paste errors in the naming of the files. 
 
 The usual page labels are overridden if `PageLabelOverride` is true. 
-for example, it might be `def`&rsquo;d to `{/Glasses TypeOfPagesBeingRendered eq}`. 
+for example, it might be `def`&rsquo;d to `{/Glasses TypeOfPagesBeingRendered eq}`. 
 Then `PageLabelOverrideWith` is a string, or code returning a string, that is the desired page label. 
