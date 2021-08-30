@@ -199,7 +199,7 @@ Please do post translations as [an issue](http://github.com/jdaw1/placemat/issue
 * `VoteRecorderTotalColTitle` = `VoteRecorderTotalRowTitle`: *Total*
 * `VoteRecorderMonkeyName`: *Monkey*
 * `TastingNotesColumnHeadings`:
-	- *Times*
+	- *Times* (i.e., time at which wine decanted)
 	- *Eye*
 	- *Nose*
 	- *Mouth*
