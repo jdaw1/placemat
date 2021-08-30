@@ -153,7 +153,7 @@ This has been used very rarely, indeed, prior to June 2021, exactly once.
 ## Variables that parameters may inspect
 
 Many parameters may be set to code, and this code may access internal variables. 
-Multiple variables can be available for use.
+Multiple variables can be available for inspection.
 
 * At the page level:
 
@@ -180,7 +180,7 @@ Multiple variables can be available for use.
 
 	- On tasting-note pages, `TastingSheetNum`, an integer being the item of `GlassesOnTastingNotePages` currently being rendered.
 
-	- On place-name pages, PlaceNameSetNum, an integer being the number of the sub-array of NamesPlaceNames currently being rendered.
+	- On place-name pages, `PlaceNameSetNum`, an integer being the number of the sub-array of `NamesPlaceNames` currently being rendered.
 
 	- On pre-pour pages, `PrePourSheetNum`, an integer &ge;&nbsp;0 and &le;&nbsp;`PrePourNumCopies`&minus;1, being the number of the pre-pour sheet currently being rendered.
 
@@ -192,7 +192,7 @@ Multiple variables can be available for use.
 
 	- Within each neck tag, `NeckTagsCopyNum`. If a tasting as many people and hence multiple bottles of each wine, of which each person tastes only one, the tags could be numbered: `/CirclearraysNeckTags [ Circlearrays {[ exch aload pop [(Bottle #) {NeckTagsCopyNum 1 add}] ]} forall ] def`. 
 
-	- `CircletextMaxFontSizes`, an array of reals with `CircletextMaxFontSizes SheetNum get` being the usual font size in which the `Circlearrays` are rendered (though the font size of any particular circle text might have been shrunk by `CircletextsMinCopies`, or altered by code within `Circlearrays`).
+	- `CircletextMaxFontSizes`, an array of reals with `CircletextMaxFontSizes SheetNum get` being that page&rsquo;s usual font size in which the `Circlearrays` are rendered (though the font size of any particular circle text might have been shrunk by `CircletextsMinCopies`, or altered by code within `Circlearrays`).
 
 	- `TitleFontSizes` and similar variables `AbovetitleFontSizes`, `BelowtitleFontSizes`, and `OvertitleFontSizes`, being nested arrays, the same shape as `GlassesOnSheets`. They contain the sizes of the font at the start of rendering the `Titles` etc.
 
