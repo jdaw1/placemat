@@ -284,6 +284,17 @@ The double-depth array allows some flexibility by *de facto* merging several typ
 If the element of PagesToBeInsertedDests is a name, so beginning with a &ldquo;`/`&rdquo;, there will be a ToC entry pointing to this &lsquo;DEST&rsquo;, titled with the element of `PagesToBeInsertedDescriptions`. 
 And the number of pages being inserted is the element of `PagesToBeInsertedNumPages`, which allows the page numbering to be correct. 
 
+So the following makes space for `1` inserted page before the first instance (instance `0`) of any of `/VoteRecorder` `/DecantingNotes` `/Accounts`. That page is to have the internal name, useable as a #&hellip; suffix to a URL, of &ldquo;FoodOrder_0&rdquo;, and is to be visible in the ToC as &ldquo;Food order&rdquo;. 
+
+```PostScript
+/PagesToBeInserted                true                                          def
+/PagesToBeInsertedNumPages        [ 1 ]                                         def
+/PagesToBeInsertedBeforeInstances [ 0 ]                                         def
+/PagesToBeInsertedBeforeTypeOneOf [ [/VoteRecorder /DecantingNotes /Accounts] ] def
+/PagesToBeInsertedDests           [ /FoodOrder_0 ]                              def
+/PagesToBeInsertedDescriptions    [ (Food order) ]                              def
+```
+
 
 ### #Linking to specific pages within the PDF
 
