@@ -356,7 +356,7 @@ Of course, if precise hue of colour is important, do not assume that screen and 
 
 ### Postponed
 
-Tasting postponed by an extention of covid lockdowns? 
+Tasting postponed by an extension of covid lockdowns? 
 Multiple links to placemats, so reluctant to remove placemats from web? 
 Nonetheless, wanting to mark &ldquo;Postponed&rdquo;? 
 It can be done.
