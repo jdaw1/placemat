@@ -281,7 +281,7 @@ If `FlightSeparationPaintSeparately` then `FlightSeparationPaintCode` is invoked
 If `FlightSeparationPaintSeparately not`, then all the lines on the current page are drawn, after which is the single call of `FlightSeparationPaintCode`. 
 The former is better if the format is not constant; the latter preferred if overlapping or crossing lines are to be double-stroked.
 
-There is a [bug in (at least some versions of) Adobe Distiller](http://groups.google.com/forum/#!topic/comp.lang.postscript/amUp28S-JFM), such that if `FlightSeparationPaintSeparately` is `false` and there are multiple lines on one page (&hArr; `FlightSeparationLines SheetNum get length` &ge; 2), the apparent ends of some lines are controlled by `setlinejoin` rather than `setlinecap`. 
+There is a [bug in (at least some versions of) Adobe Distiller](http://groups.google.com/g/comp.lang.postscript/c/amUp28S-JFM), such that if `FlightSeparationPaintSeparately` is `false` and there are multiple lines on one page (&hArr; `FlightSeparationLines SheetNum get length` &ge; 2), the apparent ends of some lines are controlled by `setlinejoin` rather than `setlinecap`. 
 It is a small aesthetic imperfection, but an aesthetic imperfection nonetheless. 
 The problem can be avoided if no line begins where the previous one ended, achievable by reversing the direction of individual lines, or by re-ordering the set of lines.
 

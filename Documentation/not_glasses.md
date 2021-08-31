@@ -332,7 +332,7 @@ And the self-explnatory parameters `DecantingNotesPaperType` and `DecantingNotes
 
 ## Accounts
 
-Of course, any financial rebalancing will have been computed in advance, audited in accordance with the [1844&nbsp;Companies&nbsp;Act](https://en.wikipedia.org/wiki/Joint_Stock_Companies_Act_1844), and settled using a system designated under the [The Financial Markets and Insolvency (Settlement Finality) Regulations 1999](https://www.legislation.gov.uk/uksi/1999/2979/contents/made). 
+Of course, any financial rebalancing will have been computed in advance, audited in accordance with the [1844&nbsp;Companies&nbsp;Act](http://en.wikipedia.org/wiki/Joint_Stock_Companies_Act_1844), and settled using a system designated under the [The Financial Markets and Insolvency (Settlement Finality) Regulations 1999](http://www.legislation.gov.uk/uksi/1999/2979/contents/made). 
 Of course.
 
 Except that it rarely works like that. 
@@ -454,7 +454,7 @@ At such an event it can help to stick to the foot of the glass (always foot; nev
 
 Specifying either of these requires describing the sheet of labels. 
 The defaults specify the sizes for sheets of sticky labels readily avaialble in the UK. 
-If the defaults should know of other standard sizes, please raise an [issue](https://github.com/jdaw1/placemat/issues) to that effect.
+If the defaults should know of other standard sizes, please raise an [issue](http://github.com/jdaw1/placemat/issues) to that effect.
 
 Sticky labels appear if `StickyLabelsNumCopies` exceeds zero. 
 
