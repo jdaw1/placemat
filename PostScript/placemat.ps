@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:20 Tuesday 24th August 2021
+% This version 21:30 Wednesday 1st September 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202108242020) def
+/ParametersVersionDateTimeAdobeFormat (D:202109012130) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -81,7 +81,7 @@
 %	true    (in list of placemats)           (http://www.jdawiseman.com/papers/placemat/placemats_list.html#a2021MMDD)
 	false   (Boot & Flogger)                 (http://www.davy.co.uk/wine-bar/boot-and-flogger/)
 	true    (SE1 1TA, streetmap.co.uk)       (http://www.streetmap.co.uk/map.srf?x=532409&y=180083&z=106&pc=SE1+1TA)
-	true    (SE1 1TA, google.co.uk)          (https://goo.gl/maps/7NEiwAMEZpG2)
+	true    (SE1 1TA, google.co.uk)          (http://goo.gl/maps/7NEiwAMEZpG2)
 	true    (SE1 1TA, bing.com)              (http://www.bing.com/maps/default.aspx?where1=SE1+1TA&cp=51.50428~-0.0935)
 	true    (What3Words: cafe.humid.palace)  (http://map.what3words.com/cafe.humid.palace)
 ] def  % /ExternalLinks
@@ -563,7 +563,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /DecanterLabelsPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /USL2
 /DecanterLabelsOrientation /Automatic def  % of labels, not of paper. /Landscape /Portrait /Automatic
 
-% GhostScript doesn't pickle settransfer; Preview doesn't see non-pickled settransfer. The bug is in Preview. https://groups.google.com/forum/#!topic/comp.lang.postscript/NJLAfvN_jwU
+% GhostScript doesn't pickle settransfer; Preview doesn't see non-pickled settransfer. The bug is in Preview. http://groups.google.com/g/comp.lang.postscript/c/NJLAfvN_jwU
 /TastingNotesCirclesBehind {IsDistiller  {GlassesNumCopies 1 ge} MightBeTrue and  BackgroundTextsTastingNotes not and  SideBySideGlassesTastingNotes not and} bind def
 /TastingNotesCirclesBehindFitAndCentreInRow false def
 /TastingNotesCirclesBehindFadingFactorIfAllBlack 0.125 def
@@ -759,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202108242020) def
+/SoftwareVersionDateTimeAdobeFormat (D:202109012130) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -828,7 +828,7 @@ PrinterEpsilon setflat  % According to PLRM3 p669, automatically substituted wit
 } bind def  % /OutputToLog
 
 
-/SuppressANN   % https://groups.google.com/forum/#!topic/comp.lang.postscript/8V9XFDwuLPg
+/SuppressANN   % http://groups.google.com/g/comp.lang.postscript/c/8V9XFDwuLPg
 /currentdistillerparams where
 {
 	pop currentdistillerparams /CheckCompliance 2 copy known {get //false exch {dup /PDFX1a:2001 eq exch /PDFX3:2002 eq or or} forall} {pop pop //false} ifelse
@@ -843,7 +843,7 @@ PrinterEpsilon setflat  % According to PLRM3 p669, automatically substituted wit
 	ifelse  % Use testing routine
 } {/globaldict where {pop globaldict} {userdict} ifelse  /pdfmark /cleartomark load put} ifelse  % /pdfmark where
 
-% https://groups.google.com/forum/#!topic/comp.lang.postscript/DWky6YmjQQI
+% http://groups.google.com/g/comp.lang.postscript/c/DWky6YmjQQI
 /NullDevices where {pop} {/NullDevices 31 array def  NullDevices 0 0 put} ifelse  % 5 would be enough. Done here to allow immediate execution.
 /CountGraphicsStack where {pop}
 {
@@ -877,7 +877,7 @@ ifelse} bind def
 % [ thing thing ... ] {comparison code that takes two things and returns a boolean} ShellSort -
 % Sorts array such that for elements i and i+1 the comparison code returns true (or equal).
 % E.g.,   [1 2 3 4 5 2. 3. 4. 5. 3 4 5 4. 5. 5] dup {le} ShellSort ==   outputs   [1 2 2.0 3 3 3.0 4 4.0 4 4.0 5 5 5.0 5.0 5]
-% Based on https://www.tutorialspoint.com/data_structures_algorithms/shell_sort_algorithm.htm
+% Based on http://www.tutorialspoint.com/data_structures_algorithms/shell_sort_algorithm.htm
 /ShellSort
 {
 	DeBugLevel 25 le {(+ShellSort) OutputToLog} if
@@ -1461,8 +1461,8 @@ mark  (product = ) product (; languagelevel = ) /languagelevel where {pop langua
 /IsDistiller false  1 dict begin /SearchString (Distiller) def  0 1 product length SearchString length sub {product exch SearchString length getinterval SearchString eq {pop //true exit} if} for  end def
 
 /MonthNames [(Jan) (Feb) (March) (April) (May) (June) (July) (Aug) (Sep) (Oct) (Nov) (Dec)] def
-% https://en.wikibooks.org/wiki/PostScript_FAQ#How_to_get_date_and_time.3F
-% https://groups.google.com/forum/#!topic/comp.lang.postscript/UAkMrNLakKs
+% http://en.wikibooks.org/wiki/PostScript_FAQ#How_to_get_date_and_time.3F
+% http://groups.google.com/g/comp.lang.postscript/c/UAkMrNLakKs
 (\%Calendar\%) dup /IODevice resourcestatus
 {
 	pop pop  currentdevparams begin
@@ -1506,14 +1506,14 @@ TestingMaxNumPagesToShow 2147483647 lt  TestingShowThesePagesOnly null ne  Testi
 	mark  (Nota bene: some pages might be suppressed = not shown, perhaps because this is an example or a test.)
 	(\nAt the end there might be an extra page, blank, caused by a bug in erasepage.)
 	(\nhttp://github.com/jdaw1/placemat/issues/109)
-	(\nhttp://groups.google.com/forum/#!topic/comp.lang.postscript/HVZVz0eBwrw)
+	(\nhttp://groups.google.com/g/comp.lang.postscript/c/HVZVz0eBwrw)
 	TestingMaxNumPagesToShow 2147483647 lt {(\nTestingMaxNumPagesToShow = ) TestingMaxNumPagesToShow} if
 	TestingShowThesePagesOnly   null    ne {(\nTestingShowThesePagesOnly = ) TestingShowThesePagesOnly} if
 	TestingSuppressPageTypes  length 0  gt {(\nTestingSuppressPageTypes = [) TestingSuppressPageTypes {dup type /nametype eq {( /) exch} if ( )} forall (])} if
 	ConcatenateToMark OutputToLog
 } if  % TestingMaxNumPagesToShow ... TestingShowThesePagesOnly ... TestingSuppressPageTypes ... or or
 
-% Changes RGB black to proper CMYK printers' black. http://groups.google.com/forum/#!topic/comp.lang.postscript/6JW6VamdVlw
+% Changes RGB black to proper CMYK printers' black. http://groups.google.com/g/comp.lang.postscript/c/6JW6VamdVlw
 CMYK0001replacesRGB000   /setcolor load type /operatortype eq   and
 {
 	(Black is a printers' black with "0 0 0 1 setcmykcolor" rather than screen black with "0 setgray", by CMYK0001replacesRGB000.) OutputToLog
@@ -1698,7 +1698,7 @@ currentdict /ForReverseBinaryDict undef
 /mm {2.83464566929 mul} bind def  % 360 127 div
 
 % PaperType Orientation  Dimensions  PageWidth PageHeight
-% https://groups.google.com/forum/#!topic/comp.lang.postscript/vlfF8eGOCMA
+% http://groups.google.com/g/comp.lang.postscript/c/vlfF8eGOCMA
 /Dimensions
 {
 	DeBugLevel 10 le {(+Dimensions) OutputToLog} if
@@ -2324,9 +2324,9 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 			TypeOfPagesBeingRendered /Empty          eq {pop [ (Empty: ) EmptyPageString ]} if
 		} ifelse  % PageLabelOverride
 
-		% https://groups.google.com/forum/#!topic/comp.lang.postscript/xqXz9g44ATs
+		% http://groups.google.com/g/comp.lang.postscript/c/xqXz9g44ATs
 		% http://www.jdawiseman.com/papers/bugs/20151113_PDFDocEncodingify.txt
-		% https://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19268545--pagelabel-pdfmark-does-not-allow-pdf-encoding
+		% http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19268545--pagelabel-pdfmark-does-not-allow-pdf-encoding
 		IsDistiller {version {cvr} stopped {pop //true} {3018.1009999 gt} ifelse} {//true} ifelse {PDFDocEncodingify} {ASCIIfy} ifelse
 		dup length 255 gt {0 255 getinterval} if
 		mark exch /Label exch /PAGELABEL pdfmark  % Former bug in Adobe Distiller affecting /PAGELABELs but not /OUTs
@@ -2414,7 +2414,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 		end
 		TestingShowThesePagesOnly dup type /arraytype eq {//false exch {execU ShownPages eq {pop //true exit} if} forall} {pop //true} ifelse {showpage} {erasepage initgraphics} ifelse
 		/ShownPages dup load 1 add store
-	} {erasepage initgraphics} ifelse  % PageSuppressed not  % http://groups.google.com/forum/#!topic/comp.lang.postscript/HVZVz0eBwrw
+	} {erasepage initgraphics} ifelse  % PageSuppressed not  % http://groups.google.com/g/comp.lang.postscript/c/HVZVz0eBwrw
 } bind def  % /ShowPage
 
 /IsNumber {type dup /integertype eq exch /realtype eq or} bind def
@@ -2502,7 +2502,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 	div
 	DeBugLevel 5 le {(-CurrentFontSize) OutputToLog} if
 } bind def  % /CurrentFontSize
-% https://groups.google.com/forum/#!topic/comp.lang.postscript/cteFkRmWMVg
+% http://groups.google.com/g/comp.lang.postscript/c/cteFkRmWMVg
 /CurrentFontName {currentfont /FontName get} bind def
 
 /SubscriptOn {0 CurrentFontSize -0.25 mul rmoveto  CurrentFontName CurrentFontSize 1.7 div selectfont} bind def
@@ -2917,7 +2917,7 @@ currentdict /SmallCapsDict undef
 % has, at the _s_tart and _e_nd points, same position as original function, same tangent, same curvature. ApproximatingCurve returns the middle two
 % knot points of a cubic Bezier. The calling code might, for example, have the first as the currentpoint, and append the last before calling curveto.
 % Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe  ApproximatingCurve  X1 Y1 X2 Y2
-% https://groups.google.com/forum/#!topic/comp.lang.postscript/3RIq0Jnwrbo
+% http://groups.google.com/g/comp.lang.postscript/c/3RIq0Jnwrbo
 /ApproximatingCurve
 {
 	DeBugLevel 10 le {(+ApproximatingCurve) OutputToLog} if
@@ -3125,7 +3125,7 @@ currentdict /SmallCapsDict undef
 	DeBugLevel 10 le {(-CharPathRecMoveto) OutputToLog} if
 } bind def  % /CharPathRecMoveto
 
-% https://groups.google.com/forum/#!topic/comp.lang.postscript/hZmiLPonDl8
+% http://groups.google.com/g/comp.lang.postscript/c/hZmiLPonDl8
 /CharPathRecursiveMoveto
 {
 	DeBugLevel 10 le {(+CharPathRecursiveMoveto) OutputToLog} if
@@ -3155,7 +3155,7 @@ currentdict /SmallCapsDict undef
 	DeBugLevel 9 le {(-CharPathRec) OutputToLog} if
 } bind def  % /CharPathRec
 
-% https://groups.google.com/forum/#!topic/comp.lang.postscript/hZmiLPonDl8
+% http://groups.google.com/g/comp.lang.postscript/c/hZmiLPonDl8
 /CharPathRecursive
 {
 	DeBugLevel 10 le {(+CharPathRecursive) OutputToLog} if
@@ -3165,7 +3165,7 @@ currentdict /SmallCapsDict undef
 	DeBugLevel 10 le {(-CharPathRecursive) OutputToLog} if
 } bind def  % /CharPathRecursive
 
-% nulldevice causes some bad rounding: https://groups.google.com/forum/#!topic/comp.lang.postscript/7RQ2cQy_k-Y
+% nulldevice causes some bad rounding: http://groups.google.com/g/comp.lang.postscript/c/7RQ2cQy_k-Y
 /ExecUExceptNotBindedPainting  % executes the one parameter, without painting
 {
 	DeBugLevel 5 le {(+ExecUExceptNotBindedPainting) OutputToLog} if
@@ -3212,7 +3212,7 @@ currentdict /SmallCapsDict undef
 		dup xcheck {currentpoint pop exch [exch ExecUExceptNotBindedPainting] StringWidthRec exch currentpoint pop exch sub add exit} if
 		dup type dup /integertype eq exch /realtype eq or {ToString} if  % no 'exit'
 		dup type /stringtype eq {stringwidth pop exit}  if
-		dup type /nametype eq {matrix currentmatrix GSave newpath setmatrix 0 0 moveto //true GlyphPath currentpoint GRestore pop exit} if  % https://groups.google.com/forum/#!topic/comp.lang.postscript/gQppSBL-x74
+		dup type /nametype eq {matrix currentmatrix GSave newpath setmatrix 0 0 moveto //true GlyphPath currentpoint GRestore pop exit} if  % http://groups.google.com/g/comp.lang.postscript/c/gQppSBL-x74
 		dup type /arraytype eq {0 exch {StringWidthRec add} forall exit} if
 		mark exch dup (Error: StringWidthRec parameter ) counttomark -1 roll 0 //true ThingToDebugText ( is of type ) counttomark -1 roll type ToString ( rather than executable, string, name or array.) ConcatenateToMark OutputToLog stop
 	} repeat
@@ -3229,7 +3229,7 @@ currentdict /SmallCapsDict undef
 % TargetAccuracy  LineWidthThatCoversPath  WidthMax WidthMin
 % Calculates, for the current path, the greatest distance from an interior point to the edge.
 % WidthMin is known to be less than this distance. WidthMax will be greater.
-% https://groups.google.com/forum/#!topic/comp.lang.postscript/86b7Sg8v7B0
+% http://groups.google.com/g/comp.lang.postscript/c/86b7Sg8v7B0
 /LineWidthThatCoversPath
 {
 	DeBugLevel 25 le {(+LineWidthThatCoversPath) OutputToLog} if
@@ -3313,7 +3313,7 @@ currentdict /SmallCapsDict undef
 % In a typical case, the most distant point will be on the edge of the circle. So these points are denser.
 % But if the path is the likes of a large letter 'O', the relevant point could be internal, so there are plenty of these as well.
 % http://www.ThePortForum.com/viewtopic.php?t=6608&p=55028#p55028 (reason for doing this computation)
-% https://groups.google.com/forum/#!topic/comp.lang.postscript/86b7Sg8v7B0 (non-discussion about how to do it)
+% http://groups.google.com/g/comp.lang.postscript/c/86b7Sg8v7B0 (non-discussion about how to do it)
 /LineWidthThatCoversCircle
 {
 	DeBugLevel 25 le {(+LineWidthThatCoversCircle) OutputToLog} if
@@ -3635,7 +3635,7 @@ currentdict /SmallCapsDict undef
 % Renders multiple copies of Filltext, outlined in alternate colors, within the clipping region.
 % Used X Y to determine offset of repeats, so that multiple calls can be aligned.
 % Some coding help was requested and provided at
-% https://groups.google.com/forum/#!topic/comp.lang.postscript/XegnvWwDAC4
+% http://groups.google.com/g/comp.lang.postscript/c/XegnvWwDAC4
 %
 % As repeated stroke'ing of text makes PDF files heavy and slow to render,
 % there is an attempt not to paint anything entirely outside the clipping region.
@@ -5202,7 +5202,7 @@ currentdict /SmallCapsDict undef
 			O 0 eq {/L W /S H} {/L H /S W} ifelse  def def
 			Echo {mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /Temple with ) N  O 0 eq {( columns.)} {( rows.)} ifelse  AreaText ConcatenateToMark OutputToLog} if
 			[
-				% https://groups.google.com/forum/#!topic/comp.lang.postscript/5pJw5Gvf_YI
+				% http://groups.google.com/g/comp.lang.postscript/c/5pJw5Gvf_YI
 				% http://mathematica.stackexchange.com/questions/101954/looking-for-postscriptform-or-forthform-to-print-expressions-as-rpn-code
 				% http://www.jdawiseman.com/papers/placemat/PackingStyles_formulae.nb and .pdf
 				L 8 R mul sub L mul 4 2 R mul 4 S mul add R mul S dup mul sub mul add L mul 16 R mul 2 R mul 4 S mul sub R mul S dup mul add mul add L mul 16 13 R mul 28 S mul sub R mul 23 S dup mul
@@ -9612,7 +9612,7 @@ currentdict /SmallCapsDict undef
 					1 currentlinecap ne {1 setlinecap} if  1 currentlinejoin ne {1 setlinejoin} if  currentdash pop length 0 ne {[] 0 setdash} if
 					InlineTitles
 					{
-						/InlinePath % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ    https://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
+						/InlinePath % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ    http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
 						{
 							TitlesFont  TitleFontSizes SheetNum get WithinPage get  selectfont
 							TitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get
@@ -9622,7 +9622,7 @@ currentdict /SmallCapsDict undef
 							moveto
 							Titles WithinTitles get  //true  CharPathRecursive
 						} def  % /InlinePath
-						InlinePath GSave clip InlinePrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ
+						InlinePath GSave clip InlinePrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 						/InlineBlackPlusWhite  InlineTitlesBlackWidth InlineTitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineTitlesAttemptMinimiseNumContours
 						{
@@ -9692,7 +9692,7 @@ currentdict /SmallCapsDict undef
 					} if  % ShapesInTitles
 					InlineTitles  % Doing the terminal '1' from the loop 50ish lines above here
 					{
-						GSave newpath InlinePath clip newpath InlinePath  % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ
+						GSave newpath InlinePath clip newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 						InlineTitlesBlackWidth 2 mul dup currentlinewidth ne {setlinewidth} {pop} ifelse TitlesAboveBelowOverInlineDarkStrokeCode GRestore
 					} if  % InlineTitles
 					newpath
@@ -9709,7 +9709,7 @@ currentdict /SmallCapsDict undef
 					2 copy gt {exch} if pop   FillOvertitles {1.25 mul} if   dup currentlinewidth ne {setlinewidth} {pop} ifelse
 					InlineOvertitles
 					{
-						/InlinePath % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ     https://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
+						/InlinePath % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ     http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
 						{
 							OvertitlesFont  OvertitleFontSizes SheetNum get WithinPage get  selectfont
 							OvertitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get
@@ -9717,7 +9717,7 @@ currentdict /SmallCapsDict undef
 							OvertitleOffsetsProportionFontSizeVertical SheetNum get WithinPage get  OvertitleFontSizes SheetNum get WithinPage get  mul
 							moveto   Overtitles WithinTitles get  //true  CharPathRecursive
 						} def  % InlinePath
-						InlinePath GSave clip InlinePrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ
+						InlinePath GSave clip InlinePrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 						/InlineBlackPlusWhite  InlineOvertitlesBlackWidth InlineOvertitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineAboveBelowOverAttemptMinimiseNumContours
 						{
@@ -9783,7 +9783,7 @@ currentdict /SmallCapsDict undef
 					} if  % ShapesInOvertitles
 					InlineOvertitles  % Doing the terminal '1' from the loop 47ish lines above here
 					{
-						GSave newpath InlinePath clip newpath InlinePath  % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ
+						GSave newpath InlinePath clip newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 						InlineOvertitlesBlackWidth 2 mul dup currentlinewidth ne {setlinewidth} {pop} ifelse TitlesAboveBelowOverInlineDarkStrokeCode GRestore
 					} if  % InlineOvertitles
 					newpath
@@ -9800,7 +9800,7 @@ currentdict /SmallCapsDict undef
 					2 copy gt {exch} if pop   FillBelowtitles {1.25 mul} if   dup currentlinewidth ne {setlinewidth} {pop} ifelse
 					InlineBelowtitles
 					{
-						/InlinePath % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ     https://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
+						/InlinePath % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ     http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
 						{
 							BelowtitlesFont  BelowtitleFontSizes SheetNum get WithinPage get  selectfont
 							BelowtitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get
@@ -9808,7 +9808,7 @@ currentdict /SmallCapsDict undef
 							BelowtitleOffsetsAbsoluteVertical SheetNum get WithinPage get
 							moveto   Belowtitles WithinTitles get  //true  CharPathRecursive
 						} def  % InlinePath
-						InlinePath GSave clip InlinePrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ
+						InlinePath GSave clip InlinePrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 						/InlineBlackPlusWhite  InlineBelowtitlesBlackWidth InlineBelowtitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineAboveBelowOverAttemptMinimiseNumContours
 						{
@@ -9874,7 +9874,7 @@ currentdict /SmallCapsDict undef
 					} if  % ShapesInBelowtitles
 					InlineBelowtitles  % Doing the terminal '1' from the loop 47ish lines above here
 					{
-						GSave newpath InlinePath clip newpath InlinePath  % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ
+						GSave newpath InlinePath clip newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 						InlineBelowtitlesBlackWidth 2 mul dup currentlinewidth ne {setlinewidth} {pop} ifelse TitlesAboveBelowOverInlineDarkStrokeCode GRestore
 					} if  % InlineBelowtitles
 					newpath
@@ -9891,7 +9891,7 @@ currentdict /SmallCapsDict undef
 					2 copy gt {exch} if pop   FillAbovetitles {1.25 mul} if   dup currentlinewidth ne {setlinewidth} {pop} ifelse
 					InlineAbovetitles
 					{
-						/InlinePath % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ     https://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
+						/InlinePath % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ     http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
 						{
 							AbovetitlesFont  AbovetitleFontSizes SheetNum get WithinPage get  selectfont
 							AbovetitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get
@@ -9899,7 +9899,7 @@ currentdict /SmallCapsDict undef
 							AbovetitleOffsetsAbsoluteVertical SheetNum get WithinPage get
 							moveto   Abovetitles WithinTitles get  //true  CharPathRecursive
 						} def  % InlinePath
-						InlinePath GSave clip InlinePrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ
+						InlinePath GSave clip InlinePrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 						/InlineBlackPlusWhite  InlineAbovetitlesBlackWidth InlineAbovetitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineAboveBelowOverAttemptMinimiseNumContours
 						{
@@ -9965,7 +9965,7 @@ currentdict /SmallCapsDict undef
 					} if  % ShapesInAbovetitles
 					InlineAbovetitles  % Doing the terminal '1' from the loop 47ish lines above here
 					{
-						GSave newpath InlinePath clip newpath InlinePath  % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ
+						GSave newpath InlinePath clip newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 						InlineAbovetitlesBlackWidth 2 mul dup currentlinewidth ne {setlinewidth} {pop} ifelse TitlesAboveBelowOverInlineDarkStrokeCode GRestore
 					} if  % InlineAbovetitles
 					newpath
@@ -10004,7 +10004,7 @@ currentdict /SmallCapsDict undef
 		PlaceNamesMaxFontSizeAbsolute   2 {2 copy gt {exch} if pop} repeat /PlaceNamesFontSize exch store
 
 		PlaceNamesFont  PlaceNamesFontSize  selectfont
-		% http://groups.google.com/group/comp.lang.postscript/browse_thread/thread/b6f1e9ec3da9cc87/
+		% http://groups.google.com/g/comp.lang.postscript/c/b6f1e9ec3da9cc87/
 		/XX  X  URX LLX add 16384 div PlaceNamesFontSize mul 2 div  sub  def
 		/YY  Y  URY LLY add 16384 div PlaceNamesFontSize mul 2 div  sub  def
 
@@ -10041,7 +10041,7 @@ currentdict /SmallCapsDict undef
 					PlaceNamesFont  PlaceNamesFontSize  selectfont
 					XX YY moveto
 					/ThisName load  //true  CharPathRecursive
-				} dup exec ClipSave clip newpath exec  % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ
+				} dup exec ClipSave clip newpath exec  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 				/InlineBlackPlusWhite  InlineTitlesBlackWidth InlineTitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 				% Discussion: http://www.theportforum.com/viewtopic.php?t=175&start=913
 				InlinePlaceNamesAttemptMinimiseNumContours {InlineBlackPlusWhite LineWidthThatCoversPath pop InlineBlackPlusWhite div ceiling cvi} {//IntegerMax} ifelse
@@ -10098,7 +10098,7 @@ currentdict /SmallCapsDict undef
 					PlaceNamesFont  PlaceNamesFontSize  selectfont
 					XX YY moveto
 					/ThisName load  //true  CharPathRecursive
-				} dup exec ClipSave clip newpath exec  % https://groups.google.com/forum/#!topic/comp.lang.postscript/ewwOV_qN4JQ
+				} dup exec ClipSave clip newpath exec  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 				GSave InlineTitlesBlackWidth 2 mul dup currentlinewidth ne {setlinewidth} {pop} ifelse TitlesAboveBelowOverInlineDarkStrokeCode GRestore  % 2 mul because half of the linewidth clip'ped away
 				ClipRestore
 			} if  % InlinePlaceNames
@@ -13376,7 +13376,7 @@ currentdict /SmallCapsDict undef
 			(.) ConcatenateToMark
 		/Keywords (placemat, tasting, glasses, Port, wine, Madeira, whisky)
 	/DOCINFO pdfmark
-	mark {Catalog} << /PageLayout /TwoPageLeft >> /PUT pdfmark  % http://groups.google.com/forum/#!topic/comp.text.pdf/kh5-xfVOK_g
+	mark {Catalog} << /PageLayout /TwoPageLeft >> /PUT pdfmark  % https://groups.google.com/g/comp.text.pdf/c/kh5-xfVOK_g
 
 	/TypeOfPagesBeingRendered /Multiple store
 	mark   /Action << >>  /Color [0.4 0.4 0.4]  /F 1  /Title (\200 ) ParametersVersionDateTimeAdobeFormat AdobeFormatDateToString Concatenate  /OUT pdfmark
@@ -13747,7 +13747,7 @@ currentdict /SmallCapsDict undef
 		} forall  % ShownPagesData ...
 		//false  ShownPagesBySheetNum {0 gt {pop //true exit} if} forall  ShownPagesByTastingSheetNum {0 gt {pop //true exit} if} forall
 		{
-			% https://groups.google.com/forum/#!topic/comp.lang.postscript/dcOto3ySuYE
+			% http://groups.google.com/g/comp.lang.postscript/c/dcOto3ySuYE
 			mark  /Action << >>  /Color [0 0 0]  /F 0  /Title ()  /OUT pdfmark
 			mark  /Action << >>  /Color [0 0 0]  /F 2  /Title (\247 Re-ordered)  /OUT pdfmark
 
