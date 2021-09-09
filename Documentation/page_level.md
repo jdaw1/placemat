@@ -185,7 +185,7 @@ The array `DropletsCharges` is of a length that is a multiple of four, as follow
 * 0: An integer, a value of `SheetNum` for this charge, or `/All` meaning all sheets.  
 * 1: A location: this can be an integer, the centre of the `WithinPage` circle on that sheet; or a length array of length two, `[x y]` in which `[0 0]` is bottom-left of the page.  
 * 2: A numeric charge, droplets flowing away from &minus;ve charges and to +ve charges.  
-* 3: A numeric spin; with +ve charge and +ve spin the droplets approach clockwise.
+* 3: A numeric spin; with +ve charge and +ve spin the droplets approach clockwise. (At a distance from a lone charge of *spin* points, the angle of the droplets is 45&deg;.)
 
 Starting locations of the drops have a distance apart of `DropletsAverageSeparation` adjusted by a random fraction of `DropletsAverageMaxTweakPlusMinus`, and path length is `DropletsPathLength`.
 
