@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:30 Wednesday 1st September 2021
+% This version 23:00 Thursday 9th September 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202109012130) def
+/ParametersVersionDateTimeAdobeFormat (D:202109092300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -759,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202109012130) def
+/SoftwareVersionDateTimeAdobeFormat (D:202109092300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -5043,7 +5043,7 @@ currentdict /SmallCapsDict undef
 		} if  % Radius <= 43.2mm
 	} def  % /AreaText
 
-	% Compute locations of glass centers
+	% Compute locations of glass centres
 	{1 {
 		% Debugging code for use within CirclePacking, with the array of positions on the top of the stack:
 		% DeBugLevel 50 le {( CirclePacking: positions de-bug:) OutputToLog dup {mark exch aload pop exch exch (\t) exch ConcatenateToMark OutputToLog} forall} if
@@ -9591,7 +9591,7 @@ currentdict /SmallCapsDict undef
 						2 div   currentdict /SheetNum0 undef   //false //false //false //false PaperType Orientation SetPaperSize
 					} if  % /CrossHatchingCentreX /CenterSheetsSamePageOrdering eq  SideBySideGlassesTastingNotes not  and
 
-					NamesShowTop SheetNum get {PageHeight MgnT sub} {MgnB} ifelse  % cross hatching center y
+					NamesShowTop SheetNum get {PageHeight MgnT sub} {MgnB} ifelse  % cross hatching centre y
 					CrossHatchingCentreY IsNumber {pop CrossHatchingCentreY} if
 					/Bottom CrossHatchingCentreY eq {pop 0} if
 					/Middle CrossHatchingCentreY eq {pop PageHeight MgnB MgnT sub add 2 div} if
@@ -10864,7 +10864,7 @@ currentdict /SmallCapsDict undef
 				DeBugLevel 100 le {(+CrossHatchingOutsideForms: PaintProc) OutputToLog} if
 				pop 3 dict begin
 
-				NamesShowTop SheetNum get {NamePlacementTopX} {NamePlacementBottomX} ifelse SheetNum get  % cross hatching center x
+				NamesShowTop SheetNum get {NamePlacementTopX} {NamePlacementBottomX} ifelse SheetNum get  % cross hatching centre x
 				CrossHatchingCentreX IsNumber {pop CrossHatchingCentreX} if
 				CrossHatchingCentreX /Left   eq {pop 0} if
 				CrossHatchingCentreX /Center eq {pop PageWidth MgnL MgnR sub add 2 div} if
@@ -10884,7 +10884,7 @@ currentdict /SmallCapsDict undef
 				} if  % /CrossHatchingCentreX /CenterSheetsSamePageOrdering eq  SideBySideGlassesTastingNotes not  and
 				/CHCX exch def
 
-				NamesShowTop SheetNum get {PageHeight MgnT sub} {MgnB} ifelse  % cross hatching center y
+				NamesShowTop SheetNum get {PageHeight MgnT sub} {MgnB} ifelse  % cross hatching centre y
 				CrossHatchingCentreY IsNumber {pop CrossHatchingCentreY} if
 				CrossHatchingCentreY /Bottom eq {pop 0} if
 				CrossHatchingCentreY /Middle eq {pop PageHeight MgnB MgnT sub add 2 div} if
@@ -10944,7 +10944,7 @@ currentdict /SmallCapsDict undef
 					{
 						matrix currentmatrix
 
-						NamesShowTop SheetNum get {NamePlacementTopX} {NamePlacementBottomX} ifelse SheetNum get  % cross hatching center x
+						NamesShowTop SheetNum get {NamePlacementTopX} {NamePlacementBottomX} ifelse SheetNum get  % cross hatching centre x
 						CrossHatchingCentreX IsNumber {pop CrossHatchingCentreX} if
 						CrossHatchingCentreX /Left   eq {pop 0} if
 						CrossHatchingCentreX /Center eq {pop PageWidth MgnL MgnR sub add 2 div} if
@@ -10963,7 +10963,7 @@ currentdict /SmallCapsDict undef
 							2 div   currentdict /SheetNum0 undef   //false //false //false //false PaperType Orientation SetPaperSize
 						} if  % /CrossHatchingCentreX /CenterSheetsSamePageOrdering eq  SideBySideGlassesTastingNotes not  and
 
-						NamesShowTop SheetNum get {PageHeight MgnT sub} {MgnB} ifelse  % cross hatching center y
+						NamesShowTop SheetNum get {PageHeight MgnT sub} {MgnB} ifelse  % cross hatching centre y
 						CrossHatchingCentreY IsNumber {pop CrossHatchingCentreY} if
 						CrossHatchingCentreY /Bottom eq {pop 0} if
 						CrossHatchingCentreY /Middle eq {pop PageHeight MgnB MgnT sub add 2 div} if
