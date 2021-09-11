@@ -1,6 +1,6 @@
 %!PS
 
-% This version 16:00 Saturday 11th September 2021
+% This version 16:30 Saturday 11th September 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202109111600) def
+/ParametersVersionDateTimeAdobeFormat (D:202109111630) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -759,7 +759,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202109111600) def
+/SoftwareVersionDateTimeAdobeFormat (D:202109111630) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -3686,7 +3686,7 @@ currentdict /SmallCapsDict undef
 			{//true upath} Stopped {/SlowInsidenessTest //false def} {/CurrentClipUPathA exch def} ifelse
 		} if  % SlowInsidenessTest
 
-		newpath  1 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+		newpath  1 setlinecap  1 setlinejoin  [] 0 setdash
 
 		NumOutlines  -1  0
 		{
@@ -8474,9 +8474,9 @@ currentdict /SmallCapsDict undef
 
 
 	% Paint the pages
-	0 setgray   1 setlinecap   1 setlinejoin   currentdash pop length 0 ne {[] 0 setdash} if
+	0 setgray   1 setlinecap   1 setlinejoin   [] 0 setdash
 	PrologueCode
-	0 setgray   1 setlinecap   1 setlinejoin   currentdash pop length 0 ne {[] 0 setdash} if
+	0 setgray   1 setlinecap   1 setlinejoin   [] 0 setdash
 
 	{BackgroundTextsGlasses PrePourShowBackgroundTexts BackgroundTextsTastingNotes or or} MightBeTrue
 	{
@@ -8631,7 +8631,7 @@ currentdict /SmallCapsDict undef
 				} ifelse  % ... /Glasses
 				BackgroundTextsFont 1 selectfont   /BackgroundTextThis load //true CharPathRecursive
 				setmatrix  0.9375 setgray  4.32 setlinewidth  1 setlinecap
-				1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if  ClipSave BackgroundTextsGlassesPaintCode ClipRestore
+				1 setlinejoin  [] 0 setdash  ClipSave BackgroundTextsGlassesPaintCode ClipRestore
 				setmatrix
 			} if  % /BackgroundTextThis load length 0 gt
 			end
@@ -8775,7 +8775,7 @@ currentdict /SmallCapsDict undef
 				WBl WBb WaterBoxesSize add moveto  WBl WBb lineto  WBl WaterBoxesSize add dup WBb lineto  WBb WaterBoxesSize add lineto
 			} for
 			FillWhite {GSave 1 setgray fill GRestore} if
-			0 setgray   0.24 setlinewidth  0 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if  WaterBoxesFormatStroke newpath
+			0 setgray   0.24 setlinewidth  0 setlinecap  1 setlinejoin  [] 0 setdash  WaterBoxesFormatStroke newpath
 		} forall  % sides
 		end
 		DeBugLevel 100 le {(-WaterBoxesPaintProc) OutputToLog} if
@@ -9149,7 +9149,7 @@ currentdict /SmallCapsDict undef
 			DeBugLevel 75 le {(+DropletsPaint) OutputToLog} if
 			31 dict begin
 			/WithinPage exch def /Ury exch def  /Urx exch def  /Lly exch def  /Llx exch def  /SheetNum exch def
-			newpath  1 setlinecap  currentdash pop length 0 ne {[] 0 setdash} if
+			newpath  1 setlinecap  [] 0 setdash
 			0  1  1
 			{
 				1 eq /DropletShowReversed exch def
@@ -9350,7 +9350,7 @@ currentdict /SmallCapsDict undef
 				DeBugLevel 100 le {(+DropletsForms: PaintProc) OutputToLog} if
 				7 dict begin
 				/SheetNum get /SheetNum exch def
-				newpath  1 setlinecap  currentdash pop length 0 ne {[] 0 setdash} if
+				newpath  1 setlinecap  [] 0 setdash
 				//false //false //false //false PaperType Orientation SetPaperSize   //true DefStoreMgns
 				ClipSave  MgnL  MgnB  PageWidth MgnL MgnR add sub  PageHeight MgnB MgnT add sub  rectclip
 				SheetNum  MgnL  MgnB  PageWidth MgnR sub  PageHeight MgnT sub  -1  DropletsPaint  ClipRestore
@@ -9435,7 +9435,7 @@ currentdict /SmallCapsDict undef
 					{
 						/FlightSeparationLineNum exch def
 						FlightSeparationLines SheetNum GetEU FlightSeparationLineNum GetEU FlightSeparationPath
-						currentdash pop length 0 ne {[] 0 setdash} if  0 currentlinejoin ne {0 setlinejoin} if  0 setlinecap  0.96 setlinewidth  0.6 setgray  % sensible defaults
+						[] 0 setdash  0 currentlinejoin ne {0 setlinejoin} if  0 setlinecap  0.96 setlinewidth  0.6 setgray  % sensible defaults
 						FlightSeparationPaintSeparately {/FlightSeparationPaintCode load execU} if
 					} for  % FlightSeparationLineNum
 					currentdict /FlightSeparationLineNum undef
@@ -9609,7 +9609,7 @@ currentdict /SmallCapsDict undef
 
 					TitleFontSizesMaxByPage SheetNum get  ColourSchemeCurrent /MidGrey eq {60 div 0.96} {120 div 0.48} ifelse  % Embedded constants
 					2 copy gt {exch} if pop   FillTextsCurrent {1.25 mul} if   setlinewidth
-					1 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+					1 setlinecap  1 setlinejoin  [] 0 setdash
 					InlineTitles
 					{
 						/InlinePath % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ    http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
@@ -9664,7 +9664,7 @@ currentdict /SmallCapsDict undef
 						RepeatClippedWithin
 						end
 						GRestore
-						1 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if  GSave  TitlesStrokeCode  GRestore
+						1 setlinecap  1 setlinejoin  [] 0 setdash  GSave  TitlesStrokeCode  GRestore
 					} if  % FillTextsCurrent
 					FillTextsCurrent not  InlineTitles not  and
 					{
@@ -9674,18 +9674,18 @@ currentdict /SmallCapsDict undef
 						TitleOffsetsProportionFontSizeVertical SheetNum get WithinPage get
 						TitleFontSizes SheetNum get WithinPage get  mul
 						moveto   0 setgray
-						1 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+						1 setlinecap  1 setlinejoin  [] 0 setdash
 						Titles WithinTitles get  //false  CharPathRecursive
 						GSave TitlesStrokeCode GRestore GSave TitlesAboveBelowOverFillCode GRestore
 					} if  % FillTextsCurrent not  InlineTitles not  and
 					CrossHatchingTitles
 					{
-						0.5 setgray  0 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+						0.5 setgray  0 setlinecap  1 setlinejoin  [] 0 setdash
 						CHCX CHCY /CrossHatchingTitlesStrokeCode load RadialCrossHatching
 					} if  % CrossHatchingTitles
 					ShapesInTitles
 					{
-						0.5 setgray  0 setlinecap  0 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+						0.5 setgray  0 setlinecap  0 setlinejoin  [] 0 setdash
 						0.36  TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if  setlinewidth
 						RadiiCirclearrayInsideUsableTAB SheetNum get dup dup neg dup 4 2 roll
 						/ShapesTitlesFill load /ShapesTitlesStroke load  ShapesTitlesClip  ShapesClippedToPath
@@ -9757,7 +9757,7 @@ currentdict /SmallCapsDict undef
 						RepeatClippedWithin
 						end
 						GRestore
-						1 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if  GSave  OvertitlesStrokeCode GRestore
+						1 setlinecap  1 setlinejoin  [] 0 setdash  GSave  OvertitlesStrokeCode GRestore
 					} if  % FillOvertitles
 					FillTextsCurrent not  InlineOvertitles not  and
 					{
@@ -9771,12 +9771,12 @@ currentdict /SmallCapsDict undef
 					}  if  % FillOvertitles not  InlineOvertitles not  and
 					CrossHatchingOvertitles
 					{
-						0.5 setgray  0 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+						0.5 setgray  0 setlinecap  1 setlinejoin  [] 0 setdash
 						CHCX CHCY /CrossHatchingOvertitlesStrokeCode load RadialCrossHatching
 					} if  % CrossHatchingOvertitles
 					ShapesInOvertitles
 					{
-						0.5 setgray  0 setlinecap  0 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+						0.5 setgray  0 setlinecap  0 setlinejoin  [] 0 setdash
 						0.36  TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if  setlinewidth
 						RadiiCirclearrayInsideUsableO SheetNum get dup dup neg dup 4 2 roll
 						/ShapesOvertitlesFill load /ShapesOvertitlesStroke load  ShapesOvertitlesClip  ShapesClippedToPath
@@ -9848,7 +9848,7 @@ currentdict /SmallCapsDict undef
 						RepeatClippedWithin
 						end
 						GRestore
-						1 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if  GSave  BelowtitlesStrokeCode GRestore
+						1 setlinecap  1 setlinejoin  [] 0 setdash  GSave  BelowtitlesStrokeCode GRestore
 					} if  % FillBelowtitles
 					FillTextsCurrent not  InlineBelowtitles not  and
 					{
@@ -9862,12 +9862,12 @@ currentdict /SmallCapsDict undef
 					}  if  % FillBelowtitles not  InlineBelowtitles not  and
 					CrossHatchingBelowtitles
 					{
-						0.5 setgray  0 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+						0.5 setgray  0 setlinecap  1 setlinejoin  [] 0 setdash
 						CHCX CHCY /CrossHatchingBelowtitlesStrokeCode load RadialCrossHatching
 					} if  % CrossHatchingBelowtitles
 					ShapesInBelowtitles
 					{
-						0.5 setgray  0 setlinecap  0 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+						0.5 setgray  0 setlinecap  0 setlinejoin  [] 0 setdash
 						0.36  TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if  setlinewidth
 						RadiiCirclearrayInsideUsableTAB SheetNum get dup dup neg dup 4 2 roll
 						/ShapesBelowtitlesFill load /ShapesBelowtitlesStroke load  ShapesBelowtitlesClip  ShapesClippedToPath
@@ -9939,7 +9939,7 @@ currentdict /SmallCapsDict undef
 						RepeatClippedWithin
 						end
 						GRestore
-						1 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if  GSave  AbovetitlesStrokeCode GRestore
+						1 setlinecap  1 setlinejoin  [] 0 setdash  GSave  AbovetitlesStrokeCode GRestore
 					} if  % FillAbovetitles
 					FillTextsCurrent not  InlineAbovetitles not  and
 					{
@@ -9953,12 +9953,12 @@ currentdict /SmallCapsDict undef
 					}  if  % FillAbovetitles not  InlineAbovetitles not  and
 					CrossHatchingAbovetitles
 					{
-						0.5 setgray  0 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+						0.5 setgray  0 setlinecap  1 setlinejoin  [] 0 setdash
 						CHCX CHCY /CrossHatchingAbovetitlesStrokeCode load RadialCrossHatching
 					} if  % CrossHatchingAbovetitles
 					ShapesInAbovetitles
 					{
-						0.5 setgray  0 setlinecap  0 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+						0.5 setgray  0 setlinecap  0 setlinejoin  [] 0 setdash
 						0.36  TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if  setlinewidth
 						RadiiCirclearrayInsideUsableTAB SheetNum get dup dup neg dup 4 2 roll
 						/ShapesAbovetitlesFill load /ShapesAbovetitlesStroke load  ShapesAbovetitlesClip  ShapesClippedToPath
@@ -10034,7 +10034,7 @@ currentdict /SmallCapsDict undef
 
 			PlaceNamesFontSize  ColourSchemeCurrent /MidGrey eq {60 div 0.96} {120 div 0.48} ifelse
 			2 copy gt {exch} if pop   FillTextsCurrent {1.25 mul} if   PlaceNamesDetailsScalingFactor mul setlinewidth
-			1 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+			1 setlinecap  1 setlinejoin  [] 0 setdash
 			InlinePlaceNames
 			{
 				{
@@ -10070,24 +10070,24 @@ currentdict /SmallCapsDict undef
 				RepeatClippedWithin
 				end
 				GRestore
-				1 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if  GSave  TitlesStrokeCode  GRestore
+				1 setlinecap  1 setlinejoin  [] 0 setdash  GSave  TitlesStrokeCode  GRestore
 			} if  % FillTextsCurrent
 			FillTextsCurrent not  InlinePlaceNames not  and
 			{
 				PlaceNamesFont  PlaceNamesFontSize  selectfont
 				XX YY moveto
-				0 setgray  1 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+				0 setgray  1 setlinecap  1 setlinejoin  [] 0 setdash
 				/ThisName load  //false  CharPathRecursive
 				GSave TitlesStrokeCode GRestore GSave TitlesAboveBelowOverFillCode GRestore
 			} if  % FillTextsCurrent not  InlinePlaceNames not  and
 			CrossHatchingPlaceNames
 			{
-				0.5 setgray  0 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+				0.5 setgray  0 setlinecap  1 setlinejoin  [] 0 setdash
 				CHCX CHCY /CrossHatchingTitlesStrokeCode load RadialCrossHatching
 			} if  % CrossHatchingPlaceNames
 			ShapesInPlaceNames
 			{
-				0.5 setgray  0 setlinecap  0 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+				0.5 setgray  0 setlinecap  0 setlinejoin  [] 0 setdash
 				0.36  TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if  setlinewidth
 				MgnL  MgnB  PageWidth MgnR sub  PageHeight 2 div MgnT sub
 				/ShapesTitlesFill load /ShapesTitlesStroke load  ShapesPlaceNamesClip  ShapesClippedToPath
@@ -10182,7 +10182,7 @@ currentdict /SmallCapsDict undef
 						CrossHatchingInside {CrossHatchingInsideForms SheetNum get WithinPage get  execform} if
 						ClipRestore
 						MatrixPrePour setmatrix
-						1 setgray 0.24 setlinewidth currentdash pop length 0 ne {[] 0 setdash} if  0 setlinejoin  rectstroke  % Erase black leakage
+						1 setgray 0.24 setlinewidth [] 0 setdash  0 setlinejoin  rectstroke  % Erase black leakage
 					} if  % OutlineTitles CrossHatchingInside Spirals or or CircleNonEmpty ... and
 					MatrixGlasses setmatrix   //false //false //false //false PaperType Orientation SetPaperSize  //true DefStoreMgns
 					/PaintBackgroundInsideGlassCircles load dup length 0 gt
@@ -10422,7 +10422,7 @@ currentdict /SmallCapsDict undef
 					} if  % VoteRecorderColWidth  VoteRecorderHeightFirstRow 0.875 mul  gt
 				} repeat % 2
 
-				0.75 setgray   0 setlinecap   1 setlinejoin   currentdash pop length 0 ne {[] 0 setdash} if
+				0.75 setgray   0 setlinecap   1 setlinejoin   [] 0 setdash
 				0  1  VoteRecorderNumNames 1 sub
 				{
 					/NameNum exch def
@@ -10508,7 +10508,7 @@ currentdict /SmallCapsDict undef
 								} {pop} ifelse  % ... WithinTitles eq
 							} for   end  % 'GlassesAnnotations'
 
-							newpath  1 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+							newpath  1 setlinecap  1 setlinejoin  [] 0 setdash
 							/VoteRecorderCrossLineWidth
 								2.88    VoteRecorderColWidth 12 div
 								VoteRecorderRowHeight CirclearraysVoteRecorderT CirclearraysVoteRecorderB sub sub 12 div
@@ -10743,7 +10743,7 @@ currentdict /SmallCapsDict undef
 				pop
 				/DecantingNotesLargerTopTwoThings DecantingNotesTopTextHeight DecantingNotesHeightFirstRow 2 copy lt {exch} if pop def
 
-				0.75 setgray   DecantingNotesLineWidth setlinewidth  0 setlinecap   1 setlinejoin   currentdash pop length 0 ne {[] 0 setdash} if
+				0.75 setgray   DecantingNotesLineWidth setlinewidth  0 setlinecap   1 setlinejoin   [] 0 setdash
 				PageHeight MgnT sub DecantingNotesTopTextHeight sub DecantingNotesHeightFirstRow add dup
 				MgnL DecantingNotesWidthColFirst add                                 dup MgnB moveto exch lineto stroke
 				MgnL DecantingNotesWidthColFirst add DecantingNotesWidthColTimes add dup MgnB moveto exch lineto stroke
@@ -11016,7 +11016,7 @@ currentdict /SmallCapsDict undef
 
 					RadiiCirclearrayInside SheetNum get  0 gt  OutlineTitles and
 					{
-						0 setgray  1 setlinejoin  1 setlinecap  currentdash pop length 0 ne {[] 0 setdash} if
+						0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash
 						newpath  0 0  RadiiCirclearrayInside SheetNum get  0 360 arc
 						GSave clip newpath  % on GRestore will be able to stroke clipping circle
 
@@ -11127,7 +11127,7 @@ currentdict /SmallCapsDict undef
 						SpiralCentreFromCentreAngle cos mul 3 -1 roll
 						abs RadiiCirclearrayInside SheetNum get add  2 add  % Embedded constant. Will be enough if linewidth <= 4.
 						SpiralRadiusBetweenArms  SpiralClockwise  ArchimedeanSpiralPath
-						0.12 setlinewidth  0 setgray  1 setlinejoin  1 setlinecap  currentdash pop length 0 ne {[] 0 setdash} if  SpiralStrokeCode
+						0.12 setlinewidth  0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash  SpiralStrokeCode
 						ClipRestore
 					} if  % RadiiCirclearrayInside SheetNum get  0 gt  Spirals and
 					DeBugLevel 100 le {(-SpiralForms: PaintProc) OutputToLog} if
@@ -11351,7 +11351,7 @@ currentdict /SmallCapsDict undef
 				dup PageHeight MgnT sub moveto MgnB lineto TastingNotesColumnStrokeCode newpath
 			} for  % 0  1  TastingNotesColumnHeadings length 2 sub
 
-			0 setgray  0.12 setlinewidth  1 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if
+			0 setgray  0.12 setlinewidth  1 setlinecap  1 setlinejoin  [] 0 setdash
 			TastingNotesColumnHeadings length 0 gt
 			{
 				HeaderFont TastingNotesColumnHeadingsFontSize selectfont
@@ -11557,7 +11557,7 @@ currentdict /SmallCapsDict undef
 		SideBySideGlassesTastingNotes not
 		{
 			DeBugLevel 75 le {( GlassesPageInnerLoop: Names) OutputToLog} if
-			4.8 setlinewidth  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if  % Embedded constant
+			4.8 setlinewidth  1 setlinejoin  [] 0 setdash  % Embedded constant
 			NamesShowTop SheetNum get
 			{
 				NamesFont NamesFontSizeIndividuallyT NameNum get selectfont
@@ -11689,7 +11689,7 @@ currentdict /SmallCapsDict undef
 			{
 				WaterBoxesSizeTN WaterBoxesGapProportionSize 1 add mul mul   NamesIsLeftHanderTN NameNum get {X exch sub} {X add} ifelse   MgnB WaterBoxesSizeTN add moveto
 				WaterBoxesSizeTN dup dup  neg 0 exch rlineto  0 rlineto  0 exch rlineto
-				0.24 setlinewidth  0 setgray  0 setlinecap  1 setlinejoin  currentdash pop length 0 ne {[] 0 setdash} if  WaterBoxesFormatStroke newpath
+				0.24 setlinewidth  0 setgray  0 setlinecap  1 setlinejoin  [] 0 setdash  WaterBoxesFormatStroke newpath
 			} for
 		} if  % WaterBoxes dup /TastingNotes ... WaterBoxesNum ... WaterBoxesShowTN ... WaterBoxesOverrideShowEverySheet ...
 
@@ -11809,7 +11809,7 @@ currentdict /SmallCapsDict undef
 		PageHeight MgnT MgnB sub add 2 div  PageWidth MgnR MgnL sub add 2 div  2 copy 4 copy
 		PageLesser 6 div add exch PageLesser 6 div sub  moveto   PageLesser 6 div sub exch PageLesser 6 div add  lineto
 		PageLesser 6 div sub exch PageLesser 6 div sub  moveto   PageLesser 6 div add exch PageLesser 6 div add  lineto
-		0.75 setgray PageLesser 40 div setlinewidth currentdash pop length 0 ne {[] 0 setdash} if 1 setlinecap stroke  0 setgray  % Embedded constant
+		0.75 setgray PageLesser 40 div setlinewidth [] 0 setdash 1 setlinecap stroke  0 setgray  % Embedded constant
 		GSave nulldevice newpath 0 0 moveto 1000 selectfont EmptyPageString //false CharPathRecursive PathBBox GRestore 1000 div /ury exch def  1000 div /urx exch def  1000 div /lly exch def 1000 div /llx exch def
 		urx llx sub //PrinterEpsilon gt  ury lly sub //PrinterEpsilon gt  and
 		{
@@ -12129,7 +12129,7 @@ currentdict /SmallCapsDict undef
 						} for  % i
 
 						/jTotal 0 def
-						0.8 setgray   0 setlinecap   currentdash pop length 0 ne {[] 0 setdash} if
+						0.8 setgray   0 setlinecap   [] 0 setdash
 						0 1 AccountsColumnGroupHeadings length 1 sub
 						{
 							/i exch def
@@ -12188,7 +12188,7 @@ currentdict /SmallCapsDict undef
 							} repeat def  % /ThisLineWidth
 							/Y  PageHeight MgnB MgnT add AccTopTextHeight add AccColGrpHeadingsT AccColGrpHeadingsB sub add AccColSubHeadingsT AccColSubHeadingsB sub add 2.4 add sub  AccRowNames length div  AccRowNames length NameNum sub mul  MgnB add  def
 							MgnL  Y ThisLineWidth 2 div sub  moveto  PageWidth MgnL MgnR add sub 0 rlineto
-							ThisLineWidth setlinewidth  0.8 setgray   0 setlinecap   currentdash pop length 0 ne {[] 0 setdash} if  stroke
+							ThisLineWidth setlinewidth  0.8 setgray   0 setlinecap   [] 0 setdash  stroke
 							0 setgray MgnL Y ThisLineWidth 0.48 add sub moveto   GSave NullDevice 16384 dup scale newpath 0 0 moveto  AccRowNames NameNum get dup //true CharPathRecursive PathBBox GRestore  0 exch neg rmoveto  pop pop pop ShowRecursive
 						} for  % NameNum
 						DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
@@ -12604,7 +12604,7 @@ currentdict /SmallCapsDict undef
 											TitleAboveBelowOverForms SheetNum get WithinPage get  execform  AnnotateGlass
 											/TypeOfPagesBeingRendered /NeckTags store   //false //false //false //false NeckTagsPaperType /Portrait SetPaperSize   //true DefStoreMgns
 											/N NeckTagsHoleRadius //TwoPi mul 18 div 4 div ceiling cvi 4 mul  dup 4 lt {pop 4} if  def  % Pieces of just under 18 pt; one third being be painted black
-											MatrixNT setmatrix   0  NTBestHeightPer 2 div NeckTagsHoleRadius NeckTagsSpaceAboveHole add sub  NeckTagsHoleRadius   newpath currentdash pop length 0 ne {[] 0 setdash} if 1 setlinejoin
+											MatrixNT setmatrix   0  NTBestHeightPer 2 div NeckTagsHoleRadius NeckTagsSpaceAboveHole add sub  NeckTagsHoleRadius   newpath [] 0 setdash 1 setlinejoin
 											0  1  N 1 sub
 											{
 												/i exch def
@@ -12815,7 +12815,7 @@ currentdict /SmallCapsDict undef
 														StepY mul FirstY add DLEachOrientation {DecanterLabelsMaxLargerDimension} {DecanterLabelsMaxSmallerDimension} ifelse 2 div  2 copy add 3 1 roll sub 2 copy 3 -1 roll
 														2 {MgnL exch moveto 4 0 rlineto  PageWidth  MgnR sub exch moveto -4 0 rlineto} repeat  % Embedded constants
 													} for  % rows
-													0.6 setgray  0.24 setlinewidth  currentdash pop length 0 ne {[] 0 setdash} if  0 setlinecap  stroke  % Embedded constants
+													0.6 setgray  0.24 setlinewidth  [] 0 setdash  0 setlinecap  stroke  % Embedded constants
 												} if  % DLNumOnPage 0 eq  DecanterLabelsGuillotineMarks ... and
 											} if  % 0 eq
 
