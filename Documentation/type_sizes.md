@@ -87,7 +87,11 @@ Broadly, the `Titles` etc fit inside the `Circlearrays`.
 
 ### Superfluous
 
-Inside which there is a `ExclusionAnnulusProportionInnerRadiusTitlesAboveBelow`, defaulting to 0. 
+If a circle has a non-empty element of `Abovetitles`, there should be space above the Title to hold that element. This is a constraint on the size of the `Titles`, which are chose such that there is at least `TitleMinHeightForAbovetitleProportionInnerRadius` inner radii above. 
+Likewise, `Belowtitles`, below, `TitleMinHeightForBelowtitleProportionInnerRadius`. 
+If the `Titles` are to be as big as possible, these could be set to `0`.
+
+Inside the `Circlearrays` there is a `ExclusionAnnulusProportionInnerRadiusTitlesAboveBelow`, defaulting to 0. 
 
 `TitleMaxHeightProportionInnerRadius` ensures that the likes of &ldquo;&dagger;&rdquo; isn&rsquo;t grossly outsized. 
 
