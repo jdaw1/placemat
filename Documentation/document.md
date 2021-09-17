@@ -231,13 +231,20 @@ A PDF document can have an &lsquo;outline&rsquo;, usually shown in a sidebar, th
 The placemat software creates this automatically. 
 
 
-At the end of the outline are relevant external links. 
-The user can create these with the array `ExternalLinks`, which is an array of length a multiple of three:  
+At the end of the outline are relevant external links, provided in the parameter `ExternalLinks`.
+
+Typically, there are links to relevant forum threads. 
+Also links to the restaurant where held, and to its location in various mapping programs. 
+Such links, sometimes carefully constructed, should be reused, and those for multiple restaurants are in [ExternalLinks_data.ps](../PostScript/ExternalLinks_data.ps), which also has links to many Port shippers. 
+Obviously, use only the relevant subset of the many links in that file. 
+And if links are missing, raise an [issue](http://github.com/jdaw1/placemat/issues) saying so.
+
+`ExternalLinks` is an array of length a multiple of three:  
 * Boolean0, Descriptor0, URL0;  
 * Boolean1, Descriptor1, URL1;  
 * &hellip;.
 
-The first boolean must be `false`; subsequent booleans are true if the link is a &lsquo;child&rsquo; of the previous &lsquo;false&rsquo; link, and are `false` if a &lsquo;parent&rsquo; link. 
+The first boolean must be `false`; subsequent booleans are `true` if the link is a &lsquo;child&rsquo; of the previous `false` link, and are `false` if a &lsquo;parent&rsquo; link. 
 (If the PDF viewer is showing the table of contents there is a small triangle beside the &lsquo;parent&rsquo; link: pointing right if the children are hidden (&ldquo;&#9656;&rdquo;); pointing down if the children are visible (&ldquo;&#9662;&rdquo;); rotated between the two by being clicked on.) 
 The descriptions can be compound strings, `[…]`. 
 The URLs must be plain simple strings, `(...)`, not arrays nor compound strings, and must start with a protocol such as &ldquo;http://&rdquo;. 
