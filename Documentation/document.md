@@ -237,7 +237,7 @@ Typically, there are links to relevant forum threads.
 Also links to the restaurant where held, and to its location in various mapping programs. 
 Such links, sometimes carefully constructed, should be reused, and those for multiple restaurants are in [ExternalLinks_data.ps](../PostScript/ExternalLinks_data.ps), which also has links to many Port shippers. 
 Obviously, use only the relevant subset of the many links in that file. 
-And if links are missing or rotted, raise an [issue](http://github.com/jdaw1/placemat/issues) saying so.
+And if links are missing or rotted, please post that in [issue&nbsp;157](http://github.com/jdaw1/placemat/issues/157).
 
 `ExternalLinks` is an array of length a multiple of three:  
 * Boolean0, Descriptor0, URL0;  
