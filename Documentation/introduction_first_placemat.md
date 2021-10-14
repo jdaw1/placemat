@@ -55,8 +55,8 @@ You will be directly editing a long text file written in PostScript.
 A code editor, a good text editor, is a boon, and it should be one that understands PostScript. 
 The basic text editor that came pre-installed on your computer will make life harder than it needs to be. 
 A code editor that understands PostScript will prevent many errors and save much labour. 
-On both Mac and PC [Sublime Text&nbsp;3](http://www.sublimetext.com/3) is my preferred editor, though making Sublime understand PostScript requires a small technical step. 
-From [Sublime forum](http://www.sublimetext.com/forum/viewtopic.php?t=17312&start=11), Dec 2014: **View** menu, fifth item of which is **Show Console**, into which paste: 
+On both Mac and PC [Sublime&nbsp;Text](http://www.sublimetext.com/) is my preferred editor, though making Sublime understand PostScript requires a small technical step ([source](http://www.sublimetext.com/forum/viewtopic.php?t=17312&start=11)). 
+Sublime &gt; **View** menu &gt; fifth item of which is **Show Console** &gt; into which paste 
 ```
 import shutil;import urllib.request;import os;import tempfile;l='https://raw.githubusercontent.com/textmate/postscript.tmbundle/master/Syntaxes/Postscript.tmLanguage';d=urllib.request.urlopen(l);f=d.read().decode('utf-8');p=os.path.join(sublime.packages_path(),'User','PostScript.tmLanguage');_, t = tempfile.mkstemp(dir=tempfile.gettempdir());th = open(t, 'w');th.writelines(f);th.close();shutil.move(t, p) if f.find('plist') != -1 else sublime.error_dialog('Something went wrong, file is corrupt');dh = open(p);ok = True if dh.read().find("Postscript") != "-1" else False;sublime.message_dialog('Installation completted successfully') if ok is True else sublime.error_dialog('Installation aborted - deleting file %s ' % p);os.remove(p) if not ok else print("File created successfully");
 ```
@@ -172,7 +172,7 @@ Pages can have a header.
 The three parameters `HeadersLeft`, `HeadersCenter`, and `HeadersRight`are each an array of even length, alternately number and string. 
 For the moment keep the number zero or negative, and update the string. 
 
-If it isn&rsquo;t a ThePortForum event, remove the ThePortForum logos by setting `ThePortForumIconPlacement` and `ThePortForumIconTastingNotePlacement` to `/None` (again, a name-type parameter).
+If it isn&rsquo;t a [ThePortForum](http://www.theportforum.com/viewforum.php?f=3) event, remove the ThePortForum logos by setting `ThePortForumIconPlacement` and `ThePortForumIconTastingNotePlacement` to `/None` (again, a name-type parameter).
 
 One more parameter. 
 Some PDF viewers can show a sidebar, typically containing bookmarks to places within the document. This can also contain external links, typically to the likes of: the thread in which the tasting was arranged; the latest version of the PDF file; perhaps websites of winemaker and restaurant; etc. 
