@@ -149,9 +149,9 @@ Each of these arrays is evenly spaced around the perimeter of each glass&rsquo;s
 `Circlearrays` must be the same length as `Titles`, but its sub-arrays can be of different lengths. 
 
 Each person&rsquo;s paperwork is named, and `Names` also appear on some of the other page types, such as the vote recorders. 
-Names is an array, not necessarily of the same length as the previous three. 
+`Names` is an array, not necessarily of the same length as the previous three. 
 ```PostScript
-/Names [ (Julian) (Alice) (Ben) (Caroline) (Derek) (Elizabeth) () ] def
+/Names [ (Julian)  (Alice)  (Ben)  (Caroline)  (Derek)  (Elizabeth)  () ] def
 ```
 
 Including a blank name, `()`, is very strongly recommended: last-minute changes to the guest list do happen.
@@ -172,14 +172,14 @@ Those in North America might wish to change `PaperType` and `TastingNotesPaperTy
 Observe that these parameters have a value that is a PostScript name, so beginning with a `/`. 
 
 Pages can have a header. 
-The three parameters `HeadersLeft`, `HeadersCenter`, and `HeadersRight`are each an array of even length, alternately number and string. 
+The three parameters [`HeadersLeft`](page_level.md#headers-and-footers), `HeadersCenter`, and `HeadersRight`are each an array of even length, alternately number and string. 
 For the moment keep the number zero or negative, and update the string. 
 
-If it isn&rsquo;t a [ThePortForum](http://www.theportforum.com/viewforum.php?f=3) event, remove the ThePortForum logos by setting `ThePortForumIconPlacement` and `ThePortForumIconTastingNotePlacement` to `/None` (again, a name-type parameter).
+If it isn&rsquo;t a [ThePortForum](http://www.theportforum.com/viewforum.php?f=3) event, remove the ThePortForum logos by setting [`ThePortForumIconPlacement`](page_level.md#the-port-forum-icon-the-port-forum-icon-the-port-forum-icon) and `ThePortForumIconTastingNotePlacement` to `/None` (again, a name-type parameter).
 
 One more parameter. 
 Some PDF viewers can show a sidebar, typically containing bookmarks to places within the document. This can also contain external links, typically to the likes of: the thread in which the tasting was arranged; the latest version of the PDF file; perhaps websites of winemaker and restaurant; etc. 
-These are configured in the array `ExternalLinks`, which is of length a multiple three, Boolean (*pro tem*, set all to `false`) then text description then URL, then the next Boolean/description/URL, etc. 
+These are configured in the array [`ExternalLinks`](document.md#external-links), which is of length a multiple three, Boolean (*pro tem*, set all to `false`) then text description then URL, then the next Boolean/description/URL, etc. 
 Populate `ExternalLinks`.
 
 ### Output
@@ -198,14 +198,14 @@ Enjoy the tasting.
 
 ### Many parameters
 
-There are hundreds more parameters, that: 
-* choose fonts and constrain their sizes;
-* control the placement of the glass circles; 
-* decorate;
-* enable and control non-glass page types; 
-* organise the document, useful for tastings over several sessions; 
-* embed &copy; copyright information; 
-* are code to be executed at specified times (code injection being explicitly allowed); 
+There are hundreds more parameters, which: 
+* [choose fonts](fonts_glasses_decoration.md#fonts) and constrain their sizes;
+* [control the placement of the glass circles](PackingStyles.md); 
+* [decorate](fonts_glasses_decoration.md);
+* enable and control [non-glass page types](not_glasses.md); 
+* [organise the document](document.md#pageordering), useful for tastings over several sessions; 
+* embed [&copy;&nbsp;copyright information](document.md#copyright-and-licensingagreement); 
+* are [code to be executed at specified times](code_injection.md) (code injection being explicitly allowed); 
 * do other things, whether between these categories or wholly outside them.
 
-But for a non-huge tasting in a single-session, the above allows most of what is wanted.
+But for a non-huge tasting in a single-session, the above allows much of what is wanted.
