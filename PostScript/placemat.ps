@@ -1,6 +1,6 @@
 %!PS
 
-% This version 17:00 Sunday 19th September 2021
+% This version 01:00 Saturday 16th October 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202109191700) def
+/ParametersVersionDateTimeAdobeFormat (D:202110160100) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -762,7 +762,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202109191700) def
+/SoftwareVersionDateTimeAdobeFormat (D:202110160100) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -7103,14 +7103,21 @@ currentdict /SmallCapsDict undef
 	% Thing0 Thing1  TwoArraysEqual  boolean
 	/TwoArraysEqual
 	{
-		2 dict begin  /Thing1 execU exch def  /Thing0 exch execU def
-		Thing0 type /arraytype eq dup  Thing1 type /arraytype eq  eq
+		2 dict begin gsave 0 0 moveto /Thing1 exch def  0 0 moveto /Thing0 exch def
+		/Thing0 load type /arraytype eq dup
+		/Thing1 load type /arraytype eq  eq
 		{
 			{
-				Thing0 length Thing1 length eq {true  0 1 Thing0 length 1 sub {dup Thing0 exch GetEU exch Thing1 exch GetEU TwoArraysEqual not {pop //false exit} if} for} {false} ifelse
-			} {Thing0 Thing1 eq} ifelse  % both or neither array
+				/Thing0 load length /Thing1 load length eq
+				{
+					true    0  1  /Thing0 load length 1 sub
+					{
+						dup /Thing0 load exch get exch /Thing1 load exch get TwoArraysEqual not {pop //false exit} if
+					} for
+				} {false} ifelse
+			} {/Thing0 load /Thing1 load eq} ifelse  % both or neither array
 		} {pop //false} ifelse
-		end
+		grestore end
 	} bind def  % /TwoArraysEqual
 
 	mark (Radii = ) Radii SizeArrayOutput TrimSpaces ( => diameters ~= )
