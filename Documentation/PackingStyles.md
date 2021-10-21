@@ -343,7 +343,7 @@ This is controlled by `ShrinkRadii`, which can be:
 * `/NotAtAll`, which leaves each page at its own best possible;
 * `/ToSmallestSamePageOrdering`, which ensures consistency within each session;
 * `/ToSmallest`, which ensures consistency over the whole document;
-* `[ 0 0 0 … 1 1 1 … 2 2 ]`, which is an arbitrary array of the same length as `GlassesOnSheets`, pages&rsquo; radii being forces to their lesser if elements satisfy PostScript&rsquo;s `eq` condition.
+* `[ 0 0 0 … 1 1 1 … 2 2 ]`, which is an arbitrary array of the same length as `GlassesOnSheets`, pages&rsquo; radii being forced to their lesser if elements satisfy PostScript&rsquo;s `eq` condition.
 
 There is also the simple numerical parameter `MaxRadius`, defaulting to 150 &rArr; diameter &le;&nbsp;300pt =&nbsp;4&#8537;&Prime; =&nbsp;105&#8538;mm.
 
