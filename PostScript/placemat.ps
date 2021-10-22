@@ -1,6 +1,6 @@
 %!PS
 
-% This version 01:00 Saturday 16th October 2021
+% This version 21:45 Friday 22nd October 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202110160100) def
+/ParametersVersionDateTimeAdobeFormat (D:202110222145) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -762,7 +762,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202110160100) def
+/SoftwareVersionDateTimeAdobeFormat (D:202110222145) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -10409,15 +10409,16 @@ currentdict /SmallCapsDict undef
 
 				VoteRecorderNamesWidthsLogged not
 				{
-					mark (NamesVoteRecorder, widths: )  ()
-					VoteRecorderNameR VoteRecorderNameL  {sub} //false TwoArraysFunction 0 NamesVoteRecorder length getinterval
-					dup //false exch {0 ne {pop //true exit} if} forall
+					/NamesVoteRecorderWidths VoteRecorderNameR VoteRecorderNameL  {sub} //false TwoArraysFunction 0 NamesVoteRecorder length getinterval def
+					NamesVoteRecorderWidths //false exch {0 ne {pop //true exit} if} forall
 					{
-						[NamesVoteRecorder {ASCIIfy} forall] exch
-						{(=) exch (;  )} //false TwoArraysFunction aload pop
-						pop ConcatenateToMark OutputToLog
+						mark (NamesVoteRecorder, widths: )
+						[ 0  1  NamesVoteRecorder length 1 sub {[exch dup NamesVoteRecorder exch get ASCIIfy exch NamesVoteRecorderWidths exch get]} for ]  dup
+						mark exch () exch {aload pop (=) exch (; )} forall pop (. Sorted increasing: )  ConcatenateToMark
+						() 3 -1 roll dup {1 get exch 1 get gt} ShellSort  {0 get (; )} forall pop (.) ConcatenateToMark OutputToLog
 						/VoteRecorderNamesWidthsLogged //true store
-					} {cleartomark} ifelse  % any non-0 widths
+					} if  % any non-0 widths
+					currentdict /NamesVoteRecorderWidths undef
 				} if  % VoteRecorderNamesWidthsLogged not
 
 				/VoteRecorderHeightFirstRow  0
