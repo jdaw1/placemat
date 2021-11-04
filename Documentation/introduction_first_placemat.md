@@ -34,12 +34,12 @@ And having done that, there might also be need for matching pages:
 This PostScript program creates all the paperwork useful for managing such tastings, large or small. 
 Many examples from previous tastings are at [jdawiseman.com/placemats_list.html](http://www.jdawiseman.com/placemats_list.html).
 
-It is a program written wholly in [PostScript](http://en.wikipedia.org/wiki/PostScript), and does not hide that. 
-It consists of a single long text file, with user-chosen parameters at the top, and PostScript code underneath. 
-Those user-chosen parameters are written in Postscript, in PostScript syntax.
+[The program](../PostScript/placemat.ps) does not hide its being written wholly in PostScript ([wikipedia](http://en.wikipedia.org/wiki/PostScript), [Adobe&nbsp;&#7448;&#671;&#640;&#7437;](http://www.adobe.com/content/dam/acom/en/devnet/actionscript/articles/PLRM.pdf)). 
+The program consists of a single long text file, with user-chosen parameters defined at the top, underneath which are many lines of code to make the pages. 
+Those user-chosen parameters are written in Postscript, in PostScript syntax, optionally with embedded PostScript code.
 
-
-Nonetheless, placemats can be and have been made by those with no programming expertise.
+Nonetheless, placemats can be and have been made by those with no programming expertise. 
+You can too.
 
 ## First placemat: advice for beginners
 
