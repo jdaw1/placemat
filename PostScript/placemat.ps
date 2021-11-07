@@ -1,6 +1,6 @@
 %!PS
 
-% This version 09:40 Sunday 7th November 2021
+% This version 15:45 Sunday 7th November 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202111070940) def
+/ParametersVersionDateTimeAdobeFormat (D:202111071545) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -762,7 +762,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202111070940) def
+/SoftwareVersionDateTimeAdobeFormat (D:202111071545) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -8523,7 +8523,7 @@ currentdict /SmallCapsDict undef
 				/prev Infinity def   FlightSeparationInterestingsLR SheetNum get 0 FSNumDoneLR getinterval dup {lt} ShellSort {dup prev sub abs Epsilon ge {dup /prev exch store (; )} {pop} ifelse} forall pop
 				ConcatenateToMark
 			} if  % FSNumDoneLR 0 gt
-			counttomark  [  {pop}  {OutputToLog pop}  {(/n) exch ConcatenateToMark OutputToLog}  ]  exch get exec
+			counttomark  [  {pop}  {OutputToLog pop}  {(\n) exch ConcatenateToMark OutputToLog}  ]  exch get exec
 			FlightSeparationDone SheetNum //true put
 		} if  % FlightSeparationDone SheetNum get not
 
