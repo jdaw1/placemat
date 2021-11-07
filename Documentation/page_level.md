@@ -270,7 +270,9 @@ So `[/Left 0 3 -0.5]` is a horizontal line to the left of the page, at a *y* val
 This can be thought of as Average[Circle 0&rsquo;s bottom, Circle 3&rsquo;s centre]. 
 Hence the integer `1` and the real `1.0` are very different, the former referring to the centre of circle 1, the latter to an offset of +1.0 radii.
 * Likewise `[/Right …]`. 
-* And `[/Top …]` and `[/Bottom …]`, for which the value &lsquo;&hellip;&rsquo; is the *x*, integers referring to that circle&rsquo;s *x* centre; allowed components including `/Left` and `/Right`.
+* And `[/Top …]` and `[/Bottom …]`, for which the value &lsquo;&hellip;&rsquo; is the *x*, integers referring to that circle&rsquo;s *x* centre; allowed components including `/Left` and `/Right`. 
+If there are `/Arc`s, it can be elegant for `/Left` `/Right` `/Bottom` `/Top` pieces to align with the edge of the curves. 
+The distillation log lists offsets, in radii, which might be elegant.
 
 In [the PDF of examples](images/FlightSeparations.pdf) the header shows that page&rsquo;s item of `FlightSeparationLines` (i.e., `FlightSeparationLines` is an array one deeper than the header). 
 If using `FlightSeparations` it is strongly recommended that these examples be examined and appropriate parts used as a starting draft. 

@@ -1,6 +1,6 @@
 %!PS
 
-% This version 18:40 Wednesday 27th October 2021
+% This version 00:15 Sunday 7th November 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202110271840) def
+/ParametersVersionDateTimeAdobeFormat (D:202111070015) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -360,9 +360,9 @@ if} bind def  % /VoteRecorderCrossedBox
 [
 	GlassesOnSheets length {[]} repeat
 ] def  % /FlightSeparationLines
-/FlightSeparationPaintCode {gsave 2.4 setlinewidth 0.75 setgray stroke grestore 1 setlinecap 1 setlinejoin 0.96 setlinewidth 1 setgray stroke} def
+/FlightSeparationPaintCode {gsave 2.4 setlinewidth 0.75 setgray 0 setlinecap stroke grestore  0.96 setlinewidth 1 setgray 1 setlinecap stroke} def
 /FlightSeparationPaintSeparately false def
-/FlightSeparationsArcProportionRadius 0.5 def  % strictly >0; <=1
+/FlightSeparationsArcProportionRadius 0.25 def  % strictly >0; <=1
 
 /PaintBackgroundInsideGlassCircles {} def  % Paints a background pattern. Called with centre of circle translated to 0,0; and clipped to radius Radii SheetNum get.
 /PaintBackgroundCode {} def  % Paints a background pattern. Will probably refer to TypeOfPagesBeingRendered and then to SheetNum or TastingSheetNum.
@@ -762,7 +762,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202110271840) def
+/SoftwareVersionDateTimeAdobeFormat (D:202111070015) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -4336,7 +4336,7 @@ currentdict /SmallCapsDict undef
 		/Temple BaseStyle eq
 		{
 			DeBugLevel 50 le {( ProcessOnePackingType, /Temple) OutputToLog} if
-			% http://www.jdawiseman.com/papers/placemat/PackingStyles_formulae.nb and .pdf
+			% http://github.com/jdaw1/placemat/blob/main/Supporting_code/PackingStyles_formulae.nb
 			% The constraint on the aspect ratio might be <= (Sqrt3-1)*5/2 ~= 1.8301 and also >= (27+11*Sqrt3)*(4-SqrtSqrt12)/61 ~= 1.6147
 			/N NG 1 sub 3 div ceiling cvi dup 2 lt {pop 2} if def
 			0 1 1  % 0 = Landscape-style, N=NumCols and NumRows~=3; 1 = Portrait-style, N=NumRows and NumCols~=3;
@@ -5205,7 +5205,7 @@ currentdict /SmallCapsDict undef
 			[
 				% http://groups.google.com/g/comp.lang.postscript/c/5pJw5Gvf_YI
 				% http://mathematica.stackexchange.com/questions/101954/looking-for-postscriptform-or-forthform-to-print-expressions-as-rpn-code
-				% http://www.jdawiseman.com/papers/placemat/PackingStyles_formulae.nb and .pdf
+				% http://github.com/jdaw1/placemat/blob/main/Supporting_code/PackingStyles_formulae.nb
 				L 8 R mul sub L mul 4 2 R mul 4 S mul add R mul S dup mul sub mul add L mul 16 R mul 2 R mul 4 S mul sub R mul S dup mul add mul add L mul 16 13 R mul 28 S mul sub R mul 23 S dup mul
 				mul add R mul 8 S dup dup mul mul mul sub R mul S dup mul dup mul add mul add 9 L mul 72 R mul sub L mul 12 22 R mul 4 S mul sub R mul S dup mul add mul add L mul 48 R mul 10 R mul 4
 				S mul sub R mul S dup mul add mul sub L mul 16 37 R mul 44 S mul sub R mul 27 S dup mul mul add R mul 8 S dup dup mul mul mul sub R mul S dup mul dup mul add mul add mul  % Coeff 0
@@ -8293,12 +8293,16 @@ currentdict /SmallCapsDict undef
 	} bind def  % /FindWithinGlassesOnSheets
 
 	% FlightSeparationPath takes a single array parameter and appends a segment to the current path.
-	% The range of permitted parameters is described at www.jdawiseman.com/papers/placemat/placemat.html#flightseparations
+	% The range of permitted parameters is described at http://github.com/jdaw1/placemat/blob/main/Documentation/page_level.md#separating-flights-within-a-page
+	/FlightSeparationDone [ NumSheets {//false} repeat ] def
+	/FlightSeparationInterestingsTB [ SheetLengths {2 mul array} forall ] def
+	/FlightSeparationInterestingsLR [ SheetLengths {2 mul array} forall ] def
 	/FlightSeparationPath
 	{
 		DeBugLevel 50 le {(+FlightSeparationPath) OutputToLog} if
 		42 dict begin
 		/fsl exch execU def  % Flight Separation Line
+		/FSNumDoneTB 0 def  /FSNumDoneLR 0 def
 
 		/Connections_fsl fsl length array def
 		/Connections_X fsl length array def
@@ -8462,9 +8466,37 @@ currentdict /SmallCapsDict undef
 					{
 						{Xj Yj} {Xh1 Xh0 add 2 div Yh1 Yh0 add 2 div} ifelse
 						dup Y0 ne  2 index X0 ne  or
-							{X0 Y0 2 copy 6 2 roll Radii SheetNum get FlightSeparationsArcProportionRadius mul arct lineto}
-							{pop pop}
-						ifelse  % Identical points produces /undefinedresult
+						{
+							FlightSeparationDone SheetNum get not
+							{
+								% If there are /Arc's, and a [/Top 1.2]-type element, it can be elegant for the '1.2' to align precisely with the boudnary of the Arc. Help is logged.
+								6 dict begin 
+								2 copy gsave currentpoint newpath moveto X0 Y0 2 copy 6 2 roll Radii SheetNum get FlightSeparationsArcProportionRadius mul arct lineto
+								PathBBox /T exch def /R exch def /B exch def /L exch def
+								pathbbox  % Computes curves from control points, not from painted path. Using this to restrict to bounds caused by curves.
+								T sub abs PrinterEpsilon le {/T Infinity def} if
+								R sub abs PrinterEpsilon le {/R Infinity def} if
+								B sub abs PrinterEpsilon le {/B Infinity def} if
+								L sub abs PrinterEpsilon le {/L Infinity def} if
+								grestore
+								GlassPositions SheetNum get
+								{
+									aload pop  /Y exch def  /X exch def
+									Y MgnB Radii SheetNum get 2 mul add le  Y PageHeight MgnT sub Radii SheetNum get 2 mul sub ge  or
+									{
+										R X sub Radii SheetNum get div dup abs 2 le {FlightSeparationInterestingsTB SheetNum get exch FSNumDoneTB exch put  /FSNumDoneTB FSNumDoneTB 1 add store} {pop} ifelse
+										L X sub Radii SheetNum get div dup abs 2 le {FlightSeparationInterestingsTB SheetNum get exch FSNumDoneTB exch put  /FSNumDoneTB FSNumDoneTB 1 add store} {pop} ifelse
+									} if  % Circle near top or bottom
+									X MgnL Radii SheetNum get 2 mul add le  X  PageWidth MgnR sub Radii SheetNum get 2 mul sub ge  or
+									{
+										T Y sub Radii SheetNum get div dup abs 2 le {FlightSeparationInterestingsLR SheetNum get exch FSNumDoneLR exch put  /FSNumDoneLR FSNumDoneLR 1 add store} {pop} ifelse
+										B Y sub Radii SheetNum get div dup abs 2 le {FlightSeparationInterestingsLR SheetNum get exch FSNumDoneLR exch put  /FSNumDoneLR FSNumDoneLR 1 add store} {pop} ifelse
+									} if  % Circle near left or right
+								} forall  % GlassPositions SheetNum get
+								end  % T R B L Y X
+							} if  % FlightSeparationDone SheetNum get not
+							X0 Y0 2 copy 6 2 roll Radii SheetNum get FlightSeparationsArcProportionRadius mul arct lineto
+						} {pop pop} ifelse  % Identical points produces /undefinedresult
 					} {{Xj Yj lineto} if} ifelse  % Connections_linetoXY Connections0 get
 				} if  % /Arc
 				Connections_Type Connections0 get /Straight eq
@@ -8475,6 +8507,23 @@ currentdict /SmallCapsDict undef
 			} ifelse  % ... /Point ...
 		} for  % Connections0
 		fsl length 1 ge {fsl 0 get /Closed eq {closepath} if} if
+
+		FlightSeparationDone SheetNum get not
+		{
+			FSNumDoneTB 0 gt
+			{
+				mark (FlightSeparations, SheetNum=) SheetNum (, /Top or /Bottom: possible elegant offsets from a centre: ) ()
+				/prev Infinity def   FlightSeparationInterestingsTB SheetNum get 0 FSNumDoneTB getinterval dup {lt} ShellSort {dup prev sub abs Epsilon ge {dup /prev exch store (; )} {pop} ifelse} forall pop
+				ConcatenateToMark OutputToLog
+			} if  % FSNumDoneTB 0 gt
+			FSNumDoneLR 0 gt
+			{
+				mark (FlightSeparations, SheetNum=) SheetNum (, /Left or /Right: possible elegant offsets from a centre: ) ()
+				/prev Infinity def   FlightSeparationInterestingsLR SheetNum get 0 FSNumDoneLR getinterval dup {lt} ShellSort {dup prev sub abs Epsilon ge {dup /prev exch store (; )} {pop} ifelse} forall pop
+				ConcatenateToMark OutputToLog
+			} if  % FSNumDoneLR 0 gt
+			FlightSeparationDone SheetNum //true put
+		} if  % FlightSeparationDone SheetNum get not
 
 		end
 		DeBugLevel 50 le {(-FlightSeparationPath) OutputToLog} if
@@ -9443,10 +9492,11 @@ currentdict /SmallCapsDict undef
 					{
 						/FlightSeparationLineNum exch def
 						FlightSeparationLines SheetNum GetEU FlightSeparationLineNum GetEU FlightSeparationPath
-						[] 0 setdash  0 currentlinejoin ne {0 setlinejoin} if  0 setlinecap  0.96 setlinewidth  0.6 setgray  % sensible defaults
+						[] 0 setdash  1 setlinejoin  0 setlinecap  0.96 setlinewidth  0.75 setgray  % sensible defaults
 						FlightSeparationPaintSeparately {/FlightSeparationPaintCode load execU} if
 					} for  % FlightSeparationLineNum
 					currentdict /FlightSeparationLineNum undef
+					[] 0 setdash  1 setlinejoin  0 setlinecap  0.96 setlinewidth  0.75 setgray  % sensible defaults
 					FlightSeparationPaintSeparately not {/FlightSeparationPaintCode load execU} if
 					GRestore
 				} if  % FlightSeparations ... FlightSeparationLines SheetNum GetEU length 0 gt ...
