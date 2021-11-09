@@ -1,6 +1,6 @@
 %!PS
 
-% This version 15:45 Sunday 7th November 2021
+% This version 19:00 Tuesday 9th November 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202111071545) def
+/ParametersVersionDateTimeAdobeFormat (D:202111091900) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -62,7 +62,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 16) {SuperscriptOn} (th) {SuperscriptOff} ( November 2021)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( January 2022)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -88,6 +88,7 @@
 	true    (SE1 1TA, bing.com)              (http://www.bing.com/maps/default.aspx?where1=SE1+1TA&cp=51.50428~-0.0935)
 	true    (What3Words: cafe.humid.palace)  (http://map.what3words.com/cafe.humid.palace)
 ] def  % /ExternalLinks
+
 /CopyrightStatementPlacemats (Copyright 2021 Julian D. A. Wiseman of www.jdawiseman.com) def
 
 % % % % % % % % % % %
@@ -762,7 +763,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202111071545) def
+/SoftwareVersionDateTimeAdobeFormat (D:202111091900) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -865,16 +866,24 @@ PrinterEpsilon setflat  % According to PLRM3 p669, automatically substituted wit
 /Stopped {countdictstack exch /StoppedStackMarker exch stopped
 	{{/StoppedStackMarker eq {exit} if} loop  countdictstack sub neg {end} repeat  //true}
 	{count 1 sub 0 exch 1 exch {dup 1 add index /StoppedStackMarker eq {exit} {pop} ifelse} for  2 add -2 roll pop pop  //false}
-ifelse} bind def
+ifelse} bind def  % /Stopped
 
 
 /ShellSortGaps
 [
-	% PostScript's max array size usually 65535, but an implementation could allow longer.
-	% Each is either 4*__-_, or 5*__-2*_, in manner that keeps ratio bounded, and where that ambiguous, preferring coprimality.
-	1 2 3 5 7 11 17 27 41 67 97 141 203 299 417 661 1007 1637 2391 3403 5149 8463 12133 18049 24567 41111 57157 91241 137387 227577 321971 493943 793941 1181831 1606043
-	2697069 3727103 6031139 8877273 12401149 19584067 30020529 48315739 71766377 98045941 162740003 229443761 354812493 562962551 856287421 1395562783 2029586901
-] readonly def
+	% PostScript's max array size usually 65535 (PLRM3, p739, table B.1), but an implementation could allow longer.
+	% Each is the prime geometrically closest to 1.51282158 * previous.
+	% Constant chosen to be >3/2, <5/3, and such that contains an element not much below 2^31 - 1 = 2,147,483,647.
+	1 2 3 5 7 11 17 23 37 59 89 137 211 317 479 727 1097 1657 2503 3793 5737 8681 13127 19861 30047 45439
+	68743 103997 157327 238009 360071 544723 824069 1246667 1885981 2853157 4316321 6529823 9878467 14944361 22608161
+	34202099 51741673 78275921 118417493 179144543 271013737 409995427 620249933 938327501 1419522079 2147483629
+	% The following exceed IntegerMax = 2^31 - 1, even sillier than exceeding 65535, so not in the PostScript.
+	% NB: ShellSort is very fast at short arrays, but QuickSort's segregation helps multi-CPU with long arrays.
+	% 3248759611 4914793673 7435205903 11248139941 17016428843 25742820769 38944294789 58915769597
+	% 89129047661 134836346681 203983335037 308590391227 466842203227 706248959509 1068428666803
+	% 1616341943831 2445236973287 3699207261401 5596240573919 8466113507069 12807719212231 19375794014849
+	% 29312119315301 44344006655747 67084570212479 101486985502481 153531701757299 232266071632519
+] readonly def  % /ShellSortGaps
 /ShellSortGapsLength1Sub ShellSortGaps length 1 sub def
 % Immediate dependencies: DeBugLevel; ShellSortGaps; ShellSortGapsLength1Sub.
 % [ thing thing ... ] {comparison code that takes two things and returns a boolean} ShellSort -
@@ -893,10 +902,10 @@ ifelse} bind def
 		1  1  //ShellSortGapsLength1Sub
 		{
 			/gapNum exch def
-			//ShellSortGaps gapNum get 2 mul n gt {/gapNum gapNum 1 sub def exit} if
+			//ShellSortGaps gapNum get 2 mul n gt {exit} if
 		} for  % gapNum up
 
-		gapNum  -1  0
+		gapNum 1 sub  -1  0
 		{
 			//ShellSortGaps exch get /gap exch def
 			gap  1  n 1 sub
@@ -1087,7 +1096,7 @@ currentdict /ShellSortGapsLength1Subs undef
 		{string dup dup 5 3 roll exch putinterval 3 -1 roll 0 exch putinterval}
 		{pop exch pop dup 65532 le {dup 3 add string dup dup 4 -1 roll (...) putinterval 0 4 -1 roll putinterval} {pop} ifelse}
 	ifelse
-} bind def
+} bind def  % /Concatenate
 
 % Immediate dependencies: ToString.
 % mark string|number|other ... string|number|other  ConcatenateToMark  string
@@ -1339,6 +1348,7 @@ currentdict /ShellSortGapsLength1Subs undef
 	/eth (\360)            /ntilde (\361)          /ograve (\362)        /oacute (\363)          /ocircumflex (\364)   /otilde (\365)        /odieresis (\366)      /divide (\367)
 	/oslash (\370)         /ugrave (\371)          /uacute (\372)        /ucircumflex (\373)     /udieresis (\374)     /yacute (\375)        /thorn (\376)          /ydieresis (\377)
 >> readonly def % /GlyphToPDFDocEncoding
+
 % CompoundString  ASCIIfy  string, the string being an all-ASCII approximation to the CompoundString
 /ASCIIfy
 {
@@ -1384,6 +1394,7 @@ currentdict /ShellSortGapsLength1Subs undef
 	end
 	DeBugLevel 15 le {(-ASCIIfy) OutputToLog} if
 } bind def  % /ASCIIfy
+
 /PDFDocEncodingify
 {
 	DeBugLevel 15 le {(+PDFDocEncodingify) OutputToLog} if
@@ -1497,6 +1508,7 @@ mark  (product = ) product (; languagelevel = ) /languagelevel where {pop langua
 	AdobeFormatDate 2 4 getinterval  % YYYY
 	end ConcatenateToMark
 } bind def  % /AdobeFormatDateToString
+
 mark
 (Software version  =    SoftwareVersionDateTimeAdobeFormat  =  ) SoftwareVersionDateTimeAdobeFormat   (  =  )  1 index AdobeFormatDateToString (\n)
 (These placemats  ~=  ParametersVersionDateTimeAdobeFormat  =  ) ParametersVersionDateTimeAdobeFormat (  =  )  1 index AdobeFormatDateToString ConcatenateToMark OutputToLog
@@ -1784,6 +1796,7 @@ currentdict /ForReverseBinaryDict undef
 	{OuterMarginLogs OuterMarginLogsNum str put  /OuterMarginLogsNum OuterMarginLogsNum 1 add store} if
 	end
 } bind def  % OuterMarginLogsAdd
+
 /PaperTypeString  % Unlike PaperTypeStringShortPDF, takes one parameter
 {
 	2 dict begin
@@ -1941,7 +1954,7 @@ currentdict /ForReverseBinaryDict undef
 			(west-northwest)
 		(north-west)
 			(north-northwest)
-] dup {readonly pop} forall readonly def % So data can't be corrupted.
+] dup {readonly pop} forall readonly def  % readonly so CompassPoints16 can't be corrupted.
 % angle  CompassPointText  text
 /CompassPointText {16 mul 360 div round cvi 16 mod 16 add 16 mod //CompassPoints16 exch get} bind def  % /CompassPointText
 currentdict	/CompassPoint16 undef
@@ -3017,8 +3030,8 @@ currentdict /SmallCapsDict undef
 		0 1 3
 		{
 			/CoeffsNum exch def
-			/Speed1s  Speed1Coeffs CoeffsNum get  0  //false  Infinity OrigSpeed_s dup 1 lt {div} {pop} ifelse  //true   //PrinterEpsilon OrigSpeed_s div Epsilon 2 copy gt {exch} if pop  PolynomialRoots  def
-			/Speed2s  Speed2Coeffs CoeffsNum get  0  //false  Infinity OrigSpeed_e dup 1 lt {div} {pop} ifelse  //true   //PrinterEpsilon OrigSpeed_e div Epsilon 2 copy gt {exch} if pop  PolynomialRoots  def
+			/Speed1s  Speed1Coeffs CoeffsNum get  0  //false  //Infinity OrigSpeed_s dup 1 lt {div} {pop} ifelse  //true   //PrinterEpsilon OrigSpeed_s div Epsilon 2 copy gt {exch} if pop  PolynomialRoots  def
+			/Speed2s  Speed2Coeffs CoeffsNum get  0  //false  //Infinity OrigSpeed_e dup 1 lt {div} {pop} ifelse  //true   //PrinterEpsilon OrigSpeed_e div Epsilon 2 copy gt {exch} if pop  PolynomialRoots  def
 
 			Speed1s
 			{
@@ -3031,8 +3044,8 @@ currentdict /SmallCapsDict undef
 					/X2 Xe Speed2 dXe mul sub def
 					/Y2 Ye Speed2 dYe mul sub def
 					1 {
-						Ys Y1 sub X2 mul Y1 Y2 sub Xs mul add Y2 Ys sub X1 mul add 2 mul  X1 Xs sub dup mul Y1 Ys sub dup mul add dup sqrt mul 3 mul  dup 0 eq {pop pop     Infinity exit} if div  CurvatureWanted_s sub dup mul
-						Y1 Y2 sub Xe mul Y2 Ye sub X1 mul add Ye Y1 sub X2 mul add 2 mul  X2 Xe sub dup mul Y2 Ye sub dup mul add dup sqrt mul 3 mul  dup 0 eq {pop pop pop Infinity exit} if div  CurvatureWanted_e sub dup mul add
+						Ys Y1 sub X2 mul Y1 Y2 sub Xs mul add Y2 Ys sub X1 mul add 2 mul  X1 Xs sub dup mul Y1 Ys sub dup mul add dup sqrt mul 3 mul  dup 0 eq {pop pop     //Infinity exit} if div  CurvatureWanted_s sub dup mul
+						Y1 Y2 sub Xe mul Y2 Ye sub X1 mul add Ye Y1 sub X2 mul add 2 mul  X2 Xe sub dup mul Y2 Ye sub dup mul add dup sqrt mul 3 mul  dup 0 eq {pop pop pop //Infinity exit} if div  CurvatureWanted_e sub dup mul add
 					} repeat  % 1
 					dup BestError lt {/BestError exch def /BestSpeed1 Speed1 def /BestSpeed2 Speed2 def} {pop} ifelse
 				} forall  % Speed2s
@@ -3044,7 +3057,7 @@ currentdict /SmallCapsDict undef
 			Xs BestSpeed1 dXs mul add
 			Ys BestSpeed1 dYs mul add
 			Xe BestSpeed2 dXe mul sub
-			Ye BestSpeed2 dYe mul sub  exit  % gsave newpath 4 copy 2 {0.24 0 360 arc closepath 0.03 setlinewidth 0 setgray stroke} repeat grestore
+			Ye BestSpeed2 dYe mul sub  exit  % GSave newpath 4 copy 2 {0.24 0 360 arc closepath 0.03 setlinewidth 0 setgray stroke} repeat GRestore
 		}{
 			( ApproximatingCurve: failure to find solution. Approximating approximation.) OutputToLog
 			Xs 2 mul Xe add 3 div  Ys 2 mul Ye add 3 div   Xs Xe 2 mul add 3 div  Ys Ye 2 mul add 3 div   exit
@@ -3085,7 +3098,7 @@ currentdict /SmallCapsDict undef
 			/ddXe SinAng //DegreeInRadians dup mul mul Radius mul neg  CosAng //DegreeInRadians mul dRadius mul  2 mul Clockwise {add} {sub} ifelse  def
 			/ddYe CosAng //DegreeInRadians dup mul mul Radius mul neg  SinAng //DegreeInRadians mul dRadius mul -2 mul Clockwise {add} {sub} ifelse  def
 			i 0 eq {Xe Ye moveto} {Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe ApproximatingCurve  Xe Ye curveto} ifelse
-			% gsave newpath Xe Ye 0.24 0 360 arc closepath gsave 0 0 1 setrgbcolor fill grestore 0.03 setlinewidth 1 0 0 setrgbcolor stroke grestore
+			% GSave newpath Xe Ye 0.24 0 360 arc closepath GSave 0 0 1 setrgbcolor fill GRestore 0.03 setlinewidth 1 0 0 setrgbcolor stroke GRestore
 			LastLap {exit} if
 			/Xs Xe def /dXs dXe def /ddXs ddXe def  /Ys Ye def /dYs dYe def /ddYs ddYe def
 			/AngSumSteps  AngSumSteps  60  Clockwise {add} {sub} ifelse  def  % [ 10 20 30 60 ] dup length 1 sub dup i gt {pop i} if get
@@ -7101,7 +7114,7 @@ currentdict /SmallCapsDict undef
 	% Thing0 Thing1  TwoArraysEqual  boolean
 	/TwoArraysEqual
 	{
-		2 dict begin gsave 0 0 moveto /Thing1 exch def  0 0 moveto /Thing0 exch def
+		2 dict begin GSave 0 0 moveto /Thing1 exch def  0 0 moveto /Thing0 exch def
 		/Thing0 load type /arraytype eq dup
 		/Thing1 load type /arraytype eq  eq
 		{
@@ -7115,7 +7128,7 @@ currentdict /SmallCapsDict undef
 				} {false} ifelse
 			} {/Thing0 load /Thing1 load eq} ifelse  % both or neither array
 		} {pop //false} ifelse
-		grestore end
+		GRestore end
 	} bind def  % /TwoArraysEqual
 
 	mark (Radii = ) Radii SizeArrayOutput TrimSpaces ( => diameters ~= )
@@ -8471,14 +8484,10 @@ currentdict /SmallCapsDict undef
 							{
 								% If there are /Arc's, and a [/Top 1.2]-type element, it can be elegant for the '1.2' to align precisely with the boudnary of the Arc. Help is logged.
 								6 dict begin 
-								2 copy gsave currentpoint newpath moveto X0 Y0 2 copy 6 2 roll Radii SheetNum get FlightSeparationsArcProportionRadius mul arct lineto
+								GSave 2 copy currentpoint newpath moveto X0 Y0 2 copy 6 2 roll Radii SheetNum get FlightSeparationsArcProportionRadius mul arct lineto
 								PathBBox /T exch def /R exch def /B exch def /L exch def
-								pathbbox  % Computes curves from control points, not from painted path. Using this to restrict to bounds caused by curves.
-								T sub abs PrinterEpsilon le {/T Infinity def} if
-								R sub abs PrinterEpsilon le {/R Infinity def} if
-								B sub abs PrinterEpsilon le {/B Infinity def} if
-								L sub abs PrinterEpsilon le {/L Infinity def} if
-								grestore
+								pathbbox  GRestore  % Computes curves from control points, not from path. Using this to restrict to bounds caused by curves.
+								[/T /R /B /L] {dup load 3 -1 roll sub abs //PrinterEpsilon le {//Infinity def} {pop} ifelse} forall
 								GlassPositions SheetNum get
 								{
 									aload pop  /Y exch def  /X exch def
@@ -8514,13 +8523,13 @@ currentdict /SmallCapsDict undef
 			FSNumDoneTB 0 gt
 			{
 				mark (FlightSeparations, SheetNum=) SheetNum (, /Top or /Bottom: possible elegant offsets from a centre: ) ()
-				/prev Infinity def   FlightSeparationInterestingsTB SheetNum get 0 FSNumDoneTB getinterval dup {lt} ShellSort {dup prev sub abs Epsilon ge {dup /prev exch store (; )} {pop} ifelse} forall pop
+				/prev //Infinity def   FlightSeparationInterestingsTB SheetNum get 0 FSNumDoneTB getinterval dup {lt} ShellSort {dup prev sub abs Epsilon ge {dup /prev exch store (; )} {pop} ifelse} forall pop
 				ConcatenateToMark
 			} if  % FSNumDoneTB 0 gt
 			FSNumDoneLR 0 gt
 			{
 				mark (FlightSeparations, SheetNum=) SheetNum (, /Left or /Right: possible elegant offsets from a centre: ) ()
-				/prev Infinity def   FlightSeparationInterestingsLR SheetNum get 0 FSNumDoneLR getinterval dup {lt} ShellSort {dup prev sub abs Epsilon ge {dup /prev exch store (; )} {pop} ifelse} forall pop
+				/prev //Infinity def   FlightSeparationInterestingsLR SheetNum get 0 FSNumDoneLR getinterval dup {lt} ShellSort {dup prev sub abs Epsilon ge {dup /prev exch store (; )} {pop} ifelse} forall pop
 				ConcatenateToMark
 			} if  % FSNumDoneLR 0 gt
 			counttomark  [  {pop}  {OutputToLog pop}  {(\n) exch ConcatenateToMark OutputToLog}  ]  exch get exec
