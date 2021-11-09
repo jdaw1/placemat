@@ -1,10 +1,10 @@
 %!PS
 
-% This version 19:00 Tuesday 9th November 2021
+% This version 19:50 Tuesday 9th November 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
-% Permissions of this strong copyleft license are conditioned on making available complete source code of 
-% licensed works and modifications, which include larger works using a licensed work, under the same license. 
+% Permissions of this strong copyleft license are conditioned on making available complete source code of
+% licensed works and modifications, which include larger works using a licensed work, under the same license.
 % Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
 
 % For these purposes a change in the parameters of the code does not need to be released.
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202111091900) def
+/ParametersVersionDateTimeAdobeFormat (D:202111091950) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -763,7 +763,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202111091900) def
+/SoftwareVersionDateTimeAdobeFormat (D:202111091950) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -872,17 +872,16 @@ ifelse} bind def  % /Stopped
 /ShellSortGaps
 [
 	% PostScript's max array size usually 65535 (PLRM3, p739, table B.1), but an implementation could allow longer.
-	% Each is the prime geometrically closest to 1.51282158 * previous.
-	% Constant chosen to be >3/2, <5/3, and such that contains an element not much below 2^31 - 1 = 2,147,483,647.
-	1 2 3 5 7 11 17 23 37 59 89 137 211 317 479 727 1097 1657 2503 3793 5737 8681 13127 19861 30047 45439
-	68743 103997 157327 238009 360071 544723 824069 1246667 1885981 2853157 4316321 6529823 9878467 14944361 22608161
-	34202099 51741673 78275921 118417493 179144543 271013737 409995427 620249933 938327501 1419522079 2147483629
-	% The following exceed IntegerMax = 2^31 - 1, even sillier than exceeding 65535, so not in the PostScript.
+	% Each is the prime geometrically closest to 1.63041867 * previous.
+	% Constant chosen to be >3/2, <5/3, and such that there is a gap of 2^31 - 1 = 2,147,483,647.
+	% Some exceed IntegerMax = 2^31 - 1, even sillier than exceeding 65535, so commented.
 	% NB: ShellSort is very fast at short arrays, but QuickSort's segregation helps multi-CPU with long arrays.
-	% 3248759611 4914793673 7435205903 11248139941 17016428843 25742820769 38944294789 58915769597
-	% 89129047661 134836346681 203983335037 308590391227 466842203227 706248959509 1068428666803
-	% 1616341943831 2445236973287 3699207261401 5596240573919 8466113507069 12807719212231 19375794014849
-	% 29312119315301 44344006655747 67084570212479 101486985502481 153531701757299 232266071632519
+	1  2  3  5  7  11  17  29  47  79  127  211  347  563  919  1499  2441  3989  6491  10589  17257  28123  45853
+	74759  121889  198733  324011  528263  861293  1404257  2289503  3732853  6086117  9922909  16178521
+	26377753  43006771  70119041  114323393  186394973  303901837  495487217  807851593  1317136321  2147483647
+	%  3501297431  5708580707  9307376567  15174920521  24741473737  40338960703  65769394643  107231648947  174832482467
+	%  285050143501  464751075851  757738830973  1235431537003  2014270643443  3284104463539  5354465231579
+	%  8730020081441  14233587730237  23206707176459  37836648649721  61689578368739  100579840316789  163987249478113
 ] readonly def  % /ShellSortGaps
 /ShellSortGapsLength1Sub ShellSortGaps length 1 sub def
 % Immediate dependencies: DeBugLevel; ShellSortGaps; ShellSortGapsLength1Sub.
@@ -8483,7 +8482,7 @@ currentdict /SmallCapsDict undef
 							FlightSeparationDone SheetNum get not
 							{
 								% If there are /Arc's, and a [/Top 1.2]-type element, it can be elegant for the '1.2' to align precisely with the boudnary of the Arc. Help is logged.
-								6 dict begin 
+								6 dict begin
 								GSave 2 copy currentpoint newpath moveto X0 Y0 2 copy 6 2 roll Radii SheetNum get FlightSeparationsArcProportionRadius mul arct lineto
 								PathBBox /T exch def /R exch def /B exch def /L exch def
 								pathbbox  GRestore  % Computes curves from control points, not from path. Using this to restrict to bounds caused by curves.
