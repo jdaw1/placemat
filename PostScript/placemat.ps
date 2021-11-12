@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:50 Tuesday 9th November 2021
+% This version 19:20 Friday 12th November 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202111091950) def
+/ParametersVersionDateTimeAdobeFormat (D:202111121920) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -729,13 +729,14 @@ if} bind def  % /VoteRecorderCrossedBox
 /OuterMarginT 0 def
 /OuterMarginB 0 def
 
-1 srand  % Change for different randomisation (1 is the iniital value for both GhostScript and Adobe Distiller).
+1 srand  % Change for different randomisation (1 is the initial value for both GhostScript and Adobe Distiller).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Parameters above here; code below. %% Unless you are Julian D. A. Wiseman himself, don't touch anything below here. %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Parameters above here; code below. %% Very likely, you don't want to touch anything below here. %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % OVERVIEW
 
@@ -763,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202111091950) def
+/SoftwareVersionDateTimeAdobeFormat (D:202111121920) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -776,7 +777,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /Pi          3.14159265358979323846 def
 /TwoPi       6.2831853071795864769 def
 /HalfPi      1.57079632679489661923 def
-/Sqrt2       1.4142135623730950488 def  % SqrtHalf Sqrt2 mul  is not necessarily identical to 1.
+/Sqrt2       1.4142135623730950488 def  % Sqrt2 SqrtHalf mul  is not necessarily identical to 1.
 /Sqrt3       1.7320508075688772935 def
 /Sqrt5       2.2360679774997896964 def
 /SqrtSqrt2   1.1892071150027210667 def
@@ -1469,7 +1470,7 @@ currentdict /ShellSortGapsLength1Subs undef
 mark [ CopyrightStatementPlacemats LicensingAgreementTextPlacemats LicensingAgreementLinkPlacemats ] {dup length 0 eq {pop} {counttomark 2 ge {(\n) exch} if} ifelse} forall ConcatenateToMark
 dup length 0 eq {pop} {OutputToLog} ifelse
 
-mark  (product = ) product (; languagelevel = ) /languagelevel where {pop languagelevel} {(undefined and hence 1)} ifelse (; version = ) version  (; revision = ) revision  (; usertime = ) usertimeStart  ConcatenateToMark OutputToLog
+mark  (product = ) product (; languagelevel = ) /languagelevel where {pop languagelevel} {(undefined and hence 1)} ifelse (; version = ) version  (; revision = ) revision  ConcatenateToMark OutputToLog
 
 /IsDistiller false  1 dict begin /SearchString (Distiller) def  0 1 product length SearchString length sub {product exch SearchString length getinterval SearchString eq {pop //true exit} if} for  end def
 
@@ -1702,7 +1703,7 @@ currentdict /ForReverseBinaryDict undef
 % These links constitute the signature of the author of the code. Yes, the code is open source, so you have the power to remove them.
 % Please don't. If you want code to be open source, respect this wish of an author who has released code for free. Thank you.
 /ExternalLinksExtras [
-	false   (GitHub)              (http://github.com/jdaw1/placemat)
+	false   (GitHub)              (http://github.com/jdaw1/placemat/#readme)
 	false   (PostScript)          (http://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps)
 	false   (Documentation start) (http://github.com/jdaw1/placemat/blob/main/Documentation/introduction_first_placemat.md)
 	false   (Placemats, list)     (http://www.jdawiseman.com/papers/placemat/placemats_list.html)
@@ -6501,7 +6502,7 @@ currentdict /SmallCapsDict undef
 
 % This open curly brace starts code passed to stopped
 {
-	AnyFillTextingAtAll DeBugLevel 100 le or {( Main: just before error checking, usertime = ) usertime ToString Concatenate OutputToLog} if
+	AnyFillTextingAtAll DeBugLevel 100 le or {mark ( Main: just before error checking, execution time ~= ) usertime usertimeStart sub 1000 div (s) ConcatenateToMark OutputToLog} if
 	% Elementary error checking
 	/ErrorFlag //false def
 
@@ -11902,7 +11903,7 @@ currentdict /SmallCapsDict undef
 		} {pop pop} ifelse  % EmptyPageString non-empty
 		/TypeOfPagesBeingRendered /Empty store ShowPage end
 	} if  % EmptyGlassesPageAtStart
-	AnyFillTextingAtAll DeBugLevel 100 le or {( Main: starting outermost page-rendering loop: usertime = ) usertime ToString Concatenate OutputToLog} if
+	AnyFillTextingAtAll DeBugLevel 100 le or {mark ( Main: starting outermost page-rendering loop: execution time ~= ) usertime usertimeStart sub 1000 div (s) ConcatenateToMark OutputToLog} if
 	/ShowHeadersAndFooters //true def
 	UsedPageOrderings
 	{
@@ -12050,7 +12051,7 @@ currentdict /SmallCapsDict undef
 							{
 								mark  ( Main: +PlaceName: NameNum = ) NameNum
 								(; PlaceNameSetNum = ) PlaceNameSetNum
-								(; usertime = ) usertime ConcatenateToMark OutputToLog
+								(; execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog
 							} if  % AnyFillTextingAtAll
 							matrix currentmatrix
 							/TypeOfPagesBeingRendered /PlaceName store
@@ -12064,7 +12065,7 @@ currentdict /SmallCapsDict undef
 							{
 								mark  ( Main: -PlaceName: NameNum = ) NameNum
 								(; PlaceNameSetNum = ) PlaceNameSetNum
-								(; usertime = ) usertime ConcatenateToMark OutputToLog
+								(; execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog
 							} if  % AnyFillTextingAtAll
 						} if  % ... ThisPaperType ... ThisPageOrdering ... and
 					} if  % NameNum  NamesPlaceNames PlaceNameSetNum GetEU length  lt
@@ -12749,7 +12750,7 @@ currentdict /SmallCapsDict undef
 					PrePourCollate {/PrePourSheetNum 0 def} if
 					{
 						/Finished //true def
-						AnyFillTextingAtAll DeBugLevel 100 le or {( Main: +PrePour: usertime = ) usertime ToString Concatenate OutputToLog} if
+						AnyFillTextingAtAll DeBugLevel 100 le or {mark ( Main: +PrePour: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
 						PrePourSheetNumWithinPageWithinTitles
 						{
 							aload pop /WithinTitles exch def  /WithinPage exch def  /SheetNum exch def
@@ -12768,7 +12769,7 @@ currentdict /SmallCapsDict undef
 								setmatrix   ShowPage
 							} for  % PrePourSheetNum, if not collating
 						} forall  % PrePourSheetNumWithinPageWithinTitles
-						AnyFillTextingAtAll DeBugLevel 100 le or {( Main: -PrePour: usertime = ) usertime ToString Concatenate OutputToLog} if
+						AnyFillTextingAtAll DeBugLevel 100 le or {mark ( Main: -PrePour: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
 						Finished  PrePourCollate not  or {exit} if
 						/PrePourSheetNum PrePourSheetNum 1 add def
 					} loop  % PrePourSheetNum, if collating
@@ -12790,7 +12791,7 @@ currentdict /SmallCapsDict undef
 					DecanterLabelsPaperType ThisPaperType  eq   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and {pop //true exit} if
 				} for  % /SheetNum
 				{
-					AnyFillTextingAtAll DeBugLevel 100 le or {(+DecanterLabels: usertime = ) usertime ToString Concatenate OutputToLog} if
+					AnyFillTextingAtAll DeBugLevel 100 le or {mark (+DecanterLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
 					/TypeOfPagesBeingRendered /DecanterLabels store  //false //false //false //false DecanterLabelsPaperType /Portrait SetPaperSize   //true DefStoreMgns
 					/ThisName (Decanter labels) def
 					/DecanterLabelsGap 8 def  % embedded constant
@@ -12983,6 +12984,7 @@ currentdict /SmallCapsDict undef
 							DLNumOnPage 0 gt {ShowPage} if
 						} if  % DLTotalNumCopies 1 gt
 					} ifelse  % DLBestNumOnPage 1 lt
+					AnyFillTextingAtAll DeBugLevel 100 le or {mark (-DecanterLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
 				} if  % ... ThisPaperType ... ThisPageOrdering ... and
 				end
 			} if  % ... DecanterLabelsNumCopies 1 ge ...
@@ -12996,7 +12998,7 @@ currentdict /SmallCapsDict undef
 				/StickyLabelsTypeThis exch def
 				{StickyLabelsNumCopies 1 ge} MightBeTrue
 				{
-					AnyFillTextingAtAll DeBugLevel 100 le or {(+StickyLabels: usertime = ) usertime ToString Concatenate OutputToLog} if
+					AnyFillTextingAtAll DeBugLevel 100 le or {mark (+StickyLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
 					/TypeOfPagesBeingRendered /StickyLabels store
 
 					//false //false //false //false StickyLabelsPaperType /Portrait SetPaperSize   //true DefStoreMgns
@@ -13374,7 +13376,7 @@ currentdict /SmallCapsDict undef
 					} for  % NameNum, or not loop
 					StickyLabelsNumPaintedOnCurrentPage 0 gt {AnnotatePDF ShowPage  /StickyLabelsNumPaintedOnCurrentPage 0 def} if
 					setmatrix
-					AnyFillTextingAtAll DeBugLevel 100 le or {(-StickyLabels: usertime = ) usertime ToString Concatenate OutputToLog} if
+					AnyFillTextingAtAll DeBugLevel 100 le or {mark (-StickyLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
 				} if  % ... StickyLabelsNumCopies 1 ge ...
 				end
 			} forall  % StickyLabelsTypeThis drawn from StickyLabelsTypes
@@ -14043,24 +14045,24 @@ currentdict /SmallCapsDict undef
 
 	OuterMarginLogsNum 0 gt {mark OuterMarginLogs 0 OuterMarginLogsNum getinterval {(\n)} forall pop ConcatenateToMark OutputToLog} if
 
-	AnyFillTextingAtAll {( Main: finish: usertime = ) usertime ToString Concatenate OutputToLog} if
-
 	PagesToBeInserted {PagesToBeInsertedWarning OutputToLog} if
 
 	EpilogueCode
 
-	() OutputToLog
-	mark  (Only log output remaining:\n)
-	/usertimeFinish usertime def
-	(usertime = ) usertimeFinish
-	/usertimeStart dup where {exch get usertimeFinish exch sub 1000 div (, so about ) exch ( seconds )
+	mark (Execution time ~= ) usertime usertimeStart sub
+	dup 0 lt {cvr 4294967296.0 add} if  % PLRM3 p714 re usertime, p739 table B.1. Note 2^31 ms ~= 24 days + 20 hours + 31 minutes.
+	1000 div ( seconds)
 	1 {
-		1 index dup 60 ge {60 div (~= ) exch ( minutes )} {pop exit} ifelse
-		1 index dup 60 ge {60 div (~= ) exch ( hours )  } {pop exit} ifelse
-		1 index dup 24 ge {24 div (~= ) exch ( days )   } {pop exit} ifelse
-	} repeat   counttomark 1 sub -1 0 {/i exch def i index type /realtype eq {i 1 add -1 roll 1 FormatDecimalPlaces i 1 add 1 roll} if} for
-	(to execute code, excluding parameter assignments and log page(s).)} {pop} ifelse  ConcatenateToMark  OutputToLog
-
+		1 index 60      div dup abs 0.5 ge   {( ~= ) exch ( minutes)}   {pop exit}   ifelse  % There have been a few distillation times of multiple minutes.
+		1 index 60      div dup abs 0.5 ge   {( ~= ) exch ( hours)  }   {pop exit}   ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
+		1 index 24      div dup abs 0.5 ge   {( ~= ) exch ( days)   }   {pop exit}   ifelse  % As of Oct 2021, JDAW's longest distillation time has been ~=22 minutes.
+		1 index 30.4375 div dup abs 0.5 ge   {( ~= ) exch ( months) }   {pop exit}   ifelse  % Julian year of 365.25 days, divided by 12. Likely impossible, as exceeding usertime's integer.
+		1 index 12      div dup abs 0.5 ge   {( ~= ) exch ( years)  }   {pop exit}   ifelse  % Years?! Something is very amiss.
+	} repeat  % 1
+	counttomark 1 sub -1 0 {/i exch def i index type /realtype eq {i 1 add -1 roll dup 1 le {2} {1} ifelse FormatDecimalPlaces i 1 add 1 roll} if} for
+	(, excluding time for parameter assignments and log page(s).)
+	ConcatenateToMark  OutputToLog
+	
 	/EndError //false def
 	count              dup  0 eq {(and is :-\))} {/EndError //true store (but isn't -- Error!)} ifelse  (     = count:              should = 0                     \n)   dup 0  5 -1 roll  ToString  putinterval dup 39 4 -1 roll putinterval  mark
 	vmstatus pop pop   dup  dup 1 eq exch 2 eq or {(and does :-\))} {/EndError //true store (but doesn't -- Error!)} ifelse (     = vmstatus pop pop:   should = 1|2                       \n) dup 0  5 -1 roll ToString putinterval dup 41 4 -1 roll putinterval
@@ -14068,9 +14070,9 @@ currentdict /SmallCapsDict undef
 	CountGraphicsStack dup  0 eq {(and is :-\))} {/EndError //true store (but isn't -- Error!)} ifelse  (     = CountGraphicsStack: should = 0                     \n)   dup 0  5 -1 roll  ToString  putinterval dup 39 4 -1 roll putinterval
 	countdictstack     dup  3 eq {(and is :-\))} {/EndError //true store (but isn't -- Error!)} ifelse  (     = countdictstack:     should = 3                     \n)   dup 0  5 -1 roll  ToString  putinterval dup 39 4 -1 roll putinterval
 	counttomark 2 add -1 roll ConcatenateToMark OutputToLog
-	EndError {(!!! Error !!!) OutputToLog} if
+	EndError {(!!! Error !!! Error !!! Error !!!      !!! Error !!! Error !!! Error !!!      !!! Error !!! Error !!! Error !!!) OutputToLog} if
 	count 0 ne {(+pstack) = pstack (-pstack) =} if
-} stopped
+} stopped  % From about 7.5k lines above.
 {
 	/ErrorFlag where {/ErrorFlag get} {//false} ifelse  % Error in parameter(s)
 	{
@@ -14088,6 +14090,7 @@ currentdict /SmallCapsDict undef
 		$error /errorinfo //null put
 	} ifelse  % ErrorFlag
 } if  % stopped
+
 
 OutputLogToAnnotation  ShownPages 0 gt  and
 {
