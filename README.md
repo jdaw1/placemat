@@ -40,8 +40,8 @@ This PostScript program creates all the paperwork useful for managing such tasti
 Lots of previous output is at [jdawiseman.com/papers/placemat/placemats_list.html](http://www.jdawiseman.com/papers/placemat/placemats_list.html).
 
 Code started November 2002 for the private use of J.&nbsp;D.&nbsp;A.&nbsp;Wiseman; 
-in September 2005 uploaded to [jdawiseman.com](http://www.jdawiseman.com/); 
-in January 2021 transferred to [GitHub](http://github.com/jdaw1/placemat).
+in September 2005 uploaded to [jdawiseman.com](http://www.jdawiseman.com/papers/placemat/placemat.html); 
+in January 2021 transferred to [GitHub](http://github.com/jdaw1/placemat/#readme).
 
 
 ## Be nice
