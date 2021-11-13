@@ -3,17 +3,17 @@
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
-&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md) 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md) 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md) 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md) 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md) 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md) 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md) 
-&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md) 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md) 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md) 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md) 
+&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme) 
 &#9655;&#xFE0E;&nbsp;*Debugging*
 
 ----
@@ -72,14 +72,14 @@ Reading from the bottom, the stack starts with `/Titles`: the problem may well h
 (The `-mark-` in the stack is `[` or `<<` or `mark`, usually the first of them.) 
 
 Often, but not always, these suffice. 
-But sometimes errors are fiddlier, especially with [injected code](code_injection.md). 
+But sometimes errors are fiddlier, especially with [injected code](code_injection.md#readme). 
 
 
 ## Diagnostic assistance
 
 ### Basics
 
-Failures can happen in the software because of bugs in the software itself, or because of a type error in a parameter, or because of a bug in [injected code](code_injection.md). 
+Failures can happen in the software because of bugs in the software itself, or because of a type error in a parameter, or because of a bug in [injected code](code_injection.md#readme). 
 
 As with the built-in error support, the log will show the error, and the state of the stack. 
 It will also show the value of `TypeOfPagesBeingRendered`, though the value `/DistillerLog` can mean a generic page. 

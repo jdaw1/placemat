@@ -3,18 +3,18 @@
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
-&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md) 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md) 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md) 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md) 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md) 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md) 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md) 
+&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme) 
 &#9655;&#xFE0E;&nbsp;*Document&#8209;level&nbsp;controls* 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md) 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md) 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md) 
-&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md)
+&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md#readme)
 
 ----
 
@@ -163,7 +163,7 @@ Sometimes page suppression can produce one extra blank page, as discussed in [is
 
 ## High-level code insertion
 
-The software allows, perhaps even encourages, [code injection](code_injection.md). 
+The software allows, perhaps even encourages, [code injection](code_injection.md#readme). 
 No, this isn&rsquo;t the modern idiom for software. 
 But really, modern software isn&rsquo;t written in PostScript.
 
@@ -369,7 +369,7 @@ Indeed, perhaps only for making documentation.
 PDFs allow page labels. 
 In some PDF viewers the page labels appear beneath the thumbnails in the sidebar. 
 They have another purpose: if a PDF has been imported by [Lemke Software&rsquo;s GraphicConverter](http://www.lemkesoft.de/en/products/graphicconverter/), and all the pages are output, the page labels become the file names of the separate bitmap files. 
-So if, for example, making [documentation for the `PackingStyles`](PackingStyles.md) function, having the parameters control the page labels would eliminate possible copy-paste errors in the naming of the files. 
+So if, for example, making [documentation for the `PackingStyles`](PackingStyles.md#readme) function, having the parameters control the page labels would eliminate possible copy-paste errors in the naming of the files. 
 
 The usual page labels are overridden if `PageLabelOverride` is true. 
 for example, it might be `def`&rsquo;d to `{/Glasses TypeOfPagesBeingRendered eq}`. 

@@ -4,17 +4,17 @@
 
 **Links to documentation**: 
 &#9655;&#xFE0E;&nbsp;*Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat* 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md) 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md) 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md) 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md) 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md) 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md) 
-&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md) 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md) 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md) 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md) 
-&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md)
+&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md#readme)
 
 ----
 
@@ -78,7 +78,7 @@ On a PC, in your preferred web browser, open [online2pdf.com/convert-ps-to-pdf](
 If it that has made a PDF resembling [this](images/placemat.pdf), then you can successfully convert the PostScript to PDF: hurray! 
 (On Unix use ps2pdf which comes as part of [GhostScript](http://en.wikipedia.org/wiki/Ghostscript).)
 
-(It can happen that the PS&rarr;PDF conversion produces an error resembling &ldquo;**PostScript Conversion Warning** &hellip; *&lt;font-name&gt;* not found, using Courier.&rdquo; On a Mac this can be caused by an older version of macOS: try a different [font](fonts_glasses_decoration.md).)
+(It can happen that the PS&rarr;PDF conversion produces an error resembling &ldquo;**PostScript Conversion Warning** &hellip; *&lt;font-name&gt;* not found, using Courier.&rdquo; On a Mac this can be caused by an older version of macOS: try a different [font](fonts_glasses_decoration.md#readme).)
 
 
 <div align="center">
@@ -126,7 +126,7 @@ This is also an array, which must be the same length as `Titles`.
 ] def
 ```
 The fourth item of `Belowtitles` is more complicated than a plain string. 
-This generalisation of the string type is explained in [Compound Strings and non-ASCII characters](compound_strings_characters.md). 
+This generalisation of the string type is explained in [Compound Strings and non-ASCII characters](compound_strings_characters.md#readme). 
 For a first placemat perhaps restrict yourself to plain ASCII strings.
 
 Again, change these to suit your tasting. 
@@ -200,12 +200,12 @@ Enjoy the tasting.
 
 There are hundreds more parameters, which: 
 * [choose fonts](fonts_glasses_decoration.md#fonts) and constrain their sizes;
-* [control the placement of the glass circles](PackingStyles.md); 
-* [decorate](fonts_glasses_decoration.md);
-* enable and control [non-glass page types](not_glasses.md); 
+* [control the placement of the glass circles](PackingStyles.md#readme); 
+* [decorate](fonts_glasses_decoration.md#readme);
+* enable and control [non-glass page types](not_glasses.md#readme); 
 * [organise the document](document.md#pageordering), useful for tastings over several sessions; 
 * embed [&copy;&nbsp;copyright information](document.md#copyright-and-licensingagreement); 
-* are [code to be executed at specified times](code_injection.md) (code injection being explicitly allowed); 
+* are [code to be executed at specified times](code_injection.md#readme) (code injection being explicitly allowed); 
 * do other things, whether between these categories or wholly outside them.
 
 But for a non-huge tasting in a single-session, the above allows much of what is wanted.
