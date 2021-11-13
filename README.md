@@ -6,18 +6,18 @@
 &#9654;&#xFE0E;&nbsp;To list the glyphs available in a single font, [glyph_log.ps](PostScript/glyph_log.ps?raw=1)
 
 **Links to documentation**: 
-&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](Documentation/introduction_first_placemat.md) 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](Documentation/fonts_glasses_decoration.md) 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](Documentation/compound_strings_characters.md) 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](Documentation/type_sizes.md) 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](Documentation/page_level.md) 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](Documentation/PackingStyles.md) 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](Documentation/not_glasses.md) 
-&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](Documentation/document.md) 
-&#9654;&#xFE0E;&nbsp;[Translations](Documentation/translations.md) 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](Documentation/code_injection.md) 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](Documentation/bitmap_images.md) 
-&#9654;&#xFE0E;&nbsp;[Debugging](Documentation/debugging.md)
+&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](Documentation/introduction_first_placemat.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](Documentation/fonts_glasses_decoration.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](Documentation/compound_strings_characters.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](Documentation/type_sizes.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](Documentation/page_level.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](Documentation/PackingStyles.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](Documentation/not_glasses.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](Documentation/document.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Translations](Documentation/translations.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](Documentation/code_injection.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](Documentation/bitmap_images.md#readme) 
+&#9654;&#xFE0E;&nbsp;[Debugging](Documentation/debugging.md#readme)
 
 
 ## About
