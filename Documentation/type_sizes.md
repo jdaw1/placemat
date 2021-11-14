@@ -58,7 +58,7 @@ These should be tackled in order.
 
 ### Worthwhile
 
-The circle text is initially set to be the smaller of `CircletextMaxFontSizeAbsolute`, and radius &times; `CircletextMaxFontSizeProportionRadius`. 
+The circle text is initially set to be the smaller of `CircletextMaxFontSizeAbsolute` and radius&nbsp;&times;&nbsp;`CircletextMaxFontSizeProportionRadius`. 
 Also relevant is `CircletextsMinNumSpacesBetween`, the gap between the items of `Circlearrays`, measured in space widths.
 
 ### Superfluous
