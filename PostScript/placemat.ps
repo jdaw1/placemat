@@ -1,6 +1,6 @@
 %!PS
 
-% This version 14:00 Sunday 14th November 2021
+% This version 23:40 Tuesday 16th November 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202111141400) def
+/ParametersVersionDateTimeAdobeFormat (D:202111162340) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202111141400) def
+/SoftwareVersionDateTimeAdobeFormat (D:202111162340) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -979,7 +979,7 @@ currentdict /ShellSortGapsLength1Subs undef
 	/Coeffs exch def
 
 	Coeffs length 1 sub  -1  0 {Coeffs exch get 0 eq {/Coeffs Coeffs dup length 1 sub 0 exch getinterval def} {exit} ifelse} for  % Removes top powers with 0 coefficient.
-	Coeffs length 1 ge
+	Coeffs length 2 ge
 	{
 		/CoeffsScaled   0 Coeffs {abs 2 copy lt {exch} if pop} forall  dup //IntegerMax gt {/MaxAbs exch def  [ Coeffs {MaxAbs div} forall ] } {pop Coeffs} ifelse   def  % Large coeffs risk overflow: rescale; don't add another machine-precision error to small.
 		0  1  CoeffsScaled length 1 sub {/ExtraZeroes exch def  CoeffsScaled ExtraZeroes get 0 ne {exit} if} for  ExtraZeroes 0 gt {/CoeffsScaled CoeffsScaled ExtraZeroes CoeffsScaled length ExtraZeroes sub getinterval def} if  % Counts and remove roots of 0.
@@ -2742,6 +2742,104 @@ currentdict /SmallCapsDict undef
 	end
 	DeBugLevel 10 le {(-PathBBox) OutputToLog} if
 } bind def  % PathBBox
+
+% Immediate dependencies: DeBugLevel; OutputToLog; PolynomialRoots; Stopped; Epsilon.
+% AngleDeemedStraight  PathDistinctiveXY  [ Xs ] [ Ys ]
+/PathDistinctiveXY
+{
+	DeBugLevel 10 le {(+PathDistinctiveXY) OutputToLog} if
+	27 dict begin
+	/cosADS exch cos def
+	/Points 256 array def  /PointsNum 0 def
+
+	/AppendXY
+	{
+		PointsNum Points length lt {[ 3 1 roll ] Points exch PointsNum exch put  /PointsNum PointsNum 1 add def} {pop pop} ifelse
+	} def  % /AppendXY
+	/DirectionsNotParallel {DirectionX null ne  DirectionY null ne  and
+	{
+		X1 X0 sub  Y1 Y0 sub  2 copy 2 {abs //PrinterEpsilon ge exch} repeat or
+		{
+			2 copy dup mul exch dup mul add 3 1 roll
+			DirectionY DirectionX 2 copy dup mul exch dup mul add 5 1 roll
+			3 1 roll mul 3 1 roll mul add  3 1 roll mul sqrt div   cosADS lt
+		} {pop pop //false} ifelse  % ... //PrinterEpsilon ge ...
+	} {//false} ifelse} def  % Non-null, /DirectionsNotParallel
+	/DefDirectionsXY  % true => success
+	{
+		2 copy null eq exch null eq or
+		{
+			pop pop  /DirectionY null def   /DirectionX null def
+			//true
+		}{
+			2 copy 2 {abs //PrinterEpsilon ge exch} repeat or
+			{
+				DirectionY null eq {dup /DirectionFirstY exch def} if /DirectionY exch def
+				DirectionX null eq {dup /DirectionFirstX exch def} if /DirectionX exch def
+				//true
+			} {pop pop //false} ifelse  % ... //PrinterEpsilon ge ...
+		} ifelse  % null ... or
+	} def  % DefDirectionsXY
+
+	/lineProcess  % also used for close
+	{
+		DirectionsNotParallel {X0 Y0 AppendXY} if
+		X1 X0 sub  Y1 Y0 sub  DefDirectionsXY pop
+	} def  % /lineProcess
+
+	{
+		{ % start move
+			dup /Y0 exch def /Ystart exch def  /DirectionY null def
+			dup /X0 exch def /Xstart exch def  /DirectionX null def
+		}  % end of move
+
+		{  % start line
+			/Y1 exch def  /X1 exch def   lineProcess   /Y0 Y1 def  /X0 X1 def
+		}  % end of line
+
+		{  % start curve
+			/Y3 exch def  /X3 exch def    /Y2 exch def  /X2 exch def    /Y1 exch def  /X1 exch def
+
+			DirectionsNotParallel {X0 Y0 AppendXY} if
+
+			% Cubic: a t^3 + b t^2 + c t + x0
+			/AX X0 neg X1 3 mul add X2 3 mul sub X3 add def  /BX X0 X1 2 mul sub X2 add 3 mul def  /CX X1 X0 sub 3 mul def
+			/AY Y0 neg Y1 3 mul add Y2 3 mul sub Y3 add def  /BY Y0 Y1 2 mul sub Y2 add 3 mul def  /CY Y1 Y0 sub 3 mul def
+
+			% Solve first differential for zero
+			[
+				[ CX  2 BX mul  3 AX mul ]  0  //false  1  //false  //Epsilon  PolynomialRoots  aload pop
+				[ CY  2 BY mul  3 AY mul ]  0  //false  1  //false  //Epsilon  PolynomialRoots  aload pop
+			]{
+				dup
+				dup dup AX mul BX add mul CX add mul X0 add  exch
+				dup dup AY mul BY add mul CY add mul Y0 add  AppendXY
+			} forall
+
+			1 {
+				X3 X2 sub  Y3 Y2 sub  DefDirectionsXY {exit} if
+				X3 X1 sub  Y3 Y1 sub  DefDirectionsXY {exit} if
+				X3 X0 sub  Y3 Y0 sub  DefDirectionsXY pop
+			} repeat  % 1
+
+			/Y0 Y3 def  /X0 X3 def
+		}  % end of curve
+
+		{  % start close
+			/Y1 Ystart def  /X1 Xstart def
+			lineProcess
+			/X1 X0 DirectionFirstX add  /X0 X1  def def
+			/Y1 Y0 DirectionFirstY add  /Y0 Y1  def def
+			lineProcess
+			/DirectionY null def   /DirectionX null def
+		}  % end of close
+		pathforall
+	} Stopped {(Warning: protected path in PathDistinctiveXY, or a routine such as PolynomialRoots is missing.) OutputToLog} if
+
+	Points 0 PointsNum getinterval
+	end
+	DeBugLevel 10 le {(-PathDistinctiveXY) OutputToLog} if
+} bind def % /PathDistinctiveXY
 
 % CentreX CentreY MinMaxRadiusSquared Tolerance   PathBRadiusSquared   MaxRadiusSquared
 % What is largest distance from CentreX,CentreY?
@@ -8309,14 +8407,13 @@ currentdict /SmallCapsDict undef
 	% FlightSeparationPath takes a single array parameter and appends a segment to the current path.
 	% The range of permitted parameters is described at http://github.com/jdaw1/placemat/blob/main/Documentation/page_level.md#separating-flights-within-a-page
 	/FlightSeparationDone [ NumSheets {//false} repeat ] def
-	/FlightSeparationInterestingsTB [ SheetLengths {2 mul array} forall ] def
-	/FlightSeparationInterestingsLR [ SheetLengths {2 mul array} forall ] def
+	/FlightSeparationInterestingsTB [ SheetLengths {4 mul array} forall ] def
+	/FlightSeparationInterestingsLR [ SheetLengths {4 mul array} forall ] def
 	/FlightSeparationPath
 	{
 		DeBugLevel 50 le {(+FlightSeparationPath) OutputToLog} if
 		42 dict begin
 		/fsl exch execU def  % Flight Separation Line
-		/FSNumDoneTB 0 def  /FSNumDoneLR 0 def
 
 		/Connections_fsl fsl length array def
 		/Connections_X fsl length array def
@@ -8328,6 +8425,36 @@ currentdict /SmallCapsDict undef
 		/Connections_linetoXY [ fsl length {//true} repeat ] def  % Is a line to or from _X,_Y permitted?
 		/Connections_num 0 def
 		/Connections_Done_First //false def
+
+		/FSNumDoneTB 0 def  /FSNumDoneLR 0 def
+
+		% ArrayInterestingPoints  FlightSeparationReportablePointsAppend  --
+		/FlightSeparationReportablePointsAppend
+		{
+			{
+				aload pop /YY exch def /XX exch def
+				GlassPositions SheetNum get
+				{
+					aload pop  /Y exch def  /X exch def
+					Y MgnB Radii SheetNum get 2 mul add le  Y PageHeight MgnT sub Radii SheetNum get 2 mul sub ge  or
+					{
+						XX X sub Radii SheetNum get div dup abs 2 le
+						{
+							//true  FlightSeparationInterestingsTB SheetNum get 0 FSNumDoneTB getinterval {2 index sub abs //Epsilon le {pop pop //false exit} if} forall
+							{FlightSeparationInterestingsTB SheetNum get exch FSNumDoneTB exch put  /FSNumDoneTB FSNumDoneTB 1 add store} if
+						} {pop} ifelse  % within 2 radii
+					} if  % Circle near top or bottom
+					X MgnL Radii SheetNum get 2 mul add le  X  PageWidth MgnR sub Radii SheetNum get 2 mul sub ge  or
+					{
+						YY Y sub Radii SheetNum get div dup abs 2 le
+						{
+							//true  FlightSeparationInterestingsLR SheetNum get 0 FSNumDoneLR getinterval {2 index sub abs //Epsilon le {pop pop //false exit} if} forall
+							{FlightSeparationInterestingsLR SheetNum get exch FSNumDoneLR exch put  /FSNumDoneLR FSNumDoneLR 1 add store} if
+						} {pop} ifelse  % within 2 radii
+					} if  % Circle near left or right
+				} forall  % GlassPositions SheetNum get
+			} forall  % 'ArrayInterestingPoints'
+		} def  % /FlightSeparationReportablePointsAppend
 
 		DeBugLevel 49 le {( FlightSeparationPath: Connections_ arrays) OutputToLog} if
 		0  1  fsl length 1 sub
@@ -8480,33 +8607,9 @@ currentdict /SmallCapsDict undef
 					{
 						{Xj Yj} {Xh1 Xh0 add 2 div Yh1 Yh0 add 2 div} ifelse
 						dup Y0 ne  2 index X0 ne  or
-						{
-							FlightSeparationDone SheetNum get not
-							{
-								% If there are /Arc's, and a [/Top 1.2]-type element, it can be elegant for the '1.2' to align precisely with the boudnary of the Arc. Help is logged.
-								6 dict begin
-								GSave 2 copy currentpoint newpath moveto X0 Y0 2 copy 6 2 roll Radii SheetNum get FlightSeparationsArcProportionRadius mul arct lineto
-								PathBBox /T exch def /R exch def /B exch def /L exch def
-								pathbbox  GRestore  % Computes curves from control points, not from path. Using this to restrict to bounds caused by curves.
-								[/T /R /B /L] {dup load 3 -1 roll sub abs //PrinterEpsilon le {//Infinity def} {pop} ifelse} forall
-								GlassPositions SheetNum get
-								{
-									aload pop  /Y exch def  /X exch def
-									Y MgnB Radii SheetNum get 2 mul add le  Y PageHeight MgnT sub Radii SheetNum get 2 mul sub ge  or
-									{
-										R X sub Radii SheetNum get div dup abs 2 le {FlightSeparationInterestingsTB SheetNum get exch FSNumDoneTB exch put  /FSNumDoneTB FSNumDoneTB 1 add store} {pop} ifelse
-										L X sub Radii SheetNum get div dup abs 2 le {FlightSeparationInterestingsTB SheetNum get exch FSNumDoneTB exch put  /FSNumDoneTB FSNumDoneTB 1 add store} {pop} ifelse
-									} if  % Circle near top or bottom
-									X MgnL Radii SheetNum get 2 mul add le  X  PageWidth MgnR sub Radii SheetNum get 2 mul sub ge  or
-									{
-										T Y sub Radii SheetNum get div dup abs 2 le {FlightSeparationInterestingsLR SheetNum get exch FSNumDoneLR exch put  /FSNumDoneLR FSNumDoneLR 1 add store} {pop} ifelse
-										B Y sub Radii SheetNum get div dup abs 2 le {FlightSeparationInterestingsLR SheetNum get exch FSNumDoneLR exch put  /FSNumDoneLR FSNumDoneLR 1 add store} {pop} ifelse
-									} if  % Circle near left or right
-								} forall  % GlassPositions SheetNum get
-								end  % T R B L Y X
-							} if  % FlightSeparationDone SheetNum get not
-							X0 Y0 2 copy 6 2 roll Radii SheetNum get FlightSeparationsArcProportionRadius mul arct lineto
-						} {pop pop} ifelse  % Identical points produces /undefinedresult
+							{X0 Y0 2 copy 6 2 roll Radii SheetNum get FlightSeparationsArcProportionRadius mul arct lineto}
+							{pop pop}
+						ifelse  % Identical points produces /undefinedresult
 					} {{Xj Yj lineto} if} ifelse  % Connections_linetoXY Connections0 get
 				} if  % /Arc
 				Connections_Type Connections0 get /Straight eq
@@ -8518,22 +8621,24 @@ currentdict /SmallCapsDict undef
 		} for  % Connections0
 		fsl length 1 ge {fsl 0 get /Closed eq {closepath} if} if
 
+		3 PathDistinctiveXY FlightSeparationReportablePointsAppend
+
 		FlightSeparationDone SheetNum get not
 		{
 			mark
 			FSNumDoneTB 0 gt
 			{
 				mark (FlightSeparations, SheetNum=) SheetNum (, /Top or /Bottom: possible elegant offsets from a centre: ) ()
-				/prev //Infinity def   FlightSeparationInterestingsTB SheetNum get 0 FSNumDoneTB getinterval dup {lt} ShellSort {dup prev sub abs Epsilon ge {dup /prev exch store (; )} {pop} ifelse} forall pop
-				ConcatenateToMark
+				/prev //Infinity def
+				FlightSeparationInterestingsTB SheetNum get 0 FSNumDoneTB getinterval dup {lt} ShellSort {dup prev sub abs //Epsilon ge {dup /prev exch store (; )} {pop} ifelse} forall pop ConcatenateToMark
 			} if  % FSNumDoneTB 0 gt
 			FSNumDoneLR 0 gt
 			{
 				mark (FlightSeparations, SheetNum=) SheetNum (, /Left or /Right: possible elegant offsets from a centre: ) ()
-				/prev //Infinity def   FlightSeparationInterestingsLR SheetNum get 0 FSNumDoneLR getinterval dup {lt} ShellSort {dup prev sub abs Epsilon ge {dup /prev exch store (; )} {pop} ifelse} forall pop
-				ConcatenateToMark
+				/prev //Infinity def
+				FlightSeparationInterestingsLR SheetNum get 0 FSNumDoneLR getinterval dup {lt} ShellSort {dup prev sub abs //Epsilon ge {dup /prev exch store (; )} {pop} ifelse} forall pop ConcatenateToMark
 			} if  % FSNumDoneLR 0 gt
-			counttomark  [  {pop}  {OutputToLog pop}  {(\n) exch ConcatenateToMark OutputToLog}  ]  exch get exec
+			counttomark dup 0 gt {-1  2 {(\n) exch 1 roll} for ConcatenateToMark OutputToLog} {pop pop} ifelse
 			FlightSeparationDone SheetNum //true put
 		} if  % FlightSeparationDone SheetNum get not
 
@@ -9455,7 +9560,8 @@ currentdict /SmallCapsDict undef
 			{
 				pop
 				DeBugLevel 100 le {(+FlightSeparationForms: PaintProc) OutputToLog} if
-				5 dict begin
+				6 dict begin
+
 				FlightSeparations {FlightSeparationLines SheetNum GetEU length 0 gt} {//false} ifelse
 				{
 					/MinCentreSeparation2  PageHeight MgnB MgnT add sub Radii SheetNum get 2 mul sub dup mul  PageWidth MgnL MgnR add sub Radii SheetNum get 2 mul sub dup mul  add def
