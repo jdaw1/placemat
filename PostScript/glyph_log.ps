@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:15 Thursday 17th June 2021
+% This version 17:15 Saturday 27th November 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -13,14 +13,39 @@
 
 
 
-() = dup == () =
-findfont /CharStrings get
+
+
+
+
+
+
+/FontName exch def
+() = FontName == () =
+/FontSize 12 def
+/LineStep FontSize 1.4 mul def
+/PageHeight 841.88976 def  /PageWidth 595.27559 def  /Margin 36 def  /GlyphNameX 90 def
+<<  /PageSize [PageWidth PageHeight]  >> setpagedevice
+FontName FontSize selectfont
+/Y PageHeight Margin sub FontSize sub def
+FontName 256 string cvs dup stringwidth pop PageWidth exch sub 2 div Y moveto show
+/Y Y LineStep 3 mul sub def
+/Any false def
+
+
+FontName findfont /CharStrings get
 {
+	/GlyphNum exch def  /GlyphName exch def
 	256 string  0 1 9 {1 index exch 32 put} for  % Spaces
 	dup 10 47 put  % "/"
-	exch 1 index cvs pop  % Number
-	exch 1 index 11 245 getinterval cvs length 11 add 0 exch getinterval =
-} forall  % CharStrings
+	GlyphNum 1 index cvs pop  % Number
+	GlyphName 1 index 11 245 getinterval cvs length 11 add 0 exch getinterval =
+
+	//Margin Y moveto GlyphName glyphshow
+	//GlyphNameX Y moveto GlyphName 256 string cvs show
+	/Y Y LineStep sub def
+	Y //Margin le {showpage /Any //false def /Y //PageHeight //Margin sub //FontSize sub def} {/Any //true def} ifelse
+} bind forall  % CharStrings
+Any {showpage} if
 () =
 
 % Bug check
