@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:40 Tuesday 16th November 2021
+% This version 16:45 Saturday 27th November 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202111162340) def
+/ParametersVersionDateTimeAdobeFormat (D:202111271645) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202111162340) def
+/SoftwareVersionDateTimeAdobeFormat (D:202111271645) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -13169,14 +13169,13 @@ currentdict /SmallCapsDict undef
 					/StickyLabelsPaperSizeSet //false def
 
 					matrix currentmatrix
-					/StickyLabelsThisPageTitlesNames () def
-					/StickyLabelsThisPageTitlesNamesUsed [ StickyLabelsByNameWhichReplaceCirclearrays {NamesStickyLabels} {Titles} ifelse length {false} repeat ] def
+					/StickyLabelsThisPageTitlesNames () def  /StickyLabelsThisPageTitlesNamesDoThis //true def
 					0  1  StickyLabelsByNameWhichReplaceCirclearrays  StickyLabelsNamesChangeFaster not and {NamesStickyLabels length 1 sub} {0} ifelse
 					{
 						StickyLabelsByNameWhichReplaceCirclearrays  StickyLabelsNamesChangeFaster not and
 						{
 							/NameNum exch def
-							/ThisName  NamesStickyLabels NameNum get  def
+							/ThisName  NamesStickyLabels NameNum get  def   /StickyLabelsThisPageTitlesNamesDoThis //true def
 						}{
 							pop
 							/NameNum 0 def
@@ -13196,7 +13195,9 @@ currentdict /SmallCapsDict undef
 									/NameNum 0 def
 								} ifelse  % StickyLabelsByNameWhichReplaceCirclearrays
 
-								StickyLabelsSheetNumWithinPageWithinTitles StickieNum get aload pop /WithinTitles exch def  /WithinPage exch def  /SheetNum exch def   //true DefStoreMgns
+								StickyLabelsSheetNumWithinPageWithinTitles StickieNum get aload pop
+								dup WithinTitles ne StickyLabelsByNameWhichReplaceCirclearrays not StickyLabelsNamesChangeFaster or and {/StickyLabelsThisPageTitlesNamesDoThis //true def} if
+								/WithinTitles exch def  /WithinPage exch def  /SheetNum exch def   //true DefStoreMgns
 								StickyLabelsPaperType ThisPaperType  eq   PageOrderingStickyLabels SheetNum GetEU  ThisPageOrdering  eq   and  % Note SheetNum. Also note that 'PageOrderingStickyLabels SheetNum get' could be code.
 								{
 									StickyLabelsPaperSizeSet not {//false //false MirrorPagesStickyLabels SheetNum GetEU //true StickyLabelsPaperType /Portrait SetPaperSize  /StickyLabelsPaperSizeSet //true def} if
@@ -13209,8 +13210,16 @@ currentdict /SmallCapsDict undef
 										StickyLabelsPositionOnPage  StickyLabelsWithPagePortraitNumRows StickyLabelsWithPagePortraitNumCols mul  ge
 										{
 											AnnotatePDF ShowPage   /StickyLabelsNumPaintedOnCurrentPage 0 store   /StickyLabelsPositionOnPage 0 store
-											/StickyLabelsThisPageTitlesNames () def   StickyLabelsThisPageTitlesNamesUsed dup length 1 sub -1 0 {1 index exch //false put} for pop
+											/StickyLabelsThisPageTitlesNames () def  /StickyLabelsThisPageTitlesNamesDoThis //true def
 										} if  % page full
+
+										StickyLabelsThisPageTitlesNamesDoThis
+										{
+											/StickyLabelsThisPageTitlesNames dup load [ exch dup length 0 ne {(, )} {pop} ifelse
+											StickyLabelsByNameWhichReplaceCirclearrays  StickyLabelsNamesChangeFaster not and {ThisName} {Titles WithinTitles get} ifelse
+											] PDFDocEncodingify def  % /StickyLabelsThisPageTitlesNames
+											/StickyLabelsThisPageTitlesNamesDoThis //false def
+										} if
 
 										StickyLabelsWithPagePortraitHeight StickyLabelsPaddingWithPagePortraitTB 2 mul le
 											{(Error: StickyLabelsWithPagePortraitHeight = ) StickyLabelsWithPagePortraitHeight ToString Concatenate ( < 2*StickyLabelsPaddingWithPagePortraitTB) Concatenate OutputToLog stop}
@@ -13453,12 +13462,6 @@ currentdict /SmallCapsDict undef
 
 										/StickyLabelsNumPaintedOnCurrentPage dup load 1 add store
 										/StickyLabelsPositionOnPage dup load 1 add store
-
-										StickyLabelsThisPageTitlesNamesUsed StickyLabelsByNameWhichReplaceCirclearrays {NameNum} {WithinTitles} ifelse 2 copy get not
-										{
-											/StickyLabelsThisPageTitlesNames dup mark exch load  StickyLabelsByNameWhichReplaceCirclearrays {ThisName} {Titles WithinTitles get} ifelse PDFDocEncodingify  2 copy length 0 gt exch length 0 gt and {(; ) exch} if ConcatenateToMark def
-											//true put
-										} {pop pop} ifelse  % StickyLabelsThisPageTitlesNamesUsed ... not
 									} for  % StickyLabelCopyNum
 								} if  % ... ThisPaperType ... ThisPageOrdering ... and
 							} for  % NameNum, or not loop
