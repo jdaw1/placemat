@@ -32,9 +32,77 @@ FontName 256 string cvs dup stringwidth pop PageWidth exch sub 2 div Y moveto sh
 /Any false def
 
 
-FontName findfont /CharStrings get
+/DeBugLevel 65535 def
+
+/ShellSortGaps
+[
+	% ShellSort is very fast at short arrays, but QuickSort's segregation helps multi-CPU with long arrays.
+	% PostScript's max array size usually 65535 (PLRM3, p739, table B.1), but an implementation could allow longer.
+	% Included are those up to PostScript's max integer = 2^31 - 1, and commented out are subsequent up to 10^15.
+	% From http://en.wikipedia.org/wiki/Shellsort
+	% > Gonnet and Baeza-Yates observed that Shellsort makes the fewest comparisons on average when the ratios of successive gaps are
+	% > roughly equal to 2.2. This is why their sequence with ratio 2.2 and Tokuda's sequence with ratio 2.25 prove efficient. However,
+	% > it is not known why this is so. Sedgewick recommends using gaps which have low greatest common divisors or are pairwise coprime.
+	% Here each is closest to previous * Sqrt5 that is coprime to all previous, so ratios tend to ~=2.236. From 51 ratios >2.21568 and <2.24303.
+	1 2 5 11 23 51 113 251 563 1259 2813 6289 14063 31439  % Below 2^16
+	70297 157189 351487 785947 1757431 3929741 8787169 19648709 43935851 98243549 219679249 491217733 1098396241  % Below 2^31
+	% 2456088659 5491981199 12280443293 27459905999 61402216471 137299529999 307011082351 686497649983 1535055411751
+	% 3432488249899 7675277058739 17162441249483 38376385293691 85812206247419 191881926468461 429061031237099 959409632342311
+] readonly def  % /ShellSortGaps
+/ShellSortGapsLength1Sub ShellSortGaps length 1 sub def
+% Immediate dependencies: DeBugLevel; ShellSortGaps; ShellSortGapsLength1Sub.
+% [ thing thing ... ] {comparison code that takes two things and returns a boolean} ShellSort -
+% Sorts array such that for elements i and i+1 the comparison code returns true (or equal).
+% E.g.,   [1 2 3 4 5 2. 3. 4. 5. 3 4 5 4. 5. 5] dup {le} ShellSort ==   outputs   [1 2 2.0 3 3 3.0 4 4.0 4 4.0 5 5 5.0 5.0 5]
+% Based on http://www.tutorialspoint.com/data_structures_algorithms/shell_sort_algorithm.htm
+/ShellSort
 {
-	/GlyphNum exch def  /GlyphName exch def
+	//DeBugLevel 25 le {(+ShellSort) OutputToLog} if
+	8 dict begin
+	/ComparisonCode exch def
+	/Things exch def
+	/n Things length def
+	n 2 ge
+	{
+		1  1  //ShellSortGapsLength1Sub
+		{
+			/gapNum exch def
+			//ShellSortGaps gapNum get n gt {/gapNum gapNum 1 sub def  exit} if
+		} for  % gapNum up
+
+		gapNum -1 0
+		{
+			//ShellSortGaps exch get /gap exch def
+			gap  1  n 1 sub
+			{
+				/outer exch def
+				/valueToInsert Things outer get def
+				/inner outer def
+				{
+					inner gap lt {exit} if
+					Things inner gap sub get  valueToInsert  ComparisonCode  {exit} if
+					Things  inner  Things inner gap sub get  put
+					/inner inner gap sub def
+				} loop  % inner
+				Things inner valueToInsert put
+			} for  % outer
+		} for  % gap down
+	} if  % n 2 ge
+	end
+	//DeBugLevel 25 le {(-ShellSort) OutputToLog} if
+} bind def  % /ShellSort
+currentdict /ShellSortGaps undef
+currentdict /ShellSortGapsLength1Subs undef
+
+
+/Fonts
+	[ FontName findfont /CharStrings get {[ 3 1 roll ]} forall ]
+	dup {0 get 256 string cvs exch 0 get 256 string cvs ge} ShellSort
+def  % /Fonts
+
+Fonts
+{
+	aload pop /GlyphNum exch def  /GlyphName exch def
 	256 string  0 1 9 {1 index exch 32 put} for  % Spaces
 	dup 10 47 put  % "/"
 	GlyphNum 1 index cvs pop  % Number
@@ -44,7 +112,7 @@ FontName findfont /CharStrings get
 	//GlyphNameX Y moveto GlyphName 256 string cvs show
 	/Y Y LineStep sub def
 	Y //Margin le {showpage /Any //false def /Y //PageHeight //Margin sub //FontSize sub def} {/Any //true def} ifelse
-} bind forall  % CharStrings
+} bind forall  % Fonts
 Any {showpage} if
 () =
 
