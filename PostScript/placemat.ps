@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:30 Saturday 27th November 2021
+% This version 20:00 Saturday 27th November 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202111271930) def
+/ParametersVersionDateTimeAdobeFormat (D:202111272000) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202111271930) def
+/SoftwareVersionDateTimeAdobeFormat (D:202111272000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -893,7 +893,7 @@ ifelse} bind def  % /Stopped
 % Based on http://www.tutorialspoint.com/data_structures_algorithms/shell_sort_algorithm.htm
 /ShellSort
 {
-	DeBugLevel 25 le {(+ShellSort) OutputToLog} if
+	//DeBugLevel 25 le {(+ShellSort) OutputToLog} if
 	8 dict begin
 	/ComparisonCode exch def
 	/Things exch def
@@ -925,7 +925,7 @@ ifelse} bind def  % /Stopped
 		} for  % gap down
 	} if  % n 2 ge
 	end
-	DeBugLevel 25 le {(-ShellSort) OutputToLog} if
+	//DeBugLevel 25 le {(-ShellSort) OutputToLog} if
 } bind def  % /ShellSort
 currentdict /ShellSortGaps undef
 currentdict /ShellSortGapsLength1Subs undef
@@ -935,7 +935,7 @@ currentdict /ShellSortGapsLength1Subs undef
 % [ c0 c1 ... ] LowerLimit UpperLimit Tolerance  PolynomialRoot  root true|false
 /PolynomialRoot
 {
-	DeBugLevel 5 le {(+PolynomialRoot) OutputToLog} if
+	//DeBugLevel 5 le {(+PolynomialRoot) OutputToLog} if
 	10 dict begin
 	/Tolerance exch def
 	/UpperX exch def
@@ -962,7 +962,7 @@ currentdict /ShellSortGapsLength1Subs undef
 		} if  % LowerY UpperY different sides of 0
 	} repeat  % 1
 	end
-	DeBugLevel 5 le {(-PolynomialRoot) OutputToLog} if
+	//DeBugLevel 5 le {(-PolynomialRoot) OutputToLog} if
 } bind def  % PolynomialRoot
 
 % Immediate dependencies: DeBugLevel; OutputToLog; IntegerMax; Epsilon; OneThird; Cbrt; PolynomialRoot; ShellSort; Stopped.
@@ -971,7 +971,7 @@ currentdict /ShellSortGapsLength1Subs undef
 % Of higher degree: to within Tolerance; repeated roots can be problematic; out-of-range errors possible as PostScript's maximum float ~= 1.7 * 10^38.
 /PolynomialRoots
 {
-	DeBugLevel 5 le {(+PolynomialRoots) OutputToLog} if
+	//DeBugLevel 5 le {(+PolynomialRoots) OutputToLog} if
 	25 dict begin
 	/Tolerance exch def
 	/StrictUpper exch def  /LimitUpper exch def
@@ -1086,7 +1086,7 @@ currentdict /ShellSortGapsLength1Subs undef
 		]
 	} {[]} ifelse  % Coeffs length 1 ge
 	end
-	DeBugLevel 5 le {(-PolynomialRoots) OutputToLog} if
+	//DeBugLevel 5 le {(-PolynomialRoots) OutputToLog} if
 } bind def  % /PolynomialRoots
 
 % string string  Concatenate  string
@@ -1353,7 +1353,7 @@ currentdict /ShellSortGapsLength1Subs undef
 % CompoundString  ASCIIfy  string, the string being an all-ASCII approximation to the CompoundString
 /ASCIIfy
 {
-	DeBugLevel 15 le {(+ASCIIfy) OutputToLog} if
+	//DeBugLevel 15 le {(+ASCIIfy) OutputToLog} if
 	3 dict begin
 	/param exch def
 	/param load xcheck
@@ -1393,12 +1393,12 @@ currentdict /ShellSortGapsLength1Subs undef
 		()
 	} repeat} ifelse  % xcheck
 	end
-	DeBugLevel 15 le {(-ASCIIfy) OutputToLog} if
+	//DeBugLevel 15 le {(-ASCIIfy) OutputToLog} if
 } bind def  % /ASCIIfy
 
 /PDFDocEncodingify
 {
-	DeBugLevel 15 le {(+PDFDocEncodingify) OutputToLog} if
+	//DeBugLevel 15 le {(+PDFDocEncodingify) OutputToLog} if
 	3 dict begin
 	/param exch def
 	/param load xcheck
@@ -1418,7 +1418,7 @@ currentdict /ShellSortGapsLength1Subs undef
 		()
 	} repeat} ifelse  % xcheck
 	end
-	DeBugLevel 15 le {(-PDFDocEncodingify) OutputToLog} if
+	//DeBugLevel 15 le {(-PDFDocEncodingify) OutputToLog} if
 } bind def  % /PDFDocEncodingify
 
 % String  Trim  StringNeitherStartingNorEndingInASpace
@@ -1590,7 +1590,7 @@ LogThisExtra ASCIIfy dup length 0 gt {mark exch (\n) exch (\n ) ConcatenateToMar
 
 /NonEmptyCompoundObject
 {
-	DeBugLevel 5 le {(+NonEmptyCompoundObject) OutputToLog} if
+	//DeBugLevel 5 le {(+NonEmptyCompoundObject) OutputToLog} if
 	1 dict begin
 	/param exch def
 	1 {
@@ -1604,12 +1604,12 @@ LogThisExtra ASCIIfy dup length 0 gt {mark exch (\n) exch (\n ) ConcatenateToMar
 		mark (Warning: NonEmptyCompoundObject parameter ) /param load 0 //true ThingToDebugText  ( is of type ) param type ( rather than executable, string, name, number or array.) ConcatenateToMark OutputToLog  //true
 	} repeat
 	end
-	DeBugLevel 5 le {(-NonEmptyCompoundObject) OutputToLog} if
+	//DeBugLevel 5 le {(-NonEmptyCompoundObject) OutputToLog} if
 } bind def  % /NonEmptyCompoundObject
 
 /LengthCompoundObject
 {
-	DeBugLevel 5 le {(+LengthCompoundObject) OutputToLog} if
+	//DeBugLevel 5 le {(+LengthCompoundObject) OutputToLog} if
 	1 dict begin
 	GSave
 	NullDevice
@@ -1637,7 +1637,7 @@ LogThisExtra ASCIIfy dup length 0 gt {mark exch (\n) exch (\n ) ConcatenateToMar
 	} ifelse  % xcheck
 	GRestore
 	end
-	DeBugLevel 5 le {(-LengthCompoundObject) OutputToLog} if
+	//DeBugLevel 5 le {(-LengthCompoundObject) OutputToLog} if
 } bind def  % /LengthCompoundObject
 
 % Similar to 'for' loop, except numbers out-of-order. Half-way number first, then odd quarter-way numbers, then odd eighth-way numbers, etc.
@@ -1717,7 +1717,7 @@ currentdict /ForReverseBinaryDict undef
 % http://groups.google.com/g/comp.lang.postscript/c/vlfF8eGOCMA
 /Dimensions
 {
-	DeBugLevel 10 le {(+Dimensions) OutputToLog} if
+	//DeBugLevel 10 le {(+Dimensions) OutputToLog} if
 	1 dict begin
 	exch /PaperType exch def
 	1 {
@@ -1763,7 +1763,7 @@ currentdict /ForReverseBinaryDict undef
 		stop
 	} repeat  end  % 1
 	3 -1 roll /Landscape eq {exch} if
-	DeBugLevel 10 le {(-Dimensions) OutputToLog} if
+	//DeBugLevel 10 le {(-Dimensions) OutputToLog} if
 } bind def  % /Dimensions
 
 /PaperTypeStringShortPDF  % Unlike PaperTypeString, does not take parameters: uses ThisPaperType
@@ -1826,7 +1826,7 @@ currentdict /ForReverseBinaryDict undef
 % First two params ignored if Callsetpagedevice is false
 /SetPaperSize
 {
-	DeBugLevel 15 le {(+SetPaperSize) OutputToLog} if
+	//DeBugLevel 15 le {(+SetPaperSize) OutputToLog} if
 	2 copy Dimensions /PageHeight exch def  /PageWidth exch def
 	14 dict begin
 	pop  /PaperType exch def  /Callsetpagedevice exch def  /Mirror exch def  /Rotate180 exch def  /ShowCropMarks exch def
@@ -1933,7 +1933,7 @@ currentdict /ForReverseBinaryDict undef
 		} if  % OMR ... gt
 	} if  % show crop marks
 	end
-	DeBugLevel 15 le {(-SetPaperSize) OutputToLog} if
+	//DeBugLevel 15 le {(-SetPaperSize) OutputToLog} if
 } bind def  % /SetPaperSize
 
 
@@ -1960,7 +1960,7 @@ currentdict /ForReverseBinaryDict undef
 /CompassPointText {16 mul 360 div round cvi 16 mod 16 add 16 mod //CompassPoints16 exch get} bind def  % /CompassPointText
 currentdict	/CompassPoint16 undef
 
-DeBugLevel 100 le {( Main: computing NumSheets, SheetLengths, PaperTypes, UsedPaperTypes, UsedPageOrderings) OutputToLog} if
+//DeBugLevel 100 le {( Main: computing NumSheets, SheetLengths, PaperTypes, UsedPaperTypes, UsedPageOrderings) OutputToLog} if
 /NumSheets GlassesOnSheets length def
 /SheetLengths [ 0 1 NumSheets 1 sub {/SheetNum exch def  GlassesOnSheets SheetNum GetEU length} for ] def
 /TypeOfPagesBeingRendered /Glasses store
@@ -2512,12 +2512,12 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 % http://bugs.ghostscript.com/show_bug.cgi?id=689664
 /CurrentFontSize
 {
-	DeBugLevel 5 le {(+CurrentFontSize) OutputToLog} if
+	//DeBugLevel 5 le {(+CurrentFontSize) OutputToLog} if
 	currentfont dup
 	/FontMatrix get 3 get  % current y scale
 	exch /FontName get findfont /FontMatrix get 3 get  % original y scale
 	div
-	DeBugLevel 5 le {(-CurrentFontSize) OutputToLog} if
+	//DeBugLevel 5 le {(-CurrentFontSize) OutputToLog} if
 } bind def  % /CurrentFontSize
 % http://groups.google.com/g/comp.lang.postscript/c/cteFkRmWMVg
 /CurrentFontName {currentfont /FontName get} bind def
@@ -2531,7 +2531,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 /UnderlineBegin {/UnderlineMatrix matrix currentmatrix store  currentpoint /UnderlineY0 exch store /UnderlineX0 exch store} def
 /UnderlinePaint
 {
-	DeBugLevel 15 le {(+UnderlinePaint) OutputToLog} if
+	//DeBugLevel 15 le {(+UnderlinePaint) OutputToLog} if
 	5 dict begin
 	matrix currentmatrix UnderlineMatrix setmatrix currentpoint  /UnderlineY1 exch def /UnderlineX1 exch def  setmatrix
 	/UnderlineLength UnderlineX1 UnderlineX0 sub dup mul  UnderlineY1 UnderlineY0 sub dup mul  add sqrt  def
@@ -2563,7 +2563,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 	} if  % UnderlineLength 0 gt
 	end
 	/UnderlineMatrix null store  /UnderlineY0 null store  /UnderlineX0 null store
-	DeBugLevel 15 le {(-UnderlinePaint) OutputToLog} if
+	//DeBugLevel 15 le {(-UnderlinePaint) OutputToLog} if
 } def  % /UnderlinePaint
 
 % compoundString  ToSmallCaps  [pieces]
@@ -2612,7 +2612,7 @@ currentdict /SmallCapsDict undef
 % Head0 and Head1 are Booleans; other parameters numeric. Recommend HeadLength:HeadWidth:TailWidth in ratio 3:3:1 ==> tip angle = 2 ArcTan[1/2] ~= 53.13 degrees.
 /ArrowPath
 {
-	DeBugLevel 10 le {(+ArrowPath) OutputToLog} if
+	//DeBugLevel 10 le {(+ArrowPath) OutputToLog} if
 	9 dict begin
 	/Head1 exch def  /Head0 exch def  2 div /TailWidthHalf exch def  2 div /HeadWidthHalf exch def  /HeadLength exch def  /Y1 exch def  /X1 exch def  /Y0 exch def  /X0 exch def
 	X1 X0 sub dup mul  Y1 Y0 sub dup mul  add sqrt  dup 0 gt
@@ -2629,7 +2629,7 @@ currentdict /SmallCapsDict undef
 		closepath  setmatrix
 	} {pop} ifelse  % Point not the same
 	end
-	DeBugLevel 10 le {(-ArrowPath) OutputToLog} if
+	//DeBugLevel 10 le {(-ArrowPath) OutputToLog} if
 } bind def  % /ArrowPath
 
 % Immediate dependencies: DeBugLevel; OutputToLog; PolynomialRoots; Stopped.
@@ -2637,7 +2637,7 @@ currentdict /SmallCapsDict undef
 % assesses only parts that will show visibly. I.e., proper handling of curves.
 /PathBBox
 {
-	DeBugLevel 10 le {(+PathBBox) OutputToLog} if
+	//DeBugLevel 10 le {(+PathBBox) OutputToLog} if
 	22 dict begin
 
 	1 {
@@ -2740,14 +2740,14 @@ currentdict /SmallCapsDict undef
 	} repeat  % 1
 
 	end
-	DeBugLevel 10 le {(-PathBBox) OutputToLog} if
+	//DeBugLevel 10 le {(-PathBBox) OutputToLog} if
 } bind def  % PathBBox
 
 % Immediate dependencies: DeBugLevel; OutputToLog; PolynomialRoots; Stopped; Epsilon.
 % AngleDeemedStraight  PathDistinctiveXY  [ Xs ] [ Ys ]
 /PathDistinctiveXY
 {
-	DeBugLevel 10 le {(+PathDistinctiveXY) OutputToLog} if
+	//DeBugLevel 10 le {(+PathDistinctiveXY) OutputToLog} if
 	27 dict begin
 	/cosADS exch cos def
 	/Points 256 array def  /PointsNum 0 def
@@ -2838,14 +2838,14 @@ currentdict /SmallCapsDict undef
 
 	Points 0 PointsNum getinterval
 	end
-	DeBugLevel 10 le {(-PathDistinctiveXY) OutputToLog} if
+	//DeBugLevel 10 le {(-PathDistinctiveXY) OutputToLog} if
 } bind def % /PathDistinctiveXY
 
 % CentreX CentreY MinMaxRadiusSquared Tolerance   PathBRadiusSquared   MaxRadiusSquared
 % What is largest distance from CentreX,CentreY?
 /PathBRadiusSquared
 {
-	DeBugLevel 10 le {(+PathBRadiusSquared) OutputToLog} if
+	//DeBugLevel 10 le {(+PathBRadiusSquared) OutputToLog} if
 	23 dict begin
 	/Tolerance exch def  /MaxRadiusSquared exch def  /CentreY exch def  /CentreX exch def
 
@@ -2932,14 +2932,14 @@ currentdict /SmallCapsDict undef
 
 	MaxRadiusSquared
 	end
-	DeBugLevel 10 le {(-PathBRadiusSquared) OutputToLog} if
+	//DeBugLevel 10 le {(-PathBRadiusSquared) OutputToLog} if
 } bind def  % PathBRadiusSquared
 
 % ExpansionCentreX ExpansionCentreY CircleCentreX CircleCentreY CircleRadius   PathMaxScalingFitCircle   Scaling
 % Given a fixed circle, and a path, buy how what factor can the path be expanded about a fixed point and still fit in circle?
 /PathMaxScalingFitCircle
 {
-	DeBugLevel 10 le {(+PathMaxScalingFitCircle) OutputToLog} if
+	//DeBugLevel 10 le {(+PathMaxScalingFitCircle) OutputToLog} if
 	31 dict begin
 	/CircleRadius exch def  /CircleCentreY exch def  /CircleCentreX exch def  /ExpansionCentreY exch def  /ExpansionCentreX exch def
 
@@ -3023,7 +3023,7 @@ currentdict /SmallCapsDict undef
 	} repeat  % 1
 
 	end
-	DeBugLevel 10 le {(-PathMaxScalingFitCircle) OutputToLog} if
+	//DeBugLevel 10 le {(-PathMaxScalingFitCircle) OutputToLog} if
 } bind def  % PathMaxScalingFitCircle
 
 
@@ -3035,7 +3035,7 @@ currentdict /SmallCapsDict undef
 % http://groups.google.com/g/comp.lang.postscript/c/3RIq0Jnwrbo
 /ApproximatingCurve
 {
-	DeBugLevel 10 le {(+ApproximatingCurve) OutputToLog} if
+	//DeBugLevel 10 le {(+ApproximatingCurve) OutputToLog} if
 	32 dict begin
 	/ddYe exch def /ddXe exch def /ddYs exch def /ddXs exch def /dYe exch def /dXe exch def /dYs exch def /dXs exch def /Ye exch def /Xe exch def /Ys exch def /Xs exch def
 	currentpoint Ys ne exch Xs ne or {Xs Ys lineto} if
@@ -3163,14 +3163,14 @@ currentdict /SmallCapsDict undef
 		} ifelse  % any solution to speeds
 	} repeat % 1
 	end
-	DeBugLevel 10 le {(-ApproximatingCurve) OutputToLog} if
+	//DeBugLevel 10 le {(-ApproximatingCurve) OutputToLog} if
 } bind def  % /ApproximatingCurve
 
 % Immediate dependencies: DeBugLevel; OutputToLog; PrinterEpsilon; Epsilon; DegreeInRadians.
 % NumArms AngOffset CentreX CentreY RadiusMax RadiusBetweenArms Clockwise  ArchimedeanSpiralPath  -
 /ArchimedeanSpiralPath
 {
-	DeBugLevel 1 le {(+ArchimedeanSpiralPath) OutputToLog} if
+	//DeBugLevel 1 le {(+ArchimedeanSpiralPath) OutputToLog} if
 	28 dict begin
 	/Clockwise exch def  /RadiusBetweenArms exch def  /RadiusMax exch def  /CentreY exch def  /CentreX exch def  /AngOffset exch def  /NumArms exch def
 
@@ -3204,7 +3204,7 @@ currentdict /SmallCapsDict undef
 		} for  % i
 	} for  % SpiralNum
 	end
-	DeBugLevel 20 le {(-ArchimedeanSpiralPath) OutputToLog} if
+	//DeBugLevel 20 le {(-ArchimedeanSpiralPath) OutputToLog} if
 } bind def  % ArchimedeanSpiralPath
 
 
@@ -3213,18 +3213,18 @@ currentdict /SmallCapsDict undef
 % Also, eliminates some types of problems with embedding fonts.
 /DeFontPath
 {
-	DeBugLevel 10 le {(+DeFontPath) OutputToLog} if
+	//DeBugLevel 10 le {(+DeFontPath) OutputToLog} if
 	{
 		[ {/moveto cvx} {/lineto cvx} {/curveto cvx} {/closepath cvx} pathforall ] newpath cvx exec
 	} Stopped {(Warning: protected path in DeFontPath) OutputToLog} if
-	DeBugLevel 10 le {(-DeFontPath) OutputToLog} if
+	//DeBugLevel 10 le {(-DeFontPath) OutputToLog} if
 } bind def  % /DeFontPath
 
 % A valid first parameter is a glyph name, a string, or an array of valid parameters.
 % CharPathRecMoveto computes the path, moving the currentpoint as if after a show.
 /CharPathRecMoveto
 {
-	DeBugLevel 10 le {(+CharPathRecMoveto) OutputToLog} if
+	//DeBugLevel 10 le {(+CharPathRecMoveto) OutputToLog} if
 	2 dict begin
 	/bln exch def
 	/param exch def
@@ -3237,24 +3237,24 @@ currentdict /SmallCapsDict undef
 		mark (Error: CharPathRecMoveto parameter ) /param load 0 //true ThingToDebugText  ( is of type ) /param load type  ( rather than executable, string, name, number or array.)  ConcatenateToMark OutputToLog stop
 	} repeat
 	end
-	DeBugLevel 10 le {(-CharPathRecMoveto) OutputToLog} if
+	//DeBugLevel 10 le {(-CharPathRecMoveto) OutputToLog} if
 } bind def  % /CharPathRecMoveto
 
 % http://groups.google.com/g/comp.lang.postscript/c/hZmiLPonDl8
 /CharPathRecursiveMoveto
 {
-	DeBugLevel 10 le {(+CharPathRecursiveMoveto) OutputToLog} if
+	//DeBugLevel 10 le {(+CharPathRecursiveMoveto) OutputToLog} if
 	1 index  XcheckRecursive  3 1 roll
 	CharPathRecMoveto
 	{DeFontPath} if
-	DeBugLevel 10 le {(-CharPathRecursiveMoveto) OutputToLog} if
+	//DeBugLevel 10 le {(-CharPathRecursiveMoveto) OutputToLog} if
 } bind def  % /CharPathRecursiveMoveto
 
 % A valid first parameter is a glyph name, a string, or an array of valid parameters.
 % CharPathRec computes the path, destroying the currentpoint.
 /CharPathRec
 {
-	DeBugLevel 9 le {(+CharPathRec) OutputToLog} if
+	//DeBugLevel 9 le {(+CharPathRec) OutputToLog} if
 	9 dict begin
 	/bln exch def
 	/param exch def
@@ -3267,23 +3267,23 @@ currentdict /SmallCapsDict undef
 		mark  (Error: CharPathRec parameter )  /param load 0 //true ThingToDebugText  ( is of type ) /param load type  ( rather than executable, string, name, number, or array.) ConcatenateToMark OutputToLog stop
 	} repeat
 	end
-	DeBugLevel 9 le {(-CharPathRec) OutputToLog} if
+	//DeBugLevel 9 le {(-CharPathRec) OutputToLog} if
 } bind def  % /CharPathRec
 
 % http://groups.google.com/g/comp.lang.postscript/c/hZmiLPonDl8
 /CharPathRecursive
 {
-	DeBugLevel 10 le {(+CharPathRecursive) OutputToLog} if
+	//DeBugLevel 10 le {(+CharPathRecursive) OutputToLog} if
 	1 index  XcheckRecursive  3 1 roll
 	CharPathRec
 	{DeFontPath} if
-	DeBugLevel 10 le {(-CharPathRecursive) OutputToLog} if
+	//DeBugLevel 10 le {(-CharPathRecursive) OutputToLog} if
 } bind def  % /CharPathRecursive
 
 % nulldevice causes some bad rounding: http://groups.google.com/g/comp.lang.postscript/c/7RQ2cQy_k-Y
 /ExecUExceptNotBindedPainting  % executes the one parameter, without painting
 {
-	DeBugLevel 5 le {(+ExecUExceptNotBindedPainting) OutputToLog} if
+	//DeBugLevel 5 le {(+ExecUExceptNotBindedPainting) OutputToLog} if
 	<<
 		/fill {}  /eofill 1 index  /stroke 1 index
 		/ufill /uappend load  /ueofill 1 index
@@ -3291,38 +3291,38 @@ currentdict /SmallCapsDict undef
 		/rectstroke [2 index aload pop /strokepath load] cvx
 		/shfill {pop GSave clippath //false upath GRestore uappend} bind
 	>> begin execU end
-	DeBugLevel 5 le {(-ExecUExceptNotBindedPainting) OutputToLog} if
+	//DeBugLevel 5 le {(-ExecUExceptNotBindedPainting) OutputToLog} if
 } bind def  % /ExecUExceptNotBindedPainting
 
 % (compound string)  StringPathBBox  llx lly urx ury
 /StringPathBBox
 {
-	DeBugLevel 10 le {(+StringPathBBox) OutputToLog} if
+	//DeBugLevel 10 le {(+StringPathBBox) OutputToLog} if
 	GSave 16384 dup scale newpath 0 0 moveto  //true CharPathRecursive PathBBox GRestore
-	DeBugLevel 10 le {(-StringPathBBox) OutputToLog} if
+	//DeBugLevel 10 le {(-StringPathBBox) OutputToLog} if
 } bind def  % /StringPathBBox
 
 % -  BaseHeight  num, being current font's usual height above baseline
 /BaseHeight
 {
-	DeBugLevel 10 le {(+BaseHeight) OutputToLog} if
+	//DeBugLevel 10 le {(+BaseHeight) OutputToLog} if
 	(AHTfhi1) StringPathBBox  4 1 roll pop pop pop
-	DeBugLevel 10 le {(-BaseHeight) OutputToLog} if
+	//DeBugLevel 10 le {(-BaseHeight) OutputToLog} if
 } bind def  % /BaseHeight
 
 % (compound string)  StringHeight  num, being top minus bottom for supplied compound string
 /StringHeight
 {
-	DeBugLevel 10 le {(+StringHeight) OutputToLog} if
+	//DeBugLevel 10 le {(+StringHeight) OutputToLog} if
 	StringPathBBox  exch pop sub neg exch pop
-	DeBugLevel 10 le {(-StringHeight) OutputToLog} if
+	//DeBugLevel 10 le {(-StringHeight) OutputToLog} if
 } bind def  % /StringHeight
 
 % A valid parameter is a glyph name, a string, or an array of valid parameters.
 % Computes the total width.
 /StringWidthRec
 {
-	DeBugLevel 9 le {(+StringWidthRec) OutputToLog} if
+	//DeBugLevel 9 le {(+StringWidthRec) OutputToLog} if
 	1 {
 		dup xcheck {currentpoint pop exch [exch ExecUExceptNotBindedPainting] StringWidthRec exch currentpoint pop exch sub add exit} if
 		dup type dup /integertype eq exch /realtype eq or {ToString} if  % no 'exit'
@@ -3331,14 +3331,14 @@ currentdict /SmallCapsDict undef
 		dup type /arraytype eq {0 exch {StringWidthRec add} forall exit} if
 		mark exch dup (Error: StringWidthRec parameter ) counttomark -1 roll 0 //true ThingToDebugText ( is of type ) counttomark -1 roll type ToString ( rather than executable, string, name or array.) ConcatenateToMark OutputToLog stop
 	} repeat
-	DeBugLevel 9 le {(-StringWidthRec) OutputToLog} if
+	//DeBugLevel 9 le {(-StringWidthRec) OutputToLog} if
 } bind def  % /StringWidthRec
 /StringWidthRecursive
 {
-	DeBugLevel 10 le {(+StringWidthRecursive) OutputToLog} if
+	//DeBugLevel 10 le {(+StringWidthRecursive) OutputToLog} if
 	GSave  newpath 0 0 moveto  %  NullDevice  16384 dup scale
 	StringWidthRec GRestore
-	DeBugLevel 10 le {(-StringWidthRecursive) OutputToLog} if
+	//DeBugLevel 10 le {(-StringWidthRecursive) OutputToLog} if
 } bind def  % moveto in case no currentpoint
 
 % TargetAccuracy  LineWidthThatCoversPath  WidthMax WidthMin
@@ -3347,7 +3347,7 @@ currentdict /SmallCapsDict undef
 % http://groups.google.com/g/comp.lang.postscript/c/86b7Sg8v7B0
 /LineWidthThatCoversPath
 {
-	DeBugLevel 25 le {(+LineWidthThatCoversPath) OutputToLog} if
+	//DeBugLevel 25 le {(+LineWidthThatCoversPath) OutputToLog} if
 	20 dict begin
 	//PrinterEpsilon 2 copy lt {exch} if pop /TargetAccuracy exch def
 	% Target accuracy is split into two equal parts. The grid separation is half. And then the WidthMax-WidthMin separation is allowed the other half, and sometimes less than that.
@@ -3365,7 +3365,7 @@ currentdict /SmallCapsDict undef
 		/HalfGapRows  ury lly sub  NumRows 2 mul  div def
 		/HalfGapCols  urx llx sub  NumCols 2 mul  div def
 		/MaxResolutionError HalfGapRows dup 4 mul HalfGapCols dup mul exch div add def
-		DeBugLevel 15 le {mark ( LineWidthThatCoversPath: NumRows = ) NumRows (; NumCols = ) NumCols (; HalfGapRows = ) HalfGapRows (; HalfGapCols = ) HalfGapCols (; MaxResolutionError = ) MaxResolutionError ConcatenateToMark OutputToLog} if
+		//DeBugLevel 15 le {mark ( LineWidthThatCoversPath: NumRows = ) NumRows (; NumCols = ) NumCols (; HalfGapRows = ) HalfGapRows (; HalfGapCols = ) HalfGapCols (; MaxResolutionError = ) MaxResolutionError ConcatenateToMark OutputToLog} if
 
 		count  currentsystemparams /MaxOpStack 2 copy known {get} {pop pop 65535} ifelse exch sub /StackSpaceRemaining exch def
 		/PointsMostDistanceFromEdge
@@ -3382,7 +3382,7 @@ currentdict /SmallCapsDict undef
 			} for  % X
 		] def  % /PointsMostDistanceFromEdge
 		StackSpaceRemaining 2 lt {(Warning: LineWidthThatCoversPath has incomplete calculation because there might be too little stack space. Increasing TargetAccuracy would help.) OutputToLog} if
-		DeBugLevel 15 le {mark ( LineWidthThatCoversPath: PointsMostDistanceFromEdge length = ) PointsMostDistanceFromEdge length ConcatenateToMark OutputToLog} if
+		//DeBugLevel 15 le {mark ( LineWidthThatCoversPath: PointsMostDistanceFromEdge length = ) PointsMostDistanceFromEdge length ConcatenateToMark OutputToLog} if
 
 		/WidthMin null def   /WidthMax null def
 		/Width ury lly sub 6 div //PrinterEpsilon 2 copy lt {exch} if pop def
@@ -3401,7 +3401,7 @@ currentdict /SmallCapsDict undef
 			} for  % PointsMostDistanceFromEdge
 			NewArrayLength 0 gt {/WidthMin Width def  /PointsMostDistanceFromEdge PointsMostDistanceFromEdge 0 NewArrayLength getinterval def} {/WidthMax Width def} ifelse
 			GRestore
-			DeBugLevel 15 le {mark ( LineWidthThatCoversPath: WidthMin = ) WidthMin (; WidthMax = ) WidthMax (; PointsMostDistanceFromEdge length = ) PointsMostDistanceFromEdge length  ConcatenateToMark OutputToLog} if
+			//DeBugLevel 15 le {mark ( LineWidthThatCoversPath: WidthMin = ) WidthMin (; WidthMax = ) WidthMax (; PointsMostDistanceFromEdge length = ) PointsMostDistanceFromEdge length  ConcatenateToMark OutputToLog} if
 
 			WidthMax null ne
 			{
@@ -3418,7 +3418,7 @@ currentdict /SmallCapsDict undef
 
 		WidthMax MaxResolutionError add  WidthMin
 	} {//PrinterEpsilon 0} ifelse  end  % Non-zero area
-	DeBugLevel 25 le {(-LineWidthThatCoversPath) OutputToLog} if
+	//DeBugLevel 25 le {(-LineWidthThatCoversPath) OutputToLog} if
 } bind def  % /LineWidthThatCoversPath
 
 % CentreX CentreY Radius LineWidthThatCoversCircle  WidthMax WidthMin [ X0 Y0 X1 Y1 ... ]
@@ -3431,7 +3431,7 @@ currentdict /SmallCapsDict undef
 % http://groups.google.com/g/comp.lang.postscript/c/86b7Sg8v7B0 (non-discussion about how to do it)
 /LineWidthThatCoversCircle
 {
-	DeBugLevel 25 le {(+LineWidthThatCoversCircle) OutputToLog} if
+	//DeBugLevel 25 le {(+LineWidthThatCoversCircle) OutputToLog} if
 	20 dict begin
 	/Radius exch def  /CentreY exch def  /CentreX exch def
 
@@ -3479,7 +3479,7 @@ currentdict /SmallCapsDict undef
 			} for  % PointsMostDistanceFromEdge
 			NewArrayLength 0 gt {/WidthMin Width def  /PointsMostDistanceFromEdge PointsMostDistanceFromEdge 0 NewArrayLength getinterval def} {/WidthMax Width def} ifelse
 			GRestore
-			DeBugLevel 15 le {mark ( LineWidthThatCoversCircle: WidthMin = ) WidthMin (; WidthMax = ) WidthMax (; PointsMostDistanceFromEdge length = ) PointsMostDistanceFromEdge length  ConcatenateToMark OutputToLog} if
+			//DeBugLevel 15 le {mark ( LineWidthThatCoversCircle: WidthMin = ) WidthMin (; WidthMax = ) WidthMax (; PointsMostDistanceFromEdge length = ) PointsMostDistanceFromEdge length  ConcatenateToMark OutputToLog} if
 
 			WidthMax null ne
 			{
@@ -3494,7 +3494,7 @@ currentdict /SmallCapsDict undef
 
 		WidthMax ExitThreshhold add   WidthMin  PointsMostDistanceFromEdge
 	} {//PrinterEpsilon 0 []} ifelse  end  % Non-zero area
-	DeBugLevel 25 le {(-LineWidthThatCoversCircle) OutputToLog} if
+	//DeBugLevel 25 le {(-LineWidthThatCoversCircle) OutputToLog} if
 } bind def  % /LineWidthThatCoversCircle
 
 % Immediate dependencies: DeBugLevel; OutputToLog; ConcatenateToMark; ToString.
@@ -3502,7 +3502,7 @@ currentdict /SmallCapsDict undef
 % ShowRecursive shows the sequences of entities in the natural manner.
 /ShowRecursive
 {
-	DeBugLevel 20 le {(+ShowRecursive) OutputToLog} if
+	//DeBugLevel 20 le {(+ShowRecursive) OutputToLog} if
 	1 dict begin
 	/param exch def
 	1 {
@@ -3514,14 +3514,14 @@ currentdict /SmallCapsDict undef
 		mark  (Error: ShowRecursive parameter ) /param load 0 //true ThingToDebugText  ( is of type ) /param load type  ( rather than executable, string, name or array.)  ConcatenateToMark OutputToLog stop
 	} repeat
 	end
-	DeBugLevel 20 le {(-ShowRecursive) OutputToLog} if
+	//DeBugLevel 20 le {(-ShowRecursive) OutputToLog} if
 } bind def  % /ShowRecursive
 
 % Computes the path of a glyph, with the charpath-style boolean flag, destroying the currentpoint.
 % http://groups.google.com/g/comp.lang.postscript/c/rvAGfbsbLVw
 /GlyphPath
 {
-	DeBugLevel 10 le {(+GlyphPath) OutputToLog} if
+	//DeBugLevel 10 le {(+GlyphPath) OutputToLog} if
 	2 dict begin
 	/bln exch def
 	/glyphname exch def
@@ -3538,13 +3538,13 @@ currentdict /SmallCapsDict undef
 	setfont
 	/TemporaryFont undefinefont
 	end
-	DeBugLevel 10 le {(-GlyphPath) OutputToLog} if
+	//DeBugLevel 10 le {(-GlyphPath) OutputToLog} if
 } bind def  % /GlyphPath
 
 % Computes the path of a glyph, with the charpath-style boolean flag, moving the currentpoint as if after a show.
 /GlyphPathMoveto
 {
-	DeBugLevel 10 le {(+GlyphPathMoveto) OutputToLog} if
+	//DeBugLevel 10 le {(+GlyphPathMoveto) OutputToLog} if
 	2 dict begin
 	/bln exch def
 	/glyphname exch def
@@ -3563,13 +3563,13 @@ currentdict /SmallCapsDict undef
 	setfont
 	/TemporaryFont undefinefont
 	end
-	DeBugLevel 10 le {(-GlyphPathMoveto) OutputToLog} if
+	//DeBugLevel 10 le {(-GlyphPathMoveto) OutputToLog} if
 } bind def  % /GlyphPathMoveto
 
 % Is this, or does this contain, an executable?
 /XcheckRecursive
 {
-	DeBugLevel 5 le {(+XcheckRecursive) OutputToLog} if
+	//DeBugLevel 5 le {(+XcheckRecursive) OutputToLog} if
 	dup xcheck
 	{pop //true}
 	{
@@ -3578,14 +3578,14 @@ currentdict /SmallCapsDict undef
 			{pop //false}
 		ifelse  % arraytype
 	} ifelse  % xcheck
-	DeBugLevel 5 le {(-XcheckRecursive) OutputToLog} if
+	//DeBugLevel 5 le {(-XcheckRecursive) OutputToLog} if
 } bind def  % XcheckRecursive
 
 % Assumes path defined, which is used as the clipping region, and also the various CrossHatching... parameters
 % X Y {FormatStrokeCode} RadialCrossHatching -
 /RadialCrossHatching
 {
-	DeBugLevel 40 le {(+RadialCrossHatching) OutputToLog} if
+	//DeBugLevel 40 le {(+RadialCrossHatching) OutputToLog} if
 	GSave
 	12 dict begin
 	/FormatStrokeCode exch def  /Y exch def  /X exch def
@@ -3656,14 +3656,14 @@ currentdict /SmallCapsDict undef
 	} if  % non-empty bounding box of clip path
 	end
 	GRestore
-	DeBugLevel 40 le {(-RadialCrossHatching) OutputToLog} if
+	//DeBugLevel 40 le {(-RadialCrossHatching) OutputToLog} if
 } bind def  % /RadialCrossHatching
 
 % OuterRegionLlx OuterRegionLly OuterRegionUrx OuterRegionUry {FillCode} {StrokeCode} DoActuallyClip  ShapesClippedToPath  -
 % Everything clipped to current path, which is left unchanged
 /ShapesClippedToPath
 {
-	DeBugLevel 40 le {(+ShapesClippedToPath) OutputToLog} if
+	//DeBugLevel 40 le {(+ShapesClippedToPath) OutputToLog} if
 	21 dict begin  GSave
 	GSave flattenpath pathbbox /ury exch def /urx exch def /lly exch def /llx exch def GRestore  % pathbbox rather than PathBBox because approximate suffices, and is faster
 	{clip} if  % DoActuallyClip
@@ -3742,7 +3742,7 @@ currentdict /SmallCapsDict undef
 		} if  % /Heart
 	} forall  % 'ShapesInts'
 	GRestore end
-	DeBugLevel 40 le {(-ShapesClippedToPath) OutputToLog} if
+	//DeBugLevel 40 le {(-ShapesClippedToPath) OutputToLog} if
 } bind def  % /ShapesClippedToPath
 
 % X Y  Filltext  FillTextNumSpaces  FilltextLineStep  Angle  NumOutlines  InnerMostColor OtherColor  RepeatClippedWithin  -
@@ -3760,7 +3760,7 @@ currentdict /SmallCapsDict undef
 % On exit the clipping path is still the current path
 /RepeatClippedWithin
 {
-	DeBugLevel 40 le {(+RepeatClippedWithin) OutputToLog} if
+	//DeBugLevel 40 le {(+RepeatClippedWithin) OutputToLog} if
 	38 dict begin
 	/OtherColor exch def
 	/InnerMostColor exch def
@@ -3851,7 +3851,7 @@ currentdict /SmallCapsDict undef
 		GRestore
 	} if  % FilltextR FilltextL sub PrinterEpsilon gt
 	end
-	DeBugLevel 40 le {(-RepeatClippedWithin) OutputToLog} if
+	//DeBugLevel 40 le {(-RepeatClippedWithin) OutputToLog} if
 } bind def  % /RepeatClippedWithin
 
 
@@ -3859,7 +3859,7 @@ currentdict /SmallCapsDict undef
 % best if int1 > int2
 /GreatestCommonDivisor
 {
-	DeBugLevel 3 le {(+GreatestCommonDivisor) OutputToLog} if
+	//DeBugLevel 3 le {(+GreatestCommonDivisor) OutputToLog} if
 	3 dict begin
 	/j exch abs def
 	/i exch abs def
@@ -3878,7 +3878,7 @@ currentdict /SmallCapsDict undef
 		} repeat
 	} ifelse  % j 0 eq
 	end
-	DeBugLevel 3 le {(-GreatestCommonDivisor) OutputToLog} if
+	//DeBugLevel 3 le {(-GreatestCommonDivisor) OutputToLog} if
 } bind def  % /GreatestCommonDivisor
 
 
@@ -3886,7 +3886,7 @@ currentdict /SmallCapsDict undef
 % ...    Star    dict, the dictionary containing /LeftX, /CenterX, /RightX, /BottomY, /CenterY, /TopY, /Radius, /InnerRadius, /AntiClockwise
 /Star
 {
-	DeBugLevel 30 le {(+Star) OutputToLog} if
+	//DeBugLevel 30 le {(+Star) OutputToLog} if
 	20 dict begin
 
 	/AntiClockwise exch def
@@ -3963,7 +3963,7 @@ currentdict /SmallCapsDict undef
 		/InnerRadius   InnerRadius
 		/AntiClockwise AntiClockwise
 	>> end
-	DeBugLevel 30 le {(-Star) OutputToLog} if
+	//DeBugLevel 30 le {(-Star) OutputToLog} if
 } bind def  % /Star
 
 
@@ -4023,7 +4023,7 @@ currentdict /SmallCapsDict undef
 % ThePortForumIconPlacement  PlaceThePortForumIcon  -
 /PlaceThePortForumIcon
 {
-	DeBugLevel 6 le {(+PlaceThePortForumIcon) OutputToLog} if
+	//DeBugLevel 6 le {(+PlaceThePortForumIcon) OutputToLog} if
 	4 dict begin
 	/param exch def
 	/IconForm //ThePortForumIconForm def  % Allows easy replacement with something else.
@@ -4076,7 +4076,7 @@ currentdict /SmallCapsDict undef
 		} ifelse  % /arraytype
 	} ifelse  % /param load xcheck
 	end
-	DeBugLevel 6 le {(-PlaceThePortForumIcon) OutputToLog} if
+	//DeBugLevel 6 le {(-PlaceThePortForumIcon) OutputToLog} if
 } bind def  % /PlaceThePortForumIcon
 
 
@@ -4132,7 +4132,7 @@ currentdict /SmallCapsDict undef
 % FlowerNumPetals FlowerPetalsAngularWidth FlowerRadius FlowerAngleOffset Clockwise? Strokeable Flower -
 /Flower
 {
-	DeBugLevel 25 le {(+Flower) OutputToLog} if
+	//DeBugLevel 25 le {(+Flower) OutputToLog} if
 	33 dict begin
 	/Strokeable exch def  /Clockwise exch def
 	/AngleOffset exch def  /Radius exch def  abs /AngularWidth exch def  /NumPetals exch def
@@ -4234,7 +4234,7 @@ currentdict /SmallCapsDict undef
 		} ifelse   % Petals overlap
 	} for  % i
 	end
-	DeBugLevel 25 le {(-Flower) OutputToLog} if
+	//DeBugLevel 25 le {(-Flower) OutputToLog} if
 } bind def  % /Flower
 
 
@@ -4248,7 +4248,7 @@ currentdict /SmallCapsDict undef
 % true => def; false => store
 /DefStoreMgns
 {
-	DeBugLevel 5 le {(+DefStoreMgns) OutputToLog} if
+	//DeBugLevel 5 le {(+DefStoreMgns) OutputToLog} if
 	/MgnB MarginB TypeOfPagesBeingRendered /Glasses eq {OuterGlassesMarginB} {OuterMarginB} ifelse add
 	/MgnT MarginT TypeOfPagesBeingRendered /Glasses eq {OuterGlassesMarginT} {OuterMarginT} ifelse add
 	/MgnL MarginL TypeOfPagesBeingRendered /Glasses eq {OuterGlassesMarginL} {OuterMarginL} ifelse add
@@ -4262,7 +4262,7 @@ currentdict /SmallCapsDict undef
 		% The swap for left-handers must be done with a 'translate'
 		PageWidth mul  SideBySideGlassesTastingNotesWidthGutter 2 div  add   3 -1 roll {def} {store} ifelse
 	} {pop} ifelse  % ... SideBySideGlassesTastingNotes ...
-	DeBugLevel 5 le {(-DefStoreMgns) OutputToLog} if
+	//DeBugLevel 5 le {(-DefStoreMgns) OutputToLog} if
 } bind def  % /DefStoreMgns
 
 /UndefMgns {currentdict dup dup dup  /MgnB undef  /MgnT undef  /MgnL undef  /MgnR undef} bind def
@@ -4274,7 +4274,7 @@ currentdict /SmallCapsDict undef
 %  a packing type   ProcessOnePackingType  -
 /ProcessOnePackingType
 {
-	DeBugLevel 50 le {(+ProcessOnePackingType) OutputToLog} if
+	//DeBugLevel 50 le {(+ProcessOnePackingType) OutputToLog} if
 	37 dict begin
 	/PackingDescriptor exch execU def
 	/BaseStyle  PackingDescriptor dup type /arraytype eq {0 GetEU} if  def
@@ -4353,7 +4353,7 @@ currentdict /SmallCapsDict undef
 		% /Diamonds is, uniquely, a fall-back for special cases of some others.
 		/Diamonds BaseStyle eq  /RectangularAlternateNudge BaseStyle eq or  /Bespoke5 BaseStyle eq NG 5 le and or   /Bespoke7 BaseStyle eq NG 7 le and or   /Temple BaseStyle eq or
 		{
-			DeBugLevel 50 le {( ProcessOnePackingType, /Diamonds | /Bespoke5 | /Bespoke7) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /Diamonds | /Bespoke5 | /Bespoke7) OutputToLog} if
 			% /Diamonds trivia: fix the number of glasses at eight, and increase the page's usable Height/Width ratio. At which ratios does the number of rows change?
 			% 2 -> 3    0.44444444      4 9 div                                                = 4/9
 			% 3 -> 4    0.68572971      7 sqrt 1 sub 5 mul 12 div                              = (Sqrt(7)-1) * 5/12
@@ -4394,7 +4394,7 @@ currentdict /SmallCapsDict undef
 
 		/Bespoke5 BaseStyle eq  NG 5 le  and
 		{
-			DeBugLevel 50 le {( ProcessOnePackingType, /Bespoke5) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /Bespoke5) OutputToLog} if
 			W H 2 copy lt {exch} if   /S exch def   /L exch def  % short side, long side
 			/a 21 S mul 10 L mul sub 2 S mul L sub 6 mul //Sqrt3 mul add S mul def
 			a 0 ge
@@ -4420,7 +4420,7 @@ currentdict /SmallCapsDict undef
 
 		/Bespoke7 BaseStyle eq  NG 7 le  and
 		{
-			DeBugLevel 50 le {( ProcessOnePackingType, /Bespoke7) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /Bespoke7) OutputToLog} if
 			W H 2 copy lt {exch} if   /S exch def   /L exch def  % short side, long side
 			L S div dup  2 //Sqrt3 sub 8 mul lt  exch  //Sqrt3 1 sub 1.5 mul gt  and
 			{
@@ -4447,7 +4447,7 @@ currentdict /SmallCapsDict undef
 
 		/Temple BaseStyle eq
 		{
-			DeBugLevel 50 le {( ProcessOnePackingType, /Temple) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /Temple) OutputToLog} if
 			% http://github.com/jdaw1/placemat/blob/main/Supporting_code/PackingStyles_formulae.nb
 			% The constraint on the aspect ratio might be <= (Sqrt3-1)*5/2 ~= 1.8301 and also >= (27+11*Sqrt3)*(4-SqrtSqrt12)/61 ~= 1.6147
 			/N NG 1 sub 3 div ceiling cvi dup 2 lt {pop 2} if def
@@ -4491,7 +4491,7 @@ currentdict /SmallCapsDict undef
 
 		BaseStyle dup dup dup  /SquareGrid eq  exch /TopRow eq or  exch /MiddleRow eq or  exch /BottomRow eq or
 		{
-			DeBugLevel 50 le {( ProcessOnePackingType, /SquareGrid | /TopRow | /MiddleRow | /BottomRow) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /SquareGrid | /TopRow | /MiddleRow | /BottomRow) OutputToLog} if
 			BaseStyle /SquareGrid eq {RowsNumMin 1 RowsNumMax} {1 1 1} ifelse
 			{
 				/NR exch def % NumRows
@@ -4514,7 +4514,7 @@ currentdict /SmallCapsDict undef
 
 		/Sides BaseStyle eq
 		{
-			DeBugLevel 50 le {( ProcessOnePackingType, /Sides) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /Sides) OutputToLog} if
 			NG 1 ge
 			{
 				/NR NG 1 add 2 idiv def
@@ -4536,7 +4536,7 @@ currentdict /SmallCapsDict undef
 
 		/LeftSide BaseStyle eq  /RightSide BaseStyle eq  or
 		{
-			DeBugLevel 50 le {mark ( ProcessOnePackingType, /) BaseStyle ConcatenateToMark OutputToLog} if
+			//DeBugLevel 50 le {mark ( ProcessOnePackingType, /) BaseStyle ConcatenateToMark OutputToLog} if
 			NG 1 ge
 			{
 				/R  H NG 2 mul div  W 2 div  2 copy gt {exch} if pop  def
@@ -4557,7 +4557,7 @@ currentdict /SmallCapsDict undef
 
 		/RectangularDislocation BaseStyle eq
 		{
-			DeBugLevel 50 le {( ProcessOnePackingType, /RectangularDislocation) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /RectangularDislocation) OutputToLog} if
 			RowsNumMin 1 RowsNumMax
 			{
 				/NR exch def
@@ -4590,7 +4590,7 @@ currentdict /SmallCapsDict undef
 		% Discussion of name: http://www.theportforum.com/viewtopic.php?t=175&p=57297#p57297
 		/PostsAndLintel BaseStyle eq
 		{
-			DeBugLevel 50 le {( ProcessOnePackingType, /PostsAndLintel) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /PostsAndLintel) OutputToLog} if
 			% Recall V is number touching a side, so ignores those touching top
 			CentralGlasses type /integertype ne  CentralGlasses 0 lt  CentralGlasses 3 gt  or or {(Error: ProcessOnePackingType, PostsAndLintel, CentralGlasses should be 0, 1, 2, or 3. Continuing with CentralGlasses=0.) OutputToLog /CentralGlasses 0 def} if
 			/NGaE NG CentralGlasses sub def  % Num Glasses at Edge
@@ -4636,7 +4636,7 @@ currentdict /SmallCapsDict undef
 		/Arch BaseStyle eq
 		{
 			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=56857#p56857
-			DeBugLevel 50 le {( ProcessOnePackingType, /Arch) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /Arch) OutputToLog} if
 			/NGiA  NG CentralGlasses sub  def  % Number Glasses in Arch
 			NGiA 3 ge
 			{
@@ -4751,7 +4751,7 @@ currentdict /SmallCapsDict undef
 
 		/DiamondsPlus BaseStyle eq  NG 5 ge  and
 		{
-			DeBugLevel 50 le {( ProcessOnePackingType, /DiamondsPlus) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /DiamondsPlus) OutputToLog} if
 			W H 2 copy lt {exch} if   /S exch def   /L exch def  % short side, long side
 			RowsNumMin dup 2 mod 0 eq {1 add} if dup 3 lt {pop 3} if  2  RowsNumMax dup 3 gt {pop 3} if  % Currently copes only with 3 rows. Should cope with any odd number. Later, perhaps.
 			{
@@ -4813,7 +4813,7 @@ currentdict /SmallCapsDict undef
 
 		/DiamondsAndRectangular BaseStyle eq
 		{
-			DeBugLevel 50 le {( ProcessOnePackingType, /DiamondsAndRectangular) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /DiamondsAndRectangular) OutputToLog} if
 			RowsNumMin 1 RowsNumMax
 			{
 				/NR exch def
@@ -4883,7 +4883,7 @@ currentdict /SmallCapsDict undef
 
 		/RectangularAlternateSplitNudge BaseStyle eq
 		{
-			DeBugLevel 50 le {( ProcessOnePackingType, /RectangularAlternateSplitNudge) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /RectangularAlternateSplitNudge) OutputToLog} if
 			RowsNumMin 1 RowsNumMax
 			{
 				/NR exch def
@@ -4935,7 +4935,7 @@ currentdict /SmallCapsDict undef
 
 		/RectangularAlternateNudge BaseStyle eq
 		{
-			DeBugLevel 50 le {( ProcessOnePackingType, /RectangularAlternateNudge) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /RectangularAlternateNudge) OutputToLog} if
 			% Not entirely happy with this code. If there isn't a solution to the quadratic, there should still be something sensible to do. But what? Answers to the author, www.jdawiseman.com/author.html
 			RowsNumMin 1 RowsNumMax
 			{
@@ -4981,7 +4981,7 @@ currentdict /SmallCapsDict undef
 
 		/Array BaseStyle eq
 		{
-			DeBugLevel 50 le {( ProcessOnePackingType, /Array) OutputToLog} if
+			//DeBugLevel 50 le {( ProcessOnePackingType, /Array) OutputToLog} if
 			PackingDescriptor length PositionsStart sub  NG  ge
 			PositionsStart 1 PackingDescriptor length 1 sub {PackingDescriptor exch GetEU dup type /arraytype eq {length 1 le {pop //false exit} if} {pop pop //false exit} ifelse} for
 			{
@@ -5054,7 +5054,7 @@ currentdict /SmallCapsDict undef
 
 	} repeat
 	end
-	DeBugLevel 50 le {(-ProcessOnePackingType) OutputToLog} if
+	//DeBugLevel 50 le {(-ProcessOnePackingType) OutputToLog} if
 } bind def  % /ProcessOnePackingType
 
 
@@ -5062,7 +5062,7 @@ currentdict /SmallCapsDict undef
 % This code has grown over the years from 2001, and has a lack of internal consistency. E.g., in some patters RowNum increases from top to bottom; in others from bottom to top.
 /CirclePacking
 {
-	DeBugLevel 100 le {(+CirclePacking) OutputToLog} if
+	//DeBugLevel 100 le {(+CirclePacking) OutputToLog} if
 	77 dict begin
 	/Echo exch def
 	/MaxRadius exch def
@@ -5163,7 +5163,7 @@ currentdict /SmallCapsDict undef
 
 		/SquareGrid BaseStyle eq  /TopRow BaseStyle eq or  /MiddleRow BaseStyle eq or  /BottomRow BaseStyle eq or
 		{
-			DeBugLevel 50 le {( CirclePacking, /SquareGrid | /TopRow BaseStyle | /MiddleRow | /BottomRow) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /SquareGrid | /TopRow BaseStyle | /MiddleRow | /BottomRow) OutputToLog} if
 			/NR BestParamsDict /NumRows get def
 			/NC BestParamsDict /NumCols get def
 
@@ -5217,7 +5217,7 @@ currentdict /SmallCapsDict undef
 
 		/Sides BaseStyle eq  /LeftSide BaseStyle eq  /RightSide BaseStyle eq  or or
 		{
-			DeBugLevel 50 le {( CirclePacking, /Sides) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /Sides) OutputToLog} if
 			/NR BestParamsDict /NumRows get def
 			/NC BestParamsDict /NumCols get def
 
@@ -5252,7 +5252,7 @@ currentdict /SmallCapsDict undef
 
 		/RectangularDislocation BaseStyle eq
 		{
-			DeBugLevel 50 le {( CirclePacking, /RectangularDislocation) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /RectangularDislocation) OutputToLog} if
 			/NR BestParamsDict /NumRows get def
 			/NC BestParamsDict /NumCols get def
 			Echo {mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /RectangularDislocation with ) NR ( rows and ) NC ( columns.)  AreaText ConcatenateToMark OutputToLog} if
@@ -5309,7 +5309,7 @@ currentdict /SmallCapsDict undef
 
 		/Temple BaseStyle eq
 		{
-			DeBugLevel 50 le {( CirclePacking, /Temple) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /Temple) OutputToLog} if
 			/O BestParamsDict /O get def
 			/N BestParamsDict /N get def
 			O 0 eq {/L W /S H} {/L H /S W} ifelse  def def
@@ -5410,7 +5410,7 @@ currentdict /SmallCapsDict undef
 
 		/Diamonds BaseStyle eq
 		{
-			DeBugLevel 50 le {( CirclePacking, /Diamonds) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /Diamonds) OutputToLog} if
 			/NR BestParamsDict /NumRows get def
 			/NC BestParamsDict /NumCols get def
 			/Capacity NR NC mul 1 add 2 idiv def
@@ -5457,7 +5457,7 @@ currentdict /SmallCapsDict undef
 
 		/PostsAndLintel BaseStyle eq
 		{
-			DeBugLevel 50 le {( CirclePacking, /PostsAndLintel) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /PostsAndLintel) OutputToLog} if
 			/NR BestParamsDict /NumRows get def
 			/CentralGlasses BestParamsDict /CentralGlasses get def
 			/NGaE NG CentralGlasses sub def  % Num Glasses at Edge
@@ -5529,7 +5529,7 @@ currentdict /SmallCapsDict undef
 
 		/Arch BaseStyle eq
 		{
-			DeBugLevel 50 le {( CirclePacking, /Arch) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /Arch) OutputToLog} if
 			/PseudoAngles BestParamsDict 1 index get def
 			/NGiA  NG CentralGlasses sub  def % Number Glasses in Arch
 			12 dict begin
@@ -5605,7 +5605,7 @@ currentdict /SmallCapsDict undef
 
 		/DiamondsAndRectangular BaseStyle eq
 		{
-			DeBugLevel 50 le {( CirclePacking, /DiamondsAndRectangular) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /DiamondsAndRectangular) OutputToLog} if
 			/NR BestParamsDict /NumRows get def
 			/NC BestParamsDict /NumCols get def
 			BestParamsDict /AboveBelow get
@@ -5697,7 +5697,7 @@ currentdict /SmallCapsDict undef
 
 		/RectangularAlternateSplitNudge BaseStyle eq
 		{
-			DeBugLevel 50 le {( CirclePacking, /RectangularAlternateSplitNudge) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /RectangularAlternateSplitNudge) OutputToLog} if
 			/NR BestParamsDict /NumRows get def
 			/NC BestParamsDict /NumCols get def
 			/NudgeRows BestParamsDict /NudgeRows get def
@@ -5756,7 +5756,7 @@ currentdict /SmallCapsDict undef
 
 		/RectangularAlternateNudge BaseStyle eq
 		{
-			DeBugLevel 50 le {( CirclePacking, /RectangularAlternateNudge) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /RectangularAlternateNudge) OutputToLog} if
 			/NR BestParamsDict /NumRows get def
 			/NC BestParamsDict /NumCols get def
 			/NudgeRows BestParamsDict /NudgeRows get def
@@ -5834,7 +5834,7 @@ currentdict /SmallCapsDict undef
 
 		/Bespoke5 BaseStyle eq
 		{
-			DeBugLevel 50 le {( CirclePacking, /Bespoke5) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /Bespoke5) OutputToLog} if
 			/NamePlacementTopX W 2 div X add def
 			/NamePlacementBottomX NamePlacementTopX def
 
@@ -5885,7 +5885,7 @@ currentdict /SmallCapsDict undef
 
 		/Bespoke7 BaseStyle eq
 		{
-			DeBugLevel 50 le {( CirclePacking, /Bespoke7) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /Bespoke7) OutputToLog} if
 			W H ge {W 2 div} {W 4 div Mirror not {3 mul} if} ifelse X add dup  /NamePlacementTopX exch def  /NamePlacementBottomX exch def
 
 			Echo {mark (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /Bespoke7.) AreaText ConcatenateToMark OutputToLog} if
@@ -5918,7 +5918,7 @@ currentdict /SmallCapsDict undef
 
 		/DiamondsPlus BaseStyle eq
 		{
-			DeBugLevel 50 le {( CirclePacking, /DiamondsPlus) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /DiamondsPlus) OutputToLog} if
 			/NC BestParamsDict /NumCols get def
 			/DistHorizontal BestParamsDict /DistHorizontal get def
 			Echo
@@ -6002,7 +6002,7 @@ currentdict /SmallCapsDict undef
 
 		/Array BaseStyle eq
 		{
-			DeBugLevel 50 le {( CirclePacking, /Array) OutputToLog} if
+			//DeBugLevel 50 le {( CirclePacking, /Array) OutputToLog} if
 			[ /MinXX /MaxXX /MinYY /MaxYY /PositionsStart /PositionsEnd ] {dup BestParamsDict exch get def} forall
 			/RngXX MaxXX MinXX sub def   /RngYY MaxYY MinYY sub def
 
@@ -6182,12 +6182,12 @@ currentdict /SmallCapsDict undef
 	PackingDescriptor NamePlacementTopX NamePlacementBottomX % Final part of answer
 
 	end
-	DeBugLevel 100 le {(-CirclePacking) OutputToLog} if
+	//DeBugLevel 100 le {(-CirclePacking) OutputToLog} if
 } bind def  % /CirclePacking
 
 /CircletextRecursive
 {
-	DeBugLevel 20 le {(+CircletextRecursive) OutputToLog} if
+	//DeBugLevel 20 le {(+CircletextRecursive) OutputToLog} if
 	/thing exch def
 	/m matrix currentmatrix def
 	1 {
@@ -6254,13 +6254,13 @@ currentdict /SmallCapsDict undef
 		} if  % /stringtype
 		mark (Error: CircletextRecursive parameter ) /thing load 0 //true ThingToDebugText  ( is of type ) /thing load type  ( rather than executable, string, name, number or array.)  ConcatenateToMark OutputToLog stop
 	} repeat
-	DeBugLevel 20 le {(-CircletextRecursive) OutputToLog} if
+	//DeBugLevel 20 le {(-CircletextRecursive) OutputToLog} if
 } bind def  % /CircletextRecursive
 
 % CircletextArray NumSpaces Radius FontSize NumCopies  Circletext  --
 /Circletext
 {
-	DeBugLevel 50 le {(+Circletext) OutputToLog} if
+	//DeBugLevel 50 le {(+Circletext) OutputToLog} if
 	24 dict begin
 	/NumCopies exch def
 	/FontSize exch def
@@ -6300,7 +6300,7 @@ currentdict /SmallCapsDict undef
 	} if  % CircletextArraySumWidths 0 gt  NumCopies 1 ge  and
 	GRestore
 	end
-	DeBugLevel 50 le {(-Circletext) OutputToLog} if
+	//DeBugLevel 50 le {(-Circletext) OutputToLog} if
 } bind def  % /Circletext
 
 /Atan {2 copy abs //PrinterEpsilon lt exch abs //PrinterEpsilon lt and {pop pop /UndefinedAtan} {atan} ifelse} bind def
@@ -6311,7 +6311,7 @@ currentdict /SmallCapsDict undef
 % Assumes existence of various things.
 /MakePathConnectingGlasses
 {
-	DeBugLevel 50 le {(+MakePathConnectingGlasses) OutputToLog} if
+	//DeBugLevel 50 le {(+MakePathConnectingGlasses) OutputToLog} if
 	/GlassPositions where {pop //true} {//false} ifelse
 	{
 		7 dict begin
@@ -6345,7 +6345,7 @@ currentdict /SmallCapsDict undef
 		} ifelse   % X1 X2 sub abs Radii SheetNum get le
 		end
 	} {pop pop} ifelse  % /GlassPositions where {pop true} {false} ifelse
-	DeBugLevel 50 le {(-MakePathConnectingGlasses) OutputToLog} if
+	//DeBugLevel 50 le {(-MakePathConnectingGlasses) OutputToLog} if
 } bind def  % /MakePathConnectingGlasses
 
 /Mod {dup 0 le {pop pop 0} { {1 index 0 lt {dup 3 1 roll add exch} {mod exit} ifelse} loop} ifelse} bind def  % Always returns >= 0
@@ -6354,7 +6354,7 @@ currentdict /SmallCapsDict undef
 % If StartItem is -1 then computes the StartItem that has the smallest Separation between text pieces; currentpoint is top-left or bottom left of box.
 /CirclearrayInStraightLine
 {
-	DeBugLevel 40 le {(+CirclearrayInStraightLine) OutputToLog} if
+	//DeBugLevel 40 le {(+CirclearrayInStraightLine) OutputToLog} if
 	24 dict begin
 	/StartItemParam exch def
 	/FillBackground exch def
@@ -6430,14 +6430,14 @@ currentdict /SmallCapsDict undef
 		StartItem  NumPieces StartItem add Circlearray length mod  DescenderMin  AscenderMax
 	} {StartItemParam dup 0 0} ifelse  % Circlearray length 0 gt
 	end
-	DeBugLevel 40 le {(-CirclearrayInStraightLine) OutputToLog} if
+	//DeBugLevel 40 le {(-CirclearrayInStraightLine) OutputToLog} if
 } bind def  % /CirclearrayInStraightLine
 
 
 % X Y Width Height Circlearray {FontSettingCode} SeparationMinNumSpaces  CirclearrayInRectangle  DescenderMin AscenderMax
 /CirclearrayInRectangle
 {
-	DeBugLevel 40 le {(+CirclearrayInRectangle) OutputToLog} if
+	//DeBugLevel 40 le {(+CirclearrayInRectangle) OutputToLog} if
 	13 dict begin
 	/SeparationMinNumSpaces exch def
 	/FontSettingCode exch def
@@ -6453,7 +6453,7 @@ currentdict /SmallCapsDict undef
 	X LineH add  Y H add  moveto  % Top
 	Circlearray  /FontSettingCode load  SeparationMinNumSpaces //true   W LineH 2 mul sub  //false  StartItemH  CirclearrayInStraightLine  pop pop pop pop  % Top
 	D  A  end
-	DeBugLevel 40 le {(-CirclearrayInRectangle) OutputToLog} if
+	//DeBugLevel 40 le {(-CirclearrayInRectangle) OutputToLog} if
 } bind def  % /CirclearrayInRectangle
 
 /CirclearrayInSemiRoundedRectangleRec
@@ -6530,7 +6530,7 @@ currentdict /SmallCapsDict undef
 % X Y Width Height Radius Circlearray {FontSettingCode} SeparationMinNumSpaces  CirclearrayInSemiRoundedRectangle  DescenderMin AscenderMax
 /CirclearrayInSemiRoundedRectangle
 {
-	DeBugLevel 40 le {(+CirclearrayInSemiRoundedRectangle) OutputToLog} if
+	//DeBugLevel 40 le {(+CirclearrayInSemiRoundedRectangle) OutputToLog} if
 	23 dict begin
 	/SeparationMinNumSpaces exch def
 	/FontSettingCode exch def
@@ -6594,14 +6594,14 @@ currentdict /SmallCapsDict undef
 		A D
 	} {0 0} ifelse  % Circlearray length 0 gt
 	end
-	DeBugLevel 40 le {(-CirclearrayInSemiRoundedRectangle) OutputToLog} if
+	//DeBugLevel 40 le {(-CirclearrayInSemiRoundedRectangle) OutputToLog} if
 } bind def  % /CirclearrayInSemiRoundedRectangle
 
 % Do stuff: call the routines
 
 % This open curly brace starts code passed to stopped
 {
-	AnyFillTextingAtAll DeBugLevel 100 le or {mark ( Main: just before error checking, execution time ~= ) usertime usertimeStart sub 1000 div (s) ConcatenateToMark OutputToLog} if
+	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: just before error checking, execution time ~= ) usertime usertimeStart sub 1000 div (s) ConcatenateToMark OutputToLog} if
 	% Elementary error checking
 	/ErrorFlag //false def
 
@@ -7078,7 +7078,7 @@ currentdict /SmallCapsDict undef
 	% End of elementary error-checking
 
 
-	DeBugLevel 100 le {( Main: some pre-computations) OutputToLog} if
+	//DeBugLevel 100 le {( Main: some pre-computations) OutputToLog} if
 
 	/CircleNonEmpty [ SheetLengths {array} forall ] def
 	0  1  NumSheets 1 sub
@@ -7091,7 +7091,7 @@ currentdict /SmallCapsDict undef
 		} for  % WithinPage, WithinTitles
 	} bind for  % SheetNum, within which CircleNonEmpty populated
 
-	DeBugLevel 100 le {( Main: calling routines to pack circles) OutputToLog} if
+	//DeBugLevel 100 le {( Main: calling routines to pack circles) OutputToLog} if
 	/PackingDescriptors   NumSheets array def
 	/NamePlacementBottomX NumSheets array def
 	/NamePlacementTopX    NumSheets array def
@@ -7274,7 +7274,7 @@ currentdict /SmallCapsDict undef
 		} if  % {... TastingNotePagesNumCopies 0 gt ...} MightBeTrue
 	ConcatenateToMark OutputToLog  % Matching 'mark' about 14 lines up
 
-	DeBugLevel 100 le {( Main: computing RadiiCirclearrayBaseline, CirclearraysFontSizes, RadiiCirclearrayInside, CirclearraysN) OutputToLog} if
+	//DeBugLevel 100 le {( Main: computing RadiiCirclearrayBaseline, CirclearraysFontSizes, RadiiCirclearrayInside, CirclearraysN) OutputToLog} if
 	/CirclearraysFontSizes [ SheetLengths {array} forall ] def
 	/CirclearraysN [ SheetLengths {array} forall ] def
 	/CirclearraysUnroundedN [ SheetLengths {array} forall ] def
@@ -7619,7 +7619,7 @@ currentdict /SmallCapsDict undef
 	end
 
 
-	DeBugLevel 100 le {( Main: computing TitleProportionFontSize...) OutputToLog} if
+	//DeBugLevel 100 le {( Main: computing TitleProportionFontSize...) OutputToLog} if
 	/TitlesAnyGrey //false def
 	/TitleProportionFontSizeT /TitleProportionFontSizeB /TitleOffsetsProportionFontSizeVertical
 	/TitleProportionFontSizeL /TitleProportionFontSizeR /TitleOffsetsProportionFontSizeHorizontal
@@ -7654,7 +7654,7 @@ currentdict /SmallCapsDict undef
 	UndefMgns
 	currentdict /SheetNum undef
 
-	DeBugLevel 100 le {( Main: computing TitleOffsetsProportionFontSizeVertical) OutputToLog} if
+	//DeBugLevel 100 le {( Main: computing TitleOffsetsProportionFontSizeVertical) OutputToLog} if
 	/TitlesFont load XcheckRecursive not
 	/VerticalMiddlingStringTitles load XcheckRecursive not
 	/VerticalMiddlingIncludeBaselineTitles load XcheckRecursive not  and and
@@ -7726,7 +7726,7 @@ currentdict /SmallCapsDict undef
 	UndefMgns
 	currentdict /SheetNum undef
 
-	DeBugLevel 100 le {( Main: computing TitleFontSizes) OutputToLog} if
+	//DeBugLevel 100 le {( Main: computing TitleFontSizes) OutputToLog} if
 	/TypeOfPagesBeingRendered /Glasses store
 	/TitleFontSizes NumSheets array def
 	/TitleMaxHeightProportionInnerRadiusRelevantNum 0 def
@@ -7797,7 +7797,7 @@ currentdict /SmallCapsDict undef
 	% ArraysStrings ArraysToAlter ArrayMatches SheetMatches FontSizesRatioMin NotSmallerIfTitlesNotLonger Equivalences  FewerDifferentFontSizes  -
 	/FewerDifferentFontSizes
 	{
-		DeBugLevel 50 le {(+FewerDifferentFontSizes) OutputToLog} if
+		//DeBugLevel 50 le {(+FewerDifferentFontSizes) OutputToLog} if
 		20 dict begin
 		/Equivalences exch def  /NotSmallerIfTitlesNotLonger exch def  /FontSizesRatioMin exch def  /SheetMatches exch def  /ArrayMatches exch def  /ArraysToAlter exch def  /ArraysStrings exch def
 
@@ -7905,7 +7905,7 @@ currentdict /SmallCapsDict undef
 			} for  % NumArrayToAlter0
 		} for  % SheetNum0
 		end
-		DeBugLevel 50 le {(-FewerDifferentFontSizes) OutputToLog} if
+		//DeBugLevel 50 le {(-FewerDifferentFontSizes) OutputToLog} if
 	} bind def  % /FewerDifferentFontSizes
 
 	/SoloTitleFontSizes [ TitleFontSizes {[ exch aload pop ]} forall ] def
@@ -7922,7 +7922,7 @@ currentdict /SmallCapsDict undef
 	} bind for  % SheetNum
 	dup length 2 eq {pop (.)} if ConcatenateToMark OutputToLog  currentdict /SoloTitleFontSizes undef
 
-	DeBugLevel 100 le {( Main: computing [Above|Below|Over]titleProportionFontSize...) OutputToLog} if
+	//DeBugLevel 100 le {( Main: computing [Above|Below|Over]titleProportionFontSize...) OutputToLog} if
 	/TypeOfPagesBeingRendered /Glasses store
 	/AbovetitleProportionFontSizeT /AbovetitleProportionFontSizeB
 	/AbovetitleProportionFontSizeL /AbovetitleProportionFontSizeR /AbovetitleOffsetsProportionFontSizeHorizontal
@@ -8000,7 +8000,7 @@ currentdict /SmallCapsDict undef
 	% For Titles and Overtitles, can compute offset first, and then size.
 	% Abovetitles (and Belowtitles) are more complicated. First compute the bottom (top) of bounding box, storing that, pre tem, in ...titleOffsetsAbsoluteVertical.
 	% From that compute size using PathMaxScalingFitCircle. Apply contraints. Then adjust ...titleOffsetsAbsoluteVertical to point to baseline.
-	DeBugLevel 100 le {( Main: computing [Above|Below|Over]titleFontSizes, OvertitleOffsetsProportionFontSizeVertical, [Above|Below]titleOffsetsAbsoluteVertical) OutputToLog} if
+	//DeBugLevel 100 le {( Main: computing [Above|Below|Over]titleFontSizes, OvertitleOffsetsProportionFontSizeVertical, [Above|Below]titleOffsetsAbsoluteVertical) OutputToLog} if
 	/TypeOfPagesBeingRendered /Glasses store
 	/AbovetitleFontSizes [ 0  1  NumSheets 1 sub {/SheetNum exch def  [ SheetLengths SheetNum get {//PrinterEpsilon} repeat ]} for ] def
 	/BelowtitleFontSizes [ 0  1  NumSheets 1 sub {/SheetNum exch def  [ SheetLengths SheetNum get {//PrinterEpsilon} repeat ]} for ] def
@@ -8163,7 +8163,7 @@ currentdict /SmallCapsDict undef
 
 	% Above here BelowtitleOffsetsAbsoluteVertical is the offset to the top of the Belowtitles
 	% (and AbovetitleOffsetsAbsoluteVertical to the bottom). Now adjust to point to baseline.
-	DeBugLevel 100 le {( Main: further computation of BelowtitleOffsetsAbsoluteVertical and AbovetitleOffsetsAbsoluteVertical) OutputToLog} if
+	//DeBugLevel 100 le {( Main: further computation of BelowtitleOffsetsAbsoluteVertical and AbovetitleOffsetsAbsoluteVertical) OutputToLog} if
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
@@ -8262,7 +8262,7 @@ currentdict /SmallCapsDict undef
 	/TitleAboveBelowOverR [ SheetLengths {[ exch {0} repeat ]} forall ] def
 	/TitleAboveBelowOverB [ SheetLengths {[ exch {0} repeat ]} forall ] def
 	/TitleAboveBelowOverT [ SheetLengths {[ exch {0} repeat ]} forall ] def
-	DeBugLevel 100 le {( Main: Computation of TitleAboveBelowOverL, ...R, ...B, ...T.) OutputToLog} if
+	//DeBugLevel 100 le {( Main: Computation of TitleAboveBelowOverL, ...R, ...B, ...T.) OutputToLog} if
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
@@ -8355,7 +8355,7 @@ currentdict /SmallCapsDict undef
 
 	{PrePourNumCopies 1 ge} MightBeTrue
 	{
-		DeBugLevel 100 le {( Main: PrePourScalingFactors) OutputToLog} if
+		//DeBugLevel 100 le {( Main: PrePourScalingFactors) OutputToLog} if
 		/TypeOfPagesBeingRendered /PrePour store
 		/PrePourScalingFactors [ NumSheets {//Infinity} repeat ] def
 		12 dict begin
@@ -8411,7 +8411,7 @@ currentdict /SmallCapsDict undef
 	/FlightSeparationInterestingsLR [ SheetLengths {4 mul array} forall ] def
 	/FlightSeparationPath
 	{
-		DeBugLevel 50 le {(+FlightSeparationPath) OutputToLog} if
+		//DeBugLevel 50 le {(+FlightSeparationPath) OutputToLog} if
 		42 dict begin
 		/fsl exch execU def  % Flight Separation Line
 
@@ -8456,7 +8456,7 @@ currentdict /SmallCapsDict undef
 			} forall  % 'ArrayInterestingPoints'
 		} def  % /FlightSeparationReportablePointsAppend
 
-		DeBugLevel 49 le {( FlightSeparationPath: Connections_ arrays) OutputToLog} if
+		//DeBugLevel 49 le {( FlightSeparationPath: Connections_ arrays) OutputToLog} if
 		0  1  fsl length 1 sub
 		{
 			/fsl_i exch def
@@ -8552,7 +8552,7 @@ currentdict /SmallCapsDict undef
 
 		fsl length 0 gt {fsl 0 get /Closed eq  Connections_Done_First  and} {//false} ifelse
 		{
-			DeBugLevel 49 le {( FlightSeparationPath: Connections_ arrays since /Closed) OutputToLog} if
+			//DeBugLevel 49 le {( FlightSeparationPath: Connections_ arrays since /Closed) OutputToLog} if
 			Connections_fsl  Connections_num  Connections_fsl 0 get      put
 			Connections_X    Connections_num  Connections_X   0 get      put
 			Connections_Y    Connections_num  Connections_Y   0 get      put
@@ -8563,7 +8563,7 @@ currentdict /SmallCapsDict undef
 			/Connections_num Connections_num 1 add def
 		} if  % ... /Closed ... Connections_Done_First  and
 
-		DeBugLevel 49 le {( FlightSeparationPath: path construction) OutputToLog} if
+		//DeBugLevel 49 le {( FlightSeparationPath: path construction) OutputToLog} if
 		0  1  Connections_num 1 sub
 		{
 			/Connections0 exch def
@@ -8643,7 +8643,7 @@ currentdict /SmallCapsDict undef
 		} if  % FlightSeparationDone SheetNum get not
 
 		end
-		DeBugLevel 50 le {(-FlightSeparationPath) OutputToLog} if
+		//DeBugLevel 50 le {(-FlightSeparationPath) OutputToLog} if
 	} bind def  % /FlightSeparationPath
 
 
@@ -8779,7 +8779,7 @@ currentdict /SmallCapsDict undef
 
 		/BackgroundTextsPaint
 		{
-			DeBugLevel 50 le {(+BackgroundTextsPaint) OutputToLog} if
+			//DeBugLevel 50 le {(+BackgroundTextsPaint) OutputToLog} if
 			9 dict begin
 			/BackgroundTextThis TypeOfPagesBeingRendered /Glasses eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TastingSheetNum} ifelse get def
 			/BackgroundTextThis load length 0 gt
@@ -8809,12 +8809,12 @@ currentdict /SmallCapsDict undef
 				setmatrix
 			} if  % /BackgroundTextThis load length 0 gt
 			end
-			DeBugLevel 50 le {(-BackgroundTextsPaint) OutputToLog} if
+			//DeBugLevel 50 le {(-BackgroundTextsPaint) OutputToLog} if
 		} bind def  % /BackgroundTextsPaint
 
 		{BackgroundTextsGlasses PrePourShowBackgroundTexts or} MightBeTrue
 		{
-			DeBugLevel 100 le {( Main: BackgroundTextsGlassesForms) OutputToLog} if
+			//DeBugLevel 100 le {( Main: BackgroundTextsGlassesForms) OutputToLog} if
 			/BackgroundTextsGlassesForms  [ GlassesOnSheets length {5 dict} repeat ] def
 			0  1  NumSheets 1 sub
 			{
@@ -8827,9 +8827,9 @@ currentdict /SmallCapsDict undef
 				/Matrix matrix identmatrix def
 				/PaintProc
 				{
-					DeBugLevel 100 le {(+BackgroundTextsGlassesForms: PaintProc) OutputToLog} if
+					//DeBugLevel 100 le {(+BackgroundTextsGlassesForms: PaintProc) OutputToLog} if
 					pop  BackgroundTextsPaint
-					DeBugLevel 100 le {(-BackgroundTextsGlassesForms: PaintProc) OutputToLog} if
+					//DeBugLevel 100 le {(-BackgroundTextsGlassesForms: PaintProc) OutputToLog} if
 				} def  % /PaintProc
 				end  % BackgroundTextsGlassesForms SheetNum get
 			} bind for  % SheetNum
@@ -8839,7 +8839,7 @@ currentdict /SmallCapsDict undef
 
 		/BackgroundTextsTastingNotes load MightBeTrue
 		{
-			DeBugLevel 100 le {( Main: BackgroundTextsTNsForms) OutputToLog} if
+			//DeBugLevel 100 le {( Main: BackgroundTextsTNsForms) OutputToLog} if
 			/BackgroundTextsTNsForms  [ GlassesOnTastingNotePages length {5 dict} repeat ] def
 			0  1  GlassesOnTastingNotePages length 1 sub
 			{
@@ -8852,9 +8852,9 @@ currentdict /SmallCapsDict undef
 				/Matrix matrix identmatrix def
 				/PaintProc
 				{
-					DeBugLevel 100 le {(+BackgroundTextsTNsForms: PaintProc) OutputToLog} if
+					//DeBugLevel 100 le {(+BackgroundTextsTNsForms: PaintProc) OutputToLog} if
 					pop  << /SheetNum TastingSheetNum >> begin BackgroundTextsPaint end
-					DeBugLevel 100 le {(-BackgroundTextsTNsForms: PaintProc) OutputToLog} if
+					//DeBugLevel 100 le {(-BackgroundTextsTNsForms: PaintProc) OutputToLog} if
 				} def  % /PaintProc
 				end  % BackgroundTextsTNsForms TastingSheetNum get
 			} bind for  % TastingSheetNum
@@ -8867,7 +8867,7 @@ currentdict /SmallCapsDict undef
 	% NameHorizontalLeft NameHorizontalRight ShowRight ShowLeft FillWhite  WaterBoxesPaintProc -
 	/WaterBoxesPaintProc
 	{
-		DeBugLevel 100 le {(+WaterBoxesPaintProc) OutputToLog} if
+		//DeBugLevel 100 le {(+WaterBoxesPaintProc) OutputToLog} if
 		20 dict begin
 		/FillWhite exch def  /ShowLeft exch def  /ShowRight exch def /NameHorizontalRight exch def  /NameHorizontalLeft exch def
 
@@ -8952,7 +8952,7 @@ currentdict /SmallCapsDict undef
 			0 setgray   0.24 setlinewidth  0 setlinecap  1 setlinejoin  [] 0 setdash  WaterBoxesFormatStroke newpath
 		} forall  % sides
 		end
-		DeBugLevel 100 le {(-WaterBoxesPaintProc) OutputToLog} if
+		//DeBugLevel 100 le {(-WaterBoxesPaintProc) OutputToLog} if
 	} bind def  % /WaterBoxesPaintProc
 
 	/DropletLocalField  % For speed takes no parameters; output put dictionary of calling routine. Assumes existence of X, Y, ChargesData
@@ -8998,7 +8998,7 @@ currentdict /SmallCapsDict undef
 	% [ X0 Y0 Charge0 X1 Y1 Charge1 ... ]  StartX StartY PathDistance StepSizeMax  DropletPath   [ X0 Y0 0 Pot0  X1 Y1 Dist1 Pot1  X2 Y2 Dist2 Pot2 ... ]
 	/DropletPath
 	{
-		DeBugLevel 25 le {(+DropletPath) OutputToLog} if
+		//DeBugLevel 25 le {(+DropletPath) OutputToLog} if
 		22 dict begin
 		/StepSizeMax exch def   /PathDistance exch def   /Y exch def   /X exch def   /ChrgData exch def
 
@@ -9028,13 +9028,13 @@ currentdict /SmallCapsDict undef
 			} loop  % Until  PathDistance DistanceTraversed sub //PrinterEpsilon le, or some bad conditions
 		]  % End this one droplet
 		end
-		DeBugLevel 25 le {(-DropletPath) OutputToLog} if
+		//DeBugLevel 25 le {(-DropletPath) OutputToLog} if
 	} bind def  % /DropletPath
 
 	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=112214#p112214
 	{Droplets} MightBeTrue
 	{
-		DeBugLevel 50 le {(+DropletPaths computation) OutputToLog} if
+		//DeBugLevel 50 le {(+DropletPaths computation) OutputToLog} if
 		/DropletsWhichReversed NumSheets array def  % Can be used in mischievous PaintBackgroundCode to highlight reversed droplets.
 		/DropletsChargesText [ NumSheets {()} repeat ] def
 		/DropletPaths
@@ -9253,8 +9253,8 @@ currentdict /SmallCapsDict undef
 			} bind for  % SheetNum
 			end
 		] readonly def  % /DropletPaths
-		DeBugLevel 50 le {(-DropletPaths computation) OutputToLog} if
-		DeBugLevel 50 le {(+DropletPaths logging) OutputToLog} if
+		//DeBugLevel 50 le {(-DropletPaths computation) OutputToLog} if
+		//DeBugLevel 50 le {(+DropletPaths logging) OutputToLog} if
 		mark
 		{
 			(Droplets will cover approximately )  % Calculations in file .../Port_PS/Old/Old_2019/20191019_area_droplets.nb
@@ -9315,12 +9315,12 @@ currentdict /SmallCapsDict undef
 		} if  % LengthsNum 0 gt
 		ConcatenateToMark OutputToLog
 		end
-		DeBugLevel 50 le {(-DropletPaths logging) OutputToLog} if
+		//DeBugLevel 50 le {(-DropletPaths logging) OutputToLog} if
 
 		% SheetNum Llx Lly Urx Ury WithinPage DropletsPaint  -
 		/DropletsPaint
 		{
-			DeBugLevel 75 le {(+DropletsPaint) OutputToLog} if
+			//DeBugLevel 75 le {(+DropletsPaint) OutputToLog} if
 			31 dict begin
 			/WithinPage exch def /Ury exch def  /Urx exch def  /Lly exch def  /Llx exch def  /SheetNum exch def
 			newpath  1 setlinecap  [] 0 setdash
@@ -9505,10 +9505,10 @@ currentdict /SmallCapsDict undef
 				} for  % DropletNum, ThisDroplet
 			} for  % DropletShowReversed
 			end
-			DeBugLevel 75 le {(-DropletsPaint) OutputToLog} if
+			//DeBugLevel 75 le {(-DropletsPaint) OutputToLog} if
 		} bind def  % /DropletsPaint
 
-		DeBugLevel 100 le {( Main: DropletsForms) OutputToLog} if
+		//DeBugLevel 100 le {( Main: DropletsForms) OutputToLog} if
 		/DropletsForms  [ NumSheets {5 dict} repeat ] def
 		0  1  NumSheets 1 sub
 		{
@@ -9521,7 +9521,7 @@ currentdict /SmallCapsDict undef
 			/Matrix matrix identmatrix def
 			/PaintProc
 			{
-				DeBugLevel 100 le {(+DropletsForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(+DropletsForms: PaintProc) OutputToLog} if
 				7 dict begin
 				/SheetNum get /SheetNum exch def
 				newpath  1 setlinecap  [] 0 setdash
@@ -9529,7 +9529,7 @@ currentdict /SmallCapsDict undef
 				ClipSave  MgnL  MgnB  PageWidth MgnL MgnR add sub  PageHeight MgnB MgnT add sub  rectclip
 				SheetNum  MgnL  MgnB  PageWidth MgnR sub  PageHeight MgnT sub  -1  DropletsPaint  ClipRestore
 				end
-				DeBugLevel 100 le {(-DropletsForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(-DropletsForms: PaintProc) OutputToLog} if
 			} def  % /PaintProc
 			end  % DropletsForms SheetNum get
 		} bind for  % SheetNum
@@ -9541,7 +9541,7 @@ currentdict /SmallCapsDict undef
 
 	/FlightSeparations load MightBeTrue
 	{
-		DeBugLevel 100 le {( Main: FlightSeparationForms) OutputToLog} if
+		//DeBugLevel 100 le {( Main: FlightSeparationForms) OutputToLog} if
 		/TypeOfPagesBeingRendered /Glasses store
 		/FlightSeparationForms [ GlassesOnSheets length {6 dict} repeat ] def
 
@@ -9559,7 +9559,7 @@ currentdict /SmallCapsDict undef
 			/PaintProc  % Paints flight separation lines
 			{
 				pop
-				DeBugLevel 100 le {(+FlightSeparationForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(+FlightSeparationForms: PaintProc) OutputToLog} if
 				6 dict begin
 
 				FlightSeparations {FlightSeparationLines SheetNum GetEU length 0 gt} {//false} ifelse
@@ -9619,7 +9619,7 @@ currentdict /SmallCapsDict undef
 					GRestore
 				} if  % FlightSeparations ... FlightSeparationLines SheetNum GetEU length 0 gt ...
 				end
-				DeBugLevel 100 le {(-FlightSeparationForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(-FlightSeparationForms: PaintProc) OutputToLog} if
 			} bind def  % /PaintProc
 			end  % FlightSeparationForms
 		} bind for  % SheetNum
@@ -9628,7 +9628,7 @@ currentdict /SmallCapsDict undef
 	} if  % ... FlightSeparations ...
 
 
-	DeBugLevel 100 le {( Main: TitleAboveBelowOverForms) OutputToLog} if
+	//DeBugLevel 100 le {( Main: TitleAboveBelowOverForms) OutputToLog} if
 	/TypeOfPagesBeingRendered /Glasses store
 	/TitleAboveBelowOverForms [ GlassesOnSheets {[ exch execU length {6 dict} repeat ]} forall ] def
 	/TitleAboveBelowOverRandomSeeds [ Titles length {//null} repeat ] def
@@ -9698,7 +9698,7 @@ currentdict /SmallCapsDict undef
 			/Matrix matrix identmatrix def
 			/PaintProc  % Paints Title and Abovetitle and Belowtitle and Overtitle
 			{
-				DeBugLevel 100 le {(+TitleAboveBelowOverForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(+TitleAboveBelowOverForms: PaintProc) OutputToLog} if
 				dup % dictionary parameter of execform containing WithinTitles and WithinPage
 				/TypeOfPagesBeingRendered /Glasses store
 				/WithinTitles get /WithinTitles exch def
@@ -10148,7 +10148,7 @@ currentdict /SmallCapsDict undef
 					TitleAboveBelowOverRandomSeeds WithinTitles get  rrand  ne {/NextRand rrand def} if
 				} if  % AbovetitleFontSizes of non-zero size
 				NextRand srand
-				DeBugLevel 100 le {(-TitleAboveBelowOverForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(-TitleAboveBelowOverForms: PaintProc) OutputToLog} if
 			} bind def  % /PaintProc
 			end  % dictionary TitleAboveBelowOverForms
 		} for  % WithinPage, WithinTitles
@@ -10158,10 +10158,10 @@ currentdict /SmallCapsDict undef
 	UndefMgns
 	currentdict /SheetNum undef
 
-	DeBugLevel 100 le {( Main: define PaintPlaceName) OutputToLog} if
+	//DeBugLevel 100 le {( Main: define PaintPlaceName) OutputToLog} if
 	/PaintPlaceName
 	{
-		DeBugLevel 100 le {(+PaintPlaceName) OutputToLog} if
+		//DeBugLevel 100 le {(+PaintPlaceName) OutputToLog} if
 		17 dict begin
 		/SheetNum 0 def  /WithinPage 0 def  /WithinTitles 0 def  % If formatting settings of Titles uses these, then formatting of PlaceNames will attempt to use them. Of course, the formatting _should_ check TypeOfPagesBeingRendered, but, you know.
 		/TypeOfPagesBeingRendered /PlaceName def
@@ -10281,12 +10281,12 @@ currentdict /SmallCapsDict undef
 			newpath
 		} if  % PlaceNamesFontSize  0  gt
 		end
-		DeBugLevel 100 le {(-PaintPlaceName) OutputToLog} if
+		//DeBugLevel 100 le {(-PaintPlaceName) OutputToLog} if
 	} bind def  % /PaintPlaceName
 
 	{PrePourNumCopies 1 ge} MightBeTrue
 	{
-		DeBugLevel 100 le {( Main: PrePourForms) OutputToLog} if
+		//DeBugLevel 100 le {( Main: PrePourForms) OutputToLog} if
 		/TypeOfPagesBeingRendered /PrePour store
 		/PrePourForms [ GlassesOnSheets {[ exch execU length {12 dict} repeat]} forall ] def
 		0  1  NumSheets 1 sub
@@ -10303,7 +10303,7 @@ currentdict /SmallCapsDict undef
 				/Matrix matrix identmatrix def
 				/PaintProc  % Paints Title and Subtitle very big, and CirclearraysPrePour in a box
 				{
-					DeBugLevel 100 le {(+PrePourForms: PaintProc) OutputToLog} if
+					//DeBugLevel 100 le {(+PrePourForms: PaintProc) OutputToLog} if
 					pop 22 dict begin  % dictionary parameter of execform containing WithinTitles and WithinPage
 					/TypeOfPagesBeingRendered /PrePour store
 
@@ -10416,7 +10416,7 @@ currentdict /SmallCapsDict undef
 					} if  % Angle perhaps non-zero for any glasses
 
 					end
-					DeBugLevel 100 le {(-PrePourForms: PaintProc) OutputToLog} if
+					//DeBugLevel 100 le {(-PrePourForms: PaintProc) OutputToLog} if
 				} bind def  % /PaintProc
 				end  % dictionary PrePourForms
 			} for  % WithinPage, WithinTitles
@@ -10429,7 +10429,7 @@ currentdict /SmallCapsDict undef
 
 	/VoteRecorders load MightBeTrue
 	{
-		DeBugLevel 100 le {( Main: VoteRecorderForms) OutputToLog} if
+		//DeBugLevel 100 le {( Main: VoteRecorderForms) OutputToLog} if
 		/VoteRecorderNamesWidthsLogged false def
 		/TypeOfPagesBeingRendered /VoteRecorder store
 		/VoteRecorderForms [ GlassesClusteredOnVoteRecorders length {6 dict} repeat ] def
@@ -10445,7 +10445,7 @@ currentdict /SmallCapsDict undef
 			/Matrix matrix identmatrix def
 			/PaintProc
 			{
-				DeBugLevel 100 le {(+VoteRecorderForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(+VoteRecorderForms: PaintProc) OutputToLog} if
 				pop  % dictionary parameter of execform
 				49 dict begin
 				/VoteRecorderSheetNum VoteRecorderSheetNum def
@@ -10759,11 +10759,11 @@ currentdict /SmallCapsDict undef
 						VoteRecorderColWidth VoteRecorderNarrowLineWidth NameNum VoteRecorderNumNames ge {2 div} if sub  % The VoteRecorderNarrowLineWidth is so that adjacent columns don't quite touch
 						VoteRecorderNameR NameNum get VoteRecorderNameL NameNum get sub  2 copy lt
 						{
-							DeBugLevel 9 le {( VoteRecorder: Horizontal, scaled) OutputToLog} if
+							//DeBugLevel 9 le {( VoteRecorder: Horizontal, scaled) OutputToLog} if
 							CurrentCentre VoteRecorderColWidth VoteRecorderNarrowLineWidth sub 2 div sub  4 -1 roll  moveto  div  matrix currentmatrix exch  1 scale  VoteRecorderNameL NameNum get neg 0 rmoveto
 							/ThisName load ShowRecursive  setmatrix
 						}{
-							DeBugLevel 9 le {( VoteRecorder: Horizontal) OutputToLog} if
+							//DeBugLevel 9 le {( VoteRecorder: Horizontal) OutputToLog} if
 							NameNum VoteRecorderNumNames ge
 								{pop pop  PageWidth MgnR sub VoteRecorderNameR NameNum get sub}
 								{pop pop  CurrentCentre VoteRecorderNameL NameNum get VoteRecorderNameR NameNum get add 2 div sub}
@@ -10778,11 +10778,11 @@ currentdict /SmallCapsDict undef
 						ifelse % Total column
 						VoteRecorderHeightFirstRow  VoteRecorderNameR NameNum get VoteRecorderNameL NameNum get sub  2 copy lt
 						{
-							DeBugLevel 9 le {( VoteRecorder: Vertical, scaled) OutputToLog} if
+							//DeBugLevel 9 le {( VoteRecorder: Vertical, scaled) OutputToLog} if
 							3 -1 roll  PageHeight MgnT sub VoteRecorderTopTextHeight sub  VoteRecorderHeightFirstRow sub  VoteRecorderNameL NameNum get sub  moveto
 							div  90 rotate  1 scale  /ThisName load ShowRecursive
 						}{
-							DeBugLevel 9 le {( VoteRecorder: Vertical) OutputToLog} if
+							//DeBugLevel 9 le {( VoteRecorder: Vertical) OutputToLog} if
 							pop pop  PageHeight MgnT sub VoteRecorderTopTextHeight sub  VoteRecorderHeightFirstRow sub  VoteRecorderNameL NameNum get sub
 							1.20  VoteRecorderHeightFirstRow VoteRecorderNameR NameNum get sub VoteRecorderNameL NameNum get add 2 copy gt {exch} if pop add  moveto  % Embedded constant
 							90 rotate  /ThisName load ShowRecursive
@@ -10807,7 +10807,7 @@ currentdict /SmallCapsDict undef
 				} ifelse  VoteRecorderInstruction ShowRecursive   setmatrix  % Show horizontally
 
 				end
-				DeBugLevel 100 le {(-VoteRecorderForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(-VoteRecorderForms: PaintProc) OutputToLog} if
 			} bind def  % /PaintProc
 			end  % dictionary VoteRecorderForms
 		} bind for  % VoteRecorderSheetNum
@@ -10819,7 +10819,7 @@ currentdict /SmallCapsDict undef
 	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=42615#p42615
 	{DecantingNotesNumCopies 1 ge} MightBeTrue
 	{
-		DeBugLevel 100 le {( Main: DecantingNotesForms) OutputToLog} if
+		//DeBugLevel 100 le {( Main: DecantingNotesForms) OutputToLog} if
 		/TypeOfPagesBeingRendered /DecantingNotes store
 		/ThisName (Decanting notes) def
 		/DecantingNotesForms [ GlassesClusteredOnDecantingNotes length {6 dict} repeat ] def
@@ -10835,7 +10835,7 @@ currentdict /SmallCapsDict undef
 			/Matrix matrix identmatrix def
 			/PaintProc
 			{
-				DeBugLevel 100 le {(+DecantingNotesForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(+DecantingNotesForms: PaintProc) OutputToLog} if
 				pop  % dictionary parameter of execform
 				30 dict begin
 				/DecantingNotesSheetNum DecantingNotesSheetNum def
@@ -11026,7 +11026,7 @@ currentdict /SmallCapsDict undef
 					} for  % WithinCluster, WithinTitles
 				} for  % ClusterNum
 				end
-				DeBugLevel 100 le {(-DecantingNotesForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(-DecantingNotesForms: PaintProc) OutputToLog} if
 			} bind def  % /PaintProc
 			end  % dictionary DecantingNotesForms
 		} bind for  % DecantingNotesSheetNum
@@ -11037,7 +11037,7 @@ currentdict /SmallCapsDict undef
 
 	/CrossHatchingOutside load MightBeTrue
 	{
-		DeBugLevel 100 le {( Main: CrossHatchingOutsideForms) OutputToLog} if
+		//DeBugLevel 100 le {( Main: CrossHatchingOutsideForms) OutputToLog} if
 		/TypeOfPagesBeingRendered /Glasses store
 		/CrossHatchingOutsideForms [ NumSheets {4 dict} repeat ] def
 
@@ -11052,7 +11052,7 @@ currentdict /SmallCapsDict undef
 
 			/PaintProc  % Paints CrossHatchingOutsideForm
 			{
-				DeBugLevel 100 le {(+CrossHatchingOutsideForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(+CrossHatchingOutsideForms: PaintProc) OutputToLog} if
 				pop 3 dict begin
 
 				NamesShowTop SheetNum get {NamePlacementTopX} {NamePlacementBottomX} ifelse SheetNum get  % cross hatching centre x
@@ -11096,7 +11096,7 @@ currentdict /SmallCapsDict undef
 				CHCX CHCY /CrossHatchingOutsideStrokeCode load RadialCrossHatching   newpath
 				ClipRestore
 				end
-				DeBugLevel 100 le {(-CrossHatchingOutsideForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(-CrossHatchingOutsideForms: PaintProc) OutputToLog} if
 			} bind def  % /PaintProc
 			end  % CrossHatchingOutsideForms
 		} bind for  % SheetNum
@@ -11106,7 +11106,7 @@ currentdict /SmallCapsDict undef
 
 	/CrossHatchingInside load MightBeTrue
 	{
-		DeBugLevel 100 le {( Main: CrossHatchingInsideForms) OutputToLog} if
+		//DeBugLevel 100 le {( Main: CrossHatchingInsideForms) OutputToLog} if
 		/TypeOfPagesBeingRendered /Glasses store
 		/CrossHatchingInsideForms [ SheetLengths {[ exch {6 dict} repeat]} forall ] def
 
@@ -11125,7 +11125,7 @@ currentdict /SmallCapsDict undef
 
 				/PaintProc  % Paints CrossHatchingInsideForm
 				{
-					DeBugLevel 100 le {(+CrossHatchingInsideForms: PaintProc) OutputToLog} if
+					//DeBugLevel 100 le {(+CrossHatchingInsideForms: PaintProc) OutputToLog} if
 					dup % dictionary parameter of execform containing WithinTitles and WithinPage
 					/TypeOfPagesBeingRendered /Glasses store
 					/WithinTitles get /WithinTitles exch def
@@ -11167,7 +11167,7 @@ currentdict /SmallCapsDict undef
 						CHCX CHCY /CrossHatchingInsideStrokeCode load RadialCrossHatching   newpath
 					} if  % CrossHatchingInside
 
-					DeBugLevel 100 le {(-CrossHatchingInsideForms: PaintProc) OutputToLog} if
+					//DeBugLevel 100 le {(-CrossHatchingInsideForms: PaintProc) OutputToLog} if
 				} bind def  % /PaintProc
 				end  % CrossHatchingInsideForms
 			} for  % WithinPage, WithinTitles
@@ -11180,7 +11180,7 @@ currentdict /SmallCapsDict undef
 
 	/OutlineTitles load MightBeTrue
 	{
-		DeBugLevel 100 le {( Main: OutlineForms) OutputToLog} if
+		//DeBugLevel 100 le {( Main: OutlineForms) OutputToLog} if
 		/OutlineTitlesNumberContours [ SheetLengths {array} forall ] def
 		/TypeOfPagesBeingRendered /Glasses store
 		/OutlineForms [ GlassesOnSheets {[ exch execU length {6 dict} repeat]} forall ] def
@@ -11200,7 +11200,7 @@ currentdict /SmallCapsDict undef
 
 				/PaintProc  % Paints OutlineForm
 				{
-					DeBugLevel 100 le {(+OutlineForms: PaintProc) OutputToLog} if
+					//DeBugLevel 100 le {(+OutlineForms: PaintProc) OutputToLog} if
 					dup % dictionary parameter of execform containing WithinTitles and WithinPage
 					/WithinTitles get /WithinTitles exch def
 					/WithinPage get /WithinPage exch def
@@ -11274,7 +11274,7 @@ currentdict /SmallCapsDict undef
 						1.0625 setlinewidth  1 setgray  stroke % an edge more than a point
 					} if  % RadiiCirclearrayInside SheetNum get  0 gt  OutlineTitles and
 
-					DeBugLevel 100 le {(-OutlineForms: PaintProc) OutputToLog} if
+					//DeBugLevel 100 le {(-OutlineForms: PaintProc) OutputToLog} if
 				} def  % /PaintProc
 				end  % OutlineForm
 			} for  % WithinPage, WithinTitles
@@ -11287,7 +11287,7 @@ currentdict /SmallCapsDict undef
 
 	/Spirals load MightBeTrue
 	{
-		DeBugLevel 100 le {( Main: SpiralForms) OutputToLog} if
+		//DeBugLevel 100 le {( Main: SpiralForms) OutputToLog} if
 		/SpiralForms [ GlassesOnSheets {[ exch execU length {6 dict} repeat]} forall ] def
 
 		0  1  NumSheets 1 sub
@@ -11304,7 +11304,7 @@ currentdict /SmallCapsDict undef
 
 				/PaintProc  % Paints Spirals
 				{
-					DeBugLevel 100 le {(+SpiralForms: PaintProc) OutputToLog} if
+					//DeBugLevel 100 le {(+SpiralForms: PaintProc) OutputToLog} if
 					dup % dictionary parameter of execform containing WithinTitles and WithinPage
 					/WithinTitles get /WithinTitles exch def
 					/WithinPage get /WithinPage exch def
@@ -11321,7 +11321,7 @@ currentdict /SmallCapsDict undef
 						0.12 setlinewidth  0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash  SpiralStrokeCode
 						ClipRestore
 					} if  % RadiiCirclearrayInside SheetNum get  0 gt  Spirals and
-					DeBugLevel 100 le {(-SpiralForms: PaintProc) OutputToLog} if
+					//DeBugLevel 100 le {(-SpiralForms: PaintProc) OutputToLog} if
 				} def  % /PaintProc
 				end  % SpiralForm
 			} for  % WithinPage, WithinTitles
@@ -11332,7 +11332,7 @@ currentdict /SmallCapsDict undef
 	} if  % ...Spirals ...
 
 
-	DeBugLevel 100 le {( Main: CirclearrayForms) OutputToLog} if
+	//DeBugLevel 100 le {( Main: CirclearrayForms) OutputToLog} if
 	/TypeOfPagesBeingRendered /Glasses store
 	/CirclearrayForms [ GlassesOnSheets {[ exch execU length {6 dict} repeat]} forall ] def
 
@@ -11350,7 +11350,7 @@ currentdict /SmallCapsDict undef
 
 			/PaintProc  % Paints Circletext
 			{
-				DeBugLevel 100 le {(+CirclearrayForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(+CirclearrayForms: PaintProc) OutputToLog} if
 				dup % dictionary parameter of execform containing WithinTitles and WithinPage
 				/WithinTitles get /WithinTitles exch def
 				/WithinPage get /WithinPage exch def
@@ -11359,7 +11359,7 @@ currentdict /SmallCapsDict undef
 				Circlearrays WithinTitles GetEU  CircletextsMinNumSpacesBetween  RadiiCirclearrayBaseline SheetNum get
 				CirclearraysFontSizes SheetNum get WithinPage get  CirclearraysN SheetNum get WithinPage get
 				Circletext
-				DeBugLevel 100 le {(-CirclearrayForms: PaintProc) OutputToLog} if
+				//DeBugLevel 100 le {(-CirclearrayForms: PaintProc) OutputToLog} if
 			} bind def  % /PaintProc
 			end
 		} for  % WithinPage
@@ -11371,7 +11371,7 @@ currentdict /SmallCapsDict undef
 	% -  HeadersAndFooters  HeaderLeft HeaderCenter HeaderRight FooterLeft FooterCenter FooterRight
 	/HeadersAndFooters
 	{
-		DeBugLevel 75 le {(+HeadersAndFooters) OutputToLog} if
+		//DeBugLevel 75 le {(+HeadersAndFooters) OutputToLog} if
 		2 dict begin  % ii is the best i
 		/ii -1 def  0 2 HeadersLeft   length 2 sub {/i exch def  HeadersLeft   i GetEU dup ThisPageOrdering le {ii -1 eq {pop //true} {HeadersLeft   ii GetEU gt} ifelse {/ii i def} if} {pop} ifelse} for  ii -1 eq {()} {HeadersLeft   ii 1 add get} ifelse
 		/ii -1 def  0 2 HeadersCenter length 2 sub {/i exch def  HeadersCenter i GetEU dup ThisPageOrdering le {ii -1 eq {pop //true} {HeadersCenter ii GetEU gt} ifelse {/ii i def} if} {pop} ifelse} for  ii -1 eq {()} {HeadersCenter ii 1 add get} ifelse
@@ -11380,13 +11380,13 @@ currentdict /SmallCapsDict undef
 		/ii -1 def  0 2 FootersCenter length 2 sub {/i exch def  FootersCenter i GetEU dup ThisPageOrdering le {ii -1 eq {pop //true} {FootersCenter ii GetEU gt} ifelse {/ii i def} if} {pop} ifelse} for  ii -1 eq {()} {FootersCenter ii 1 add get} ifelse
 		/ii -1 def  0 2 FootersRight  length 2 sub {/i exch def  FootersRight  i GetEU dup ThisPageOrdering le {ii -1 eq {pop //true} {FootersRight  ii GetEU gt} ifelse {/ii i def} if} {pop} ifelse} for  ii -1 eq {()} {FootersRight  ii 1 add get} ifelse
 		end
-		DeBugLevel 75 le {(-HeadersAndFooters) OutputToLog} if
+		//DeBugLevel 75 le {(-HeadersAndFooters) OutputToLog} if
 	} bind def  % /HeadersAndFooters
 
 	% HeaderLeft HeaderCenter HeaderRight FooterLeft FooterCenter FooterRight  PaintHeadersFooters  -
 	/PaintHeadersFooters
 	{
-		DeBugLevel 75 le {(+PaintHeadersFooters) OutputToLog} if
+		//DeBugLevel 75 le {(+PaintHeadersFooters) OutputToLog} if
 		9 dict begin
 		/FooterRight exch def  /FooterCenter exch def  /FooterLeft exch def
 		/HeaderRight exch def  /HeaderCenter exch def  /HeaderLeft exch def
@@ -11413,10 +11413,10 @@ currentdict /SmallCapsDict undef
 		} if
 
 		end
-		DeBugLevel 75 le {(-PaintHeadersFooters) OutputToLog} if
+		//DeBugLevel 75 le {(-PaintHeadersFooters) OutputToLog} if
 	} bind def  % /PaintHeadersFooters
 
-	DeBugLevel 100 le {( Main: TastingNoteForms) OutputToLog} if
+	//DeBugLevel 100 le {( Main: TastingNoteForms) OutputToLog} if
 	/TypeOfPagesBeingRendered /TastingNotes store
 	/RightBoundaryNameTastingNotes  GlassesOnTastingNotePages length array  def  % values will be put into this
 	/TastingNoteForms [ GlassesOnTastingNotePages length {6 dict} repeat ] def
@@ -11437,7 +11437,7 @@ currentdict /SmallCapsDict undef
 
 		/PaintProc
 		{
-			DeBugLevel 100 le {(+TastingNoteForms: PaintProc) OutputToLog} if
+			//DeBugLevel 100 le {(+TastingNoteForms: PaintProc) OutputToLog} if
 			pop 33 dict begin
 			/TypeOfPagesBeingRendered /TastingNotes store
 			/TastingNotesPageCircletextFontSize 4 def  % embedded constant
@@ -11602,7 +11602,7 @@ currentdict /SmallCapsDict undef
 				selectfont   MgnL CurrentTop urY sub moveto  SubtitlesTastingNotes WithinTitles get ShowRecursive
 			} for  % WithinPage, WithinTitles
 			end
-			DeBugLevel 100 le {(-TastingNoteForms: PaintProc) OutputToLog} if
+			//DeBugLevel 100 le {(-TastingNoteForms: PaintProc) OutputToLog} if
 		} def  % /PaintProc
 		end
 	} bind for  % TastingSheetNum
@@ -11614,10 +11614,10 @@ currentdict /SmallCapsDict undef
 	% They exist to allow later determination the ordering of the
 	% outer loops, without repeating any of this code. Messy, but functional.
 
-	DeBugLevel 100 le {( Main: Defining inner loops) OutputToLog} if
+	//DeBugLevel 100 le {( Main: Defining inner loops) OutputToLog} if
 	/GlassesPageInnerLoop
 	{
-		DeBugLevel 100 le {(+GlassesPageInnerLoop) OutputToLog} if
+		//DeBugLevel 100 le {(+GlassesPageInnerLoop) OutputToLog} if
 		13 dict begin
 		/TypeOfPagesBeingRendered /Glasses store
 
@@ -11642,27 +11642,27 @@ currentdict /SmallCapsDict undef
 
 		BackgroundTextsGlasses
 		{
-			DeBugLevel 75 le {( GlassesPageInnerLoop: BackgroundTexts) OutputToLog} if
+			//DeBugLevel 75 le {( GlassesPageInnerLoop: BackgroundTexts) OutputToLog} if
 			BackgroundTextsGlassesForms SheetNum get execform
 		} if  % BackgroundTextsGlasses
 
 		Droplets
 		{
-			DeBugLevel 75 le {( GlassesPageInnerLoop: Droplets) OutputToLog} if
+			//DeBugLevel 75 le {( GlassesPageInnerLoop: Droplets) OutputToLog} if
 			DropletsForms SheetNum get execform
 		} if  % Droplets
 
 		% CrossHatchingOutside
 		/CrossHatchingOutside load MightBeTrue
 		{
-			DeBugLevel 75 le {( GlassesPageInnerLoop: CrossHatchingOutside) OutputToLog} if
+			//DeBugLevel 75 le {( GlassesPageInnerLoop: CrossHatchingOutside) OutputToLog} if
 			CrossHatchingOutsideForms SheetNum get  execform
 		} if  % ... CrossHatchingOutside ...
 
 		% FlightSeparationForms
 		FlightSeparations
 		{
-			DeBugLevel 75 le {( GlassesPageInnerLoop: FlightSeparations) OutputToLog} if
+			//DeBugLevel 75 le {( GlassesPageInnerLoop: FlightSeparations) OutputToLog} if
 			FlightSeparationForms SheetNum get  execform
 		} if  % FlightSeparations
 
@@ -11673,7 +11673,7 @@ currentdict /SmallCapsDict undef
 		% WaterBoxes
 		WaterBoxes dup /Glasses eq exch /Both eq or  WaterBoxesNum 1 ge  and
 		{
-			DeBugLevel 75 le {( GlassesPageInnerLoop: WaterBoxes) OutputToLog} if
+			//DeBugLevel 75 le {( GlassesPageInnerLoop: WaterBoxes) OutputToLog} if
 			NamesShowBottom SheetNum get {NamePlacementBottomX SheetNum get  ThisNameR ThisNameL sub 2 div  2 copy sub 3 1 roll add} {PageWidth MgnR sub  MgnL} ifelse
 			NamesIsLeftHander NameNum get not  WaterBoxesOverrideShowEverySheet not {WaterBoxesShowRight SheetNum get execU  and} if
 			NamesIsLeftHander NameNum get      WaterBoxesOverrideShowEverySheet not {WaterBoxesShowLeft  SheetNum get execU  and} if
@@ -11681,7 +11681,7 @@ currentdict /SmallCapsDict undef
 		} if  % WaterBoxes dup /Glasses eq exch /Both eq or  WaterBoxesNumSideTriangle 1 ge  and
 
 		% Outlined titles, and CrossHatchingInside after outlining as that spreads much white paint
-		DeBugLevel 75 le {( GlassesPageInnerLoop: OutlineTitles and CrossHatchingInside) OutputToLog} if
+		//DeBugLevel 75 le {( GlassesPageInnerLoop: OutlineTitles and CrossHatchingInside) OutputToLog} if
 		0  1  SheetLengths SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
@@ -11711,7 +11711,7 @@ currentdict /SmallCapsDict undef
 		ThePortForumIconPlacement PlaceThePortForumIcon
 
 		% TitleAboveBelowOverForms
-		DeBugLevel 75 le {( GlassesPageInnerLoop: TitleAboveBelowOverForms) OutputToLog} if
+		//DeBugLevel 75 le {( GlassesPageInnerLoop: TitleAboveBelowOverForms) OutputToLog} if
 		0  1  SheetLengths SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
@@ -11747,7 +11747,7 @@ currentdict /SmallCapsDict undef
 		% Names
 		SideBySideGlassesTastingNotes not
 		{
-			DeBugLevel 75 le {( GlassesPageInnerLoop: Names) OutputToLog} if
+			//DeBugLevel 75 le {( GlassesPageInnerLoop: Names) OutputToLog} if
 			4.8 setlinewidth  1 setlinejoin  [] 0 setdash  % Embedded constant
 			NamesShowTop SheetNum get
 			{
@@ -11767,13 +11767,13 @@ currentdict /SmallCapsDict undef
 
 		ShowHeadersAndFooters
 		{
-			DeBugLevel 75 le {( GlassesPageInnerLoop: headers and footers) OutputToLog} if
+			//DeBugLevel 75 le {( GlassesPageInnerLoop: headers and footers) OutputToLog} if
 			<< /SideBySideGlassesTastingNotes //false >> begin  //false DefStoreMgns  dup matrix currentmatrix exch setmatrix  HeadersAndFooters PaintHeadersFooters  setmatrix  end
 			//false DefStoreMgns
 		} if  % ShowHeadersAndFooters
 
 		% Circletext over everything
-		DeBugLevel 75 le {( GlassesPageInnerLoop: CirclearrayForms) OutputToLog} if
+		//DeBugLevel 75 le {( GlassesPageInnerLoop: CirclearrayForms) OutputToLog} if
 		0  1  SheetLengths SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
@@ -11790,13 +11790,13 @@ currentdict /SmallCapsDict undef
 		currentdict /WithinTitles undef
 
 		end
-		DeBugLevel 100 le {(-GlassesPageInnerLoop) OutputToLog} if
+		//DeBugLevel 100 le {(-GlassesPageInnerLoop) OutputToLog} if
 	} bind def  % /GlassesPageInnerLoop
 
 
 	/TastingNotesInnerLoop
 	{
-		DeBugLevel 100 le {(+TastingNotesInnerLoop) OutputToLog} if
+		//DeBugLevel 100 le {(+TastingNotesInnerLoop) OutputToLog} if
 		19 dict begin
 
 		TastingNotesReplaceNameWithPageNum {/ThisName TastingNotesPageNumCompoundString def} if
@@ -11807,13 +11807,13 @@ currentdict /SmallCapsDict undef
 
 		ShowHeadersAndFooters
 		{
-			DeBugLevel 75 le {( TastingNotesInnerLoop: headers and footers) OutputToLog} if
+			//DeBugLevel 75 le {( TastingNotesInnerLoop: headers and footers) OutputToLog} if
 			<< /SideBySideGlassesTastingNotes //false >> begin
 			dup matrix currentmatrix exch setmatrix  //false DefStoreMgns  HeadersAndFooters PaintHeadersFooters  setmatrix end
 			//false DefStoreMgns
 		} if  % ShowHeadersAndFooters
 
-		DeBugLevel 75 le {( TastingNotesInnerLoop: TastingNoteForms) OutputToLog} if
+		//DeBugLevel 75 le {( TastingNotesInnerLoop: TastingNoteForms) OutputToLog} if
 		TastingNoteForms TastingSheetNum get
 		0  1  GlassesOnTastingNotePages TastingSheetNum GetEU length 1 sub
 		{
@@ -11869,7 +11869,7 @@ currentdict /SmallCapsDict undef
 		% Discussion: http://www.theportforum.com/viewtopic.php?t=175&start=929
 		WaterBoxes dup /TastingNotes eq exch /Both eq or  WaterBoxesNum 0 gt and  WaterBoxesShowTN TastingSheetNum get WaterBoxesOverrideShowEverySheet or  and
 		{
-			DeBugLevel 75 le {( TastingNotesInnerLoop: Water) OutputToLog} if
+			//DeBugLevel 75 le {( TastingNotesInnerLoop: Water) OutputToLog} if
 			/WaterBoxesSizeTN IconSizeTN WaterBoxesSizeMax 2 copy gt {exch} if pop def
 
 			NamesIsLeftHanderTN NameNum get   ThePortForumIconTastingNotePlacement /LowerNonName eq
@@ -11884,7 +11884,7 @@ currentdict /SmallCapsDict undef
 			} for
 		} if  % WaterBoxes dup /TastingNotes ... WaterBoxesNum ... WaterBoxesShowTN ... WaterBoxesOverrideShowEverySheet ...
 
-		DeBugLevel 75 le {( TastingNotesInnerLoop: Names) OutputToLog} if
+		//DeBugLevel 75 le {( TastingNotesInnerLoop: Names) OutputToLog} if
 		0 setgray
 		NamesFont  NamesFontSize TastingNotesReplaceNameWithPageNum {TastingNotesPageNumFontSizeFactor mul} if  selectfont
 		/ThisName load  GSave  NullDevice  16384 dup scale  newpath 0 0 moveto   //true CharPathRecursive PathBBox GRestore
@@ -11893,18 +11893,18 @@ currentdict /SmallCapsDict undef
 		/ThisName load ShowRecursive
 
 		end
-		DeBugLevel 100 le {(-TastingNotesInnerLoop) OutputToLog} if
+		//DeBugLevel 100 le {(-TastingNotesInnerLoop) OutputToLog} if
 	} bind def  % /TastingNotesInnerLoop
 
 
 	/PlaceNamesRandomSeeds [ NamesPlaceNames { [ exch length {//null} repeat ] } forall ] def
 	/PlaceNamesInnerLoop
 	{
-		DeBugLevel 100 le {(+PlaceNamesInnerLoop) OutputToLog} if
+		//DeBugLevel 100 le {(+PlaceNamesInnerLoop) OutputToLog} if
 		9 dict begin
 		PlaceNamesFirstAndThirdFoldsFromEdge 0 ne
 		{
-			DeBugLevel 75 le {( PlaceNamesInnerLoop: PlaceNamesFirstAndThirdFoldsFromEdge) OutputToLog} if
+			//DeBugLevel 75 le {( PlaceNamesInnerLoop: PlaceNamesFirstAndThirdFoldsFromEdge) OutputToLog} if
 			newpath
 			0 1 1
 			{
@@ -11950,11 +11950,11 @@ currentdict /SmallCapsDict undef
 
 		ShowHeadersAndFooters
 		{
-			DeBugLevel 75 le {( PlaceNamesInnerLoop: headers and footers) OutputToLog} if
+			//DeBugLevel 75 le {( PlaceNamesInnerLoop: headers and footers) OutputToLog} if
 			HeadersAndFooters  PlaceNamesShowNameAsFooter PlaceNameSetNum GetEU  NameNum Names length lt  and {exch pop Names NameNum get exch} if  PaintHeadersFooters
 		} if  % ShowHeadersAndFooters
 
-		DeBugLevel 75 le {( PlaceNamesInnerLoop: call PaintPlaceName) OutputToLog} if
+		//DeBugLevel 75 le {( PlaceNamesInnerLoop: call PaintPlaceName) OutputToLog} if
 		0 1 1
 		{
 			/SideFacingNamedPerson exch 2 mod 0 eq def
@@ -11970,22 +11970,22 @@ currentdict /SmallCapsDict undef
 			SideFacingNamedPerson not {end setmatrix} if
 		} for  % SideFacingNamedPerson
 		end
-		DeBugLevel 100 le {(-PlaceNamesInnerLoop) OutputToLog} if
+		//DeBugLevel 100 le {(-PlaceNamesInnerLoop) OutputToLog} if
 	} bind def  % /PlaceNamesInnerLoop
 
 	/PrePourInnerLoop
 	{
-		DeBugLevel 100 le {(+PrePourInnerLoop) OutputToLog} if
+		//DeBugLevel 100 le {(+PrePourInnerLoop) OutputToLog} if
 
 		CircleNonEmpty SheetNum get WithinPage get {PrePourForms SheetNum get WithinPage get  execform} if
 
 		ShowHeadersAndFooters
 		{
-			DeBugLevel 75 le {( PrePourInnerLoop: headers and footers) OutputToLog} if
+			//DeBugLevel 75 le {( PrePourInnerLoop: headers and footers) OutputToLog} if
 			HeadersAndFooters PaintHeadersFooters
 		} if  % ShowHeadersAndFooters
 
-		DeBugLevel 100 le {(-PrePourInnerLoop) OutputToLog} if
+		//DeBugLevel 100 le {(-PrePourInnerLoop) OutputToLog} if
 	} bind def  % /PrePourInnerLoop
 
 	() OutputToLog
@@ -12010,7 +12010,7 @@ currentdict /SmallCapsDict undef
 		} {pop pop} ifelse  % EmptyPageString non-empty
 		/TypeOfPagesBeingRendered /Empty store ShowPage end
 	} if  % EmptyGlassesPageAtStart
-	AnyFillTextingAtAll DeBugLevel 100 le or {mark ( Main: starting outermost page-rendering loop: execution time ~= ) usertime usertimeStart sub 1000 div (s) ConcatenateToMark OutputToLog} if
+	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: starting outermost page-rendering loop: execution time ~= ) usertime usertimeStart sub 1000 div (s) ConcatenateToMark OutputToLog} if
 	/ShowHeadersAndFooters //true def
 	UsedPageOrderings
 	{
@@ -12051,9 +12051,9 @@ currentdict /SmallCapsDict undef
 										{
 											1 SideBySideGlassesTastingNotesProportionPageGlasses sub PageWidth mul  SideBySideGlassesTastingNotesWidthGutter 2 div add  MgnL sub   0  translate
 										} if  % NamesIsLeftHander ...
-										DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
+										//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 										GlassesPageInnerLoop
-										DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+										//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 										setmatrix
 									} if  % SheetNum NumSheets lt
 
@@ -12067,9 +12067,9 @@ currentdict /SmallCapsDict undef
 										{
 											MarginL MgnL sub  0  translate
 										} if  % NamesIsLeftHander ...
-										DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
+										//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 										TastingNotesInnerLoop
-										DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+										//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 										setmatrix
 									} if  % TastingSheetNum  GlassesOnTastingNotePages length  lt ...
 
@@ -12101,9 +12101,9 @@ currentdict /SmallCapsDict undef
 									MirrorPagesGlasses SheetNum GetEU  //true ThisPaperType Orientation SetPaperSize
 									//true DefStoreMgns
 									matrix currentmatrix
-									DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
+									//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 									GlassesPageInnerLoop
-									DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+									//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 									setmatrix   ShowPage
 								} for  % GlassesCopyNum
 							} if  % ... ThisPageOrdering eq ... ThisPaperType eq  and
@@ -12132,9 +12132,9 @@ currentdict /SmallCapsDict undef
 									MirrorPagesTastingNotePages TastingSheetNum GetEU  //true  TastingNotesPaperType TastingNotesOrientation  SetPaperSize
 									//true DefStoreMgns
 									matrix currentmatrix
-									DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
+									//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 									TastingNotesInnerLoop
-									DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+									//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 									setmatrix   ShowPage
 								} repeat  % TastingNotePagesNumCopies ...
 							} if  % NameNum NamesTastingNotes length lt
@@ -12164,9 +12164,9 @@ currentdict /SmallCapsDict undef
 							/TypeOfPagesBeingRendered /PlaceName store
 							//false  //false  MirrorPagesPlaceNames PlaceNameSetNum GetEU  //true  PlaceNamesPaperType  PlaceNamesOrientation  SetPaperSize
 							//true DefStoreMgns
-							DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
+							//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 							PlaceNamesInnerLoop
-							DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+							//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 							setmatrix   ShowPage
 							AnyFillTextingAtAll
 							{
@@ -12189,7 +12189,7 @@ currentdict /SmallCapsDict undef
 			/VoteRecorders load MightBeTrue
 			{
 				17 dict begin
-				DeBugLevel 100 le {(+VoteRecorder) OutputToLog} if
+				//DeBugLevel 100 le {(+VoteRecorder) OutputToLog} if
 				/TypeOfPagesBeingRendered /VoteRecorder store
 				/ThisName (Vote recorder) def
 
@@ -12208,7 +12208,7 @@ currentdict /SmallCapsDict undef
 							/TypeOfPagesBeingRendered /VoteRecorder store
 							//false  //false  MirrorPagesVoteRecorder VoteRecorderSheetNum GetEU  //true  VoteRecorderPaperType  VoteRecorderOrientation  SetPaperSize
 							//true DefStoreMgns
-							DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
+							//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 							/VoteRecorderTopTextHeight PageHeight MgnB MgnT add sub 50 div  def  % Embedded constant. Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=56967#p56967
 							VoteRecorderTopTextHeight 0 gt
 							{
@@ -12224,19 +12224,19 @@ currentdict /SmallCapsDict undef
 								} {pop pop pop} ifelse  % Non-zero height
 							} if  % VoteRecorderTopTextHeight 0 gt
 							VoteRecorderForms VoteRecorderSheetNum get  execform
-							DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+							//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 							ShowPage
 						} for  % VoteRecorderTopTextNum
 					} if  % VoteRecorderPaperType ... PageOrderingVoteRecorder ... and
 				} for  % VoteRecorderSheetNum
 				end
-				DeBugLevel 100 le {(-VoteRecorder) OutputToLog} if
+				//DeBugLevel 100 le {(-VoteRecorder) OutputToLog} if
 			} if  % ... VoteRecorders ...
 
 
 			{DecantingNotesNumCopies 1 ge} MightBeTrue
 			{
-				DeBugLevel 100 le {(+DecantingNotes) OutputToLog} if
+				//DeBugLevel 100 le {(+DecantingNotes) OutputToLog} if
 				/TypeOfPagesBeingRendered /DecantingNotes store
 				/ThisName (Decanter labels) def
 
@@ -12256,15 +12256,15 @@ currentdict /SmallCapsDict undef
 							/TypeOfPagesBeingRendered /DecantingNotes store
 							//false  //false  MirrorPagesDecantingNotes DecantingNotesSheetNum GetEU  //true  DecantingNotesPaperType  DecantingNotesOrientation  SetPaperSize
 							//true DefStoreMgns
-							DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
+							//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 							/DecantingNotesTopTextHeight PageHeight MgnB MgnT add sub 50 div  def  % embedded constant
 							DecantingNotesForms DecantingNotesSheetNum get  execform
-							DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+							//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 							ShowPage
 						} if  % DecantingNotesPaperType ... PageOrderingDecantingNotes ... and
 					} for  % DecantingNotesCopyNum
 				} for  % DecantingNotesSheetNum
-				DeBugLevel 100 le {(-DecantingNotes) OutputToLog} if
+				//DeBugLevel 100 le {(-DecantingNotes) OutputToLog} if
 			} if  % ... DecantingNotesNumCopies 1 ge ...
 
 
@@ -12279,10 +12279,10 @@ currentdict /SmallCapsDict undef
 				{
 				  AccountsNumCopies
 					{
-						DeBugLevel 100 le {(+Accounts) OutputToLog} if
+						//DeBugLevel 100 le {(+Accounts) OutputToLog} if
 						//false  //false  MirrorPagesAccounts 0 1 PageOrderingAccounts length 1 sub {dup PageOrderingAccounts exch GetEU ThisPageOrdering eq {exit} {pop} ifelse} for GetEU  //true  AccountsPaperType  AccountsOrientation  SetPaperSize
 						//true DefStoreMgns
-						DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
+						//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 						HeadersAndFooters PaintHeadersFooters
 
 						/AccTopTextFontSize 16 def  % embedded constant
@@ -12382,9 +12382,9 @@ currentdict /SmallCapsDict undef
 							ThisLineWidth setlinewidth  0.8 setgray   0 setlinecap   [] 0 setdash  stroke
 							0 setgray MgnL Y ThisLineWidth 0.48 add sub moveto   GSave NullDevice 16384 dup scale newpath 0 0 moveto  AccRowNames NameNum get dup //true CharPathRecursive PathBBox GRestore  0 exch neg rmoveto  pop pop pop ShowRecursive
 						} for  % NameNum
-						DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+						//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 						ShowPage
-						DeBugLevel 100 le {(-Accounts) OutputToLog} if
+						//DeBugLevel 100 le {(-Accounts) OutputToLog} if
 					} repeat  % AccountsNumCopies
 				} if  % ... AccountsPaperType ... PageOrderingAccounts ...
 				end
@@ -12394,7 +12394,7 @@ currentdict /SmallCapsDict undef
 			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=45400#p45400
 			{CorkDisplayNumCopies 1 ge} MightBeTrue
 			{
-				DeBugLevel 100 le {(+CorkDisplay) OutputToLog} if
+				//DeBugLevel 100 le {(+CorkDisplay) OutputToLog} if
 				58 dict begin
 				/TypeOfPagesBeingRendered /CorkDisplay store
 				/ThisName (Cork display) def
@@ -12498,7 +12498,7 @@ currentdict /SmallCapsDict undef
 									{
 										//false  //false  MirrorPagesCorkDisplay CorkDisplaySetNum GetEU  //true  CorkDisplayPaperType  CDBestOrientation  SetPaperSize
 										//true DefStoreMgns
-										DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
+										//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 										HeadersAndFooters PaintHeadersFooters
 										CorkDisplayTopTextHeight 0 gt {HeaderFont CDTopTextFontSize selectfont   PageWidth MgnL MgnR sub CDTopTextL CDTopTextR add sub add 2 div  PageHeight MgnT CDTopTextT add sub  moveto 0 setgray CorkDisplayTopText ShowRecursive} if
 									} if  % WithinPage 0 eq
@@ -12556,7 +12556,7 @@ currentdict /SmallCapsDict undef
 									/WithinPage WithinPage 1 add def
 									WithinPage CDBestNumRows CDBestNumCols mul ge
 									{
-										DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+										//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 										ShowPage  /WithinPage 0 def  /CorkDisplayThisPageTitles () def
 									} if
 								} repeat  % ... CorkDisplayNumCopies ...
@@ -12565,19 +12565,19 @@ currentdict /SmallCapsDict undef
 						} forall
 						WithinPage 0 gt
 						{
-							DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+							//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 							ShowPage
 						} if
 					} if  % CorkDisplayPaperType ... PageOrderingCorkDisplay ... and ... CorkDisplayNumCopies 1 ge
 				} for  % CorkDisplaySetNum
 				end
-				DeBugLevel 100 le {(-CorkDisplay) OutputToLog} if
+				//DeBugLevel 100 le {(-CorkDisplay) OutputToLog} if
 			} if  % ... CorkDisplayNumCopies 1 ge ...
 
 
 			//false  {NeckTagsNumCopies 1 ge} MightBeTrue {PageOrderingNeckTags {execU ThisPageOrdering eq {pop //true exit} if} forall} if
 			{
-				DeBugLevel 100 le {(+NeckTags) OutputToLog} if
+				//DeBugLevel 100 le {(+NeckTags) OutputToLog} if
 				51 dict begin
 				/TypeOfPagesBeingRendered /NeckTags store
 				/NTGapBetweenMin 6 def  /NTGapInside 0.24 def  % embedded constants
@@ -12822,7 +12822,7 @@ currentdict /SmallCapsDict undef
 					} {(Error: NeckTags, NTBestRotatedness is null. No neck tags pages; otherwise continuing. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog} ifelse  % NTBestRotatedness //null ne
 				} if  % NTNumGlasses 1 ge ...
 				end
-				DeBugLevel 100 le {(-NeckTags) OutputToLog} if
+				//DeBugLevel 100 le {(-NeckTags) OutputToLog} if
 			} if  % ...NeckTagsNumCopies 1 ge ... PageOrderingNeckTags ... ThisPageOrdering eq
 
 
@@ -12857,7 +12857,7 @@ currentdict /SmallCapsDict undef
 					PrePourCollate {/PrePourSheetNum 0 def} if
 					{
 						/Finished //true def
-						AnyFillTextingAtAll DeBugLevel 100 le or {mark ( Main: +PrePour: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: +PrePour: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
 						PrePourSheetNumWithinPageWithinTitles
 						{
 							aload pop /WithinTitles exch def  /WithinPage exch def  /SheetNum exch def
@@ -12870,13 +12870,13 @@ currentdict /SmallCapsDict undef
 								/Finished //false def
 								//false  //false  MirrorPagesPrePour SheetNum GetEU  //true  PrePourPaperType  PrePourOrientation  SetPaperSize
 								//true DefStoreMgns
-								DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
+								//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 								PrePourInnerLoop
-								DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+								//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 								setmatrix   ShowPage
 							} for  % PrePourSheetNum, if not collating
 						} forall  % PrePourSheetNumWithinPageWithinTitles
-						AnyFillTextingAtAll DeBugLevel 100 le or {mark ( Main: -PrePour: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: -PrePour: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
 						Finished  PrePourCollate not  or {exit} if
 						/PrePourSheetNum PrePourSheetNum 1 add def
 					} loop  % PrePourSheetNum, if collating
@@ -12898,7 +12898,7 @@ currentdict /SmallCapsDict undef
 					DecanterLabelsPaperType ThisPaperType  eq   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and {pop //true exit} if
 				} for  % /SheetNum
 				{
-					AnyFillTextingAtAll DeBugLevel 100 le or {mark (+DecanterLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+DecanterLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
 					/TypeOfPagesBeingRendered /DecanterLabels store  //false //false //false //false DecanterLabelsPaperType /Portrait SetPaperSize   //true DefStoreMgns
 					/ThisName (Decanter labels) def
 					/DecanterLabelsGap 8 def  % embedded constant
@@ -13091,7 +13091,7 @@ currentdict /SmallCapsDict undef
 							DLNumOnPage 0 gt {ShowPage} if
 						} if  % DLTotalNumCopies 1 gt
 					} ifelse  % DLBestNumOnPage 1 lt
-					AnyFillTextingAtAll DeBugLevel 100 le or {mark (-DecanterLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (-DecanterLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
 				} if  % ... ThisPaperType ... ThisPageOrdering ... and
 				end
 			} if  % ... DecanterLabelsNumCopies 1 ge ...
@@ -13105,7 +13105,7 @@ currentdict /SmallCapsDict undef
 				/StickyLabelsTypeThis exch def
 				{StickyLabelsNumCopies 1 ge} MightBeTrue
 				{
-					AnyFillTextingAtAll DeBugLevel 100 le or {mark (+StickyLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+StickyLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
 					/TypeOfPagesBeingRendered /StickyLabels store
 
 					//false //false //false //false StickyLabelsPaperType /Portrait SetPaperSize   //true DefStoreMgns
@@ -13114,7 +13114,7 @@ currentdict /SmallCapsDict undef
 					/StickyLabelsWithPagePortraitWidth   PageWidth   StickyLabelsWithPagePortraitGapL StickyLabelsWithPagePortraitGapR add sub
 					StickyLabelsWithPagePortraitGapBetweenCols StickyLabelsWithPagePortraitNumCols 1 sub mul sub  StickyLabelsWithPagePortraitNumCols div  def
 
-					DeBugLevel 10 le {( StickyLabels: StringAnnotationPDF computation) OutputToLog} if
+					//DeBugLevel 10 le {( StickyLabels: StringAnnotationPDF computation) OutputToLog} if
 					/StringAnnotationPDF
 						mark  (For )
 						StickyLabelsPaperType execU
@@ -13144,7 +13144,7 @@ currentdict /SmallCapsDict undef
 						} if  % PageSuppressed not
 					} bind def  % /AnnotatePDF
 
-					DeBugLevel 10 le {( StickyLabels: compute StickyLabelsSheetNumWithinPageWithinTitles) OutputToLog} if
+					//DeBugLevel 10 le {( StickyLabels: compute StickyLabelsSheetNumWithinPageWithinTitles) OutputToLog} if
 					/StickyLabelsSheetNumWithinPageWithinTitles
 					[
 					NumSheets 1 sub  StickyLabelsReverseOrder {-1 0} {0 exch 1 exch} ifelse
@@ -13163,7 +13163,7 @@ currentdict /SmallCapsDict undef
 					] def  % /StickyLabelsSheetNumWithinPageWithinTitles
 					StickyLabelsSortByWithinTitles {StickyLabelsSheetNumWithinPageWithinTitles {2 get exch 2 get ge} {2 get exch 2 get le} StickyLabelsReverseOrder {exch} if pop ShellSort} if
 
-					DeBugLevel 10 le {( StickyLabels: painting) OutputToLog} if
+					//DeBugLevel 10 le {( StickyLabels: painting) OutputToLog} if
 					/StickyLabelsNumPaintedOnCurrentPage 0 def
 					/StickyLabelsPositionOnPage where {pop} {/StickyLabelsPositionOnPage StickyLabelsFirstPageStartPosition StickyLabelsWithPagePortraitNumRows StickyLabelsWithPagePortraitNumCols mul mod def} ifelse
 					/StickyLabelsPaperSizeSet //false def
@@ -13486,7 +13486,7 @@ currentdict /SmallCapsDict undef
 					} for  % NameNum, or not loop
 					StickyLabelsNumPaintedOnCurrentPage 0 gt {AnnotatePDF ShowPage  /StickyLabelsNumPaintedOnCurrentPage 0 def} if
 					setmatrix
-					AnyFillTextingAtAll DeBugLevel 100 le or {mark (-StickyLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (-StickyLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
 				} if  % ... StickyLabelsNumCopies 1 ge ...
 				end
 			} forall  % StickyLabelsTypeThis drawn from StickyLabelsTypes
@@ -13554,7 +13554,7 @@ currentdict /SmallCapsDict undef
 		IsDistiller not {( \(But distillation might be in Ghostscript, so these # tags might be missing: check.\))} if
 	} {(.)} ifelse   1 index mark ne {ConcatenateToMark () OutputToLog OutputToLog} {cleartomark} ifelse
 
-	DeBugLevel 50 le {( Main: pdfmark's, DOCVIEW, DOCINFO, {Catalog}...PUT) OutputToLog} if
+	//DeBugLevel 50 le {( Main: pdfmark's, DOCVIEW, DOCINFO, {Catalog}...PUT) OutputToLog} if
 	mark
 		/Page 1
 		/View [/Fit]
@@ -13575,7 +13575,7 @@ currentdict /SmallCapsDict undef
 
 	/TypeOfPagesBeingRendered /Multiple store
 	mark   /Action << >>  /Color [0.4 0.4 0.4]  /F 1  /Title (\200 ) ParametersVersionDateTimeAdobeFormat AdobeFormatDateToString Concatenate  /OUT pdfmark
-	DeBugLevel 50 le {( Main: pdfmark's, OUT, in print order) OutputToLog} if
+	//DeBugLevel 50 le {( Main: pdfmark's, OUT, in print order) OutputToLog} if
 	mark
 		/Action << >>  /Color [0 0 0]  /F 2
 		/Title (\247 In Print Order)   ShownPages 0 gt  ShownPagesData 0 ShownPages getinterval {/ThisPaperType get ShownPagesData 0 get /ThisPaperType get ne {pop //false exit} if} forall
@@ -13612,7 +13612,7 @@ currentdict /SmallCapsDict undef
 			} forall  % PagesToBeInsertedData
 			TypeOfPagesBeingRendered dup dup /Glasses eq exch /TastingNotes eq or exch /PlaceName eq or
 			{
-				DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, Glasses and TastingNotes and PlaceName) OutputToLog} if
+				//DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, Glasses and TastingNotes and PlaceName) OutputToLog} if
 				/NumPagesThisType 1 def
 				/PagesCountGlasses /PagesCountTNs /PagesCountPlaceName   TypeOfPagesBeingRendered /Glasses eq {3 -1 roll} if   TypeOfPagesBeingRendered /TastingNotes eq {exch} if   1 def 0 def 0 def
 				/NewNamePages [ ShownPageThis
@@ -13722,7 +13722,7 @@ currentdict /SmallCapsDict undef
 
 			/VoteRecorder TypeOfPagesBeingRendered eq
 			{
-				DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, VoteRecorder) OutputToLog} if
+				//DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, VoteRecorder) OutputToLog} if
 				mark
 					/Action /GoTo /Dest PageDestName
 					/Title  mark (Vote recorder) NumPagesThisType 1 eq {( \(p) PageNum 1 add} {(s \(pp) PageNum 1 add (\205) PageNum NumPagesThisType add} ifelse  (, ) PaperTypeStringShortPDF (\)) ConcatenateToMark
@@ -13743,7 +13743,7 @@ currentdict /SmallCapsDict undef
 
 			/DecantingNotes TypeOfPagesBeingRendered eq
 			{
-				DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, DecantingNotes) OutputToLog} if
+				//DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, DecantingNotes) OutputToLog} if
 				mark  /Action /GoTo /Dest PageDestName
 				/Title  mark  (Decanting notes) ( \() NumPagesThisType 1 eq {(p) PageNum 1 add} {(pp) PageNum 1 add (\205) PageNum NumPagesThisType add} ifelse  (, ) PaperTypeStringShortPDF (\)) ConcatenateToMark
 				/Count NumPagesThisType neg  /F 0  /OUT  pdfmark
@@ -13774,7 +13774,7 @@ currentdict /SmallCapsDict undef
 
 			/Accounts TypeOfPagesBeingRendered eq
 			{
-				DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, Accounts) OutputToLog} if
+				//DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, Accounts) OutputToLog} if
 				mark  /Action /GoTo /Dest PageDestName
 				/Title  mark  (Accounts) ( \() NumPagesThisType 1 eq {(p) PageNum 1 add} {(pp) PageNum 1 add (\205) PageNum NumPagesThisType add} ifelse  (, ) PaperTypeStringShortPDF (\)) ConcatenateToMark
 				/Count NumPagesThisType dup 1 gt {neg} {pop 0} ifelse  /F 0  /OUT  pdfmark
@@ -13793,7 +13793,7 @@ currentdict /SmallCapsDict undef
 
 			/CorkDisplay TypeOfPagesBeingRendered eq
 			{
-				DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, CorkDisplay) OutputToLog} if
+				//DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, CorkDisplay) OutputToLog} if
 				mark
 					/Action /GoTo  /Dest PageDestName  /Count NumPagesThisType neg  /F 0
 					/Title  mark (Cork display \() NumPagesThisType 1 eq {(p) PageNum 1 add} {(pp) PageNum 1 add (\205) PageNum NumPagesThisType add} ifelse  (, ) PaperTypeStringShortPDF (\)) ConcatenateToMark
@@ -13813,7 +13813,7 @@ currentdict /SmallCapsDict undef
 
 			/NeckTags TypeOfPagesBeingRendered eq
 			{
-				DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, NeckTags) OutputToLog} if
+				//DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, NeckTags) OutputToLog} if
 				mark
 					/Action /GoTo  /Dest PageDestName  /Count NumPagesThisType neg  /F 0
 					/Title  mark (Neck tags \() NumPagesThisType 1 eq {(p) PageNum 1 add} {(pp) PageNum 1 add (\205) PageNum NumPagesThisType add} ifelse  (, ) PaperTypeStringShortPDF (\)) ConcatenateToMark
@@ -13833,7 +13833,7 @@ currentdict /SmallCapsDict undef
 
 			/PrePour TypeOfPagesBeingRendered eq
 			{
-				DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, PrePour) OutputToLog} if
+				//DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, PrePour) OutputToLog} if
 				mark
 					/Action /GoTo /Dest PageDestName  /Count NumPagesThisType neg  /F 0
 					/Title  mark (Pre-pour) NumPagesThisType 1 eq {( \(p) PageNum 1 add} {(s \(pp) PageNum 1 add (\205) PageNum NumPagesThisType add} ifelse  (, ) PaperTypeStringShortPDF (\)) ConcatenateToMark
@@ -13855,7 +13855,7 @@ currentdict /SmallCapsDict undef
 
 			/DecanterLabels TypeOfPagesBeingRendered eq
 			{
-				DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, DecanterLabels) OutputToLog} if
+				//DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, DecanterLabels) OutputToLog} if
 				mark  /Action /GoTo /Dest PageDestName
 				/Title  mark (Decanter labels) ( \() NumPagesThisType 1 eq {(p) PageNum 1 add} {(pp) PageNum 1 add (\205) PageNum NumPagesThisType add} ifelse (, ) PaperTypeStringShortPDF (\)) ConcatenateToMark
 				/Count NumPagesThisType neg  /F 0  /OUT  pdfmark
@@ -13873,7 +13873,7 @@ currentdict /SmallCapsDict undef
 
 			/StickyLabels TypeOfPagesBeingRendered eq
 			{
-				DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, StickyLabels) OutputToLog} if
+				//DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, StickyLabels) OutputToLog} if
 				mark
 					/Action /GoTo  /Dest PageDestName  /Count NumPagesThisType dup 1 eq {pop 0} {neg} ifelse  /F 0
 					/Title
@@ -13895,7 +13895,7 @@ currentdict /SmallCapsDict undef
 
 			/Empty TypeOfPagesBeingRendered eq
 			{
-				DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, Empty) OutputToLog} if
+				//DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, Empty) OutputToLog} if
 				mark  /Action /GoTo /Dest PageDestName  /Title [(Empty: ) EmptyPageString ( \(p) PageNum 1 add (\))] PDFDocEncodingify TrimSpaces TruncateTo255  /F 0  /OUT pdfmark
 				exit
 			} if  % /Empty ...
@@ -13903,7 +13903,7 @@ currentdict /SmallCapsDict undef
 		end end /ShownPageThis ShownPageThis 1 add def
 	} bind loop  % ShownPageThis
 
-	DeBugLevel 50 le {( Main: pdfmark's, OUT, re-arranged) OutputToLog} if
+	//DeBugLevel 50 le {( Main: pdfmark's, OUT, re-arranged) OutputToLog} if
 	/TypeOfPagesBeingRendered /DistillerLog def
 	OutputLogToPage {false PageSuppressed not} {false} ifelse
 	{
@@ -14151,7 +14151,7 @@ currentdict /SmallCapsDict undef
 		ifelse  /Title ExternalLinksExtras i 1 add get PDFDocEncodingify  /Count IndentationCount neg  /F 0  /OUT  pdfmark
 	} for  % i
 
-	DeBugLevel 50 le {(-Outline construction, and other pdfmark's) OutputToLog} if
+	//DeBugLevel 50 le {(-Outline construction, and other pdfmark's) OutputToLog} if
 
 	OuterMarginLogsNum 0 gt {mark OuterMarginLogs 0 OuterMarginLogsNum getinterval {(\n)} forall pop ConcatenateToMark OutputToLog} if
 
