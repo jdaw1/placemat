@@ -1,6 +1,7 @@
 %!PS
 
-% This version 17:15 Saturday 27th November 2021
+% This version 11:00 Sunday 28th November 2021
+% Copyright 2021 Julian D. A. Wiseman of www.jdawiseman.com.
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of 
@@ -9,27 +10,19 @@
 
 
 
-/DejaVuSans-Bold  % Chosen font
 
 
-
-
+/Georgia  % Chosen font
 
 
 
 
 
 /FontName exch def
-() = FontName == () =
-/FontSize 12 def
+/PageHeight 841.88976 def  /PageWidth 595.27559 def  /Margin 36 def
+/FontSize 12 def  /GlyphNameX 90 def
 /LineStep FontSize 1.4 mul def
-/PageHeight 841.88976 def  /PageWidth 595.27559 def  /Margin 36 def  /GlyphNameX 90 def
-<<  /PageSize [PageWidth PageHeight]  >> setpagedevice
-FontName FontSize selectfont
-/Y PageHeight Margin sub FontSize sub def
-FontName 256 string cvs dup stringwidth pop PageWidth exch sub 2 div Y moveto show
-/Y Y LineStep 3 mul sub def
-/Any false def
+() = FontName == () =
 
 
 /DeBugLevel 65535 def
@@ -100,6 +93,18 @@ currentdict /ShellSortGapsLength1Subs undef
 	dup {0 get 256 string cvs exch 0 get 256 string cvs ge} ShellSort
 def  % /Fonts
 
+
+
+<<  /PageSize [PageWidth PageHeight]  >> setpagedevice
+
+FontName FontSize selectfont
+/Y PageHeight Margin sub FontSize sub def
+FontName 256 string cvs dup stringwidth pop PageWidth exch sub 2 div Y moveto show
+/Y Y LineStep sub def
+( characters) Fonts length 10 string cvs 2 copy stringwidth pop exch stringwidth pop add PageWidth exch sub 2 div Y moveto show show
+/Y Y LineStep 3 mul sub def
+/Any false def
+
 Fonts
 {
 	aload pop /GlyphNum exch def  /GlyphName exch def
@@ -121,4 +126,5 @@ count dup 0 gt
 {
 	(Problem!) =   (count =           ) exch
 	1 index 8 10 getinterval cvs pop = () =
-} {pop (Stack correctly empty) =} ifelse
+	(+pstack) = pstack (-pstack) =
+} {pop (Stack correctly empty.) =} ifelse

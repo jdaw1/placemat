@@ -258,4 +258,4 @@ E.g.,&nbsp;`/uni1D00` =&nbsp;&ldquo;&#x1D00;&rdquo; =&nbsp;[small&#8209;caps&nbs
 But this glyph naming is not consistently available: not in all fonts; not necessarily all glyphs within a font. 
 The usual advice applies: carefully check the output.
 
-As a small assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;12.
+As a small assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15, and shows them in a simple PDF.
