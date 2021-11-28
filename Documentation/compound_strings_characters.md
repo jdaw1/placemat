@@ -179,7 +179,12 @@ There follow a selection of the glyphs most likely to be useful to users of the 
 &lArr;&#xFE0E;&nbsp;`/arrowdblleft`&nbsp;&nbsp;&nbsp;&nbsp; 
 &uArr;&#xFE0E;&nbsp;`/arrowdblup`&nbsp;&nbsp;&nbsp;&nbsp; 
 &dArr;&#xFE0E;&nbsp;`/arrowdbldown`&nbsp;&nbsp;&nbsp;&nbsp; 
-&hArr;&#xFE0E;&nbsp;`/arrowdblboth`
+&hArr;&#xFE0E;&nbsp;`/arrowdblboth`&nbsp;&nbsp;&nbsp;&nbsp; 
+&#9658;&#xFE0E;&nbsp;`/triagrt`&nbsp;&nbsp;&nbsp;&nbsp; 
+&#9668;&#xFE0E;&nbsp;`/triaglf`&nbsp;&nbsp;&nbsp;&nbsp; 
+&#9650;&#xFE0E;&nbsp;`/triagup`&nbsp;&nbsp;&nbsp;&nbsp; 
+&#9660;&#xFE0E;&nbsp;`/triagdn`
+
 
 
 ## Accents and diacritics
