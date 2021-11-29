@@ -1,27 +1,28 @@
 %!PS
 
-% This version 19:45 Sunday 28th November 2021
+% This version 23:00 Monday 29th November 2021
 % Copyright 2021 Julian D. A. Wiseman of www.jdawiseman.com.
 
 % This sofware is licensed under the GNU General Public License v3.0.
-% Permissions of this strong copyleft license are conditioned on making available complete source code of 
-% licensed works and modifications, which include larger works using a licensed work, under the same license. 
+% Permissions of this strong copyleft license are conditioned on making available complete source code of
+% licensed works and modifications, which include larger works using a licensed work, under the same license.
 % Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
 
+% http://github.com/jdaw1/placemat/blob/main/Documentation/compound_strings_characters.md#unicode
 
 
 
-
-/Georgia  % Chosen font
+/TrebuchetMS  % Chosen font
 
 
 
 
 
 /FontName exch def
-/PageHeight 841.88976 def  /PageWidth 595.27559 def  /Margin 36 def
-/FontSize 12 def  /GlyphNameX 90 def
+/PageHeight 841.88976 def   /PageWidth 595.27559 def   /Margin 36 def
+/FontSize 12 def   /TabSize FontSize 1.5 mul def
 /LineStep FontSize 1.4 mul def
+/Xs [ Margin   PageWidth Margin add 3 div   PageWidth 2 mul Margin sub 3 div ] def
 () = FontName == () =
 
 
@@ -97,32 +98,75 @@ def  % /Fonts
 
 <<  /PageSize [PageWidth PageHeight]  >> setpagedevice
 
-FontName FontSize selectfont  0 setgray 0.48 setlinewidth 1 setlinecap
-/Y PageHeight Margin sub FontSize sub def
+
+/Yadj 0 def
+0 setgray
+/Y PageHeight Margin sub LineStep 3 mul sub def
+FontName FontSize 3 mul selectfont
 FontName 256 string cvs dup stringwidth pop PageWidth exch sub 2 div Y moveto show
+FontName FontSize selectfont
 /Y Y LineStep sub def
-( characters) Fonts length 10 string cvs 2 copy stringwidth pop exch stringwidth pop add PageWidth exch sub 2 div Y moveto show show
-/Y Y LineStep sub def
-Margin Y currentlinewidth 2 div add moveto PageWidth Margin 2 mul sub 0 rlineto 0.8 setgray stroke 0 setgray
-Margin Y moveto (The quick brown fox jumps over the lazy dog 0123456789) show
-/Y Y LineStep sub def
-Margin Y currentlinewidth 2 div add moveto PageWidth Margin 2 mul sub 0 rlineto 0.8 setgray stroke 0 setgray
-Margin Y moveto (0123456789 THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG) show
+[ Fonts length 10 string cvs  ( characters, shown at ) FontSize 10 string cvs (pt) ]
+0  1 index  {stringwidth pop add} forall  PageWidth exch sub 2 div  Y moveto {show} forall
+[
+	(The quick brown fox jumps over the lazy dog 0123456789)
+	(THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG)
+	(0123456789 !"#$%&'\(\)*+,-./:;<=>?@[\\]^_`{|}~)  % all ASCII characters
+	(K47  D78  Ck12  F27  S35  Cr45  W55  SW63  D70  G85  T92  RP97  N00  V03  Qv11)
+	(http://github.com/jdaw1/placemat/blob/main/PostScript/glyph_log.ps)
+	(http://github.com/jdaw1/placemat/blob/main/Documentation/compound_strings_characters.md#unicode)
+]{
+	/Y Y LineStep sub def
+	dup 0 4 getinterval (http) eq
+	{
+		FontName FontSize 5 sqrt 1 sub 2 div mul selectfont
+		Xs 0 get Xs 1 get add 2 div  Y Yadj add moveto
+		/Yadj Yadj FontSize 0.5 mul add def
+	}{
+		0.9 setgray  //Margin  Y  PageWidth Margin 2 mul sub  1.92  rectfill  0 setgray
+		FontName FontSize selectfont
+		Xs 0 get  Y  moveto
+	} ifelse  % http
+	show
+} forall
+FontName FontSize selectfont
 /Y Y LineStep 2 mul sub def
+/Ystart Y def
 /Any false def
+/PageDested false def
+/iX 0 def
 
 Fonts
 {
 	aload pop /GlyphNum exch def  /GlyphName exch def
+	/GlyphNameString GlyphName 245 string cvs def
 	256 string  0 1 9 {1 index exch 32 put} for  % Spaces
 	dup 10 47 put  % "/"
 	GlyphNum 1 index cvs pop  % Number
-	GlyphName 1 index 11 245 getinterval cvs length 11 add 0 exch getinterval =
+	GlyphNameString 1 index 11 245 getinterval copy length 11 add 0 exch getinterval
+	=
 
-	//Margin Y moveto GlyphName glyphshow
-	//GlyphNameX Y moveto GlyphName 256 string cvs show
+	Xs iX get               Y moveto GlyphName glyphshow
+	Xs iX get //TabSize add Y moveto GlyphNameString show
+	/Any //true def
 	/Y Y LineStep sub def
-	Y //Margin le {showpage /Any //false def /Y //PageHeight //Margin sub //FontSize sub def} {/Any //true def} ifelse
+
+	PageDested not
+	{
+		GlyphNameString 0 get dup dup dup  65 ge exch 90 le and 3 1 roll  97 ge exch 122 le and  or
+		{
+			mark /Dest GlyphName   /DEST  pdfmark
+			mark /Action /GoTo  /Dest GlyphName  /Title GlyphNameString  /OUT pdfmark
+			/PageDested true def
+		} if  % A...Z or a...z
+	} if  % first on page
+
+	Y //Margin le
+	{
+		/iX iX 1 add Xs length mod def
+		iX 0 eq {showpage   /Any //false def   /PageDested false def  /Ystart //PageHeight //Margin sub //LineStep sub def} if
+		/Y Ystart def
+	} if  % Y //Margin le
 } bind forall  % Fonts
 Any {showpage} if
 () =
