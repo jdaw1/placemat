@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Monday 29th November 2021
+% This version 19:00 Tuesday 30th November 2021
 % Copyright 2021 Julian D. A. Wiseman of www.jdawiseman.com.
 
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -21,7 +21,7 @@
 /FontName exch def
 /PageHeight 841.88976 def   /PageWidth 595.27559 def   /Margin 36 def
 /FontSize 12 def   /TabSize FontSize 1.5 mul def
-/LineStep FontSize 1.4 mul def
+/LineStep FontSize 1.5 mul def
 /Xs [ Margin   PageWidth Margin add 3 div   PageWidth 2 mul Margin sub 3 div ] def
 () = FontName == () =
 
@@ -89,11 +89,46 @@ currentdict /ShellSortGaps undef
 currentdict /ShellSortGapsLength1Subs undef
 
 
-/Fonts
-	[ FontName findfont /CharStrings get {[ 3 1 roll ]} forall ]
-	dup {0 get 256 string cvs exch 0 get 256 string cvs ge} ShellSort
-def  % /Fonts
+/AlphaSortDict <<
+	( ) 0  32 0    (0) 1  48 1    (1) 2  49 2    (2) 3  50 3    (3) 4  51 4    (4) 5  52 5    (5) 6  53 6    (6) 7  54 7    (7) 8  55 8    (8) 9  56 9    (9) 10  57 10    (a) 11  97 11    (A) 12  65 12    (b) 13  98 13    (B) 14  66 14
+	(c) 15  99 15    (C) 16  67 16    (d) 17  100 17    (D) 18  68 18    (e) 19  101 19    (E) 20  69 20    (f) 21  102 21    (F) 22  70 22    (g) 23  103 23    (G) 24  71 24    (h) 25  104 25    (H) 26  72 26    (i) 27  105 27    (I) 28  73 28
+	(j) 29  106 29    (J) 30  74 30    (k) 31  107 31    (K) 32  75 32    (l) 33  108 33    (L) 34  76 34    (m) 35  109 35    (M) 36  77 36    (n) 37  110 37    (N) 38  78 38    (o) 39  111 39    (O) 40  79 40
+	(p) 41  112 41    (P) 42  80 42    (q) 43  113 43    (Q) 44  81 44    (r) 45  114 45    (R) 46  82 46    (s) 47  115 47    (S) 48  83 48    (t) 49  116 49    (T) 50  84 50    (u) 51  117 51    (U) 52  85 52    (v) 53  118 53    (V) 54  86 54
+	(w) 55  119 55    (W) 56  87 56    (x) 57  120 57    (X) 58  88 58    (y) 59  121 59    (Y) 60  89 60    (z) 61  122 61    (Z) 62  90 62    (!) 63  33 63    (") 64  34 64    (#) 65  35 65    ($) 66  36 66    (%) 67  37 67    (&) 68  38 68
+	(') 69  39 69    (\() 70  40 70    (\)) 71  41 71    (*) 72  42 72    (+) 73  43 73    (,) 74  44 74    (-) 75  45 75    (.) 76  46 76    (/) 77  47 77    (:) 78  58 78    (;) 79  59 79    (<) 80  60 80    (=) 81  61 81    (>) 82  62 82
+	(?) 83  63 83    (@) 84  64 84    ([) 85  91 85    (\\) 86  92 86    (]) 87  93 87    (^) 88  94 88    (_) 89  95 89    (`) 90  96 90    ({) 91  123 91    (|) 92  124 92    (}) 93  125 93    (~) 94  126 94    127 95
+>> readonly def  % /AlphaSortDict
 
+/NamesOrdered
+{
+	4 dict begin
+	2 get /Name2 exch def
+	2 get /Name1 exch def
+	/NoAnswerYet  % Used if Name2 longer than Name1, or if identical
+	[ //false //true ]
+	{
+		/CaseSensitive exch def
+		0  1  Name1 length 1 sub
+		{
+			/i exch def
+			i Name2 length ge {pop //false exit} if  % Name2 shorter, identical to here
+			//AlphaSortDict  Name1 i get  CaseSensitive not {dup dup 65 ge exch 90 le and {32 add} if} if  get
+			//AlphaSortDict  Name2 i get  CaseSensitive not {dup dup 65 ge exch 90 le and {32 add} if} if  get
+			2 copy eq {pop pop} {lt exch pop exit} ifelse
+		} for  % i
+		dup type /booleantype eq {exit} if
+		Name1 length Name2 length lt {pop //true exit} if
+	} forall  % CaseSensitive
+	end
+	dup type /nametype eq {pop //true} if
+} bind def  % /NamesOrdered
+
+[ 0 0 (banana)] [0 0 (apple)] NamesOrdered =
+
+/Fonts
+	[ FontName findfont /CharStrings get {[ 3 1 roll  1 index 256 string cvs ]} bind forall ]
+	dup  /NamesOrdered load  ShellSort
+def  % /Fonts
 
 
 <<  /PageSize [PageWidth PageHeight]  >> setpagedevice
@@ -101,7 +136,7 @@ def  % /Fonts
 
 /Yadj 0 def
 0 setgray
-/Y PageHeight Margin sub LineStep 3 mul sub def
+/Y PageHeight Margin sub LineStep 2 mul sub def
 FontName FontSize 3 mul selectfont
 FontName 256 string cvs dup stringwidth pop PageWidth exch sub 2 div Y moveto show
 FontName FontSize selectfont
@@ -109,10 +144,9 @@ FontName FontSize selectfont
 [ Fonts length 10 string cvs  ( characters, shown at ) FontSize 10 string cvs (pt) ]
 0  1 index  {stringwidth pop add} forall  PageWidth exch sub 2 div  Y moveto {show} forall
 [
-	(The quick brown fox jumps over the lazy dog 0123456789)
-	(THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG)
-	(0123456789 !"#$%&'\(\)*+,-./:;<=>?@[\\]^_`{|}~)  % all ASCII characters
-	(K47  D78  Ck12  F27  S35  Cr45  W55  SW63  D70  G85  T92  RP97  N00  V03  Qv11)
+	(THE FIVE BOXING WIZARDS JUMP QUICKLY  !"#$%&'\(\)*+,-./:;<=>?@[\\]^_`{|}~)  % all ASCII characters
+	(the quick brown fox jumps over a lazy dog  0123456789)
+	(K47  D78  Mz96  Ck12  Ni27  S35  Cr45  W55  SW63  G66  D70  F85  T92  RP97  N00  V03  Qv11)
 	(http://github.com/jdaw1/placemat/blob/main/PostScript/glyph_log.ps)
 	(http://github.com/jdaw1/placemat/blob/main/Documentation/compound_strings_characters.md#unicode)
 ]{
@@ -128,7 +162,7 @@ FontName FontSize selectfont
 		Xs 0 get  Y  moveto
 	} ifelse  % http
 	show
-} forall
+} bind forall
 FontName FontSize selectfont
 /Y Y LineStep 2 mul sub def
 /Ystart Y def
@@ -138,8 +172,7 @@ FontName FontSize selectfont
 
 Fonts
 {
-	aload pop /GlyphNum exch def  /GlyphName exch def
-	/GlyphNameString GlyphName 245 string cvs def
+	aload pop  /GlyphNameString exch def  /GlyphNum exch def  /GlyphName exch def
 	256 string  0 1 9 {1 index exch 32 put} for  % Spaces
 	dup 10 47 put  % "/"
 	GlyphNum 1 index cvs pop  % Number
