@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:00 Tuesday 30th November 2021
+% This version 22:20 Thursday 2nd December 2021
 % Copyright 2021 Julian D. A. Wiseman of www.jdawiseman.com.
 
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -14,15 +14,22 @@
 
 /TrebuchetMS  % Chosen font
 
+true  % true => A4; false => US Letter
 
 
 
+
+
+
+
+	{/PageWidth 595.27559 def   /PageHeight 841.88976 def}  % A4 = 210mm by 297mm
+	{/PageWidth 612       def   /PageHeight 792       def}  % US Letter = 8.5" by 11"
+ifelse  % Page size: A4 or US Letter?
 
 /FontName exch def
-/PageHeight 841.88976 def   /PageWidth 595.27559 def   /Margin 36 def
-/FontSize 12 def   /TabSize FontSize 1.5 mul def
-/LineStep FontSize 1.5 mul def
-/Xs [ Margin   PageWidth Margin add 3 div   PageWidth 2 mul Margin sub 3 div ] def
+
+/Margin 36 def   /ColumnsNum 3 def
+/FontSize 12 def   /TabSize FontSize 1.5 mul def   /LineStep FontSize 1.5 mul def
 () = FontName == () =
 
 
@@ -131,8 +138,13 @@ currentdict /ShellSortGapsLength1Subs undef
 def  % /Fonts
 
 
+
+
 <<  /PageSize [PageWidth PageHeight]  >> setpagedevice
 
+/Xs [
+	ColumnsNum  -1  1 {dup Margin mul exch ColumnsNum exch sub PageWidth Margin sub mul add ColumnsNum div} for
+] def  % /Xs
 
 /Yadj 0 def
 0 setgray
@@ -196,7 +208,7 @@ Fonts
 
 	Y //Margin le
 	{
-		/iX iX 1 add Xs length mod def
+		/iX iX 1 add ColumnsNum mod def
 		iX 0 eq {showpage   /Any //false def   /PageDested false def  /Ystart //PageHeight //Margin sub //LineStep sub def} if
 		/Y Ystart def
 	} if  % Y //Margin le
