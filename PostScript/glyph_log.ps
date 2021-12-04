@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:20 Thursday 2nd December 2021
+% This version 00:40 Saturday 4th December 2021
 % Copyright 2021 Julian D. A. Wiseman of www.jdawiseman.com.
 
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -33,6 +33,7 @@ ifelse  % Page size: A4 or US Letter?
 () = FontName == () =
 
 
+/usertimeStart usertime def
 /DeBugLevel 65535 def
 
 /ShellSortGaps
@@ -214,7 +215,9 @@ Fonts
 	} if  % Y //Margin le
 } bind forall  % Fonts
 Any {showpage} if
-() =
+
+
+(\n\n\nExecution time ~=              ) dup dup  21 10 getinterval usertime usertimeStart sub 1000 div exch cvs length 21 add (s) 0 get put =
 
 % Bug check
 count dup 0 gt
