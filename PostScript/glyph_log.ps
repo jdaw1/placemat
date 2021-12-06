@@ -1,6 +1,6 @@
 %!PS
 
-% This version 00:40 Saturday 4th December 2021
+% This version 19:30 Monday 6th December 2021
 % Copyright 2021 Julian D. A. Wiseman of www.jdawiseman.com.
 
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -35,6 +35,23 @@ ifelse  % Page size: A4 or US Letter?
 
 /usertimeStart usertime def
 /DeBugLevel 65535 def
+
+
+/SuppressANN   % http://groups.google.com/g/comp.lang.postscript/c/8V9XFDwuLPg
+/currentdistillerparams where
+{
+	pop currentdistillerparams /CheckCompliance 2 copy known {get //false exch {dup /PDFX1a:2001 eq exch /PDFX3:2002 eq or or} forall} {pop pop //false} ifelse
+	currentdistillerparams /PDFX1aCheck 2 copy known {get or} {pop pop} ifelse
+	currentdistillerparams /PDFX3Check 2 copy known {get or} {pop pop} ifelse
+} {false} ifelse  def  % /SuppressANN
+/pdfmark where
+{
+	false  % Use testing routine? In user-distributed code should be false.
+		{pop /pdfmark {dup == pdfmark} bind def}
+		{pop /pdfmark {dup /ANN eq //SuppressANN and {cleartomark} {pdfmark} ifelse} bind def}
+	ifelse  % Use testing routine
+} {/globaldict where {pop globaldict} {userdict} ifelse  /pdfmark /cleartomark load put} ifelse  % /pdfmark where
+
 
 /ShellSortGaps
 [
