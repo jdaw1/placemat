@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Saturday 27th November 2021
+% This version 20:30 Thursday 9th November 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202111272000) def
+/ParametersVersionDateTimeAdobeFormat (D:202112092030) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -318,6 +318,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /SpiralCentreFromCentreAngle 0 def
 /SpiralStrokeCode {stroke} def
 
+/FillTextPrintQuickerDistillSlower false def  % Production version ==> true
 /FillTitles false def
 /FillAbovetitles {FillTitles} def
 /FillBelowtitles {FillTitles} def
@@ -326,7 +327,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /FillTextAngle {GlassesOnSheets length 2 eq {SheetNum 0 eq {/LowerRight} {/LowerLeft} ifelse} {NamesShowTop SheetNum get {/LowerCenter} {/Name} ifelse} ifelse} bind def  % E.g., /Name /LowerLeft /LowerRight /MiddleLeft /UpperCenter /UpperRight
 /FillTexts /Titles load def  % ignored if no filling. If used typically set to a custom array (of same length as Titles).
 /FillTextPlaceNames {ThisName} def
-/FillTextPrintQuickerDistillSlower false def
 
 
 % % % % % % % % % %
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202111272000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202112092030) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
