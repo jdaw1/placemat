@@ -71,13 +71,15 @@ And the default value of `GlassesOnSheetsMaxPerSheet` itself depends on `PaperTy
 
 <div align="center">
 
-| `PaperType` |            Size, mm           |             Size, inches              | Default value of<br>`GlassesOnSheetsMaxPerSheet` | Diameter if &lsquo;full&rsquo;<br>&amp; margins=24pt |
-|:-----------:|:-----------------------------:|:-------------------------------------:|:--:| :--:|
-|    `/A4`    | 210&nbsp;&times;&nbsp;297     | &asymp; 8.27&nbsp;&times;&nbsp;11.69  |  6 | 92.7mm, 3.65&Prime; |
-|    `/USL`   | 215.9&nbsp;&times;&nbsp;279.4 | 8&frac12;&nbsp;&times;&nbsp;11        |  6 | 88.6mm, 3.49&Prime; |
-|  `/USLegal` | 215.9&nbsp;&times;&nbsp;355.6 | 14&nbsp;&times;&nbsp;8&frac12;        |  9 | 78.7mm, 3.10&Prime; |
-|    `/A3`    | 420&nbsp;&times;&nbsp;297     | &asymp; 16.54&nbsp;&times;&nbsp;11.69 | 14 | 86.4mm, 3.40&Prime; |
-|   `/USL2`   | 431.8&nbsp;&times;&nbsp;279.4 |        17&nbsp;&times;&nbsp;11        | 14 | 86.8mm, 3.42&Prime; |
+|  `PaperType`  |            Size, mm           |             Size, inches              | Default value of<br>`GlassesOnSheetsMaxPerSheet` | Diameter if &lsquo;full&rsquo;<br>&amp; margins=24pt |
+|:-------------:|:-----------------------------:|:-------------------------------------:|:--:| :--:|
+|     `/A4`     | 210&nbsp;&times;&nbsp;297     | &asymp; 8.27&nbsp;&times;&nbsp;11.69  |  6 | 92.7mm, 3.65&Prime; |
+|     `/USL`    | 215.9&nbsp;&times;&nbsp;279.4 | 8&frac12;&nbsp;&times;&nbsp;11        |  6 | 88.6mm, 3.49&Prime; |
+|   `/USLegal`  | 215.9&nbsp;&times;&nbsp;355.6 | 14&nbsp;&times;&nbsp;8&frac12;        |  9 | 78.7mm, 3.10&Prime; |
+|     `/A3`     | 420&nbsp;&times;&nbsp;297     | &asymp; 16.54&nbsp;&times;&nbsp;11.69 | 14 | 86.4mm, 3.40&Prime; |
+|   `/Tabloid`  | 431.8&nbsp;&times;&nbsp;279.4 |        17&nbsp;&times;&nbsp;11        | 14 | 86.8mm, 3.42&Prime; |
+
+`/Tabloid` has the synonym `/USL2` ([issue&nbsp;159](http://github.com/jdaw1/placemat/issues/159)).
 
 </div>
 

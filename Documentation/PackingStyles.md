@@ -120,8 +120,8 @@ The diamonds can be offset from the diamonds either vertically or horizontally.
 | `/DiamondsAndRectangular`<br>Fourteen glasses<br>`/A3` = 420mm&times;297mm | ![A3_14_DiamondsAndRectangular](images/A3_14_DiamondsAndRectangular.png) |
 | `[ /DiamondsAndRectangular /RectColsToLeftOrRowsBelow 0 ]`<br>Fourteen glasses<br>`/A3` = 420mm&times;297mm | ![A3_14_DiamondsAndRectangular_RectColsToLeftOrRowsBelow_0](images/A3_14_DiamondsAndRectangular_RectColsToLeftOrRowsBelow_0.png) |
 | `[ /DiamondsAndRectangular /RectColsToLeftOrRowsBelow 2 ]`<br>Fourteen glasses<br>`/A3` = 420mm&times;297mm | ![A3_14_DiamondsAndRectangular_RectColsToLeftOrRowsBelow_2](images/A3_14_DiamondsAndRectangular_RectColsToLeftOrRowsBelow_2.png) |
-| `/DiamondsAndRectangular`<br>Fourteen glasses<br>`/USL2` = 17&Prime;&times;11&Prime; | ![USL2_14_DiamondsAndRectangular](images/USL2_14_DiamondsAndRectangular.png) |
-| `/DiamondsAndRectangular`<br>Nine glasses<br>`/USL2` = 14&Prime;&times;8&frac12;&Prime; | ![USLegal_09_DiamondsAndRectangular](images/USLegal_09_DiamondsAndRectangular.png) |
+| `/DiamondsAndRectangular`<br>Fourteen glasses<br>`/Tabloid` = 17&Prime;&times;11&Prime; | ![USL2_14_DiamondsAndRectangular](images/USL2_14_DiamondsAndRectangular.png) |
+| `/DiamondsAndRectangular`<br>Nine glasses<br>`/USLegal` = 14&Prime;&times;8&frac12;&Prime; | ![USLegal_09_DiamondsAndRectangular](images/USLegal_09_DiamondsAndRectangular.png) |
 
 </div>
 
@@ -175,9 +175,9 @@ But on `/A4` the improvement in the radius is much less: only &asymp; 0.28pt &as
 
 | `PackingStyles` element<br>`PaperType` = *width*&times;*height* | Example |
 |:---------------------------------------|:-------:|
-| `/RectangularAlternateSplitNudge`<br>Ten glasses<br>`/USL2` = 17&Prime;&times;11&Prime; | ![USL2_10_RectangularAlternateSplitNudge](images/USL2_10_RectangularAlternateSplitNudge.png) |
-| `/RectangularAlternateSplitNudge`<br>Twelve glasses<br>`/USL2` = 17&Prime;&times;11&Prime; | ![USL2_12_RectangularAlternateSplitNudge](images/USL2_12_RectangularAlternateSplitNudge.png) |
-| `[ /RectangularAlternateSplitNudge /Mirror ]`<br>Twelve glasses<br>`/USL2` = 17&Prime;&times;11&Prime; | ![USL2_12_RectangularAlternateSplitNudge_Mirror](images/USL2_12_RectangularAlternateSplitNudge_Mirror.png) |
+| `/RectangularAlternateSplitNudge`<br>Ten glasses<br>`/Tabloid` = 17&Prime;&times;11&Prime; | ![USL2_10_RectangularAlternateSplitNudge](images/USL2_10_RectangularAlternateSplitNudge.png) |
+| `/RectangularAlternateSplitNudge`<br>Twelve glasses<br>`/Tabloid` = 17&Prime;&times;11&Prime; | ![USL2_12_RectangularAlternateSplitNudge](images/USL2_12_RectangularAlternateSplitNudge.png) |
+| `[ /RectangularAlternateSplitNudge /Mirror ]`<br>Twelve glasses<br>`/Tabloid` = 17&Prime;&times;11&Prime; | ![USL2_12_RectangularAlternateSplitNudge_Mirror](images/USL2_12_RectangularAlternateSplitNudge_Mirror.png) |
 
 </div>
 
@@ -202,7 +202,7 @@ Obviously using both would be strange.
 
 ### Temple
 
-`/Temple` is an intricate pattern, that has the largest radius for 10 glasses on `/USL`, and for 13 glasses on either `/USLegal` or `/USL2`. 
+`/Temple` is an intricate pattern, that has the largest radius for 10 glasses on `/USL`, and for 13 glasses on either `/USLegal` or `/Tabloid`. 
 The sub-parameter `/TempleExtraColsToLeftOrRowsBelow` is followed by one integer, and is to `/Temple` as `/RectColsToLeftOrRowsBelow` is to `/DiamondsAndRectangular`.
 
 <div align="center">
@@ -211,7 +211,7 @@ The sub-parameter `/TempleExtraColsToLeftOrRowsBelow` is followed by one integer
 |:---------------------------------------|:-------:|
 | `/Temple`<br>Ten glasses<br>`/USL` = 8&frac12;&Prime;&times;11&Prime; | ![USL_10_Temple](images/USL_10_Temple.png) |
 | `/Temple`<br>Thirteen glasses<br>`/USLegal` = 14&Prime;&times;8&frac12;&Prime; | ![USLegal_13_Temple](images/USLegal_13_Temple.png) |
-| `/Temple`<br>Thirteen glasses<br>`/USL2` = 17&Prime;&times;11&Prime; | ![USL2_13_Temple_TempleExtraColsToLeftOrRowsBelow_0](images/USL2_13_Temple_TempleExtraColsToLeftOrRowsBelow_0.png) |
+| `/Temple`<br>Thirteen glasses<br>`/Tabloid` = 17&Prime;&times;11&Prime; | ![USL2_13_Temple_TempleExtraColsToLeftOrRowsBelow_0](images/USL2_13_Temple_TempleExtraColsToLeftOrRowsBelow_0.png) |
 
 </div>
 
@@ -307,7 +307,7 @@ But not heeded in every base style.
 
 * `/PackingDirectionTopToBottom bool` and `/PackingDirectionLeftToRight bool` and `/PackingNestingColumnMajor bool`: by default most layouts start at the top-left, work across to the top-right, then start the second row slightly further down on the left. 
 This can be changed: glasses can run right-to-left, bottom-to-top, and the nesting order of columns and rows can be exchanged. 
-For large pre-poured tastings on `/A3` or `/USL2`, generally one pre-pours the youngest first. 
+For large pre-poured tastings on `/A3` or `/Tabloid`, generally one pre-pours the youngest first. 
 If these are in the front row, it is more fiddly to lower subsequent older vintages into place. 
 Adding `/PackingNestingColumnMajor true` fixes this. 
 (The global value of `PackingNestingColumnMajor` is the default value within PackingStyles, and also affects the ordering in Cork-Display pages.)
@@ -354,7 +354,7 @@ Given the default value of `PackingStyles`, the following shows glass diameters 
 
 <div align="center">
 
-| Num<br>Glasses | `/A4`<br>210mm&times;297mm | `/A3`<br>420mm&times;297mm | `/USLegal`<br>14&Prime;&times;8&frac12;&Prime; | `/USL`<br>8&frac12;&Prime;&times;11&Prime; | `/USL2`<br>17&Prime;&times;11&Prime; |
+| Num<br>Glasses | `/A4`<br>210mm&times;297mm | `/A3`<br>420mm&times;297mm | `/USLegal`<br>14&Prime;&times;8&frac12;&Prime; | `/USL`<br>8&frac12;&Prime;&times;11&Prime; | `/Tabloid`<br>17&Prime;&times;11&Prime; |
 |---:|---:|---:|---:|---:|---:|
 | 3 | 113.9mm, 4.49&Prime; | 164.6mm, 6.48&Prime; | 126.9mm, 5.00&Prime; | 113.1mm, 4.45&Prime; | 161.1mm, 6.34&Prime; |
 | 4 | 105.1mm, 4.14&Prime; | 151.6mm, 5.97&Prime; | 112.8mm, 4.44&Prime; | 105.6mm, 4.16&Prime; | 145.6mm, 5.73&Prime; |
@@ -381,7 +381,7 @@ Given the default value of `PackingStyles`, the following shows glass diameters 
 Measure the diameter of your glasses. 
 Add something for two fingers. 
 Add something for the inebriation of the owner of the fingers. 
-Suggestion: &le;6 on `/A4`; &le;14 on `/A3`; &le;9 on `/USLegal`; &le;6 on `/USL`; &le;14 on `/USL2`. 
+Suggestion: &le;6 on `/A4`; &le;14 on `/A3`; &le;9 on `/USLegal`; &le;6 on `/USL`; &le;14 on `/Tabloid`. 
 But sometimes table space is a binding constraint, in which case there must be less paper area, hence smaller circles.
 
 The images show the packings for the diameters &le;&nbsp;4&frac12;&Prime; &asymp;&nbsp;114mm, down to slightly below 3&Prime; &asymp;&nbsp;76mm.
@@ -392,7 +392,7 @@ The images show the packings for the diameters &le;&nbsp;4&frac12;&Prime; &asymp
 |:---------------------|:--------:|
 | `/A4`&nbsp; `/A3`<br>Height: 297mm<br>Widths: 210mm&nbsp; 420mm | [![A4](images/HowManyGlasses_A4.gif)](images/HowManyGlasses_A4.pdf) [![A3](images/HowManyGlasses_A3.gif)](images/HowManyGlasses_A3.pdf) |
 | `/USLegal`<br>Height: 8&frac12;&Prime;<br>Width: 14&Prime;<br> | [![USLegal](images/HowManyGlasses_USLegal.gif)](images/HowManyGlasses_USLegal.pdf) |
-| `/USL`&nbsp; `/USL2`<br>Height: 11&Prime;<br>Widths: 8&frac12;&Prime;&nbsp; 17&Prime; | [![USL](images/HowManyGlasses_USL.gif)](images/HowManyGlasses_USL.pdf) [![USL2](images/HowManyGlasses_USL2.gif)](images/HowManyGlasses_USL2.pdf) |
+| `/USL`&nbsp; `/Tabloid`<br>Height: 11&Prime;<br>Widths: 8&frac12;&Prime;&nbsp; 17&Prime; | [![USL](images/HowManyGlasses_USL.gif)](images/HowManyGlasses_USL.pdf) [![USL2](images/HowManyGlasses_USL2.gif)](images/HowManyGlasses_USL2.pdf) |
 
 </div>
 

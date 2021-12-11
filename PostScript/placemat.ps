@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:30 Thursday 9th November 2021
+% This version 12:15 Saturday 11th November 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202112092030) def
+/ParametersVersionDateTimeAdobeFormat (D:202112111215) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -52,7 +52,7 @@
 ] def
 /LeftHanders [ (RMW)  (RAW)  (SRG) (Simon G.)  (HEG) (Helen G.)  (CSD) (Chris D.)  (CFD) (Conan D.)  (NCG) (Marc Jackson)  (JG) (Jeff G.)  (ZDR) (Zak R.) ] def
 
-/PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /USL2 = 11"x17", [SmallerPts LargerPts]
+/PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]
 /TastingNotesPaperType /A4 def  % If this is /USL then the distiller log is also on 8.5"x11", otherwise log on /A4
 
 /ThePortForumIconPlacement /LowerNonWaterBox def  % /None
@@ -136,8 +136,8 @@
 % Page Organisation and Page-Level Features %
 % % % % % % % % % % % % % % % % % % % % % % %
 
-% GlassesOnSheetsMaxPerSheet: 6 default, USLegal => 9; A3 or USL2 => 13. For all on one sheet replace with "/GlassesOnSheetsMaxPerSheet 999 def".
-/GlassesOnSheetsMaxPerSheet  6  /PaperType load dup /A3 eq exch /USL2 eq or {pop 14} if  /PaperType load /USLegal eq {pop 9} if  def
+% GlassesOnSheetsMaxPerSheet: 6 default, USLegal => 9; A3 or Tabloid => 13. For all on one sheet replace with "/GlassesOnSheetsMaxPerSheet 999 def".
+/GlassesOnSheetsMaxPerSheet  6  /PaperType load dup /A3 eq exch /Tabloid eq or {pop 14} if  /PaperType load /USLegal eq {pop 9} if  def
 /GlassesOnSheets [
 	% For a custom arrangement replace the next line  with something of the form "[0 1 2 3] [4 5 6 7 8 9] [10 11 12 13]"
 	% The code below spreads glasses evenly over the sheets, the sheets one glass larger being last. Replace "floor": with "ceiling" for larger sheets to be early; with "round" for them to be scattered.
@@ -564,7 +564,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /NamesFontSizeMin 18 def
 /NamesFontSizeMax 24 def
 
-/DecanterLabelsPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /USL2
+/DecanterLabelsPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /Tabloid
 /DecanterLabelsOrientation /Automatic def  % of labels, not of paper. /Landscape /Portrait /Automatic
 
 % GhostScript doesn't pickle settransfer; Preview doesn't see non-pickled settransfer. The bug is in Preview. http://groups.google.com/g/comp.lang.postscript/c/NJLAfvN_jwU
@@ -585,7 +585,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /TastingNotesPageNumFontSizeFactor 0.333333333 def
 
 /PlaceNamesShowNameAsFooter [ NamesPlaceNames {/Names load ne} forall ] def
-/PlaceNamesPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /USL2
+/PlaceNamesPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /Tabloid
 /PlaceNamesOrientation /Landscape def  % /Landscape /Portrait
 /PlaceNamesMaxFontSizeAbsolute 192 def
 /PlaceNamesDetailsScalingFactor 5 sqrt 1 add 2 div def
@@ -595,7 +595,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /PrePourCollate true def
 /PrePourRemoveDuplicatesByWithinTitles true def
 /PrePourSortByWithinTitles true def
-/PrePourPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /USL2
+/PrePourPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /Tabloid
 /PrePourOrientation /Landscape def  % /Landscape /Portrait
 /PrePourShowDroplets true def
 
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202112092030) def
+/SoftwareVersionDateTimeAdobeFormat (D:202112111215) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1517,14 +1517,14 @@ mark
 	mark  WizardLongName (, version =  ) WizardVersionDateTimeAdobeFormat (  =  ) 1 index AdobeFormatDateToString ConcatenateToMark OutputToLog
 } if} if
 
-TestingMaxNumPagesToShow 2147483647 lt  TestingShowThesePagesOnly null ne  TestingSuppressPageTypes length 0 gt  or or
+TestingMaxNumPagesToShow 2147483647 lt  TestingShowThesePagesOnly //null ne  TestingSuppressPageTypes length 0 gt  or or
 {
 	mark  (Nota bene: some pages might be suppressed = not shown, perhaps because this is an example or a test.)
 	(\nAt the end there might be an extra page, blank, caused by a bug in erasepage.)
 	(\nhttp://github.com/jdaw1/placemat/issues/109)
 	(\nhttp://groups.google.com/g/comp.lang.postscript/c/HVZVz0eBwrw)
 	TestingMaxNumPagesToShow 2147483647 lt {(\nTestingMaxNumPagesToShow = ) TestingMaxNumPagesToShow} if
-	TestingShowThesePagesOnly   null    ne {(\nTestingShowThesePagesOnly = ) TestingShowThesePagesOnly} if
+	TestingShowThesePagesOnly   //null    ne {(\nTestingShowThesePagesOnly = ) TestingShowThesePagesOnly} if
 	TestingSuppressPageTypes  length 0  gt {(\nTestingSuppressPageTypes = [) TestingSuppressPageTypes {dup type /nametype eq {( /) exch} if ( )} forall (])} if
 	ConcatenateToMark OutputToLog
 } if  % TestingMaxNumPagesToShow ... TestingShowThesePagesOnly ... TestingSuppressPageTypes ... or or
@@ -1711,6 +1711,9 @@ currentdict /ForReverseBinaryDict undef
 	false   (Author)              (http://www.jdawiseman.com/author.html)
 ] def % /ExternalLinksExtras
 
+% Returns true if sole parameter is one of /USL, /USLegal, /Tabloid, /USL2
+/NorthAmericanPaperSize {//false [/USL /USLegal /Tabloid /USL2] {2 index eq {pop pop //null //true exit} if} forall exch pop} bind def
+
 /mm {2.83464566929 mul} bind def  % 360 127 div
 
 % PaperType Orientation  Dimensions  PageWidth PageHeight
@@ -1721,14 +1724,15 @@ currentdict /ForReverseBinaryDict undef
 	1 dict begin
 	exch /PaperType exch def
 	1 {
-		/A4      PaperType eq {595.27559   841.88976 exit} if  % 210mm by 297mm. For speed start with the five values most often used.
+		/A4      PaperType eq {595.27559   841.88976 exit} if  % 210mm by 297mm. For speed start with the values most often used.
 		/A3      PaperType eq {841.88976  1190.55118 exit} if  % 297mm by 420mm
 		/USL     PaperType eq {612         792       exit} if  % 8.5" by 11"
 		/USLegal PaperType eq {612        1008       exit} if  % 8.5" by 14"
+		/Tabloid PaperType eq {792        1224       exit} if  % 11"  by 17", http://github.com/jdaw1/placemat/issues/159
 		/USL2    PaperType eq {792        1224       exit} if  % 11"  by 17"
 		PaperType type /arraytype eq {PaperType {execU} forall exit} if  % [ Small Large ]
 		/A4_USL PaperType eq {210 mm 792 exit} if  % Smaller of the A4/USL widths; smaller of the heights
-		/A0  PaperType eq { 841 mm 1189 mm  exit} if  % A0 can hold 112 glasses slightly larger than five on A4. Which is a large enough page size.
+		/A0  PaperType eq { 841 mm 1189 mm  exit} if  % A0 can hold 106 glasses slightly larger than five on A4. Which is a large enough page size.
 		/A1  PaperType eq { 594 mm  841 mm  exit} if
 		/A2  PaperType eq { 420 mm  594 mm  exit} if
 		/A5  PaperType eq { 148 mm  210 mm  exit} if
@@ -1816,9 +1820,6 @@ currentdict /ForReverseBinaryDict undef
 		} repeat  (*)
 	} forall   pop ConcatenateToMark end
 } bind def  % /PaperTypeString
-
-% Returns true if sole parameter is one of /USL, /USL2 or /USLegal
-/NorthAmericanPaperSize {dup dup   /USL eq exch   /USL2 eq or exch   /USLegal eq or} bind def
 
 /DefaultOutputFaceUp currentpagedevice /OutputFaceUp 2 copy known {get} {pop pop //false} ifelse def
 
@@ -2527,7 +2528,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 /SuperscriptOn {0 CurrentFontSize 0.375 mul rmoveto  CurrentFontName CurrentFontSize 1.7 div selectfont} bind def
 /SuperscriptOff {CurrentFontName CurrentFontSize 1.7 mul selectfont  0 CurrentFontSize -0.375 mul rmoveto} bind def
 /Kern {CurrentFontSize mul 0 rmoveto} bind def
-/UnderlineX0 null def  /UnderlineY0 null def  /UnderlineMatrix null def
+/UnderlineX0 //null def  /UnderlineY0 //null def  /UnderlineMatrix //null def
 /UnderlineBegin {/UnderlineMatrix matrix currentmatrix store  currentpoint /UnderlineY0 exch store /UnderlineX0 exch store} def
 /UnderlinePaint
 {
@@ -2562,7 +2563,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 		UnderlineX1 UnderlineY1 moveto setmatrix
 	} if  % UnderlineLength 0 gt
 	end
-	/UnderlineMatrix null store  /UnderlineY0 null store  /UnderlineX0 null store
+	/UnderlineMatrix //null store  /UnderlineY0 //null store  /UnderlineX0 //null store
 	//DeBugLevel 15 le {(-UnderlinePaint) OutputToLog} if
 } def  % /UnderlinePaint
 
@@ -2756,7 +2757,7 @@ currentdict /SmallCapsDict undef
 	{
 		PointsNum Points length lt {[ 3 1 roll ] Points exch PointsNum exch put  /PointsNum PointsNum 1 add def} {pop pop} ifelse
 	} def  % /AppendXY
-	/DirectionsNotParallel {DirectionX null ne  DirectionY null ne  and
+	/DirectionsNotParallel {DirectionX //null ne  DirectionY //null ne  and
 	{
 		X1 X0 sub  Y1 Y0 sub  2 copy 2 {abs //PrinterEpsilon ge exch} repeat or
 		{
@@ -2767,18 +2768,18 @@ currentdict /SmallCapsDict undef
 	} {//false} ifelse} def  % Non-null, /DirectionsNotParallel
 	/DefDirectionsXY  % true => success
 	{
-		2 copy null eq exch null eq or
+		2 copy //null eq exch //null eq or
 		{
-			pop pop  /DirectionY null def   /DirectionX null def
+			pop pop  /DirectionY //null def   /DirectionX //null def
 			//true
 		}{
 			2 copy 2 {abs //PrinterEpsilon ge exch} repeat or
 			{
-				DirectionY null eq {dup /DirectionFirstY exch def} if /DirectionY exch def
-				DirectionX null eq {dup /DirectionFirstX exch def} if /DirectionX exch def
+				DirectionY //null eq {dup /DirectionFirstY exch def} if /DirectionY exch def
+				DirectionX //null eq {dup /DirectionFirstX exch def} if /DirectionX exch def
 				//true
 			} {pop pop //false} ifelse  % ... //PrinterEpsilon ge ...
-		} ifelse  % null ... or
+		} ifelse  % //null ... or
 	} def  % DefDirectionsXY
 
 	/lineProcess  % also used for close
@@ -2789,8 +2790,8 @@ currentdict /SmallCapsDict undef
 
 	{
 		{ % start move
-			dup /Y0 exch def /Ystart exch def  /DirectionY null def
-			dup /X0 exch def /Xstart exch def  /DirectionX null def
+			dup /Y0 exch def /Ystart exch def  /DirectionY //null def
+			dup /X0 exch def /Xstart exch def  /DirectionX //null def
 		}  % end of move
 
 		{  % start line
@@ -2831,7 +2832,7 @@ currentdict /SmallCapsDict undef
 			/X1 X0 DirectionFirstX add  /X0 X1  def def
 			/Y1 Y0 DirectionFirstY add  /Y0 Y1  def def
 			lineProcess
-			/DirectionY null def   /DirectionX null def
+			/DirectionY //null def   /DirectionX //null def
 		}  % end of close
 		pathforall
 	} Stopped {(Warning: protected path in PathDistinctiveXY, or a routine such as PolynomialRoots is missing.) OutputToLog} if
@@ -3384,7 +3385,7 @@ currentdict /SmallCapsDict undef
 		StackSpaceRemaining 2 lt {(Warning: LineWidthThatCoversPath has incomplete calculation because there might be too little stack space. Increasing TargetAccuracy would help.) OutputToLog} if
 		//DeBugLevel 15 le {mark ( LineWidthThatCoversPath: PointsMostDistanceFromEdge length = ) PointsMostDistanceFromEdge length ConcatenateToMark OutputToLog} if
 
-		/WidthMin null def   /WidthMax null def
+		/WidthMin //null def   /WidthMax //null def
 		/Width ury lly sub 6 div //PrinterEpsilon 2 copy lt {exch} if pop def
 		{
 			GSave
@@ -3403,17 +3404,17 @@ currentdict /SmallCapsDict undef
 			GRestore
 			//DeBugLevel 15 le {mark ( LineWidthThatCoversPath: WidthMin = ) WidthMin (; WidthMax = ) WidthMax (; PointsMostDistanceFromEdge length = ) PointsMostDistanceFromEdge length  ConcatenateToMark OutputToLog} if
 
-			WidthMax null ne
+			WidthMax //null ne
 			{
-				WidthMin null ne
+				WidthMin //null ne
 				{
 					% Complicated exit conditions. Generally by the time this becomes close, PointsMostDistanceFromEdge is short, so a few extra rounds are fast.
 					WidthMax WidthMin sub MaxResolutionError lt  WidthMin TargetAccuracy div cvi WidthMax MaxResolutionError add TargetAccuracy div cvi eq  and {exit} if
 					WidthMax WidthMin sub dup TargetAccuracy 64 div lt  exch //PrinterEpsilon le  or {exit} if
-				} {WidthMax TargetAccuracy 2 div le WidthMax //PrinterEpsilon le or {/WidthMin 0 def exit} if} ifelse  % WidthMin null ne
-			} if  % WidthMax null ne
+				} {WidthMax TargetAccuracy 2 div le WidthMax //PrinterEpsilon le or {/WidthMin 0 def exit} if} ifelse  % WidthMin //null ne
+			} if  % WidthMax //null ne
 
-			/Width WidthMax null eq {WidthMin 2 mul} {WidthMin null eq {WidthMax 2 div} {WidthMin WidthMax add 2 div} ifelse} ifelse def
+			/Width WidthMax //null eq {WidthMin 2 mul} {WidthMin //null eq {WidthMax 2 div} {WidthMin WidthMax add 2 div} ifelse} ifelse def
 		} loop
 
 		WidthMax MaxResolutionError add  WidthMin
@@ -3462,7 +3463,7 @@ currentdict /SmallCapsDict undef
 		% Whilst constructing PointsMostDistanceFromEdge max points on stack is 2*(10325+5760) = 32170.
 
 		/ExitThreshhold Radius //Pi mul NumOnCircleEdge div def
-		/WidthMin null def   /WidthMax null def
+		/WidthMin //null def   /WidthMax //null def
 		/Width Radius 6 div //PrinterEpsilon 2 copy lt {exch} if pop def
 		{
 			GSave
@@ -3481,15 +3482,15 @@ currentdict /SmallCapsDict undef
 			GRestore
 			//DeBugLevel 15 le {mark ( LineWidthThatCoversCircle: WidthMin = ) WidthMin (; WidthMax = ) WidthMax (; PointsMostDistanceFromEdge length = ) PointsMostDistanceFromEdge length  ConcatenateToMark OutputToLog} if
 
-			WidthMax null ne
+			WidthMax //null ne
 			{
-				WidthMin null ne
+				WidthMin //null ne
 				{
 					WidthMax WidthMin sub dup  ExitThreshhold le exch //PrinterEpsilon le or {exit} if
-				} {WidthMax ExitThreshhold le WidthMax //PrinterEpsilon le or {/WidthMin 0 def exit} if} ifelse  % WidthMin null ne
-			} if  % WidthMax null ne
+				} {WidthMax ExitThreshhold le WidthMax //PrinterEpsilon le or {/WidthMin 0 def exit} if} ifelse  % WidthMin //null ne
+			} if  % WidthMax //null ne
 
-			/Width WidthMax null eq {WidthMin 2 mul} {WidthMin null eq {WidthMax 2 div} {WidthMin WidthMax add 2 div} ifelse} ifelse def
+			/Width WidthMax //null eq {WidthMin 2 mul} {WidthMin //null eq {WidthMax 2 div} {WidthMin WidthMax add 2 div} ifelse} ifelse def
 		} loop
 
 		WidthMax ExitThreshhold add   WidthMin  PointsMostDistanceFromEdge
@@ -4731,7 +4732,7 @@ currentdict /SmallCapsDict undef
 					} for  % loop count to stop slow convergence, updating PositionsX, PositionsY, EllipseSemiY
 					/R UpperR LowerR add 2 div def
 				} loop  % R, UpperR, LowerR
-				[ 0 1 BestX length 1 sub {/i exch def  BestX i get IsNumber BestY i get IsNumber and {BestX i get W 2 div LowerR sub div  BestY i get LowerR sub H LowerR sub div  atan} {null} ifelse} for ]   LowerR
+				[ 0 1 BestX length 1 sub {/i exch def  BestX i get IsNumber BestY i get IsNumber and {BestX i get W 2 div LowerR sub div  BestY i get LowerR sub H LowerR sub div  atan} {//null} ifelse} for ]   LowerR
 				end
 				/R exch def
 				R  BestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
@@ -5721,7 +5722,7 @@ currentdict /SmallCapsDict undef
 				NudgeRows {(rows nudged, part left and part right)} {(columns nudged, part up and part down)} ifelse  (, by )  NudgeAmount (pt.) AreaText ConcatenateToMark  OutputToLog
 			} if  % Echo
 
-			/PrevXXb null def  /PrevXXt null def  R 3 div dup /NamePlacementTopX exch def /NamePlacementBottomX exch def
+			/PrevXXb //null def  /PrevXXt //null def  R 3 div dup /NamePlacementTopX exch def /NamePlacementBottomX exch def
 			[
 				PackingNestingColumnMajor
 					{PackingDirectionLeftToRight {0 1 NC 1 sub} {NC 1 sub -1 0} ifelse}
@@ -5747,7 +5748,7 @@ currentdict /SmallCapsDict undef
 						RowNum 0 eq        {PrevXXt IsNumber {NamePlacementTopX    W 2 div X add sub abs  XX PrevXXt add W sub 2 div X sub abs R 24 div add  ge {/NamePlacementTopX    XX PrevXXt add 2 div def} if} if /PrevXXt XX def} if
 						RowNum NR 1 sub eq {PrevXXb IsNumber {NamePlacementBottomX W 2 div X add sub abs  XX PrevXXb add W sub 2 div X sub abs R 24 div add  ge {/NamePlacementBottomX XX PrevXXb add 2 div def} if} if /PrevXXb XX def} if
 					} for  % ColNum or RowNum
-					PackingNestingColumnMajor not {/PrevXXb null def /PrevXXt null def} if
+					PackingNestingColumnMajor not {/PrevXXb //null def /PrevXXt //null def} if
 				} for  % RowNum or ColNum
 			]
 			exit
@@ -7484,10 +7485,10 @@ currentdict /SmallCapsDict undef
 		/CirclearraysAnyImprovement //false def
 		/CirclearraysUnroundedNBest [ CirclearraysUnroundedN {[ exch {} forall ]} forall ] def
 		/CirclearraysProtoBestFontSize 0 def
-		/CirclearraysProtoBestScore null def
-		/CirclearraysProtoBestSheetNum null def
-		/CirclearraysProtoBestWithinPage null def
-		/CirclearraysProtoBestMinCopies null def
+		/CirclearraysProtoBestScore //null def
+		/CirclearraysProtoBestSheetNum //null def
+		/CirclearraysProtoBestWithinPage //null def
+		/CirclearraysProtoBestMinCopies //null def
 		0 eq {(Warning: CirclearraysNScore not converging. Please submit an issue to http://github.com/jdaw1/placemat/issues/ . Execution continuing.) OutputToLog} if
 		0  1  NumSheets 1 sub
 		{
@@ -11587,7 +11588,7 @@ currentdict /SmallCapsDict undef
 				CirclearraysTastingNotes WithinTitles get  {0 setgray CircletextFont TastingNotesPageCircletextFontSize selectfont}  CircletextsMinNumSpacesBetween //true  PageWidth MgnL MgnR add sub  //false  -1  CirclearrayInStraightLine
 				sub CurrentTop add TastingNotesLineGap sub /CurrentTop exch def pop pop
 
-				TastingNotesStarTops TastingSheetNum  2 copy get null eq {GlassesOnTastingNotePages TastingSheetNum GetEU length array put} {pop pop} ifelse
+				TastingNotesStarTops TastingSheetNum  2 copy get //null eq {GlassesOnTastingNotePages TastingSheetNum GetEU length array put} {pop pop} ifelse
 				TastingNotesStarTops TastingSheetNum get WithinPage  2 copy get IsNumber {pop pop} {CurrentTop put} ifelse
 
 				0 setgray   MinCircletextMaxFontSizes  60 div setlinewidth
@@ -14231,7 +14232,7 @@ OutputLogToPage {false PageSuppressed not} {false} ifelse
 	/TypeOfPagesBeingRendered /DistillerLog def  % def rather than store in case top-most instance of TypeOfPagesBeingRendered is in a readonly dictionary
 	/OuterMarginL 0 def  /OuterMarginR 0 def  /OuterMarginT 0 def  /OuterMarginB 0 def
 	% Fixed page size based on type of first page. Also will use 27 margins all round. Page not really for high-quality printing.
-	/SPS {//false  //false  //false  //true  /TastingNotesPaperType dup where {exch get dup /USL ne {pop /A4} if} {pop /A4} ifelse  /Portrait  SetPaperSize} bind def
+	/SPS {//false  //false  //false  //true  TastingNotesPaperType NorthAmericanPaperSize {/USL} {/A4} ifelse  /Portrait  SetPaperSize} bind def
 	SPS    mark  /Dest /DistillationLog  /View [/FitH PageHeight]  /DEST  pdfmark    mark  /Label (Distillation log)  /PAGELABEL  pdfmark
 	/FontSize 6.5 def   /Courier FontSize selectfont  /WidthW (W) stringwidth pop def
 	/FontSize  PageWidth 54 sub //PrinterEpsilon sub  dup WidthW div ceiling  132  2 copy lt {exch} if pop  WidthW mul div FontSize mul def
