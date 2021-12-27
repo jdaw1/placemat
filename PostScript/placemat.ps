@@ -1,6 +1,6 @@
 %!PS
 
-% This version 12:15 Saturday 11th November 2021
+% This version 19:45 Monday 27th December 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202112111215) def
+/ParametersVersionDateTimeAdobeFormat (D:202112271945) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,16 +764,16 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202112111215) def
+/SoftwareVersionDateTimeAdobeFormat (D:202112271945) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
 % /dict {dup 1 add dict dup 3 -1 roll /DictionaryOriginalSize exch put} bind def
 % /end {currentdict /DictionaryOriginalSize known {DictionaryOriginalSize currentdict length 1 sub lt {() = TypeOfPagesBeingRendered = DictionaryOriginalSize = currentdict length 1 sub = (###) =} if} if end} bind def
 
-/RandMax 2147483647 def  % 2^31-1, page 637 of PLRM3
+/RandMax 2147483647 def  % 2^31 - 1, page 637 of PLRM3
 /HalfRandMax RandMax 2 div def
-/IntegerMax  2147483647 def  % 2^31-1, page 739 of PLRM3
+/IntegerMax  2147483647 def  % 2^31 - 1, page 739 of PLRM3
 /Pi          3.14159265358979323846 def
 /TwoPi       6.2831853071795864769 def
 /HalfPi      1.57079632679489661923 def
@@ -874,16 +874,17 @@ ifelse} bind def  % /Stopped
 [
 	% ShellSort is very fast at short arrays, but QuickSort's segregation helps multi-CPU with long arrays.
 	% PostScript's max array size usually 65535 (PLRM3, p739, table B.1), but an implementation could allow longer.
-	% Included are those up to PostScript's max integer = 2^31 -1, and commented out are subsequent up to 10^15.
+	% Included are those up to PostScript's max integer = 2^31 - 1, and commented out are subsequent up to 10^15.
 	% From http://en.wikipedia.org/wiki/Shellsort
-	% > Gonnet and Baeza-Yates observed that Shellsort makes the fewest comparisons on average when the ratios of successive gaps are
-	% > roughly equal to 2.2. This is why their sequence with ratio 2.2 and Tokuda's sequence with ratio 2.25 prove efficient. However,
-	% > it is not known why this is so. Sedgewick recommends using gaps which have low greatest common divisors or are pairwise coprime.
-	% Here each is closest to previous * Sqrt5 that is coprime to all previous, so ratios tend to ~=2.236. From 51 ratios >2.21568 and <2.24303.
+	%   > Gonnet and Baeza-Yates observed that Shellsort makes the fewest comparisons on average when the ratios of successive gaps are
+	%   > roughly equal to 2.2. This is why their sequence with ratio 2.2 and Tokuda's sequence with ratio 2.25 prove efficient. However,
+	%   > it is not known why this is so. Sedgewick recommends using gaps which have low greatest common divisors or are pairwise coprime.
+	% Here each is closest to immediately previous * Sqrt5 that is coprime to all previous, so ratios tend to ~=2.236.
+	% From values of 51 the ratios >2.21568 and <2.24303.
 	1 2 5 11 23 51 113 251 563 1259 2813 6289 14063 31439  % Below 2^16
 	70297 157189 351487 785947 1757431 3929741 8787169 19648709 43935851 98243549 219679249 491217733 1098396241  % Below 2^31
-	% 2456088659 5491981199 12280443293 27459905999 61402216471 137299529999 307011082351 686497649983 1535055411751
-	% 3432488249899 7675277058739 17162441249483 38376385293691 85812206247419 191881926468461 429061031237099 959409632342311
+	% 2456088659 5491981199 12280443293 27459905999 61402216471 137299529999 307011082351 686497649983 1535055411751 3432488249899
+	% 7675277058739 17162441249483 38376385293691 85812206247419 191881926468461 429061031237099 959409632342311  % Below 10^15
 ] readonly def  % /ShellSortGaps
 /ShellSortGapsLength1Sub ShellSortGaps length 1 sub def
 % Immediate dependencies: DeBugLevel; ShellSortGaps; ShellSortGapsLength1Sub.
@@ -6636,16 +6637,16 @@ currentdict /SmallCapsDict undef
 	[
 		[
 			/Circlearrays /Titles /Abovetitles /Overtitles /Belowtitles  % Not using GlassesNumCopies as these pages might be computed for sticky-label or pre-pour purposes, then not rendered
-			/FontSizesTitlesEquivalences /FontSizesAbovetitlesEquivalences /FontSizesBelowtitlesEquivalences /FontSizesOvertitlesEquivalences
-			{GlassesOnTastingNotePages length 0 gt} MightBeTrue {TastingNotePagesNumCopies 1 ge} MightBeTrue and {/CirclearraysTastingNotes /TitlesTastingNotes /SubtitlesTastingNotes} if
-			/VoteRecorders load MightBeTrue {/CirclearraysVoteRecorder /TitlesVoteRecorder /SubtitlesVoteRecorder} if
-			{DecantingNotesNumCopies 1 ge} MightBeTrue {/CirclearraysDecantingNotes /TitlesDecantingNotes /SubtitlesDecantingNotes} if
-			{CorkDisplayNumCopies 1 ge} MightBeTrue {/CirclearraysCorkDisplay /TitlesCorkDisplay /SubtitlesCorkDisplay} if
-			{NeckTagsNumCopies 1 ge} MightBeTrue {/CirclearraysNeckTags} if
-			{PrePourNumCopies 1 ge}        MightBeTrue {/CirclearraysPrePour} if
-			{StickyLabelsNumCopies 1 ge} {StickyLabelsTypes length 0 gt} MightBeTrue exch MightBeTrue and {/CirclearraysStickyLabels} if
 			AnyFillTextingAtAll {/FillTexts} if
+			/FontSizesTitlesEquivalences /FontSizesAbovetitlesEquivalences /FontSizesBelowtitlesEquivalences /FontSizesOvertitlesEquivalences
 		]
+		{GlassesOnTastingNotePages length 0 gt} MightBeTrue {TastingNotePagesNumCopies 1 ge} MightBeTrue and { [ /CirclearraysTastingNotes /TitlesTastingNotes /SubtitlesTastingNotes ] } if
+		{DecantingNotesNumCopies 1 ge} MightBeTrue { [ /CirclearraysDecantingNotes /TitlesDecantingNotes /SubtitlesDecantingNotes ] } if
+		/VoteRecorders load            MightBeTrue { [ /CirclearraysVoteRecorder   /TitlesVoteRecorder   /SubtitlesVoteRecorder   ] } if
+		{CorkDisplayNumCopies    1 ge} MightBeTrue { [ /CirclearraysCorkDisplay    /TitlesCorkDisplay    /SubtitlesCorkDisplay    ] } if
+		{NeckTagsNumCopies       1 ge} MightBeTrue { [ /CirclearraysNeckTags  /Titles  ] } if
+		{PrePourNumCopies 1 ge}        MightBeTrue { [ /CirclearraysPrePour   /Titles  ] } if
+		{StickyLabelsNumCopies 1 ge} {StickyLabelsTypes length 0 gt} MightBeTrue exch MightBeTrue and { [ /CirclearraysStickyLabels  /Titles  ] } if
 		[
 			/GlassesOnSheets /NamesShowTop /NamesShowBottom /PageOrderingGlasses /MirrorPagesGlasses
 			{DecanterLabelsNumCopies 1 ge} MightBeTrue {/PageOrderingDecanterLabels /MirrorPagesDecanterLabels} if
@@ -6940,8 +6941,13 @@ currentdict /SmallCapsDict undef
 		{DecantingNotesNumCopies 0 gt} MightBeTrue {/GlassesClusteredOnDecantingNotes} if
 		{CorkDisplayNumCopies 1 ge}    MightBeTrue {/GlassesClusteredOnCorkDisplay   } if
 	]{
-		4 dict begin
+		5 dict begin
 		/ClusterCheck exch def
+		/ValueMax -1   1 {
+			/GlassesClusteredOnVoteRecorders  ClusterCheck eq {pop TitlesVoteRecorder   execU length 1 sub exit} if
+			/GlassesClusteredOnDecantingNotes ClusterCheck eq {pop TitlesDecantingNotes execU length 1 sub exit} if
+			/GlassesClusteredOnCorkDisplay    ClusterCheck eq {pop TitlesCorkDisplay    execU length 1 sub exit} if
+		} repeat def  % /ValueMax
 		ClusterCheck load xcheck not
 		{
 			ClusterCheck load type /arraytype eq
@@ -6979,8 +6985,8 @@ currentdict /SmallCapsDict undef
 												ClusterCheck load i get j get k get type /integertype eq
 												{
 													ClusterCheck load i get j get k get dup
-													dup 0             lt {mark (Error: ) ClusterCheck ( ) i ( get ) j ( get ) k ( get  = ) counttomark 2 add -1 roll ( is negative.)                     ConcatenateToMark OutputToLog /ErrorFlag //true store} {pop} ifelse
-													dup Titles length ge {mark (Error: ) ClusterCheck ( ) i ( get ) j ( get ) k ( get  = ) counttomark 2 add -1 roll ( exceeds ) Titles length 1 sub (.) ConcatenateToMark OutputToLog /ErrorFlag //true store} {pop} ifelse
+													dup 0        lt {mark (Error: ) ClusterCheck ( ) i ( get ) j ( get ) k ( get  = ) counttomark 2 add -1 roll ( is negative.)                     ConcatenateToMark OutputToLog /ErrorFlag //true store} {pop} ifelse
+													dup ValueMax gt {mark (Error: ) ClusterCheck ( ) i ( get ) j ( get ) k ( get  = ) counttomark 2 add -1 roll ( exceeds ) Titles length 1 sub (.) ConcatenateToMark OutputToLog /ErrorFlag //true store} {pop} ifelse
 												} {mark (Error: ) ClusterCheck ( ) i ( get ) j ( get ) k ( get  should be an integer, but isn't.) ConcatenateToMark OutputToLog /ErrorFlag //true store} ifelse  % ... type /integertype
 											} if  % ClusterCheck load i get j get k get dup xcheck not
 										} for  % k
