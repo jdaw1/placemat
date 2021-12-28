@@ -174,7 +174,7 @@ Multiple variables can be available for inspection.
 
 	- On glasses sheets, `SheetNum`, an integer being the item of `GlassesOnSheets` currently being rendered. This also exists on pre-pour, neck-tag, and sticky-label pages.
 
-	- `Radii`, an array of reals holding the radii of the different glasses sheets. Also `RadiiCirclearrayBaseline` and `RadiiCirclearrayInside`, holding the distance from centre of the baseline and top of the `Circlearrays`.
+	- `Radii`, an array of reals holding the radii of the different glasses sheets. Also `RadiiCirclearrayBaseline` and `RadiiCirclearrayInside`, holding the distance from centre to the baseline and to the top of the `Circlearrays`.
 
 	- `GlassPositions`, a triple-depth array holding the positions of the glasses. `GlassPositions SheetNum get WithinPage get` is an array, `[x y]`, the position of the centre of the glass placement. 
 
@@ -400,7 +400,7 @@ A standard presentation is to have the name of the person bringing the wine as t
 For such tastings it&rsquo;s natural to populate `Names` from `Circlearrays`. 
 However, there&rsquo;s sometimes a blank or spare circle, for which the element of Circlearrays resembles `[ /dagger ]`.
 
-This code gets the last item of each sub-array of `Circlearrays`; discards those of which the type is `/nametype`; removes duplicates; and appends a spare-guest `()`.
+This code gets the last item of each sub-array of `Circlearrays`; discards those of which the `type` is `/nametype`; removes duplicates; and appends a spare&#8209;guest&nbsp;=&nbsp;`()`.
 
 ```PostScript
 /Names  % Non-duplicate non-nametypes from last items of Circlearrays' sub-arrays
