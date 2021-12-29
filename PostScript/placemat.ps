@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:20 Wednesday 29th December 2021
+% This version 23:00 Wednesday 29th December 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202112292120) def
+/ParametersVersionDateTimeAdobeFormat (D:202112292300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202112292120) def
+/SoftwareVersionDateTimeAdobeFormat (D:202112292300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1725,12 +1725,13 @@ currentdict /ForReverseBinaryDict undef
 	1 dict begin
 	exch /PaperType exch def
 	1 {
-		/A4      PaperType eq {595.27559   841.88976 exit} if  % 210mm by 297mm. For speed start with the values most often used.
-		/A3      PaperType eq {841.88976  1190.55118 exit} if  % 297mm by 420mm
-		/USL     PaperType eq {612         792       exit} if  % 8.5" by 11"
-		/USLegal PaperType eq {612        1008       exit} if  % 8.5" by 14"
-		/Tabloid PaperType eq {792        1224       exit} if  % 11"  by 17", http://github.com/jdaw1/placemat/issues/159
-		/USL2    PaperType eq {792        1224       exit} if  % 11"  by 17"
+		/A4       PaperType eq {595.27559   841.88976 exit} if  % 210mm by 297mm. For speed start with the values most often used.
+		/A3       PaperType eq {841.88976  1190.55118 exit} if  % 297mm by 420mm
+		/USL      PaperType eq {612         792       exit} if  % 8.5" by 11"
+		/USLegal  PaperType eq {612        1008       exit} if  % 8.5" by 14"
+		/Tabloid  PaperType eq {792        1224       exit} if  % 11"  by 17", http://github.com/jdaw1/placemat/issues/159
+		/USL2     PaperType eq {792        1224       exit} if  % 11"  by 17"
+		/Berliner PaperType eq {315 mm      470 mm    exit} if  % http://www.theguardian.com/gpc/berliner-format
 		PaperType type /arraytype eq {PaperType {execU} forall exit} if  % [ Small Large ]
 		/A4_USL PaperType eq {210 mm 792 exit} if  % Smaller of the A4/USL widths; smaller of the heights
 		/A0  PaperType eq { 841 mm 1189 mm  exit} if  % A0 can hold 106 glasses slightly larger than five on A4. Which is a large enough page size.
