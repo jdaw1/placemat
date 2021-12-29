@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:00 Wednesday 29th December 2021
+% This version 21:20 Wednesday 29th December 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202112292100) def
+/ParametersVersionDateTimeAdobeFormat (D:202112292120) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202112292100) def
+/SoftwareVersionDateTimeAdobeFormat (D:202112292120) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -12705,8 +12705,11 @@ currentdict /SmallCapsDict undef
 
 					NTBestRotatedness //null ne
 					{
-						mark  (Neck tags: scaling factors = ) NTBestScalingFactor RadiiCirclearrayInside {div} //false TwoArraysFunction (\(with ThisPageOrdering = ) ThisPageOrdering (\), and scaled TitleFontSizes = )
-						TitleFontSizes RadiiCirclearrayInside {div} //false TwoArraysFunction NTBestScalingFactor {mul} //false TwoArraysFunction SizeArrayOutput (.) ConcatenateToMark OutputToLog
+						DeBugLevel 100 le
+						{
+							mark  (Neck tags: scaling factors = ) NTBestScalingFactor RadiiCirclearrayInside {div} //false TwoArraysFunction (\(with ThisPageOrdering = ) ThisPageOrdering (\), and scaled TitleFontSizes = )
+							TitleFontSizes RadiiCirclearrayInside {div} //false TwoArraysFunction NTBestScalingFactor {mul} //false TwoArraysFunction SizeArrayOutput (.) ConcatenateToMark OutputToLog
+						} if  % DeBugLevel 100 le
 						/MatrixPaper matrix currentmatrix def
 						/NeckTagsThisPageTitles () def
 						/NTGapBetweenH
