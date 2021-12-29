@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:45 Monday 27th December 2021
+% This version 21:00 Wednesday 29th December 2021
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
@@ -19,7 +19,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202112271945) def
+/ParametersVersionDateTimeAdobeFormat (D:202112292100) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -80,8 +80,8 @@
 % Links for some restaurants and many Port houses at http://github.com/jdaw1/placemat/blob/main/PostScript/ExternalLinks_data.ps
 /ExternalLinks [
 	false   (Thread on ThePortForum.com)     (http://www.theportforum.com/viewtopic.php?t=00175&view=unread#unread)
-%	false   (Latest version this placemat)   (http://www.jdawiseman.com/2021/    .pdf)
-%	true    (in list of placemats)           (http://www.jdawiseman.com/papers/placemat/placemats_list.html#a2021MMDD)
+%	false   (Latest version this placemat)   (http://www.jdawiseman.com/2022/    .pdf)
+%	true    (in list of placemats)           (http://www.jdawiseman.com/papers/placemat/placemats_list.html#a2022MMDD)
 	false   (Boot & Flogger)                 (http://www.davy.co.uk/wine-bar/boot-and-flogger/)
 	true    (SE1 1TA, streetmap.co.uk)       (http://www.streetmap.co.uk/map.srf?x=532409&y=180083&z=106&pc=SE1+1TA)
 	true    (SE1 1TA, google.co.uk)          (http://goo.gl/maps/7NEiwAMEZpG2)
@@ -89,7 +89,7 @@
 	true    (What3Words: cafe.humid.palace)  (http://map.what3words.com/cafe.humid.palace)
 ] def  % /ExternalLinks
 
-/CopyrightStatementPlacemats (Copyright 2021 Julian D. A. Wiseman of www.jdawiseman.com) def
+/CopyrightStatementPlacemats (Copyright 2022 Julian D. A. Wiseman of www.jdawiseman.com) def
 
 % % % % % % % % % % %
 % Non-Glasses Pages %
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202112271945) def
+/SoftwareVersionDateTimeAdobeFormat (D:202112292100) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -2177,66 +2177,69 @@ mark (Array equalities:  {)  4 dict begin
 } bind for  % i
 end pop (.) ConcatenateToMark OutputToLog
 
-% Log settings of used decorative parameters
-[
-	{ShapesInTitles ShapesInAbovetitles or ShapesInBelowtitles or ShapesInOvertitles or ShapesInPlaceNames or} MightBeTrue {[
-		/ShapesInTitles /ShapesInAbovetitles /ShapesInBelowtitles /ShapesInOvertitles /ShapesInPlaceNames /ShapesToUse /ShapesStarsPointsAndStepsArray
-		/ShapesAverageSeparation /ShapesEnclosingCircleRadiusMin /ShapesEnclosingCircleRadiusMax /ShapesAverageMaxTweakPlusMinus
-		/ShapesFlowersNumPetalsMin /ShapesFlowersNumPetalsMax /ShapesFlowersAngularWidthMin /ShapesFlowersAngularWidthMax
-		/ShapesInTitles load MightBeTrue {/ShapesTitlesFill /ShapesTitlesStroke} if
-		/ShapesInAbovetitles load MightBeTrue {/ShapesAbovetitlesFill /ShapesAbovetitlesStroke} if
-		/ShapesInBelowtitles load MightBeTrue {/ShapesBelowtitlesFill /ShapesBelowtitlesStroke} if
-		/ShapesInOvertitles load MightBeTrue {/ShapesOvertitlesFill /ShapesOvertitlesStroke} if
-	]} if  % ... ShapesInTitles ...
-	{CrossHatchingOutside CrossHatchingInside or CrossHatchingTitles or CrossHatchingAbovetitles or CrossHatchingBelowtitles or CrossHatchingOvertitles or CrossHatchingPlaceNames or} MightBeTrue {[
-		/CrossHatchingOutside /CrossHatchingInside /CrossHatchingTitles /CrossHatchingAbovetitles /CrossHatchingBelowtitles /CrossHatchingOvertitles /CrossHatchingPlaceNames
-		/CrossHatchingOutside load MightBeTrue {/CrossHatchingOutsideStrokeCode} if
-		/CrossHatchingInside load MightBeTrue {/DecanterLabelsShowCrossHatchingInside /CrossHatchingInsideStrokeCode} if
-		/CrossHatchingTitles load MightBeTrue {/CrossHatchingTitlesStrokeCode} if
-		/CrossHatchingAbovetitles load MightBeTrue {/CrossHatchingAbovetitlesStrokeCode} if
-		/CrossHatchingBelowtitles load MightBeTrue {/CrossHatchingBelowtitlesStrokeCode} if
-		/CrossHatchingOvertitles load MightBeTrue {/CrossHatchingOvertitlesStrokeCode} if
-		/CrossHatchingNumRadialLines /CrossHatchingCellArea /CrossHatchingCentreX /CrossHatchingCentreY
-	]} if  % ... CrossHatchingTitles  ...
-	{InlineTitles InlineAbovetitles or InlineBelowtitles or InlineOvertitles or InlinePlaceNames or} MightBeTrue {[
-		/InlineTitles /InlineAbovetitles /InlineBelowtitles /InlineOvertitles
-		/InlineTitles load MightBeTrue {/InlineTitlesMaxNumberContours /InlineTitlesBlackWidth /InlineTitlesWhiteWidth} if
-		/InlineAbovetitles load MightBeTrue {/InlineAbovetitlesMaxNumberContours} if
-		/InlineBelowtitles load MightBeTrue {/InlineBelowtitlesMaxNumberContours} if
-		/InlineOvertitles load MightBeTrue {/InlineOvertitlesMaxNumberContours} if
-		/InlineAbovetitles load MightBeTrue {/InlineAbovetitlesBlackWidth /InlineAbovetitlesWhiteWidth} if
-		/InlineBelowtitles load MightBeTrue {/InlineBelowtitlesBlackWidth /InlineBelowtitlesWhiteWidth} if
-		/InlineOvertitles load MightBeTrue {/InlineOvertitlesBlackWidth /InlineOvertitlesWhiteWidth} if
-	]} if  % ... InlineTitles ...
-	/OutlineTitles load MightBeTrue {[
-		/OutlineTitles /OutlineTitlesAlsoAbovetitles /OutlineTitlesAlsoBelowtitles /OutlineTitlesAlsoOvertitles /OutlineTitlesInnerWidthWhite /OutlineTitlesInnerWidthBlack
-		/OutlineTitlesMultiplierWhite /OutlineTitlesMultiplierBlack /DecanterLabelsShowOutlineTitles /OutlineTitlesMaxNum
-	]} if  % ... OutlineTitles ...
-	AnyFillTextingAtAll {[
-		/FillTitles /FillAbovetitles /FillBelowtitles /FillOvertitles /FillPlaceNames /FillTextAngle /FillTexts /FillTextPrintQuickerDistillSlower /FillPrioritiseSmallFileSizeOverPortability
-		/FillTextNumSpaces /FillTextNumOutlines /FillTextMinFontSizeAbsolute /FillTextMinFontSizeProportionLargestTitleAboveBelowOver
-		{PlaceNames} MightBeTrue {/FillTextPlaceNames /FillTextAnglePlaceNames} if
-	]} if  % ... FillTitles ...
-	/TastingNotesCirclesBehind load MightBeTrue {[ /TastingNotesCirclesBehind /TastingNotesCirclesBehindFadingFactorIfAllBlack /TastingNotesCirclesBehindFadingFactorIfAnyGrey /TastingNotesCirclesBehindTopX /TastingNotesCirclesBehindBottomX ]} if
-	/BackgroundTextsGlasses load MightBeTrue {[
-		/BackgroundTextsGlasses /BackgroundTextsGlassesTexts /BackgroundTextsSquooshMin /BackgroundTextsSquooshMax /BackgroundTextsTastingNotes /PrePourShowBackgroundTexts
-		/BackgroundTextsFontSizeMax /BackgroundTextsOrientation /BackgroundTextsGlassesPaintCode /BackgroundTextsGlassesSameSizeIfAllOf /BackgroundTextsGlassesVerticalMiddling
-	]} if  % ... BackgroundTextsGlasses ...
-	/PaintBackgroundCode load length 0 gt {[/PaintBackgroundCode]} if
-	/PaintForegroundCode load length 0 gt {[/PaintForegroundCode]} if
-]
+DeBugLevel 100 le	 % This logging introduced in May 2011. In December 2021 decided to be too much clutter. Hence this de facto disablement.
 {
-	2 dict begin  /Parameters exch def  mark
-	0  1  Parameters length 1 sub
+	% Log settings of used decorative parameters
+	[
+		{ShapesInTitles ShapesInAbovetitles or ShapesInBelowtitles or ShapesInOvertitles or ShapesInPlaceNames or} MightBeTrue {[
+			/ShapesInTitles /ShapesInAbovetitles /ShapesInBelowtitles /ShapesInOvertitles /ShapesInPlaceNames /ShapesToUse /ShapesStarsPointsAndStepsArray
+			/ShapesAverageSeparation /ShapesEnclosingCircleRadiusMin /ShapesEnclosingCircleRadiusMax /ShapesAverageMaxTweakPlusMinus
+			/ShapesFlowersNumPetalsMin /ShapesFlowersNumPetalsMax /ShapesFlowersAngularWidthMin /ShapesFlowersAngularWidthMax
+			/ShapesInTitles load MightBeTrue {/ShapesTitlesFill /ShapesTitlesStroke} if
+			/ShapesInAbovetitles load MightBeTrue {/ShapesAbovetitlesFill /ShapesAbovetitlesStroke} if
+			/ShapesInBelowtitles load MightBeTrue {/ShapesBelowtitlesFill /ShapesBelowtitlesStroke} if
+			/ShapesInOvertitles load MightBeTrue {/ShapesOvertitlesFill /ShapesOvertitlesStroke} if
+		]} if  % ... ShapesInTitles ...
+		{CrossHatchingOutside CrossHatchingInside or CrossHatchingTitles or CrossHatchingAbovetitles or CrossHatchingBelowtitles or CrossHatchingOvertitles or CrossHatchingPlaceNames or} MightBeTrue {[
+			/CrossHatchingOutside /CrossHatchingInside /CrossHatchingTitles /CrossHatchingAbovetitles /CrossHatchingBelowtitles /CrossHatchingOvertitles /CrossHatchingPlaceNames
+			/CrossHatchingOutside load MightBeTrue {/CrossHatchingOutsideStrokeCode} if
+			/CrossHatchingInside load MightBeTrue {/DecanterLabelsShowCrossHatchingInside /CrossHatchingInsideStrokeCode} if
+			/CrossHatchingTitles load MightBeTrue {/CrossHatchingTitlesStrokeCode} if
+			/CrossHatchingAbovetitles load MightBeTrue {/CrossHatchingAbovetitlesStrokeCode} if
+			/CrossHatchingBelowtitles load MightBeTrue {/CrossHatchingBelowtitlesStrokeCode} if
+			/CrossHatchingOvertitles load MightBeTrue {/CrossHatchingOvertitlesStrokeCode} if
+			/CrossHatchingNumRadialLines /CrossHatchingCellArea /CrossHatchingCentreX /CrossHatchingCentreY
+		]} if  % ... CrossHatchingTitles  ...
+		{InlineTitles InlineAbovetitles or InlineBelowtitles or InlineOvertitles or InlinePlaceNames or} MightBeTrue {[
+			/InlineTitles /InlineAbovetitles /InlineBelowtitles /InlineOvertitles
+			/InlineTitles load MightBeTrue {/InlineTitlesMaxNumberContours /InlineTitlesBlackWidth /InlineTitlesWhiteWidth} if
+			/InlineAbovetitles load MightBeTrue {/InlineAbovetitlesMaxNumberContours} if
+			/InlineBelowtitles load MightBeTrue {/InlineBelowtitlesMaxNumberContours} if
+			/InlineOvertitles load MightBeTrue {/InlineOvertitlesMaxNumberContours} if
+			/InlineAbovetitles load MightBeTrue {/InlineAbovetitlesBlackWidth /InlineAbovetitlesWhiteWidth} if
+			/InlineBelowtitles load MightBeTrue {/InlineBelowtitlesBlackWidth /InlineBelowtitlesWhiteWidth} if
+			/InlineOvertitles load MightBeTrue {/InlineOvertitlesBlackWidth /InlineOvertitlesWhiteWidth} if
+		]} if  % ... InlineTitles ...
+		/OutlineTitles load MightBeTrue {[
+			/OutlineTitles /OutlineTitlesAlsoAbovetitles /OutlineTitlesAlsoBelowtitles /OutlineTitlesAlsoOvertitles /OutlineTitlesInnerWidthWhite /OutlineTitlesInnerWidthBlack
+			/OutlineTitlesMultiplierWhite /OutlineTitlesMultiplierBlack /DecanterLabelsShowOutlineTitles /OutlineTitlesMaxNum
+		]} if  % ... OutlineTitles ...
+		AnyFillTextingAtAll {[
+			/FillTitles /FillAbovetitles /FillBelowtitles /FillOvertitles /FillPlaceNames /FillTextAngle /FillTexts /FillTextPrintQuickerDistillSlower /FillPrioritiseSmallFileSizeOverPortability
+			/FillTextNumSpaces /FillTextNumOutlines /FillTextMinFontSizeAbsolute /FillTextMinFontSizeProportionLargestTitleAboveBelowOver
+			{PlaceNames} MightBeTrue {/FillTextPlaceNames /FillTextAnglePlaceNames} if
+		]} if  % ... FillTitles ...
+		/TastingNotesCirclesBehind load MightBeTrue {[ /TastingNotesCirclesBehind /TastingNotesCirclesBehindFadingFactorIfAllBlack /TastingNotesCirclesBehindFadingFactorIfAnyGrey /TastingNotesCirclesBehindTopX /TastingNotesCirclesBehindBottomX ]} if
+		/BackgroundTextsGlasses load MightBeTrue {[
+			/BackgroundTextsGlasses /BackgroundTextsGlassesTexts /BackgroundTextsSquooshMin /BackgroundTextsSquooshMax /BackgroundTextsTastingNotes /PrePourShowBackgroundTexts
+			/BackgroundTextsFontSizeMax /BackgroundTextsOrientation /BackgroundTextsGlassesPaintCode /BackgroundTextsGlassesSameSizeIfAllOf /BackgroundTextsGlassesVerticalMiddling
+		]} if  % ... BackgroundTextsGlasses ...
+		/PaintBackgroundCode load length 0 gt {[/PaintBackgroundCode]} if
+		/PaintForegroundCode load length 0 gt {[/PaintForegroundCode]} if
+	]
 	{
-		/i exch def
-		Parameters i get ( = )
-		Parameters i get load dup [ exch ValueIfAscertainable ] dup length 1 eq {pop} {aload pop {exch pop} if} ifelse 0 //true ThingToDebugText
-		dup dup length 1 sub get //AsciiSpace eq {dup length 1 sub 0 exch getinterval} if  % remove trailing space
-		i Parameters length 1 sub lt {(; )} if
-	} for  % i
-	ConcatenateToMark  OutputToLog  end
-} bind forall  % used sets of decorative parameters
+		2 dict begin  /Parameters exch def  mark
+		0  1  Parameters length 1 sub
+		{
+			/i exch def
+			Parameters i get ( = )
+			Parameters i get load dup [ exch ValueIfAscertainable ] dup length 1 eq {pop} {aload pop {exch pop} if} ifelse 0 //true ThingToDebugText
+			dup dup length 1 sub get //AsciiSpace eq {dup length 1 sub 0 exch getinterval} if  % remove trailing space
+			i Parameters length 1 sub lt {(; )} if
+		} for  % i
+		ConcatenateToMark  OutputToLog  end
+	} bind forall  % used sets of decorative parameters
+} if  % DeBugLevel 100 le
 
 % Prefixed to the page names visible from within Acrobat
 /UnnamedAttendee dup where {pop pop} {Names length 1 le {(Everybody)} {(Extra)} ifelse def} ifelse
