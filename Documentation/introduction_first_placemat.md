@@ -174,6 +174,22 @@ Observe that these parameters have a value that is a PostScript name, so beginni
 Pages can have a header. 
 The three parameters [`HeadersLeft`](page_level.md#headers-and-footers), `HeadersCenter`, and `HeadersRight`are each an array of even length, alternately number and string. 
 For the moment keep the number zero or negative, and update the string. 
+E.g.:
+
+```PostScript
+/HeadersLeft [
+	0
+	(Dddday DD Mmmm 20YY)
+] def  % /HeadersLeft
+/HeadersCenter [
+	0
+	(Horizontal of 1970s)
+] def  % /HeadersCenter
+/HeadersRight [
+	0
+	[(Rick) /quoteright (s Caf) /eacute ( Am) /eacute (ricain)]
+] def  % /HeadersRight
+```
 
 If it isn&rsquo;t a [ThePortForum](http://www.theportforum.com/viewforum.php?f=3) event, remove the ThePortForum logos by setting [`ThePortForumIconPlacement`](page_level.md#the-port-forum-icon-the-port-forum-icon-the-port-forum-icon) and `ThePortForumIconTastingNotePlacement` to `/None` (again, a name-type parameter).
 
