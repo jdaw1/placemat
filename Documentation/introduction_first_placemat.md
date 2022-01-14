@@ -215,7 +215,7 @@ Enjoy the tasting.
 ### Many parameters
 
 There are hundreds more parameters, which: 
-* [choose fonts](fonts_glasses_decoration.md#fonts) and constrain their sizes;
+* [choose fonts](fonts_glasses_decoration.md#fonts) and constrain [their sizes](type_sizes.md#readme);
 * [control the placement of the glass circles](PackingStyles.md#readme); 
 * [decorate](fonts_glasses_decoration.md#readme);
 * enable and control [non-glass page types](not_glasses.md#readme); 
