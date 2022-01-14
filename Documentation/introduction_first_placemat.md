@@ -195,7 +195,7 @@ If it isn&rsquo;t a [ThePortForum](http://www.theportforum.com/viewforum.php?f=3
 
 One more parameter. 
 Some PDF viewers can show a sidebar, typically containing bookmarks to places within the document. This can also contain external links, typically to the likes of: the thread in which the tasting was arranged; the latest version of the PDF file; perhaps websites of winemaker and restaurant; etc. 
-These are configured in the array [`ExternalLinks`](document.md#external-links), which is of length a multiple three, Boolean (*pro tem*, set all to `false`) then text description then URL, then the next Boolean/description/URL, etc. 
+These are configured in the array [`ExternalLinks`](document.md#external-links), which is of length a multiple of three: Boolean (*pro tem*, set all to `false`), then text description, then URL (e.g., `http://www.example.com/`); then the next Boolean/description/URL; etc. 
 Populate `ExternalLinks`.
 
 ### Output
