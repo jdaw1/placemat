@@ -3,18 +3,18 @@
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
-![TriangleSolid](images/TriangleSolid.svg)&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme) 
-![TriangleSolid](images/TriangleSolid.svg)&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme) 
-![TriangleSolid](images/TriangleSolid.svg)&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme) 
-![TriangleSolid](images/TriangleSolid.svg)&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme) 
-![TriangleSolid](images/TriangleSolid.svg)&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme) 
-![TriangleSolid](images/TriangleSolid.svg)&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme) 
-![TriangleSolid](images/TriangleSolid.svg)&nbsp;[Document&#8209;level&nbsp;controls](document.md#readme) 
-![TriangleSolid](images/TriangleSolid.svg)&nbsp;[Type&nbsp;sizes](type_sizes.md#readme) 
-![TriangleSolid](images/TriangleSolid.svg)&nbsp;[Translations](translations.md#readme) 
-![TriangleSolid](images/TriangleSolid.svg)&nbsp;[Code&nbsp;injection](code_injection.md#readme) 
-![TriangleSolid](images/TriangleSolid.svg)&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme) 
-![TriangleHollow](images/TriangleHollow.svg)&nbsp;*Debugging*
+![TriangleSolid](images/TriangleSolid.svg)[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme) 
+![TriangleSolid](images/TriangleSolid.svg)[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme) 
+![TriangleSolid](images/TriangleSolid.svg)[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme) 
+![TriangleSolid](images/TriangleSolid.svg)[Page&#8209;level&nbsp;controls](page_level.md#readme) 
+![TriangleSolid](images/TriangleSolid.svg)[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme) 
+![TriangleSolid](images/TriangleSolid.svg)[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme) 
+![TriangleSolid](images/TriangleSolid.svg)[Document&#8209;level&nbsp;controls](document.md#readme) 
+![TriangleSolid](images/TriangleSolid.svg)[Type&nbsp;sizes](type_sizes.md#readme) 
+![TriangleSolid](images/TriangleSolid.svg)[Translations](translations.md#readme) 
+![TriangleSolid](images/TriangleSolid.svg)[Code&nbsp;injection](code_injection.md#readme) 
+![TriangleSolid](images/TriangleSolid.svg)[Bitmap&nbsp;images](bitmap_images.md#readme) 
+![TriangleHollow](images/TriangleHollow.svg)*Debugging*
 
 ----
 
