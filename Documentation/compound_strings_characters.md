@@ -1,6 +1,6 @@
 # Compound Strings and non-ASCII characters
 
-**Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
+**Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1). And link to the [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15.
 
 **Links to documentation**: 
 &#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme) 
