@@ -181,7 +181,7 @@ There is also the parameter `PlaceNamesShowNameAsFooter`, an array of Booleans t
 If the big writing says &ldquo;Low-salt diet salad&rdquo;, it can simplify set-up to have a very small &ldquo;Derek&rdquo; written on the page.
 
 These place-name pages are set on pages of size `PlaceNamesPaperType` (defaulting to `TastingNotesPaperType`), and orientation `PlaceNamesOrientation` (default `/Landscape`). 
-The lines marking the anti-curling folds are a distance `PlaceNamesFirstAndThirdFoldsFromEdge` away from the top and bottom edges, defaulting to 36 = &frac12;&Prime; = 12.7mm, which should be changed to `0` if printing to stiff card. 
+The lines marking the anti-curling folds are a distance `PlaceNamesFirstAndThirdFoldsFromEdge` away from the top and bottom edges, defaulting to 36 = &frac12;&Prime; = 12.7mm, which should be changed to 0 if printing to stiff card. 
 The Names are set in font `PlaceNamesFont` (defaulting to `NamesFont`, though sometimes `TitlesFont` would be more appropriate), at the largest size that fits subject to an upper bound of `PlaceNamesMaxFontSizeAbsolute` (defaulting to 192). 
 The colour scheme used is `ColourSchemePlaceNames`, this functioning in the same manner as `ColourSchemeTitles`. 
 Because these names are usually larger than the Titles, various details such as line-widths are set larger by a factor of `PlaceNamesDetailsScalingFactor`; but, messily, this parameter is used partly in the code, and partly in the default values of other parameters.
