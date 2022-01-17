@@ -1,15 +1,14 @@
 %!PS
 
-% This version 23:30 Wednesday 29th December 2021
+% This version 18:45 Monday 17th January 2022
 
+% Copyright Julian D. A. Wiseman 1988 to 2012.
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
 % licensed works and modifications, which include larger works using a licensed work, under the same license.
 % Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
-
-% For these purposes a change in the parameters of the code does not need to be released.
-% Nor does any output: not PDF; nor images of such a document.
-% But it does include re-usable improvements to the body of the code.
+% For these purposes a change in the parameters of the code does not need to be released. Nor does any output:
+% not PDF; nor images of such a document. But it does include re-usable improvements to the body of the code.
 
 
 % Recommendation: move changed parameters to just above this line.
@@ -19,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202112292330) def
+/ParametersVersionDateTimeAdobeFormat (D:202201171845) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -62,7 +61,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( January 2022)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 19) {SuperscriptOn} (th) {SuperscriptOff} ( April 2022)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -764,7 +763,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202112292330) def
+/SoftwareVersionDateTimeAdobeFormat (D:202201171845) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -10459,7 +10458,7 @@ currentdict /SmallCapsDict undef
 			{
 				//DeBugLevel 100 le {(+VoteRecorderForms: PaintProc) OutputToLog} if
 				pop  % dictionary parameter of execform
-				49 dict begin
+				50 dict begin
 				/VoteRecorderSheetNum VoteRecorderSheetNum def
 				/TypeOfPagesBeingRendered /VoteRecorder store
 
@@ -10590,10 +10589,19 @@ currentdict /SmallCapsDict undef
 					/NamesVoteRecorderWidths VoteRecorderNameR VoteRecorderNameL  {sub} //false TwoArraysFunction 0 NamesVoteRecorder length getinterval def
 					NamesVoteRecorderWidths //false exch {0 ne {pop //true exit} if} forall
 					{
+						/SortIncreasingVR
+						1 {
+							NamesVoteRecorder length 9 ge {2   NamesVoteRecorder length 4 sub exit} if
+							NamesVoteRecorder length 3 ge {NamesVoteRecorder length 2 sub 4 div   dup round cvi   exch 3 mul round cvi exit} if
+							0   0
+						} repeat  % 1
+						NamesVoteRecorderWidths exch get  exch NamesVoteRecorderWidths exch get  ge
+						def  % /SortIncreasingVR
+
 						mark (NamesVoteRecorder, widths: )
 						[ 0  1  NamesVoteRecorder length 1 sub {[exch dup NamesVoteRecorder exch get ASCIIfy exch NamesVoteRecorderWidths exch get]} for ]  dup
-						mark exch () exch {aload pop (=) exch (; )} forall pop (. Sorted increasing: )  ConcatenateToMark
-						() 3 -1 roll dup {1 get exch 1 get gt} ShellSort  {0 get (; )} forall pop (.) ConcatenateToMark OutputToLog
+						mark exch () exch {aload pop (=) exch (; )} forall pop (. Sorted ) SortIncreasingVR {(in)} {(de)} ifelse (creasing: )  ConcatenateToMark
+						() 3 -1 roll dup {1 get exch 1 get SortIncreasingVR {gt} {lt} ifelse} ShellSort  {0 get (; )} forall pop (.) ConcatenateToMark OutputToLog
 						/VoteRecorderNamesWidthsLogged //true store
 					} if  % any non-0 widths
 					currentdict /NamesVoteRecorderWidths undef
@@ -14180,7 +14188,7 @@ currentdict /SmallCapsDict undef
 	1 {
 		1 index 60      div dup abs 0.5 ge   {( ~= ) exch ( minutes)}   {pop exit}   ifelse  % There have been a few distillation times of multiple minutes.
 		1 index 60      div dup abs 0.5 ge   {( ~= ) exch ( hours)  }   {pop exit}   ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
-		1 index 24      div dup abs 0.5 ge   {( ~= ) exch ( days)   }   {pop exit}   ifelse  % As of Oct 2021, JDAW's longest distillation time has been ~=22 minutes.
+		1 index 24      div dup abs 0.5 ge   {( ~= ) exch ( days)   }   {pop exit}   ifelse  % As of Jan 2022, JDAW's longest distillation time has been ~=22 minutes.
 		1 index 30.4375 div dup abs 0.5 ge   {( ~= ) exch ( months) }   {pop exit}   ifelse  % Julian year of 365.25 days, divided by 12. Likely impossible, as exceeding usertime's integer.
 		1 index 12      div dup abs 0.5 ge   {( ~= ) exch ( years)  }   {pop exit}   ifelse  % Years?! Something is very amiss.
 	} repeat  % 1
