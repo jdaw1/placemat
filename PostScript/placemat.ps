@@ -1,6 +1,6 @@
 %!PS
 
-% This version 18:45 Monday 17th January 2022
+% This version 20:30 Tuesday 18th January 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2012.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202201171845) def
+/ParametersVersionDateTimeAdobeFormat (D:202201182030) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -763,7 +763,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202201171845) def
+/SoftwareVersionDateTimeAdobeFormat (D:202201182030) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -11332,12 +11332,24 @@ currentdict /SmallCapsDict undef
 					RadiiCirclearrayInside SheetNum get  0 gt  Spirals and
 					{
 						ClipSave newpath  0 0  RadiiCirclearrayInside SheetNum get  0 360 arc clip newpath
-						SpiralNumArms  SpiralAngleOffset
-						RadiiCirclearrayInside SheetNum get  SpiralCentreFromCentreProportionRadiiInside  mul  dup dup
-						SpiralCentreFromCentreAngle sin mul exch
-						SpiralCentreFromCentreAngle cos mul 3 -1 roll
-						abs RadiiCirclearrayInside SheetNum get add  2 add  % Embedded constant. Will be enough if linewidth <= 4.
-						SpiralRadiusBetweenArms  SpiralClockwise  ArchimedeanSpiralPath
+						SpiralRadiusBetweenArms abs Infinity ge
+						{
+							0  1  SpiralNumArms 1 sub
+							{
+								RadiiCirclearrayInside SheetNum get  SpiralCentreFromCentreProportionRadiiInside  mul
+								SpiralCentreFromCentreAngle  2 copy   sin mul 3 1 roll  cos mul  moveto  % 'centre'
+								360 mul SpiralNumArms div SpiralAngleOffset add  SpiralRadiusBetweenArms 0 lt {180 add} if
+								SpiralCentreFromCentreProportionRadiiInside abs 1 add  RadiiCirclearrayInside SheetNum get mul
+								exch 2 copy  sin mul 3 1 roll  cos mul  rlineto  % extremity of arm
+							} for  % arm number
+						}{
+							SpiralNumArms  SpiralAngleOffset
+							RadiiCirclearrayInside SheetNum get  SpiralCentreFromCentreProportionRadiiInside  mul  dup dup
+							SpiralCentreFromCentreAngle sin mul exch
+							SpiralCentreFromCentreAngle cos mul 3 -1 roll
+							abs RadiiCirclearrayInside SheetNum get add  2 add  % Embedded constant. Will be enough if linewidth <= 4.
+							SpiralRadiusBetweenArms  SpiralClockwise  ArchimedeanSpiralPath
+						} ifelse  % SpiralRadiusBetweenArms abs Infinity ge
 						0.12 setlinewidth  0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash  SpiralStrokeCode
 						ClipRestore
 					} if  % RadiiCirclearrayInside SheetNum get  0 gt  Spirals and
