@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:30 Tuesday 18th January 2022
+% This version 21:00 Wednesday 19th January 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2012.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202201182030) def
+/ParametersVersionDateTimeAdobeFormat (D:202201192100) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -763,7 +763,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202201182030) def
+/SoftwareVersionDateTimeAdobeFormat (D:202201192100) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -2533,44 +2533,73 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 /SuperscriptOn {0 CurrentFontSize 0.375 mul rmoveto  CurrentFontName CurrentFontSize 1.7 div selectfont} bind def
 /SuperscriptOff {CurrentFontName CurrentFontSize 1.7 mul selectfont  0 CurrentFontSize -0.375 mul rmoveto} bind def
 /Kern {CurrentFontSize mul 0 rmoveto} bind def
-/UnderlineX0 //null def  /UnderlineY0 //null def  /UnderlineMatrix //null def
-/UnderlineBegin {/UnderlineMatrix matrix currentmatrix store  currentpoint /UnderlineY0 exch store /UnderlineX0 exch store} def
+  /UnderlineX0 //null def    /UnderlineY0 //null def    /UnderlineMatrix //null def
+/ThroughlineX0 //null def  /ThroughlineY0 //null def  /ThroughlineMatrix //null def
+  /UnderlineBegin {  /UnderlineMatrix matrix currentmatrix store  currentpoint   /UnderlineY0 exch store   /UnderlineX0 exch store} def
+/ThroughlineBegin {/ThroughlineMatrix matrix currentmatrix store  currentpoint /ThroughlineY0 exch store /ThroughlineX0 exch store} def
 /UnderlinePaint
 {
-	//DeBugLevel 15 le {(+UnderlinePaint) OutputToLog} if
-	5 dict begin
-	matrix currentmatrix UnderlineMatrix setmatrix currentpoint  /UnderlineY1 exch def /UnderlineX1 exch def  setmatrix
-	/UnderlineLength UnderlineX1 UnderlineX0 sub dup mul  UnderlineY1 UnderlineY0 sub dup mul  add sqrt  def
-	UnderlineLength 0 gt
+	<< /PrepstnlineX0 UnderlineX0   /PrepstnlineY0 UnderlineY0  /PrepstnlineMatrix UnderlineMatrix >> begin
+	/Under PrepositionlinePaint    end
+} def  % /UnderlinePaint
+/ThroughlinePaint
+{
+	<< /PrepstnlineX0 ThroughlineX0   /PrepstnlineY0 ThroughlineY0  /PrepstnlineMatrix ThroughlineMatrix >> begin
+	/Through PrepositionlinePaint    end
+} def  % /ThroughlinePaint
+
+% /Under|/Through  PrepositionlinePaint  -
+/PrepositionlinePaint
+{
+	//DeBugLevel 15 le {(+PrepositionlinePaint) OutputToLog} if
+	6 dict begin
+	/PrepositionWhich exch def
+	matrix currentmatrix PrepstnlineMatrix setmatrix currentpoint  /PrepstnlineY1 exch def /PrepstnlineX1 exch def  setmatrix
+	/PrepstnlineLength PrepstnlineX1 PrepstnlineX0 sub dup mul  PrepstnlineY1 PrepstnlineY0 sub dup mul  add sqrt  def
+	PrepstnlineLength 0 gt
 	{
-		/HalfUnderlineWidth
+		/HalfPrepstnlineWidth
 		currentfont /FontInfo known {currentfont /FontInfo get /UnderlineThickness known} {//false} ifelse
 			{currentfont /FontInfo get /UnderlineThickness get CurrentFontSize mul}
 			{CurrentFontSize 20.48 div}  % 20.48 is actual constant for /TimesNewRomanPS-ItalicMT
-		ifelse  2 div def  % /HalfUnderlineWidth
-		/OffsetY
-		currentfont /FontInfo known {currentfont /FontInfo get /UnderlinePosition known} {//false} ifelse
-		{currentfont /FontInfo get /UnderlinePosition get CurrentFontSize mul}
-		{
-			GSave  0 0 moveto (Qgjpqy) //true charpath PathBBox  GRestore
-			pop pop exch pop   3 div   currentlinewidth 2 div sub
-		} ifelse  def  % /OffsetY
-		matrix currentmatrix UnderlineMatrix setmatrix
-		UnderlineY0 UnderlineY1 sub UnderlineLength div OffsetY HalfUnderlineWidth add mul UnderlineX0 add
-		UnderlineX1 UnderlineX0 sub UnderlineLength div OffsetY HalfUnderlineWidth add mul UnderlineY0 add
+		ifelse  2 div def  % /HalfPrepstnlineWidth
+		/OffsetY 1 {
+			/Under PrepositionWhich eq
+			{
+				currentfont /FontInfo known {currentfont /FontInfo get /UnderlinePosition known} {//false} ifelse
+				{currentfont /FontInfo get /UnderlinePosition get CurrentFontSize mul}
+				{
+					GSave  0 0 moveto (Qgjpqy) //true charpath PathBBox  GRestore
+					pop pop exch pop   3 div   currentlinewidth 2 div sub
+				} ifelse
+				exit
+			} if  % /Under
+			/Through PrepositionWhich eq
+			{
+				GSave  0 0 moveto (o) //true charpath PathBBox  GRestore
+				2 div 4 1 roll  pop pop pop
+				exit
+			} if  % /Through
+			mark (Error in PrepositionlinePaint: unknown value of PrepositionWhich = ) PrepositionWhich (. Continuing.) ConcatenateToMark OutputToLog
+			0
+		} repeat def  % /OffsetY
+		matrix currentmatrix PrepstnlineMatrix setmatrix
+		PrepstnlineY0 PrepstnlineY1 sub PrepstnlineLength div OffsetY HalfPrepstnlineWidth add mul PrepstnlineX0 add
+		PrepstnlineX1 PrepstnlineX0 sub PrepstnlineLength div OffsetY HalfPrepstnlineWidth add mul PrepstnlineY0 add
 		moveto  % top of arc at start of underline
-		UnderlineY0 UnderlineY1 sub UnderlineLength div  % x
-		UnderlineX1 UnderlineX0 sub UnderlineLength div  % y
+		PrepstnlineY0 PrepstnlineY1 sub PrepstnlineLength div  % x
+		PrepstnlineX1 PrepstnlineX0 sub PrepstnlineLength div  % y
 		2 copy   atan neg /a exch def  OffsetY mul exch OffsetY mul 2 copy
-		UnderlineX0 add exch UnderlineY0 add  HalfUnderlineWidth  a 90 add a 270 add  arc
-		UnderlineX1 add exch UnderlineY1 add  HalfUnderlineWidth  a 90 sub a  90 add  arc
+		PrepstnlineX0 add exch PrepstnlineY0 add  HalfPrepstnlineWidth  a 90 add a 270 add  arc
+		PrepstnlineX1 add exch PrepstnlineY1 add  HalfPrepstnlineWidth  a 90 sub a  90 add  arc
 		closepath   fill
-		UnderlineX1 UnderlineY1 moveto setmatrix
-	} if  % UnderlineLength 0 gt
+		PrepstnlineX1 PrepstnlineY1 moveto setmatrix
+	} if  % PrepstnlineLength 0 gt
 	end
-	/UnderlineMatrix //null store  /UnderlineY0 //null store  /UnderlineX0 //null store
-	//DeBugLevel 15 le {(-UnderlinePaint) OutputToLog} if
-} def  % /UnderlinePaint
+	/PrepstnlineMatrix //null store  /PrepstnlineY0 //null store  /PrepstnlineX0 //null store
+	//DeBugLevel 15 le {(-PrepositionlinePaint) OutputToLog} if
+} def  % /PrepositionlinePaint
+
 
 % compoundString  ToSmallCaps  [pieces]
 % Doesn't touch executable pieces: they not small-caps'd. Works well with font /DejaVuSerifCondensed, and presumably (but not tested) other /DejaVu... fonts.
