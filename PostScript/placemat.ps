@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:00 Wednesday 19th January 2022
+% This version 22:30 Friday 21st January 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2012.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202201192100) def
+/ParametersVersionDateTimeAdobeFormat (D:202201212230) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -487,9 +487,9 @@ if} bind def  % /VoteRecorderCrossedBox
 /ShapesAbovetitlesClip ShapesTitlesClip def   /ShapesBelowtitlesClip ShapesTitlesClip def   /ShapesOvertitlesClip ShapesTitlesClip def  % Ditto.
 /ShapesPrintQuickerDistillSlower true def
 
-/CrossHatchingOutsideStrokeCode {0 setgray 0.06 setlinewidth stroke} def
+/CrossHatchingOutsideStrokeCode {0 setgray 0.12 setlinewidth stroke} def
 /CrossHatchingOutsideToPaperEdge false def
-/CrossHatchingInsideStrokeCode {0 setgray 0.06 setlinewidth stroke} def
+/CrossHatchingInsideStrokeCode {0 setgray 0.12 setlinewidth stroke} def
 /CrossHatchingTitlesStrokeCode      {InlineTitles      ColourSchemeCurrent /MidGrey eq {{0.4 0.15} {0 0.24}} {{0 0.06} {1 0.24}} ifelse ifelse TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if setlinewidth setgray stroke} def
 /CrossHatchingAbovetitlesStrokeCode {InlineAbovetitles ColourSchemeCurrent /MidGrey eq {{0.4 0.15} {0 0.24}} {{0 0.06} {1 0.24}} ifelse ifelse TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if setlinewidth setgray stroke} def
 /CrossHatchingBelowtitlesStrokeCode {InlineBelowtitles ColourSchemeCurrent /MidGrey eq {{0.4 0.15} {0 0.24}} {{0 0.06} {1 0.24}} ifelse ifelse TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if setlinewidth setgray stroke} def
@@ -576,9 +576,9 @@ if} bind def  % /VoteRecorderCrossedBox
 /TastingNotesOrientation /Portrait def  % /Landscape /Portrait
 /TastingNotesColumnRelativeWidths [ 1 2 4 8 1 ] def
 /TastingNotesColumnHeadingsFontSize 6 def
-/TastingNotesColumnStrokeCode {0 setgray  0.06 setlinewidth  0 setlinecap  [2.4 16.8] 0 setdash  stroke} def
+/TastingNotesColumnStrokeCode {0 setgray  0.12 setlinewidth  0 setlinecap  [2.4 16.8] 0 setdash  stroke} def
 /TastingNotesLineGap 2 def
-/TastingNotesTitlesFontSizeMax 24 def
+/TastingNotesTitlesFontSizeMax 18 def
 /TastingNotesSubtitleFontSizeProportionTitles 0.5 def
 /TastingNotesReplaceNameWithPageNum false def
 /TastingNotesPageNumFontSizeFactor 0.333333333 def
@@ -763,7 +763,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202201192100) def
+/SoftwareVersionDateTimeAdobeFormat (D:202201212230) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -791,7 +791,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /ArcCosMinusOneThird 109.471220634490691369 def  % In degrees
 /ArcTanOneQuarter    14.03624346792647858289 def  % In degrees
 /ArcTanFiveEighths   32.00538320808349556079 def  % In degrees
-/Infinity 32767 def  % = 2^15-1, which in points ~= 11559mm, bigger than the ~7184mm diagonal of the 200"x200" largest allowed PDF page. Can be 8th-powered without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.4*10^38.
+/Infinity 32767 def  % 2^15-1, which in points ~= 455", so ~61% bigger than the ~283" diagonal of the 200"x200" maximum PDF page. Can be 8th-powered without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.4*10^38.
 /InfinityNeg Infinity neg def
 /PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi, and less at less. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
 /Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, so about 419 times the single-precision minimum.
@@ -11379,7 +11379,7 @@ currentdict /SmallCapsDict undef
 							abs RadiiCirclearrayInside SheetNum get add  2 add  % Embedded constant. Will be enough if linewidth <= 4.
 							SpiralRadiusBetweenArms  SpiralClockwise  ArchimedeanSpiralPath
 						} ifelse  % SpiralRadiusBetweenArms abs Infinity ge
-						0.12 setlinewidth  0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash  SpiralStrokeCode
+						0.24 setlinewidth  0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash  SpiralStrokeCode  % Too thin was 0.12 setlinewidth as used http://www.jdawiseman.com/2022/20220120_blind.pdf
 						ClipRestore
 					} if  % RadiiCirclearrayInside SheetNum get  0 gt  Spirals and
 					//DeBugLevel 100 le {(-SpiralForms: PaintProc) OutputToLog} if
@@ -11603,7 +11603,7 @@ currentdict /SmallCapsDict undef
 				dup PageHeight MgnT sub moveto MgnB lineto TastingNotesColumnStrokeCode newpath
 			} for  % 0  1  TastingNotesColumnHeadings length 2 sub
 
-			0 setgray  0.12 setlinewidth  1 setlinecap  1 setlinejoin  [] 0 setdash
+			0 setgray  0.24 setlinewidth  1 setlinecap  1 setlinejoin  [] 0 setdash
 			TastingNotesColumnHeadings length 0 gt
 			{
 				HeaderFont TastingNotesColumnHeadingsFontSize selectfont
