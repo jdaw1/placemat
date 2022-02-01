@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:00 Monday 31st January 2022
+% This version 23:00 Tuesday 1st February 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202201311900) def
+/ParametersVersionDateTimeAdobeFormat (D:202202012300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -26,14 +26,15 @@
 	[ [(W) {-0.07 Kern} (arre)]  (1970)   (bot. Peatling & Cawdron) ]
 	[ (Sandeman)                 (1970)  [(bot. A) {-0.06 Kern} (very)] ]
 	[ (Fonseca)                  (1970)   (bot. Justerini & Brooks) ]
-] def
+] def  % /Circlearrays
+
 /Titles [
 	(N70)
 	(K70)
 	(W70)
 	(S70)
 	(F70)
-] def
+] def  % /Titles
 
 /Belowtitles [
 	(Wine Society)
@@ -41,14 +42,14 @@
 	(Peatling & Cawdron)
 	[(A) {-0.04 Kern} (very)]
 	(Justerini & Brooks)
-] def
+] def  % /Belowtitles
 
 /Names [
 	(JDAW)
 	[(G) /uacute /edieresis (st ) /Ocircumflex /ntilde /egrave]
 	(Guest Two)
 	()
-] def
+] def  % /Names
 /LeftHanders [ (RMW)  (RAW)  (SRG) (Simon G.)  (HEG) (Helen G.)  (CSD) (Chris D.)  (CFD) (Conan D.)  (NCG) (Marc Jackson)  (JG) (Jeff G.)  (ZDR) (Zak R.) ] def
 
 /PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]
@@ -182,7 +183,7 @@
 /VoteRecorderTopTexts [  % Must be same length as GlassesClusteredOnVoteRecorders, each sub-array containing some number of TopTexts
 	[ (Wine Of The Night?)  /questiondown ]
 	% [ (What is it?) ]  % If uncommenting this, insert a 'true' into the VoteRecorderShowTotalRow array.
-] def  % Must be same length as GlassesClusteredOnVoteRecorders
+] def  % /VoteRecorderTopTexts, Must be same length as GlassesClusteredOnVoteRecorders
 /VoteRecorderShowTotalRow [ false ] def  % Same length as VoteRecorderTopTexts
 /GlassesClusteredOnVoteRecorders [ VoteRecorderTopTexts length {GlassesOnTastingNotePages} repeat ] def  % triple-depth array, same length as VoteRecorderTopTexts and VoteRecorderShowTotalRow
 /VoteRecorderCrossedBox {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU dup
@@ -713,7 +714,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /EmptyGlassesPageAtStart false def
 /EmptyGlassesPageOrientation /Portrait def
 /TestingSuppressPageTypes [ ] def  % Useful value: [ /Glasses 1  /TastingNotes 1  /VoteRecorder 1  /DecantingNotes 1  /Accounts 1  /CorkDisplay 1  /NeckTags 1  /PrePour 1  /PlaceName 1  /DecanterLabels 1  /StickyLabels 1 ]. Also, no int, /DistillerLog
-/TestingMaxNumPagesToShow 2147483647 def  % maximum integer
+/TestingMaxNumPagesToShow 2147483647 def
 /TestingShowThesePagesOnly null def   % Either null, in which case having no effect, or an array of integers. If making a PDF for insertion to another doc, perhaps also "/pdfmark {cleartomark} def".
 
 
@@ -763,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202201311900) def
+/SoftwareVersionDateTimeAdobeFormat (D:202202012300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -13613,9 +13614,9 @@ currentdict /SmallCapsDict undef
 			(=) Names length (*)  //true 1 1 NumSheets 1 sub {dup 1 sub SheetLengths exch get exch SheetLengths exch get eq and} for  {NumSheets (*) SheetLengths 0 get}  {(\() SheetLengths {(+)} forall pop (\))}  ifelse
 			GlassesNumCopies dup 1 gt {(*) exch} {pop} ifelse
 		} if} if  % Sensible to express as a multiplication
-		( glass-circle zooms of the form Circle_#NameNum_#SheetNum_#WithinPage)  {GlassesNumCopies 2 ge} MightBeTrue {([_#GlassesCopyNum])} if
-		(, the first being )  ShownGlassesCirclesData 0 get /GlassesCircleDestName get ( and the last being ) ShownGlassesCirclesData ShownGlassesCircles 1 sub get /GlassesCircleDestName get (.)
-		IsDistiller not {( \(But distillation might be in Ghostscript, so these # tags might be missing: check.\))} if
+		( glass-circle zooms of form Circle_#NameNum_#SheetNum_#WithinPage)  {GlassesNumCopies 2 ge} MightBeTrue {([_#GlassesCopyNum])} if
+		(, from )  ShownGlassesCirclesData 0 get /GlassesCircleDestName get ( to ) ShownGlassesCirclesData ShownGlassesCircles 1 sub get /GlassesCircleDestName get (.)
+		IsDistiller not {( \(But distillation might be in Ghostscript, so these # tags might be missing.\))} if
 	} {(.)} ifelse   1 index mark ne {ConcatenateToMark () OutputToLog OutputToLog} {cleartomark} ifelse
 
 	//DeBugLevel 50 le {( Main: pdfmark's, DOCVIEW, DOCINFO, {Catalog}...PUT) OutputToLog} if
