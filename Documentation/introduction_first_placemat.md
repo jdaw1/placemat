@@ -170,6 +170,7 @@ And then move and update `ParametersVersionDateTimeAdobeFormat`, which is the ti
 
 Those in North America might wish to change `PaperType` and `TastingNotesPaperType` from `/A4` to `/USL`&nbsp;= US&nbsp;Letter&nbsp;= 8&frac12;&Prime;&times;11&Prime;. 
 Observe that these parameters have a value that is a PostScript name, so beginning with a `/`. 
+(If using a large `PaperType`, such as `/A3`, and so transporting printouts rolled, do reverse-roll, print on outside, such that when loaded with glasses the page is held flat. Non-reverse-roll, print on inside, means that corners curl upwards: not recommended.)
 
 Pages can have a header. 
 The three parameters [`HeadersLeft`](page_level.md#headers-and-footers), `HeadersCenter`, and `HeadersRight`are each an array of even length, alternately number and string. 
