@@ -92,7 +92,7 @@ Obviously, the optically best kern amount varies by font.
 ### Superscript
 
 To help with superscripting there are routines `SuperscriptOn` and `SuperscriptOff`:
-* `[(T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( May 2021)` =<br>![Tue_18_May_2021](images/Tue_18_May_2021.png)
+* `[(T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( May 2021)]` =<br>![Tue_18_May_2021](images/Tue_18_May_2021.png)
 
 ### Typeface changing
 
