@@ -49,23 +49,23 @@ Some examples:
 
 <div align="center">
 
-| Compound string | Rendered as |
-|:----------------|:------------|
-| `/dagger`       | &dagger;    |
-| `[/daggerdbl]`  | &Dagger;    |
-| `/sterling`     | &pound;     |
-| `/dollar`       | $           |
-| `($)`           | $           |
-| `[ [/yen] ]`    | &yen;       |
-| `[(Croft Quinta da Ro) /ecircumflex (da)]` | Croft Quinta da Ro&ecirc;da |
-| `[(C) /aacute (lem)]` | C&aacute;lem |
-| `[(Roz) /egrave (s)]` | Roz&egrave;s | 
-| `[(Po) /ccedilla (as)]` | Po&ccedil;as |
-| `[(Mo) /edieresis (t & Chandon)]` | Mo&euml;t & Chandon |
-| `[(Ch) /acircumflex (teau L) /eacute (oville-Barton)]` | Ch&acirc;teau L&eacute;oville-Barton |
-| `[(Quinta do Bom) /fi (m)]` | Quinta do Bom&#64257;m |
-| `(JDAW)`                   | ![&lsquo;JDAW&rsquo;, not kerned](images/JDAW_unkerned.png) |
-| `[(JDA) {-0.06 Kern} (W)]` | ![&lsquo;JDAW&rsquo;, kerned](images/JDAW_kerned.png) |
+| Compound string                                               | Rendered as                              |
+|:--------------------------------------------------------------|:-----------------------------------------|
+| `/dagger`                                                     | &dagger;                                 |
+| `[/daggerdbl]`                                                | &Dagger;                                 |
+| `/sterling`                                                   | &pound;                                  |
+| `/dollar`                                                     | $                                        |
+| `($)`                                                         | $                                        |
+| `[ [/yen] ]`                                                  | &yen;                                    |
+| `[(C) /aacute (lem)]`                                         | C&aacute;lem                             |
+| `[(Roz) /egrave (s)]`                                         | Roz&egrave;s                             | 
+| `[(Po) /ccedilla (as)]`                                       | Po&ccedil;as                             |
+| `[(Quinta do Bom) /fi (m)]`                                   | Quinta do Bom&#64257;m                   |
+| `[(Croft Quinta da Ro) /ecircumflex (da S) /emacron (rikos)]` | Croft Quinta da Ro&ecirc;da S&#275;rikos |
+| `[(Ch) /acircumflex (teau L) /eacute (oville-Barton)]`        | Ch&acirc;teau L&eacute;oville-Barton     |
+| `[(Mo) /edieresis (t & Chandon)]`                             | Mo&euml;t & Chandon                      |
+| `(JDAW)`                                                      | ![&lsquo;JDAW&rsquo;, not kerned](images/JDAW_unkerned.png) |
+| `[(JDA) {-0.06 Kern} (W)]`                                    | ![&lsquo;JDAW&rsquo;, kerned](images/JDAW_kerned.png) |
 
 </div>
 
@@ -78,10 +78,12 @@ Seven glasses on 2&times;A4 have three spares, usually &pound; $ &yen;.
 The last two rows of the table show the effect of `Kern`ing, code being in curly brackets `{}`, the number being the horizontal movement as a proportion of the font size (font = `/DejaVuSerif`). 
 
 Some fonts have thousands of glyphs. 
-Other fonts have fewer &mdash; not every glyph is present in every font. 
-Check your output!
+Other fonts have fewer: not every glyph is present in every font. 
+E.g.,&nbsp;`/emacron`&nbsp;=&nbsp;&#275; is present in the fonts of the `/TrebuchetMS` family, but not in (my computer&rsquo;s version of) the `/Garamond` family, nor in many other fonts. 
+(Indeed, it&rsquo;s missing from so many fonts that the text on [Croft&rsquo;s website](https://croftport.com/en/products/serikos-vintage/2017/) doesn&rsquo;t use it consistently, even though the &ldquo;&#275;&rdquo; appears on the bottle labels.) 
+So check your output!
 
-There follow a selection of the glyphs most likely to be useful to users of the placemat software.
+There follow a selection of other glyphs that might be useful to users of the placemat software.
 
 ## Glyph names
 
