@@ -80,8 +80,8 @@ The last two rows of the table show the effect of `Kern`ing, code being in curly
 Some fonts have thousands of glyphs. 
 Other fonts have fewer: not every glyph is present in every font. 
 E.g.,&nbsp;`/emacron`&nbsp;=&nbsp;&#275; is present in the fonts of the `/TrebuchetMS` family, but not in (my computer&rsquo;s version of) the `/Garamond` family, nor in many other fonts. 
-(Indeed, it&rsquo;s missing from so many fonts that the text on [Croft&rsquo;s website](https://croftport.com/en/products/serikos-vintage/2017/) doesn&rsquo;t use it consistently, even though the &ldquo;&#275;&rdquo; appears on the bottle labels.) 
-So check your output!
+Indeed, `/emacron` is missing from so many fonts that the text on [Croft&rsquo;s website](https://croftport.com/en/products/serikos-vintage/2017/) doesn&rsquo;t use it consistently, even though the &ldquo;&#275;&rdquo; appears on the labels of S&#275;rikos bottles. 
+If a glyph is missing from a font then there should be a warning on the log page, but, anyway, check your output.
 
 There follow a selection of other glyphs that might be useful to users of the placemat software.
 

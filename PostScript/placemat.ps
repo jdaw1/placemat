@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:15 Thursday 3rd February 2022
+% This version 13:30 Saturday 19th February 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202202032315) def
+/ParametersVersionDateTimeAdobeFormat (D:202202191330) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202202032315) def
+/SoftwareVersionDateTimeAdobeFormat (D:202202191330) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -3533,7 +3533,28 @@ currentdict /SmallCapsDict undef
 	//DeBugLevel 25 le {(-LineWidthThatCoversCircle) OutputToLog} if
 } bind def  % /LineWidthThatCoversCircle
 
-% Immediate dependencies: DeBugLevel; OutputToLog; ConcatenateToMark; ToString.
+% Immediate dependencies: DeBugLevel; OutputToLog; ConcatenateToMark.
+/GlyphShowKnownAbsences << >> def
+/GlyphShow
+{
+	//DeBugLevel 5 le {(+GlyphShow) OutputToLog} if
+	1 dict begin
+	/GlyphNameThis exch def
+	//true  currentfont /CharStrings get {pop GlyphNameThis eq {pop //false exit} if} forall
+	{
+		mark currentfont /FontName get (__MissingGlyph__) GlyphNameThis 256 string cvs ConcatenateToMark
+		//GlyphShowKnownAbsences exch 2 copy known {pop pop} {
+			mark (Warning: glyph /) GlyphNameThis ( not present in font /) currentfont /FontName get (. Continuing.) ConcatenateToMark OutputToLog
+			0 put
+		} ifelse
+	} if  % Missing
+	GlyphNameThis glyphshow
+	end
+	//DeBugLevel 5 le {(-GlyphShow) OutputToLog} if
+} bind def  % /GlyphShow
+currentdict /GlyphShowKnownAbsences undef
+
+% Immediate dependencies: DeBugLevel; OutputToLog; ConcatenateToMark; ToString; GlyphShow.
 % A valid parameter is a glyph name, a string, some code, or an array of valid parameters.
 % ShowRecursive shows the sequences of entities in the natural manner.
 /ShowRecursive
@@ -3545,7 +3566,7 @@ currentdict /SmallCapsDict undef
 		/param load xcheck {[/param load execU] ShowRecursive exit} if  % in case the executable puts something on the stack
 		param type dup /integertype eq exch /realtype eq or {/param param ToString store} if  % no 'exit'.
 		param type /stringtype eq {param show exit} if
-		param type /nametype eq {param glyphshow exit} if
+		param type /nametype eq {param GlyphShow exit} if
 		param type /arraytype eq {param {ShowRecursive} forall exit} if
 		mark  (Error: ShowRecursive parameter ) /param load 0 //true ThingToDebugText  ( is of type ) /param load type  ( rather than executable, string, name or array.)  ConcatenateToMark OutputToLog stop
 	} repeat
@@ -6265,7 +6286,7 @@ currentdict /SmallCapsDict undef
 			Angle neg cos R mul Y add moveto
 			Angle 180 add rotate
 			CW -2 div  CircleVerticalOffset  rmoveto
-			CircletextUnderlining {UnderlineBegin thing glyphshow UnderlinePaint}  {thing glyphshow} ifelse
+			CircletextUnderlining {UnderlineBegin thing GlyphShow UnderlinePaint}  {thing GlyphShow} ifelse
 			m setmatrix
 			/CharacterAngle CharacterAngle CA add def  exit
 		} if  % /nametype
@@ -6553,7 +6574,7 @@ currentdict /SmallCapsDict undef
 						{X R add Ang sin R D add mul sub         H R sub Y add Ang cos R D add mul add moveto  180 Ang add rotate  WidthChar0 -2 div VerticalOffset rmoveto}
 					ifelse  % PartMiddleChar0 2 eq
 				} ifelse  % PartMiddleChar0 2 mod 1 eq
-				/DistCurrent dup load  thing ThingIsString {0 CharsToShow getinterval dup show} {dup glyphshow} ifelse StringWidthRecursive  add store
+				/DistCurrent dup load  thing ThingIsString {0 CharsToShow getinterval dup show} {dup GlyphShow} ifelse StringWidthRecursive  add store
 				setmatrix
 				ThingIsString {CharsToShow thing length lt {thing CharsToShow thing length CharsToShow sub getinterval CirclearrayInSemiRoundedRectangleRec} if} if
 			} if  % ... thing length 1 ge ...
