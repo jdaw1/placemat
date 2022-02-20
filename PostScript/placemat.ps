@@ -1,6 +1,6 @@
 %!PS
 
-% This version 13:30 Saturday 19th February 2022
+% This version 20:45 Sunday 20th February 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202202191330) def
+/ParametersVersionDateTimeAdobeFormat (D:202202202045) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202202191330) def
+/SoftwareVersionDateTimeAdobeFormat (D:202202202045) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -3533,27 +3533,6 @@ currentdict /SmallCapsDict undef
 	//DeBugLevel 25 le {(-LineWidthThatCoversCircle) OutputToLog} if
 } bind def  % /LineWidthThatCoversCircle
 
-% Immediate dependencies: DeBugLevel; OutputToLog; ConcatenateToMark.
-/GlyphShowKnownAbsences << >> def
-/GlyphShow
-{
-	//DeBugLevel 5 le {(+GlyphShow) OutputToLog} if
-	1 dict begin
-	/GlyphNameThis exch def
-	//true  currentfont /CharStrings get {pop GlyphNameThis eq {pop //false exit} if} forall
-	{
-		mark currentfont /FontName get (__MissingGlyph__) GlyphNameThis 256 string cvs ConcatenateToMark
-		//GlyphShowKnownAbsences exch 2 copy known {pop pop} {
-			mark (Warning: glyph /) GlyphNameThis ( not present in font /) currentfont /FontName get (. Continuing.) ConcatenateToMark OutputToLog
-			0 put
-		} ifelse
-	} if  % Missing
-	GlyphNameThis glyphshow
-	end
-	//DeBugLevel 5 le {(-GlyphShow) OutputToLog} if
-} bind def  % /GlyphShow
-currentdict /GlyphShowKnownAbsences undef
-
 % Immediate dependencies: DeBugLevel; OutputToLog; ConcatenateToMark; ToString; GlyphShow.
 % A valid parameter is a glyph name, a string, some code, or an array of valid parameters.
 % ShowRecursive shows the sequences of entities in the natural manner.
@@ -3574,6 +3553,34 @@ currentdict /GlyphShowKnownAbsences undef
 	//DeBugLevel 20 le {(-ShowRecursive) OutputToLog} if
 } bind def  % /ShowRecursive
 
+% Immediate dependencies: DeBugLevel; OutputToLog; ConcatenateToMark.
+/GlyphShowKnownAbsences << >> def
+/GlyphTestAbsence
+{
+	//DeBugLevel 4 le {(+GlyphTestAbsence) OutputToLog} if
+	currentfont /CharStrings get GlyphNameThis known not
+	{
+		mark currentfont /FontName get (__MissingGlyph__) GlyphNameThis 256 string cvs ConcatenateToMark
+		//GlyphShowKnownAbsences exch 2 copy known {pop pop} {
+			mark (Error: glyph /) GlyphNameThis ( not present in font /) currentfont /FontName get (. Continuing.) ConcatenateToMark OutputToLog
+			0 put
+		} ifelse
+	} if  % ... GlyphNameThis known not
+	//DeBugLevel 4 le {(-GlyphTestAbsence) OutputToLog} if
+} bind def  % /GlyphTestAbsence
+currentdict /GlyphShowKnownAbsences undef
+
+/GlyphShow
+{
+	//DeBugLevel 5 le {(+GlyphShow) OutputToLog} if
+	1 dict begin
+	/GlyphNameThis exch def
+	GlyphTestAbsence
+	GlyphNameThis glyphshow
+	end
+	//DeBugLevel 5 le {(-GlyphShow) OutputToLog} if
+} bind def  % /GlyphShow
+
 % Computes the path of a glyph, with the charpath-style boolean flag, destroying the currentpoint.
 % http://groups.google.com/g/comp.lang.postscript/c/rvAGfbsbLVw
 /GlyphPath
@@ -3581,12 +3588,13 @@ currentdict /GlyphShowKnownAbsences undef
 	//DeBugLevel 10 le {(+GlyphPath) OutputToLog} if
 	2 dict begin
 	/bln exch def
-	/glyphname exch def
+	/GlyphNameThis exch def
+	GlyphTestAbsence
 	currentfont
 	currentfont length dict begin
 	currentfont {1 index /FID ne {def} {pop pop} ifelse} forall
 	/Encoding [ 256 {/.notdef} repeat ] def
-	Encoding 97 glyphname put  % ASCII a = 97
+	Encoding 97 GlyphNameThis put  % ASCII a = 97
 	currentdict
 	end
 	/TemporaryFont exch definefont pop
@@ -3604,12 +3612,13 @@ currentdict /GlyphShowKnownAbsences undef
 	//DeBugLevel 10 le {(+GlyphPathMoveto) OutputToLog} if
 	2 dict begin
 	/bln exch def
-	/glyphname exch def
+	/GlyphNameThis exch def
+	GlyphTestAbsence
 	currentfont
 	currentfont length dict begin
 	currentfont {1 index /FID ne {def} {pop pop} ifelse} forall
 	/Encoding [ 256 {/.notdef} repeat ] def
-	Encoding 97 glyphname put  % ASCII a = 97
+	Encoding 97 GlyphNameThis put  % ASCII a = 97
 	currentdict
 	end
 	/TemporaryFont exch definefont pop
