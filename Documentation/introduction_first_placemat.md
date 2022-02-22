@@ -131,7 +131,7 @@ For a first placemat perhaps restrict yourself to plain ASCII strings.
 
 Again, change these to suit your tasting. 
 The example has the `Belowtitles` as names of bottlers, but for your event they might be bottle sizes, or lot numbers, or something else. 
-Indeed, it may well that all five are set to an empty string:
+Indeed, it might well be that all five are set to an empty string:  
 ```PostScript
 /Belowtitles [ () () () () () ] def
 ```
