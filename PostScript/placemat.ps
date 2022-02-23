@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:45 Sunday 20th February 2022
+% This version 20:00 Wednesday 23rd February 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202202202045) def
+/ParametersVersionDateTimeAdobeFormat (D:202202232000) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202202202045) def
+/SoftwareVersionDateTimeAdobeFormat (D:202202232000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -792,7 +792,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /ArcCosMinusOneThird 109.471220634490691369 def  % In degrees
 /ArcTanOneQuarter    14.03624346792647858289 def  % In degrees
 /ArcTanFiveEighths   32.00538320808349556079 def  % In degrees
-/Infinity 32767 def  % 2^15-1, which in points ~= 455", so ~61% bigger than the ~283" diagonal of the 200"x200" maximum PDF page. Can be '8 exp 256.06251 mul' without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.40282*10^38.
+/Infinity 32767 def  % 2^15-1, which in points ~= 455" ~= 38', so ~61% bigger than the ~283" diagonal of the 200"x200" maximum PDF page. Can be '8 exp 256.06251 mul' without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.40282*10^38.
 /InfinityNeg Infinity neg def
 /PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi, and less at less. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
 /Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, so about 419 times the single-precision minimum.
@@ -1707,7 +1707,7 @@ currentdict /ForReverseBinaryDict undef
 /ExternalLinksExtras [
 	false   (GitHub)              (http://github.com/jdaw1/placemat/#readme)
 	false   (PostScript)          (http://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps)
-	false   (Documentation start) (http://github.com/jdaw1/placemat/blob/main/Documentation/introduction_first_placemat.md)
+	false   (Documentation start) (http://github.com/jdaw1/placemat/blob/main/Documentation/introduction_first_placemat.md#readme)
 	false   (Placemats, list)     (http://www.jdawiseman.com/papers/placemat/placemats_list.html)
 	false   (Author)              (http://www.jdawiseman.com/author.html)
 ] def % /ExternalLinksExtras
