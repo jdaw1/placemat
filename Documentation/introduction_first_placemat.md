@@ -163,7 +163,7 @@ There is a comment line (comments begin with a &lsquo;`%`&rsquo;).
 ```PostScript
 % Recommendation: move changed parameters to just above this line.
 ```
-By copy-paste move the changed parameters to above that line. 
+By cut-and-paste move the changed parameters to above that line. 
 And then move and update `ParametersVersionDateTimeAdobeFormat`, which is the time-stamp of the changing of the parameters in the form D:YYYYMMDDhhmm. 
 
 ### More settings
