@@ -1,6 +1,6 @@
 %!PS
 
-% This version 00:15 Thursday 24th February 2022
+% This version 18:45 Thursday 24th February 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202202240015) def
+/ParametersVersionDateTimeAdobeFormat (D:202202241845) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202202240015) def
+/SoftwareVersionDateTimeAdobeFormat (D:202202241845) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -8318,6 +8318,7 @@ currentdict /GlyphShowKnownAbsences undef
 	} if  % ... GlassesNumCopies 1 ge ...
 	{GlassesNumCopies 1 ge  DecanterLabelsNumCopies 1 ge  PrePourNumCopies 1 ge  StickyLabelsNumCopies 1 ge  or or or} MightBeTrue
 	{
+		()
 		Abovetitles NonEmptyCompoundObject {(AbovetitleFontSizes/TitleFontSizes = ) AbovetitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
 		Belowtitles NonEmptyCompoundObject {(BelowtitleFontSizes/TitleFontSizes = ) BelowtitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
 		Overtitles NonEmptyCompoundObject {(OvertitleFontSizes/TitleFontSizes = ) OvertitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
@@ -12576,25 +12577,29 @@ currentdict /GlyphShowKnownAbsences undef
 						/CDTitleFontSize [ CDTopTextFontSize  18  CDBestHeightOneCork 6 div  CDBestWidthOneCork 6 div ] Min def
 						/CDSubtitleFontSize  VoteRecorderSubtitleFontSizeProportionTitles dup IsNumber not {pop 0.5} if  CDTitleFontSize mul def  % Embedded constant
 
-						/CDSpareHoles CDBestNumCols CDBestNumRows mul CDBestNumPages mul  GlassesClusteredOnCorkDisplay CorkDisplaySetNum GetEU {length sub} forall def
+						/CDSpareHoles  CDNumGlasses 0 gt {CDBestNumCols CDBestNumRows mul CDBestNumPages mul  CDNumGlasses sub} {0} ifelse  def
 
 						/WithinPage 0 def  /CorkDisplayThisPageTitles () def
-						GlassesClusteredOnCorkDisplay CorkDisplaySetNum GetEU
+						GlassesClusteredOnCorkDisplay CorkDisplaySetNum GetEU     dup //true exch {length 0 gt {pop //false exit} if} forall {pop [ [ -1 ] ]} if
 						{
 							execU
 							{
 								/WithinTitles exch execU def
 								WithinTitles type /integertype eq {CorkDisplayNumCopies} {1} ifelse  % Should be redundant following change in code on 11 March 2018.
 								{
-									WithinPage 0 eq
+									WithinTitles -1 eq  WithinPage 0 eq  or
 									{
 										//false  //false  MirrorPagesCorkDisplay CorkDisplaySetNum GetEU  //true  CorkDisplayPaperType  CDBestOrientation  SetPaperSize
 										//true DefStoreMgns
 										//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 										HeadersAndFooters PaintHeadersFooters
-										CorkDisplayTopTextHeight 0 gt {HeaderFont CDTopTextFontSize selectfont   PageWidth MgnL MgnR sub CDTopTextL CDTopTextR add sub add 2 div  PageHeight MgnT CDTopTextT add sub  moveto 0 setgray CorkDisplayTopText ShowRecursive} if
-									} if  % WithinPage 0 eq
-									WithinTitles type /integertype eq  % Should be redundant following change in code on 11 March 2018.
+										CorkDisplayTopTextHeight 0 gt
+										{
+											PageWidth MgnL MgnR sub CDTopTextL CDTopTextR add sub add 2 div  PageHeight MgnT CDTopTextT add sub  moveto
+											HeaderFont CDTopTextFontSize selectfont  0 setgray  CorkDisplayTopText ShowRecursive
+										} if  % CorkDisplayTopTextHeight 0 gt
+									} if  % WithinTitles -1 eq  WithinPage 0 eq  or
+									WithinTitles type /integertype eq {WithinTitles -1 ne} {//false} ifelse % First clause should be redundant following change in code on 11 March 2018.
 									{
 										/CDColNum WithinPage PackingNestingColumnMajor {CDBestNumRows idiv} {CDBestNumCols mod } ifelse def
 										/CDRowNum WithinPage PackingNestingColumnMajor {CDBestNumRows mod } {CDBestNumCols idiv} ifelse def
@@ -12643,14 +12648,14 @@ currentdict /GlyphShowKnownAbsences undef
 											CDLeft CDBottom moveto
 											CDLeft  CDBottom CDTitlesB sub moveto  TitlesCorkDisplay WithinTitles get  ShowRecursive
 										} if  % non-empty
-									} if  % WithinTitles type /integertype eq
-									/CorkDisplayThisPageTitles dup load  dup length 0 gt {(; ) Concatenate} if  Titles WithinTitles get PDFDocEncodingify Concatenate  def  % Deliberately Titles rather than TitlesCorkDisplay
+									} if  % WithinTitles type /integertype eq ... WithinTitles -1 ne ...
+									WithinTitles -1 ne {/CorkDisplayThisPageTitles dup load  dup length 0 gt {(; ) Concatenate} if  Titles WithinTitles get PDFDocEncodingify Concatenate  def} if  % Deliberately Titles rather than TitlesCorkDisplay
 									/WithinPage WithinPage 1 add def
-									WithinPage CDBestNumRows CDBestNumCols mul ge
+									WithinTitles -1 ne {WithinPage CDBestNumRows CDBestNumCols mul ge} {//true} ifelse
 									{
 										//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 										ShowPage  /WithinPage 0 def  /CorkDisplayThisPageTitles () def
-									} if
+									} if  % Page finished
 								} repeat  % ... CorkDisplayNumCopies ...
 							} forall
 							WithinPage 0 gt {CDSpareHoles  CDBestNumCols CDBestNumRows mul WithinPage sub  2 copy ge {sub /CDSpareHoles exch def  ShowPage  /WithinPage 0 def  /CorkDisplayThisPageTitles () def} {pop pop} ifelse} if
@@ -13780,7 +13785,7 @@ currentdict /GlyphShowKnownAbsences undef
 									} if  % /Glasses ...
 									/TastingNotes TypeOfPagesBeingRendered eq
 									{
-										ThisNameNumTypes 2 ge {(TNs: )} {()} ifelse  mark
+										ThisNameNumTypes 2 ge {(TNs: )} {()} ifelse  mark ()
 										0  1  GlassesOnTastingNotePages TastingSheetNum GetEU length 1 sub
 										{
 											/WithinPage exch def
