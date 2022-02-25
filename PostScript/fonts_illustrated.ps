@@ -1,7 +1,7 @@
 %!PS
 
-% This version 21:15 Thursday 27th August 2020
-/CreationDateAdobeFormat (D:202008272115) def
+% This version 23:30 Friday 25th February 2022
+/CreationDateAdobeFormat (D:202202252330) def
 
 /FontStartNum 0 def   % ordered after all sorting
 /FontEndNum 2147483647 def % ordered after all sorting
@@ -1370,19 +1370,7 @@
 } bind def  % /CharPathRecursive
 
 % name  GlyphMightBeGoodInCurrentFont  bool
-/GlyphMightBeGoodInCurrentFont
-{
-	1 dict begin
-	/GlyphToTest exch def
-	true
-	1 {
-		currentfont /FontType get 1 eq
-		{
-			currentfont /CharStrings get /GlyphToTest known not {pop false exit} if
-		} if  % Type 1
-	} repeat  % 1 {...} repeat  allows exit
-	end
-} bind def  % /GlyphMightBeGoodInCurrentFont
+/GlyphMightBeGoodInCurrentFont {currentfont /CharStrings get exch known} bind def
 
 % End standard subroutines
 
@@ -1482,8 +1470,8 @@ DeBugLevel 100 le {(+ Populate FontsGood) == flush} if
 					% "Note: Distiller does not support Type 32 fonts."
 					ThisFont /FontType 2 copy known {get 32 eq {stop} if} {pop pop} ifelse
 					ThisFont /WMode known {currentfont /WMode get 0 ne} {false} ifelse   {exit} if
-					ThisFont false  MandatoryGlyphs {GlyphMightBeGoodInCurrentFont not {pop true exit} if} forall {exit} if
 					ThisFont //FontSize scalefont setfont
+					ThisFont false  MandatoryGlyphs {GlyphMightBeGoodInCurrentFont not {pop true exit} if} forall {exit} if
 					0 0 moveto (W) true charpath flattenpath pathbbox newpath 3 -1 roll le 3 1 roll ge or {exit} if
 					/ThisFontSpecial false SpecialFonts {FontNames n get eq {pop true exit} if} forall def
 					ThisFontSpecial {() OutputToLog  FontNames n get OutputToLog  n OutputToLog} if
