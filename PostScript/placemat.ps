@@ -1,6 +1,6 @@
 %!PS
 
-% This version 18:45 Thursday 24th February 2022
+% This version 19:20 Friday 25th February 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202202241845) def
+/ParametersVersionDateTimeAdobeFormat (D:202202251920) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202202241845) def
+/SoftwareVersionDateTimeAdobeFormat (D:202202251920) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -14183,7 +14183,7 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				mark
 					/Action /GoTo /Dest GlassesCircleDestName
-					/Color [0 0 0]  /F 0  /Count  FirstGlasses length 2 add neg  % 2 add because of links to bug reports
+					/Color [0 0 0]  /F 0  /Count  FirstGlasses length 1 add neg  % 1 add because of links to bug report
 					/Title  mark (Zooms of ) /GlassesNumCopies load type /integertype eq Names length 0 gt and {0 SheetLengths {add} forall Names length mul GlassesNumCopies mul ShownGlassesCircles eq
 					{
 						ShownGlassesCircles (=) Names length (\327)  0 SheetLengths {add} forall  GlassesNumCopies dup 1 gt {(\327) exch} {pop} ifelse ( )
@@ -14217,7 +14217,6 @@ currentdict /GlyphShowKnownAbsences undef
 			end end
 		} bind forall  % /ShownGlassesNum
 		mark  /Title (\(Mac Preview: zoom-in fails\))         /Color [0.4 0.4 0.4]  /Action << /Subtype /URI /URI (http://discussions.apple.com/thread/7234631)               >>  /Count 0  /F 0  /OUT  pdfmark
-		mark  /Title (\(Chrome PDF plug-in: zoom-in fails\))  /Color [0.4 0.4 0.4]  /Action << /Subtype /URI /URI (http://code.google.com/p/chromium/issues/detail?id=535978) >>  /Count 0  /F 0  /OUT  pdfmark
 	} if  % FirstGlasses length 0 gt  NumSheets 0 gt  and
 	end
 
