@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:40 Friday 25th February 2022
+% This version 19:30 Saturday 26th February 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202202252340) def
+/ParametersVersionDateTimeAdobeFormat (D:202202261930) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -155,7 +155,7 @@
 % /PackingDirectionTopToBottom /PackingDirectionLeftToRight /PackingNestingColumnMajor  /RowsNumMin /RowsNumMax  /CentralGlasses /RectColsToLeftOrRowsBelow /TempleExtraColsToLeftOrRowsBelow
 % /SquareGrid only, /HorizontalAlignment is followed by one of /Left /Right /Centre /Justify; and /VerticalAlignment by one of /Top /Bottom /Middle /Justify.
 % Also the flags /SuppressNonRightOrnaments and /SuppressNonLeftOrnaments suppress headers, icons, and water boxes that not on the labelled side (i.e., on other side or in centre).
-/PackingNestingColumnMajor false def  % Default value, which can be overridden at the level of the individual item of PackingStyles
+/PackingNestingColumnMajor {Orientation /Landscape eq} def  % Default value, which can be overridden at the level of the individual item of PackingStyles
 /PackingDirectionTopToBottom true def  % Ditto
 /PackingDirectionLeftToRight true def  % Ditto
 /PackingStyles [
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202202252340) def
+/SoftwareVersionDateTimeAdobeFormat (D:202202261930) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -12601,8 +12601,8 @@ currentdict /GlyphShowKnownAbsences undef
 									} if  % WithinTitles -1 eq  WithinPage 0 eq  or
 									WithinTitles type /integertype eq {WithinTitles -1 ne} {//false} ifelse % First clause should be redundant following change in code on 11 March 2018.
 									{
-										/CDColNum WithinPage PackingNestingColumnMajor {CDBestNumRows idiv} {CDBestNumCols mod } ifelse def
-										/CDRowNum WithinPage PackingNestingColumnMajor {CDBestNumRows mod } {CDBestNumCols idiv} ifelse def
+										/CDColNum WithinPage << /SheetNum 0 >> begin PackingNestingColumnMajor end {CDBestNumRows idiv} {CDBestNumCols mod } ifelse def
+										/CDRowNum WithinPage << /SheetNum 0 >> begin PackingNestingColumnMajor end {CDBestNumRows mod } {CDBestNumCols idiv} ifelse def
 										/CDLeft CDGapBetween CDBestWidthOneCork  add CDColNum mul MgnL add def
 										/CDBottom CDGapBetween CDBestHeightOneCork add CDBestNumRows CDRowNum sub 1 sub mul MgnB add def
 										CDLeft CDBottom CDBestWidthOneCork CDBestHeightOneCork  CirclearraysCorkDisplay WithinTitles get
