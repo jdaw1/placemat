@@ -196,7 +196,7 @@ Is the image wanted on either of those?
 Hence page type is tested.
 * Is the image wanted for all wines, or only for those for which this is the correct brand logo? 
 The example selects only the first: `WithinTitles 0 eq`. 
-* Is the image colour or gray? The former has three times the amount of data, so this knowledge is needed, and imparted with `/DeviceGray setcolorspace` or `/DeviceRGB setcolorspace`. Use of `/DeviceGray` when the data is colour can leave excess data on the stack, causing an error to appear much later in execution, hence with seemingly unconnected error reporting. 
+* Is the image colour or gray? The former has three times the amount of data, so this knowledge is needed, and imparted with `/DeviceGray setcolorspace` or `/DeviceRGB setcolorspace`. Use of `/DeviceGray` when the data is colour can leave excess data on the stack, causing an error to appear much later in execution, hence with error reporting seemingly unconnected to image painting. 
 * Update `<< /width 640 /height 400 >>` to match the pixel dimensions of the bitmap.
 * The image needs to be `scale`d. If being scaled by equal amounts in both directions, as is usual, the multiplier can be computed and followed by `dup scale`. The example is scaled to fit precisely inside the circle: `RadiiCirclearrayInside SheetNum get  width dup mul height dup mul add sqrt 2 div  div`, which works well for an image the contents of which are conveniently rectangular. But trial-and-error isn&rsquo;t bad: guess 0.5; guess 0.02; go from there.
 * We want the point (0,0) to be the centre of the image, not its lower-left, which is done with `width -2 div height -2 div translate`. 
