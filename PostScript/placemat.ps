@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:30 Saturday 26th February 2022
+% This version 23:55 Tuesday 1st March 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202202261930) def
+/ParametersVersionDateTimeAdobeFormat (D:202203012355) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202202261930) def
+/SoftwareVersionDateTimeAdobeFormat (D:202203012355) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -10659,10 +10659,28 @@ currentdict /GlyphShowKnownAbsences undef
 						NamesVoteRecorderWidths exch get  exch NamesVoteRecorderWidths exch get  ge
 						def  % /SortIncreasingVR
 
-						mark (NamesVoteRecorder, widths: )
-						[ 0  1  NamesVoteRecorder length 1 sub {[exch dup NamesVoteRecorder exch get ASCIIfy exch NamesVoteRecorderWidths exch get]} for ]  dup
-						mark exch () exch {aload pop (=) exch (; )} forall pop (. Sorted ) SortIncreasingVR {(in)} {(de)} ifelse (creasing: )  ConcatenateToMark
-						() 3 -1 roll dup {1 get exch 1 get SortIncreasingVR {gt} {lt} ifelse} ShellSort  {0 get (; )} forall pop (.) ConcatenateToMark OutputToLog
+						% VoteRecorder slightly neater if names sorted by length. Usual practice to begin with honoured guest, then organiser, then the others sorted by length. These logs help sorting.
+						mark () (NamesVoteRecorder, sorted ) (longer) (shorter) SortIncreasingVR {exch} if (-to-) exch (: )
+						[ 0  1  NamesVoteRecorder length 1 sub {[exch dup NamesVoteRecorder exch get ASCIIfy exch NamesVoteRecorderWidths exch get]  dup 1 get 0 eq {pop} if} for ]
+						dup {1 get exch 1 get SortIncreasingVR {gt} {lt} ifelse} ShellSort  {0 get (; )} forall pop
+						{dup dup (; ) eq exch () eq or {pop} {exit} ifelse} loop  % pop until string that is neither () nor (; )
+						dup length 0 gt {dup dup length 1 sub 1 getinterval (.) ne {(.)} if} if  % If top string doesn't end in a ".", add one.
+						(  Names with lengths locally non-monotonic: )
+						1  1  NamesVoteRecorderWidths length 2 sub
+						{
+							/NameNum exch def
+							NamesVoteRecorderWidths NameNum 1 sub get 0 gt
+							NamesVoteRecorderWidths NameNum       get 0 gt and
+							NamesVoteRecorderWidths NameNum 1 add get 0 gt and
+							{
+								NamesVoteRecorderWidths NameNum get   NamesVoteRecorderWidths NameNum 1 sub get  1 index  NamesVoteRecorderWidths NameNum 1 add get  4 copy
+								gt 3 1 roll gt and 5 1 roll  lt 3 1 roll lt and  or
+								{
+									NamesVoteRecorder NameNum get ASCIIfy (; )
+								} if  % Non-montonic
+							} if  % ... 0 gt
+						} for  % i
+						(; ) eq {dup length 0 gt {dup dup length 1 sub 1 getinterval (.) ne {(.)} if} if} if  ConcatenateToMark OutputToLog
 						/VoteRecorderNamesWidthsLogged //true store
 					} if  % any non-0 widths
 					currentdict /NamesVoteRecorderWidths undef
