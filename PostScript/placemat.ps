@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:55 Tuesday 1st March 2022
+% This version 17:30 Saturday 5th March 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202203012355) def
+/ParametersVersionDateTimeAdobeFormat (D:202203051730) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202203012355) def
+/SoftwareVersionDateTimeAdobeFormat (D:202203051730) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1248,6 +1248,19 @@ currentdict /ShellSortGapsLength1Subs undef
 } bind def  % FormatDecimalPlaces
 
 /TruncateTo255 {dup length 255 gt {0 254 getinterval (\203) Concatenate} if} bind def
+
+/TerminatingFullStopAppend
+{
+	counttomark
+	{
+		dup type /stringtype ne {exit} if  % Hopefully never reached.
+		dup length {dup dup length 1 sub get //AsciiSpace eq {dup length 1 sub 0 exch getinterval} {exit} ifelse} repeat
+		dup length 0 gt
+		{
+			dup dup length 1 sub 1 getinterval (.) ne {(.)} if exit
+		} {pop} ifelse  % length 0 gt
+	} repeat  % counttomark
+} bind def  % /TerminatingFullStopAppend
 
 % name|code  WatchExpression_MakeString  (string)
 /WatchExpression_MakeString
@@ -2075,7 +2088,7 @@ DesMaxLength 0 ge {ConcatenateToMark OutputToLog} {cleartomark} ifelse   end
 		/NameNum exch def
 		NamesIsLeftHander NameNum get {( NameNum=) NameNum (, ) Names NameNum get ASCIIfy (;)} if
 	} bind for  % NameNum
-	ConcatenateToMark  OutputToLog
+	(;) eq {TerminatingFullStopAppend} if  ConcatenateToMark  OutputToLog
 } if  % any lefties
 //false  NamesTastingNotes Names ne {NamesIsLeftHanderTN {{pop //true exit} if} forall} if
 {
@@ -2085,7 +2098,7 @@ DesMaxLength 0 ge {ConcatenateToMark OutputToLog} {cleartomark} ifelse   end
 		/NameNum exch def
 		NamesIsLeftHanderTN NameNum get {( NameNum=) NameNum (, ) NamesTastingNotes NameNum get ASCIIfy (;)} if
 	} bind for  % NameNum
-	ConcatenateToMark  OutputToLog
+	(;) eq {TerminatingFullStopAppend} if  ConcatenateToMark  OutputToLog
 } if  % any lefties
 {PlaceNames} MightBeTrue
 {
@@ -2101,7 +2114,7 @@ DesMaxLength 0 ge {ConcatenateToMark OutputToLog} {cleartomark} ifelse   end
 				NamesIsLeftHanderPN PlaceNameSetNum get NameNum get {( PlaceNameSetNum=) PlaceNameSetNum (, NameNum=) NameNum (, ) NamesPlaceNames PlaceNameSetNum GetEU NameNum get ASCIIfy (;)} if
 			} for  % NameNum
 		} bind for  % PlaceNameSetNum
-		ConcatenateToMark  OutputToLog
+		(;) eq {TerminatingFullStopAppend} if  ConcatenateToMark  OutputToLog
 	} if  % any lefties
 } if  % ...PlaceNames...
 end
@@ -10663,8 +10676,7 @@ currentdict /GlyphShowKnownAbsences undef
 						mark () (NamesVoteRecorder, sorted ) (longer) (shorter) SortIncreasingVR {exch} if (-to-) exch (: )
 						[ 0  1  NamesVoteRecorder length 1 sub {[exch dup NamesVoteRecorder exch get ASCIIfy exch NamesVoteRecorderWidths exch get]  dup 1 get 0 eq {pop} if} for ]
 						dup {1 get exch 1 get SortIncreasingVR {gt} {lt} ifelse} ShellSort  {0 get (; )} forall pop
-						{dup dup (; ) eq exch () eq or {pop} {exit} ifelse} loop  % pop until string that is neither () nor (; )
-						dup length 0 gt {dup dup length 1 sub 1 getinterval (.) ne {(.)} if} if  % If top string doesn't end in a ".", add one.
+						dup (; ) eq {pop TerminatingFullStopAppend} if  % pop until string that is neither () nor (; )
 						(  Names with lengths locally non-monotonic: )
 						1  1  NamesVoteRecorderWidths length 2 sub
 						{
@@ -10680,7 +10692,7 @@ currentdict /GlyphShowKnownAbsences undef
 								} if  % Non-montonic
 							} if  % ... 0 gt
 						} for  % i
-						(; ) eq {dup length 0 gt {dup dup length 1 sub 1 getinterval (.) ne {(.)} if} if} if  ConcatenateToMark OutputToLog
+						(; ) eq {TerminatingFullStopAppend} if  ConcatenateToMark OutputToLog
 						/VoteRecorderNamesWidthsLogged //true store
 					} if  % any non-0 widths
 					currentdict /NamesVoteRecorderWidths undef
@@ -14432,7 +14444,7 @@ OutputLogToPage {false PageSuppressed not} {false} ifelse
 				j i gt
 				{
 					/ThisLineToShow TextToShow i j i sub getinterval def
-					{TextToShow dup length dup 0 eq {pop pop exit} if 1 sub 2 copy get dup AsciiTab eq exch AsciiSpace eq or {0 exch getinterval /TextToShow exch def} {pop pop exit} ifelse} loop  % Trim tabs and spaces from end
+					{TextToShow dup length dup 0 eq {pop pop exit} if 1 sub 2 copy get dup //AsciiTab eq exch //AsciiSpace eq or {0 exch getinterval /TextToShow exch def} {pop pop exit} ifelse} loop  % Trim tabs and spaces from end
 					1 {
 						//false
 						0 1 ThisLineToShow length 5 sub {ThisLineToShow exch 5 getinterval (Error)   eq {pop //true} if dup {exit} if} for
