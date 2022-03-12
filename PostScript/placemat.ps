@@ -1,6 +1,6 @@
 %!PS
 
-% This version 17:30 Saturday 5th March 2022
+% This version 23:00 Saturday 12th March 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202203051730) def
+/ParametersVersionDateTimeAdobeFormat (D:202203122300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -500,7 +500,10 @@ if} bind def  % /VoteRecorderCrossedBox
 /CrossHatchingCentreX /CenterSheetsSamePageOrdering def  % number /Name /Left /Center /Right /CenterSheetsSamePageOrdering
 /CrossHatchingCentreY /Bottom def  % number /Name /Bottom /Middle /Top
 
-/InlinePrefillWhite {CrossHatchingInside Spirals or} bind def
+/InlineTitlesPrefillWhite {CrossHatchingInside Spirals or} def
+/InlineAbovetitlesPrefillWhite /InlineTitlesPrefillWhite load def
+/InlineBelowtitlesPrefillWhite /InlineTitlesPrefillWhite load def
+/InlineOvertitlesPrefillWhite true def
 /InlineTitlesBlackWidth {InlineTitlesMaxNumberContours 1 gt {0.96} {1.44} ifelse} bind def  % Black isn't always black. Sometimes it's grey.
 /InlineTitlesWhiteWidth {InlineTitlesBlackWidth 2 mul} bind def  % White isn't always white. Sometimes it's grey.
 /InlineAbovetitlesBlackWidth {InlineTitlesBlackWidth 2 div} bind def  % Black isn't always black. Sometimes it's grey.
@@ -764,7 +767,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202203051730) def
+/SoftwareVersionDateTimeAdobeFormat (D:202203122300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -9883,7 +9886,7 @@ currentdict /GlyphShowKnownAbsences undef
 							moveto
 							Titles WithinTitles get  //true  CharPathRecursive
 						} def  % /InlinePath
-						InlinePath GSave clip InlinePrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+						InlinePath GSave clip InlineTitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 						/InlineBlackPlusWhite  InlineTitlesBlackWidth InlineTitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineTitlesAttemptMinimiseNumContours
 						{
@@ -9978,7 +9981,7 @@ currentdict /GlyphShowKnownAbsences undef
 							OvertitleOffsetsProportionFontSizeVertical SheetNum get WithinPage get  OvertitleFontSizes SheetNum get WithinPage get  mul
 							moveto   Overtitles WithinTitles get  //true  CharPathRecursive
 						} def  % InlinePath
-						InlinePath GSave clip InlinePrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+						InlinePath GSave clip InlineOvertitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 						/InlineBlackPlusWhite  InlineOvertitlesBlackWidth InlineOvertitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineAboveBelowOverAttemptMinimiseNumContours
 						{
@@ -10069,7 +10072,7 @@ currentdict /GlyphShowKnownAbsences undef
 							BelowtitleOffsetsAbsoluteVertical SheetNum get WithinPage get
 							moveto   Belowtitles WithinTitles get  //true  CharPathRecursive
 						} def  % InlinePath
-						InlinePath GSave clip InlinePrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+						InlinePath GSave clip InlineBelowtitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 						/InlineBlackPlusWhite  InlineBelowtitlesBlackWidth InlineBelowtitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineAboveBelowOverAttemptMinimiseNumContours
 						{
@@ -10160,7 +10163,7 @@ currentdict /GlyphShowKnownAbsences undef
 							AbovetitleOffsetsAbsoluteVertical SheetNum get WithinPage get
 							moveto   Abovetitles WithinTitles get  //true  CharPathRecursive
 						} def  % InlinePath
-						InlinePath GSave clip InlinePrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+						InlinePath GSave clip InlineAbovetitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 						/InlineBlackPlusWhite  InlineAbovetitlesBlackWidth InlineAbovetitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineAboveBelowOverAttemptMinimiseNumContours
 						{

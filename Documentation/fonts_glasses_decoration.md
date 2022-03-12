@@ -275,7 +275,7 @@ If the capped number of contours is large, then it becomes relevant that the cod
 It does so if `InlineTitlesAttemptMinimiseNumContours` (or `InlineAboveBelowOverAttemptMinimiseNumContours` or `InlinePlaceNamesAttemptMinimiseNumContours`) is `true`. 
 If the code&rsquo;s estimate is too low, as might happen if the lines are very thin, then the booleans should be false and the upper bounds set carefully. The attempted estimate is computed using a horrible algorithm, &lsquo;discussed&rsquo; at [comp.lang.postscript](http://groups.google.com/g/comp.lang.postscript/c/86b7Sg8v7B0). 
 
-If `InlinePrefillWhite`, all of the Titles/Abovetitles/Belowtitles/Overtitles are filled white before painting the &lsquo;Inlines&rsquo;, so are opaque. 
+If `InlineTitlesPrefillWhite` / `InlineAbovetitlesPrefillWhite` / `InlineBelowtitlesPrefillWhite` / `InlineOvertitlesPrefillWhite`, then the `Titles` / `Abovetitles` / `Belowtitles` / `Overtitles` are filled white before painting the &lsquo;Inlines&rsquo;, so are opaque. 
 This is good if there is CrossHatchingInside, but less good with BackgroundTextsGlasses. 
 Again, the routine requested in [issue&nbsp;18](http://github.com/jdaw1/placemat/issues/18) would be a blessing.
 
