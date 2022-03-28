@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Saturday 12th March 2022
+% This version 21:00 Monday 28th March 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202203122300) def
+/ParametersVersionDateTimeAdobeFormat (D:202203282100) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -767,7 +767,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202203122300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202203282100) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -12745,9 +12745,9 @@ currentdict /GlyphShowKnownAbsences undef
 					[ /NTBestRotatedness /NTBestNumRows /NTBestNumCols /NTBestRadius /NTBestWidthPer /NTBestHeightPer ] {//null def} forall
 
 					21 dict begin
-					[ //false //true ]
+					0  1  1
 					{
-						/NTRotated exch def
+						1 eq /NTRotated exch def
 						1  1  NTNumGlasses  NTSpaceH NTGapBetweenMin add NTRotated {NeckTagsMinHeight} {NeckTagsMinWidth} ifelse NTGapBetweenMin add div cvi dup 1 lt {pop 1} if 2 copy gt {exch} if pop
 						{
 							/NTNumCols exch def
@@ -12796,7 +12796,7 @@ currentdict /GlyphShowKnownAbsences undef
 								} if  % new best
 							} for  % NTNumRows
 						} for  % NTNumCols
-					} forall  % NTRotated
+					} for  % NTRotated
 					end
 
 					/StringAnnotationPDF
@@ -12864,7 +12864,7 @@ currentdict /GlyphShowKnownAbsences undef
 											/NTCentreX  PageWidth  MgnR MgnL sub add 2 div  NTBestNumCols 1 sub 2 div NTColNum sub  NTBestRotatedness {NTBestHeightPer} {NTBestWidthPer} ifelse NTGapBetweenH add mul sub  def
 											/NTCentreY  PageHeight MgnT MgnB sub add 2 div  NTBestNumRows 1 sub 2 div NTRowNum sub  NTBestRotatedness {NTBestWidthPer} {NTBestHeightPer} ifelse NTGapBetweenV add mul add  def
 											/MatrixNT
-												NTBestRotatedness {NTColNum NTBestNumCols 1 sub eq NTColNum 0 gt and {-90} {90} ifelse matrix rotate} {NTRowNum NTBestNumRows 1 sub eq NTRowNum 0 gt and {180 matrix rotate} if} ifelse
+												NTBestRotatedness {NTBestNumCols 1 gt NTColNum 0 eq and {-90} {90} ifelse matrix rotate} {NTBestNumRows 1 gt NTRowNum 0 eq and {180 matrix rotate} if} ifelse
 												NTCentreX NTCentreY matrix translate   MatrixPaper
 											{1 index type /arraytype eq {matrix concatmatrix} {exit} ifelse} loop  def  % /MatrixNT
 											/MatrixTitlesEtc
