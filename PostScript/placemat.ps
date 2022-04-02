@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:00 Monday 28th March 2022
+% This version 23:00 Saturday 2nd April 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202203282100) def
+/ParametersVersionDateTimeAdobeFormat (D:202204022300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -62,7 +62,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 19) {SuperscriptOn} (th) {SuperscriptOff} ( April 2022)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( October 2022)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -155,7 +155,7 @@
 % /PackingDirectionTopToBottom /PackingDirectionLeftToRight /PackingNestingColumnMajor  /RowsNumMin /RowsNumMax  /CentralGlasses /RectColsToLeftOrRowsBelow /TempleExtraColsToLeftOrRowsBelow
 % /SquareGrid only, /HorizontalAlignment is followed by one of /Left /Right /Centre /Justify; and /VerticalAlignment by one of /Top /Bottom /Middle /Justify.
 % Also the flags /SuppressNonRightOrnaments and /SuppressNonLeftOrnaments suppress headers, icons, and water boxes that not on the labelled side (i.e., on other side or in centre).
-/PackingNestingColumnMajor {Orientation /Landscape eq} def  % Default value, which can be overridden at the level of the individual item of PackingStyles
+/PackingNestingColumnMajor {Orientation /Landscape eq  SideBySideGlassesTastingNotes not  and} def  % Default value, which can be overridden at the level of the individual item of PackingStyles
 /PackingDirectionTopToBottom true def  % Ditto
 /PackingDirectionLeftToRight true def  % Ditto
 /PackingStyles [
@@ -767,7 +767,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202203282100) def
+/SoftwareVersionDateTimeAdobeFormat (D:202204022300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
