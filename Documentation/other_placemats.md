@@ -30,4 +30,5 @@ Do suggest others.
 * Black-edged circles (too small), titled &ldquo;1&rdquo; to &ldquo;7&rdquo;, on a bordered page with a corporate logo: [Hamilton Russell Pinot Noir spanning 5 decades from the first vintage](https://twitter.com/joannasimon/status/1503767785792589825), 15 March 2022. 
 
 * For sale at [Wine Folly](https://shop.winefolly.com/collections/wine-accessories/products/wine-tasting-placemats), $1 each, being three plain circles, with tasting-note space. 
-(Free, by this software, near-equivalent, on [`/A4`&nbsp;=&nbsp;297mm&times;210mm](http://www.jdawiseman.com/2022/Three_plain_SideBySide_A4.pdf), or on [`/USL`&nbsp;=&nbsp;US&nbsp;Letter&nbsp;=&nbsp;11&Prime;&times;8&frac12;&Prime;](http://www.jdawiseman.com/2022/Three_plain_SideBySide_USL.pdf).)
+(Free, by this software, near-equivalent, on [`/A4`&nbsp;=&nbsp;297mm&times;210mm](http://github.com/jdaw1/placemat/blob/main/Documentation/images/Three_plain_SideBySide_A4.pdf), or on [`/USL`&nbsp;=&nbsp;US&nbsp;Letter&nbsp;=&nbsp;11&Prime;&times;8&frac12;&Prime;](http://github.com/jdaw1/placemat/blob/main/Documentation/images/Three_plain_SideBySide_USL.pdf).)
+
