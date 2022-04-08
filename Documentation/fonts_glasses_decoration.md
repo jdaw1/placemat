@@ -39,7 +39,7 @@ Extracts of code that made the image, for later explanation:
 /FontSizesSetsAboveBelowOver [ 0 0 1 ] def
 /InlineTitles false def
 /FillTitles true def
-/CircletextFontSizeAbsolute 11 def
+/CircletextFontSize 11 def
 ```
 
 

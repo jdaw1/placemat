@@ -416,7 +416,7 @@ Some extracts from the code used to make some of examples on this page.
 /FontSizesRatioTitlesMin 999 def
 
 /CircletextsMinNumSpacesBetween 1.5 def
-/CircletextFontSizeAbsolute 12 def
+/CircletextFontSize 12 def
 
 /InlineTitles false def
 

@@ -34,7 +34,7 @@ In the author&rsquo;s old placemats, the most often changed, in order from most 
 
 * `BelowtitleMaxFontSizeProportionTitles`, to values in the range `0.16666`&ndash;`0.5`. Also, but less often, and to similar values, `OvertitleMaxFontSizeProportionTitles` and `AbovetitleMaxFontSizeProportionTitles`.
 
-* `CircletextFontSizeAbsolute` to values `6`&ndash;`16`.
+* `CircletextFontSize` to values `6`&ndash;`16`.
 
 * `FontSizesSetsAboveBelowOver`, from `[ 0 0 0 ]` to `[ 0 0 1 ]`.
 
@@ -58,7 +58,7 @@ These should be tackled in order.
 
 ### Worthwhile
 
-The circle text is initially set to be `CircletextFontSizeAbsolute`. 
+The circle text is initially set to be `CircletextFontSize`. 
 Also relevant is `CircletextsMinNumSpacesBetween`, the gap between the items of `Circlearrays`, measured in space widths.
 
 ### Superfluous

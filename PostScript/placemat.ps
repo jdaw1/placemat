@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:00 Friday 8th April 2022
+% This version 22:15 Friday 8th April 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202204082200) def
+/ParametersVersionDateTimeAdobeFormat (D:202204082215) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -269,7 +269,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /CircletextsMinCopies 2 def
 /CircletextsTweakSize true def
 /CircletextMaxFontSizeMayBeSlightlyExceeded true def
-/CircletextFontSizeAbsolute 8 def
+/CircletextFontSize 8 def
 /CircletextsSameFontSizeIfRadiiShrunkToBeSame true def
 
 
@@ -766,7 +766,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202204022300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202204082215) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -7424,7 +7424,7 @@ currentdict /GlyphShowKnownAbsences undef
 				0  1  SheetLengths SheetNum get 1 sub
 				{
 					4 dict begin   WithinPage-WithinTitles-def
-					/CircletextsBasicFS CircletextFontSizeAbsolute def
+					/CircletextsBasicFS CircletextFontSize def
 					% NumCopies * WidthUnitFont * FontSize = TwoPi * (CirclearraysBMin * FontSize + Radius)
 					% <==>  NumCopies = TwoPi * (CirclearraysBMin + Radius/FontSize) / WidthUnitFont
 					% <==>  FontSize  =  TwoPi * Radius / (NumCopies * WidthUnitFont - TwoPi * CirclearraysBMin)
@@ -7466,7 +7466,7 @@ currentdict /GlyphShowKnownAbsences undef
 					CirclearraysPaddedW SheetNum get WithinPage get CircletextsMinCopiesIndividually SheetNum get WithinPage get mul //TwoPi div  CirclearraysB SheetNum get WithinPage get sub
 					dup 0 gt
 					{
-						Radii SheetNum get exch div  CircletextFontSizeAbsolute  2 copy gt {exch} if pop
+						Radii SheetNum get exch div  CircletextFontSize  2 copy gt {exch} if pop
 						dup CircletextMaxFontSizes SheetNum  3 copy get gt {3 -1 roll put} {pop pop pop} ifelse
 						dup CirclearraysB SheetNum get WithinPage get mul  CirclearraysDescenderMin SheetNum  3 copy get lt {3 -1 roll put} {pop pop pop} ifelse
 					} {pop //PrinterEpsilon} ifelse  % ... 0 gt
@@ -7494,7 +7494,7 @@ currentdict /GlyphShowKnownAbsences undef
 					WithinPage-WithinTitles-def
 					CirclearraysPaddedW SheetNum get WithinPage get CircletextsMinCopiesIndividually SheetNum get WithinPage get mul  dup 0 gt
 					{
-						RadiiCirclearrayBaseline SheetNum get //TwoPi mul exch div  CircletextFontSizeAbsolute  2 copy gt {exch} if pop
+						RadiiCirclearrayBaseline SheetNum get //TwoPi mul exch div  CircletextFontSize  2 copy gt {exch} if pop
 					} {pop //PrinterEpsilon} ifelse
 					CirclearraysFontSizes SheetNum get exch WithinPage exch put
 				} for  % WithinPage, WithinTitles
