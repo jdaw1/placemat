@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:15 Friday 8th April 2022
+% This version 20:15 Thursday 14th April 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202204082215) def
+/ParametersVersionDateTimeAdobeFormat (D:202204142015) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -260,10 +260,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /FontSizesBelowtitlesEquivalences FontSizesTitlesEquivalences def
 /FontSizesOvertitlesEquivalences FontSizesTitlesEquivalences def
 /RotationTitlesAboveBelowOverCirclearray 0 def
-
-/DecanterLabelsMaxSmallerDimension 53.98 8 sub 360 mul 127 div def  % Size of business card in points, ISO 7810 ID1 being 53.98mm x 85.60mm (less 4mm margins)
-/DecanterLabelsMaxLargerDimension  85.60 8 sub 360 mul 127 div def
-/DecanterLabelsGuillotineMarks true def
 
 /CircletextsMinNumSpacesBetween 3 def
 /CircletextsMinCopies 2 def
@@ -566,9 +562,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /NamesFontSizeMin 18 def
 /NamesFontSizeMax 24 def
 
-/DecanterLabelsPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /Tabloid
-/DecanterLabelsOrientation /Automatic def  % of labels, not of paper. /Landscape /Portrait /Automatic
-
 % GhostScript doesn't pickle settransfer; Preview doesn't see non-pickled settransfer. The bug is in Preview. http://groups.google.com/g/comp.lang.postscript/c/NJLAfvN_jwU
 /TastingNotesCirclesBehind {IsDistiller  {GlassesNumCopies 1 ge} MightBeTrue and  BackgroundTextsTastingNotes not and  SideBySideGlassesTastingNotes not and} bind def
 /TastingNotesCirclesBehindFitAndCentreInRow false def
@@ -641,8 +634,13 @@ if} bind def  % /VoteRecorderCrossedBox
 /NeckTagsShowCrossHatchingInside false def  % ignored if CrossHatchingInside is false
 /NeckTagsPaperType /DecantingNotesPaperType load def
 
+/DecanterLabelsMaxSmallerDimension 130.337 def  % ISO 7810 ID1 = 53.98mm by 85.60mm.
+/DecanterLabelsMaxLargerDimension  219.969 def  % Minus 4mm margins all round, in pt.
+/DecanterLabelsGuillotineMarks true def
 /DecanterLabelsShowOutlineTitles false def  % ignored if OutlineTitles is false
 /DecanterLabelsShowCrossHatchingInside false def  % ignored if CrossHatchingInside is false
+/DecanterLabelsPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /Tabloid
+/DecanterLabelsOrientation /Automatic def  % of labels, not of paper. /Landscape /Portrait /Automatic
 
 % Defaults:
 % Type 0 = www.ryman.co.uk/0220013460/Product ;
@@ -766,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202204082215) def
+/SoftwareVersionDateTimeAdobeFormat (D:202204142015) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
