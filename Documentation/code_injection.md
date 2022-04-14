@@ -407,10 +407,13 @@ This code gets the last item of each sub-array of `Circlearrays`; discards those
 [
 	Circlearrays
 	{
-		dup length 1 sub get dup type /nametype eq
-			{pop}
-			{counttomark 1 sub -1 1 {index 1 index eq {pop exit} if} for}
-		ifelse  % /nametype
+		dup length 1 sub get dup type /nametype ne
+		{
+			dup length 0 gt
+				{counttomark 1 sub -1 1 {index 1 index eq {pop exit} if} for}
+				{pop}
+			ifelse
+		} {pop} ifelse  % /nametype
 	} forall  % Circlearrays
 	()
 ] def  % /Names
