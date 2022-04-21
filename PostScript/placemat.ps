@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Thursday 21st April 2022
+% This version 20:20 Thursday 21st April 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202204212000) def
+/ParametersVersionDateTimeAdobeFormat (D:202204212020) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -764,7 +764,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202204212000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202204212020) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -808,7 +808,8 @@ PrinterEpsilon setflat  % According to PLRM3 p669, automatically substituted wit
 /GetEU {get //UserScratchDict begin exec end} bind def
 /WithinPage-WithinTitles-def {/WithinPage exch def   /WithinTitles //GlassesOnSheets SheetNum get //UserScratchDict begin exec WithinPage get exec end def} bind def
 
-/OutputLog 127 array def  /OutputtedToLog 0 def
+/OutputLog 127 array def  /OutputtedToLog 1 def
+OutputLog  0  (!!! Error !!! Error !!!   An error occurred. More information below.   !!! Error !!! Error !!!) put  % This overwritten if all good.
 % If taking this because other subroutines are being copied, perhaps replace with  /OutputToLog {=} bind def
 /OutputToLog
 {
@@ -14300,7 +14301,7 @@ currentdict /GlyphShowKnownAbsences undef
 	counttomark 1 sub -1 0 {/i exch def i index type /realtype eq {i 1 add -1 roll dup 1 le {2} {1} ifelse FormatDecimalPlaces i 1 add 1 roll} if} for
 	(, excluding time for parameter assignments and log page(s).)
 	ConcatenateToMark  OutputToLog
-	
+
 	/EndError //false def
 	count              dup  0 eq {(and is :-\))} {/EndError //true store (but isn't -- Error!)} ifelse  (     = count:              should = 0                     \n)   dup 0  5 -1 roll  ToString  putinterval dup 39 4 -1 roll putinterval  mark
 	vmstatus pop pop   dup  dup 1 eq exch 2 eq or {(and does :-\))} {/EndError //true store (but doesn't -- Error!)} ifelse (     = vmstatus pop pop:   should = 1|2                       \n) dup 0  5 -1 roll ToString putinterval dup 41 4 -1 roll putinterval
@@ -14308,7 +14309,10 @@ currentdict /GlyphShowKnownAbsences undef
 	CountGraphicsStack dup  0 eq {(and is :-\))} {/EndError //true store (but isn't -- Error!)} ifelse  (     = CountGraphicsStack: should = 0                     \n)   dup 0  5 -1 roll  ToString  putinterval dup 39 4 -1 roll putinterval
 	countdictstack     dup  3 eq {(and is :-\))} {/EndError //true store (but isn't -- Error!)} ifelse  (     = countdictstack:     should = 3                     \n)   dup 0  5 -1 roll  ToString  putinterval dup 39 4 -1 roll putinterval
 	counttomark 2 add -1 roll ConcatenateToMark OutputToLog
-	EndError {(!!! Error !!! Error !!! Error !!!      !!! Error !!! Error !!! Error !!!      !!! Error !!! Error !!! Error !!!) OutputToLog} if
+	EndError
+		{(!!! Error !!! Error !!! Error !!!      !!! Error !!! Error !!! Error !!!      !!! Error !!! Error !!! Error !!!) OutputToLog}
+		{OutputLog  0  (:-\)   :-\)   Happily, execution successfully completed.   :-\)   :-\))  put}
+	ifelse  % EndError
 	count 0 ne {(+pstack) = pstack (-pstack) =} if
 } stopped  % From about 7.5k lines above.
 {
