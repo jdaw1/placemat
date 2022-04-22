@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:20 Thursday 21st April 2022
+% This version 21:45 Friday 22nd April 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202204212020) def
+/ParametersVersionDateTimeAdobeFormat (D:202204222145) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -196,7 +196,9 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /TastingNotesStarsNameColsRowsArrangement  % (ASCIIfied Name) NumCols NumRows /Alternating|/Sideways|/Upright
 [
+	(JDAW) 5 1 /Upright      (Julian W.)   4 copy pop
 	(DRT)  5 1 /Upright      (Derek T.)    4 copy pop
+	(NAC)  5 1 /Upright      (Neil C.)     4 copy pop
 	(CSD)  5 1 /Upright      (Chris D.)    4 copy pop
 	(WPS)  5 1 /Sideways     (Wolfgang S.) 4 copy pop
 	(PW)   5 1 /Sideways     (Phil W.)     4 copy pop
@@ -764,7 +766,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202204212020) def
+/SoftwareVersionDateTimeAdobeFormat (D:202204222145) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -11968,7 +11970,7 @@ currentdict /GlyphShowKnownAbsences undef
 					} repeat  % 1
 					/StarRadius [
 						10
-						TitlesFont TastingNotesTitlesFontSizeMax selectfont (GJPQYgjpqy) StringHeight  1 //Sqrt5 5 div sub mul  % Embedded constant string
+						TitlesFont TastingNotesTitlesFontSizeMax selectfont (DFGKNOSTVW) StringHeight  1 //Sqrt5 5 div sub mul  % Embedded constant string
 						TastingNotesStarTops TastingSheetNum get dup length 1 sub get MgnB sub  TNrows dup 0 le {pop} {1 sub yStepFactor mul 2 add div} ifelse 2 div  % Approx, because stars packed tighter than circles. Final "2 div" to take not more than half space.
 						PageWidth MgnL MgnR add sub 0.25 mul  TNcols dup 0 eq {pop} {1 sub xStepFactor mul 2 add div} ifelse  % Approx, because stars packed tighter than circles
 					] Min   def  % /StarRadius
