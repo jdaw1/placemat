@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:45 Friday 22nd April 2022
+% This version 21:15 Tuesday 3rd May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202204222145) def
+/ParametersVersionDateTimeAdobeFormat (D:202205032115) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -766,7 +766,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202204222145) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205032115) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -877,7 +877,7 @@ ifelse} bind def  % /Stopped
 [
 	% ShellSort is very fast at short arrays, but QuickSort's segregation helps multi-CPU with long arrays.
 	% PostScript's max array size usually 65535 (PLRM3, p739, table B.1), but an implementation could allow longer.
-	% Included are those up to PostScript's max integer = 2^31 - 1, and commented out are subsequent up to 10^15.
+	% Included are those up to PostScript's max integer = 2^31 - 1, subsequent being commented out.
 	% From http://en.wikipedia.org/wiki/Shellsort
 	%   > Gonnet and Baeza-Yates observed that Shellsort makes the fewest comparisons on average when the ratios of successive gaps are
 	%   > roughly equal to 2.2. This is why their sequence with ratio 2.2 and Tokuda's sequence with ratio 2.25 prove efficient. However,
@@ -887,7 +887,9 @@ ifelse} bind def  % /Stopped
 	1 2 5 11 23 51 113 251 563 1259 2813 6289 14063 31439  % Below 2^16
 	70297 157189 351487 785947 1757431 3929741 8787169 19648709 43935851 98243549 219679249 491217733 1098396241  % Below 2^31
 	% 2456088659 5491981199 12280443293 27459905999 61402216471 137299529999 307011082351 686497649983 1535055411751 3432488249899
-	% 7675277058739 17162441249483 38376385293691 85812206247419 191881926468461 429061031237099 959409632342311  % Below 10^15
+	% 7675277058739 17162441249483 38376385293691 85812206247419 191881926468461 429061031237099 959409632342311 2145305156185489
+	% 4797048161711557 10726525780927447 23985240808557793 53632628904637243 119926204042788961 268163144523186221 599631020213944813
+	% 1340815722615931087 2998155101069724053 6704078613079655429 14990775505348620269  % Below 2^64 ~= 18 quintillion
 ] readonly def  % /ShellSortGaps
 /ShellSortGapsLength1Sub ShellSortGaps length 1 sub def
 % Immediate dependencies: DeBugLevel; ShellSortGaps; ShellSortGapsLength1Sub.
