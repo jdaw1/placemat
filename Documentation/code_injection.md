@@ -178,7 +178,7 @@ Multiple variables can be available for inspection.
 
 	- `GlassPositions`, a triple-depth array holding the positions of the glasses. `GlassPositions SheetNum get WithinPage get` is an array, `[x y]`, the position of the centre of the glass placement. 
 
-	- On tasting-note pages, `TastingSheetNum`, an integer being the item of `GlassesOnTastingNotePages` currently being rendered.
+	- On tasting-note pages, `TNSheetNum`, an integer being the item of `GlassesOnTastingNotePages` currently being rendered.
 
 	- On place-name pages, `PlaceNameSetNum`, an integer being the number of the sub-array of `NamesPlaceNames` currently being rendered.
 
@@ -200,7 +200,7 @@ Multiple variables can be available for inspection.
 
 * At the individual glass level (and thus available to glass-level settings such as `InlineTitlesMaxNumberContours`, as well as to one-glass situations such as the pre-pour pages) there will also be: 
 
-	- `WithinPage`, being number of the glass on this page, thus running from zero to one less than the number of glasses on page `SheetNum` or `TastingSheetNum`.
+	- `WithinPage`, being number of the glass on this page, thus running from zero to one less than the number of glasses on page `SheetNum` or `TNSheetNum`.
 
 	- `WithinTitles`, being number of item in the array `Titles` (and hence also of `Circlearrays`, `Abovetitles`, `Belowtitles`, `Overtitles`, `Subtitles`, and `FillTexts`).
 

@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:15 Tuesday 3rd May 2022
+% This version 21:30 Wednesday 4th May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205032115) def
+/ParametersVersionDateTimeAdobeFormat (D:202205042130) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -333,7 +333,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /BackgroundTextsGlasses false def
 /BackgroundTextsGlassesTexts [ GlassesOnSheets length {()} repeat ] def
 /BackgroundTextsTNsTexts [ 0 1 GlassesOnTastingNotePages length 1 sub {BackgroundTextsGlassesTexts exch 1 index length mul GlassesOnTastingNotePages length div floor cvi get} for ] def
-/BackgroundTextsAlignmentVertical {1 TypeOfPagesBeingRendered /TastingNotes eq {TastingSheetNum GlassesOnTastingNotePages} {SheetNum GlassesOnSheets} ifelse length dup 1 le {pop pop pop 0.5} {1 sub div sub} ifelse} bind def  % number /Middle /Bottom /Top
+/BackgroundTextsAlignmentVertical {1 TypeOfPagesBeingRendered /TastingNotes eq {TNSheetNum GlassesOnTastingNotePages} {SheetNum GlassesOnSheets} ifelse length dup 1 le {pop pop pop 0.5} {1 sub div sub} ifelse} bind def  % number /Middle /Bottom /Top
 /BackgroundTextsAlignmentHorizontal /Centre def  % number /Centre /Left /Right
 /BackgroundTextsSquooshMax 1 def  % y/x scaling, bigger being taller, smaller being fatter
 /BackgroundTextsSquooshMin 1  BackgroundTextsSquooshMax dup 1 eq {pop} {div} ifelse  def
@@ -363,8 +363,8 @@ if} bind def  % /VoteRecorderCrossedBox
 /FlightSeparationsArcProportionRadius 0.25 def  % strictly >0; <=1
 
 /PaintBackgroundInsideGlassCircles {} def  % Paints a background pattern. Called with centre of circle translated to 0,0; and clipped to radius Radii SheetNum get.
-/PaintBackgroundCode {} def  % Paints a background pattern. Will probably refer to TypeOfPagesBeingRendered and then to SheetNum or TastingSheetNum.
-/PaintForegroundCode {} def  % Paints a pattern on top of everything. Will probably refer to TypeOfPagesBeingRendered and then to SheetNum or TastingSheetNum.
+/PaintBackgroundCode {} def  % Paints a background pattern. Will probably refer to TypeOfPagesBeingRendered and then to SheetNum or TNSheetNum.
+/PaintForegroundCode {} def  % Paints a pattern on top of everything. Will probably refer to TypeOfPagesBeingRendered and then to SheetNum or TNSheetNum.
 
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
@@ -379,7 +379,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /VoteRecorderMonkeyName (Monkey) def
 
 /TastingNotesColumnHeadings [  (Times)  (Eye)  (Nose)  (Mouth)  (Score)  ] def
-/TastingNotesPageNumCompoundString [(Page ) {TastingSheetNum 1 add 5 string cvs}] def
+/TastingNotesPageNumCompoundString [(Page ) {TNSheetNum 1 add 5 string cvs}] def
 
 /DecantingNotesTopText (Decanting Notes) def
 /DecantingNotesColumnHeadingTimes (Decant Time) def
@@ -569,8 +569,8 @@ if} bind def  % /VoteRecorderCrossedBox
 /TastingNotesCirclesBehindFitAndCentreInRow false def
 /TastingNotesCirclesBehindFadingFactorIfAllBlack 0.125 def
 /TastingNotesCirclesBehindFadingFactorIfAnyGrey  0.2 def
-/TastingNotesCirclesBehindTopX    {[0  1  0  0.5  1  1  0.5  0.5  0] TastingSheetNum       9 mod get} bind def  % 0 to 1, this complication giving a nice variety
-/TastingNotesCirclesBehindBottomX {[0  1  0  0.5  1  1  0.5  0.5  0] TastingSheetNum 1 add 9 mod get} bind def  % 0 to 1, this complication giving a nice variety
+/TastingNotesCirclesBehindTopX    {[0  1  0  0.5  1  1  0.5  0.5  0] TNSheetNum       9 mod get} bind def  % 0 to 1, this complication giving a nice variety
+/TastingNotesCirclesBehindBottomX {[0  1  0  0.5  1  1  0.5  0.5  0] TNSheetNum 1 add 9 mod get} bind def  % 0 to 1, this complication giving a nice variety
 /TastingNotesOrientation /Portrait def  % /Landscape /Portrait
 /TastingNotesColumnRelativeWidths [ 1 2 4 8 1 ] def
 /TastingNotesColumnHeadingsFontSize 6 def
@@ -582,7 +582,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /TastingNotesPageNumFontSizeFactor 0.333333333 def
 
 /PlaceNamesShowNameAsFooter [ NamesPlaceNames {/Names load ne} forall ] def
-/PlaceNamesPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /Tabloid
+/PlaceNamesPaperType {<< /TNSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /Tabloid
 /PlaceNamesOrientation /Landscape def  % /Landscape /Portrait
 /PlaceNamesMaxFontSizeAbsolute 192 def
 /PlaceNamesDetailsScalingFactor 5 sqrt 1 add 2 div def
@@ -592,13 +592,13 @@ if} bind def  % /VoteRecorderCrossedBox
 /PrePourCollate true def
 /PrePourRemoveDuplicatesByWithinTitles true def
 /PrePourSortByWithinTitles true def
-/PrePourPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /Tabloid
+/PrePourPaperType {<< /TNSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /Tabloid
 /PrePourOrientation /Landscape def  % /Landscape /Portrait
 /PrePourShowDroplets true def
 
 /VoteRecorderNamesOrientation /Either def  % /Horizontal /Vertical /Either
 /VoteRecorderShowTotalCol [ GlassesClusteredOnVoteRecorders length {true} repeat ] def  % Must be same length as GlassesClusteredOnVoteRecorders
-/VoteRecorderPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def
+/VoteRecorderPaperType {<< /TNSheetNum 0 >> begin TastingNotesPaperType end} bind def
 /VoteRecorderOrientation /Portrait def
 /VoteRecorderTitlesFontSizeMax 24 def
 /VoteRecorderSubtitleFontSizeProportionTitles /Automatic def
@@ -641,7 +641,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /DecanterLabelsGuillotineMarks true def
 /DecanterLabelsShowOutlineTitles false def  % ignored if OutlineTitles is false
 /DecanterLabelsShowCrossHatchingInside false def  % ignored if CrossHatchingInside is false
-/DecanterLabelsPaperType {<< /TastingSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /Tabloid
+/DecanterLabelsPaperType {<< /TNSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /Tabloid
 /DecanterLabelsOrientation /Automatic def  % of labels, not of paper. /Landscape /Portrait /Automatic
 
 % Defaults:
@@ -766,7 +766,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205032115) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205042130) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1988,10 +1988,10 @@ currentdict	/CompassPoint16 undef
 /TypeOfPagesBeingRendered /Glasses store
 /PaperTypes   [  0  1  NumSheets 1 sub {/SheetNum exch def  PaperType} for  ] def  currentdict /SheetNum undef  % Duplicates not removed
 /TypeOfPagesBeingRendered /TastingNotes store
-/TastingNotesPaperTypes [   0  1  GlassesOnTastingNotePages length 1 sub {/TastingSheetNum exch def   TastingNotesPaperType   counttomark 1 sub -1 1 {index 1 index eq {pop exit} if} for} for   ] def  currentdict /TastingSheetNum undef  % No duplicates
+/TastingNotesPaperTypes [   0  1  GlassesOnTastingNotePages length 1 sub {/TNSheetNum exch def   TastingNotesPaperType   counttomark 1 sub -1 1 {index 1 index eq {pop exit} if} for} for   ] def  currentdict /TNSheetNum undef  % No duplicates
 
 /TypeOfPagesBeingRendered /Multiple store
-/UsedPaperTypes   [   [ 7 dict begin  /SheetNum 0 def  /TastingSheetNum 0 def  % Construct an array with many duplicates; construct new duplicates-free array.
+/UsedPaperTypes   [   [ 7 dict begin  /SheetNum 0 def  /TNSheetNum 0 def  % Construct an array with many duplicates; construct new duplicates-free array.
 	PaperTypes aload pop   TastingNotesPaperTypes aload pop
 	{PlaceNames} MightBeTrue {0  1  NamesPlaceNames length 1 sub {/PlaceNameSetNum exch def  PlaceNamesPaperType} for} if
 	/VoteRecorders load MightBeTrue {0  1  GlassesClusteredOnVoteRecorders length 1 sub {/VoteRecorderSheetNum exch def  /VoteRecorders load MightBeTrue {VoteRecorderPaperType} if} for} if
@@ -2352,7 +2352,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 			{pop [
 				/ThisName load dup NonEmptyCompoundObject not {pop UnnamedAttendee} if
 				TypeOfPagesBeingRendered /Glasses      eq {(: Glasses: ) SheetNum (: ) DestGlasses} if
-				TypeOfPagesBeingRendered /TastingNotes eq SideBySideGlassesTastingNotes not and {(: Tasting notes: ) TastingSheetNum (: ) DestTastingNotes} if
+				TypeOfPagesBeingRendered /TastingNotes eq SideBySideGlassesTastingNotes not and {(: Tasting notes: ) TNSheetNum (: ) DestTastingNotes} if
 				TypeOfPagesBeingRendered /PlaceName    eq {(: place-setting names: ) DestPlaceName} if
 			]} if  % ... /Glasses ... /TastingNotes ... /PlaceName ... or or
 			TypeOfPagesBeingRendered /PrePour        eq {pop [ Titles WithinTitles get (: Pre-Pour: ) DestPrePour ]} if
@@ -2397,7 +2397,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 			[
 				/PageWidth /PageHeight  /MgnL /MgnB /MgnR /MgnT
 				/PageDestName /ThisPageOrdering /TypeOfPagesBeingRendered /SideBySideGlassesTastingNotes
-				/NameNum /SheetNum /TastingSheetNum /WithinTitles   /PlaceNameSetNum
+				/NameNum /SheetNum /TNSheetNum /WithinTitles   /PlaceNameSetNum
 				/VoteRecorderSheetNum /VoteRecorderTopTextNum /DecantingNotesSheetNum /DecanterLabelsThisPageTitles
 				/CorkDisplayThisPageTitles   /NeckTagsThisPageTitles
 				/StickyLabelsTypeThis /StickyLabelsWithPagePortraitNumRows /StickyLabelsWithPagePortraitNumCols /StickyLabelsThisPageTitlesNames
@@ -5230,7 +5230,7 @@ currentdict /GlyphShowKnownAbsences undef
 		div 100 mul dup exch (\% within circles = ) exch  2 mul //Sqrt3 mul //Pi div (\% of infinite-plane exact-hexagonal maximum.)
 		R  43.2 360 mul 127 div  le
 		{
-			(\nWarning! Radius=) R (pt is )
+			(\nWarning! Radius~=) R 1 FormatDecimalPlaces (pt~=) R 127 mul 360 div 1 FormatDecimalPlaces (mm~=) R 72 div 2 FormatDecimalPlaces (" is )
 			R  36 360 mul 127 div  lt
 			{
 				R  30 360 mul 127 div  lt
@@ -6770,8 +6770,8 @@ currentdict /GlyphShowKnownAbsences undef
 	/TypeOfPagesBeingRendered /TastingNotes store
 	0  1  GlassesOnTastingNotePages length 1 sub
 	{
-		/TastingSheetNum exch def
-		GlassesOnTastingNotePages TastingSheetNum GetEU
+		/TNSheetNum exch def
+		GlassesOnTastingNotePages TNSheetNum GetEU
 		{
 			/WithinTitles exch execU def
 			WithinTitles type /integertype ne {(Error: non-integer element of GlassesOnTastingNotePages.) OutputToLog /ErrorFlag //true store} if
@@ -6780,13 +6780,13 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				mark  (Error: With Titles of length )  Titles length
 				( no element of GlassesOnTastingNotePages should exceed )  Titles length 1 sub
-				(, yet on tasting-note sheet )  TastingSheetNum
+				(, yet on tasting-note sheet )  TNSheetNum
 				( (starting at zero of course) is a )  WithinTitles
 				ConcatenateToMark OutputToLog /ErrorFlag //true store
 			} if
 		} forall
-	} bind for  % TastingSheetNum
-	currentdict /WithinTitles undef  currentdict /TastingSheetNum undef
+	} bind for  % TNSheetNum
+	currentdict /WithinTitles undef  currentdict /TNSheetNum undef
 	/TastingNotesCirclesBehind load MightBeTrue
 	{
 		/product dup where
@@ -7330,7 +7330,7 @@ currentdict /GlyphShowKnownAbsences undef
 		/NameNum Names length def
 		[  0  1  RearrangementArray length 1 sub
 		{
-			dup  /SheetNum exch def  /TastingSheetNum exch def
+			dup  /SheetNum exch def  /TNSheetNum exch def
 			[
 				0  1  RearrangementArray SheetNum GetEU length 1 sub
 				{
@@ -8763,13 +8763,13 @@ currentdict /GlyphShowKnownAbsences undef
 			/TypeOfPagesBeingRendered  PageType 0 eq {/Glasses} {/TastingNotes} ifelse  store
 			0  1  PageType 0 eq {NumSheets} {GlassesOnTastingNotePages length} ifelse 1 sub
 			{
-				PageType 0 eq {/SheetNum} {/TastingSheetNum} ifelse exch def
-				/BackgroundTextThis  PageType 0 eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TastingSheetNum} ifelse  get def
+				PageType 0 eq {/SheetNum} {/TNSheetNum} ifelse exch def
+				/BackgroundTextThis  PageType 0 eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TNSheetNum} ifelse  get def
 
 				/BackgroundTextThis load length 0 gt
 				{
 					//false //false //false //false PageType 0 eq {PaperType Orientation} {TastingNotesPaperType TastingNotesOrientation} ifelse SetPaperSize   //true DefStoreMgns
-					PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TastingSheetNum} ifelse
+					PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse
 					BackgroundTextsOrientation dup /Rotated eq exch  PageType 0 eq {Orientation} {TastingNotesOrientation} ifelse  2 copy  /Landscape eq exch /Portrait eq and  3 1 roll  /Portrait eq exch /Landscape eq and  or or  put
 					BackgroundTextsFont 16384 selectfont  GSave nulldevice 0 0 moveto /BackgroundTextThis load //true CharPathRecursive PathBBox GRestore [ /BgT /BgR /BgB /BgL ] {exch 16384 div def} forall
 
@@ -8781,9 +8781,9 @@ currentdict /GlyphShowKnownAbsences undef
 				} {/BgT 0 def /BgR 0 def /BgB 0 def /BgL 0 def} ifelse % /BackgroundTextThis load length 0 gt
 				PageType 0 eq
 					{BackgroundTextsGlassesL SheetNum        BackgroundTextsGlassesR BackgroundTextsGlassesB BackgroundTextsGlassesT BackgroundTextsGlassesMinB BackgroundTextsGlassesMaxT}
-					{BackgroundTextsTNsL     TastingSheetNum BackgroundTextsTNsR     BackgroundTextsTNsB     BackgroundTextsTNsT     BackgroundTextsTNsMinB     BackgroundTextsTNsMaxT}
+					{BackgroundTextsTNsL     TNSheetNum BackgroundTextsTNsR     BackgroundTextsTNsB     BackgroundTextsTNsT     BackgroundTextsTNsMinB     BackgroundTextsTNsMaxT}
 				ifelse   5 index BgT put 4 index BgB put 3 index BgT put 2 index BgB put 1 index BgR put BgL put
-			} for  % SheetNum|TastingSheetNum
+			} for  % SheetNum|TNSheetNum
 
 		//true BackgroundTextsGlassesSameSizeIfAllOf {dup //false eq exch /False eq or {pop //false exit} if} forall
 			{
@@ -8807,7 +8807,7 @@ currentdict /GlyphShowKnownAbsences undef
 						{ {
 							dup /SamePageOrdering eq {PageOrderingTastingNotePages dup SNum0 GetEU exch SNum1 GetEU ne {pop pop //false exit} if} if
 							dup /OnSheetWithSameNumberGlasses eq {GlassesOnTastingNotePages SNum0 GetEU length GlassesOnTastingNotePages SNum1 GetEU length ne {pop pop //false exit} if} if
-							dup /SamePaperSize eq {<< /TastingSheetNum SNum0 /SheetNum SNum0 >> begin TastingNotesPaperType end  << /TastingSheetNum SNum1 /SheetNum SNum1 >> begin TastingNotesPaperType end ne {pop pop //false exit} if} if
+							dup /SamePaperSize eq {<< /TNSheetNum SNum0 /SheetNum SNum0 >> begin TastingNotesPaperType end  << /TNSheetNum SNum1 /SheetNum SNum1 >> begin TastingNotesPaperType end ne {pop pop //false exit} if} if
 							dup /TextSameLength eq {BackgroundTextsTNsTexts SNum0 get LengthCompoundObject BackgroundTextsTNsTexts SNum1 get LengthCompoundObject ne {pop pop //false exit} if} if
 							pop
 						} } ifelse forall  % BackgroundTextsGlassesSameSizeIfAllOf
@@ -8824,7 +8824,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 			0  1  PageType 0 eq {NumSheets} {GlassesOnTastingNotePages length} ifelse 1 sub
 			{
-			  dup  /SheetNum exch def  /TastingSheetNum exch def  % In case BackgroundTextsSquooshMin/...Max depend on SheetNum|TastingNotes
+			  dup  /SheetNum exch def  /TNSheetNum exch def  % In case BackgroundTextsSquooshMin/...Max depend on SheetNum|TastingNotes
 				PageType 0 eq {BackgroundTextsGlassesL BackgroundTextsGlassesR BackgroundTextsGlassesMinB BackgroundTextsGlassesMaxT} {BackgroundTextsTNsL BackgroundTextsTNsR BackgroundTextsTNsMinB BackgroundTextsTNsMaxT} ifelse  % Note MinB, MaxT
 				4 {SheetNum get 4 1 roll} repeat   /BgT exch def  /BgB exch def  /BgR exch def  /BgL exch def
 				BgR BgL gt  BgT BgB gt  and
@@ -8852,16 +8852,16 @@ currentdict /GlyphShowKnownAbsences undef
 						BackgroundUsedFontSizesY     BackgroundUsedFontSizesNum FontSizeY     put
 						/BackgroundUsedFontSizesNum dup load 1 add store
 						mark   (BackgroundTexts: FontSizeX=)  FontSizeX   (; FontSizeY=)  FontSizeY
-						(, on )  TypeOfPagesBeingRendered  TypeOfPagesBeingRendered  /TastingNotes eq {( TastingSheetNum=) TastingSheetNum} {( SheetNum=) SheetNum} ifelse  ( and perhaps others)
-						PageType 0 eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TastingSheetNum} ifelse  get  LengthCompoundObject 2 ge
+						(, on )  TypeOfPagesBeingRendered  TypeOfPagesBeingRendered  /TastingNotes eq {( TNSheetNum=) TNSheetNum} {( SheetNum=) SheetNum} ifelse  ( and perhaps others)
+						PageType 0 eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TNSheetNum} ifelse  get  LengthCompoundObject 2 ge
 						{
-							PageWidth MgnL MgnR add sub PageHeight MgnB MgnT add sub   PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TastingSheetNum} ifelse get {exch} if div  BgT BgB sub mul BgR BgL sub sub
+							PageWidth MgnL MgnR add sub PageHeight MgnB MgnT add sub   PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get {exch} if div  BgT BgB sub mul BgR BgL sub sub
 							dup abs 0.0001 ge  {( \(for snug fit insert "{)  exch  dup 0 gt {(+) exch} if  ( Kern}"\))}  {pop ( \(which fits snugly\))}  ifelse  % If so small that would be shown in scientific notation, don't show. And on A3 1E-4 ~= 0.1pt
 						} if  % at least two characters
 						(.)  ConcatenateToMark OutputToLog
 					}  if  % Not previous logged
 				} if   % Non-zero bounding box
-			} for  % SheetNum|TastingSheetNum
+			} for  % SheetNum|TNSheetNum
 
 		} bind for  % PageType
 		end
@@ -8870,13 +8870,13 @@ currentdict /GlyphShowKnownAbsences undef
 		{
 			//DeBugLevel 50 le {(+BackgroundTextsPaint) OutputToLog} if
 			9 dict begin
-			/BackgroundTextThis TypeOfPagesBeingRendered /Glasses eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TastingSheetNum} ifelse get def
+			/BackgroundTextThis TypeOfPagesBeingRendered /Glasses eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TNSheetNum} ifelse get def
 			/BackgroundTextThis load length 0 gt
 			{
 				/BTAH  BackgroundTextsAlignmentHorizontal  dup /Left   eq {pop 0} if  dup /Centre eq {pop 0.5} if  dup /Right eq {pop 1} if  def
 				/BTAV  BackgroundTextsAlignmentVertical    dup /Bottom eq {pop 0} if  dup /Middle eq {pop 0.5} if  dup /Top   eq {pop 1} if  def
 				matrix currentmatrix
-				TypeOfPagesBeingRendered /Glasses eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TastingSheetNum} ifelse get
+				TypeOfPagesBeingRendered /Glasses eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get
 				{
 					PageWidth 0 translate 90 rotate  /MgnL MgnB /MgnB MgnR /MgnR MgnT /MgnT MgnL  /PageHeight PageWidth /PageWidth PageHeight  6 {def} repeat
 				} if  % rotated
@@ -8888,9 +8888,9 @@ currentdict /GlyphShowKnownAbsences undef
 					BackgroundTextsGlassesL SheetNum get neg  1 BTAH sub mul  BackgroundTextsGlassesR SheetNum get neg BTAH mul add
 					BackgroundTextsGlassesB SheetNum get neg  1 BTAV sub mul  BackgroundTextsGlassesT SheetNum get neg BTAV mul add  rmoveto
 				}{
-					matrix currentmatrix   BackgroundTextsTNsFontSizeX TastingSheetNum get BackgroundTextsTNsFontSizeY TastingSheetNum get scale
-					BackgroundTextsTNsL TastingSheetNum get neg  1 BTAH sub mul  BackgroundTextsTNsR TastingSheetNum get neg BTAH mul add
-					BackgroundTextsTNsB TastingSheetNum get neg  1 BTAV sub mul  BackgroundTextsTNsT TastingSheetNum get neg BTAV mul add  rmoveto
+					matrix currentmatrix   BackgroundTextsTNsFontSizeX TNSheetNum get BackgroundTextsTNsFontSizeY TNSheetNum get scale
+					BackgroundTextsTNsL TNSheetNum get neg  1 BTAH sub mul  BackgroundTextsTNsR TNSheetNum get neg BTAH mul add
+					BackgroundTextsTNsB TNSheetNum get neg  1 BTAV sub mul  BackgroundTextsTNsT TNSheetNum get neg BTAV mul add  rmoveto
 				} ifelse  % ... /Glasses
 				BackgroundTextsFont 1 selectfont   /BackgroundTextThis load //true CharPathRecursive
 				setmatrix  0.9375 setgray  4.32 setlinewidth  1 setlinecap
@@ -8932,23 +8932,23 @@ currentdict /GlyphShowKnownAbsences undef
 			/BackgroundTextsTNsForms  [ GlassesOnTastingNotePages length {5 dict} repeat ] def
 			0  1  GlassesOnTastingNotePages length 1 sub
 			{
-				/TastingSheetNum exch def
+				/TNSheetNum exch def
 				//false //false //false //false TastingNotesPaperType TastingNotesOrientation SetPaperSize   //true DefStoreMgns
-				BackgroundTextsTNsForms TastingSheetNum get begin
-				/TastingSheetNum TastingSheetNum def
+				BackgroundTextsTNsForms TNSheetNum get begin
+				/TNSheetNum TNSheetNum def
 				/FormType 1 def
 				/BBox [ MgnL 0.6 mul 1 sub  MgnB 0.6 mul 1 sub  PageWidth MgnR 0.6 mul 1 sub sub  PageHeight MgnB 0.6 mul 1 sub sub ] def
 				/Matrix matrix identmatrix def
 				/PaintProc
 				{
 					//DeBugLevel 100 le {(+BackgroundTextsTNsForms: PaintProc) OutputToLog} if
-					pop  << /SheetNum TastingSheetNum >> begin BackgroundTextsPaint end
+					pop  << /SheetNum TNSheetNum >> begin BackgroundTextsPaint end
 					//DeBugLevel 100 le {(-BackgroundTextsTNsForms: PaintProc) OutputToLog} if
 				} def  % /PaintProc
-				end  % BackgroundTextsTNsForms TastingSheetNum get
-			} bind for  % TastingSheetNum
+				end  % BackgroundTextsTNsForms TNSheetNum get
+			} bind for  % TNSheetNum
 			UndefMgns
-			currentdict /TastingSheetNum undef
+			currentdict /TNSheetNum undef
 		} if  % ... BackgroundTextsTastingNotes ...
 	} if  % ... BackgroundTextsGlasses PrePourShowBackgroundTexts BackgroundTextsTastingNotes or or ...
 
@@ -11551,12 +11551,12 @@ currentdict /GlyphShowKnownAbsences undef
 
 	0  1  GlassesOnTastingNotePages length 1 sub
 	{
-		/TastingSheetNum exch def
-		//false //false  //false  //false  SideBySideGlassesTastingNotes { << /SheetNum TastingSheetNum >> begin PaperType Orientation end} {TastingNotesPaperType TastingNotesOrientation} ifelse  SetPaperSize
+		/TNSheetNum exch def
+		//false //false  //false  //false  SideBySideGlassesTastingNotes { << /SheetNum TNSheetNum >> begin PaperType Orientation end} {TastingNotesPaperType TastingNotesOrientation} ifelse  SetPaperSize
 		//true DefStoreMgns
 
-		TastingNoteForms TastingSheetNum get begin
-		/TastingSheetNum TastingSheetNum def
+		TastingNoteForms TNSheetNum get begin
+		/TNSheetNum TNSheetNum def
 
 		/FormType 1 def
 		/BBox [ 0 0 PageWidth PageHeight ] def
@@ -11569,7 +11569,7 @@ currentdict /GlyphShowKnownAbsences undef
 			/TypeOfPagesBeingRendered /TastingNotes store
 			/TastingNotesPageCircletextFontSize 4 def  % embedded constant
 
-			/N GlassesOnTastingNotePages TastingSheetNum GetEU length def
+			/N GlassesOnTastingNotePages TNSheetNum GetEU length def
 			/TNColumnMultiplier
 				0 TastingNotesColumnRelativeWidths {execU add} forall
 				dup 0 eq {pop 1} {PageWidth MgnL MgnR add sub exch div} ifelse
@@ -11605,7 +11605,7 @@ currentdict /GlyphShowKnownAbsences undef
 				0  1  N 1 sub
 				{
 					/WithinPage exch def
-					/WithinTitles GlassesOnTastingNotePages TastingSheetNum GetEU WithinPage GetEU def
+					/WithinTitles GlassesOnTastingNotePages TNSheetNum GetEU WithinPage GetEU def
 					TastingNotesCirclesBehind
 					{
 						/t  N 1 le {0.5} {WithinPage  N 1 sub  div} ifelse   def
@@ -11674,7 +11674,7 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				HeaderFont TastingNotesColumnHeadingsFontSize selectfont
 
-				RightBoundaryNameTastingNotes  TastingSheetNum  PageWidth MgnR sub  put
+				RightBoundaryNameTastingNotes  TNSheetNum  PageWidth MgnR sub  put
 				TastingNotesColumnHeadings length 1 sub  -1  0  % goes down to allow population of RightBoundaryNameTastingNotes
 				{
 					/i exch def
@@ -11689,11 +11689,11 @@ currentdict /GlyphShowKnownAbsences undef
 							TastingNotesColumnRelativeWidths i GetEU  0  gt
 							{
 								TastingNotesColumnRelativeWidths i GetEU TNColumnMultiplier mul exch div  1  scale
-								RightBoundaryNameTastingNotes  TastingSheetNum  ColStart  put
+								RightBoundaryNameTastingNotes  TNSheetNum  ColStart  put
 							} {pop} ifelse  % TastingNotesColumnRelativeWidths i GetEU  0  gt
 						}{
 							neg  TastingNotesColumnRelativeWidths i GetEU TNColumnMultiplier mul add  2 div   0   rmoveto
-							RightBoundaryNameTastingNotes  TastingSheetNum  currentpoint pop  put
+							RightBoundaryNameTastingNotes  TNSheetNum  currentpoint pop  put
 						} ifelse  % text wider than column
 						CurrentFontSize 60 div  setlinewidth
 						TastingNotesColumnRelativeWidths i GetEU  0  gt {TastingNotesColumnHeadings i get ShowRecursive} if
@@ -11707,15 +11707,15 @@ currentdict /GlyphShowKnownAbsences undef
 			0  1  N 1 sub
 			{
 				/WithinPage exch def
-				/WithinTitles GlassesOnTastingNotePages TastingSheetNum GetEU WithinPage GetEU def
+				/WithinTitles GlassesOnTastingNotePages TNSheetNum GetEU WithinPage GetEU def
 
 				/CurrentTop  N WithinPage sub TNRowHeight mul MgnB add  def
 				MgnL CurrentTop moveto
 				CirclearraysTastingNotes WithinTitles get  {0 setgray CircletextFont TastingNotesPageCircletextFontSize selectfont}  CircletextsMinNumSpacesBetween //true  PageWidth MgnL MgnR add sub  //false  -1  CirclearrayInStraightLine
 				sub CurrentTop add TastingNotesLineGap sub /CurrentTop exch def pop pop
 
-				TastingNotesStarTops TastingSheetNum  2 copy get //null eq {GlassesOnTastingNotePages TastingSheetNum GetEU length array put} {pop pop} ifelse
-				TastingNotesStarTops TastingSheetNum get WithinPage  2 copy get IsNumber {pop pop} {CurrentTop put} ifelse
+				TastingNotesStarTops TNSheetNum  2 copy get //null eq {GlassesOnTastingNotePages TNSheetNum GetEU length array put} {pop pop} ifelse
+				TastingNotesStarTops TNSheetNum get WithinPage  2 copy get IsNumber {pop pop} {CurrentTop put} ifelse
 
 				0 setgray   MinCircletextMaxFontSizes  60 div setlinewidth
 				TNRowHeight 2 div TastingNotesSubtitleFontSizeProportionTitles 1 add div TastingNotesTitlesFontSizeMax 2 copy gt {exch} if pop  dup TitlesFont exch 2 copy  % embedded constant in "2 div"
@@ -11732,9 +11732,9 @@ currentdict /GlyphShowKnownAbsences undef
 			//DeBugLevel 100 le {(-TastingNoteForms: PaintProc) OutputToLog} if
 		} def  % /PaintProc
 		end
-	} bind for  % TastingSheetNum
+	} bind for  % TNSheetNum
 	UndefMgns
-	currentdict /TastingSheetNum undef
+	currentdict /TNSheetNum undef
 
 
 	% GlassesPageInnerLoop and TastingNotesInnerLoop are really 'inline code'.
@@ -11928,7 +11928,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 		TastingNotesReplaceNameWithPageNum {/ThisName TastingNotesPageNumCompoundString def} if
 
-		BackgroundTextsTastingNotes /SideBySideGlassesTastingNotes load MightBeTrue not  and {BackgroundTextsTNsForms TastingSheetNum get execform} if
+		BackgroundTextsTastingNotes /SideBySideGlassesTastingNotes load MightBeTrue not  and {BackgroundTextsTNsForms TNSheetNum get execform} if
 
 		SideBySideGlassesTastingNotes not {ThePortForumIconTastingNotePlacement PlaceThePortForumIcon} if
 
@@ -11941,19 +11941,19 @@ currentdict /GlyphShowKnownAbsences undef
 		} if  % ShowHeadersAndFooters
 
 		//DeBugLevel 75 le {( TastingNotesInnerLoop: TastingNoteForms) OutputToLog} if
-		TastingNoteForms TastingSheetNum get
-		0  1  GlassesOnTastingNotePages TastingSheetNum GetEU length 1 sub
+		TastingNoteForms TNSheetNum get
+		0  1  GlassesOnTastingNotePages TNSheetNum GetEU length 1 sub
 		{
 			/WithinPage exch def
-			/WithinTitles GlassesOnTastingNotePages TastingSheetNum GetEU WithinPage GetEU def
+			/WithinTitles GlassesOnTastingNotePages TNSheetNum GetEU WithinPage GetEU def
 		} for  % WithinPage, WithinTitles
 		execform    currentdict /WithinPage undef  currentdict /WithinTitles undef
 		/ThisNameASCII /ThisName load ASCIIfy def
 		12 dict begin
-		0  1  GlassesOnTastingNotePages TastingSheetNum GetEU length 1 sub
+		0  1  GlassesOnTastingNotePages TNSheetNum GetEU length 1 sub
 		{
 			/WithinPage exch def
-			/WithinTitles GlassesOnTastingNotePages TastingSheetNum GetEU WithinPage GetEU def
+			/WithinTitles GlassesOnTastingNotePages TNSheetNum GetEU WithinPage GetEU def
 			0  4  TastingNotesStarsNameColsRowsArrangement length 4 sub
 			{
 				/i exch def
@@ -11973,7 +11973,7 @@ currentdict /GlyphShowKnownAbsences undef
 					/StarRadius [
 						10
 						TitlesFont TastingNotesTitlesFontSizeMax selectfont (DFGKNOSTVW) StringHeight  1 //Sqrt5 5 div sub mul  % Embedded constant string
-						TastingNotesStarTops TastingSheetNum get dup length 1 sub get MgnB sub  TNrows dup 0 le {pop} {1 sub yStepFactor mul 2 add div} ifelse 2 div  % Approx, because stars packed tighter than circles. Final "2 div" to take not more than half space.
+						TastingNotesStarTops TNSheetNum get dup length 1 sub get MgnB sub  TNrows dup 0 le {pop} {1 sub yStepFactor mul 2 add div} ifelse 2 div  % Approx, because stars packed tighter than circles. Final "2 div" to take not more than half space.
 						PageWidth MgnL MgnR add sub 0.25 mul  TNcols dup 0 eq {pop} {1 sub xStepFactor mul 2 add div} ifelse  % Approx, because stars packed tighter than circles
 					] Min   def  % /StarRadius
 					0  1  TNcols 1 sub
@@ -11982,7 +11982,7 @@ currentdict /GlyphShowKnownAbsences undef
 						0  1  TNrows 1 sub
 						{
 							/RowNum exch def
-							PageWidth MgnR ColNum StarRadius xStepFactor mul mul add sub   TastingNotesStarTops TastingSheetNum get WithinPage get RowNum StarRadius yStepFactor mul mul sub  moveto
+							PageWidth MgnR ColNum StarRadius xStepFactor mul mul add sub   TastingNotesStarTops TNSheetNum get WithinPage get RowNum StarRadius yStepFactor mul mul sub  moveto
 							/Right /Top StarRadius /Radius Angle 5 2 //false //false  Star  0 setgray  fill
 							begin CenterX CenterY moveto /Center /Middle Radius 0.75 mul /Radius Angle 5 2 //false //true end Star pop  1 setgray  fill
 						} for  % /RowNum
@@ -11994,7 +11994,7 @@ currentdict /GlyphShowKnownAbsences undef
 		end
 
 		% Discussion: http://www.theportforum.com/viewtopic.php?t=175&start=929
-		WaterBoxes dup /TastingNotes eq exch /Both eq or  WaterBoxesNum 0 gt and  WaterBoxesShowTN TastingSheetNum get WaterBoxesOverrideShowEverySheet or  and
+		WaterBoxes dup /TastingNotes eq exch /Both eq or  WaterBoxesNum 0 gt and  WaterBoxesShowTN TNSheetNum get WaterBoxesOverrideShowEverySheet or  and
 		{
 			//DeBugLevel 75 le {( TastingNotesInnerLoop: Water) OutputToLog} if
 			/WaterBoxesSizeTN IconSizeTN WaterBoxesSizeMax 2 copy gt {exch} if pop def
@@ -12121,7 +12121,7 @@ currentdict /GlyphShowKnownAbsences undef
 	EmptyGlassesPageAtStart  % /Empty
 	{
 		/TypeOfPagesBeingRendered /Glasses store   10 dict begin
-		<< /SheetNum 0  /TastingSheetNum 0  /WithinPage 0  /WithinTitles 0 >> begin HeaderFont dup dup TastingNotesPaperType end EmptyGlassesPageOrientation
+		<< /SheetNum 0  /TNSheetNum 0  /WithinPage 0  /WithinTitles 0 >> begin HeaderFont dup dup TastingNotesPaperType end EmptyGlassesPageOrientation
 		//false //false //false //true 6 4 roll SetPaperSize //true DefStoreMgns
 		/PageLesser PageWidth MgnL MgnR add sub PageHeight MgnB MgnT add sub 2 copy gt {exch} if pop def
 		PageHeight MgnT MgnB sub add 2 div  PageWidth MgnR MgnL sub add 2 div  2 copy 4 copy
@@ -12158,7 +12158,7 @@ currentdict /GlyphShowKnownAbsences undef
 						/SheetNum exch def
 						NameNum  Names length  lt
 						{
-							/TastingSheetNum SheetNum def
+							/TNSheetNum SheetNum def
 							NameNum Names length lt {PageOrderingGlasses} {PageOrderingDecanterLabels} ifelse   SheetNum GetEU  ThisPageOrdering  eq
 							ThisPaperType PaperType ne {PaperType type /arraytype eq ThisPaperType type /arraytype eq and {0 1 1 {dup PaperType exch GetEU exch ThisPaperType exch GetEU sub abs //PrinterEpsilon lt} for and and} {pop //false} ifelse} if
 							{
@@ -12184,7 +12184,7 @@ currentdict /GlyphShowKnownAbsences undef
 										setmatrix
 									} if  % SheetNum NumSheets lt
 
-									TastingSheetNum  GlassesOnTastingNotePages length  lt
+									TNSheetNum  GlassesOnTastingNotePages length  lt
 									{
 										/TypeOfPagesBeingRendered /TastingNotes store
 										//true DefStoreMgns
@@ -12198,16 +12198,16 @@ currentdict /GlyphShowKnownAbsences undef
 										TastingNotesInnerLoop
 										//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 										setmatrix
-									} if  % TastingSheetNum  GlassesOnTastingNotePages length  lt ...
+									} if  % TNSheetNum  GlassesOnTastingNotePages length  lt ...
 
 									ShowPage
 									currentdict /SheetNum undef
-									currentdict /TastingSheetNum undef
+									currentdict /TNSheetNum undef
 								} for  % GlassesCopyNum
 								/ShowHeadersAndFooters //true store
 							} if  % ThisPaperType ... eq
 						} if  % NameNum  Names length  lt
-					} for  % SheetNum, TastingSheetNum
+					} for  % SheetNum, TNSheetNum
 				}{
 					% SideBySideGlassesTastingNotes is false
 					/TypeOfPagesBeingRendered /Glasses store
@@ -12243,9 +12243,9 @@ currentdict /GlyphShowKnownAbsences undef
 					/TypeOfPagesBeingRendered /TastingNotes store
 					0  1  GlassesOnTastingNotePages length 1 sub   {TastingNotePagesNumCopies 1 ge} MightBeTrue not {pop -1} if
 					{
-						/TastingSheetNum exch def
+						/TNSheetNum exch def
 						/TypeOfPagesBeingRendered /TastingNotes store
-						TastingNotesPaperType ThisPaperType eq   PageOrderingTastingNotePages TastingSheetNum GetEU  ThisPageOrdering  eq   and
+						TastingNotesPaperType ThisPaperType eq   PageOrderingTastingNotePages TNSheetNum GetEU  ThisPageOrdering  eq   and
 						{
 							NameNum NamesTastingNotes length lt
 							{
@@ -12256,7 +12256,7 @@ currentdict /GlyphShowKnownAbsences undef
 									/TypeOfPagesBeingRendered /TastingNotes store
 									//false  % Crop marks
 									Rotate180AlternateNames {NameNum dup Names length ge {Names length sub} if 2 mod 1 eq} {//false} ifelse
-									MirrorPagesTastingNotePages TastingSheetNum GetEU  //true  TastingNotesPaperType TastingNotesOrientation  SetPaperSize
+									MirrorPagesTastingNotePages TNSheetNum GetEU  //true  TastingNotesPaperType TastingNotesOrientation  SetPaperSize
 									//true DefStoreMgns
 									matrix currentmatrix
 									//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
@@ -12266,9 +12266,9 @@ currentdict /GlyphShowKnownAbsences undef
 								} repeat  % TastingNotePagesNumCopies ...
 							} if  % NameNum NamesTastingNotes length lt
 						} if  % ... ThisPaperType ... ThisPageOrdering ... and
-					} for  % TastingSheetNum
+					} for  % TNSheetNum
 					UndefMgns
-					currentdict /TastingSheetNum undef
+					currentdict /TNSheetNum undef
 				} ifelse  % SideBySideGlassesTastingNotes
 
 				/TypeOfPagesBeingRendered /PlaceName store
@@ -12802,12 +12802,12 @@ currentdict /GlyphShowKnownAbsences undef
 
 					/StringAnnotationPDF
 						mark  (Neck tags: cut around text; cut circle perhaps after gently folding that part of tag; put over otherwise-unlabelled bottle.)
-						<< /SheetNum 0  /TastingSheetNum 0 >> begin  % in case headers reference same
+						<< /SheetNum 0  /TNSheetNum 0 >> begin  % in case headers reference same
 						HeadersAndFooters 6 3 roll
 						3 copy [ 4 1 roll ] NonEmptyCompoundObject {[(\r\n\r\nHeader: ) 5 2 roll (     ) 3 1 roll 2 index exch] PDFDocEncodingify 4 1 roll} {pop pop pop} ifelse
 						3 copy [ 4 1 roll ] NonEmptyCompoundObject {[(\r\n\r\nFooter: ) 5 2 roll (     ) 3 1 roll 2 index exch] PDFDocEncodingify         } {pop pop pop} ifelse
 						ConcatenateToMark
-						end  % << /SheetNum 0  /TastingSheetNum 0 >>
+						end  % << /SheetNum 0  /TNSheetNum 0 >>
 					def  % /StringAnnotationPDF
 					/AnnotatePDF {
 						//false PageSuppressed not
@@ -13256,12 +13256,12 @@ currentdict /GlyphShowKnownAbsences undef
 						StickyLabelsWithPagePortraitNumRows ( rows separated by gaps of ) StickyLabelsWithPagePortraitGapBetweenRows
 						(pt. Margins: top ) StickyLabelsWithPagePortraitGapT (pt; bottom ) StickyLabelsWithPagePortraitGapB (pt; left ) StickyLabelsWithPagePortraitGapL (pt; right ) StickyLabelsWithPagePortraitGapR
 						(pt.\r\n\r\nIn some PDF viewers pale lines are visible. These make more obvious the assumed label size and paddings, but do not print.)
-						<< /SheetNum 0  /TastingSheetNum 0 >> begin  % in case headers reference same
+						<< /SheetNum 0  /TNSheetNum 0 >> begin  % in case headers reference same
 						HeadersAndFooters 6 3 roll
 						3 copy [ 4 1 roll ] NonEmptyCompoundObject {[(\r\n\r\nHeader: ) 5 2 roll (     ) 3 1 roll 2 index exch] PDFDocEncodingify 4 1 roll} {pop pop pop} ifelse
 						3 copy [ 4 1 roll ] NonEmptyCompoundObject {[(\r\n\r\nFooter: ) 5 2 roll (     ) 3 1 roll 2 index exch] PDFDocEncodingify         } {pop pop pop} ifelse
 						ConcatenateToMark
-						end  % << /SheetNum 0  /TastingSheetNum 0 >>
+						end  % << /SheetNum 0  /TNSheetNum 0 >>
 					def  % /StringAnnotationPDF
 					/AnnotatePDF {
 						//false PageSuppressed not
@@ -13820,13 +13820,13 @@ currentdict /GlyphShowKnownAbsences undef
 									/TastingNotes TypeOfPagesBeingRendered eq
 									{
 										ThisNameNumTypes 2 ge {(TNs: )} {()} ifelse  mark ()
-										0  1  GlassesOnTastingNotePages TastingSheetNum GetEU length 1 sub
+										0  1  GlassesOnTastingNotePages TNSheetNum GetEU length 1 sub
 										{
 											/WithinPage exch def
-											/WithinTitles GlassesOnTastingNotePages TastingSheetNum GetEU WithinPage GetEU def
+											/WithinTitles GlassesOnTastingNotePages TNSheetNum GetEU WithinPage GetEU def
 											Titles WithinTitles get PDFDocEncodingify TrimSpaces  dup length 0 gt {(; )} if  % Deliberately not using TitlesTastingNotes
 										} for  % WithinPage
-										pop ConcatenateToMark  dup length 0 le {pop (TastingSheetNum = ) TastingSheetNum} if  ( \(p) PageNum 1 add  (, ) PaperTypeStringShortPDF (\)) ConcatenateToMark TruncateTo255
+										pop ConcatenateToMark  dup length 0 le {pop (TNSheetNum = ) TNSheetNum} if  ( \(p) PageNum 1 add  (, ) PaperTypeStringShortPDF (\)) ConcatenateToMark TruncateTo255
 									} if  % /TastingNotes ...
 									/PlaceName TypeOfPagesBeingRendered eq
 									{
@@ -14053,7 +14053,7 @@ currentdict /GlyphShowKnownAbsences undef
 	} if  % OutputLogToPage ...
 	[
 		0 1 NumSheets 1 sub {/SheetNum exch def {GlassesNumCopies 1 ge} MightBeTrue {PageOrderingGlasses SheetNum GetEU} if} for
-		0 1 GlassesOnTastingNotePages length 1 sub {/TastingSheetNum exch def {TastingNotePagesNumCopies 1 ge} MightBeTrue {PageOrderingTastingNotePages TastingSheetNum GetEU} if} for
+		0 1 GlassesOnTastingNotePages length 1 sub {/TNSheetNum exch def {TastingNotePagesNumCopies 1 ge} MightBeTrue {PageOrderingTastingNotePages TNSheetNum GetEU} if} for
 	] dup {le} ShellSort  /RelevantPageOrderings exch def
 	//false  1 1 RelevantPageOrderings length 1 sub {RelevantPageOrderings exch 2 copy 1 sub get 3 1 roll get eq {pop //true exit} if} for  currentdict /RelevantPageOrderings undef
 	{
@@ -14066,11 +14066,11 @@ currentdict /GlyphShowKnownAbsences undef
 			SideBySideGlassesTastingNotes
 			{
 				ShownPagesSideBySideByNum
-				/SheetNum dup where {exch get} {pop /TastingSheetNum dup where {exch get} {pop //null} ifelse} ifelse
+				/SheetNum dup where {exch get} {pop /TNSheetNum dup where {exch get} {pop //null} ifelse} ifelse
 				dup type /integertype ne {pop pop} {2 copy get 1 add put} ifelse
 			}{
 				/Glasses TypeOfPagesBeingRendered eq {ShownPagesBySheetNum SheetNum 2 copy get 1 add put} if
-				/TastingNotes TypeOfPagesBeingRendered eq {ShownPagesByTastingSheetNum TastingSheetNum 2 copy get 1 add put} if
+				/TastingNotes TypeOfPagesBeingRendered eq {ShownPagesByTastingSheetNum TNSheetNum 2 copy get 1 add put} if
 			} ifelse  % SideBySideGlassesTastingNotes
 			end
 		} forall  % ShownPagesData ...
@@ -14137,14 +14137,14 @@ currentdict /GlyphShowKnownAbsences undef
 				/PdfmarkShownHeaderLevel0 //false def
 				0  1  GlassesOnTastingNotePages length 1 sub
 				{
-					/TastingSheetNum exch def
-					ShownPagesByTastingSheetNum TastingSheetNum get 0 gt
+					/TNSheetNum exch def
+					ShownPagesByTastingSheetNum TNSheetNum get 0 gt
 					{
 						/PdfmarkShownHeaderLevel1 //false def
 						ShownPagesData 0 ShownPages getinterval
 						{
-							TastingSheetNum exch begin
-							/TastingNotes TypeOfPagesBeingRendered eq {TastingSheetNum eq} {pop //false} ifelse  SideBySideGlassesTastingNotes not and
+							TNSheetNum exch begin
+							/TastingNotes TypeOfPagesBeingRendered eq {TNSheetNum eq} {pop //false} ifelse  SideBySideGlassesTastingNotes not and
 							{
 								PdfmarkShownHeaderLevel0 not
 								{
@@ -14159,16 +14159,16 @@ currentdict /GlyphShowKnownAbsences undef
 								{
 									mark
 										/Action /GoTo /Dest PageDestName
-										/Color [0.4 0.4 0.4]  /F 0  /Count  ShownPagesByTastingSheetNum TastingSheetNum get neg
-										/Title  mark mark ()  0  1  GlassesOnTastingNotePages TastingSheetNum GetEU length 1 sub
+										/Color [0.4 0.4 0.4]  /F 0  /Count  ShownPagesByTastingSheetNum TNSheetNum get neg
+										/Title  mark mark ()  0  1  GlassesOnTastingNotePages TNSheetNum GetEU length 1 sub
 										{
 											2 dict begin
 											/WithinPage exch def
-											/WithinTitles GlassesOnTastingNotePages TastingSheetNum GetEU WithinPage GetEU def
+											/WithinTitles GlassesOnTastingNotePages TNSheetNum GetEU WithinPage GetEU def
 											Titles WithinTitles get PDFDocEncodingify TrimSpaces  dup length 0 gt {(; )} if  % Deliberately not using TitlesTastingNotes
 											end
 										} for  % WithinPage
-										pop  ConcatenateToMark TruncateTo255  dup length 0 le {pop (TastingSheetNum = ) TastingSheetNum} if   ( \() << /ThisPaperType TastingNotesPaperType >> begin PaperTypeStringShortPDF end (\))  ConcatenateToMark
+										pop  ConcatenateToMark TruncateTo255  dup length 0 le {pop (TNSheetNum = ) TNSheetNum} if   ( \() << /ThisPaperType TastingNotesPaperType >> begin PaperTypeStringShortPDF end (\))  ConcatenateToMark
 									/OUT pdfmark
 									/PdfmarkShownHeaderLevel1 //true store
 								} if  % PdfmarkShownHeaderLevel1 not
@@ -14178,8 +14178,8 @@ currentdict /GlyphShowKnownAbsences undef
 								/OUT pdfmark
 							} if  end
 						} forall  % ShownPagesData ...
-					} if  % ShownPagesByTastingSheetNum TastingSheetNum get 0 gt
-				} bind for  % TastingSheetNum
+					} if  % ShownPagesByTastingSheetNum TNSheetNum get 0 gt
+				} bind for  % TNSheetNum
 			} if  % Any TN sheets
 		} if  % Any relevant sheets
 	} if  % There are glasses or TN sheets with the same page ordering

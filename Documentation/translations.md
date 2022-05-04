@@ -51,7 +51,7 @@ The optimal amount of kerning varies by font, even by version of font: do inspec
 /VoteRecorderMonkeyName (Monkey) def
 
 /TastingNotesColumnHeadings [  (Times)  (Eye)  (Nose)  (Mouth)  (Score)  ] def
-/TastingNotesPageNumCompoundString [(Page ) {TastingSheetNum 1 add 5 string cvs}] def
+/TastingNotesPageNumCompoundString [(Page ) {TNSheetNum 1 add 5 string cvs}] def
 
 /DecantingNotesTopText (Decanting Notes) def
 /DecantingNotesColumnHeadingTimes (Decant Time) def
@@ -133,7 +133,7 @@ Derived from [issue 70](http://github.com/jdaw1/placemat/issues/70), and discuss
 /VoteRecorderMonkeyName (Singe) def
 
 /TastingNotesColumnHeadings [  (Heure)  [(V) {-0.06 Kern} (ue)]  (Odorat)  [(Go) /ucircumflex (t)]  (Points)  ] def
-/TastingNotesPageNumCompoundString [(Page ) {TastingSheetNum 1 add 5 string cvs}] def
+/TastingNotesPageNumCompoundString [(Page ) {TNSheetNum 1 add 5 string cvs}] def
 
 /DecantingNotesTopText [(Notes de d) /eacute (cantation)] def
 /DecantingNotesColumnHeadingTimes (Heure) def
