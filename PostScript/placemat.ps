@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:30 Wednesday 4th May 2022
+% This version 20:00 Saturday 7th May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205042130) def
+/ParametersVersionDateTimeAdobeFormat (D:202205072000) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -766,7 +766,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205042130) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205072000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1094,6 +1094,112 @@ currentdict /ShellSortGapsLength1Subs undef
 	end
 	//DeBugLevel 5 le {(-PolynomialRoots) OutputToLog} if
 } bind def  % /PolynomialRoots
+
+% Immediate dependencies: SheetNum, Radii, GlassPositions, PolynomialRoots
+% WithinPageFrom WithinPageTo TargetLength GapFromCircles HeadWidth HeadLength {PathCode} {HeadCode}  ArrowCircleToCircle  -
+% WithinPageTo is either an integer, or an array [x y].
+/ArrowCircleToCircle
+{
+	17 dict begin
+	/HeadCode exch def  /PathCode exch def  /HeadLength exch def  /HeadWidth exch def
+	/GapFromCircles exch def  /LengthMax exch def  /WithinPageTo exch def  /WithinPageFrom exch def
+
+	/r  Radii SheetNum get  def
+	GlassPositions SheetNum get WithinPageFrom get aload pop /yF exch def /xF exch def
+
+	/arraytype LengthMax type eq
+	{
+		/LengthMax
+			GlassPositions SheetNum get LengthMax 0 get get aload pop
+			GlassPositions SheetNum get LengthMax 1 get get aload pop
+			3 -1 roll sub dup mul 3 1 roll sub dup mul add
+			sqrt r GapFromCircles add 2 mul sub
+		def  % /LengthMax
+	} if  % /arraytype LengthMax type eq
+
+	1 {
+		LengthMax 0 le {exit} if
+
+		/arraytype WithinPageTo type eq {WithinPageTo} {GlassPositions SheetNum get WithinPageTo get} ifelse
+		aload pop  /yT exch def /xT exch def
+		/dist  xF xT sub dup mul  yF yT sub dup mul  add sqrt  def
+		r GapFromCircles add dist ge {exit} if
+
+		% Must be From an integer, a circle centre. Advance r+GapFromCircles in correct direction.
+		/ratio r GapFromCircles add dist div def
+		/xF  xT xF sub ratio mul xF add  def
+		/yF  yT yF sub ratio mul yF add  def
+
+		% If To a circle, then to its outside
+		/dist  xF xT sub dup mul  yF yT sub dup mul  add sqrt  def
+		r GapFromCircles add dist ge {exit} if
+		/arraytype WithinPageFrom type ne
+		{
+			/dist  xF xT sub dup mul  yF yT sub dup mul  add sqrt  def
+			/ratio r GapFromCircles add dist div def
+			ratio 1 lt
+			{
+				/xT  xF xT sub ratio mul xT add  def
+				/yT  yF yT sub ratio mul yT add  def
+			} if  % ratio 1 lt
+		} if % integer
+
+		% Trim length to LengthMax
+		/dist  xF xT sub dup mul  yF yT sub dup mul  add sqrt  def
+		/ratio LengthMax dist div def
+		ratio 1 lt
+		{
+			/xT  xT xF sub ratio mul xF add  def
+			/yT  yT yF sub ratio mul yF add  def
+		} if  % ratio 1 lt
+
+		% Avoid collision with other circles
+		/ratio  Infinity
+		0  1  GlassPositions SheetNum get length 1 sub
+		{
+			dup dup WithinPageTo ne exch WithinPageFrom ne and
+			{
+				GlassPositions SheetNum get exch get aload pop /yC exch def /xC exch def
+				[
+					xC xF sub dup mul  yC yF sub dup mul  add  r GapFromCircles add dup mul  sub
+					xC xF sub xF xT sub mul  yC yF sub yF yT sub mul  add 2 mul
+					xF xT sub dup mul  yF yT sub dup mul  add
+				] -0.1 //false  1 //true  Epsilon  PolynomialRoots
+				Min  2 copy gt {exch} if pop
+			} {pop} ifelse  % WithinPageTo ne exch WithinPageFrom ne and
+		} for  % WithinPage
+		def  % /ratio
+		ratio 0 le {exit} if  % This, and the -0.1, in case starting point very near another circle
+		ratio 1 lt
+		{
+			/xT  xT xF sub ratio mul xF add  def
+			/yT  yT yF sub ratio mul yF add  def
+		} if  % ratio 1 lt
+
+		/dist  xF xT sub dup mul  yF yT sub dup mul  add sqrt  def
+		dist HeadLength lt dist HeadLength 2 div ge and {/HeadWidth dist HeadLength 2 mul div HeadWidth mul def  /HeadLength dist 2 div def} if
+
+		GSave
+		0 setgray  0.36 setlinewidth  0 setlinecap  [] 0 setdash
+		xF yF moveto
+		/HeadCode length 0 gt {HeadLength 0 gt} {//false} ifelse
+		{
+			/ratio  dist HeadLength 0.95 mul sub  dist  div  def
+			xT xF sub ratio mul  yT yF sub ratio mul  rlineto
+		} {xT yT lineto} ifelse  % Head
+		PathCode
+		GRestore
+
+		GSave
+		xT yT translate  xF xT sub yT yF sub atan rotate
+		0 0 moveto  HeadWidth 2 div HeadLength neg rlineto  HeadWidth neg 0 rlineto  closepath
+		0 setgray  0.72 setlinewidth  0 setlinecap  [] 0 setdash
+		HeadCode
+		GRestore
+
+	} repeat  % 1
+	end
+} bind def  % /ArrowCircleToCircle
 
 % string string  Concatenate  string
 /Concatenate
