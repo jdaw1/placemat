@@ -436,7 +436,11 @@ The decanter labels are on paper `DecanterLabelsPaperType`.
 
 At some blind tasting, particularly of wines served cold and undecanted, it is natural to bring the wine in its original bottle, wrapped in anonymising paper. 
 
+<div align="center">
+
 <img align="center" width="842" height="595" src="images/NonGlasses_BW.png">
+
+</div>
 
 There&rsquo;s a quirk. 
 Usually most of the paperwork is printed centrally. 
