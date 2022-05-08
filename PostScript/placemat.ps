@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Saturday 7th May 2022
+% This version 21:15 Sunday 8th May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205072000) def
+/ParametersVersionDateTimeAdobeFormat (D:202205082115) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -107,6 +107,8 @@
 /AccountsNumCopies  Names length 8 ge {1} {0} ifelse  def
 /StickyLabelsNumCopies 0 def
 /StickyLabelsTypes [0 1] def  % 0 = 2x4 on A4; 1 = 5x13 on A4
+/BottleWrapNumCopies 0 def
+/BottleWrapSuppressOtherPageTypes {/BottleWrapNumCopies load 0 ne} def
 
 /Abovetitles [ Titles length {()} repeat ] def
 /Overtitles [ Titles length {()} repeat ] def
@@ -124,6 +126,7 @@
 /CirclearraysCorkDisplay CirclearraysDecantingNotes def
 /CirclearraysPrePour CirclearraysDecantingNotes def
 /CirclearraysNeckTags CirclearraysDecantingNotes def  % Multiple copies? /CirclearraysNeckTags [ Circlearrays {[ exch aload pop [(Bottle #) {NeckTagsCopyNum 1 add}] ]} forall ] def
+/CirclearraysBottleWrap CirclearraysDecantingNotes def
 /CirclearraysStickyLabels CirclearraysDecantingNotes def
 
 /NamesTastingNotes Names def
@@ -596,6 +599,15 @@ if} bind def  % /VoteRecorderCrossedBox
 /PrePourOrientation /Landscape def  % /Landscape /Portrait
 /PrePourShowDroplets true def
 
+/BottleWrapPadding 12 def
+/BottleWrapReverseOrder true def
+/BottleWrapCollate true def
+/BottleWrapRemoveDuplicatesByWithinTitles true def
+/BottleWrapSortByWithinTitles true def
+/BottleWrapPaperType {<< /TNSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /Tabloid
+/BottleWrapOrientation /Landscape def  % /Landscape /Portrait
+/BottleWrapScalingMin 0.7071 def  % ~=Sqrt[1/2]
+
 /VoteRecorderNamesOrientation /Either def  % /Horizontal /Vertical /Either
 /VoteRecorderShowTotalCol [ GlassesClusteredOnVoteRecorders length {true} repeat ] def  % Must be same length as GlassesClusteredOnVoteRecorders
 /VoteRecorderPaperType {<< /TNSheetNum 0 >> begin TastingNotesPaperType end} bind def
@@ -682,6 +694,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /PageOrderingPrePourPages PageOrderingGlasses def  % Of length the same as GlassesOnSheets, not necessarily being of length PrePourNumCopies
 /PageOrderingPlaceNames [ NamesPlaceNames length {100} repeat ] def  % Near end to facilitate advance folding
 /PageOrderingDecanterLabels [ PageOrderingGlasses {200 add} forall ] def  % By default decanter-label pages appear together at the end, to facilitate advance manufacture
+/PageOrderingBottleWrap PageOrderingGlasses def  % Of length the same as GlassesOnSheets, not necessarily being of length PrePourNumCopies
 /PageOrderingStickyLabels [ GlassesOnSheets length {300} repeat ] def  % Of length the same as GlassesOnSheets, not necessarily being of length StickyLabelsNumCopies
 /PageOrderingSections [] def  % Array of even length, alternately elements of the PageOrder...s, and compound strings
 
@@ -695,6 +708,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /MirrorPagesPrePour [ PageOrderingPrePourPages length {false} repeat ] def
 /MirrorPagesPlaceNames [ PageOrderingPlaceNames length {false} repeat ] def
 /MirrorPagesDecanterLabels [ PageOrderingDecanterLabels length {false} repeat ] def
+/MirrorPagesBottleWrap [ PageOrderingPrePourPages length {false} repeat ] def
 /MirrorPagesStickyLabels [ PageOrderingStickyLabels length {false} repeat ] def
 
 /PagesToBeInserted false def
@@ -708,14 +722,14 @@ if} bind def  % /VoteRecorderCrossedBox
 /LicensingAgreementLinkPlacemats (http://creativecommons.org/licenses/by-sa/4.0/deed.en) def  % To be consistent with LicensingAgreementTextPlacemats
 /OutputLogToLog true def
 /OutputLogToPage true def
-/OutputLogToAnnotation OutputLogToPage not def
+/OutputLogToAnnotation  OutputLogToPage not  BottleWrapSuppressOtherPageTypes or  def
 /PageLabelOverride false def  % E.g., {/Glasses TypeOfPagesBeingRendered eq}
 /PageLabelOverrideWith {[(PageNum) ShownPages 5 string cvs]} def
 /PrologueCode {} def  % Executed once, just before painting pages
 /EpilogueCode {} def  % Executed once, just after painting pages
 /EmptyGlassesPageAtStart false def
 /EmptyGlassesPageOrientation /Portrait def
-/TestingSuppressPageTypes [ ] def  % Useful value: [ /Glasses 1  /TastingNotes 1  /VoteRecorder 1  /DecantingNotes 1  /Accounts 1  /CorkDisplay 1  /NeckTags 1  /PrePour 1  /PlaceName 1  /DecanterLabels 1  /StickyLabels 1 ]. Also, no int, /DistillerLog
+/TestingSuppressPageTypes [ ] def  % [ /Glasses 1  /TastingNotes 1  /VoteRecorder 1  /DecantingNotes 1  /Accounts 1  /CorkDisplay 1  /NeckTags 1  /PrePour 1  /PlaceName 1  /DecanterLabels 1  /BottleWrap 1  /StickyLabels 1 ]. Also, no int, /DistillerLog
 /TestingMaxNumPagesToShow 2147483647 def
 /TestingShowThesePagesOnly null def   % Either null, in which case having no effect, or an array of integers. If making a PDF for insertion to another doc, perhaps also "/pdfmark {cleartomark} def".
 
@@ -766,7 +780,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205072000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205082115) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -804,7 +818,7 @@ if} bind def  % /VoteRecorderCrossedBox
 
 PrinterEpsilon setflat  % According to PLRM3 p669, automatically substituted with 0.2, being the smallest allowed value. Presumably from an era of lower resolution printers. Happily, most PDF renderers seem to ignore this, substituting ~= 1 pixel.
 
-/TypeOfPagesBeingRendered /Multiple def  % Always being one of /Multiple /Glasses /TastingNotes /PlaceName /PrePour /VoteRecorder /DecantingNotes /Accounts /CorkDisplay /NeckTags /DecanterLabels /StickyLabels /DistillerLog
+/TypeOfPagesBeingRendered /Multiple def  % Always being one of /Multiple /Glasses /TastingNotes /PlaceName /PrePour /VoteRecorder /DecantingNotes /Accounts /CorkDisplay /NeckTags /DecanterLabels /BottleWrap /StickyLabels /DistillerLog
 /UserScratchDict << >> def  % Not 0 dict, to avoid addition of /DictionaryOriginalSize
 /execU {    //UserScratchDict begin exec end} bind def
 /GetEU {get //UserScratchDict begin exec end} bind def
@@ -1964,7 +1978,7 @@ currentdict /ForReverseBinaryDict undef
 		[PageWidth PageHeight] {14400 gt {(Warning: with a paper side > 14400pt = 16'8" = 5.08 metres, about to call setpagedevice, which might fail.) OutputToLog} if} forall
 		<<
 			/OutputFaceUp DefaultOutputFaceUp Mirror {not} if   /PageSize [PageWidth PageHeight]   /ImagingBBox //null
-			//true [/TastingNotes /PrePour /VoteRecorder /DecantingNotes /Accounts /DistillerLog] {TypeOfPagesBeingRendered eq {pop //false exit} if} forall  {/Duplex //false} if
+			//true [/TastingNotes /PrePour /VoteRecorder /DecantingNotes /Accounts /BottleWrap /DistillerLog] {TypeOfPagesBeingRendered eq {pop //false exit} if} forall  {/Duplex //false} if
 		>> setpagedevice
 		/InitialMatrix matrix currentmatrix store
 		Mirror
@@ -2101,14 +2115,19 @@ currentdict	/CompassPoint16 undef
 	PaperTypes aload pop   TastingNotesPaperTypes aload pop
 	{PlaceNames} MightBeTrue {0  1  NamesPlaceNames length 1 sub {/PlaceNameSetNum exch def  PlaceNamesPaperType} for} if
 	/VoteRecorders load MightBeTrue {0  1  GlassesClusteredOnVoteRecorders length 1 sub {/VoteRecorderSheetNum exch def  /VoteRecorders load MightBeTrue {VoteRecorderPaperType} if} for} if
-	0  1  NumSheets 1 sub {/SheetNum exch def  0 1 SheetLengths SheetNum get 1 sub {WithinPage-WithinTitles-def  {PrePourNumCopies 1 ge} MightBeTrue {PrePourPaperType} if  {NeckTagsNumCopies 1 ge} MightBeTrue {NeckTagsPaperType} if} for} for
-	{DecanterLabelsNumCopies 1 ge} MightBeTrue {0  1  NumSheets 1 sub {/SheetNum exch def  DecanterLabelsPaperType} for} if
+	0  1  NumSheets 1 sub {/SheetNum exch def  0 1 SheetLengths SheetNum get 1 sub {
+		WithinPage-WithinTitles-def
+		{PrePourNumCopies        1 ge} MightBeTrue {       PrePourPaperType} if
+		{NeckTagsNumCopies       1 ge} MightBeTrue {      NeckTagsPaperType} if
+		{BottleWrapNumCopies     1 ge} MightBeTrue {    BottleWrapPaperType} if
+		{DecanterLabelsNumCopies 1 ge} MightBeTrue {DecanterLabelsPaperType} if
+	} for} for
 	{StickyLabelsNumCopies 1 ge} MightBeTrue {StickyLabelsTypes {execU /StickyLabelsTypeThis exch def  {StickyLabelsNumCopies 1 ge} MightBeTrue {StickyLabelsPaperType} if  } forall} if  {CorkDisplayNumCopies 1 ge} MightBeTrue {CorkDisplayPaperType} if
 	{AccountsNumCopies 1 ge} MightBeTrue {AccountsPaperType} if   {DecantingNotesNumCopies 1 ge} MightBeTrue {DecantingNotesPaperType} if
 end ]   {counttomark 1 sub -1 1 {index 1 index eq {pop exit} if} for} bind forall   ]    def  % /UsedPaperTypes
 
 /UsedPageOrderings   [   [   % Construct an array with many duplicates; construct new duplicates-free array; sort it.
-	[ PageOrderingGlasses PageOrderingTastingNotePages PageOrderingVoteRecorder PageOrderingDecantingNotes PageOrderingCorkDisplay PageOrderingNeckTags PageOrderingPrePourPages PageOrderingPlaceNames PageOrderingDecanterLabels PageOrderingStickyLabels ]
+	[ PageOrderingGlasses PageOrderingTastingNotePages PageOrderingVoteRecorder PageOrderingDecantingNotes PageOrderingCorkDisplay PageOrderingNeckTags PageOrderingPrePourPages PageOrderingPlaceNames PageOrderingDecanterLabels PageOrderingBottleWrap PageOrderingStickyLabels ]
 	{{execU} forall} forall
 ]   {counttomark 1 sub -1 1 {index 1 index eq {pop exit} if} for} bind forall   ]  dup {le} ShellSort  def  % /UsedPageOrderings
 
@@ -2268,10 +2287,11 @@ mark (Array equalities:  {)  4 dict begin
 	{GlassesOnTastingNotePages length 0 gt} MightBeTrue {TastingNotePagesNumCopies 1 ge} MightBeTrue and {/CirclearraysTastingNotes /TitlesTastingNotes /SubtitlesTastingNotes /Names /NamesTastingNotes} {/Names} ifelse
 	/VoteRecorders load            MightBeTrue {/CirclearraysVoteRecorder   /TitlesVoteRecorder   /SubtitlesVoteRecorder /NamesVoteRecorder} if
 	{DecantingNotesNumCopies 1 ge} MightBeTrue {/CirclearraysDecantingNotes /TitlesDecantingNotes /SubtitlesDecantingNotes} if
-	{AccountsNumCopies 1 ge}       MightBeTrue {/NamesAccounts} if
-	{CorkDisplayNumCopies 1 ge}    MightBeTrue {/CirclearraysCorkDisplay    /TitlesCorkDisplay    /SubtitlesCorkDisplay} if
-	{NeckTagsNumCopies 1 ge}       MightBeTrue {/CirclearraysNeckTags} if
-	{PrePourNumCopies 1 ge}        MightBeTrue {/CirclearraysPrePour} if
+	{AccountsNumCopies       1 ge} MightBeTrue {/NamesAccounts} if
+	{CorkDisplayNumCopies    1 ge} MightBeTrue {/CirclearraysCorkDisplay    /TitlesCorkDisplay    /SubtitlesCorkDisplay} if
+	{NeckTagsNumCopies       1 ge} MightBeTrue {/CirclearraysNeckTags  } if
+	{PrePourNumCopies        1 ge} MightBeTrue {/CirclearraysPrePour   } if
+	{BottleWrapNumCopies     1 ge} MightBeTrue {/CirclearraysBottleWrap} if
 	/PlaceNames load MightBeTrue {0 1 NamesPlaceNames length 1 sub {[ exch /NamesPlaceNames cvx exch /get cvx ] cvx} for} if
 	{StickyLabelsNumCopies 1 ge} {StickyLabelsTypes length 0 gt} MightBeTrue exch MightBeTrue and {/CirclearraysStickyLabels} if
 	//false 1 dict begin StickyLabelsTypes {/StickyLabelsTypeThis exch def {StickyLabelsNumCopies 1 ge} MightBeTrue /StickyLabelsByNameWhichReplaceCirclearrays load MightBeTrue and {pop //true exit} if} forall end  {/NamesStickyLabels} if
@@ -2376,19 +2396,20 @@ DeBugLevel 100 le	 % This logging introduced in May 2011. In December 2021 decid
 /ShownPagesData 512 array def
 /ShownGlassesCircles 0 def
 /ShownGlassesCirclesData 1024 array def
-/DestOther          0 def  /DestPrefixOther (Other_) def
-/DestGlasses        0 def  /DestPrefixGlasses (Glasses_) def
+/DestOther          0 def  /DestPrefixOther          (Other_)          def
+/DestGlasses        0 def  /DestPrefixGlasses        (Glasses_)        def
 /DestDecanterLabels 0 def  /DestPrefixDecanterLabels (DecanterLabels_) def
-/DestTastingNotes   0 def  /DestPrefixTastingNotes (TastingNotes_) def
-/DestPlaceName      0 def  /DestPrefixPlaceName (PlaceName_) def
-/DestPrePour        0 def  /DestPrefixPrePour (PrePour_) def
-/DestStickyLabels   0 def  /DestPrefixStickyLabels (StickyLabels_) def
-/DestVoteRecorder   0 def  /DestPrefixVoteRecorders (VoteRecorder_) def
+/DestTastingNotes   0 def  /DestPrefixTastingNotes   (TastingNotes_)   def
+/DestPlaceName      0 def  /DestPrefixPlaceName      (PlaceName_)      def
+/DestPrePour        0 def  /DestPrefixPrePour        (PrePour_)        def
+/DestBottleWrap     0 def  /DestPrefixBottleWrap     (BottleWrap_)     def
+/DestStickyLabels   0 def  /DestPrefixStickyLabels   (StickyLabels_)   def
+/DestVoteRecorder   0 def  /DestPrefixVoteRecorders  (VoteRecorder_)   def
 /DestDecantingNotes 0 def  /DestPrefixDecantingNotes (DecantingNotes_) def
-/DestAccounts       0 def  /DestPrefixAccounts (Accounts_) def
-/DestCorkDisplay    0 def  /DestPrefixCorkDisplay (CorkDisplay_) def
-/DestNeckTags       0 def  /DestPrefixNeckTags (NeckTags_) def
-/DestEmpty          0 def  /DestPrefixEmpty (Empty_) def
+/DestAccounts       0 def  /DestPrefixAccounts       (Accounts_)       def
+/DestCorkDisplay    0 def  /DestPrefixCorkDisplay    (CorkDisplay_)    def
+/DestNeckTags       0 def  /DestPrefixNeckTags       (NeckTags_)       def
+/DestEmpty          0 def  /DestPrefixEmpty          (Empty_)          def
 PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests length {-1} repeat ] def} if
 /PagesToBeInsertedWarning (\n\nWarning, don't forget to insert pages with named destinations as follows:) def
 
@@ -2396,7 +2417,8 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 /PageSuppressed
 {
 	<< exch /UpdatePageCount exch  /i 0 >> begin
-	ShownPages TestingMaxNumPagesToShow lt
+	BottleWrapSuppressOtherPageTypes not  /BottleWrap TypeOfPagesBeingRendered eq  or
+	ShownPages TestingMaxNumPagesToShow lt  and
 	{
 		//false
 		{
@@ -2462,6 +2484,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 				TypeOfPagesBeingRendered /PlaceName    eq {(: place-setting names: ) DestPlaceName} if
 			]} if  % ... /Glasses ... /TastingNotes ... /PlaceName ... or or
 			TypeOfPagesBeingRendered /PrePour        eq {pop [ Titles WithinTitles get (: Pre-Pour: ) DestPrePour ]} if
+			TypeOfPagesBeingRendered /BottleWrap     eq {pop [ Titles WithinTitles get (: Bottle-Wrap: ) DestBottleWrap ]} if
 			TypeOfPagesBeingRendered /VoteRecorder   eq {pop [ (Vote recorder: )  VoteRecorderSheetNum (: ) VoteRecorderTopTextNum (: ) DestVoteRecorder]} if
 			TypeOfPagesBeingRendered /DecantingNotes eq {pop [ (Decanting notes: ) DestDecantingNotes ]} if
 			TypeOfPagesBeingRendered /Accounts       eq {pop [ (Accounts: ) DestAccounts ]} if
@@ -2481,18 +2504,19 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 
 		% Destination, for use in URLs of the form ...#...
 		DestPrefixOther /DestOther
-		TypeOfPagesBeingRendered /Glasses        eq {pop pop DestPrefixGlasses        /DestGlasses} if
-		TypeOfPagesBeingRendered /TastingNotes   eq {pop pop DestPrefixTastingNotes   /DestTastingNotes} if
-		TypeOfPagesBeingRendered /PlaceName      eq {pop pop DestPrefixPlaceName      /DestPlaceName} if
-		TypeOfPagesBeingRendered /PrePour        eq {pop pop DestPrefixPrePour        /DestPrePour} if
-		TypeOfPagesBeingRendered /StickyLabels   eq {pop pop DestPrefixStickyLabels   /DestStickyLabels} if
-		TypeOfPagesBeingRendered /VoteRecorder   eq {pop pop DestPrefixVoteRecorders  /DestVoteRecorder} if
+		TypeOfPagesBeingRendered /Glasses        eq {pop pop DestPrefixGlasses        /DestGlasses       } if
+		TypeOfPagesBeingRendered /TastingNotes   eq {pop pop DestPrefixTastingNotes   /DestTastingNotes  } if
+		TypeOfPagesBeingRendered /PlaceName      eq {pop pop DestPrefixPlaceName      /DestPlaceName     } if
+		TypeOfPagesBeingRendered /PrePour        eq {pop pop DestPrefixPrePour        /DestPrePour       } if
+		TypeOfPagesBeingRendered /BottleWrap     eq {pop pop DestPrefixBottleWrap     /DestBottleWrap    } if
+		TypeOfPagesBeingRendered /StickyLabels   eq {pop pop DestPrefixStickyLabels   /DestStickyLabels  } if
+		TypeOfPagesBeingRendered /VoteRecorder   eq {pop pop DestPrefixVoteRecorders  /DestVoteRecorder  } if
 		TypeOfPagesBeingRendered /DecantingNotes eq {pop pop DestPrefixDecantingNotes /DestDecantingNotes} if
-		TypeOfPagesBeingRendered /Accounts       eq {pop pop DestPrefixAccounts       /DestAccounts} if
-		TypeOfPagesBeingRendered /CorkDisplay    eq {pop pop DestPrefixCorkDisplay    /DestCorkDisplay} if
-		TypeOfPagesBeingRendered /NeckTags       eq {pop pop DestPrefixNeckTags       /DestNeckTags} if
+		TypeOfPagesBeingRendered /Accounts       eq {pop pop DestPrefixAccounts       /DestAccounts      } if
+		TypeOfPagesBeingRendered /CorkDisplay    eq {pop pop DestPrefixCorkDisplay    /DestCorkDisplay   } if
+		TypeOfPagesBeingRendered /NeckTags       eq {pop pop DestPrefixNeckTags       /DestNeckTags      } if
 		TypeOfPagesBeingRendered /DecanterLabels eq {pop pop DestPrefixDecanterLabels /DestDecanterLabels} if
-		TypeOfPagesBeingRendered /Empty          eq {pop pop DestPrefixEmpty          /DestEmpty} if
+		TypeOfPagesBeingRendered /Empty          eq {pop pop DestPrefixEmpty          /DestEmpty         } if
 
 		dup load dup 3 1 roll 1 add store  ToString Concatenate cvn  /PageDestName exch def
 		mark /Dest PageDestName  /View [TypeOfPagesBeingRendered /VoteRecorder eq {/FitH PageHeight} {/Fit} ifelse]   /DEST  pdfmark
@@ -2509,18 +2533,19 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 				/StickyLabelsTypeThis /StickyLabelsWithPagePortraitNumRows /StickyLabelsWithPagePortraitNumCols /StickyLabelsThisPageTitlesNames
 			] {dup dup where {exch get} {pop //null} ifelse} forall  % Over wanted fields
 			/ThisPaperType //null //null
-			TypeOfPagesBeingRendered /Glasses        eq {pop pop PaperType               Orientation              } if
-			TypeOfPagesBeingRendered /TastingNotes   eq {pop pop TastingNotesPaperType   TastingNotesOrientation  } if
-			TypeOfPagesBeingRendered /PlaceName      eq {pop pop PlaceNamesPaperType     PlaceNamesOrientation    } if
-			TypeOfPagesBeingRendered /PrePour        eq {pop pop PrePourPaperType        PrePourOrientation       } if
-			TypeOfPagesBeingRendered /StickyLabels   eq {pop pop StickyLabelsPaperType   /Portrait                } if
-			TypeOfPagesBeingRendered /VoteRecorder   eq {pop pop VoteRecorderPaperType   VoteRecorderOrientation  } if
+			TypeOfPagesBeingRendered /Glasses        eq {pop pop               PaperType               Orientation} if
+			TypeOfPagesBeingRendered /TastingNotes   eq {pop pop   TastingNotesPaperType   TastingNotesOrientation} if
+			TypeOfPagesBeingRendered /PlaceName      eq {pop pop     PlaceNamesPaperType     PlaceNamesOrientation} if
+			TypeOfPagesBeingRendered /PrePour        eq {pop pop        PrePourPaperType        PrePourOrientation} if
+			TypeOfPagesBeingRendered /BottleWrap     eq {pop pop     BottleWrapPaperType     BottleWrapOrientation} if
+			TypeOfPagesBeingRendered /VoteRecorder   eq {pop pop   VoteRecorderPaperType   VoteRecorderOrientation} if
 			TypeOfPagesBeingRendered /DecantingNotes eq {pop pop DecantingNotesPaperType DecantingNotesOrientation} if
-			TypeOfPagesBeingRendered /Accounts       eq {pop pop AccountsPaperType       AccountsOrientation      } if
-			TypeOfPagesBeingRendered /CorkDisplay    eq {pop pop CorkDisplayPaperType    CDBestOrientation        } if
+			TypeOfPagesBeingRendered /Accounts       eq {pop pop       AccountsPaperType       AccountsOrientation} if
+			TypeOfPagesBeingRendered /CorkDisplay    eq {pop pop    CorkDisplayPaperType         CDBestOrientation} if
+			TypeOfPagesBeingRendered /Empty          eq {pop pop               PaperType               Orientation} if
 			TypeOfPagesBeingRendered /NeckTags       eq {pop pop NeckTagsPaperType       /Portrait                } if
+			TypeOfPagesBeingRendered /StickyLabels   eq {pop pop StickyLabelsPaperType   /Portrait                } if
 			TypeOfPagesBeingRendered /DecanterLabels eq {pop pop DecanterLabelsPaperType DLOrientation {/Portrait} {/Landscape} ifelse} if
-			TypeOfPagesBeingRendered /Empty          eq {pop pop PaperType               Orientation              } if
 			/ThisOrientation exch
 			/PageNum PageNum
 			/PagesToBeInsertedData  PagesToBeInserted {PagesToBeInsertedData} {[]} ifelse
@@ -6833,14 +6858,16 @@ currentdict /GlyphShowKnownAbsences undef
 		{DecantingNotesNumCopies 1 ge} MightBeTrue { [ /CirclearraysDecantingNotes /TitlesDecantingNotes /SubtitlesDecantingNotes ] } if
 		/VoteRecorders load            MightBeTrue { [ /CirclearraysVoteRecorder   /TitlesVoteRecorder   /SubtitlesVoteRecorder   ] } if
 		{CorkDisplayNumCopies    1 ge} MightBeTrue { [ /CirclearraysCorkDisplay    /TitlesCorkDisplay    /SubtitlesCorkDisplay    ] } if
-		{NeckTagsNumCopies       1 ge} MightBeTrue { [ /CirclearraysNeckTags  /Titles  ] } if
-		{PrePourNumCopies 1 ge}        MightBeTrue { [ /CirclearraysPrePour   /Titles  ] } if
+		{NeckTagsNumCopies       1 ge} MightBeTrue { [ /CirclearraysNeckTags   /Titles  ] } if
+		{PrePourNumCopies 1 ge}        MightBeTrue { [ /CirclearraysPrePour    /Titles  ] } if
+		{BottleWrapNumCopies 1 ge}     MightBeTrue { [ /CirclearraysBottleWrap /Titles  ] } if
 		{StickyLabelsNumCopies 1 ge} {StickyLabelsTypes length 0 gt} MightBeTrue exch MightBeTrue and { [ /CirclearraysStickyLabels  /Titles  ] } if
 		[
 			/GlassesOnSheets /NamesShowTop /NamesShowBottom /PageOrderingGlasses /MirrorPagesGlasses
 			{DecanterLabelsNumCopies 1 ge} MightBeTrue {/PageOrderingDecanterLabels /MirrorPagesDecanterLabels} if
-			{NeckTagsNumCopies 1 ge} MightBeTrue {/PageOrderingNeckTags /MirrorPagesNeckTags} if
-			{PrePourNumCopies 1 ge} MightBeTrue {/PageOrderingPrePourPages /MirrorPagesPrePour} if
+			{NeckTagsNumCopies       1 ge} MightBeTrue {/PageOrderingNeckTags       /MirrorPagesNeckTags      } if
+			{PrePourNumCopies        1 ge} MightBeTrue {/PageOrderingPrePourPages   /MirrorPagesPrePour       } if
+			{BottleWrapNumCopies     1 ge} MightBeTrue {/PageOrderingPrePourPages   /MirrorPagesPrePour       } if
 			{StickyLabelsNumCopies 1 ge} {StickyLabelsTypes length 0 gt} MightBeTrue exch MightBeTrue and {/PageOrderingStickyLabels /MirrorPagesStickyLabels} if
 			ShrinkRadii type /arraytype eq {/ShrinkRadii} if
 			{WaterBoxes dup /Glasses eq exch /Both eq or  WaterBoxesOverrideShowEverySheet not  and} MightBeTrue {/WaterBoxesShowRight /WaterBoxesShowLeft} if
@@ -7212,7 +7239,7 @@ currentdict /GlyphShowKnownAbsences undef
 			} if  % BackgroundTextsSquooshMin BackgroundTextsSquooshMax gt
 		} for  % SheetNum
 		currentdict /SheetNum undef
-	} if  % /BackgroundTextsGlasses ... PrePourShowBackgroundTexts ... BackgroundTextsTastingNotes ... or or
+	} if  % /BackgroundTextsGlasses ...
 
 	0  1  NumSheets 1 sub
 	{
@@ -8439,7 +8466,7 @@ currentdict /GlyphShowKnownAbsences undef
 		Belowtitles NonEmptyCompoundObject {(BelowtitleFontSizes = ) BelowtitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
 		Overtitles NonEmptyCompoundObject {(OvertitleFontSizes = ) OvertitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
 	} if  % ... GlassesNumCopies 1 ge ...
-	{GlassesNumCopies 1 ge  DecanterLabelsNumCopies 1 ge  PrePourNumCopies 1 ge  StickyLabelsNumCopies 1 ge  or or or} MightBeTrue
+	{GlassesNumCopies 1 ge  DecanterLabelsNumCopies 1 ge  PrePourNumCopies 1 ge  BottleWrapNumCopies 1 ge  StickyLabelsNumCopies 1 ge  or or or or} MightBeTrue
 	{
 		()
 		Abovetitles NonEmptyCompoundObject {(AbovetitleFontSizes/TitleFontSizes = ) AbovetitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
@@ -8564,7 +8591,8 @@ currentdict /GlyphShowKnownAbsences undef
 				{
 					//false //false //false //false PrePourPaperType PrePourOrientation SetPaperSize
 					//true DefStoreMgns
-					/AD CirclearraysT SheetNum get WithinPage get CirclearraysB SheetNum get WithinPage get sub CirclearraysFontSizes SheetNum get WithinPage get mul def
+					CircletextFont  CirclearraysFontSizes SheetNum get WithinPage get  selectfont
+					CirclearraysPrePour WithinTitles get StringPathBBox exch pop exch sub /AD exch def pop
 					PageHeight MgnB MgnT add sub 2 div AD sub  dup   PageWidth  MgnL MgnR add sub 2 div AD sub  dup
 					[ TitleAboveBelowOverL TitleAboveBelowOverR TitleAboveBelowOverB TitleAboveBelowOverT ] {SheetNum get WithinPage get abs 0.48 add div  4 1 roll} forall  % Half maximum linewidth of /MidGrey edging
 					3 {2 copy gt {exch} if pop} repeat   PrePourScalingFactors SheetNum 3 copy get lt {3 -1 roll put} {pop pop pop} ifelse
@@ -9030,7 +9058,7 @@ currentdict /GlyphShowKnownAbsences undef
 			} bind for  % SheetNum
 			UndefMgns
 			currentdict /SheetNum undef
-		} if  % ... BackgroundTextsGlasses PrePourShowBackgroundTexts or ...
+		} if  % ... BackgroundTextsGlasses ...
 
 		/BackgroundTextsTastingNotes load MightBeTrue
 		{
@@ -9056,7 +9084,7 @@ currentdict /GlyphShowKnownAbsences undef
 			UndefMgns
 			currentdict /TNSheetNum undef
 		} if  % ... BackgroundTextsTastingNotes ...
-	} if  % ... BackgroundTextsGlasses PrePourShowBackgroundTexts BackgroundTextsTastingNotes or or ...
+	} if  % ... BackgroundTextsGlasses ...
 
 	/WaterSizesReported [ NumSheets {//false} repeat ] def
 	% NameHorizontalLeft NameHorizontalRight ShowRight ShowLeft FillWhite  WaterBoxesPaintProc -
@@ -10621,6 +10649,161 @@ currentdict /GlyphShowKnownAbsences undef
 		UndefMgns
 		currentdict /SheetNum undef
 	} if  % ... PrePourNumCopies 1 ge ...
+
+	{BottleWrapNumCopies 1 ge} MightBeTrue
+	{
+		//DeBugLevel 100 le {( Main: BottleWrapForms) OutputToLog} if
+		/TypeOfPagesBeingRendered /BottleWrap store
+		/BottleWrapForms [ GlassesOnSheets {[ exch execU length {12 dict} repeat]} forall ] def
+		0  1  NumSheets 1 sub
+		{
+			/SheetNum exch def
+			0  1  SheetLengths SheetNum get 1 sub
+			{
+				dup BottleWrapForms SheetNum get exch get begin
+				WithinPage-WithinTitles-def
+				//false //false //false //false BottleWrapPaperType BottleWrapOrientation SetPaperSize   //true DefStoreMgns
+
+				/FormType 1 def
+				/BBox [ MgnL 1.92 sub  MgnB 1.92 sub  PageWidth MgnR sub  PageHeight MgnT sub 1.92 add ] def  % Needs the hard clipping on right. Embedded constant, should be positive.
+				/Matrix matrix identmatrix def
+				/PaintProc  % Paints repeated copies of a TitleAboveBelowOverForms, and repeated copies of an item of CirclearraysBottleWrap
+				{
+					//DeBugLevel 100 le {(+BottleWrapForms: PaintProc) OutputToLog} if
+					pop 17 dict begin  % dictionary parameter of execform containing WithinTitles and WithinPage
+					/TypeOfPagesBeingRendered /BottleWrap store
+
+					//false //false //false //false BottleWrapPaperType BottleWrapOrientation SetPaperSize
+					//true DefStoreMgns
+					CircletextFont  CirclearraysFontSizes SheetNum get WithinPage get  selectfont
+					CirclearraysBottleWrap WithinTitles get StringPathBBox exch pop exch sub /AD exch def pop
+
+					/BottleWrapNumRows
+						PageHeight  MgnB MgnT add sub  AD sub
+						TitleAboveBelowOverT SheetNum get WithinPage get
+						TitleAboveBelowOverB SheetNum get WithinPage get sub BottleWrapScalingMin mul  AD add  BottleWrapPadding 2 mul add
+						dup //PrinterEpsilon gt {div} {pop pop AD PrinterEpsilon gt {PageHeight  MgnB MgnT add sub  AD div 2 div} {12} ifelse} ifelse
+						dup 48 gt {pop 48} {dup 1 le {pop 1} {floor cvi} ifelse} ifelse
+					def  % /BottleWrapNumRows
+
+					/BottleWrapScalingFactor
+						PageHeight  MarginB MarginT add sub  BottleWrapNumRows 1 add AD mul sub  BottleWrapNumRows div  BottleWrapPadding 2 mul sub
+						TitleAboveBelowOverT SheetNum get WithinPage get
+						TitleAboveBelowOverB SheetNum get WithinPage get sub div
+					def  % /BottleWrapScalingFactor
+
+					CircletextFont  CirclearraysFontSizes SheetNum get WithinPage get  selectfont
+					CirclearraysBottleWrap WithinTitles get StringPathBBox  /BW_T exch def  pop  /BW_B exch def  pop
+
+					/BW_X_first
+						BW_T BW_B sub  MarginL add
+						TitleAboveBelowOverL SheetNum get WithinPage get
+						BottleWrapScalingFactor  mul sub  BottleWrapPadding add
+					def  % /BW_X_first
+
+					/BW_X_step
+						BW_T BW_B sub
+						TitleAboveBelowOverR SheetNum get WithinPage get
+						TitleAboveBelowOverL SheetNum get WithinPage get  sub
+						BottleWrapScalingFactor  mul add  BottleWrapPadding 2 mul add
+					def  % /BW_X_step
+
+					/BW_Y_first
+						PageHeight  BW_T BW_B sub MarginT add sub
+						TitleAboveBelowOverT SheetNum get WithinPage get
+						BottleWrapScalingFactor  mul sub  BottleWrapPadding sub
+					def  % /BW_Y_first
+
+					/BW_Y_step
+						BW_T BW_B sub
+						TitleAboveBelowOverT SheetNum get WithinPage get
+						TitleAboveBelowOverB SheetNum get WithinPage get  sub
+						BottleWrapScalingFactor  mul add  BottleWrapPadding 2 mul add  neg
+					def  % /BW_Y_step
+
+					BW_X_first  BW_X_step  PageWidth MgnR sub BW_X_step 2 div add
+					{
+						/BW_X exch def
+						
+						0  1  BottleWrapNumRows 1 sub
+						{
+							BW_Y_step mul BW_Y_first add  /BW_Y exch def
+
+							matrix currentmatrix
+							BW_X BW_Y translate  BottleWrapScalingFactor dup scale
+							TitleAboveBelowOverForms SheetNum get WithinPage get  execform  AnnotateGlass
+							setmatrix
+							/TypeOfPagesBeingRendered /BottleWrap store
+						} for  % BW_Y
+					} for  % BW_X
+
+					/N CirclearraysBottleWrap WithinTitles get length def
+					N 0 gt
+					{
+						CircletextFont  CirclearraysFontSizes SheetNum get WithinPage get  selectfont
+						0  1  1000  % X counter
+						{
+							/BW_XX exch def
+							/BW_X BW_XX BW_X_step mul MgnL add def
+							BW_X  PageWidth MgnR sub  ge {exit} if
+
+							% Text running vertically
+							/ItemCBW  BW_XX  N mod
+							1 {
+								N 3 le {exit} if
+								N 4 eq {[0 2 1 3] exch get exit} if
+								N 5 eq {2 mul N mod exit} if  % In the wild, items of Circlearrays of length <=5
+								N 6 eq {[0 2 4 1 5 3] exch get exit} if
+								N 7 eq {[0 3 5 1 6 2 4] exch get exit} if
+								N 8 eq {[0 4 2 6 1 5 7 3] exch get exit} if  % slightly excessive.
+							} repeat   def  % /ItemCBW
+							matrix currentmatrix
+							BW_X 0 translate   90 rotate  MgnB 0 moveto
+
+							CirclearraysBottleWrap WithinTitles get
+							{CircletextFont  CirclearraysFontSizes SheetNum get WithinPage get  selectfont}
+							CircletextsMinNumSpacesBetween
+							//true  % CurrentpointIsTop
+							PageHeight MgnB MgnT add sub
+							//false  % FillBackground
+							ItemCBW
+							CirclearrayInStraightLine pop pop pop pop
+							setmatrix
+
+							% Horizontal text, in many short stretches
+							0  1  BottleWrapNumRows  % Not 1 sub, as one more row of CirclearraysBottleWrap than of Titles
+							{
+								/BW_YY exch def
+								/BW_Y  BW_Y_step BW_YY mul  PageHeight MgnT sub add  def
+
+								BW_X BW_T BW_B sub add  BW_Y  moveto
+
+								CirclearraysBottleWrap WithinTitles get
+								{CircletextFont  CirclearraysFontSizes SheetNum get WithinPage get  selectfont}
+								CircletextsMinNumSpacesBetween
+								//true  % CurrentpointIsTop
+								BottleWrapPadding 2 mul
+									TitleAboveBelowOverR SheetNum get WithinPage get
+									TitleAboveBelowOverL SheetNum get WithinPage get  sub
+									BottleWrapScalingFactor  mul   add
+								//false  % FillBackground
+								BW_XX BW_YY add 2 mod 0 eq {-1} {ItemCBW} ifelse
+								CirclearrayInStraightLine pop pop pop pop
+							} for  % Y
+						} for  % X
+					} if  % N 0 gt
+
+					end
+					//DeBugLevel 100 le {(-BottleWrapForms: PaintProc) OutputToLog} if
+				} bind def  % /PaintProc
+				end  % dictionary BottleWrapForms
+			} for  % WithinPage, WithinTitles
+			currentdict /WithinPage undef
+			currentdict /WithinTitles undef
+		} bind for  % SheetNum
+		UndefMgns
+		currentdict /SheetNum undef
+	} if  % ... BottleWrapNumCopies 1 ge ...
 
 	/VoteRecorders load MightBeTrue
 	{
@@ -12221,6 +12404,21 @@ currentdict /GlyphShowKnownAbsences undef
 		//DeBugLevel 100 le {(-PrePourInnerLoop) OutputToLog} if
 	} bind def  % /PrePourInnerLoop
 
+	/BottleWrapInnerLoop
+	{
+		//DeBugLevel 100 le {(+BottleWrapInnerLoop) OutputToLog} if
+
+		CircleNonEmpty SheetNum get WithinPage get {BottleWrapForms SheetNum get WithinPage get  execform} if
+
+		ShowHeadersAndFooters
+		{
+			//DeBugLevel 75 le {( BottleWrapInnerLoop: headers and footers) OutputToLog} if
+			HeadersAndFooters PaintHeadersFooters
+		} if  % ShowHeadersAndFooters
+
+		//DeBugLevel 100 le {(-BottleWrapInnerLoop) OutputToLog} if
+	} bind def  % /BottleWrapInnerLoop
+
 	() OutputToLog
 
 	% Render the pages, starting with the possible (only) empty page
@@ -13125,6 +13323,65 @@ currentdict /GlyphShowKnownAbsences undef
 			} if  % ...PrePourNumCopies 0 gt...
 
 
+			{BottleWrapNumCopies 0 gt} MightBeTrue
+			{
+				/TypeOfPagesBeingRendered /BottleWrap store
+				17 dict begin
+				/NameNum 0 def
+				/ThisName (Bottle-wrap) def
+				/BottleWrapSheetNumWithinPageWithinTitles
+				[
+				NumSheets 1 sub  BottleWrapReverseOrder {-1 0} {0 exch 1 exch} ifelse
+				{
+					/SheetNum exch def
+					BottleWrapPaperType ThisPaperType  eq   PageOrderingBottleWrap SheetNum GetEU  ThisPageOrdering  eq   and  % Note SheetNum not BottleWrapSheetNum
+					{
+						SheetLengths SheetNum get 1 sub  BottleWrapReverseOrder {-1 0} {0 exch 1 exch} ifelse
+						{
+							WithinPage-WithinTitles-def
+							true
+							BottleWrapRemoveDuplicatesByWithinTitles {counttomark 1 sub 1 exch 1 exch {index 2 get WithinTitles eq {pop //false exit} if} for} if
+							{ [ SheetNum WithinPage WithinTitles ] } if
+						} for  % WithinPage, WithinTitles
+					} if  % ... ThisPaperType ... ThisPageOrdering ... and
+				} for  % SheetNum
+				] def  % /BottleWrapSheetNumWithinPageWithinTitles
+
+				BottleWrapSheetNumWithinPageWithinTitles length 1 ge
+				{
+					BottleWrapSortByWithinTitles {BottleWrapSheetNumWithinPageWithinTitles {2 get exch 2 get ge} {2 get exch 2 get le} BottleWrapReverseOrder {exch} if pop ShellSort} if
+
+					BottleWrapCollate {/BottleWrapSheetNum 0 def} if
+					{
+						/Finished //true def
+						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: +BottleWrap: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+						BottleWrapSheetNumWithinPageWithinTitles
+						{
+							aload pop /WithinTitles exch def  /WithinPage exch def  /SheetNum exch def
+							0  1  BottleWrapCollate {BottleWrapSheetNum BottleWrapNumCopies lt {0} {-1} ifelse} {BottleWrapNumCopies 1 sub} ifelse
+							{
+								//false PageSuppressed {pop exit} if
+								BottleWrapCollate {pop} {/BottleWrapSheetNum exch def} ifelse
+								matrix currentmatrix
+								/TypeOfPagesBeingRendered /BottleWrap store
+								/Finished //false def
+								//false  //false  MirrorPagesBottleWrap SheetNum GetEU  //true  BottleWrapPaperType  BottleWrapOrientation  SetPaperSize
+								//true DefStoreMgns
+								//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
+								BottleWrapInnerLoop
+								//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
+								setmatrix   ShowPage
+							} for  % BottleWrapSheetNum, if not collating
+						} forall  % BottleWrapSheetNumWithinPageWithinTitles
+						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: -BottleWrap: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+						Finished  BottleWrapCollate not  or {exit} if
+						/BottleWrapSheetNum BottleWrapSheetNum 1 add def
+					} loop  % BottleWrapSheetNum, if collating
+				} if  % BottleWrapSheetNumWithinPageWithinTitles length 1 ge
+				end
+			} if  % ...BottleWrapNumCopies 0 gt...
+
+
 			% Decanter labels. Because there is, in inner loops, testing of DecanterLabelsPaperType and PageOrderingDecanterLabels, this is not in an ...InnerLoop code.
 			{DecanterLabelsNumCopies 1 ge} MightBeTrue
 			{
@@ -13775,6 +14032,7 @@ currentdict /GlyphShowKnownAbsences undef
 	DestCorkDisplay     0 gt {1 index mark ne {(; )} if  DestPrefixCorkDisplay    (0)  DestCorkDisplay    1 gt {DestCorkDisplay    2 eq {(, )} {( ... )} ifelse DestPrefixCorkDisplay    DestCorkDisplay    1 sub} if} if
 	DestNeckTags        0 gt {1 index mark ne {(; )} if  DestPrefixNeckTags       (0)  DestNeckTags       1 gt {DestNeckTags       2 eq {(, )} {( ... )} ifelse DestPrefixNeckTags       DestNeckTags       1 sub} if} if
 	DestPrePour         0 gt {1 index mark ne {(; )} if  DestPrefixPrePour        (0)  DestPrePour        1 gt {DestPrePour        2 eq {(, )} {( ... )} ifelse DestPrefixPrePour        DestPrePour        1 sub} if} if
+	DestBottleWrap      0 gt {1 index mark ne {(; )} if  DestPrefixBottleWrap     (0)  DestBottleWrap     1 gt {DestBottleWrap     2 eq {(, )} {( ... )} ifelse DestPrefixBottleWrap     DestBottleWrap     1 sub} if} if
 	DestPlaceName       0 gt {1 index mark ne {(; )} if  DestPrefixPlaceName      (0)  DestPlaceName      1 gt {DestPlaceName      2 eq {(, )} {( ... )} ifelse DestPrefixPlaceName      DestPlaceName      1 sub} if} if
 	DestDecanterLabels  0 gt {1 index mark ne {(; )} if  DestPrefixDecanterLabels (0)  DestDecanterLabels 1 gt {DestDecanterLabels 2 eq {(, )} {( ... )} ifelse DestPrefixDecanterLabels DestDecanterLabels 1 sub} if} if
 	DestStickyLabels    0 gt {1 index mark ne {(; )} if  DestPrefixStickyLabels   (0)  DestStickyLabels   1 gt {DestStickyLabels   2 eq {(, )} {( ... )} ifelse DestPrefixStickyLabels   DestStickyLabels   1 sub} if} if
@@ -14092,6 +14350,28 @@ currentdict /GlyphShowKnownAbsences undef
 				} for  % ShownPageThis
 				exit
 			} if  % /PrePour ...
+
+			/BottleWrap TypeOfPagesBeingRendered eq
+			{
+				//DeBugLevel 25 le {( Main: pdfmark's, OUT, in print order, BottleWrap) OutputToLog} if
+				mark
+					/Action /GoTo /Dest PageDestName  /Count NumPagesThisType neg  /F 0
+					/Title  mark (Bottle-wrap) NumPagesThisType 1 eq {( \(p) PageNum 1 add} {(s \(pp) PageNum 1 add (\205) PageNum NumPagesThisType add} ifelse  (, ) PaperTypeStringShortPDF (\)) ConcatenateToMark
+				/OUT pdfmark
+				ShownPageThis  1  ShownPageThis NumPagesThisType 1 sub add
+				{
+					/ShownPageThis exch store
+					ShownPagesData ShownPageThis get begin 2 dict begin
+					mark
+						/Action /GoTo /Dest PageDestName
+						/BottleWrapTitlingPieces [ Titles WithinTitles get PDFDocEncodingify TrimSpaces   [ Abovetitles Belowtitles Overtitles ] {WithinTitles get PDFDocEncodingify TrimSpaces dup length 0 eq {pop} if} forall ] def
+						/BottleWrapTitlingPieces [ 0 1 BottleWrapTitlingPieces length 1 sub {/i exch def  BottleWrapTitlingPieces i get  0 1 i 1 sub {BottleWrapTitlingPieces exch get 1 index eq {pop exit} if} for} for ] def
+						/Title mark mark  BottleWrapTitlingPieces {(, )} forall pop   ConcatenateToMark dup length 0 le {pop (Bottle-wrap)} if  ( \(p) PageNum 1 add  (, ) PaperTypeStringShortPDF (\)) ConcatenateToMark TruncateTo255  /F 0
+					/OUT pdfmark
+					end end
+				} for  % ShownPageThis
+				exit
+			} if  % /BottleWrap ...
 
 			/DecanterLabels TypeOfPagesBeingRendered eq
 			{

@@ -431,6 +431,27 @@ The decanter labels are on paper `DecanterLabelsPaperType`.
 
 <div style="clear: both;"></div>
 
+
+## BottleWrap
+
+At some blind tasting, particularly of wines served cold and undecanted, it is natural to bring the wine in its original bottle, wrapped in anonymising paper. 
+
+<img align="right" width="842" height="595" src="images/NonGlasses_BW.png">
+
+There&rsquo;s a quirk. 
+Usually most of the paperwork is printed centrally. 
+But these pages need to be printed, and wrapped around bottles, before arriving at the central location. 
+So if the main control, `BottleWrapNumCopies`, is not `0`, then `BottleWrapSuppressOtherPageTypes` becomes true, and all non-bottle-wrap pages are suppressed. 
+Then this *BottleWrap* PDF should be made available separately, and people encouraged to print their page(s) at home.
+
+### Superfluous
+
+The parameter `BottleWrapPadding` is the empty space around the graphic that is the bottle centre. 
+And `BottleWrapScalingMin` is the target size of this graphic, as a proportion of that on the Glasses pages, which is used to determine the number of rows.
+
+Most other parameters function as for pre-pour pages: `BottleWrapReverseOrder`, `BottleWrapCollate`, `BottleWrapRemoveDuplicatesByWithinTitles`, `BottleWrapSortByWithinTitles`, `BottleWrapPaperType`, `BottleWrapOrientation`.
+
+
 ## StickyLabels
 
 <img align="right" width="218" height="587" src="images/NonGlasses_SL1.png">
