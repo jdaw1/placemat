@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:15 Sunday 8th May 2022
+% This version 21:40 Sunday 8th May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205082115) def
+/ParametersVersionDateTimeAdobeFormat (D:202205082140) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -780,7 +780,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205082115) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205082140) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1191,7 +1191,7 @@ currentdict /ShellSortGapsLength1Subs undef
 		} if  % ratio 1 lt
 
 		/dist  xF xT sub dup mul  yF yT sub dup mul  add sqrt  def
-		dist HeadLength lt dist HeadLength 2 div ge and {/HeadWidth dist HeadLength 2 mul div HeadWidth mul def  /HeadLength dist 2 div def} if
+		dist HeadLength lt dist HeadLength 2 mul 3 div ge and {/HeadWidth dist HeadLength 1.5 mul div HeadWidth mul def  /HeadLength dist 2 mul 3 div def} if
 
 		GSave
 		0 setgray  0.36 setlinewidth  0 setlinecap  [] 0 setdash
