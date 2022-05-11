@@ -1,6 +1,6 @@
 %!PS
 
-% This version 17:00 Wednesday 11th May 2022
+% This version 21:45 Wednesday 11th May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205111700) def
+/ParametersVersionDateTimeAdobeFormat (D:202205112145) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -780,7 +780,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205111700) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205112145) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1114,14 +1114,14 @@ currentdict /ShellSortGapsLength1Subs undef
 /SheetLengths [ 0 1 NumSheets 1 sub {/SheetNum exch def  GlassesOnSheets SheetNum GetEU length} for ] def
 
 % Immediate dependencies: SheetNum, Radii, GlassPositions, PolynomialRoots, PrinterEpsilon
-% WithinPageFrom WithinPageTo GapFromCircles OffsetRightBool OffsetMin TargetLength HeadLength HeadWidth {PathCode} {HeadCode}  ArrowCircleToCircle  -
+% WithinPageFrom WithinPageTo GapFromCircles OffsetRightBool OffsetMin TargetLength HeadLength HeadWidth {PathCode} HeadFromBool HeadToBool {HeadCode}  ArrowCircleToCircle  -
 % WithinPageTo is either an integer, or an array [x y].
 /ArrowCircleToCircle_CanWarn [ NumSheets {//true} repeat ] def
 /ArrowCircleToCircle
 {
 	//DeBugLevel 25 le {(+ArrowCircleToCircle) OutputToLog} if
 	23 dict begin
-	/HeadCode exch def  /PathCode exch def  /HeadWidth exch def  /HeadLength exch def  /TargetLength exch def
+	/HeadCode exch def  /HeadTo exch def  /HeadFrom exch def  /PathCode exch def  /HeadWidth exch def  /HeadLength exch def  /TargetLength exch def
 	/OffsetMin exch def  /OffsetRight exch def  /GapFromCircles exch def  /WithinPageTo exch def  /WithinPageFrom exch def
 	GlassPositions SheetNum get WithinPageFrom get aload pop /yF exch def /xF exch def
 
@@ -1151,12 +1151,15 @@ currentdict /ShellSortGapsLength1Subs undef
 			dup abs OffsetMin abs lt {pop OffsetMin abs OffsetRight not {neg} if} if
 		def  % /offset
 
-		/offsetX  yT yF sub dist div offset mul def
-		/offsetY  xF xT sub dist div offset mul def
-		/xF dup load offsetX add def
-		/xT dup load offsetX add def
-		/yF dup load offsetY add def
-		/yT dup load offsetY add def
+		<<
+			/offsetX  yT yF sub dist div offset mul
+			/offsetY  xF xT sub dist div offset mul
+		>> begin
+		/xF dup load offsetX add store
+		/xT dup load offsetX add store
+		/yF dup load offsetY add store
+		/yT dup load offsetY add store
+		end
 
 		% Boundary from circle
 		/ratio
@@ -1214,26 +1217,38 @@ currentdict /ShellSortGapsLength1Subs undef
 		} if  % ratio 1 lt
 
 		/dist  xF xT sub dup mul  yF yT sub dup mul  add sqrt  def
-		dist HeadLength lt dist HeadLength 2 mul 3 div ge and {/HeadWidth dist HeadLength 1.5 mul div HeadWidth mul def  /HeadLength dist 2 mul 3 div def} if
+		HeadFrom HeadTo and
+			{HeadLength dist 2.5 div ge {/HeadWidth dist 2.5 div HeadWidth mul HeadLength div def  /HeadLength dist 2.5 div def} if}
+			{HeadLength dist 1.5 div ge {/HeadWidth dist 1.5 div HeadWidth mul HeadLength div def  /HeadLength dist 1.5 div def} if}
+		ifelse  % HeadFrom HeadTo and
 
 		GSave
-		0 setgray  0.36 setlinewidth  0 setlinecap  [] 0 setdash
-		xF yF moveto
-		/HeadCode length 0 gt {HeadLength 0 gt} {//false} ifelse
+		HeadFrom
 		{
-			/ratio  dist HeadLength 0.95 mul sub  dist  div  def
-			xT xF sub ratio mul  yT yF sub ratio mul  rlineto
-		} {xT yT lineto} ifelse  % Head
-		PathCode
+			/ratio  1  HeadLength 0.99 mul  dist div  sub  def
+			xF xT sub ratio mul xT add
+			yF yT sub ratio mul yT add
+		} {xF yF} ifelse
+		moveto
+		HeadTo
+		{
+			/ratio  1  HeadLength 0.99 mul  dist div  sub  def
+			xT xF sub ratio mul xF add
+			yT yF sub ratio mul yF add
+		} {xT yT} ifelse
+		lineto
+		0 setgray  0.36 setlinewidth  0 setlinecap  0 setlinejoin  [] 0 setdash  PathCode
 		GRestore
 
-		GSave
-		xT yT translate  xF xT sub yT yF sub atan rotate
-		0 0 moveto  HeadWidth 2 div HeadLength neg rlineto  HeadWidth neg 0 rlineto  closepath
-		0 setgray  0.72 setlinewidth  0 setlinecap  [] 0 setdash
-		HeadCode
-		GRestore
-
+		[
+			HeadFrom { [xT xF sub yF yT sub atan   xF yF] } if
+			HeadTo   { [xF xT sub yT yF sub atan   xT yT] } if
+		]{
+			GSave  aload pop translate rotate
+			0 0 moveto  HeadWidth 2 div HeadLength neg rlineto  HeadWidth neg 0 rlineto  closepath
+			0 setgray  0.72 setlinewidth  0 setlinecap  0 setlinejoin  [] 0 setdash  HeadCode
+			GRestore
+		} forall
 	} repeat  % 1
 	end
 	//DeBugLevel 25 le {(-ArrowCircleToCircle) OutputToLog} if
