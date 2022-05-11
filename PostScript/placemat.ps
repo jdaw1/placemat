@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:40 Sunday 8th May 2022
+% This version 17:00 Wednesday 11th May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205082140) def
+/ParametersVersionDateTimeAdobeFormat (D:202205111700) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -780,7 +780,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205082140) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205111700) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -804,6 +804,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /Cos15       0.9659258262890682867497431997 def  % 3 sqrt 1 add 8 sqrt div
 /Cos01Sqd    0.999695413509547865 def  % N[Cos[1 Degree]^2, 18]
 /GoldenRatio 1.6180339887498948482 def  % 5 sqrt 1 add 2 div
+/Root2Root3Minus3 0.68125003863321328 def  % N[Sqrt[2 Sqrt[3] - 3], 17]
 /DegreeInRadians  0.0174532925199432957692369 def  % pi / 180
 /ArcCosMinusOneThird 109.471220634490691369 def  % In degrees
 /ArcTanOneQuarter    14.03624346792647858289 def  % In degrees
@@ -1109,78 +1110,100 @@ currentdict /ShellSortGapsLength1Subs undef
 	//DeBugLevel 5 le {(-PolynomialRoots) OutputToLog} if
 } bind def  % /PolynomialRoots
 
-% Immediate dependencies: SheetNum, Radii, GlassPositions, PolynomialRoots
-% WithinPageFrom WithinPageTo TargetLength GapFromCircles HeadWidth HeadLength {PathCode} {HeadCode}  ArrowCircleToCircle  -
+/NumSheets GlassesOnSheets length def
+/SheetLengths [ 0 1 NumSheets 1 sub {/SheetNum exch def  GlassesOnSheets SheetNum GetEU length} for ] def
+
+% Immediate dependencies: SheetNum, Radii, GlassPositions, PolynomialRoots, PrinterEpsilon
+% WithinPageFrom WithinPageTo GapFromCircles OffsetRightBool OffsetMin TargetLength HeadLength HeadWidth {PathCode} {HeadCode}  ArrowCircleToCircle  -
 % WithinPageTo is either an integer, or an array [x y].
+/ArrowCircleToCircle_CanWarn [ NumSheets {//true} repeat ] def
 /ArrowCircleToCircle
 {
-	17 dict begin
-	/HeadCode exch def  /PathCode exch def  /HeadLength exch def  /HeadWidth exch def
-	/GapFromCircles exch def  /LengthMax exch def  /WithinPageTo exch def  /WithinPageFrom exch def
-
-	/r  Radii SheetNum get  def
+	//DeBugLevel 25 le {(+ArrowCircleToCircle) OutputToLog} if
+	23 dict begin
+	/HeadCode exch def  /PathCode exch def  /HeadWidth exch def  /HeadLength exch def  /TargetLength exch def
+	/OffsetMin exch def  /OffsetRight exch def  /GapFromCircles exch def  /WithinPageTo exch def  /WithinPageFrom exch def
 	GlassPositions SheetNum get WithinPageFrom get aload pop /yF exch def /xF exch def
 
-	/arraytype LengthMax type eq
-	{
-		/LengthMax
-			GlassPositions SheetNum get LengthMax 0 get get aload pop
-			GlassPositions SheetNum get LengthMax 1 get get aload pop
-			3 -1 roll sub dup mul 3 1 roll sub dup mul add
-			sqrt r GapFromCircles add 2 mul sub
-		def  % /LengthMax
-	} if  % /arraytype LengthMax type eq
-
 	1 {
-		LengthMax 0 le {exit} if
+		TargetLength 0 le {exit} if
+
+		/r  Radii SheetNum get  GapFromCircles add  def
+		TargetLength r //Root2Root3Minus3 mul ge  //ArrowCircleToCircle_CanWarn SheetNum get  and
+		{
+			mark (Warning: in ArrowCircleToCircle generally recommend TargetLength < \(Radius + GapFromCircles\) * Sqrt[2 Sqrt3 - 3]\n~= )
+			(\() Radii SheetNum get ( + ) GapFromCircles (\) * ) //Root2Root3Minus3 ( ~= ) r //Root2Root3Minus3 mul
+			(pt. SheetNum=) SheetNum (; WithinPageFrom=) WithinPageFrom (.) ConcatenateToMark OutputToLog
+			//ArrowCircleToCircle_CanWarn SheetNum //false put
+		} if  % Long, and not yet warned
 
 		/arraytype WithinPageTo type eq {WithinPageTo} {GlassPositions SheetNum get WithinPageTo get} ifelse
 		aload pop  /yT exch def /xT exch def
-		/dist  xF xT sub dup mul  yF yT sub dup mul  add sqrt  def
-		r GapFromCircles add dist ge {exit} if
 
-		% Must be From an integer, a circle centre. Advance r+GapFromCircles in correct direction.
-		/ratio r GapFromCircles add dist div def
-		/xF  xT xF sub ratio mul xF add  def
-		/yF  yT yF sub ratio mul yF add  def
+		/dist2  xF xT sub dup mul  yF yT sub dup mul  add  def
+		dist2  r dup mul  le {exit} if  % ==> strictly positive
+		/dist  dist2 sqrt  def
 
-		% If To a circle, then to its outside
-		/dist  xF xT sub dup mul  yF yT sub dup mul  add sqrt  def
-		r GapFromCircles add dist ge {exit} if
-		/arraytype WithinPageFrom type ne
+		/offset
+			dist TargetLength 2 mul mul
+			dist2 sub   r dup mul 4 mul add   TargetLength dup mul sub
+			dup 0 gt {sqrt -2 OffsetRight {neg} if div} {pop 0} ifelse
+			dup abs OffsetMin abs lt {pop OffsetMin abs OffsetRight not {neg} if} if
+		def  % /offset
+
+		/offsetX  yT yF sub dist div offset mul def
+		/offsetY  xF xT sub dist div offset mul def
+		/xF dup load offsetX add def
+		/xT dup load offsetX add def
+		/yF dup load offsetY add def
+		/yT dup load offsetY add def
+
+		% Boundary from circle
+		/ratio
+		GlassPositions SheetNum get WithinPageFrom get aload pop /yC exch def /xC exch def
+		[
+			xC xF sub dup mul  yC yF sub dup mul  add  r dup mul  sub
+			xC xF sub xF xT sub mul  yC yF sub yF yT sub mul  add 2 mul
+			xF xT sub dup mul  yF yT sub dup mul  add
+		] -0.1 //false  1 //true  Epsilon  PolynomialRoots
+		Min def  % /ratio
+		ratio 0 le {exit} if  % This, and the -0.1, in case starting point very near another circle
+		ratio 1 lt
 		{
-			/dist  xF xT sub dup mul  yF yT sub dup mul  add sqrt  def
-			/ratio r GapFromCircles add dist div def
-			ratio 1 lt
-			{
-				/xT  xF xT sub ratio mul xT add  def
-				/yT  yF yT sub ratio mul yT add  def
-			} if  % ratio 1 lt
-		} if % integer
+			/xF  xT xF sub ratio mul xF add  def
+			/yF  yT yF sub ratio mul yF add  def
+		} if  % ratio 1 lt
 
-		% Trim length to LengthMax
+		% Trim length to TargetLength
 		/dist  xF xT sub dup mul  yF yT sub dup mul  add sqrt  def
-		/ratio LengthMax dist div def
+		/ratio TargetLength dist div def
 		ratio 1 lt
 		{
 			/xT  xT xF sub ratio mul xF add  def
 			/yT  yT yF sub ratio mul yF add  def
 		} if  % ratio 1 lt
 
+		/ratio
+		[
+			% Trim to margins
+			xT xF //PrinterEpsilon add gt {PageWidth  MgnR sub xF sub  xT xF sub  div} if
+			yT yF //PrinterEpsilon add gt {PageHeight MgnT sub yF sub  yT yF sub  div} if
+			xT xF //PrinterEpsilon sub lt {           MgnL     xF sub  xT xF sub  div} if
+			yT yF //PrinterEpsilon sub lt {           MgnB     yF sub  yT yF sub  div} if
+		] Min
 		% Avoid collision with other circles
-		/ratio  Infinity
 		0  1  GlassPositions SheetNum get length 1 sub
 		{
-			dup dup WithinPageTo ne exch WithinPageFrom ne and
+			dup WithinPageFrom ne
 			{
 				GlassPositions SheetNum get exch get aload pop /yC exch def /xC exch def
 				[
-					xC xF sub dup mul  yC yF sub dup mul  add  r GapFromCircles add dup mul  sub
+					xC xF sub dup mul  yC yF sub dup mul  add  r dup mul  sub
 					xC xF sub xF xT sub mul  yC yF sub yF yT sub mul  add 2 mul
 					xF xT sub dup mul  yF yT sub dup mul  add
 				] -0.1 //false  1 //true  Epsilon  PolynomialRoots
 				Min  2 copy gt {exch} if pop
-			} {pop} ifelse  % WithinPageTo ne exch WithinPageFrom ne and
+			} {pop} ifelse  % ... WithinPageFrom ne
 		} for  % WithinPage
 		def  % /ratio
 		ratio 0 le {exit} if  % This, and the -0.1, in case starting point very near another circle
@@ -1213,7 +1236,9 @@ currentdict /ShellSortGapsLength1Subs undef
 
 	} repeat  % 1
 	end
+	//DeBugLevel 25 le {(-ArrowCircleToCircle) OutputToLog} if
 } bind def  % /ArrowCircleToCircle
+currentdict /ArrowCircleToCircle_CanWarn undef
 
 % string string  Concatenate  string
 /Concatenate
@@ -2102,9 +2127,7 @@ currentdict /ForReverseBinaryDict undef
 /CompassPointText {16 mul 360 div round cvi 16 mod 16 add 16 mod //CompassPoints16 exch get} bind def  % /CompassPointText
 currentdict	/CompassPoint16 undef
 
-//DeBugLevel 100 le {( Main: computing NumSheets, SheetLengths, PaperTypes, UsedPaperTypes, UsedPageOrderings) OutputToLog} if
-/NumSheets GlassesOnSheets length def
-/SheetLengths [ 0 1 NumSheets 1 sub {/SheetNum exch def  GlassesOnSheets SheetNum GetEU length} for ] def
+//DeBugLevel 100 le {( Main: computing PaperTypes, UsedPaperTypes, UsedPageOrderings) OutputToLog} if
 /TypeOfPagesBeingRendered /Glasses store
 /PaperTypes   [  0  1  NumSheets 1 sub {/SheetNum exch def  PaperType} for  ] def  currentdict /SheetNum undef  % Duplicates not removed
 /TypeOfPagesBeingRendered /TastingNotes store
