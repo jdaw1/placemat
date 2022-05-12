@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:45 Wednesday 11th May 2022
+% This version 20:00 Thursday 12th May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205112145) def
+/ParametersVersionDateTimeAdobeFormat (D:202205122000) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -600,7 +600,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /PrePourShowDroplets true def
 
 /BottleWrapPadding 12 def
-/BottleWrapReverseOrder true def
+/BottleWrapReverseOrder false def
 /BottleWrapCollate true def
 /BottleWrapRemoveDuplicatesByWithinTitles true def
 /BottleWrapSortByWithinTitles true def
@@ -780,7 +780,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205112145) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205122000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1129,13 +1129,6 @@ currentdict /ShellSortGapsLength1Subs undef
 		TargetLength 0 le {exit} if
 
 		/r  Radii SheetNum get  GapFromCircles add  def
-		TargetLength r //Root2Root3Minus3 mul ge  //ArrowCircleToCircle_CanWarn SheetNum get  and
-		{
-			mark (Warning: in ArrowCircleToCircle generally recommend TargetLength < \(Radius + GapFromCircles\) * Sqrt[2 Sqrt3 - 3]\n~= )
-			(\() Radii SheetNum get ( + ) GapFromCircles (\) * ) //Root2Root3Minus3 ( ~= ) r //Root2Root3Minus3 mul
-			(pt. SheetNum=) SheetNum (; WithinPageFrom=) WithinPageFrom (.) ConcatenateToMark OutputToLog
-			//ArrowCircleToCircle_CanWarn SheetNum //false put
-		} if  % Long, and not yet warned
 
 		/arraytype WithinPageTo type eq {WithinPageTo} {GlassPositions SheetNum get WithinPageTo get} ifelse
 		aload pop  /yT exch def /xT exch def
@@ -1206,6 +1199,15 @@ currentdict /ShellSortGapsLength1Subs undef
 					xF xT sub dup mul  yF yT sub dup mul  add
 				] -0.1 //false  1 //true  Epsilon  PolynomialRoots
 				Min  2 copy gt {exch} if pop
+
+				TargetLength r //Root2Root3Minus3 mul ge  //ArrowCircleToCircle_CanWarn SheetNum get  and
+				{
+					mark (Warning: in ArrowCircleToCircle generally recommend TargetLength < \(Radius + GapFromCircles\) * Sqrt[2 Sqrt3 - 3]\n~= )
+					(\() Radii SheetNum get ( + ) GapFromCircles (\) * ) //Root2Root3Minus3 ( ~= ) r //Root2Root3Minus3 mul
+					(pt. SheetNum=) SheetNum (; WithinPageFrom=) WithinPageFrom (.) ConcatenateToMark OutputToLog
+					//ArrowCircleToCircle_CanWarn SheetNum //false put
+				} if  % Long, and not yet warned
+
 			} {pop} ifelse  % ... WithinPageFrom ne
 		} for  % WithinPage
 		def  % /ratio
@@ -1223,20 +1225,9 @@ currentdict /ShellSortGapsLength1Subs undef
 		ifelse  % HeadFrom HeadTo and
 
 		GSave
-		HeadFrom
-		{
-			/ratio  1  HeadLength 0.99 mul  dist div  sub  def
-			xF xT sub ratio mul xT add
-			yF yT sub ratio mul yT add
-		} {xF yF} ifelse
-		moveto
-		HeadTo
-		{
-			/ratio  1  HeadLength 0.99 mul  dist div  sub  def
-			xT xF sub ratio mul xF add
-			yT yF sub ratio mul yF add
-		} {xT yT} ifelse
-		lineto
+		/ratio  1  HeadLength 0.06 sub  dist div  sub  def  % Bigger overlap than PrinterEpsilon.
+		HeadFrom {xF xT sub ratio mul xT add   yF yT sub ratio mul yT add} {xF yF} ifelse  moveto
+		HeadTo   {xT xF sub ratio mul xF add   yT yF sub ratio mul yF add} {xT yT} ifelse  lineto
 		0 setgray  0.36 setlinewidth  0 setlinecap  0 setlinejoin  [] 0 setdash  PathCode
 		GRestore
 
@@ -10762,7 +10753,7 @@ currentdict /GlyphShowKnownAbsences undef
 					BW_X_first  BW_X_step  PageWidth MgnR sub BW_X_step 2 div add
 					{
 						/BW_X exch def
-						
+
 						0  1  BottleWrapNumRows 1 sub
 						{
 							BW_Y_step mul BW_Y_first add  /BW_Y exch def
