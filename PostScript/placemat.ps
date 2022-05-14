@@ -1,6 +1,6 @@
 %!PS
 
-% This version 14:00 Saturday 14th May 2022
+% This version 17:15 Saturday 14th May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205141400) def
+/ParametersVersionDateTimeAdobeFormat (D:202205141715) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -780,7 +780,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205141400) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205141715) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -10685,6 +10685,7 @@ currentdict /GlyphShowKnownAbsences undef
 	{
 		//DeBugLevel 100 le {( Main: BottleWrapForms) OutputToLog} if
 		/TypeOfPagesBeingRendered /BottleWrap store
+		/BottleWrapScalingFactors  Titles length array  def
 		/BottleWrapForms [ GlassesOnSheets {[ exch execU length {12 dict} repeat]} forall ] def
 		0  1  NumSheets 1 sub
 		{
@@ -10722,6 +10723,7 @@ currentdict /GlyphShowKnownAbsences undef
 						TitleAboveBelowOverT SheetNum get WithinPage get
 						TitleAboveBelowOverB SheetNum get WithinPage get sub div
 					def  % /BottleWrapScalingFactor
+					BottleWrapScalingFactors WithinTitles BottleWrapScalingFactor put
 
 					CircletextFont  CirclearraysFontSizes SheetNum get WithinPage get  selectfont
 					CirclearraysBottleWrap WithinTitles get StringPathBBox  /BW_T exch def  pop  /BW_B exch def  pop
@@ -14052,6 +14054,20 @@ currentdict /GlyphShowKnownAbsences undef
 		(\nMinimum of PlaceNamesFontSizes = )  //Infinity PlaceNamesFontSizes {{dup IsNumber {2 copy gt {exch} if} if pop} forall} forall dup //Infinity lt {ConcatenateToMark OutputToLog} {cleartomark} ifelse
 	} if  % ...PlaceNames ...
 
+	{BottleWrapNumCopies 1 ge} MightBeTrue
+	{
+		mark (BottleWrapScalingFactors: ) 
+		0  1  Titles length 1 sub
+		{
+			/WithinTitles exch def
+			BottleWrapScalingFactors WithinTitles get type /realtype eq
+			{
+				Titles WithinTitles get ASCIIfy ( = ) BottleWrapScalingFactors WithinTitles get (; )
+			} if  % /realtype
+		} for  % WithinTitles
+		pop (.)  ConcatenateToMark OutputToLog 
+	} if  % {BottleWrapNumCopies 1 ge} MightBeTrue
+
 	/TypeOfPagesBeingRendered /Multiple store
 	mark  (URL # tags: )
 	DestEmpty           0 gt {                           DestPrefixEmpty          (0)  DestEmpty          1 gt {DestEmpty          2 eq {(, )} {( ... )} ifelse DestPrefixEmpty          DestEmpty          1 sub} if} if
@@ -14735,7 +14751,7 @@ currentdict /GlyphShowKnownAbsences undef
 		{OutputLog  0  (:-\)   :-\)   Happily, execution successfully completed.   :-\)   :-\))  put}
 	ifelse  % EndError
 	count 0 ne {(+pstack) = pstack (-pstack) =} if
-} stopped  % From about 7.5k lines above.
+} stopped  % From about 7.9k lines above.
 {
 	/ErrorFlag where {/ErrorFlag get} {//false} ifelse  % Error in parameter(s)
 	{
