@@ -1,6 +1,6 @@
 %!PS
 
-% This version 17:15 Saturday 14th May 2022
+% This version 23:00 Wednesday 18th May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205141715) def
+/ParametersVersionDateTimeAdobeFormat (D:202205182300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -107,8 +107,7 @@
 /AccountsNumCopies  Names length 8 ge {1} {0} ifelse  def
 /StickyLabelsNumCopies 0 def
 /StickyLabelsTypes [0 1] def  % 0 = 2x4 on A4; 1 = 5x13 on A4
-/BottleWrapNumCopies 0 def
-/BottleWrapSuppressOtherPageTypes {/BottleWrapNumCopies load 0 ne} def
+/BottleWrapNumCopies 0 def  % Interacts with BottleWrapSuppressOtherPageTypes
 
 /Abovetitles [ Titles length {()} repeat ] def
 /Overtitles [ Titles length {()} repeat ] def
@@ -718,21 +717,22 @@ if} bind def  % /VoteRecorderCrossedBox
 /PagesToBeInsertedNumPages [ 1 ] def
 /PagesToBeInsertedDescriptions [ (Food order) ] def
 
-/LogThisExtra () def
 /LicensingAgreementLinkPlacemats (http://creativecommons.org/licenses/by-sa/4.0/deed.en) def  % To be consistent with LicensingAgreementTextPlacemats
-/OutputLogToLog true def
-/OutputLogToPage true def
-/OutputLogToAnnotation  OutputLogToPage not  BottleWrapSuppressOtherPageTypes or  def
 /PageLabelOverride false def  % E.g., {/Glasses TypeOfPagesBeingRendered eq}
 /PageLabelOverrideWith {[(PageNum) ShownPages 5 string cvs]} def
 /PrologueCode {} def  % Executed once, just before painting pages
 /EpilogueCode {} def  % Executed once, just after painting pages
 /EmptyGlassesPageAtStart false def
 /EmptyGlassesPageOrientation /Portrait def
+/BottleWrapSuppressOtherPageTypes {/BottleWrapNumCopies load 0 ne} def
 /TestingSuppressPageTypes [ ] def  % [ /Glasses 1  /TastingNotes 1  /VoteRecorder 1  /DecantingNotes 1  /Accounts 1  /CorkDisplay 1  /NeckTags 1  /PrePour 1  /PlaceName 1  /DecanterLabels 1  /BottleWrap 1  /StickyLabels 1 ]. Also, no int, /DistillerLog
 /TestingMaxNumPagesToShow 2147483647 def
 /TestingShowThesePagesOnly null def   % Either null, in which case having no effect, or an array of integers. If making a PDF for insertion to another doc, perhaps also "/pdfmark {cleartomark} def".
 
+/LogThisExtra () def
+/OutputLogToLog true def
+/OutputLogToPage true def
+/OutputLogToAnnotation  OutputLogToPage not  BottleWrapSuppressOtherPageTypes or  def
 
 % Adds extra space in the logical page around the usual layout. ...Glasses... for glasses pages; other for all others.
 /OuterGlassesMarginL 0 def
@@ -780,7 +780,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205141715) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205182300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1227,7 +1227,7 @@ currentdict /ShellSortGapsLength1Subs undef
 			{HeadLength dist 1.5 div ge {/HeadWidth dist 1.5 div HeadWidth mul HeadLength div def  /HeadLength dist 1.5 div def} if}
 		ifelse} if  % HeadFrom HeadTo ...
 
-		0.36 setlinewidth  0 setgray  0 setlinecap  0 setlinejoin  [] 0 setdash
+		0.48 setlinewidth  0 setgray  0 setlinecap  0 setlinejoin  [] 0 setdash
 		GSave
 		/ratio  1  HeadLength 0.06 sub  dist div  sub  def  % Bigger overlap than PrinterEpsilon.
 		HeadFrom {xF xT sub ratio mul xT add   yF yT sub ratio mul yT add} {xF yF} ifelse  moveto
@@ -1238,7 +1238,7 @@ currentdict /ShellSortGapsLength1Subs undef
 			HeadFrom { [xT xF sub yF yT sub atan   xF yF] } if
 			HeadTo   { [xF xT sub yT yF sub atan   xT yT] } if
 		]{
-			GSave  aload pop translate rotate  0.72 setlinewidth
+			GSave  aload pop translate rotate  0.96 setlinewidth
 			0 0 moveto  HeadWidth 2 div HeadLength neg rlineto  HeadWidth neg 0 rlineto  closepath  HeadCode
 			GRestore
 		} forall  % Heads, From and To
