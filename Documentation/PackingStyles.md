@@ -245,9 +245,10 @@ This could be set as 6 + 6 + 5 on 3&times;`/A4`.
 But if table space were tight, 14 on 1&times;`/A3` and 3 on 1&times;`/RightSide` `/A4` would use only 2&frac12; `/A4` widths, if the unused half of the `/A4` were tucked under the `/A3`. 
 Suppressing the ornaments tucked under the `/A3`, such as `HeadersCenter`, would look neater. 
 This can be done by adding to the array an extra flag, `/SuppressNonRightOrnaments` (or `/SuppressNonLeftOrnaments`), which for the pages using that packing style suppresses the unwanted headers, footers, icons, and water boxes. 
+It also accepts the `/VerticalAlignment` parameter. 
 Example item of PackingStyles:
 ```PostScript
-[ /RightSide  /GlassesNumMax 3  /SuppressNonRightOrnaments ]
+[ /RightSide  /GlassesNumMax 3  /OnlyIfOrientation /Portrait  /VerticalAlignment /Justify  /SuppressNonRightOrnaments ]
 ```
 
 <div align="center">

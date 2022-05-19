@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Wednesday 18th May 2022
+% This version 22:30 Thursday 19th May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205182300) def
+/ParametersVersionDateTimeAdobeFormat (D:202205192230) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -172,7 +172,7 @@
 	[ /Temple        /OnlyIfOrientation /Landscape  /ImprovementPointsMin 1 ]
 	[ /Temple        /OnlyIfOrientation /Portrait   /ImprovementPointsMin 2 ]
 	[ /RectangularAlternateNudge  /ImprovementPointsMin 2 ]
-	% [ /RightSide  /GlassesNumMax 3  /OnlyIfOrientation /Portrait  /SuppressNonRightOrnaments ]
+	% [ /RightSide  /GlassesNumMax 3  /OnlyIfOrientation /Portrait  /VerticalAlignment /Justify  /SuppressNonRightOrnaments ]
 	% [ /PostsAndLintel  /CentralGlasses 1  /GlassesNumMin 7  /OnlyIfOrientation /Landscape ]
 	% [ /Arch            /CentralGlasses 1  /GlassesNumMin 6  /OnlyIfOrientation /Landscape ]
 ] def  % /PackingStyles
@@ -780,7 +780,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205182300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205192230) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -5485,7 +5485,14 @@ currentdict /GlyphShowKnownAbsences undef
 						ColNum 0 eq  RowNum 0 gt  NG 2 mod 0 eq  or or
 						{[
 							/LeftSide BaseStyle eq {X R add} {/RightSide BaseStyle eq {X R sub W add} {ColNum 0 eq  {ShoveRight {W R 3 mul sub} {R} ifelse}  {ShoveLeft  {R 3 mul} {W R sub} ifelse}  ifelse  X add} ifelse} ifelse
-							NR 1 le {H 2 div} {H R 2 mul sub RowNum mul NR 1 sub div R add} ifelse Y add
+							1 {
+								NR 1 le {H 2 div  exit} if
+								VerticalAlignment /Justify eq {H R 2 mul sub RowNum mul NR 1 sub div R add  exit} if
+								VerticalAlignment /Bottom eq {RowNum 2 mul 1 add R mul  exit} if
+								VerticalAlignment /Middle eq {RowNum 2 mul 1 add NR sub R mul  H 2 div add  exit} if
+								H RowNum 2 mul 1 add R mul sub  exit  % Top, being the default
+							} repeat  % 1
+							Y add
 						]} if  % Within row, even if shortened
 					} for  % NC or NR
 				} for  % NR or NC
