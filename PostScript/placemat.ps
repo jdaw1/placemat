@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:30 Thursday 19th May 2022
+% This version 20:15 Friday 20th May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205192230) def
+/ParametersVersionDateTimeAdobeFormat (D:202205202015) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -780,7 +780,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205192230) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205202015) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -897,10 +897,10 @@ ifelse} bind def  % /Stopped
 	%   > Gonnet and Baeza-Yates observed that Shellsort makes the fewest comparisons on average when the ratios of successive gaps are
 	%   > roughly equal to 2.2. This is why their sequence with ratio 2.2 and Tokuda's sequence with ratio 2.25 prove efficient. However,
 	%   > it is not known why this is so. Sedgewick recommends using gaps which have low greatest common divisors or are pairwise coprime.
-	% Here each is closest to immediately previous * Sqrt5 that is coprime to all previous, so ratios tend to ~=2.236.
-	% From values of 51 the ratios >2.21568 and <2.24303.
-	1 2 5 11 23 51 113 251 563 1259 2813 6289 14063 31439  % Below 2^16
-	70297 157189 351487 785947 1757431 3929741 8787169 19648709 43935851 98243549 219679249 491217733 1098396241  % Below 2^31
+	% Here each is closest to immediately previous * Sqrt5 that is coprime to all smaller,
+	% so ratios tend to ~=2.236. From values of 51 the ratios >2.21568 and <2.24303.
+	1 2 5 11 23 51 113 251 563 1259 2813 6289 14063 31439  % Below 2^16 = 65536, so sufficient for PostScript.
+	70297 157189 351487 785947 1757431 3929741 8787169 19648709 43935851 98243549 219679249 491217733 1098396241  % Below 2^31 ~= 2 billion
 	% 2456088659 5491981199 12280443293 27459905999 61402216471 137299529999 307011082351 686497649983 1535055411751 3432488249899
 	% 7675277058739 17162441249483 38376385293691 85812206247419 191881926468461 429061031237099 959409632342311 2145305156185489
 	% 4797048161711557 10726525780927447 23985240808557793 53632628904637243 119926204042788961 268163144523186221 599631020213944813
@@ -5431,8 +5431,8 @@ currentdict /GlyphShowKnownAbsences undef
 						ColNum  NG RowNum NR 1 sub sub -2 div NC mul sub 1 sub 2 mul 1 NC sub add  le
 						{
 							1 {
-								ShoveLeft HorizontalAlignment /Left eq or {ColNum NC add R mul  exit} if
-								ShoveRight HorizontalAlignment /Right eq or {W NC ColNum sub R mul sub  exit} if
+								ShoveLeft   /Left  HorizontalAlignment eq  or {  NC ColNum add R mul      exit} if
+								ShoveRight  /Right HorizontalAlignment eq  or {W NC ColNum sub R mul sub  exit} if
 								HorizontalAlignment /Justify eq
 									{W R 2 mul sub  NC 1 le {pop 0} {ColNum mul NC 1 sub 2 mul div} ifelse W 2 div add  exit}  % Justify
 									{ColNum R mul  W 2 div add  exit}  % /Centre, being the default
@@ -9124,7 +9124,6 @@ currentdict /GlyphShowKnownAbsences undef
 		} if  % ... BackgroundTextsTastingNotes ...
 	} if  % ... BackgroundTextsGlasses ...
 
-	/WaterSizesReported [ NumSheets {//false} repeat ] def
 	% NameHorizontalLeft NameHorizontalRight ShowRight ShowLeft FillWhite  WaterBoxesPaintProc -
 	/WaterBoxesPaintProc
 	{
@@ -9145,15 +9144,6 @@ currentdict /GlyphShowKnownAbsences undef
 
 		/WaterBoxesGap WaterBoxesSize WaterBoxesGapProportionSize mul def
 		/WaterBoxesMaxRowLengths [ WaterBoxesNumSideTriangle cvi -1 0 {0 counttomark 1 sub -1 1 {index add} for WaterBoxesNum 2 copy ge {sub sub exit} {pop pop} ifelse} for ] def
-
-		WaterSizesReported SheetNum get not
-		{
-			//true   0 1 NumSheets 1 sub {dup  WaterSizesReported exch get exch  Radii exch get Radii SheetNum get eq  and {pop //false exit} if} for
-			{
-				mark (WaterBoxes on SheetNum ) SheetNum ( with radius ) Radii SheetNum get (: WaterBoxesSize = ) WaterBoxesSize (; WaterBoxesGap = ) WaterBoxesGap (; WaterBoxesNum = ) WaterBoxesNum ConcatenateToMark OutputToLog
-				WaterSizesReported SheetNum //true put
-			} if  % Unique radius
-		} if  % WaterSizesReported SheetNum get not
 
 		newpath
 		[
