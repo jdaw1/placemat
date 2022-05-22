@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:15 Friday 20th May 2022
+% This version 11:30 Sunday 22nd May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205202015) def
+/ParametersVersionDateTimeAdobeFormat (D:202205221130) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -780,7 +780,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205202015) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205221130) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -11023,7 +11023,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 				/VoteRecorderHeightFirstRow  0
 					0  1  VoteRecorderNumNames 1 sub  {dup VoteRecorderNameR exch get exch VoteRecorderNameL exch get sub   2 copy lt {exch} if pop} for
-					PageHeight MgnB MgnT add sub dup 5 div exch  6 mul VoteRecorderThisSheetLength 7 add div  2 {2 copy gt {exch} if pop} repeat  % Not to exceed 1/5 page, nor 6 times other rows
+					PageHeight MgnB MgnT add sub dup 6 div exch  2.5 mul VoteRecorderThisSheetLength 3.5 add div  2 {2 copy gt {exch} if pop} repeat  % Not to exceed 1/6 page, nor 2.5 times other rows
 				def  % /VoteRecorderHeightFirstRow
 
 				2 {  % VoteRecorderRowHeight needs VoteRecorderHeightFirstRow needs VoteRecorderColWidth needs VoteRecorderWideLineWidth needs VoteRecorderCircletextFontSize needs VoteRecorderRowHeight
