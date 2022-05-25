@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:10 Sunday 22nd May 2022
+% This version 23:00 Wednesday 25th May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205222110) def
+/ParametersVersionDateTimeAdobeFormat (D:202205252300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -563,8 +563,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /WaterBoxesShowRight [ 0 1 GlassesOnSheets length 1 sub {<< exch /i exch >> begin true  i 1 add 1 GlassesOnSheets length 1 sub {PageOrderingGlasses exch get PageOrderingGlasses i get eq {pop false exit} if} for end} for ] def
 /WaterBoxesShowTN [ 0 1 GlassesOnTastingNotePages length 1 sub {<< exch /i exch >> begin true PageOrderingTastingNotePages 0 i getinterval {PageOrderingTastingNotePages i get eq {pop false exit} if} forall end} for ] def
 
-/NamesFontSizeMin 18 def
-/NamesFontSizeMax 24 def
+/NamesFontSize 18 def
 
 % GhostScript doesn't pickle settransfer; Preview doesn't see non-pickled settransfer. The bug is in Preview. http://groups.google.com/g/comp.lang.postscript/c/NJLAfvN_jwU
 /TastingNotesCirclesBehind {IsDistiller  {GlassesNumCopies 1 ge} MightBeTrue and  BackgroundTextsTastingNotes not and  SideBySideGlassesTastingNotes not and} bind def
@@ -780,7 +779,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205222110) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205252300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -3552,7 +3551,7 @@ currentdict /SmallCapsDict undef
 /StringWidthRecursive
 {
 	//DeBugLevel 10 le {(+StringWidthRecursive) OutputToLog} if
-	GSave  newpath 0 0 moveto  %  NullDevice  16384 dup scale
+	GSave newpath 0 0 moveto  %  NullDevice  16384 dup scale
 	StringWidthRec GRestore
 	//DeBugLevel 10 le {(-StringWidthRecursive) OutputToLog} if
 } bind def  % moveto in case no currentpoint
@@ -6069,7 +6068,7 @@ currentdict /GlyphShowKnownAbsences undef
 			NudgeRows {NR 2 mod 1 eq Mirror eq {NudgeAmount add} if} if
 			def  % /NamePlacementTopX
 			% NamePlacement. If nudging columns, then with the appropriate nudged column, which will be different top and bottom. If nudging rows, then 0.5 cols left of middle.
-			NudgeRows not  NudgeAmount NamesFontSizeMax ge  and
+			NudgeRows not  NudgeAmount NamesFontSize ge  and
 			{
 				NC 1 le {W 4 div dup} {W R 2 mul sub NC 1 sub div dup  NC 4 idiv 2 mul mul X R add add exch  NC 2 sub 4 idiv 2 mul 1 add mul X R add add} ifelse   NC 2 mod 0 eq Mirror eq {exch} if   /NamePlacementBottomX exch def  /NamePlacementTopX exch def
 			}{
@@ -6081,7 +6080,7 @@ currentdict /GlyphShowKnownAbsences undef
 					{W Mirror NR 2 mod 1 eq eq {0.25} {0.75} ifelse mul}
 					{R NC 1.5 sub mul  W R sub NudgeRows {NudgeAmount sub} if 0.5 mul  add NC 1 sub div  Mirror NR 2 mod 1 eq eq NudgeRows and {NudgeAmount add} if}
 				ifelse  X add  /NamePlacementTopX exch def
-			} ifelse  % NudgeRows not  NudgeAmount NamesFontSizeMax ge  and
+			} ifelse  % NudgeRows not  NudgeAmount NamesFontSize ge  and
 			exit  % 1 {...} repeat
 		} if  % /RectangularAlternateNudge ...
 
@@ -6231,7 +6230,7 @@ currentdict /GlyphShowKnownAbsences undef
 			/LeftOfMiddle X def  /RightOfMiddle W X add def
 			dup
 			{
-				dup 1 get  H R Y NamesFontSizeMin //PrinterEpsilon add add add sub  ge
+				dup 1 get  H R Y NamesFontSize //PrinterEpsilon add add add sub  ge
 				{
 					0 get dup dup dup dup dup
 					MidX lt exch  LeftOfMiddle gt and {/LeftOfMiddle  exch store} {pop} ifelse
@@ -6242,7 +6241,7 @@ currentdict /GlyphShowKnownAbsences undef
 			/LeftOfMiddle X def  /RightOfMiddle W X add def
 			dup
 			{
-				dup 1 get  R Y NamesFontSizeMin //PrinterEpsilon add add add  le
+				dup 1 get  R Y NamesFontSize //PrinterEpsilon add add add  le
 				{
 					0 get dup dup dup dup dup
 					MidX lt exch  LeftOfMiddle gt and {/LeftOfMiddle  exch store} {pop} ifelse
@@ -6416,11 +6415,11 @@ currentdict /GlyphShowKnownAbsences undef
 				dup length 2 gt {dup {lt} ShellSort} if  dup 0 get exch 1 get add 2 div
 			} dup
 			/NamePlacementTopX
-			[  Answer {aload pop   H Y add R NamesFontSizeMin //PrinterEpsilon add add  sub  lt {pop} if} forall  ]
+			[  Answer {aload pop   H Y add R NamesFontSize //PrinterEpsilon add add  sub  lt {pop} if} forall  ]
 			1  4 -1 roll  repeat  % 1
 			def  % /NamePlacementTopX
 			/NamePlacementBottomX
-			[  Answer {aload pop         Y R NamesFontSizeMin //PrinterEpsilon add add add   gt {pop} if} forall  ]
+			[  Answer {aload pop         Y R NamesFontSize //PrinterEpsilon add add add   gt {pop} if} forall  ]
 			1  4 -1 roll  repeat  % 1
 			def  % /NamePlacementBottomX
 
@@ -6630,7 +6629,7 @@ currentdict /GlyphShowKnownAbsences undef
 			/i exch def
 			FontSettingCode
 			PieceW  i  Circlearray i get StringWidthRecursive  put
-			GSave 16384 dup scale newpath 0 0 moveto  Circlearray i get //true CharPathRecursive PathBBox GRestore
+			Circlearray i get  StringPathBBox
 			dup AscenderMax  gt {/AscenderMax  exch def} {pop} ifelse
 			PieceR exch  i exch  put
 			dup DescenderMin lt {/DescenderMin exch def} {pop} ifelse
@@ -6818,7 +6817,7 @@ currentdict /GlyphShowKnownAbsences undef
 			/i exch def
 			FontSettingCode
 			PieceW  i  Circlearray i get StringWidthRecursive  put
-			GSave 16384 dup scale newpath 0 0 moveto  Circlearray i get //true CharPathRecursive PathBBox GRestore
+			Circlearray i get  StringPathBBox
 			pop  PieceR exch  i exch  put
 			pop  PieceL exch  i exch  put
 		} for  % i
@@ -7569,7 +7568,7 @@ currentdict /GlyphShowKnownAbsences undef
 			CircletextFont 1000 selectfont   CirclearraysT SheetNum get WithinPage //InfinityNeg put   CirclearraysB SheetNum get WithinPage //Infinity put
 			Circlearrays WithinTitles get
 			{
-				GSave NullDevice newpath 0 0 moveto  //true CharPathRecursive PathBBox GRestore
+				StringPathBBox
 				1000 div  CirclearraysT SheetNum get WithinPage 3 copy get gt {3 -1 roll put} {pop pop pop} ifelse pop
 				1000 div  CirclearraysB SheetNum get WithinPage 3 copy get lt {3 -1 roll put} {pop pop pop} ifelse pop
 			} forall  % Circlearrays WithinTitles get
@@ -7789,8 +7788,6 @@ currentdict /GlyphShowKnownAbsences undef
 		(.\nCirclearraysUnroundedN = ) CirclearraysUnroundedN SizeArrayOutput TrimSpaces (.\nCirclearraysN = ) CirclearraysN SizeArrayOutput TrimSpaces (.) ConcatenateToMark OutputToLog
 		mark (RadiiCirclearrayBaseline = ) RadiiCirclearrayBaseline SizeArrayOutput TrimSpaces (. RadiiCirclearrayInside = ) RadiiCirclearrayInside SizeArrayOutput TrimSpaces (.) ConcatenateToMark OutputToLog
 	} if  % ... GlassesNumCopies 1 ge PrePourNumCopies 1 ge or NumSheets 1 ge and ...
-	/MinCircletextMaxFontSizes //Infinity       CircletextMaxFontSizes {2 copy gt {exch} if pop} forall def
-	/MaxCircletextMaxFontSizes //PrinterEpsilon CircletextMaxFontSizes {2 copy lt {exch} if pop} forall def
 
 	5 dict begin  % Output the ...Equivalences arrays
 	/EquivalencesEquivalencesToTest
@@ -7833,10 +7830,9 @@ currentdict /GlyphShowKnownAbsences undef
 	end
 
 	/TypeOfPagesBeingRendered /Glasses store
-	/NamesFontSize {NamesFontSizeMax NamesFontSizeMin MaxCircletextMaxFontSizes  2 copy lt {exch} if pop 2 copy gt {exch} if pop} bind def
-	/NamesFontSizeIndividuallyT [ Names length {NamesFontSize} repeat ] def  % If NamesShowTop
-	/NamesFontSizeIndividuallyB [ Names length {NamesFontSize} repeat ] def  % If NamesShowBottom
-	19 dict begin
+	/NamesFontSizeIndividuallyT [ NumSheets {Names length array} repeat ] def  % If NamesShowTop
+	/NamesFontSizeIndividuallyB [ NumSheets {Names length array} repeat ] def  % If NamesShowBottom
+	22 dict begin
 	0  1  Names length 1 sub
 	{
 		/NameNum exch def
@@ -7845,38 +7841,50 @@ currentdict /GlyphShowKnownAbsences undef
 			/SheetNum exch def
 			//false //false //false //false PaperType Orientation SetPaperSize
 			//true DefStoreMgns
-			NamesFont 1 selectfont  % Inside SheetNum loop as, if only page type is /Glasses, NamesFont could depend on SheetNum.
-			GSave nulldevice 1000 dup scale 0 0 moveto Names NameNum get //false CharPathRecursive PathBBox GRestore  3 -1 roll sub /NameH exch def exch sub /NameW exch def
-			NameH 0 gt
+
+			NamesFont 32 selectfont  % Inside SheetNum loop as, if only page type is /Glasses, NamesFont could depend on SheetNum.
+			Names NameNum get StringPathBBox  32 div /NameT exch def  32 div /NameR exch def  32 div /NameB exch def  32 div /NameL exch def
+			/DirectionY NameT NameB sub def
+
+			[  DirectionY 0 gt {NamesShowTop SheetNum GetEU {//true} if   NamesShowBottom SheetNum GetEU {//false} if} if  ]
 			{
-				[ NamesShowTop SheetNum GetEU {//true} if  NamesShowBottom SheetNum GetEU {//false} if  ]
+				/Top exch def
+				/NameFontSizeThis NamesFontSize def
+				/NameY Top {PageHeight MgnT sub} {MgnB} ifelse def
+				/NameX Top {NamePlacementTopX} {NamePlacementBottomX} ifelse SheetNum get def
+
+				0  1  SheetLengths SheetNum get 1 sub
 				{
-					/Top exch def
-					/NameY Top {PageHeight MgnT sub} {MgnB} ifelse def
-					/NameX Top {NamePlacementTopX} {NamePlacementBottomX} ifelse SheetNum get def
-					0  1  SheetLengths SheetNum get 1 sub
+					/WithinPage exch def
+					GlassPositions SheetNum get WithinPage get aload pop /CircleY exch def /CircleX exch def
+
+					CircleY   NameY Radii SheetNum get DirectionY NameFontSizeThis mul add  Top {sub gt} {add lt} ifelse
 					{
-						/WithinPage exch def
-						CircleNonEmpty SheetNum get WithinPage get
+						CircleX NameX sub abs  NameR NameL sub 2 div NameFontSizeThis mul Radii SheetNum get add  lt
+						CircleNonEmpty SheetNum get WithinPage get   and
 						{
-							GlassPositions SheetNum get WithinPage get aload pop /CircleY exch def /CircleX exch def
-							/c0 CircleX NameX sub dup mul CircleY NameY sub dup mul add Radii SheetNum get dup mul sub def
-							/c2 NameH dup mul NameW dup mul 4 div add def
-							/c1  NameY CircleY sub 2 mul NameH mul Top {neg} if  NameX CircleX sub NameW mul  3 copy  3 copy
-							-1  1  1
+							% On a typical page = instance of SheetNum, with typical settings, will reach here for only 2, 1, or 0 values of WithinPage.
+							/c0  NameX CircleX sub dup mul  NameY CircleY sub dup mul  add  Radii SheetNum get dup mul  sub  def
+
+							-0.50  0.02  0.5001  % Fifty-one steps, a number of directions which is excessive but not insanely so. And tests done only for close circles.
 							{
-								mul add def  % c1
-								[ c0 c1 c2 ]  0  //false  Top {NamesFontSizeIndividuallyT} {NamesFontSizeIndividuallyB} ifelse NameNum get  //false  //PrinterEpsilon  PolynomialRoots
-								dup length 1 ge {Min Top {NamesFontSizeIndividuallyT} {NamesFontSizeIndividuallyB} ifelse exch NameNum exch put} {pop} ifelse
-							} for  % right, middle, left of name
-						} if  % CircleNonEmpty ...
-					} for  % WithinPage
-				} forall  % name at top|bottom
-			} if  % NameH 0 gt
+								NameR NameL sub mul /DirectionX exch def
+								[
+									c0
+									NameX CircleX sub DirectionX mul  NameY CircleY sub DirectionY mul  add 2 mul
+									DirectionX dup mul  DirectionY dup mul  add
+								]  0  //false  NameFontSizeThis  //true  //PrinterEpsilon  PolynomialRoots
+								dup length 1 ge {Min /NameFontSizeThis exch def} {pop} ifelse
+							} for  % DirectionX
+						} if  % Circle x-close enough to be worth testing, and CircleNonEmpty
+					} if  % Circle y-close enough to be worth testing
+				} for  % WithinPage
+				Top {NamesFontSizeIndividuallyT} {NamesFontSizeIndividuallyB} ifelse SheetNum get  NameNum  NameFontSizeThis  put
+			} forall  % Top
 		} for  % SheetNum
+		% Optionally, here there could be SheetNum^2 loops referring to ShrinkRadiiSquareArray. But, May 2022, such behaviour removed.
 	} bind for  % NameNum
 	end
-
 
 	//DeBugLevel 100 le {( Main: computing TitleProportionFontSize...) OutputToLog} if
 	/TitlesAnyGrey //false def
@@ -8943,7 +8951,7 @@ currentdict /GlyphShowKnownAbsences undef
 					//false //false //false //false PageType 0 eq {PaperType Orientation} {TastingNotesPaperType TastingNotesOrientation} ifelse SetPaperSize   //true DefStoreMgns
 					PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse
 					BackgroundTextsOrientation dup /Rotated eq exch  PageType 0 eq {Orientation} {TastingNotesOrientation} ifelse  2 copy  /Landscape eq exch /Portrait eq and  3 1 roll  /Portrait eq exch /Landscape eq and  or or  put
-					BackgroundTextsFont 16384 selectfont  GSave nulldevice 0 0 moveto /BackgroundTextThis load //true CharPathRecursive PathBBox GRestore [ /BgT /BgR /BgB /BgL ] {exch 16384 div def} forall
+					BackgroundTextsFont 16384 selectfont  /BackgroundTextThis load StringPathBBox [ /BgT /BgR /BgB /BgL ] {exch 16384 div def} forall
 
 					TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup dup type /arraytype eq
 					{
@@ -10699,7 +10707,7 @@ currentdict /GlyphShowKnownAbsences undef
 				/PaintProc  % Paints repeated copies of a TitleAboveBelowOverForms, and repeated copies of an item of CirclearraysBottleWrap
 				{
 					//DeBugLevel 100 le {(+BottleWrapForms: PaintProc) OutputToLog} if
-					pop 17 dict begin  % dictionary parameter of execform containing WithinTitles and WithinPage
+					pop 30 dict begin  % dictionary parameter of execform containing WithinTitles and WithinPage
 					/TypeOfPagesBeingRendered /BottleWrap store
 
 					//false //false //false //false BottleWrapPaperType BottleWrapOrientation SetPaperSize
@@ -10893,7 +10901,7 @@ currentdict /GlyphShowKnownAbsences undef
 				} if  % VoteRecorderTitlesFontSize 6 lt
 				/VoteRecorderNamesFontSize
 					PageWidth MgnL MgnR add sub  VoteRecorderNumNames 6 add div  1.25 div
-					NamesFontSizeMax   2 copy gt {exch} if pop   //PrinterEpsilon 2 copy lt {exch} if pop
+					NamesFontSize   2 copy gt {exch} if pop   //PrinterEpsilon 2 copy lt {exch} if pop
 				def  % /VoteRecorderNamesFontSize
 				VoteRecorderNamesFontSize 8 lt
 				{
@@ -10972,7 +10980,7 @@ currentdict /GlyphShowKnownAbsences undef
 					/NameNum exch def
 					/ThisName VoteRecorderNames NameNum get def  % Non-standard line
 					NamesFont VoteRecorderNamesFontSize selectfont
-					GSave  NullDevice  16384 dup scale  newpath 0 0 moveto  /ThisName load  //false CharPathRecursive PathBBox  GRestore
+					/ThisName load  StringPathBBox
 					dup VoteRecorderNamesMaxT gt {/VoteRecorderNamesMaxT exch def} {pop} ifelse  exch dup
 					dup VoteRecorderNamesMinB lt {/VoteRecorderNamesMinB exch def} {pop} ifelse
 					VoteRecorderNameB exch   NameNum exch  put
@@ -11074,14 +11082,10 @@ currentdict /GlyphShowKnownAbsences undef
 						/CurrentTop  VoteRecorderRowHeight VoteRecorderThisSheetLength WithinPage sub mul  MgnB add  def
 
 						TitlesFont VoteRecorderTitlesFontSize selectfont
-						GSave  NullDevice  16384 dup scale  newpath 0 0 moveto
-						/ThisVoteRecorderTitle load  //false CharPathRecursive PathBBox
-						GRestore  /VoteRecorderTitleT exch def  /VoteRecorderTitleR exch def  /VoteRecorderTitleB exch def  /VoteRecorderTitleL exch def
+						/ThisVoteRecorderTitle load  StringPathBBox  /VoteRecorderTitleT exch def  /VoteRecorderTitleR exch def  /VoteRecorderTitleB exch def  /VoteRecorderTitleL exch def
 
 						SubtitlesFont VoteRecorderTitlesFontSize VoteRecorderSubtitleFSPT WithinPage GetEU mul selectfont
-						GSave  NullDevice  16384 dup scale  newpath 0 0 moveto
-						/ThisVoteRecorderSubtitle load  //false CharPathRecursive PathBBox
-						GRestore  /VoteRecorderSubtitleT exch def pop /VoteRecorderSubtitleB exch def pop
+						/ThisVoteRecorderSubtitle load  StringPathBBox  /VoteRecorderSubtitleT exch def pop /VoteRecorderSubtitleB exch def pop
 
 						/VoteRecorderTitleSubtitleGap  VoteRecorderTitleT VoteRecorderTitleB sub  VoteRecorderSubtitleT VoteRecorderSubtitleB sub  2 copy gt {exch} if pop  0.25 mul  def  % embedded constant 0.25
 
@@ -11228,9 +11232,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 				matrix currentmatrix
 				<< /WithinTitles 0 >> begin  HeaderFont VoteRecorderCircletextFontSize selectfont  end
-				GSave  NullDevice  16384 dup scale  newpath 0 0 moveto
-				VoteRecorderInstruction  //false CharPathRecursive PathBBox
-				GRestore  /VRTTT exch def  /VRTTR exch def  /VRTTB exch def  /VRTTL exch def
+				VoteRecorderInstruction  StringPathBBox  /VRTTT exch def  /VRTTR exch def  /VRTTB exch def  /VRTTL exch def
 				VoteRecorderWidthColFirst  VoteRecorderHeightFirstRow 0.875 mul  ge
 				{
 					MgnL   PageHeight MgnT sub VoteRecorderTopTextHeight sub VoteRecorderHeightFirstRow 2 div sub  VRTTT VRTTB add 2 div  sub  moveto
@@ -11271,7 +11273,7 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				//DeBugLevel 100 le {(+DecantingNotesForms: PaintProc) OutputToLog} if
 				pop  % dictionary parameter of execform
-				30 dict begin
+				32 dict begin
 				/DecantingNotesSheetNum DecantingNotesSheetNum def
 				/TypeOfPagesBeingRendered /DecantingNotes store
 				/ThisName (Decanting notes) def
@@ -11294,7 +11296,6 @@ currentdict /GlyphShowKnownAbsences undef
 						{(Warning:  DecantingNotesTitlesFontSize \(with DecantingNotesSheetNum=) DecantingNotesSheetNum (\) computed to be ) DecantingNotesTitlesFontSize ( which is <) 8 (, so small)}
 					ifelse  (. Continuing, but consider changing GlassesClusteredOnDecantingNotes.)  ConcatenateToMark OutputToLog
 				} if  % VoteRecorderTitlesFontSize 6 lt
-				/DecantingNotesHeadingsFontSize  MaxCircletextMaxFontSizes DecantingNotesTopTextHeight 2 div 2 copy gt {exch} if pop def
 
 				/DecantingNotesTitleWidths DecantingNotesThisSheetLength array def
 				/DecantingNotesSubtitleWidths DecantingNotesThisSheetLength array def
@@ -11352,6 +11353,11 @@ currentdict /GlyphShowKnownAbsences undef
 				currentdict /WithinCluster undef
 				currentdict /ClusterNum undef
 
+				HeaderFont DecantingNotesTopTextHeight selectfont
+				DecantingNotesTopText StringPathBBox /DecantingNotesTopTextT exch def  /DecantingNotesTopTextR exch def  /DecantingNotesTopTextB exch def  pop
+				/DecantingNotesTopTextFontSize  DecantingNotesTopTextHeight dup mul DecantingNotesTopTextT DecantingNotesTopTextB sub div  //PrinterEpsilon 2 copy lt {exch} if pop  def
+				/DecantingNotesHeadingsFontSize  DecantingNotesTopTextFontSize //GoldenRatio div  def
+
 				/DecantingNotesWidthColFirst
 					DecantingNotesTitleWidthsMax DecantingNotesSubtitleWidthsMax 2 copy lt {exch} if pop   DecantingNotesLineWidth 2 div add
 					PageWidth MgnL MgnR add sub 6 div  2 copy gt {exch} if pop  % Max is 6 times other cols
@@ -11362,7 +11368,7 @@ currentdict /GlyphShowKnownAbsences undef
 				def
 
 				HeaderFont  DecantingNotesHeadingsFontSize selectfont
-				GSave NullDevice 16384 dup scale newpath 0 0 moveto [DecantingNotesColumnHeadingTimes DecantingNotesColumnHeadingNotes] //true CharPathRecursive PathBBox GRestore
+				[DecantingNotesColumnHeadingTimes DecantingNotesColumnHeadingNotes] StringPathBBox
 				exch pop 2 copy exch sub 2 add /DecantingNotesHeightFirstRow exch def  % embedded constant
 				add neg DecantingNotesHeightFirstRow add 2 div /DecantingNotesVerticalOffsetFirstRow exch def
 				pop
@@ -11378,27 +11384,23 @@ currentdict /GlyphShowKnownAbsences undef
 
 				DecantingNotesTopTextHeight 0 gt
 				{
-					HeaderFont DecantingNotesTopTextHeight selectfont
-					GSave  NullDevice  16384 dup scale  newpath 0 0 moveto
-					DecantingNotesTopText  //true CharPathRecursive PathBBox
-					GRestore  /DecantingNotesTopTextT exch def  /DecantingNotesTopTextR exch def  /DecantingNotesTopTextB exch def  pop
-					HeaderFont  DecantingNotesTopTextHeight dup mul DecantingNotesTopTextT DecantingNotesTopTextB sub div  selectfont
-					PageWidth MgnR sub DecantingNotesTopTextR DecantingNotesTopTextHeight mul DecantingNotesTopTextT DecantingNotesTopTextB sub div sub
-					PageHeight  MgnT sub  DecantingNotesTopTextHeight DecantingNotesTopTextT DecantingNotesTopTextB sub div DecantingNotesTopTextT mul sub  moveto
+					HeaderFont  DecantingNotesTopTextFontSize  selectfont
+					/DecantingNotesFirstRowBaseline PageHeight  MgnT sub  DecantingNotesTopTextHeight DecantingNotesTopTextT DecantingNotesTopTextB sub div DecantingNotesTopTextT mul sub def
+					PageWidth MgnR sub DecantingNotesTopTextR DecantingNotesTopTextHeight mul DecantingNotesTopTextT DecantingNotesTopTextB sub div sub  DecantingNotesFirstRowBaseline  moveto
 					0.5 setgray  DecantingNotesTopText ShowRecursive
 					currentdict /DecantingNotesTopTextB undef  currentdict /DecantingNotesTopTextR undef  currentdict /DecantingNotesTopTextT undef
-				} if  % DecantingNotesTopTextHeight 0 gt
 
-				0 setgray  HeaderFont  DecantingNotesHeadingsFontSize selectfont
-				PageHeight MgnT sub DecantingNotesLargerTopTwoThings sub DecantingNotesVerticalOffsetFirstRow add  dup
-				/DecantingNotesColumnHeadingTimesStringWidth DecantingNotesColumnHeadingTimes StringWidthRecursive def
-				DecantingNotesWidthColTimes DecantingNotesColumnHeadingTimesStringWidth lt
-					{matrix currentmatrix exch MgnL DecantingNotesWidthColFirst add exch moveto DecantingNotesWidthColTimes DecantingNotesColumnHeadingTimesStringWidth div 1 scale DecantingNotesColumnHeadingTimes ShowRecursive setmatrix}
-					{MgnL DecantingNotesWidthColFirst add   DecantingNotesWidthColTimes DecantingNotesColumnHeadingTimesStringWidth sub 2 div add exch moveto DecantingNotesColumnHeadingTimes ShowRecursive}
-				ifelse  % DecantingNotesColumnHeadingTimes too large
-				DecantingNotesWidthColTimes DecantingNotesColumnHeadingTimesStringWidth lt {PageWidth MgnL MgnR add sub 128 div} {DecantingNotesWidthColTimes DecantingNotesColumnHeadingTimesStringWidth sub 2 div} ifelse
-				MgnL add DecantingNotesWidthColFirst add DecantingNotesWidthColTimes add  exch moveto
-				DecantingNotesColumnHeadingNotes ShowRecursive
+					0 setgray  HeaderFont  DecantingNotesHeadingsFontSize selectfont
+					DecantingNotesFirstRowBaseline  dup
+					/DecantingNotesColumnHeadingTimesStringWidth DecantingNotesColumnHeadingTimes StringWidthRecursive def
+					DecantingNotesWidthColTimes DecantingNotesColumnHeadingTimesStringWidth lt
+						{matrix currentmatrix exch MgnL DecantingNotesWidthColFirst add exch moveto DecantingNotesWidthColTimes DecantingNotesColumnHeadingTimesStringWidth div 1 scale DecantingNotesColumnHeadingTimes ShowRecursive setmatrix}
+						{MgnL DecantingNotesWidthColFirst add   DecantingNotesWidthColTimes DecantingNotesColumnHeadingTimesStringWidth sub 2 div add exch moveto DecantingNotesColumnHeadingTimes ShowRecursive}
+					ifelse  % DecantingNotesColumnHeadingTimes too large
+					DecantingNotesWidthColTimes DecantingNotesColumnHeadingTimesStringWidth lt {PageWidth MgnL MgnR add sub 128 div} {DecantingNotesWidthColTimes DecantingNotesColumnHeadingTimesStringWidth sub 2 div} ifelse
+					MgnL add DecantingNotesWidthColFirst add DecantingNotesWidthColTimes add  exch moveto
+					DecantingNotesColumnHeadingNotes ShowRecursive
+				} if  % DecantingNotesTopTextHeight 0 gt
 
 				/WithinPage 0 def
 				0  1  DecantingNotesThisSheet length 1 sub
@@ -11430,14 +11432,10 @@ currentdict /GlyphShowKnownAbsences undef
 						} for  end  % 'GlassesAnnotations'
 
 						TitlesFont DecantingNotesTitlesFontSize selectfont
-						GSave  NullDevice  16384 dup scale  newpath 0 0 moveto
-						TitlesDecantingNotes WithinTitles get  //true CharPathRecursive PathBBox
-						GRestore  /DecantingNotesTitleT exch def pop /DecantingNotesTitleB exch def pop
+						TitlesDecantingNotes WithinTitles get  StringPathBBox  /DecantingNotesTitleT exch def pop /DecantingNotesTitleB exch def pop
 
 						SubtitlesFont DecantingNotesTitlesFontSize DecantingNotesSubtitleFSPT WithinPage get mul selectfont
-						GSave  NullDevice  16384 dup scale  newpath 0 0 moveto
-						SubtitlesDecantingNotes WithinTitles get  //true CharPathRecursive PathBBox
-						GRestore  /DecantingNotesSubtitleT exch def pop /DecantingNotesSubtitleB exch def pop
+						SubtitlesDecantingNotes WithinTitles get  StringPathBBox  /DecantingNotesSubtitleT exch def pop /DecantingNotesSubtitleB exch def pop
 
 						/DecantingNotesTitleSubtitleGap  DecantingNotesTitleT DecantingNotesTitleB sub  DecantingNotesSubtitleT DecantingNotesSubtitleB sub  2 copy gt {exch} if pop  0.25 mul  def  % embedded constant 0.25
 
@@ -11800,7 +11798,7 @@ currentdict /GlyphShowKnownAbsences undef
 				dup % dictionary parameter of execform containing WithinTitles and WithinPage
 				/WithinTitles get /WithinTitles exch def
 				/WithinPage get /WithinPage exch def
-				0 setgray   CircletextMaxFontSizes SheetNum get 60 div setlinewidth
+				0 setgray   0.24 setlinewidth
 				0 0 moveto
 				Circlearrays WithinTitles GetEU  CircletextsMinNumSpacesBetween  RadiiCirclearrayBaseline SheetNum get
 				CirclearraysFontSizes SheetNum get WithinPage get  CirclearraysN SheetNum get WithinPage get
@@ -11897,8 +11895,7 @@ currentdict /GlyphShowKnownAbsences undef
 			TastingNotesColumnHeadings length 0 gt
 			{
 				HeaderFont TastingNotesColumnHeadingsFontSize selectfont
-				GSave NullDevice 16384 dup scale newpath 0 0 moveto TastingNotesColumnHeadings //true CharPathRecursive PathBBox GRestore
-				/TastingNotesColumnHeadingsT exch def  pop  /TastingNotesColumnHeadingsB exch def  pop
+				TastingNotesColumnHeadings StringPathBBox  /TastingNotesColumnHeadingsT exch def  pop  /TastingNotesColumnHeadingsB exch def  pop
 				/TNtop  PageHeight MgnT sub  TastingNotesColumnHeadingsT sub TastingNotesColumnHeadingsB -0.48 2 copy gt {exch} if pop add  def
 			} {/TNtop  PageHeight MgnT sub def} ifelse  % TastingNotesColumnHeadings length 0 gt
 
@@ -12036,13 +12033,13 @@ currentdict /GlyphShowKnownAbsences undef
 				TastingNotesStarTops TNSheetNum  2 copy get //null eq {GlassesOnTastingNotePages TNSheetNum GetEU length array put} {pop pop} ifelse
 				TastingNotesStarTops TNSheetNum get WithinPage  2 copy get IsNumber {pop pop} {CurrentTop put} ifelse
 
-				0 setgray   MinCircletextMaxFontSizes  60 div setlinewidth
+				0 setgray  0.24 setlinewidth
 				TNRowHeight 2 div TastingNotesSubtitleFontSizeProportionTitles 1 add div TastingNotesTitlesFontSizeMax 2 copy gt {exch} if pop  dup TitlesFont exch 2 copy  % embedded constant in "2 div"
 				selectfont   0 0 moveto TitlesTastingNotes WithinTitles get //true CharPathRecursive PathBBox newpath /urY exch def pop /llY exch def pop
 				selectfont   MgnL CurrentTop urY sub moveto  TitlesTastingNotes WithinTitles get ShowRecursive
 				/CurrentTop CurrentTop TastingNotesLineGap urY llY sub add sub def
 
-				0 setgray  MinCircletextMaxFontSizes 2 div 60 div setlinewidth  % embedded constant
+				0 setgray  0.24 setlinewidth
 				TastingNotesSubtitleFontSizeProportionTitles mul SubtitlesFont exch 2 copy
 				selectfont   0 0 moveto SubtitlesTastingNotes WithinTitles get //true CharPathRecursive PathBBox newpath /urY exch def pop pop pop
 				selectfont   MgnL CurrentTop urY sub moveto  SubtitlesTastingNotes WithinTitles get ShowRecursive
@@ -12112,15 +12109,16 @@ currentdict /GlyphShowKnownAbsences undef
 			FlightSeparationForms SheetNum get  execform
 		} if  % FlightSeparations
 
-		NamesFont NamesFontSizeIndividuallyB NameNum get selectfont
-		/ThisName load  GSave  NullDevice  16384 dup scale  newpath 0 0 moveto   //true CharPathRecursive PathBBox GRestore
-		/ThisNameT exch def  /ThisNameR exch def  /ThisNameB exch def  /ThisNameL exch def
-
 		% WaterBoxes
 		WaterBoxes dup /Glasses eq exch /Both eq or  WaterBoxesNum 1 ge  and
 		{
 			//DeBugLevel 75 le {( GlassesPageInnerLoop: WaterBoxes) OutputToLog} if
-			NamesShowBottom SheetNum get {NamePlacementBottomX SheetNum get  ThisNameR ThisNameL sub 2 div  2 copy sub 3 1 roll add} {PageWidth MgnR sub  MgnL} ifelse
+			% NameHorizontalLeft NameHorizontalRight ShowRight ShowLeft FillWhite  WaterBoxesPaintProc -
+			NamesFontSizeIndividuallyB SheetNum get NameNum get dup IsNumber  NamesShowBottom SheetNum get  and
+			{
+				NamesFont exch selectfont  /ThisName load StringPathBBox  pop /ThisNameR exch def pop /ThisNameL exch def
+				NamePlacementBottomX SheetNum get  ThisNameR ThisNameL sub 2 div  2 copy sub 3 1 roll add
+			} {pop //Infinity  //InfinityNeg} ifelse  % NamesShowBottom ...
 			NamesIsLeftHander NameNum get not  WaterBoxesOverrideShowEverySheet not {WaterBoxesShowRight SheetNum get execU  and} if
 			NamesIsLeftHander NameNum get      WaterBoxesOverrideShowEverySheet not {WaterBoxesShowLeft  SheetNum get execU  and} if
 			/PaintBackgroundCode load length 0 gt  /Droplets load MightBeTrue or  CrossHatchingOutside or  /FlightSeparations load MightBeTrue {FlightSeparationLines SheetNum get length 0 gt or} if  WaterBoxesPaintProc  % Ignoring BackgroundTextsGlasses.
@@ -12195,20 +12193,20 @@ currentdict /GlyphShowKnownAbsences undef
 		{
 			//DeBugLevel 75 le {( GlassesPageInnerLoop: Names) OutputToLog} if
 			4.8 setlinewidth  1 setlinejoin  [] 0 setdash  % Embedded constant
-			NamesShowTop SheetNum get
+			3 dict begin
+			NamesFontSizeIndividuallyT SheetNum get NameNum get dup IsNumber   NamesShowTop    SheetNum get  and
 			{
-				NamesFont NamesFontSizeIndividuallyT NameNum get selectfont
-				/ThisName load  GSave  NullDevice  16384 dup scale  newpath 0 0 moveto   //true CharPathRecursive PathBBox GRestore   /ThisNameT exch def  /ThisNameR exch def  pop  /ThisNameL exch def
+				NamesFont exch selectfont   /ThisName load  StringPathBBox   /ThisNameT exch def  /ThisNameR exch def  pop  /ThisNameL exch def
 				NamePlacementTopX    SheetNum get ThisNameL ThisNameR add 2 div sub  PageWidth MgnR ThisNameR add sub 2 copy gt {exch} if pop  MgnL ThisNameL sub 2 copy lt {exch} if pop
 				PageHeight MgnT ThisNameT add sub  moveto   /ThisName load //true CharPathRecursive   1 setgray GSave stroke GRestore 0 setgray fill
-			} if  % NamesShowTop ...
-			NamesShowBottom SheetNum get
+			} {pop} ifelse  % NamesShowTop ...
+			NamesFontSizeIndividuallyB SheetNum get NameNum get dup IsNumber   NamesShowBottom SheetNum get  and
 			{
-				NamesFont NamesFontSizeIndividuallyB NameNum get selectfont
-				/ThisName load  GSave  NullDevice  16384 dup scale  newpath 0 0 moveto   //true CharPathRecursive PathBBox GRestore   pop  /ThisNameR exch def  /ThisNameB exch def  /ThisNameL exch def
+				NamesFont exch selectfont   /ThisName load  StringPathBBox   pop  /ThisNameR exch def  /ThisNameB exch def  /ThisNameL exch def
 				NamePlacementBottomX SheetNum get ThisNameL ThisNameR add 2 div sub  PageWidth MgnR ThisNameR add sub 2 copy gt {exch} if pop  MgnL ThisNameL sub 2 copy lt {exch} if pop
 				MgnB ThisNameB sub                 moveto   /ThisName load //true CharPathRecursive   1 setgray GSave stroke GRestore 0 setgray fill
-			} if  % NamesShowBottom ...
+			} {pop} ifelse  % NamesShowBottom ...
+			end
 		} if  % SideBySideGlassesTastingNotes not
 
 		ShowHeadersAndFooters
@@ -12333,8 +12331,7 @@ currentdict /GlyphShowKnownAbsences undef
 		//DeBugLevel 75 le {( TastingNotesInnerLoop: Names) OutputToLog} if
 		0 setgray
 		NamesFont  NamesFontSize TastingNotesReplaceNameWithPageNum {TastingNotesPageNumFontSizeFactor mul} if  selectfont
-		/ThisName load  GSave  NullDevice  16384 dup scale  newpath 0 0 moveto   //true CharPathRecursive PathBBox GRestore
-		pop  /ThisNameR exch def  /ThisNameB exch def  /ThisNameL exch def
+		/ThisName load  StringPathBBox  pop  /ThisNameR exch def  /ThisNameB exch def  /ThisNameL exch def
 		NamesIsLeftHanderTN NameNum get {MgnL ThisNameL sub} {PageWidth MgnR sub ThisNameR sub} ifelse  MgnB ThisNameB sub  moveto
 		/ThisName load ShowRecursive
 
@@ -12462,7 +12459,7 @@ currentdict /GlyphShowKnownAbsences undef
 		PageLesser 6 div add exch PageLesser 6 div sub  moveto   PageLesser 6 div sub exch PageLesser 6 div add  lineto
 		PageLesser 6 div sub exch PageLesser 6 div sub  moveto   PageLesser 6 div add exch PageLesser 6 div add  lineto
 		0.75 setgray PageLesser 40 div setlinewidth [] 0 setdash 1 setlinecap stroke  0 setgray  % Embedded constant
-		GSave nulldevice newpath 0 0 moveto 1000 selectfont EmptyPageString //false CharPathRecursive PathBBox GRestore 1000 div /ury exch def  1000 div /urx exch def  1000 div /lly exch def 1000 div /llx exch def
+		1000 selectfont EmptyPageString StringPathBBox  1000 div [/ury /urx /lly /llx ] {exch 1000 div def} forall
 		urx llx sub //PrinterEpsilon gt  ury lly sub //PrinterEpsilon gt  and
 		{
 			/FontSize  32  PageWidth MgnL MgnR add sub urx llx sub div  PageHeight MgnT MgnB add sub 6 div ury lly sub div  2 {2 copy gt {exch} if pop} repeat  def  % Embedded constants
@@ -12674,9 +12671,7 @@ currentdict /GlyphShowKnownAbsences undef
 							VoteRecorderTopTextHeight 0 gt
 							{
 								HeaderFont VoteRecorderTopTextHeight selectfont
-								GSave  NullDevice  16384 dup scale  newpath 0 0 moveto
-								VoteRecorderTopTexts VoteRecorderSheetNum get VoteRecorderTopTextNum get  //true CharPathRecursive PathBBox
-								GRestore  /VoteRecorderTopTextT exch def pop /VoteRecorderTopTextB exch def pop
+								VoteRecorderTopTexts VoteRecorderSheetNum get VoteRecorderTopTextNum get  StringPathBBox  /VoteRecorderTopTextT exch def pop /VoteRecorderTopTextB exch def pop
 								HeaderFont  VoteRecorderTopTextHeight dup mul VoteRecorderTopTextT VoteRecorderTopTextB sub  dup 0 ne
 								{
 									div selectfont
@@ -12747,7 +12742,7 @@ currentdict /GlyphShowKnownAbsences undef
 						HeadersAndFooters PaintHeadersFooters
 
 						/AccTopTextFontSize 16 def  % embedded constant
-						HeaderFont AccTopTextFontSize selectfont GSave  NullDevice 16384 dup scale newpath 0 0 moveto   AccountsTopText  //true CharPathRecursive PathBBox GRestore  /AccTopTextT exch def  /AccTopTextR exch def  /AccTopTextB exch def  /AccTopTextL exch def
+						HeaderFont AccTopTextFontSize selectfont  AccountsTopText StringPathBBox  /AccTopTextT exch def  /AccTopTextR exch def  /AccTopTextB exch def  /AccTopTextL exch def
 						/AccTopTextHeight AccTopTextT AccTopTextB sub def
 						AccTopTextHeight 0 gt {HeaderFont AccTopTextFontSize selectfont   PageWidth MgnL MgnR sub AccTopTextL AccTopTextR add sub add 2 div  PageHeight MgnT AccTopTextT add sub  moveto 0 setgray AccountsTopText ShowRecursive} if
 
@@ -12769,13 +12764,13 @@ currentdict /GlyphShowKnownAbsences undef
 						{
 							/i exch def
 							HeaderFont AccountsColumnHeadingsFontSize selectfont
-							GSave  NullDevice 16384 dup scale newpath 0 0 moveto   AccountsColumnGroupHeadings i get  //true CharPathRecursive PathBBox GRestore
+							AccountsColumnGroupHeadings i get  StringPathBBox
 							dup AccColGrpHeadingsT gt {/AccColGrpHeadingsT exch def} {pop} ifelse pop dup AccColGrpHeadingsB lt {/AccColGrpHeadingsB exch def} {pop} ifelse pop
 							0  1  AccountsSubColumnHeadings i get length 1 sub
 							{
 								/j exch def
 								HeaderFont AccountsColumnHeadingsFontSize selectfont
-								GSave  NullDevice 16384 dup scale newpath 0 0 moveto   AccountsSubColumnHeadings i get j get  //true CharPathRecursive PathBBox GRestore
+								AccountsSubColumnHeadings i get j get  StringPathBBox
 								dup AccColSubHeadingsT gt {/AccColSubHeadingsT exch def} {pop} ifelse pop dup AccColSubHeadingsB lt {/AccColSubHeadingsB exch def} {pop} ifelse pop
 							} for  % j
 						} for  % i
@@ -12841,7 +12836,7 @@ currentdict /GlyphShowKnownAbsences undef
 							/Y  PageHeight MgnB MgnT add AccTopTextHeight add AccColGrpHeadingsT AccColGrpHeadingsB sub add AccColSubHeadingsT AccColSubHeadingsB sub add 2.4 add sub  AccRowNames length div  AccRowNames length NameNum sub mul  MgnB add  def
 							MgnL  Y ThisLineWidth 2 div sub  moveto  PageWidth MgnL MgnR add sub 0 rlineto
 							ThisLineWidth setlinewidth  0.8 setgray   0 setlinecap   [] 0 setdash  stroke
-							0 setgray MgnL Y ThisLineWidth 0.48 add sub moveto   GSave NullDevice 16384 dup scale newpath 0 0 moveto  AccRowNames NameNum get dup //true CharPathRecursive PathBBox GRestore  0 exch neg rmoveto  pop pop pop ShowRecursive
+							0 setgray MgnL Y ThisLineWidth 0.48 add sub moveto   AccRowNames NameNum get dup StringPathBBox  0 exch neg rmoveto  pop pop pop ShowRecursive
 						} for  % NameNum
 						//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 						ShowPage
@@ -12865,7 +12860,7 @@ currentdict /GlyphShowKnownAbsences undef
 					//false //false //false //false CorkDisplayPaperType /Portrait SetPaperSize
 					//true DefStoreMgns
 					/CDTopTextFontSize 16 def  % embedded constant
-					HeaderFont CDTopTextFontSize selectfont GSave  NullDevice 16384 dup scale newpath 0 0 moveto   CorkDisplayTopText  //true CharPathRecursive PathBBox GRestore  /CDTopTextT exch def  /CDTopTextR exch def  /CDTopTextB exch def  /CDTopTextL exch def
+					HeaderFont CDTopTextFontSize selectfont  CorkDisplayTopText StringPathBBox  /CDTopTextT exch def  /CDTopTextR exch def  /CDTopTextB exch def  /CDTopTextL exch def
 					/CorkDisplayTopTextHeight CDTopTextT CDTopTextB sub def
 					CorkDisplayPaperType ThisPaperType  eq   PageOrderingCorkDisplay CorkDisplaySetNum GetEU  ThisPageOrdering  eq   and
 					{CorkDisplayNumCopies 1 ge} MightBeTrue  and  dup {//false PageSuppressed {pop //false} if} if
@@ -12997,9 +12992,7 @@ currentdict /GlyphShowKnownAbsences undef
 										/CDBottom CDBottom AD add 1.92 add def  % Embedded constant
 
 										SubtitlesFont CDSubtitleFontSize selectfont  0 setgray
-										GSave  NullDevice  16384 dup scale  newpath 0 0 moveto
-										SubtitlesCorkDisplay WithinTitles get //true CharPathRecursive PathBBox
-										GRestore  /CDSubtitlesT exch def  /CDSubtitlesR exch def  /CDSubtitlesB exch def  /CDSubtitlesL exch def
+										SubtitlesCorkDisplay WithinTitles get  StringPathBBox  /CDSubtitlesT exch def  /CDSubtitlesR exch def  /CDSubtitlesB exch def  /CDSubtitlesL exch def
 										CDSubtitlesT CDSubtitlesB gt  CDSubtitlesR CDSubtitlesL gt  and
 										{
 											CDLeft CDBottom moveto
@@ -13008,9 +13001,7 @@ currentdict /GlyphShowKnownAbsences undef
 										} if  % non-empty
 
 										TitlesFont CDTitleFontSize selectfont  0 setgray
-										GSave  NullDevice  16384 dup scale  newpath 0 0 moveto
-										TitlesCorkDisplay WithinTitles get //true CharPathRecursive PathBBox
-										GRestore  /CDTitlesT exch def  /CDTitlesR exch def  /CDTitlesB exch def  /CDTitlesL exch def
+										TitlesCorkDisplay WithinTitles get  StringPathBBox  /CDTitlesT exch def  /CDTitlesR exch def  /CDTitlesB exch def  /CDTitlesL exch def
 										CDTitlesT CDTitlesB gt  CDTitlesR CDTitlesL gt  and
 										{
 											CDLeft CDBottom moveto
@@ -13434,9 +13425,7 @@ currentdict /GlyphShowKnownAbsences undef
 					HeaderFont DecanterLabelsTopTextFontSize selectfont  % Embedded constant
 					/DecanterLabelsTopText load StringWidthRecursive PageWidth MgnL MgnR add sub 2 copy gt {exch div /DecanterLabelsTopTextFontSize dup load 3 -1 roll mul def} {pop pop} ifelse
 					HeaderFont DecanterLabelsTopTextFontSize selectfont
-					GSave  NullDevice  16384 dup scale  newpath 0 0 moveto
-					/DecanterLabelsTopText load  //false CharPathRecursive PathBBox
-					GRestore  /DecanterLabelsTopTextT exch def  /DecanterLabelsTopTextR exch def  /DecanterLabelsTopTextB exch def  /DecanterLabelsTopTextL exch def
+					/DecanterLabelsTopText load  StringPathBBox  /DecanterLabelsTopTextT exch def  /DecanterLabelsTopTextR exch def  /DecanterLabelsTopTextB exch def  /DecanterLabelsTopTextL exch def
 
 					/DLBestNumOnPage -1 def
 					% Boolean orientations: portrait = true
@@ -13881,7 +13870,7 @@ currentdict /GlyphShowKnownAbsences undef
 											/ThisCirclearray load  NonEmptyCompoundObject
 											{
 												/StickyLabelsCircletextFontSize  % Embedded constant: max 0.25 * TitleFontSize
-													StickyLabelsCirclearraysMaxFontSize NamesFontSizeMax  2 copy gt {exch} if pop
+													StickyLabelsCirclearraysMaxFontSize NamesFontSize  2 copy gt {exch} if pop
 													Titles      WithinTitles get NonEmptyCompoundObject {TitleFontSizes      SheetNum get WithinPage get  4 div  2 copy gt {exch} if pop} if
 													Abovetitles WithinTitles get NonEmptyCompoundObject {AbovetitleFontSizes SheetNum get WithinPage get  4 div  2 copy gt {exch} if pop} if
 													Belowtitles WithinTitles get NonEmptyCompoundObject {BelowtitleFontSizes SheetNum get WithinPage get  4 div  2 copy gt {exch} if pop} if

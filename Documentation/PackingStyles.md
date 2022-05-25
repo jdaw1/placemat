@@ -397,6 +397,15 @@ The images show the packings for the diameters &le;&nbsp;4&frac12;&Prime; &asymp
 
 </div>
 
+
+## Related parameters
+
+The `Names` are shown on each Glasses page. 
+Whether a name is shown at the bottom of the page is controlled by `NamesShowBottom`, being an array of Booleans the same length as `GlassesOnSheets`, with default elements of `true`. 
+And likewise at the top of the page, `NamesShowTop`, with default elements of `false`. 
+Each is shown in the font `NamesFont`, at size not exceeding and usually equalling`NamesFontSize`, but wiggled smaller if neccessary to avoid the circles.
+
+
 ## Code extracts
 
 Some extracts from the code used to make some of examples on this page.
