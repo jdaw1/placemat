@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Wednesday 25th May 2022
+% This version 21:00 Thursday 26th May 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202205252300) def
+/ParametersVersionDateTimeAdobeFormat (D:202205262100) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -605,6 +605,8 @@ if} bind def  % /VoteRecorderCrossedBox
 /BottleWrapPaperType {<< /TNSheetNum 0 >> begin TastingNotesPaperType end} bind def  % /A4 /A3 /B4  /USL /USLegal /Tabloid
 /BottleWrapOrientation /Landscape def  % /Landscape /Portrait
 /BottleWrapScalingMin 0.7071 def  % ~=Sqrt[1/2]
+/BottleWrapShowOutlineTitles true def  % ignored if OutlineTitles is false
+/BottleWrapShowCrossHatchingInside true def  % ignored if CrossHatchingInside is false
 
 /VoteRecorderNamesOrientation /Either def  % /Horizontal /Vertical /Either
 /VoteRecorderShowTotalCol [ GlassesClusteredOnVoteRecorders length {true} repeat ] def  % Must be same length as GlassesClusteredOnVoteRecorders
@@ -779,7 +781,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202205252300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202205262100) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -810,11 +812,11 @@ if} bind def  % /VoteRecorderCrossedBox
 /ArcTanFiveEighths   32.00538320808349556079 def  % In degrees
 /Infinity 32767 def  % 2^15-1, which in points ~= 455" ~= 38', so ~61% bigger than the ~283" diagonal of the 200"x200" maximum PDF page. Can be '8 exp 256.06251 mul' without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.40282*10^38.
 /InfinityNeg Infinity neg def
-/PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi, and less at less. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
+/PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
 /Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, so about 419 times the single-precision minimum.
 /AsciiTab (\t) 0 get def   /AsciiNewline (\n) 0 get def   /AsciiSpace ( ) 0 get def
 
-/OneThird 1 3 div def   /Cbrt {dup 0 lt {neg //OneThird exp neg} {//OneThird exp} ifelse} bind def
+/OneThird 1 3 div def   /Cbrt {dup dup 0 lt {neg //OneThird exp neg} {//OneThird exp} ifelse  dup abs 1290 le {dup cvi dup dup mul mul 3 -1 roll eq {cvi} if} {exch pop} ifelse} bind def  % 1290^3 < IntegerMax < 1291^3
 
 PrinterEpsilon setflat  % According to PLRM3 p669, automatically substituted with 0.2, being the smallest allowed value. Presumably from an era of lower resolution printers. Happily, most PDF renderers seem to ignore this, substituting ~= 1 pixel.
 
@@ -867,18 +869,24 @@ OutputLog  0  (!!! Error !!! Error !!!   An error occurred. More information bel
 
 % http://groups.google.com/g/comp.lang.postscript/c/DWky6YmjQQI
 /NullDevices where {pop} {/NullDevices 31 array def  NullDevices 0 0 put} ifelse  % 5 would be enough. Done here to allow immediate execution.
-/CountGraphicsStack where {pop}
-{
+/CountGraphicsStack where {pop} {
 	/CountGraphicsStack 0 def
 	/GSave {/CountGraphicsStack CountGraphicsStack 1 add store  //NullDevices CountGraphicsStack 2 copy 1 sub get put  gsave} bind def
-	/GRestore {/CountGraphicsStack CountGraphicsStack 1 sub store  grestore} bind def
+	/GRestore
+	{
+		CountGraphicsStack 0 le {(Error: number of calls of GRestore exceeds those of GSave.) dup = OutputToLog stop} if  % So low-level that OutputToLog might fail. Hence also =ing.
+		/CountGraphicsStack  CountGraphicsStack 1 sub  store    grestore
+	} bind def  % /GRestore
 	/NullDevice {//NullDevices CountGraphicsStack 2 copy get 1 add put  nulldevice} bind def
 } ifelse  % /CountGraphicsStack where
-/CountClipStack where {pop}
-{
+/CountClipStack where {pop} {
 	/CountClipStack 0 def
 	/ClipSave {/CountClipStack CountClipStack 1 add store  clipsave} bind def
-	/ClipRestore {/CountClipStack CountClipStack 1 sub store  cliprestore} bind def
+	/ClipRestore
+	{
+		CountClipStack 0 le {(Error: number of calls of ClipRestore exceeds those of ClipSave.) dup = OutputToLog stop} if  % So low-level that OutputToLog might fail. Hence also =ing.
+		/CountClipStack  CountClipStack 1 sub  store    cliprestore
+	} bind def  % /ClipRestore
 } ifelse  % /CountClipStack where
 
 /Stopped {countdictstack exch /StoppedStackMarker exch stopped
@@ -1499,27 +1507,28 @@ currentdict /ArrowCircleToCircle_CanWarn undef
 	/uni264E (Libra)  /uni264F (Scorpius)  /uni2650 (Sagittarius)  /uni2651 (Capricorn)  /uni2652 (Aquarius)  /uni2653 (Pisces)
 	/uni2654 (King white)  /uni2655 (Queen white)  /uni2656 (Rook white)  /uni2657 (Bishop white)  /uni2658 (Knight white)  /uni2659 (Pawn white)
 	/uni265A (King black)  /uni265B (Queen black)  /uni265C (Rook black)  /uni265D (Bishop black)  /uni265E (Knight black)  /uni265F (Pawn black)
->> readonly def  % /GlyphToASCII
+>>  dup {readonly pop pop} bind forall  readonly def  % /GlyphToASCII
 /GlyphToPDFDocEncoding <<  % Appendix D of PDF 32000-1:2008
-	/breve (\030)          /caron (\031)           /circumflex (\032)    /dotaccent (\033)       /hungarumlaut (\034)  /ogonek (\035)        /ring (\036)           /tilde (\037)
-	                                                                     /braceleft (\173)       /bar (\174)           /braceright (\175)    /asciitilde (\176)
-	/bullet (\200)         /dagger (\201)          /daggerdbl (\202)     /ellipsis (\203)        /emdash (\204)        /endash (\205)        /florin (\206)         /fraction (\207)
-	/guilsinglleft (\210)  /guilsinglright (\211)  /minus (\212)         /perthousand (\213)     /quotedblbase (\214)  /quotedblleft (\215)  /quotedblright (\216)  /quoteleft (\217)
-	/quoteright (\220)     /quotesinglbase (\221)  /trademark (\222)     /fi (\223)              /fl (\224)            /Lslash (\225)        /OE (\226)             /Scaron (\227)
-	/Ydieresis (\230)      /Zcaron (\231)          /dotlessi (\232)      /lslash (\233)          /oe (\234)            /scaron (\235)        /zcaron (\236)
-	/Euro (\240)           /exclamdown (\241)      /cent (\242)          /sterling (\243)        /currency (\244)      /yen (\245)           /brokenbar (\246)      /section (\247)
-	/dieresis (\250)       /copyright (\251)       /ordfeminine (\252)   /guillemotleft (\253)   /logicalnot (\254)                          /registered (\256)     /macron (\257)
-	/degree (\260)         /plusminus (\261)       /twosuperior (\262)   /threesuperior (\263)   /acute (\264)         /mu (\265)            /paragraph (\266)      /periodcentered (\267)
-	/cedilla (\270)        /onesuperior (\271)     /ordmasculine (\272)  /guillemotright (\273)  /onequarter (\274)    /onehalf (\275)       /threequarters (\276)  /questiondown (\277)
-	/Agrave (\300)         /Aacute (\301)          /Acircumflex (\302)   /Atilde (\303)          /Adieresis (\304)     /Aring (\305)         /AE (\306)             /Ccedilla (\307)
-	/Egrave (\310)         /Eacute (\311)          /Ecircumflex (\312)   /Edieresis (\313)       /Igrave (\314)        /Iacute (\315)        /Icircumflex (\316)    /Idieresis (\317)
-	/Eth (\320)            /Ntilde (\321)          /Ograve (\322)        /Oacute (\323)          /Ocircumflex (\324)   /Otilde (\325)        /Odieresis (\326)      /multiply (\327)
-	/Oslash (\330)         /Ugrave (\331)          /Uacute (\332)        /Ucircumflex (\333)     /Udieresis (\334)     /Yacute (\335)        /Thorn (\336)          /germandbls (\337)
-	/agrave (\340)         /aacute (\341)          /acircumflex (\342)   /atilde (\343)          /adieresis (\344)     /aring (\345)         /ae (\346)             /ccedilla (\347)
-	/egrave (\350)         /eacute (\351)          /ecircumflex (\352)   /edieresis (\353)       /igrave (\354)        /iacute (\355)        /icircumflex (\356)    /idieresis (\357)
-	/eth (\360)            /ntilde (\361)          /ograve (\362)        /oacute (\363)          /ocircumflex (\364)   /otilde (\365)        /odieresis (\366)      /divide (\367)
-	/oslash (\370)         /ugrave (\371)          /uacute (\372)        /ucircumflex (\373)     /udieresis (\374)     /yacute (\375)        /thorn (\376)          /ydieresis (\377)
->> readonly def % /GlyphToPDFDocEncoding
+	/breve         (\030)   /caron          (\031)   /circumflex   (\032)   /dotaccent      (\033)   /hungarumlaut (\034)   /ogonek       (\035)   /ring          (\036)   /tilde          (\037)
+
+	                                                                        /braceleft      (\173)   /bar          (\174)   /braceright   (\175)   /asciitilde    (\176)
+	/bullet        (\200)   /dagger         (\201)   /daggerdbl    (\202)   /ellipsis       (\203)   /emdash       (\204)   /endash       (\205)   /florin        (\206)   /fraction       (\207)
+	/guilsinglleft (\210)   /guilsinglright (\211)   /minus        (\212)   /perthousand    (\213)   /quotedblbase (\214)   /quotedblleft (\215)   /quotedblright (\216)   /quoteleft      (\217)
+	/quoteright    (\220)   /quotesinglbase (\221)   /trademark    (\222)   /fi             (\223)   /fl           (\224)   /Lslash       (\225)   /OE            (\226)   /Scaron         (\227)
+	/Ydieresis     (\230)   /Zcaron         (\231)   /dotlessi     (\232)   /lslash         (\233)   /oe           (\234)   /scaron       (\235)   /zcaron        (\236)
+	/Euro          (\240)   /exclamdown     (\241)   /cent         (\242)   /sterling       (\243)   /currency     (\244)   /yen          (\245)   /brokenbar     (\246)   /section        (\247)
+	/dieresis      (\250)   /copyright      (\251)   /ordfeminine  (\252)   /guillemotleft  (\253)   /logicalnot   (\254)                          /registered    (\256)   /macron         (\257)
+	/degree        (\260)   /plusminus      (\261)   /twosuperior  (\262)   /threesuperior  (\263)   /acute        (\264)   /mu           (\265)   /paragraph     (\266)   /periodcentered (\267)
+	/cedilla       (\270)   /onesuperior    (\271)   /ordmasculine (\272)   /guillemotright (\273)   /onequarter   (\274)   /onehalf      (\275)   /threequarters (\276)   /questiondown   (\277)
+	/Agrave        (\300)   /Aacute         (\301)   /Acircumflex  (\302)   /Atilde         (\303)   /Adieresis    (\304)   /Aring        (\305)   /AE            (\306)   /Ccedilla       (\307)
+	/Egrave        (\310)   /Eacute         (\311)   /Ecircumflex  (\312)   /Edieresis      (\313)   /Igrave       (\314)   /Iacute       (\315)   /Icircumflex   (\316)   /Idieresis      (\317)
+	/Eth           (\320)   /Ntilde         (\321)   /Ograve       (\322)   /Oacute         (\323)   /Ocircumflex  (\324)   /Otilde       (\325)   /Odieresis     (\326)   /multiply       (\327)
+	/Oslash        (\330)   /Ugrave         (\331)   /Uacute       (\332)   /Ucircumflex    (\333)   /Udieresis    (\334)   /Yacute       (\335)   /Thorn         (\336)   /germandbls     (\337)
+	/agrave        (\340)   /aacute         (\341)   /acircumflex  (\342)   /atilde         (\343)   /adieresis    (\344)   /aring        (\345)   /ae            (\346)   /ccedilla       (\347)
+	/egrave        (\350)   /eacute         (\351)   /ecircumflex  (\352)   /edieresis      (\353)   /igrave       (\354)   /iacute       (\355)   /icircumflex   (\356)   /idieresis      (\357)
+	/eth           (\360)   /ntilde         (\361)   /ograve       (\362)   /oacute         (\363)   /ocircumflex  (\364)   /otilde       (\365)   /odieresis     (\366)   /divide         (\367)
+	/oslash        (\370)   /ugrave         (\371)   /uacute       (\372)   /ucircumflex    (\373)   /udieresis    (\374)   /yacute       (\375)   /thorn         (\376)   /ydieresis      (\377)
+>>  dup {readonly pop pop} bind forall  readonly def % /GlyphToPDFDocEncoding
 
 % CompoundString  ASCIIfy  string, the string being an all-ASCII approximation to the CompoundString
 /ASCIIfy
@@ -1784,7 +1793,7 @@ LogThisExtra ASCIIfy dup length 0 gt {mark exch (\n) exch (\n ) ConcatenateToMar
 	1 dict begin
 	GSave
 	NullDevice
-	0 0 moveto % in case no currentpoint and code does a rmoveto
+	0 0 moveto  % in case no currentpoint and code does a rmoveto
 	/param exch def
 	/param load xcheck
 	{
@@ -2747,19 +2756,12 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 			/Under PrepositionWhich eq
 			{
 				currentfont /FontInfo known {currentfont /FontInfo get /UnderlinePosition known} {//false} ifelse
-				{currentfont /FontInfo get /UnderlinePosition get CurrentFontSize mul}
-				{
-					GSave  0 0 moveto (Qgjpqy) //true charpath PathBBox  GRestore
-					pop pop exch pop   3 div   currentlinewidth 2 div sub
-				} ifelse
+					{currentfont /FontInfo get /UnderlinePosition get CurrentFontSize mul}
+					{(Qgjpqy) StringPathBBox  pop pop exch pop   3 div   currentlinewidth 2 div sub}
+				ifelse
 				exit
 			} if  % /Under
-			/Through PrepositionWhich eq
-			{
-				GSave  0 0 moveto (o) //true charpath PathBBox  GRestore
-				2 div 4 1 roll  pop pop pop
-				exit
-			} if  % /Through
+			/Through PrepositionWhich eq {(o) StringPathBBox  2 div 4 1 roll  pop pop pop   exit} if
 			mark (Error in PrepositionlinePaint: unknown value of PrepositionWhich = ) PrepositionWhich (. Continuing.) ConcatenateToMark OutputToLog
 			0
 		} repeat def  % /OffsetY
@@ -4018,15 +4020,13 @@ currentdict /GlyphShowKnownAbsences undef
 	/Y exch def
 	/X exch def
 
-	GSave  newpath  0 0 moveto  /Filltext load  //true CharPathRecursive PathBBox  GRestore
-	/FilltextT exch def  /FilltextR exch def  /FilltextB exch def  /FilltextL exch def
+	/Filltext load StringPathBBox  /FilltextT exch def  /FilltextR exch def  /FilltextB exch def  /FilltextL exch def
 
 	FilltextR FilltextL sub //PrinterEpsilon gt
 	{
 		GSave  clip
 
-		GSave  matrix currentmatrix  Angle rotate  newpath  0 0 moveto  /Filltext load  //true CharPathRecursive  setmatrix  PathBBox  GRestore
-		/FilltextTa exch def  /FilltextRa exch def  /FilltextBa exch def  /FilltextLa exch def
+		/Filltext load StringPathBBox  /FilltextTa exch def  /FilltextRa exch def  /FilltextBa exch def  /FilltextLa exch def
 
 		PathBBox /ury exch def  /urx exch def  /lly exch def  /llx exch def
 		Angle rotate
@@ -7904,9 +7904,7 @@ currentdict /GlyphShowKnownAbsences undef
 		{
 			WithinPage-WithinTitles-def
 			ColourSchemeTitles /MidGrey eq {/TitlesAnyGrey //true store} if
-			GSave   NullDevice  newpath
-			TitlesFont 16384 selectfont  0 0 moveto  Titles WithinTitles get  //true  CharPathRecursive
-			PathBBox  GRestore
+			TitlesFont 16384 selectfont  Titles WithinTitles get  StringPathBBox
 			16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 lt {pop 0} if} if   TitleProportionFontSizeT SheetNum get  WithinPage  3 -1 roll  put
 			16384 div                                                                   TitleProportionFontSizeR SheetNum get  WithinPage  3 -1 roll  put
 			16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 gt {pop 0} if} if   TitleProportionFontSizeB SheetNum get  WithinPage  3 -1 roll  put
@@ -7926,12 +7924,9 @@ currentdict /GlyphShowKnownAbsences undef
 	/VerticalMiddlingStringTitles load XcheckRecursive not
 	/VerticalMiddlingIncludeBaselineTitles load XcheckRecursive not  and and
 	{
-		TitlesFont 16384 selectfont
-		GSave   NullDevice  0 0 moveto
-		VerticalMiddlingStringTitles  //true  CharPathRecursive  PathBBox
+		TitlesFont 16384 selectfont  VerticalMiddlingStringTitles  StringPathBBox
 		16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 lt {pop 0} if}  if /VMSTT exch def  pop
 		16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 gt {pop 0} if}  if /VMSTB exch def  pop
-		GRestore
 	} {/VMSTT /Null def /VMSTB /Null def} ifelse  % ... XcheckRecursive not ...
 	0  1  NumSheets 1 sub
 	{
@@ -7973,11 +7968,9 @@ currentdict /GlyphShowKnownAbsences undef
 					VMSTT /Null eq  VMSTB /Null eq  or
 					{
 						TitlesFont 16384 selectfont
-						GSave   NullDevice  0 0 moveto
-						/VerticalMiddlingStringTitles load  //true  CharPathRecursive  PathBBox
+						/VerticalMiddlingStringTitles load  StringPathBBox
 						16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 lt {pop 0} if} if   /MaxTops    exch def  pop
 						16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 gt {pop 0} if} if   /MinBottoms exch def  pop
-						GRestore
 					}{
 						/MaxTops VMSTT def
 						/MinBottoms VMSTB def
@@ -8214,44 +8207,35 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  SheetLengths SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
-			GSave NullDevice
-			AbovetitlesFont 16384 selectfont  0 0 moveto  Abovetitles WithinTitles get  //true  CharPathRecursive
-			PathBBox   4 {16384 div 4 1 roll} repeat
-			GRestore
+			AbovetitlesFont 16384 selectfont  Abovetitles WithinTitles get  StringPathBBox   4 {16384 div 4 1 roll} repeat
 			AbovetitleProportionFontSizeT SheetNum get  WithinPage  3 -1 roll  put
-			AbovetitleProportionFontSizeR SheetNum get WithinPage  3 -1 roll  put
+			AbovetitleProportionFontSizeR SheetNum get  WithinPage  3 -1 roll  put
 			AbovetitleProportionFontSizeB SheetNum get  WithinPage  3 -1 roll  put
-			AbovetitleProportionFontSizeL SheetNum get WithinPage  3 -1 roll  put
+			AbovetitleProportionFontSizeL SheetNum get  WithinPage  3 -1 roll  put
 
 			AbovetitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage
-			AbovetitleProportionFontSizeL SheetNum get WithinPage get
-			AbovetitleProportionFontSizeR SheetNum get WithinPage get
+			AbovetitleProportionFontSizeL SheetNum get  WithinPage get
+			AbovetitleProportionFontSizeR SheetNum get  WithinPage get
 			add 2 div neg put
 
-			GSave NullDevice
-			BelowtitlesFont 16384 selectfont  0 0 moveto  Belowtitles WithinTitles get  //true  CharPathRecursive
-			PathBBox   4 {16384 div 4 1 roll} repeat
-			GRestore
+			BelowtitlesFont 16384 selectfont  Belowtitles WithinTitles get  StringPathBBox   4 {16384 div 4 1 roll} repeat
 			BelowtitleProportionFontSizeT SheetNum get  WithinPage  3 -1 roll  put
-			BelowtitleProportionFontSizeR SheetNum get WithinPage  3 -1 roll  put
+			BelowtitleProportionFontSizeR SheetNum get  WithinPage  3 -1 roll  put
 			BelowtitleProportionFontSizeB SheetNum get  WithinPage  3 -1 roll  put
-			BelowtitleProportionFontSizeL SheetNum get WithinPage  3 -1 roll  put
+			BelowtitleProportionFontSizeL SheetNum get  WithinPage  3 -1 roll  put
 
 			BelowtitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage
 			BelowtitleProportionFontSizeL SheetNum get WithinPage get
 			BelowtitleProportionFontSizeR SheetNum get WithinPage get
 			add 2 div neg put
 
-			GSave NullDevice
-			OvertitlesFont 16384 selectfont  0 0 moveto  Overtitles WithinTitles get  //true  CharPathRecursive
-			PathBBox   4 {16384 div 4 1 roll} repeat
-			GRestore
+			OvertitlesFont 16384 selectfont  Overtitles WithinTitles get  StringPathBBox   4 {16384 div 4 1 roll} repeat
 			VerticalMiddlingIncludeBaselineOvertitles {dup 0 lt {pop 0} if} if
 			OvertitleProportionFontSizeT SheetNum get  WithinPage  3 -1 roll  put
-			OvertitleProportionFontSizeR SheetNum get WithinPage  3 -1 roll  put
+			OvertitleProportionFontSizeR SheetNum get  WithinPage  3 -1 roll  put
 			VerticalMiddlingIncludeBaselineOvertitles {dup 0 gt {pop 0} if} if
 			OvertitleProportionFontSizeB SheetNum get  WithinPage  3 -1 roll  put
-			OvertitleProportionFontSizeL SheetNum get WithinPage  3 -1 roll  put
+			OvertitleProportionFontSizeL SheetNum get  WithinPage  3 -1 roll  put
 
 			OvertitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage
 			OvertitleProportionFontSizeL SheetNum get WithinPage get
@@ -8293,10 +8277,7 @@ currentdict /GlyphShowKnownAbsences undef
 			/VerticalMiddlingStringOvertitles load XcheckRecursive not
 			/VerticalMiddlingIncludeBaselineOvertitles load XcheckRecursive not  and and and
 			{
-				OvertitlesFont 16384 selectfont
-				GSave   NullDevice  0 0 moveto
-				VerticalMiddlingStringOvertitles  //true  CharPathRecursive  PathBBox
-				GRestore
+				OvertitlesFont 16384 selectfont  VerticalMiddlingStringOvertitles  StringPathBBox
 				16384 div  VerticalMiddlingIncludeBaselineOvertitles {dup 0 lt {pop 0} if}  if /VMSST exch def  pop
 				16384 div  VerticalMiddlingIncludeBaselineOvertitles {dup 0 gt {pop 0} if}  if /VMSSB exch def  pop
 			} {/VMSST /Null def /VMSSB /Null def} ifelse  % ... XcheckRecursive not ...
@@ -8331,10 +8312,7 @@ currentdict /GlyphShowKnownAbsences undef
 				{
 					VMSST /Null eq  VMSSB /Null eq  or
 					{
-						OvertitlesFont 16384 selectfont
-						GSave   NullDevice  0 0 moveto
-						/VerticalMiddlingStringOvertitles load  //true  CharPathRecursive  PathBBox
-						GRestore
+						OvertitlesFont 16384 selectfont  /VerticalMiddlingStringOvertitles load  StringPathBBox
 						16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 lt {pop 0} if} if   /MaxTops    exch def  pop
 						16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 gt {pop 0} if} if   /MinBottoms exch def  pop
 						exit
@@ -10430,10 +10408,7 @@ currentdict /GlyphShowKnownAbsences undef
 		/Y PageHeight 4 div MgnB FooterExtraOffset add MgnT sub 2 div add def
 
 		newpath
-		PlaceNamesFont 16384 selectfont
-		0 0 moveto  /ThisName load //true CharPathRecursive  PathBBox
-		newpath
-		/URY exch def  /URX exch def  /LLY exch def  /LLX exch def
+		PlaceNamesFont 16384 selectfont  /ThisName load  StringPathBBox  /URY exch def  /URX exch def  /LLY exch def  /LLX exch def
 		URY LLY sub  dup 0 gt {PageHeight 2 div MgnB MgnT add sub 2.4 sub FooterExtraOffset sub  exch div 16384 mul} {pop PageHeight 2 div} ifelse  % embedded constant
 		URX LLX sub  dup 0 gt {PageWidth MgnL MgnR add sub 4.8 sub  exch div 16384 mul} {pop PageHeight 2 div} ifelse  % embedded constant
 		PlaceNamesMaxFontSizeAbsolute   2 {2 copy gt {exch} if pop} repeat /PlaceNamesFontSize exch store
@@ -10707,7 +10682,7 @@ currentdict /GlyphShowKnownAbsences undef
 				/PaintProc  % Paints repeated copies of a TitleAboveBelowOverForms, and repeated copies of an item of CirclearraysBottleWrap
 				{
 					//DeBugLevel 100 le {(+BottleWrapForms: PaintProc) OutputToLog} if
-					pop 30 dict begin  % dictionary parameter of execform containing WithinTitles and WithinPage
+					pop 31 dict begin  % dictionary parameter of execform containing WithinTitles and WithinPage
 					/TypeOfPagesBeingRendered /BottleWrap store
 
 					//false //false //false //false BottleWrapPaperType BottleWrapOrientation SetPaperSize
@@ -10731,29 +10706,29 @@ currentdict /GlyphShowKnownAbsences undef
 					BottleWrapScalingFactors WithinTitles BottleWrapScalingFactor put
 
 					CircletextFont  CirclearraysFontSizes SheetNum get WithinPage get  selectfont
-					CirclearraysBottleWrap WithinTitles get StringPathBBox  /BW_T exch def  pop  /BW_B exch def  pop
+					CirclearraysBottleWrap WithinTitles get StringPathBBox  /BW_T exch def  pop  /BW_B exch def  pop  /BW_H BW_T BW_B sub def
 
 					/BW_X_first
-						BW_T BW_B sub  MarginL add
+						BW_H  MarginL add
 						TitleAboveBelowOverL SheetNum get WithinPage get
 						BottleWrapScalingFactor  mul sub  BottleWrapPadding add
 					def  % /BW_X_first
 
 					/BW_X_step
-						BW_T BW_B sub
+						BW_H
 						TitleAboveBelowOverR SheetNum get WithinPage get
 						TitleAboveBelowOverL SheetNum get WithinPage get  sub
 						BottleWrapScalingFactor  mul add  BottleWrapPadding 2 mul add
 					def  % /BW_X_step
 
 					/BW_Y_first
-						PageHeight  BW_T BW_B sub MarginT add sub
+						PageHeight  BW_H MarginT add sub
 						TitleAboveBelowOverT SheetNum get WithinPage get
 						BottleWrapScalingFactor  mul sub  BottleWrapPadding sub
 					def  % /BW_Y_first
 
 					/BW_Y_step
-						BW_T BW_B sub
+						BW_H
 						TitleAboveBelowOverT SheetNum get WithinPage get
 						TitleAboveBelowOverB SheetNum get WithinPage get  sub
 						BottleWrapScalingFactor  mul add  BottleWrapPadding 2 mul add  neg
@@ -10766,9 +10741,24 @@ currentdict /GlyphShowKnownAbsences undef
 						0  1  BottleWrapNumRows 1 sub
 						{
 							BW_Y_step mul BW_Y_first add  /BW_Y exch def
-
-							matrix currentmatrix
-							BW_X BW_Y translate  BottleWrapScalingFactor dup scale
+							matrix currentmatrix   BW_X BW_Y translate
+							CrossHatchingInside BottleWrapShowCrossHatchingInside and  OutlineTitles BottleWrapShowOutlineTitles and  or  /PaintBackgroundInsideGlassCircles load length 0 gt or
+							{
+								ClipSave
+								BW_X_step BW_H sub 0.24 sub  dup -2 div exch
+								BW_Y_step 0.24 add 2 div BW_H sub  exch   BW_Y_step 0.24 add neg BW_H sub
+								rectclip
+								BottleWrapScalingFactor dup scale
+								/PaintBackgroundInsideGlassCircles load dup length 0 gt
+									{/TypeOfPagesBeingRendered /BottleWrap store GSave newpath 0 0 Radii SheetNum get 0 360 arc closepath clip newpath execU GRestore}
+									{pop}
+								ifelse  % PaintBackgroundInsideGlassCircles ... length 0 gt
+								/TypeOfPagesBeingRendered /Glasses store
+								OutlineTitles BottleWrapShowOutlineTitles and {OutlineForms SheetNum get WithinPage get   execform} if
+								Spirals {SpiralForms SheetNum get WithinPage get execform} if
+								CrossHatchingInside BottleWrapShowCrossHatchingInside and {CrossHatchingInsideForms SheetNum get WithinPage get   execform} if
+								ClipRestore
+							} {BottleWrapScalingFactor dup scale} ifelse  % CrossHatchingInside ... OutlineTitles ... or ... PaintBackgroundInsideGlassCircles ... or
 							TitleAboveBelowOverForms SheetNum get WithinPage get  execform  AnnotateGlass
 							setmatrix
 							/TypeOfPagesBeingRendered /BottleWrap store
@@ -10814,7 +10804,7 @@ currentdict /GlyphShowKnownAbsences undef
 								/BW_YY exch def
 								/BW_Y  BW_Y_step BW_YY mul  PageHeight MgnT sub add  def
 
-								BW_X BW_T BW_B sub add  BW_Y  moveto
+								BW_X BW_H add  BW_Y  moveto
 
 								CirclearraysBottleWrap WithinTitles get
 								{CircletextFont  CirclearraysFontSizes SheetNum get WithinPage get  selectfont}
@@ -12035,13 +12025,13 @@ currentdict /GlyphShowKnownAbsences undef
 
 				0 setgray  0.24 setlinewidth
 				TNRowHeight 2 div TastingNotesSubtitleFontSizeProportionTitles 1 add div TastingNotesTitlesFontSizeMax 2 copy gt {exch} if pop  dup TitlesFont exch 2 copy  % embedded constant in "2 div"
-				selectfont   0 0 moveto TitlesTastingNotes WithinTitles get //true CharPathRecursive PathBBox newpath /urY exch def pop /llY exch def pop
+				selectfont   TitlesTastingNotes WithinTitles get  StringPathBBox  /urY exch def pop /llY exch def pop
 				selectfont   MgnL CurrentTop urY sub moveto  TitlesTastingNotes WithinTitles get ShowRecursive
 				/CurrentTop CurrentTop TastingNotesLineGap urY llY sub add sub def
 
 				0 setgray  0.24 setlinewidth
 				TastingNotesSubtitleFontSizeProportionTitles mul SubtitlesFont exch 2 copy
-				selectfont   0 0 moveto SubtitlesTastingNotes WithinTitles get //true CharPathRecursive PathBBox newpath /urY exch def pop pop pop
+				selectfont   SubtitlesTastingNotes WithinTitles get  StringPathBBox  /urY exch def  pop pop pop
 				selectfont   MgnL CurrentTop urY sub moveto  SubtitlesTastingNotes WithinTitles get ShowRecursive
 			} for  % WithinPage, WithinTitles
 			end
@@ -13877,8 +13867,7 @@ currentdict /GlyphShowKnownAbsences undef
 													Overtitles  WithinTitles get NonEmptyCompoundObject {OvertitleFontSizes  SheetNum get WithinPage get  4 div  2 copy gt {exch} if pop} if
 												def  % /StickyLabelsCircletextFontSize
 												ThisFont StickyLabelsCircletextFontSize selectfont
-												newpath  GSave  NullDevice 16384 dup scale 0 0 moveto  /ThisCirclearray load //true CharPathRecursive  PathBBox  GRestore
-												/CirclearrayT exch def  /CirclearrayR exch def  /CirclearrayB exch def  /CirclearrayL exch def
+												newpath  /ThisCirclearray load  StringPathBBox  /CirclearrayT exch def  /CirclearrayR exch def  /CirclearrayB exch def  /CirclearrayL exch def
 
 												/StickyLabelCirclearrayBaseline
 												Top0Bottom1 0 eq
@@ -14042,7 +14031,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 	{BottleWrapNumCopies 1 ge} MightBeTrue
 	{
-		mark (BottleWrapScalingFactors: ) 
+		mark (BottleWrapScalingFactors: )
 		0  1  Titles length 1 sub
 		{
 			/WithinTitles exch def
@@ -14051,7 +14040,7 @@ currentdict /GlyphShowKnownAbsences undef
 				Titles WithinTitles get ASCIIfy ( = ) BottleWrapScalingFactors WithinTitles get (; )
 			} if  % /realtype
 		} for  % WithinTitles
-		pop (.)  ConcatenateToMark OutputToLog 
+		pop (.)  ConcatenateToMark OutputToLog
 	} if  % {BottleWrapNumCopies 1 ge} MightBeTrue
 
 	/TypeOfPagesBeingRendered /Multiple store
