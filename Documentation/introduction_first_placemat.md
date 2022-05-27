@@ -27,7 +27,7 @@ And having done that, there might also be need for matching pages:
 * to label decanters and bottles,  
 * to organise pre-pouring,  
 * to display the corks,  
-* to label each person&rsquo;s place-setting (so everybody knows who everybody else is, even late in the tasting),  
+* to label each person&rsquo;s place-setting (so everybody knows who everybody else is),  
 * to record votes for the WOTN = **W**ine **O**f **T**he **N**ight, and  
 * to assist with computing the split of the costs, allowing for bottles provided.
 
@@ -148,7 +148,7 @@ Each of these arrays is evenly spaced around the perimeter of each glass&rsquo;s
 ```
 `Circlearrays` must be the same length as `Titles`, but its sub-arrays can be of different lengths. 
 
-Each person&rsquo;s paperwork is named, and `Names` also appear on some of the other page types, such as the vote recorders. 
+Each person&rsquo;s paperwork is named, and `Names` also appear on some of [the other page types](not_glasses.md#readme), such as the vote recorders. 
 `Names` is an array, not necessarily of the same length as the previous three. 
 ```PostScript
 /Names [ (Julian)  (Alice)  (Ben)  (Caroline)  (Derek)  (Elizabeth)  () ] def

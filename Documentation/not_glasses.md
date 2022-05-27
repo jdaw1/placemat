@@ -25,7 +25,7 @@
 There are multiple types of printable page. 
 * `/Glasses`: labels glass positions;
 * `/TastingNotes`: for those who record TNs with a pen on paper. 
-* `/PlaceName`: At a large formal tasting it is appropriate to label each person&rsquo;s place-setting, so everybody knows who everybody else is, even late in the tasting.
+* `/PlaceName`: At a large formal tasting it is appropriate to label each person&rsquo;s place-setting, so everybody knows who everybody else is.
 * `/PrePour`: to help with the pre-pouring of portions &mdash; necessary at at tastings with many people. 
 * `/VoteRecorder`: to record the votes for Wine Of The Night, and to record guesses of blinded wines.
 * `/DecantingNotes`: observations of those doing the decanting.
@@ -33,6 +33,7 @@ There are multiple types of printable page.
 * `/CorkDisplay` as described.
 * `/NeckTags`: to label de-capsuled bottles when decanting; also around the neck of a wrapped bottle at blind tastings. 
 * `/DecanterLabels`: cut; paste to back of old business cards; allow to dry; punch holes; hang on decanters; fill decanters; wait; drink.
+* `/BottleWrap`: at a blind tasting, to which bottles rather than decanters are being brought, bottles should be wrapped in pages that match everything else.
 * `/StickyLabels`: at a tasting with more wines than glasses, these can be attached to the foot of a glass to show both owner and current contents. Larger stickies also useful on bottles.
 
 To make the glasses pages required information about wines, about people, and about formatting. 

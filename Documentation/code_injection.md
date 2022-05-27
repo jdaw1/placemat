@@ -167,6 +167,7 @@ Multiple variables can be available for inspection.
 		* `/DecantingNotes`; 
 		* `/Accounts`; 
 		* `/CorkDisplay`; 
+		* `/BottleWrap`; 
 		* `/DecanterLabels`; and 
 		* `/Multiple` if doing calculations applicable to multiple types of page.
 

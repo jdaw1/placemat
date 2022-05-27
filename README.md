@@ -32,7 +32,7 @@ And having done that, there might also be need for matching pages:
 * to label decanters and bottles,  
 * to organise pre-pouring,  
 * to display the corks,  
-* to label each person&rsquo;s place-setting (so everybody knows who everybody else is, even late in the tasting),  
+* to label each person&rsquo;s place-setting (so everybody knows who everybody else is),  
 * to record votes for the Wine Of The Night, and  
 * to assist with computing the split of the costs, allowing for bottles provided.
 
