@@ -149,7 +149,7 @@ The code must include the `stroke`, this requirement permitting the likes of `gs
 And analogous `stroke`ing code `CrossHatchingAbovetitlesStrokeCode`, `CrossHatchingBelowtitlesStrokeCode`, and `CrossHatchingOvertitlesStrokeCode`, `CrossHatchingInsideStrokeCode`, `CrossHatchingOutsideStrokeCode` (`CrossHatchingPlaceNames` uses the sub-parameters of CrossHatchingTitles). 
 Sometimes used with `CrossHatchingInside` and `CrossHatchingOutside` is `CirclearraysFillBehind`, which fills behind the annulus containing the `Circlearrays` by executing `CirclearraysFillBehindCode`.
 
-The Inside lines (inside the circle but behind the various titles) are less elegant on some ther page types. 
+The Inside lines (inside the circle but behind the various titles) are less elegant on some other page types. 
 Their presence is controlled by `NeckTagsShowCrossHatchingInside` and `DecanterLabelsShowCrossHatchingInside`.
 
 Extracts of code that made the image:
