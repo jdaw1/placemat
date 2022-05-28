@@ -150,7 +150,7 @@ And analogous `stroke`ing code `CrossHatchingAbovetitlesStrokeCode`, `CrossHatch
 Sometimes used with `CrossHatchingInside` and `CrossHatchingOutside` is `CirclearraysFillBehind`, which fills behind the annulus containing the `Circlearrays` by executing `CirclearraysFillBehindCode`.
 
 The Inside lines (inside the circle but behind the various titles) are less elegant on some other page types. 
-Their presence is controlled by `NeckTagsShowCrossHatchingInside` and `DecanterLabelsShowCrossHatchingInside`.
+Their presence is controlled by `NeckTagsShowCrossHatchingInside`, `DecanterLabelsShowCrossHatchingInside`, and `BottleWrapShowCrossHatchingInside`.
 
 Extracts of code that made the image:
 ```PostScript
