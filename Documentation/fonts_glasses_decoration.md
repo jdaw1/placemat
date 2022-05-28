@@ -140,7 +140,7 @@ In parts of this documentation such parameters are headed &ldquo;superfluous&rdq
 ### Superfluous
 
 The number of straight lines is `CrossHatchingNumRadialLines`, defaulting to 180 so 2&deg; apart. 
-The radii are chosen such that each cell has area `CrossHatchingCellArea`, defaulting to &asymp;491&nbsp;pt&sup2; &asymp; (7.8mm)&sup2;.
+The radii are chosen such that each cell has area `CrossHatchingCellArea`, defaulting to &asymp;491.45&nbsp;pt&sup2; &asymp; (7.8mm)&sup2; &asymp; (0.3&Prime;)&sup2;.
 
 `CrossHatchingOutsideToPaperEdge` is a Boolean affecting the &lsquo;Outside&rsquo; lines: to paper edge, or to the internal margin? 
 
