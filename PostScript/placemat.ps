@@ -1,6 +1,6 @@
 %!PS
 
-% This version 18:15 Saturday 4th June 2022
+% This version 20:00 Wednesday 8th June 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202206041815) def
+/ParametersVersionDateTimeAdobeFormat (D:202206082000) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -781,7 +781,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202206041815) def
+/SoftwareVersionDateTimeAdobeFormat (D:202206082000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -7238,8 +7238,8 @@ currentdict /GlyphShowKnownAbsences undef
 												ClusterCheck load i get j get k get type /integertype eq
 												{
 													ClusterCheck load i get j get k get dup
-													dup 0        lt {mark (Error: ) ClusterCheck ( ) i ( get ) j ( get ) k ( get  = ) counttomark 2 add -1 roll ( is negative.)                     ConcatenateToMark OutputToLog /ErrorFlag //true store} {pop} ifelse
-													dup ValueMax gt {mark (Error: ) ClusterCheck ( ) i ( get ) j ( get ) k ( get  = ) counttomark 2 add -1 roll ( exceeds ) Titles length 1 sub (.) ConcatenateToMark OutputToLog /ErrorFlag //true store} {pop} ifelse
+													dup 0      lt {mark (Warning: ) ClusterCheck ( ) i ( get ) j ( get ) k ( get  = ) counttomark 2 add -1 roll ( is negative; will be blank.) ConcatenateToMark OutputToLog} {pop} ifelse
+													dup ValueMax gt {mark (Error: ) ClusterCheck ( ) i ( get ) j ( get ) k ( get  = ) counttomark 2 add -1 roll ( exceeds ) Titles length 1 sub (.)    ConcatenateToMark OutputToLog /ErrorFlag //true store} {pop} ifelse
 												} {mark (Error: ) ClusterCheck ( ) i ( get ) j ( get ) k ( get  should be an integer, but isn't.) ConcatenateToMark OutputToLog /ErrorFlag //true store} ifelse  % ... type /integertype
 											} if  % ClusterCheck load i get j get k get dup xcheck not
 										} for  % k
@@ -10915,14 +10915,17 @@ currentdict /GlyphShowKnownAbsences undef
 						/WithinCluster exch def
 						/ThisRowTotalRow  VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU  WithinPage VoteRecorderThisSheetLength 1 sub eq  and  def
 						/WithinTitles ThisRowTotalRow {//null} {VoteRecorderThisSheet ClusterNum GetEU WithinCluster GetEU} ifelse def
-						/ThisVoteRecorderTitle ThisRowTotalRow {()} {TitlesVoteRecorder WithinTitles get} ifelse  def
-						/ThisVoteRecorderSubtitle ThisRowTotalRow {()} {SubtitlesVoteRecorder WithinTitles get} ifelse  def
-						TitlesFont VoteRecorderTitlesFontSize selectfont
-						VoteRecorderTitleWidths  WithinPage  /ThisVoteRecorderTitle load StringPathBBox pop exch pop exch sub
-						/VoteRecorderTitleWidthsMax dup load 2 index lt {1 index store} {pop} ifelse   put
-						SubtitlesFont  VoteRecorderTitlesFontSize  selectfont
-						VoteRecorderSubtitleWidths  WithinPage  /ThisVoteRecorderSubtitle load StringPathBBox pop exch pop exch sub
-						/VoteRecorderSubtitleWidthsMax dup load 2 index lt {1 index store} {pop} ifelse   put
+						WithinTitles 0 ge
+						{
+							/ThisVoteRecorderTitle ThisRowTotalRow {()} {TitlesVoteRecorder WithinTitles get} ifelse  def
+							/ThisVoteRecorderSubtitle ThisRowTotalRow {()} {SubtitlesVoteRecorder WithinTitles get} ifelse  def
+							TitlesFont VoteRecorderTitlesFontSize selectfont
+							VoteRecorderTitleWidths  WithinPage  /ThisVoteRecorderTitle load StringPathBBox pop exch pop exch sub
+							/VoteRecorderTitleWidthsMax dup load 2 index lt {1 index store} {pop} ifelse   put
+							SubtitlesFont  VoteRecorderTitlesFontSize  selectfont
+							VoteRecorderSubtitleWidths  WithinPage  /ThisVoteRecorderSubtitle load StringPathBBox pop exch pop exch sub
+							/VoteRecorderSubtitleWidthsMax dup load 2 index lt {1 index store} {pop} ifelse   put
+						} if  % WithinTitles 0 ge
 						/WithinPage WithinPage 1 add def
 					} for  % WithinCluster, WithinTitles
 				} for  % ClusterNum
@@ -10936,25 +10939,31 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						/WithinCluster exch def
 						/WithinTitles VoteRecorderThisSheet ClusterNum GetEU WithinCluster GetEU def
-						VoteRecorderSubtitleWidths  WithinPage  2 copy get
-						VoteRecorderSubtitleFontSizeProportionTitles dup IsNumber not
+						WithinTitles 0 ge
 						{
-							pop VoteRecorderTitleWidthsMax VoteRecorderSubtitleWidthsMax dup 0 gt {div} {pop pop 0.5} ifelse
-							0.5  2 copy gt {exch} if pop  % embedded constant
-							5  VoteRecorderTitlesFontSize div  2 copy lt {exch} if pop  % embedded constant
-							//Epsilon  2 copy lt {exch} if pop   //SqrtHalf  2 copy gt {exch} if pop  % embedded constant
-							VoteRecorderProportionToBeLogged  VoteRecorderSubtitleWidthsMax 0 gt  and
+							VoteRecorderSubtitleWidths  WithinPage  2 copy get
+							VoteRecorderSubtitleFontSizeProportionTitles dup IsNumber not
 							{
-								dup mark exch (VoteRecorderSheetNum=) exch VoteRecorderSheetNum exch (: VoteRecorderSubtitleFontSizeProportionTitles at least once replaced with ) exch
-								(, a font size of ) 1 index VoteRecorderTitlesFontSize mul (pt.) ConcatenateToMark OutputToLog
-								/VoteRecorderProportionToBeLogged //false store
-							} if  % VoteRecorderProportionToBeLogged  VoteRecorderSubtitleWidthsMax 0 gt  and
-							dup VoteRecorderSubtitleFSPT exch WithinPage exch put
-						} if  % VoteRecorderSubtitleFontSizeProportionTitles dup IsNumber not
-						mul put
+								pop VoteRecorderTitleWidthsMax VoteRecorderSubtitleWidthsMax dup 0 gt {div} {pop pop 0.5} ifelse
+								0.5  2 copy gt {exch} if pop  % embedded constant
+								5  VoteRecorderTitlesFontSize div  2 copy lt {exch} if pop  % embedded constant
+								//Epsilon  2 copy lt {exch} if pop   //SqrtHalf  2 copy gt {exch} if pop  % embedded constant
+								VoteRecorderProportionToBeLogged  VoteRecorderSubtitleWidthsMax 0 gt  and
+								{
+									dup mark exch (VoteRecorderSheetNum=) exch VoteRecorderSheetNum exch (: VoteRecorderSubtitleFontSizeProportionTitles at least once replaced with ) exch
+									(, a font size of ) 1 index VoteRecorderTitlesFontSize mul (pt.) ConcatenateToMark OutputToLog
+									/VoteRecorderProportionToBeLogged //false store
+								} if  % VoteRecorderProportionToBeLogged  VoteRecorderSubtitleWidthsMax 0 gt  and
+								dup VoteRecorderSubtitleFSPT exch WithinPage exch put
+							} if  % VoteRecorderSubtitleFontSizeProportionTitles dup IsNumber not
+							mul put
+						} if  % WithinTitles 0 ge
 						/WithinPage WithinPage 1 add def
 					} for  % WithinCluster, WithinTitles
-					/VoteRecorderSubtitleWidthsMax dup load  0 1 VoteRecorderThisSheet ClusterNum GetEU length 1 sub {dup VoteRecorderSubtitleFSPT exch GetEU exch VoteRecorderSubtitleWidths exch get mul 2 copy lt {exch} if pop} for  store
+					/VoteRecorderSubtitleWidthsMax dup load  0 1 VoteRecorderThisSheet ClusterNum GetEU length 1 sub
+					{
+						dup VoteRecorderSubtitleWidths exch get dup IsNumber {exch VoteRecorderSubtitleFSPT exch GetEU mul 2 copy lt {exch} if} {pop} ifelse pop
+					} for  store
 				} for  % ClusterNum
 				currentdict /WithinTitles undef
 				currentdict /WithinCluster undef
@@ -11066,105 +11075,108 @@ currentdict /GlyphShowKnownAbsences undef
 						/WithinCluster exch def
 						/ThisRowTotalRow  VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU  WithinPage VoteRecorderThisSheetLength 1 sub eq  and  def
 						/WithinTitles ThisRowTotalRow {//null} {VoteRecorderThisSheet ClusterNum GetEU WithinCluster GetEU} ifelse def
-						/ThisVoteRecorderTitle ThisRowTotalRow {/VoteRecorderTotalRowTitle load} {TitlesVoteRecorder WithinTitles get} ifelse  def
-						/ThisVoteRecorderSubtitle ThisRowTotalRow {()} {SubtitlesVoteRecorder WithinTitles get} ifelse  def
-
-						/CurrentTop  VoteRecorderRowHeight VoteRecorderThisSheetLength WithinPage sub mul  MgnB add  def
-
-						TitlesFont VoteRecorderTitlesFontSize selectfont
-						/ThisVoteRecorderTitle load  StringPathBBox  /VoteRecorderTitleT exch def  /VoteRecorderTitleR exch def  /VoteRecorderTitleB exch def  /VoteRecorderTitleL exch def
-
-						SubtitlesFont VoteRecorderTitlesFontSize VoteRecorderSubtitleFSPT WithinPage GetEU mul selectfont
-						/ThisVoteRecorderSubtitle load  StringPathBBox  /VoteRecorderSubtitleT exch def pop /VoteRecorderSubtitleB exch def pop
-
-						/VoteRecorderTitleSubtitleGap  VoteRecorderTitleT VoteRecorderTitleB sub  VoteRecorderSubtitleT VoteRecorderSubtitleB sub  2 copy gt {exch} if pop  0.25 mul  def  % embedded constant 0.25
-
-						ThisRowTotalRow
+						WithinTitles //null eq {//true} {WithinTitles 0 ge} ifelse
 						{
-							0.75 setgray   MgnL  CurrentTop  PageWidth MgnL MgnR add sub  VoteRecorderWideLineWidth neg  rectfill   0 setgray
+							/ThisVoteRecorderTitle ThisRowTotalRow {/VoteRecorderTotalRowTitle load} {TitlesVoteRecorder WithinTitles get} ifelse  def
+							/ThisVoteRecorderSubtitle ThisRowTotalRow {()} {SubtitlesVoteRecorder WithinTitles get} ifelse  def
+
+							/CurrentTop  VoteRecorderRowHeight VoteRecorderThisSheetLength WithinPage sub mul  MgnB add  def
+
 							TitlesFont VoteRecorderTitlesFontSize selectfont
-							VoteRecorderTitleT VoteRecorderTitleB sub //PrinterEpsilon gt  VoteRecorderTitleR VoteRecorderTitleL sub //PrinterEpsilon gt  and
-							{
-								% http://www.theportforum.com/viewtopic.php?t=175&start=852
-								matrix currentmatrix
-								% Size factor if rotated
-								VoteRecorderWidthColFirst VoteRecorderWideLineWidth 2 div sub  VoteRecorderTitleT VoteRecorderTitleB sub div
-								VoteRecorderRowHeight VoteRecorderWideLineWidth sub  VoteRecorderTitleR VoteRecorderTitleL sub div
-								1  2 {2 copy gt {exch} if pop} repeat
-								% Size factor if not rotated
-								VoteRecorderWidthColFirst VoteRecorderWideLineWidth 2 div sub  VoteRecorderTitleR VoteRecorderTitleL sub  div
-								VoteRecorderRowHeight VoteRecorderWideLineWidth sub  VoteRecorderTitleT VoteRecorderTitleB sub  div
-								1  2 {2 copy gt {exch} if pop} repeat
-								2 copy gt
-								{
-									MgnL  VoteRecorderRowHeight VoteRecorderThisSheetLength WithinPage sub 1 sub mul  MgnB add   translate
-									pop   90 rotate  dup 1 ne {dup scale} {pop} ifelse
-									VoteRecorderTitleL neg VoteRecorderTitleT neg moveto
-								}{
-									MgnL  CurrentTop VoteRecorderRowHeight sub VoteRecorderTitleB sub VoteRecorderRowHeight 32 div add moveto
-									dup 1 ne {1 scale} {pop} ifelse  pop
-								} ifelse  % rotate
-								/ThisVoteRecorderTitle load  ShowRecursive    setmatrix
-							} if  % Non-zero size
-						}{
-							MgnL CurrentTop moveto
-							CirclearraysVoteRecorder WithinTitles get  {0 setgray CircletextFont VoteRecorderCircletextFontSize selectfont}  CircletextsMinNumSpacesBetween //true  PageWidth MgnL MgnR add sub  WithinCluster 0 eq  -1  CirclearrayInStraightLine
-							/CirclearraysVoteRecorderT exch def  /CirclearraysVoteRecorderB exch def  pop pop
-							/CurrentTop  CurrentTop CirclearraysVoteRecorderT CirclearraysVoteRecorderB sub sub  def
-
-							1 dict begin  /AnnotationCount 0 def
-							0  2  GlassesAnnotations length 2 sub  dup 0 ge {//false PageSuppressed {pop -1} if} if
-							{
-								dup GlassesAnnotations exch GetEU WithinTitles eq
-								{
-									mark exch
-										1 add GlassesAnnotations exch GetEU PDFDocEncodingify /Contents exch
-										/Title [Titles WithinTitles get (: annotation)] PDFDocEncodingify
-										/Rect [ MgnL VoteRecorderWidthColFirst add 8 AnnotationCount sub 8 div mul  PageWidth MgnR sub AnnotationCount 8 div mul  add   CurrentTop   2 copy ]
-										/Subtype /Text   /Open //true   /F 64 128 add  % ReadOnly + Locked. PDFReference16.pdf page 574
-									/ANN pdfmark
-									/AnnotationCount AnnotationCount 1 add store   AnnotationCount 9 ge {exit} if
-								} {pop} ifelse  % ... WithinTitles eq
-							} for   end  % 'GlassesAnnotations'
-
-							newpath  1 setlinecap  1 setlinejoin  [] 0 setdash
-							/VoteRecorderCrossLineWidth
-								2.88    VoteRecorderColWidth 12 div
-								VoteRecorderRowHeight CirclearraysVoteRecorderT CirclearraysVoteRecorderB sub sub 12 div
-								2 {2 copy gt {exch} if pop} repeat
-							def % VoteRecorderCrossLineWidth
-							0  1  VoteRecorderNumNames 1 sub  % Different upper bound
-							{
-								/NameNum exch def  % Different variable
-								/ThisName VoteRecorderNames NameNum get def
-								VoteRecorderCrossedBox
-								{
-									/x   PageWidth MgnL MgnR add sub VoteRecorderWidthColFirst sub  NameNum 0.5 add mul  VoteRecorderNumNames div   MgnL add  VoteRecorderWidthColFirst add   def
-									x VoteRecorderColWidth 2 div sub VoteRecorderCrossLineWidth 2 mul add  CurrentTop VoteRecorderCrossLineWidth 2 mul sub  2 copy moveto
-									x VoteRecorderColWidth 2 div add VoteRecorderCrossLineWidth 2 mul sub  CurrentTop VoteRecorderRowHeight CirclearraysVoteRecorderT CirclearraysVoteRecorderB sub sub sub VoteRecorderCrossLineWidth 2 mul add  2 copy lineto
-									3 1 roll exch moveto lineto
-									0 setgray VoteRecorderCrossLineWidth dup setlinewidth 2.16 ge {GSave stroke GRestore 1 setgray VoteRecorderCrossLineWidth 3 div setlinewidth stroke} {stroke} ifelse
-								} if  % VoteRecorderCrossedBox
-							} for  % NameNum
-							currentdict /NameNum undef  currentdict /ThisName undef
-
-							/CurrentTop CurrentTop TastingNotesLineGap sub def
-
-							0 setgray  TitlesFont VoteRecorderTitlesFontSize selectfont
-							MgnL  CurrentTop  VoteRecorderTitleT sub  VoteRecorderRowHeight 32 div sub
-							moveto  VoteRecorderWidthColFirst VoteRecorderTitleWidths WithinPage get 2 copy lt
-								{div  matrix currentmatrix  exch 1 scale  /ThisVoteRecorderTitle load  ShowRecursive  setmatrix}
-								{pop pop  /ThisVoteRecorderTitle load  ShowRecursive}
-							ifelse
-							/CurrentTop  CurrentTop  VoteRecorderTitleT VoteRecorderTitleB sub sub  VoteRecorderRowHeight 32 div sub  def
+							/ThisVoteRecorderTitle load  StringPathBBox  /VoteRecorderTitleT exch def  /VoteRecorderTitleR exch def  /VoteRecorderTitleB exch def  /VoteRecorderTitleL exch def
 
 							SubtitlesFont VoteRecorderTitlesFontSize VoteRecorderSubtitleFSPT WithinPage GetEU mul selectfont
-							MgnL  CurrentTop  VoteRecorderTitleSubtitleGap sub VoteRecorderSubtitleT sub
-							moveto  VoteRecorderWidthColFirst VoteRecorderSubtitleWidths WithinPage get 2 copy lt
-								{div  matrix currentmatrix  exch 1 scale  /ThisVoteRecorderSubtitle load  ShowRecursive  setmatrix}
-								{pop pop  /ThisVoteRecorderSubtitle load  ShowRecursive}
-							ifelse
-						} ifelse  % ThisRowTotalRow
+							/ThisVoteRecorderSubtitle load  StringPathBBox  /VoteRecorderSubtitleT exch def pop /VoteRecorderSubtitleB exch def pop
+
+							/VoteRecorderTitleSubtitleGap  VoteRecorderTitleT VoteRecorderTitleB sub  VoteRecorderSubtitleT VoteRecorderSubtitleB sub  2 copy gt {exch} if pop  0.25 mul  def  % embedded constant 0.25
+
+							ThisRowTotalRow
+							{
+								0.75 setgray   MgnL  CurrentTop  PageWidth MgnL MgnR add sub  VoteRecorderWideLineWidth neg  rectfill   0 setgray
+								TitlesFont VoteRecorderTitlesFontSize selectfont
+								VoteRecorderTitleT VoteRecorderTitleB sub //PrinterEpsilon gt  VoteRecorderTitleR VoteRecorderTitleL sub //PrinterEpsilon gt  and
+								{
+									% http://www.theportforum.com/viewtopic.php?t=175&start=852
+									matrix currentmatrix
+									% Size factor if rotated
+									VoteRecorderWidthColFirst VoteRecorderWideLineWidth 2 div sub  VoteRecorderTitleT VoteRecorderTitleB sub div
+									VoteRecorderRowHeight VoteRecorderWideLineWidth sub  VoteRecorderTitleR VoteRecorderTitleL sub div
+									1  2 {2 copy gt {exch} if pop} repeat
+									% Size factor if not rotated
+									VoteRecorderWidthColFirst VoteRecorderWideLineWidth 2 div sub  VoteRecorderTitleR VoteRecorderTitleL sub  div
+									VoteRecorderRowHeight VoteRecorderWideLineWidth sub  VoteRecorderTitleT VoteRecorderTitleB sub  div
+									1  2 {2 copy gt {exch} if pop} repeat
+									2 copy gt
+									{
+										MgnL  VoteRecorderRowHeight VoteRecorderThisSheetLength WithinPage sub 1 sub mul  MgnB add   translate
+										pop   90 rotate  dup 1 ne {dup scale} {pop} ifelse
+										VoteRecorderTitleL neg VoteRecorderTitleT neg moveto
+									}{
+										MgnL  CurrentTop VoteRecorderRowHeight sub VoteRecorderTitleB sub VoteRecorderRowHeight 32 div add moveto
+										dup 1 ne {1 scale} {pop} ifelse  pop
+									} ifelse  % rotate
+									/ThisVoteRecorderTitle load  ShowRecursive    setmatrix
+								} if  % Non-zero size
+							}{
+								MgnL CurrentTop moveto
+								CirclearraysVoteRecorder WithinTitles get  {0 setgray CircletextFont VoteRecorderCircletextFontSize selectfont}  CircletextsMinNumSpacesBetween //true  PageWidth MgnL MgnR add sub  WithinCluster 0 eq  -1  CirclearrayInStraightLine
+								/CirclearraysVoteRecorderT exch def  /CirclearraysVoteRecorderB exch def  pop pop
+								/CurrentTop  CurrentTop CirclearraysVoteRecorderT CirclearraysVoteRecorderB sub sub  def
+
+								1 dict begin  /AnnotationCount 0 def
+								0  2  GlassesAnnotations length 2 sub  dup 0 ge {//false PageSuppressed {pop -1} if} if
+								{
+									dup GlassesAnnotations exch GetEU WithinTitles eq
+									{
+										mark exch
+											1 add GlassesAnnotations exch GetEU PDFDocEncodingify /Contents exch
+											/Title [Titles WithinTitles get (: annotation)] PDFDocEncodingify
+											/Rect [ MgnL VoteRecorderWidthColFirst add 8 AnnotationCount sub 8 div mul  PageWidth MgnR sub AnnotationCount 8 div mul  add   CurrentTop   2 copy ]
+											/Subtype /Text   /Open //true   /F 64 128 add  % ReadOnly + Locked. PDFReference16.pdf page 574
+										/ANN pdfmark
+										/AnnotationCount AnnotationCount 1 add store   AnnotationCount 9 ge {exit} if
+									} {pop} ifelse  % ... WithinTitles eq
+								} for   end  % 'GlassesAnnotations'
+
+								newpath  1 setlinecap  1 setlinejoin  [] 0 setdash
+								/VoteRecorderCrossLineWidth
+									2.88    VoteRecorderColWidth 12 div
+									VoteRecorderRowHeight CirclearraysVoteRecorderT CirclearraysVoteRecorderB sub sub 12 div
+									2 {2 copy gt {exch} if pop} repeat
+								def % VoteRecorderCrossLineWidth
+								0  1  VoteRecorderNumNames 1 sub  % Different upper bound
+								{
+									/NameNum exch def  % Different variable
+									/ThisName VoteRecorderNames NameNum get def
+									VoteRecorderCrossedBox
+									{
+										/x   PageWidth MgnL MgnR add sub VoteRecorderWidthColFirst sub  NameNum 0.5 add mul  VoteRecorderNumNames div   MgnL add  VoteRecorderWidthColFirst add   def
+										x VoteRecorderColWidth 2 div sub VoteRecorderCrossLineWidth 2 mul add  CurrentTop VoteRecorderCrossLineWidth 2 mul sub  2 copy moveto
+										x VoteRecorderColWidth 2 div add VoteRecorderCrossLineWidth 2 mul sub  CurrentTop VoteRecorderRowHeight CirclearraysVoteRecorderT CirclearraysVoteRecorderB sub sub sub VoteRecorderCrossLineWidth 2 mul add  2 copy lineto
+										3 1 roll exch moveto lineto
+										0 setgray VoteRecorderCrossLineWidth dup setlinewidth 2.16 ge {GSave stroke GRestore 1 setgray VoteRecorderCrossLineWidth 3 div setlinewidth stroke} {stroke} ifelse
+									} if  % VoteRecorderCrossedBox
+								} for  % NameNum
+								currentdict /NameNum undef  currentdict /ThisName undef
+
+								/CurrentTop CurrentTop TastingNotesLineGap sub def
+
+								0 setgray  TitlesFont VoteRecorderTitlesFontSize selectfont
+								MgnL  CurrentTop  VoteRecorderTitleT sub  VoteRecorderRowHeight 32 div sub
+								moveto  VoteRecorderWidthColFirst VoteRecorderTitleWidths WithinPage get 2 copy lt
+									{div  matrix currentmatrix  exch 1 scale  /ThisVoteRecorderTitle load  ShowRecursive  setmatrix}
+									{pop pop  /ThisVoteRecorderTitle load  ShowRecursive}
+								ifelse
+								/CurrentTop  CurrentTop  VoteRecorderTitleT VoteRecorderTitleB sub sub  VoteRecorderRowHeight 32 div sub  def
+
+								SubtitlesFont VoteRecorderTitlesFontSize VoteRecorderSubtitleFSPT WithinPage GetEU mul selectfont
+								MgnL  CurrentTop  VoteRecorderTitleSubtitleGap sub VoteRecorderSubtitleT sub
+								moveto  VoteRecorderWidthColFirst VoteRecorderSubtitleWidths WithinPage get 2 copy lt
+									{div  matrix currentmatrix  exch 1 scale  /ThisVoteRecorderSubtitle load  ShowRecursive  setmatrix}
+									{pop pop  /ThisVoteRecorderSubtitle load  ShowRecursive}
+								ifelse
+							} ifelse  % ThisRowTotalRow
+						} if  % WithinTitles //null eq {//true} {WithinTitles 0 ge} ifelse
 
 						/WithinPage WithinPage 1 add def
 					} for  % WithinCluster, WithinTitles
@@ -11300,12 +11312,15 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						/WithinCluster exch def
 						/WithinTitles DecantingNotesThisSheet ClusterNum GetEU WithinCluster GetEU def
-						TitlesFont DecantingNotesTitlesFontSize selectfont
-						DecantingNotesTitleWidths  WithinPage  TitlesDecantingNotes WithinTitles get StringPathBBox pop exch pop exch sub
-						/DecantingNotesTitleWidthsMax dup load 2 index lt {1 index store} {pop} ifelse   put
-						SubtitlesFont  DecantingNotesTitlesFontSize selectfont
-						DecantingNotesSubtitleWidths  WithinPage  SubtitlesDecantingNotes WithinTitles get StringPathBBox pop exch pop exch sub
-						/DecantingNotesSubtitleWidthsMax dup load 2 index lt {1 index store} {pop} ifelse   put
+						WithinTitles 0 ge
+						{
+							TitlesFont DecantingNotesTitlesFontSize selectfont
+							DecantingNotesTitleWidths  WithinPage  TitlesDecantingNotes WithinTitles get StringPathBBox pop exch pop exch sub
+							/DecantingNotesTitleWidthsMax dup load 2 index lt {1 index store} {pop} ifelse   put
+							SubtitlesFont  DecantingNotesTitlesFontSize selectfont
+							DecantingNotesSubtitleWidths  WithinPage  SubtitlesDecantingNotes WithinTitles get StringPathBBox pop exch pop exch sub
+							/DecantingNotesSubtitleWidthsMax dup load 2 index lt {1 index store} {pop} ifelse   put
+						} if  % WithinTitles 0 ge
 						/WithinPage WithinPage 1 add def
 					} for  % WithinCluster, WithinTitles
 				} for  % ClusterNum
@@ -11319,26 +11334,32 @@ currentdict /GlyphShowKnownAbsences undef
 						/WithinCluster exch def
 						/WithinTitles DecantingNotesThisSheet ClusterNum GetEU WithinCluster GetEU def
 
-						DecantingNotesSubtitleWidths  WithinPage  2 copy get
-						DecantingNotesSubtitleFontSizeProportionTitles dup IsNumber not
+						WithinTitles 0 ge
 						{
-							pop DecantingNotesTitleWidthsMax DecantingNotesSubtitleWidthsMax dup 0 gt {div} {pop pop 0.5} ifelse
-							0.5  2 copy gt {exch} if pop  % embedded constant
-							5  DecantingNotesTitlesFontSize div  2 copy lt {exch} if pop  % embedded constant
-							//SqrtHalf  2 copy gt {exch} if pop  % embedded constant
-							DecantingNotesProportionToBeLogged  DecantingNotesSubtitleWidthsMax 0 gt  and
+							DecantingNotesSubtitleWidths  WithinPage  2 copy get
+							DecantingNotesSubtitleFontSizeProportionTitles dup IsNumber not
 							{
-								dup mark exch (DecantingNotesSheetNum=) exch DecantingNotesSheetNum exch (: DecantingNotesSubtitleFontSizeProportionTitles at least once replaced with ) exch
-								(, a font size of ) 1 index DecantingNotesTitlesFontSize mul (pt.) ConcatenateToMark OutputToLog
-								/DecantingNotesProportionToBeLogged //false store
-							} if  % DecantingNotesProportionToBeLogged  DecantingNotesSubtitleWidthsMax 0 gt  and
-							dup DecantingNotesSubtitleFSPT exch WithinPage exch put
-						} if  % DecantingNotesSubtitleFontSizeProportionTitles dup IsNumber not
-						mul put
+								pop DecantingNotesTitleWidthsMax DecantingNotesSubtitleWidthsMax dup 0 gt {div} {pop pop 0.5} ifelse
+								0.5  2 copy gt {exch} if pop  % embedded constant
+								5  DecantingNotesTitlesFontSize div  2 copy lt {exch} if pop  % embedded constant
+								//SqrtHalf  2 copy gt {exch} if pop  % embedded constant
+								DecantingNotesProportionToBeLogged  DecantingNotesSubtitleWidthsMax 0 gt  and
+								{
+									dup mark exch (DecantingNotesSheetNum=) exch DecantingNotesSheetNum exch (: DecantingNotesSubtitleFontSizeProportionTitles at least once replaced with ) exch
+									(, a font size of ) 1 index DecantingNotesTitlesFontSize mul (pt.) ConcatenateToMark OutputToLog
+									/DecantingNotesProportionToBeLogged //false store
+								} if  % DecantingNotesProportionToBeLogged  DecantingNotesSubtitleWidthsMax 0 gt  and
+								dup DecantingNotesSubtitleFSPT exch WithinPage exch put
+							} if  % DecantingNotesSubtitleFontSizeProportionTitles dup IsNumber not
+							mul put
+						} if  % WithinTitles 0 ge
 						/WithinPage WithinPage 1 add def
 					} for  % WithinCluster, WithinTitles
 				} for  % ClusterNum
-				/DecantingNotesSubtitleWidthsMax 0  0 1 DecantingNotesThisSheetLength 1 sub {dup DecantingNotesSubtitleFSPT exch get exch DecantingNotesSubtitleWidths exch get mul 2 copy lt {exch} if pop} for  store
+				/DecantingNotesSubtitleWidthsMax 0  0 1 DecantingNotesThisSheetLength 1 sub
+				{
+					dup DecantingNotesSubtitleWidths exch get dup IsNumber {exch DecantingNotesSubtitleFSPT exch get mul 2 copy lt {exch} if} {pop} ifelse pop
+				} for  store
 				currentdict /WithinTitles undef
 				currentdict /WithinCluster undef
 				currentdict /ClusterNum undef
@@ -11400,50 +11421,52 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						/WithinCluster exch def
 						/WithinTitles DecantingNotesThisSheet ClusterNum GetEU WithinCluster GetEU def
-						/CurrentTop  DecantingNotesRowHeight DecantingNotesThisSheetLength WithinPage sub mul  MgnB add  def
-
-						MgnL CurrentTop moveto
-						CirclearraysDecantingNotes WithinTitles get  {0 setgray CircletextFont DecantingNotesCircletextFontSize selectfont}  CircletextsMinNumSpacesBetween //true  PageWidth MgnL MgnR add sub  WithinCluster 0 eq  -1  CirclearrayInStraightLine
-						sub 2 div CurrentTop add /CurrentTop exch def pop pop
-
-						1 dict begin   /AnnotationCount 0 def
-						0  2  GlassesAnnotations length 2 sub  dup 0 ge {//false PageSuppressed {pop -1} if} if
+						WithinTitles 0 ge
 						{
-							dup GlassesAnnotations exch GetEU WithinTitles eq
+							/CurrentTop  DecantingNotesRowHeight DecantingNotesThisSheetLength WithinPage sub mul  MgnB add  def
+
+							MgnL CurrentTop moveto
+							CirclearraysDecantingNotes WithinTitles get  {0 setgray CircletextFont DecantingNotesCircletextFontSize selectfont}  CircletextsMinNumSpacesBetween //true  PageWidth MgnL MgnR add sub  WithinCluster 0 eq  -1  CirclearrayInStraightLine
+							sub 2 div CurrentTop add /CurrentTop exch def pop pop
+
+							1 dict begin   /AnnotationCount 0 def
+							0  2  GlassesAnnotations length 2 sub  dup 0 ge {//false PageSuppressed {pop -1} if} if
 							{
-								mark exch
-									1 add GlassesAnnotations exch GetEU PDFDocEncodingify /Contents exch
-									/Title [Titles WithinTitles get (: annotation)] PDFDocEncodingify
-									/Rect [ MgnL DecantingNotesWidthColFirst add 8 AnnotationCount sub 8 div mul  PageWidth MgnR sub AnnotationCount 8 div mul  add   CurrentTop   2 copy ]
-									/Subtype /Text   /Open //true   /F 64 128 add  % ReadOnly + Locked. PDFReference16.pdf page 574
-								/ANN pdfmark
-								/AnnotationCount AnnotationCount 1 add store   AnnotationCount 9 ge {exit} if
-							} {pop} ifelse  % ... WithinTitles eq
-						} for  end  % 'GlassesAnnotations'
+								dup GlassesAnnotations exch GetEU WithinTitles eq
+								{
+									mark exch
+										1 add GlassesAnnotations exch GetEU PDFDocEncodingify /Contents exch
+										/Title [Titles WithinTitles get (: annotation)] PDFDocEncodingify
+										/Rect [ MgnL DecantingNotesWidthColFirst add 8 AnnotationCount sub 8 div mul  PageWidth MgnR sub AnnotationCount 8 div mul  add   CurrentTop   2 copy ]
+										/Subtype /Text   /Open //true   /F 64 128 add  % ReadOnly + Locked. PDFReference16.pdf page 574
+									/ANN pdfmark
+									/AnnotationCount AnnotationCount 1 add store   AnnotationCount 9 ge {exit} if
+								} {pop} ifelse  % ... WithinTitles eq
+							} for  end  % 'GlassesAnnotations'
 
-						TitlesFont DecantingNotesTitlesFontSize selectfont
-						TitlesDecantingNotes WithinTitles get  StringPathBBox  /DecantingNotesTitleT exch def pop /DecantingNotesTitleB exch def pop
+							TitlesFont DecantingNotesTitlesFontSize selectfont
+							TitlesDecantingNotes WithinTitles get  StringPathBBox  /DecantingNotesTitleT exch def pop /DecantingNotesTitleB exch def pop
 
-						SubtitlesFont DecantingNotesTitlesFontSize DecantingNotesSubtitleFSPT WithinPage get mul selectfont
-						SubtitlesDecantingNotes WithinTitles get  StringPathBBox  /DecantingNotesSubtitleT exch def pop /DecantingNotesSubtitleB exch def pop
+							SubtitlesFont DecantingNotesTitlesFontSize DecantingNotesSubtitleFSPT WithinPage get mul selectfont
+							SubtitlesDecantingNotes WithinTitles get  StringPathBBox  /DecantingNotesSubtitleT exch def pop /DecantingNotesSubtitleB exch def pop
 
-						/DecantingNotesTitleSubtitleGap  DecantingNotesTitleT DecantingNotesTitleB sub  DecantingNotesSubtitleT DecantingNotesSubtitleB sub  2 copy gt {exch} if pop  0.25 mul  def  % embedded constant 0.25
+							/DecantingNotesTitleSubtitleGap  DecantingNotesTitleT DecantingNotesTitleB sub  DecantingNotesSubtitleT DecantingNotesSubtitleB sub  2 copy gt {exch} if pop  0.25 mul  def  % embedded constant 0.25
 
-						MgnL  CurrentTop DecantingNotesRowHeight 2 div sub  2 copy
-						DecantingNotesSubtitleT DecantingNotesSubtitleB sub  DecantingNotesTitleT DecantingNotesTitleB add  sub DecantingNotesTitleSubtitleGap add 2 div add
-						TitlesFont DecantingNotesTitlesFontSize selectfont
-						moveto  DecantingNotesWidthColFirst DecantingNotesTitleWidths WithinPage get 2 copy lt
-							{div  matrix currentmatrix  exch 1 scale  TitlesDecantingNotes WithinTitles get  ShowRecursive  setmatrix}
-							{pop pop  TitlesDecantingNotes WithinTitles get  ShowRecursive}
-						ifelse
+							MgnL  CurrentTop DecantingNotesRowHeight 2 div sub  2 copy
+							DecantingNotesSubtitleT DecantingNotesSubtitleB sub  DecantingNotesTitleT DecantingNotesTitleB add  sub DecantingNotesTitleSubtitleGap add 2 div add
+							TitlesFont DecantingNotesTitlesFontSize selectfont
+							moveto  DecantingNotesWidthColFirst DecantingNotesTitleWidths WithinPage get 2 copy lt
+								{div  matrix currentmatrix  exch 1 scale  TitlesDecantingNotes WithinTitles get  ShowRecursive  setmatrix}
+								{pop pop  TitlesDecantingNotes WithinTitles get  ShowRecursive}
+							ifelse
 
-						DecantingNotesSubtitleT DecantingNotesSubtitleB add  DecantingNotesTitleT DecantingNotesTitleB sub  add DecantingNotesTitleSubtitleGap add 2 div sub
-						SubtitlesFont DecantingNotesTitlesFontSize DecantingNotesSubtitleFSPT WithinPage get mul selectfont
-						moveto  DecantingNotesWidthColFirst DecantingNotesSubtitleWidths WithinPage get 2 copy lt
-							{div  matrix currentmatrix  exch 1 scale  SubtitlesDecantingNotes WithinTitles get  ShowRecursive  setmatrix}
-							{pop pop  SubtitlesDecantingNotes WithinTitles get  ShowRecursive}
-						ifelse
-
+							DecantingNotesSubtitleT DecantingNotesSubtitleB add  DecantingNotesTitleT DecantingNotesTitleB sub  add DecantingNotesTitleSubtitleGap add 2 div sub
+							SubtitlesFont DecantingNotesTitlesFontSize DecantingNotesSubtitleFSPT WithinPage get mul selectfont
+							moveto  DecantingNotesWidthColFirst DecantingNotesSubtitleWidths WithinPage get 2 copy lt
+								{div  matrix currentmatrix  exch 1 scale  SubtitlesDecantingNotes WithinTitles get  ShowRecursive  setmatrix}
+								{pop pop  SubtitlesDecantingNotes WithinTitles get  ShowRecursive}
+							ifelse
+						} if  % WithinTitles 0 ge
 						/WithinPage WithinPage 1 add def
 					} for  % WithinCluster, WithinTitles
 				} for  % ClusterNum
@@ -12940,7 +12963,7 @@ currentdict /GlyphShowKnownAbsences undef
 								/WithinTitles exch execU def
 								WithinTitles type /integertype eq {CorkDisplayNumCopies} {1} ifelse  % Should be redundant following change in code on 11 March 2018.
 								{
-									WithinTitles -1 eq  WithinPage 0 eq  or
+									WithinPage 0 eq
 									{
 										//false  //false  MirrorPagesCorkDisplay CorkDisplaySetNum GetEU  //true  CorkDisplayPaperType  CDBestOrientation  SetPaperSize
 										//true DefStoreMgns
@@ -12951,8 +12974,8 @@ currentdict /GlyphShowKnownAbsences undef
 											PageWidth MgnL MgnR sub CDTopTextL CDTopTextR add sub add 2 div  PageHeight MgnT CDTopTextT add sub  moveto
 											HeaderFont CDTopTextFontSize selectfont  0 setgray  CorkDisplayTopText ShowRecursive
 										} if  % CorkDisplayTopTextHeight 0 gt
-									} if  % WithinTitles -1 eq  WithinPage 0 eq  or
-									WithinTitles type /integertype eq {WithinTitles -1 ne} {//false} ifelse % First clause should be redundant following change in code on 11 March 2018.
+									} if  % WithinPage 0 eq
+									WithinTitles type /integertype eq {WithinTitles 0 ge} {//false} ifelse % First clause should be redundant following change in code on 11 March 2018.
 									{
 										/CDColNum WithinPage << /SheetNum 0 >> begin PackingNestingColumnMajor end {CDBestNumRows idiv} {CDBestNumCols mod } ifelse def
 										/CDRowNum WithinPage << /SheetNum 0 >> begin PackingNestingColumnMajor end {CDBestNumRows mod } {CDBestNumCols idiv} ifelse def
@@ -12997,10 +13020,10 @@ currentdict /GlyphShowKnownAbsences undef
 											CDLeft CDBottom moveto
 											CDLeft  CDBottom CDTitlesB sub moveto  TitlesCorkDisplay WithinTitles get  ShowRecursive
 										} if  % non-empty
-									} if  % WithinTitles type /integertype eq ... WithinTitles -1 ne ...
-									WithinTitles -1 ne {/CorkDisplayThisPageTitles dup load  dup length 0 gt {(; ) Concatenate} if  Titles WithinTitles get PDFDocEncodingify Concatenate  def} if  % Deliberately Titles rather than TitlesCorkDisplay
+									} if  % WithinTitles type /integertype eq ... WithinTitles 0 ge ...
+									WithinTitles 0 ge {/CorkDisplayThisPageTitles dup load  dup length 0 gt {(; ) Concatenate} if  Titles WithinTitles get PDFDocEncodingify Concatenate  def} if  % Deliberately Titles rather than TitlesCorkDisplay
 									/WithinPage WithinPage 1 add def
-									WithinTitles -1 ne {WithinPage CDBestNumRows CDBestNumCols mul ge} {//true} ifelse
+									WithinPage CDBestNumRows CDBestNumCols mul ge
 									{
 										//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 										ShowPage  /WithinPage 0 def  /CorkDisplayThisPageTitles () def
@@ -14282,7 +14305,7 @@ currentdict /GlyphShowKnownAbsences undef
 							{
 								/WithinCluster exch def
 								/WithinTitles GlassesClusteredOnDecantingNotes DecantingNotesSheetNum GetEU ClusterNum GetEU WithinCluster GetEU def
-								TitlesDecantingNotes WithinTitles get PDFDocEncodingify TrimSpaces  dup length 0 gt {(; )} if
+								WithinTitles 0 ge {TitlesDecantingNotes WithinTitles get PDFDocEncodingify TrimSpaces  dup length 0 gt {(; )} if} if
 							} for  % WithinCluster, WithinTitles
 						} for  % ClusterNum
 						end  pop ConcatenateToMark  dup length 0 le {pop (Decanting notes)} if  ( \(p) PageNum 1 add  (, ) PaperTypeStringShortPDF (\)) ConcatenateToMark TruncateTo255

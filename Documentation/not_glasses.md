@@ -272,7 +272,7 @@ The appearance of the monkey column is controlled by `VoteRecorderMonkeyWhenShow
 `GlassesClusteredOnVoteRecorders` is a triple-depth array, the same length as `VoteRecorderTopTexts` and `VoteRecorderShowTotalRow`, and can remain at its default value except for the largest tastings.
 The outermost array is one per vote-recorder page: voting on separate days, with different people or wines, or different total-column-row flags, should be recorded on separate sheets. 
 Within this are &lsquo;clusters&rsquo;, intended to align with tasting-note pages. 
-Within this are integers pointing to wines. 
+Within this are integers pointing to wines (except that a negative integer is blank, not shown). 
 The default value is empty if `GlassesOnTastingNotePages` is empty, otherwise `[GlassesOnTastingNotePages]`, so the cluster divisions (25% grey backgrounding) on the vote recorder are page divisions between the tasting-note pages.
 
 The most [complicated definition of `/GlassesClusteredOnVoteRecorders`](http://www.jdawiseman.com/papers/placemat/placemats_list.html#a20131011) has been:
