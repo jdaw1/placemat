@@ -87,7 +87,7 @@ Broadly, the `Titles` etc fit inside the `Circlearrays`.
 
 ### Superfluous
 
-If a circle has a non-empty element of `Abovetitles`, there should be space above the Title to hold that element. This is a constraint on the size of the `Titles`, which are chose such that there is at least `TitleMinHeightForAbovetitleProportionInnerRadius` inner radii above. 
+If a circle has a non-empty element of `Abovetitles`, there should be space above the Title to hold that element. This is a constraint on the size of the `Titles`, which are chosen such that the space above is at least `TitleMinHeightForAbovetitleProportionInnerRadius` inner radii. 
 Likewise, `Belowtitles`, below, `TitleMinHeightForBelowtitleProportionInnerRadius`. 
 If the `Titles` are to be as big as possible, these could be set to `0`.
 
