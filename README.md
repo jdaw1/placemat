@@ -24,6 +24,12 @@
 
 This PostScript program makes placemats for tastings of Port, of Madeira, whisky, beer, wine, etc.
 
+<div align="center">
+
+![Example placemat](Documentation/images/placemat_software_logo.png)
+
+</div>
+
 At such a tasting there will be many glasses, each person having one for each drink to taste. 
 It is important to avoid confusion about what is in each glass. 
 Hence labelling is needed, best done with beautiful printed pages on which glasses can sit. 
