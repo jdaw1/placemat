@@ -26,7 +26,7 @@ This PostScript program makes placemats for tastings of Port, of Madeira, whisky
 
 <div align="center">
 
-![Example placemat](Documentation/images/placemat_software_logo.png)
+![Placemat software example](Documentation/images/placemat_software_logo.png)
 
 </div>
 
@@ -43,7 +43,7 @@ And having done that, there might also be need for matching pages:
 * to assist with computing the split of the costs, allowing for bottles provided.
 
 This PostScript program creates all the paperwork useful for managing such tastings, large or small. 
-Lots of previous output is at [jdawiseman.com/papers/placemat/placemats_list.html](http://www.jdawiseman.com/papers/placemat/placemats_list.html) (but that page has &ge;&nbsp;20&nbsp;MB of PNGs, so WiFi rather than mobile data).
+Lots of previous output is at [jdawiseman.com/papers/placemat/placemats_list.html](http://www.jdawiseman.com/papers/placemat/placemats_list.html) (lots: that page has &ge;&nbsp;20&nbsp;MB of PNGs, so WiFi rather than mobile data).
 
 Code started November 2002 for the private use of J.&nbsp;D.&nbsp;A.&nbsp;Wiseman; 
 in September 2005 uploaded to [jdawiseman.com](http://www.jdawiseman.com/papers/placemat/placemat.html); 
