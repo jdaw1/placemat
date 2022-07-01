@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Wednesday 8th June 2022
+% This version 22:00 Friday 1st July 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202206082000) def
+/ParametersVersionDateTimeAdobeFormat (D:202207012200) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -781,7 +781,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202206082000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202207012200) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -8893,11 +8893,7 @@ currentdict /GlyphShowKnownAbsences undef
 		//DeBugLevel 50 le {(-FlightSeparationPath) OutputToLog} if
 	} bind def  % /FlightSeparationPath
 
-
-	% Paint the pages
-	0 setgray   1 setlinecap   1 setlinejoin   [] 0 setdash
-	PrologueCode
-	0 setgray   1 setlinecap   1 setlinejoin   [] 0 setdash
+	% Make forms
 
 	{BackgroundTextsGlasses PrePourShowBackgroundTexts BackgroundTextsTastingNotes or or} MightBeTrue
 	{
@@ -10016,6 +10012,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 				TitleFontSizes SheetNum get WithinPage get  0  gt
 				{
+					6 dict begin
 					TitleAboveBelowOverRandomSeeds WithinTitles get srand
 					/ColourSchemeCurrent ColourSchemeTitles def
 					/FillTextsCurrent FillTitles def
@@ -10109,11 +10106,13 @@ currentdict /GlyphShowKnownAbsences undef
 						InlineTitlesBlackWidth 2 mul setlinewidth TitlesAboveBelowOverInlineDarkStrokeCode GRestore
 					} if  % InlineTitles
 					newpath
+					end
 					TitleAboveBelowOverRandomSeeds WithinTitles get  rrand  ne {/NextRand rrand def} if
 				} if  % TitleFontSizes of non-zero size
 
 				OvertitleFontSizes SheetNum get WithinPage get  //PrinterEpsilon  gt
 				{
+					4 dict begin
 					TitleAboveBelowOverRandomSeeds WithinTitles get srand
 					/ColourSchemeCurrent ColourSchemeOvertitles def
 					/FillTextsCurrent FillOvertitles def
@@ -10200,11 +10199,13 @@ currentdict /GlyphShowKnownAbsences undef
 						InlineOvertitlesBlackWidth 2 mul setlinewidth TitlesAboveBelowOverInlineDarkStrokeCode GRestore
 					} if  % InlineOvertitles
 					newpath
+					end
 					TitleAboveBelowOverRandomSeeds WithinTitles get  rrand  ne {/NextRand rrand def} if
 				} if  % OvertitleFontSizes of non-zero size
 
 				BelowtitleFontSizes SheetNum get WithinPage get  //PrinterEpsilon  gt
 				{
+					4 dict begin
 					TitleAboveBelowOverRandomSeeds WithinTitles get srand
 					/ColourSchemeCurrent ColourSchemeBelowtitles def
 					/FillTextsCurrent FillBelowtitles def
@@ -10291,11 +10292,13 @@ currentdict /GlyphShowKnownAbsences undef
 						InlineBelowtitlesBlackWidth 2 mul setlinewidth TitlesAboveBelowOverInlineDarkStrokeCode GRestore
 					} if  % InlineBelowtitles
 					newpath
+					end
 					TitleAboveBelowOverRandomSeeds WithinTitles get  rrand  ne {/NextRand rrand def} if
 				} if  % BelowtitleFontSizes of non-zero size
 
 				AbovetitleFontSizes SheetNum get WithinPage get  //PrinterEpsilon  gt
 				{
+					4 dict begin
 					TitleAboveBelowOverRandomSeeds WithinTitles get srand
 					/ColourSchemeCurrent ColourSchemeAbovetitles def
 					/FillTextsCurrent FillAbovetitles def
@@ -10382,6 +10385,7 @@ currentdict /GlyphShowKnownAbsences undef
 						InlineAbovetitlesBlackWidth 2 mul setlinewidth TitlesAboveBelowOverInlineDarkStrokeCode GRestore
 					} if  % InlineAbovetitles
 					newpath
+					end
 					TitleAboveBelowOverRandomSeeds WithinTitles get  rrand  ne {/NextRand rrand def} if
 				} if  % AbovetitleFontSizes of non-zero size
 				NextRand srand
@@ -12351,6 +12355,12 @@ currentdict /GlyphShowKnownAbsences undef
 		end
 		//DeBugLevel 100 le {(-TastingNotesInnerLoop) OutputToLog} if
 	} bind def  % /TastingNotesInnerLoop
+
+
+	% Paint the pages
+	0 setgray   1 setlinecap   1 setlinejoin   [] 0 setdash
+	PrologueCode
+	0 setgray   1 setlinecap   1 setlinejoin   [] 0 setdash
 
 
 	/PlaceNamesRandomSeeds [ NamesPlaceNames { [ exch length {//null} repeat ] } forall ] def
