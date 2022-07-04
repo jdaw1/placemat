@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:00 Friday 1st July 2022
+% This version 20:30 Monday 4th July 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202207012200) def
+/ParametersVersionDateTimeAdobeFormat (D:202207042030) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -781,7 +781,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202207012200) def
+/SoftwareVersionDateTimeAdobeFormat (D:202207042030) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -9550,12 +9550,12 @@ currentdict /GlyphShowKnownAbsences undef
 		end
 		//DeBugLevel 50 le {(-DropletPaths logging) OutputToLog} if
 
-		% SheetNum Llx Lly Urx Ury WithinPage DropletsPaint  -
+		% SheetNum Llx Lly Urx Ury WithinPage LengthsDistance DropletsPaint  -
 		/DropletsPaint
 		{
 			//DeBugLevel 75 le {(+DropletsPaint) OutputToLog} if
-			31 dict begin
-			/WithinPage exch def /Ury exch def  /Urx exch def  /Lly exch def  /Llx exch def  /SheetNum exch def
+			32 dict begin
+			/LengthsDistance exch def  /WithinPage exch def /Ury exch def  /Urx exch def  /Lly exch def  /Llx exch def  /SheetNum exch def
 			newpath  1 setlinecap  [] 0 setdash
 			0  1  1
 			{
@@ -9617,10 +9617,10 @@ currentdict /GlyphShowKnownAbsences undef
 														/WP exch def
 														WithinPage WP ne
 														{
-															% Double test on points: at most Radius+DropletsPathLength from centre; closer to WithinPage than WP.
+															% Double test on points: at most Radius+DropletsPathLength * LengthsDistance from centre; closer to WithinPage than WP.
 															GlassPositions SheetNum get WithinPage get aload pop
 															ThisDroplet i 1 add get sub dup mul exch  ThisDroplet i get sub dup mul  add
-															dup Radii SheetNum get DropletsPathLength add dup mul gt exch
+															dup Radii SheetNum get DropletsPathLength LengthsDistance mul add dup mul gt exch
 															GlassPositions SheetNum get WP         get aload pop
 															ThisDroplet i 1 add get sub dup mul exch  ThisDroplet i get sub dup mul  add
 															gt or {pop //false exit} if  % Point i further from WithinPage than from WP
@@ -9760,7 +9760,7 @@ currentdict /GlyphShowKnownAbsences undef
 				newpath  1 setlinecap  [] 0 setdash
 				//false //false //false //false PaperType Orientation SetPaperSize   //true DefStoreMgns
 				ClipSave  MgnL  MgnB  PageWidth MgnL MgnR add sub  PageHeight MgnB MgnT add sub  rectclip
-				SheetNum  MgnL  MgnB  PageWidth MgnR sub  PageHeight MgnT sub  -1  DropletsPaint  ClipRestore
+				SheetNum  MgnL  MgnB  PageWidth MgnR sub  PageHeight MgnT sub  -1  //Infinity  DropletsPaint  ClipRestore
 				end
 				//DeBugLevel 100 le {(-DropletsForms: PaintProc) OutputToLog} if
 			} def  % /PaintProc
@@ -10576,7 +10576,7 @@ currentdict /GlyphShowKnownAbsences undef
 								MgnL MgnB moveto  PageWidth MgnR sub MgnB lineto  PageWidth MgnR sub PageHeight MgnT sub lineto  MgnL PageHeight MgnT sub lineto
 								MatrixGlasses setmatrix  GlassPositions SheetNum get WithinPage get {neg} forall translate  pathbbox	GRestore
 							} {//InfinityNeg  //InfinityNeg  //Infinity  //Infinity} ifelse  % RotationTitlesAboveBelowOverCirclearray 0 eq
-							WithinPage  DropletsPaint  % If rotating too complicated to rotate box; the WithinPage must suffice.
+							WithinPage  1.0  DropletsPaint  % If rotating too complicated to rotate box; the WithinPage must suffice.
 						} if  % Droplets PrePourShowDroplets and
 						ClipRestore
 						/TypeOfPagesBeingRendered /PrePour store  //false //false //false //false PrePourPaperType PrePourOrientation SetPaperSize  //true DefStoreMgns
@@ -13251,7 +13251,7 @@ currentdict /GlyphShowKnownAbsences undef
 														NTBestWidthPer  2 div NTBestHeightPer  2 div lineto  NTBestWidthPer -2 div NTBestHeightPer  2 div lineto
 														MatrixTitlesEtc setmatrix  GlassPositions SheetNum get WithinPage get {neg} forall translate  pathbbox  GRestore
 													} {//InfinityNeg  //InfinityNeg  //Infinity  //Infinity} ifelse  % RotationTitlesAboveBelowOverCirclearray 0 eq
-													WithinPage  DropletsPaint  % If rotating too complicated to rotate box; the WithinPage must suffice.
+													WithinPage  1.0  DropletsPaint  % If rotating too complicated to rotate box; the WithinPage must suffice.
 												} if  % Droplets NeckTagsShowDroplets and
 												ClipRestore
 											} if  % BackgroundTextsGlasses ... NeckTagsShowBackgroundTexts ... Droplets ...NeckTagsShowDroplets or
@@ -13870,7 +13870,7 @@ currentdict /GlyphShowKnownAbsences undef
 													StickyLabelX StickyLabelsWithPagePortraitWidth 2 div add StickyLabelY StickyLabelsWithPagePortraitHeight 2 div sub lineto
 													StickyLabelsGlassesMatrix setmatrix  GlassPositions SheetNum get WithinPage get {neg} forall translate  pathbbox  GRestore
 												} {//InfinityNeg  //InfinityNeg  //Infinity  //Infinity} ifelse  % RotationTitlesAboveBelowOverCirclearray 0 eq
-												WithinPage  DropletsPaint
+												WithinPage  1.0  DropletsPaint
 											} if  % Droplets StickyLabelsShowDroplets and
 											setmatrix ClipRestore
 											/TypeOfPagesBeingRendered /StickyLabels store   //false //false //false //false StickyLabelsPaperType /Portrait SetPaperSize  //false DefStoreMgns
