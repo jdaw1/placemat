@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:15 Tuesday 5th July 2022
+% This version 16:15 Sunday 10th July 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202207052315) def
+/ParametersVersionDateTimeAdobeFormat (D:202207101615) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -62,7 +62,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( October 2022)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 20) {SuperscriptOn} (th) {SuperscriptOff} ( December 2022)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -494,7 +494,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /CrossHatchingAbovetitlesStrokeCode {InlineAbovetitles ColourSchemeCurrent /MidGrey eq {{0.4 0.15} {0 0.24}} {{0 0.06} {1 0.24}} ifelse ifelse TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if setlinewidth setgray stroke} def
 /CrossHatchingBelowtitlesStrokeCode {InlineBelowtitles ColourSchemeCurrent /MidGrey eq {{0.4 0.15} {0 0.24}} {{0 0.06} {1 0.24}} ifelse ifelse TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if setlinewidth setgray stroke} def
 /CrossHatchingOvertitlesStrokeCode  {InlineOvertitles  ColourSchemeCurrent /MidGrey eq {{0.4 0.15} {0 0.24}} {{0 0.06} {1 0.24}} ifelse ifelse TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if setlinewidth setgray stroke} def
-/CrossHatchingNumRadialLines {TypeOfPagesBeingRendered /PlaceName eq {90} {CrossHatchingOutside {120} {180} ifelse} ifelse} bind def
+/CrossHatchingNumRadialLines 80 def
 /CrossHatchingCellArea 1296 def  % (36pt)^2 = (0.5")^2 = (12.7mm)^2
 /CrossHatchingCentreX /CenterSheetsSamePageOrdering def  % number /Name /Left /Center /Right /CenterSheetsSamePageOrdering
 /CrossHatchingCentreY /Bottom def  % number /Name /Bottom /Middle /Top
@@ -781,7 +781,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202207052315) def
+/SoftwareVersionDateTimeAdobeFormat (D:202207101615) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
