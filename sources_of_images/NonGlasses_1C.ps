@@ -11,6 +11,9 @@
 % not PDF; nor images of such a document. But it does include re-usable improvements to the body of the code.
 
 
+/OneCircles true def       % Activates OneCircleSuppressOtherPageTypes
+/Droplets true def
+
 % Recommendation: move changed parameters to just above this line.
 
 % % % % % % % %
@@ -108,7 +111,6 @@
 /StickyLabelsNumCopies 0 def
 /StickyLabelsTypes [0 1] def  % 0 = 2x4 on A4; 1 = 5x13 on A4
 /BottleWrapNumCopies 0 def  % Activates BottleWrapSuppressOtherPageTypes
-/OneCircles false def       % Activates OneCircleSuppressOtherPageTypes
 
 /Abovetitles [ Titles length {()} repeat ] def
 /Overtitles [ Titles length {()} repeat ] def
@@ -344,7 +346,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /BackgroundTextsOrientation /Landscape def  % /Landscape /Portrait /Natural /Rotated
 /BackgroundTextsGlassesPaintCode {clip 4.32 setlinewidth 0.9375 setgray stroke} def
 
-/Droplets false def
 /DropletsCharges [  % Length a multiple of 4
 	/All  [297.638 777.685]  -1    0  % SheetNum Location Charge Spin. SheetNum can be /All; location is [x y] or circle number.
 	/All  [160.819 538.760]   4  300  % These default settings look best for A4, 5 glasses, RectangularDislocation.

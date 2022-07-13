@@ -433,6 +433,26 @@ The decanter labels are on paper `DecanterLabelsPaperType`.
 <div style="clear: both;"></div>
 
 
+
+<img align="right" width="360" height="360" src="images/NonGlasses_1C.gif">
+
+## OneCircle
+
+Nice to post online can be a GIF animation of all the glass circles.
+
+The natural way to proceed is to have the software make single-glass pages. 
+For each page, width = height = 2&nbsp;&times;&nbsp;radius, with the circle centred. 
+GIFing is then easy, such as via [GraphicConverter](https://www.lemkesoft.de/en/products/graphicconverter/)&rsquo;s *File* > *New* > *Animation using all Pages of the multipage Document (TIFF,PDF)*.
+
+This done by setting `OneCircles` to `true`. 
+That activates `OneCircleSuppressOtherPageTypes`, which suppresses all other pages.
+
+The parameters `PrePourShowBackgroundTexts` and `PrePourShowDroplets` also apply to the one-circle pages.
+
+This is the only page type for which there isn&rsquo;t a `PageType`: the size of each page is determined by the size of its circle.
+
+<div style="clear: both;"></div>
+
 ## BottleWrap
 
 At some blind tasting, particularly of wines served cold and undecanted, it is natural to bring the wine in its original bottle, wrapped in anonymising paper. 
