@@ -35,6 +35,7 @@ There are multiple types of printable page.
 * `/DecanterLabels`: cut; paste to back of old business cards; allow to dry; punch holes; hang on decanters; fill decanters; wait; drink.
 * `/BottleWrap`: at a blind tasting, to which bottles rather than decanters are being brought, bottles should be wrapped in pages that match everything else.
 * `/StickyLabels`: at a tasting with more wines than glasses, these can be attached to the foot of a glass to show both owner and current contents. Larger stickies also useful on bottles.
+* `/OneCircle`: to make a GIF animation of the circles.
 
 To make the glasses pages required information about wines, about people, and about formatting. 
 That information is reused to make the other pages.
