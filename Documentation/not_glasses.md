@@ -449,7 +449,7 @@ That activates `OneCircleSuppressOtherPageTypes`, which suppresses all other pag
 
 The parameters `PrePourShowBackgroundTexts` and `PrePourShowDroplets` also apply to the one-circle pages.
 
-This is the only page type for which there isn&rsquo;t a `PageType`: the size of each page is determined by the size of its circle.
+This is the only page type for which there isn&rsquo;t a `PaperType`: the size of each page is determined by the size of its circle.
 
 <div style="clear: both;"></div>
 
