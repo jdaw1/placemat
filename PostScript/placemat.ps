@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:00 Wednesday 13th July 2022
+% This version 23:00 Thursday 14th July 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202207132200) def
+/ParametersVersionDateTimeAdobeFormat (D:202207142300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -785,7 +785,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202207132200) def
+/SoftwareVersionDateTimeAdobeFormat (D:202207142300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -8490,7 +8490,12 @@ currentdict /GlyphShowKnownAbsences undef
 				/TitleFontSizesFrequencies [ TitleFontSizesUnique length {0} repeat ] def
 				TitleFontSizes {{/TFS exch def 0 1 TitleFontSizesUnique length 1 sub {/i exch def TitleFontSizesUnique i get TFS sub abs //PrinterEpsilon le {TitleFontSizesFrequencies i 2 copy get 1 add put exit} if} for} forall} forall
 				(frequencies=) TitleFontSizesFrequencies (; )
-				TitleFontSizesUnique length 1 sub  -1  1 {dup 1 sub 2 copy (#) 5 1 roll (/#) 4 1 roll (=) 3 1 roll TitleFontSizesUnique exch get exch TitleFontSizesUnique exch get exch div (, )} for
+				1  1  TitleFontSizesUnique length 1 sub
+				{
+					dup 1 sub 2 copy (#) 5 1 roll (/#) 4 1 roll (=) 3 1 roll
+					TitleFontSizesUnique exch get exch TitleFontSizesUnique exch get exch
+					dup //PrinterEpsilon gt {div (, )} {pop pop pop pop pop pop pop} ifelse
+				} for
 				pop (.) (\n)
 			} if  % At least two different values in TitleFontSizes
 			end

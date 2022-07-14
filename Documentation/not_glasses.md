@@ -213,6 +213,9 @@ In an awkward working space `/PrePourNumCopies 2 def` might be useful.
 
 In a typical vertical tasting, the oldest wines come first in the list, so as to be top-left of the sheet. But decanting is in the reverse order, youngest to oldest, so it is convenient to reverse the order of the pre-pour sheets. This is controlled by `PrePourReverseOrder`, which defaults to true. 
 
+`PrePourShowBackgroundTexts` and `PrePourShowDroplets` control whether the [background texts](page_level.md#backgroundtexts) and [droplets](page_level.md#droplets), present on the glasses pages, appear on the pre-pour pages. 
+These parameters are re-ised, with same meaning, on the [one-circle](#onecircle) pages.
+
 ### Superfluous
 
 The other parameters are changed rarely. 
@@ -445,8 +448,8 @@ The natural way to proceed is to have the software make single-glass pages.
 For each page, width = height = 2&nbsp;&times;&nbsp;radius, with the circle centred. 
 GIFing is then easy, such as via [GraphicConverter](https://www.lemkesoft.de/en/products/graphicconverter/)&rsquo;s *File* > *New* > *Animation using all Pages of the multipage Document (TIFF,PDF)*.
 
-This done by setting `OneCircles` to `true`. 
-That activates `OneCircleSuppressOtherPageTypes`, which suppresses all other pages.
+This is done by setting `OneCircles` to `true`. 
+By default that activates `OneCircleSuppressOtherPageTypes`, which suppresses all other pages.
 
 The parameters `PrePourShowBackgroundTexts` and `PrePourShowDroplets` also apply to the one-circle pages.
 
