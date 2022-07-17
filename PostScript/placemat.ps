@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Thursday 14th July 2022
+% This version 11:00 Saturday 16th July 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202207142300) def
+/ParametersVersionDateTimeAdobeFormat (D:202207161100) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -785,7 +785,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202207142300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202207161100) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -909,13 +909,13 @@ ifelse} bind def  % /Stopped
 	%   > roughly equal to 2.2. This is why their sequence with ratio 2.2 and Tokuda's sequence with ratio 2.25 prove efficient. However,
 	%   > it is not known why this is so. Sedgewick recommends using gaps which have low greatest common divisors or are pairwise coprime.
 	% Here each is closest to immediately previous * Sqrt5 that is coprime to all smaller,
-	% so ratios tend to ~=2.236. From values of 51 the ratios >2.21568 and <2.24303.
-	1 2 5 11 23 51 113 251 563 1259 2813 6289 14063 31439  % Below 2^16 = 65536, so sufficient for PostScript.
-	70297 157189 351487 785947 1757431 3929741 8787169 19648709 43935851 98243549 219679249 491217733 1098396241  % Below 2^31 ~= 2 billion
-	% 2456088659 5491981199 12280443293 27459905999 61402216471 137299529999 307011082351 686497649983 1535055411751 3432488249899
-	% 7675277058739 17162441249483 38376385293691 85812206247419 191881926468461 429061031237099 959409632342311 2145305156185489
-	% 4797048161711557 10726525780927447 23985240808557793 53632628904637243 119926204042788961 268163144523186221 599631020213944813
-	% 1340815722615931087 2998155101069724053 6704078613079655429 14990775505348620269  % Below 2^64 ~= 18 quintillion
+	% so ratios tend to ~=2.236. From values of 419	the ratios >2.24 and <2.236.
+	1 3 7 16 37 83 187 419 937 2099 4693 10499 23479 52501  % Below 2^16 = 65536, so sufficient for PostScript.
+	117391 262495 586961 1312481 2934793 6562397 14673961 32811973 73369801 164059859 366848983 820299269 1834244921  % Below 2^31 ~= 2 billion
+	% 4101496331 9171224603 20507481647 45856123009 102537408229 229280615033 512687041133 1146403075157 2563435205663 5732015375783
+	% 12817176028331 28660076878933 64085880141667 143300384394667 320429400708323 716501921973329 1602147003541613 3582509609866643
+	% 8010735017708063 17912548049333207 40053675088540303 89562740246666023 200268375442701509 447813701233330109
+	% 1001341877213507537 2239068506166650537 5006709386067537661 11195342530833252689  % Below 2^64 ~= 18 quintillion
 ] readonly def  % /ShellSortGaps
 /ShellSortGapsLength1Sub ShellSortGaps length 1 sub def
 % Immediate dependencies: DeBugLevel; ShellSortGaps; ShellSortGapsLength1Sub.
@@ -12542,47 +12542,29 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						//false  //false  MirrorPagesOneCircle  //true  [Radii SheetNum get 2 mul  dup]  /Portrait  SetPaperSize
 						matrix currentmatrix    Radii SheetNum get  dup  translate  newpath    /MatrixGlasses matrix currentmatrix def
-						0  0  Radii SheetNum get  0  360  arc  1 setgray fill  % GIF making usually done with transparency
+						ClipSave   0 30 359 {0  0  Radii SheetNum get  4 -1 roll  dup 30 add  arc} for    clip  1 setgray fill
 
 						PrePourShowBackgroundTexts   Droplets {PrePourShowDroplets or} if
 						{
-							ClipSave  newpath  0  0  Radii SheetNum get  0  360  arc  clip  newpath
 							/TypeOfPagesBeingRendered /Glasses store
 							GlassPositions SheetNum get WithinPage get {neg} forall translate
 							/MatrixGlassesPage matrix currentmatrix def
 							BackgroundTextsGlasses PrePourShowBackgroundTexts and {BackgroundTextsGlassesForms SheetNum get execform} if
 							Droplets PrePourShowDroplets and
 							{
-								SheetNum
-								GSave  newpath
-								MatrixGlasses setmatrix
-								Radii SheetNum get dup   dup dup neg  dup dup  dup 4 index  moveto lineto lineto lineto
-								MatrixGlassesPage setmatrix   pathbbox	GRestore
+								SheetNum  % passed to DropletsPaint
+								MatrixGlasses setmatrix   Radii SheetNum get dup   dup dup neg  dup dup  dup 4 index  moveto lineto lineto lineto   MatrixGlassesPage setmatrix   pathbbox
 								WithinPage  0.0  DropletsPaint
 							} if  % Droplets PrePourShowDroplets and
-							ClipRestore
 						} if  % PrePourShowBackgroundTexts ...PrePourShowDroplets or
 						MatrixGlasses setmatrix
 
 						/TypeOfPagesBeingRendered /Glasses store
-						OutlineTitles
-						{
-							OutlineForms SheetNum get WithinPage get   execform
-						} if  % OutlineTitles ...
-
-						Spirals {SpiralForms SheetNum get WithinPage get execform} if
-						CrossHatchingInside {CrossHatchingInsideForms SheetNum get WithinPage get  execform} if
-
-						/PaintBackgroundInsideGlassCircles load dup length 0 gt
-						{
-							/TypeOfPagesBeingRendered /Glasses store
-							GSave newpath  0 0 Radii SheetNum get 0 360 arc  clip newpath
-							execU   GRestore
-						} {pop} ifelse  % PaintBackgroundInsideGlassCircles ... length 0 gt
-						/TypeOfPagesBeingRendered /Glasses store
+						[ OutlineTitles {OutlineForms} if  Spirals {SpiralForms} if  CrossHatchingInside {CrossHatchingInsideForms} if ] {SheetNum get WithinPage get  execform} forall
+						/PaintBackgroundInsideGlassCircles load dup length 0 gt {execU} {pop} ifelse
+						ClipRestore
 						TitleAboveBelowOverForms SheetNum get WithinPage get  execform  AnnotateGlass
 						CirclearrayForms SheetNum get WithinPage get   execform
-
 						/TypeOfPagesBeingRendered /OneCircle store
 
 						mark
