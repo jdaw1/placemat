@@ -1,6 +1,6 @@
 %!PS
 
-% This version 11:00 Saturday 16th July 2022
+% This version 17:00 Sunday 24th July 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202207161100) def
+/ParametersVersionDateTimeAdobeFormat (D:202207241700) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -785,7 +785,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202207161100) def
+/SoftwareVersionDateTimeAdobeFormat (D:202207241700) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -2982,6 +2982,92 @@ currentdict /SmallCapsDict undef
 	//DeBugLevel 10 le {(-PathBBox) OutputToLog} if
 } bind def  % PathBBox
 
+
+% Pieces no wider than 30 degrees ==> radius correct to one part in 2,683,397
+% So, on a 3600 dpi printer, accurate to half a pixel if radius <= 9.46 metres ~= 31 foot.
+% (Ignoring machine precision; ignoring De Casteljau's approximation; ignoring paper roller speed.)
+% http://github.com/jdaw1/placemat/issues/164
+% http://groups.google.com/g/comp.lang.postscript/c/B23RW2QpIjU
+/ArcAccurateBoth
+{
+	18 dict begin
+	/Widdershins exch def
+	/StartOperator exch def  % /m ==> moveto; /l ==> lineto; /n ==> nothing, presumably because already at start
+	/Angle2 exch def
+	/Angle1 exch def
+	/R exch def
+	/Y exch def
+	/X exch def
+
+	Widdershins
+		{Angle2 Angle1 lt {/Angle2 Angle2  Angle1 Angle2 sub 360 div ceiling cvi 360 mul  add def} if}
+		{Angle2 Angle1 gt {/Angle2 Angle2  Angle2 Angle1 sub 360 div ceiling cvi 360 mul  sub def} if}
+	ifelse  % Widdershins
+
+	5 dict begin
+	[
+		/Ang Angle1 def
+		{
+			Widdershins
+			{
+				/Next90  Ang 90 div floor cvi 1 add 90 mul  Angle2  2 copy gt {exch} if pop  def
+				/NumToNext90  Next90 Ang sub 30 div ceiling cvi  def
+			}{
+				/Next90  Ang 90 div ceiling cvi 1 sub 90 mul  Angle2  2 copy lt {exch} if pop  def
+				/NumToNext90  Ang Next90 sub 30 div ceiling cvi  def
+			} ifelse  % Widdershins
+			/StepSize Next90 Ang sub NumToNext90 div def
+			NumToNext90
+			{
+				/Next  StepSize Ang add  dup dup cvi eq {cvi} if  def  % Can change type from real to integer
+				[ Ang Next ]
+				/Ang Next def
+			} repeat
+			Ang Angle2 Widdershins {ge} {le} ifelse  {exit}  if
+		} loop
+	]
+	end
+	% Debugging:  dup {==} forall
+
+	//false  [ /m /l /moveto /lineto ] {StartOperator eq {pop //true exit} if} forall
+	{
+		/X0 Angle1 cos R mul X add def
+		/Y0 Angle1 sin R mul Y add def
+		X0 Y0   StartOperator dup /m eq exch /moveto eq or {moveto} {{lineto} stopped {moveto} if} ifelse
+	} if  % Not /n (/n would mean do nothing as aleady at start of curve)
+
+	{
+		aload pop /a2 exch def /a1 exch def
+		/speed  a2 a1 sub abs 30 eq
+			{0.175536663449861137962   a2 a1 lt {neg} if}  % Tan[Pi/24]*4/3 = 6 sqrt 2 sub 3 sqrt sub 2 sqrt add 4 mul 3 div
+			{a2 a1 sub 4 div dup sin exch cos div 4 mul 3 div}
+		ifelse  R mul  def  % /speed
+		/X3 a2 cos R mul X add def
+		/Y3 a2 sin R mul Y add def
+		/X1  X0  a1 sin speed mul  sub  def
+		/Y1  Y0  a1 cos speed mul  add  def
+		/X2  X3  a2 sin speed mul  add  def
+		/Y2  Y3  a2 cos speed mul  sub  def
+		X1 Y1  X2 Y2  X3 Y3  curveto
+		/X0 X3 def   /Y0 Y3 def
+	} forall  % [ [a1 a2] ... ]
+
+	end
+} bind def  % ArcAccurateBoth
+
+% x y r angle1 angle2 StartOperator  ArcAccurate  –
+% Mostly as arc.
+% StartOperator is /m or /l or /n.
+% /m ==> start with a moveto.
+% /l ==> if there is a currentpoint, start with a lineto; if not, with a moveto.
+% /n ==> nothing, so may assume already at the start of the arc. If not there, user's problem.
+/ArcAccurate  {//true  ArcAccurateBoth} bind def  % ArcAccurate
+
+% x y r angle1 angle2 StartOperator  ArcAccurateN  –
+% Mostly as arcn.  StartOperator as ArcAccurate.
+/ArcAccurateN {//false ArcAccurateBoth} bind def  % ArcAccurateN
+
+
 % Immediate dependencies: DeBugLevel; OutputToLog; PolynomialRoots; Stopped; Epsilon.
 % AngleDeemedStraight  PathDistinctiveXY  [ Xs ] [ Ys ]
 /PathDistinctiveXY
@@ -3919,7 +4005,7 @@ currentdict /GlyphShowKnownAbsences undef
 		{
 			% CrossHatchingCellArea = (Rthis^2-Rprev^2)*Pi/CrossHatchingNumRadialLines  <==  R = Sqrt[ N * CrossHatchingCellArea*CrossHatchingNumRadialLines/Pi ]
 			CrossHatchingNumRadialLines mul CrossHatchingCellArea mul //Pi div sqrt /R exch def
-			X Amax sin R mul add  Y Amax cos R mul add  moveto   X Y R 90 Amax sub 90 Amin sub arc
+			X Amax sin R mul add  Y Amax cos R mul add  moveto   X Y R 90 Amax sub 90 Amin sub  /m  ArcAccurate
 		} for  % 'R'
 		0 setgray  0.12 setlinewidth  [] 0 setdash  1 setlinejoin  1 setlinecap
 		FormatStrokeCode newpath
@@ -10588,7 +10674,7 @@ currentdict /GlyphShowKnownAbsences undef
 						{
 							/PPCaVPE PPCirclearraysV 0.48 add def  % PPCirclearraysV Plus Extra
 							MgnL PPCaVPE add MgnB PPCaVPE add moveto  PageWidth MgnR PPCaVPE add sub dup MgnB PPCaVPE add lineto  PageHeight MgnT PPCaVPE add sub lineto  MgnL PPCaVPE add PageHeight MgnT PPCaVPE add sub lineto  closepath
-							MatrixGlasses setmatrix  0 0 Radii SheetNum get 3 copy add moveto 90 450 arc closepath  clip newpath  % Second clip to union of rectangle inside Circlearrays and circle of radius Radii...
+							MatrixGlasses setmatrix  0 0 Radii SheetNum get 0 360 /m ArcAccurate closepath  clip newpath  % Second clip to union of rectangle inside Circlearrays and circle of radius Radii...
 						} if  % PPShowCirclearrays
 						/TypeOfPagesBeingRendered /Glasses store  //false //false //false //false PaperType Orientation SetPaperSize  //true DefStoreMgns
 						MatrixGlasses setmatrix   RotationTitlesAboveBelowOverCirclearray dup 0 ne {neg rotate} {pop} ifelse   GlassPositions SheetNum get WithinPage get {neg} forall translate
@@ -10627,7 +10713,7 @@ currentdict /GlyphShowKnownAbsences undef
 					} if  % OutlineTitles CrossHatchingInside Spirals or or CircleNonEmpty ... and
 					MatrixGlasses setmatrix   //false //false //false //false PaperType Orientation SetPaperSize  //true DefStoreMgns
 					/PaintBackgroundInsideGlassCircles load dup length 0 gt
-						{/TypeOfPagesBeingRendered /PrePour store GSave newpath 0 0 Radii SheetNum get 0 360 arc closepath clip newpath execU GRestore /TypeOfPagesBeingRendered /Glasses store}
+						{/TypeOfPagesBeingRendered /PrePour store GSave newpath 0 0 Radii SheetNum get 0 360 /m ArcAccurate closepath clip newpath execU GRestore /TypeOfPagesBeingRendered /Glasses store}
 						{pop}
 					ifelse  % PaintBackgroundInsideGlassCircles ... length 0 gt
 					TitleAboveBelowOverForms SheetNum get WithinPage get  execform  AnnotateGlass
@@ -10781,7 +10867,7 @@ currentdict /GlyphShowKnownAbsences undef
 								rectclip
 								BottleWrapScalingFactor dup scale
 								/PaintBackgroundInsideGlassCircles load dup length 0 gt
-									{/TypeOfPagesBeingRendered /BottleWrap store GSave newpath 0 0 Radii SheetNum get 0 360 arc closepath clip newpath execU GRestore}
+									{/TypeOfPagesBeingRendered /BottleWrap store GSave newpath 0 0 Radii SheetNum get 0 360 /m  ArcAccurate closepath clip newpath execU GRestore}
 									{pop}
 								ifelse  % PaintBackgroundInsideGlassCircles ... length 0 gt
 								/TypeOfPagesBeingRendered /Glasses store
@@ -11567,7 +11653,7 @@ currentdict /GlyphShowKnownAbsences undef
 				0  1  SheetLengths SheetNum get 1 sub
 				{
 					/WithinPage exch def
-					CircleNonEmpty SheetNum get WithinPage get {GlassPositions SheetNum get WithinPage get aload pop Radii SheetNum get 3 copy add moveto 90 450 arc closepath} if
+					CircleNonEmpty SheetNum get WithinPage get {GlassPositions SheetNum get WithinPage get aload pop Radii SheetNum get 0 360 /m ArcAccurate closepath} if
 				} for  % WithinPage
 				CHCX CHCY /CrossHatchingOutsideStrokeCode load RadialCrossHatching   newpath
 				ClipRestore
@@ -11639,7 +11725,7 @@ currentdict /GlyphShowKnownAbsences undef
 						RotationTitlesAboveBelowOverCirclearray dup 0 ne {neg rotate} {pop} ifelse  GlassPositions SheetNum get WithinPage get aload pop neg exch neg exch translate
 						moveto setmatrix currentpoint newpath  /CHCY exch def /CHCX exch def
 
-						0 0  RadiiCirclearrayInside SheetNum get  0 360 arc
+						0 0  RadiiCirclearrayInside SheetNum get  0 360  /m  ArcAccurate
 						CHCX CHCY /CrossHatchingInsideStrokeCode load RadialCrossHatching   newpath
 					} if  % CrossHatchingInside
 
@@ -11684,7 +11770,7 @@ currentdict /GlyphShowKnownAbsences undef
 					RadiiCirclearrayInside SheetNum get  0 gt  OutlineTitles and
 					{
 						0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash
-						newpath  0 0  RadiiCirclearrayInside SheetNum get  0 360 arc
+						newpath  0 0  RadiiCirclearrayInside SheetNum get  0 360  /m  ArcAccurate
 						GSave clip newpath  % on GRestore will be able to stroke clipping circle
 
 						TitlesFont  TitleFontSizes SheetNum get WithinPage get  selectfont
@@ -11787,7 +11873,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 					RadiiCirclearrayInside SheetNum get  0 gt  Spirals and
 					{
-						ClipSave newpath  0 0  RadiiCirclearrayInside SheetNum get  0 360 arc clip newpath
+						ClipSave newpath  0 0  RadiiCirclearrayInside SheetNum get  0 360  /m  ArcAccurate  clip newpath
 						SpiralRadiusBetweenArms abs Infinity ge
 						{
 							0  1  SpiralNumArms 1 sub
@@ -12007,7 +12093,7 @@ currentdict /GlyphShowKnownAbsences undef
 								CrossHatchingInside {CrossHatchingInsideForms SheetNum get WithinPage get  execform} if
 							} if  % CircleNonEmpty ...
 							/PaintBackgroundInsideGlassCircles load dup length 0 gt
-								{/TypeOfPagesBeingRendered /TastingNotes store GSave newpath 0 0 Radii SheetNum get 0 360 arc closepath clip newpath execU GRestore /TypeOfPagesBeingRendered /Glasses store}
+								{/TypeOfPagesBeingRendered /TastingNotes store GSave newpath 0 0 Radii SheetNum get 0 360 /m ArcAccurate closepath clip newpath execU GRestore /TypeOfPagesBeingRendered /Glasses store}
 								{pop}
 							ifelse  % PaintBackgroundInsideGlassCircles ... length 0 gt
 							TitleAboveBelowOverForms SheetNum get WithinPage get  execform  AnnotateGlass
@@ -12111,7 +12197,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  SheetLengths SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
-			GlassesPageWhiteCirclesBehind  CircleNonEmpty SheetNum get WithinPage get  and {newpath GlassPositions SheetNum get WithinPage get aload pop Radii SheetNum get 0 360 arc 1 setgray fill} if
+			GlassesPageWhiteCirclesBehind  CircleNonEmpty SheetNum get WithinPage get  and {newpath GlassPositions SheetNum get WithinPage get aload pop Radii SheetNum get 0 360 /m ArcAccurate 1 setgray fill} if
 		} for  % WithinPage, WithinTitles
 
 		0  1  SheetLengths SheetNum get 1 sub
@@ -12122,7 +12208,7 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				newpath   GSave
 				dup 1 //Epsilon sub lt {[currenttransfer   /exec cvx   1   /exch cvx   /sub cvx   7 -1 roll   /mul cvx   1   /exch cvx   /sub cvx] cvx bind settransfer} {pop} ifelse
-				GlassPositions SheetNum get WithinPage get aload pop 2 copy Radii SheetNum get 0 360 arc closepath  RadiiCirclearrayInside SheetNum get 3 copy add moveto 90 -270 arcn closepath
+				GlassPositions SheetNum get WithinPage get aload pop 2 copy Radii SheetNum get 0 360 /m ArcAccurate closepath  RadiiCirclearrayInside SheetNum get 360 0 /m ArcAccurateN closepath
 				/CirclearraysFillBehindCode load execU  GRestore
 			} {pop} ifelse  % GlassesCirclesFadingFactor dup //Epsilon ge  CirclearraysFillBehind  and
 		} for  % WithinPage, WithinTitles
@@ -12209,7 +12295,7 @@ currentdict /GlyphShowKnownAbsences undef
 				dup 1 //Epsilon sub lt {[currenttransfer   /exec cvx   1   /exch cvx   /sub cvx   7 -1 roll   /mul cvx   1   /exch cvx   /sub cvx] cvx bind settransfer} {pop} ifelse
 				RotationTitlesAboveBelowOverCirclearray dup 0 ne {rotate} {pop} ifelse
 				/PaintBackgroundInsideGlassCircles load dup length 0 gt
-					{GSave newpath 0 0 Radii SheetNum get 0 360 arc closepath clip newpath execU GRestore}
+					{GSave newpath 0 0 Radii SheetNum get 0 360 /m ArcAccurate closepath clip newpath execU GRestore}
 					{pop}
 				ifelse  % PaintBackgroundInsideGlassCircles ... length 0 gt
 				TitleAboveBelowOverForms SheetNum get WithinPage get  execform  AnnotateGlass
@@ -12542,7 +12628,7 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						//false  //false  MirrorPagesOneCircle  //true  [Radii SheetNum get 2 mul  dup]  /Portrait  SetPaperSize
 						matrix currentmatrix    Radii SheetNum get  dup  translate  newpath    /MatrixGlasses matrix currentmatrix def
-						ClipSave   0 30 359 {0  0  Radii SheetNum get  4 -1 roll  dup 30 add  arc} for    clip  1 setgray fill
+						ClipSave   0 0  Radii SheetNum get  0 360  /m ArcAccurate   clip  1 setgray fill
 
 						PrePourShowBackgroundTexts   Droplets {PrePourShowDroplets or} if
 						{
@@ -12562,7 +12648,7 @@ currentdict /GlyphShowKnownAbsences undef
 						/TypeOfPagesBeingRendered /Glasses store
 						[ OutlineTitles {OutlineForms} if  Spirals {SpiralForms} if  CrossHatchingInside {CrossHatchingInsideForms} if ] {SheetNum get WithinPage get  execform} forall
 						/PaintBackgroundInsideGlassCircles load dup length 0 gt {execU} {pop} ifelse
-						ClipRestore
+						ClipRestore  % from 20 lines above
 						TitleAboveBelowOverForms SheetNum get WithinPage get  execform  AnnotateGlass
 						CirclearrayForms SheetNum get WithinPage get   execform
 						/TypeOfPagesBeingRendered /OneCircle store
@@ -13333,9 +13419,9 @@ currentdict /GlyphShowKnownAbsences undef
 												ClipSave  MatrixNT setmatrix
 												NTBestWidthPer -2 div NTRadiiDiffPlusGap add  NTBestHeightPer -2 div NTRadiiDiffPlusGap add moveto     NTBestWidthPer NTRadiiDiffPlusGap 2 mul sub  0 rlineto
 												NTBestWidthPer  2 div NTBestRadius sub
-												NTBestHeightPer 2 div NTBestRadius sub  NTBestRadius NTRadiiDiffPlusGap sub  0  90 arc
+												NTBestHeightPer 2 div NTBestRadius sub  NTBestRadius NTRadiiDiffPlusGap sub  0  90  /l ArcAccurate
 												NTBestWidthPer -2 div NTBestRadius add
-												NTBestHeightPer 2 div NTBestRadius sub  NTBestRadius NTRadiiDiffPlusGap sub 90 180 arc  closepath clip newpath
+												NTBestHeightPer 2 div NTBestRadius sub  NTBestRadius NTRadiiDiffPlusGap sub 90 180  /l ArcAccurate  closepath clip newpath
 												RotationTitlesAboveBelowOverCirclearray dup 0 ne
 												{
 													MatrixTitlesEtc setmatrix   neg rotate
@@ -13361,10 +13447,10 @@ currentdict /GlyphShowKnownAbsences undef
 												GSave  MatrixNT setmatrix
 												NTBestWidthPer -2 div NTRadiiDiffPlusGap add  NTBestHeightPer -2 div NTRadiiDiffPlusGap add moveto    NTBestWidthPer NTRadiiDiffPlusGap 2 mul sub  0 rlineto
 												NTBestWidthPer  2 div NTRadiiDiffPlusGap sub NeckTagsHoleRadius NeckTagsSpaceAboveHole add sub
-												NTBestHeightPer 2 div NeckTagsHoleRadius NeckTagsSpaceAboveHole add NTRadiiDiffPlusGap add sub  NeckTagsHoleRadius NeckTagsSpaceAboveHole add  0  90 arc
+												NTBestHeightPer 2 div NeckTagsHoleRadius NeckTagsSpaceAboveHole add NTRadiiDiffPlusGap add sub  NeckTagsHoleRadius NeckTagsSpaceAboveHole add  0  90  /l ArcAccurate
 												NTBestWidthPer -2 div NTRadiiDiffPlusGap add NeckTagsHoleRadius NeckTagsSpaceAboveHole add add
-												NTBestHeightPer 2 div NeckTagsHoleRadius NeckTagsSpaceAboveHole add NTRadiiDiffPlusGap add sub  NeckTagsHoleRadius NeckTagsSpaceAboveHole add 90 180 arc  closepath clip newpath
-												MatrixTitlesEtc setmatrix   0  0  Radii SheetNum get  0  360 arc closepath clip newpath
+												NTBestHeightPer 2 div NeckTagsHoleRadius NeckTagsSpaceAboveHole add NTRadiiDiffPlusGap add sub  NeckTagsHoleRadius NeckTagsSpaceAboveHole add 90 180  /l ArcAccurate  closepath clip newpath
+												MatrixTitlesEtc setmatrix   0 0  Radii SheetNum get  0 360  /m  ArcAccurate  closepath clip newpath
 												/PaintBackgroundInsideGlassCircles load length 0 gt {/TypeOfPagesBeingRendered /NeckTags store   /PaintBackgroundInsideGlassCircles load execU} if
 												OutlineTitles NeckTagsShowOutlineTitles and {OutlineForms SheetNum get WithinPage get  execform} if
 												Spirals {SpiralForms SheetNum get WithinPage get execform} if
@@ -13711,7 +13797,7 @@ currentdict /GlyphShowKnownAbsences undef
 												DecanterLabelsMaxLargerDimension DecanterLabelsMaxSmallerDimension DLEachOrientation {exch} if
 												DLX 2 index 2 div sub  DLY 2 index 2 div sub  4 2 roll rectclip newpath  dup setmatrix
 												/PaintBackgroundInsideGlassCircles load dup length 0 gt
-													{/TypeOfPagesBeingRendered /DecanterLabels store GSave newpath 0 0 Radii SheetNum get 0 360 arc closepath clip newpath execU GRestore}
+													{/TypeOfPagesBeingRendered /DecanterLabels store GSave newpath 0 0 Radii SheetNum get 0 360 /m ArcAccurate closepath clip newpath execU GRestore}
 													{pop}
 												ifelse  % PaintBackgroundInsideGlassCircles ... length 0 gt
 												/TypeOfPagesBeingRendered /Glasses store
@@ -14083,7 +14169,7 @@ currentdict /GlyphShowKnownAbsences undef
 											} ifelse  % StickyLabelsRotate
 											BBYB  exch BBYT BBYB sub rectclip newpath
 											/PaintBackgroundInsideGlassCircles load dup length 0 gt
-												{/TypeOfPagesBeingRendered /StickyLabels store StickyLabelsGlassesMatrix setmatrix GSave newpath 0 0 Radii SheetNum get 0 360 arc closepath clip newpath execU GRestore}
+												{/TypeOfPagesBeingRendered /StickyLabels store StickyLabelsGlassesMatrix setmatrix GSave newpath 0 0 Radii SheetNum get 0 360 /m ArcAccurate closepath clip newpath execU GRestore}
 												{pop}
 											ifelse  % PaintBackgroundInsideGlassCircles ... length 0 gt
 											/TypeOfPagesBeingRendered /Glasses store
