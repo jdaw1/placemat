@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:55 Wednesday 27th July 2022
+% This version 20:00 Thursday 28th July 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202207272155) def
+/ParametersVersionDateTimeAdobeFormat (D:202207282000) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -785,7 +785,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202207272155) def
+/SoftwareVersionDateTimeAdobeFormat (D:202207282000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -3352,7 +3352,7 @@ currentdict /SmallCapsDict undef
 } bind def  % PathMaxScalingFitCircle
 
 
-% Immediate dependencies: DeBugLevel; OutputToLog; PrinterEpsilon; Epsilon; Infinity; PolynomialRoots.
+% Immediate dependencies: DeBugLevel; OutputToLog; PrinterEpsilon; Epsilon; Infinity; InfinityNeg; PolynomialRoots.
 % Have functions X[z] and Y[z], for z over some range. ApproximatingCurve approximates such a path with a single cubic Bezier curve. That approximation
 % has, at the _s_tart and _e_nd points, same position as original function, same tangent, same curvature. ApproximatingCurve returns the middle two
 % knot points of a cubic Bezier. The calling code might, for example, have the first as the currentpoint, and append the last before calling curveto.
@@ -3476,7 +3476,7 @@ currentdict /SmallCapsDict undef
 			} forall  % Speed1s
 		} for  % CoeffsNum
 
-		BestSpeed1 //InfinityNeg ne  BestSpeed2 //InfinityNeg ne  and
+		BestError //Infinity lt
 		{
 			Xs BestSpeed1 dXs mul add
 			Ys BestSpeed1 dYs mul add
