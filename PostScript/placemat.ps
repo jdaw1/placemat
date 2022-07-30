@@ -1,6 +1,6 @@
 %!PS
 
-% This version 12:30 Saturday 30th July 2022
+% This version 20:15 Saturday 30th July 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202207301230) def
+/ParametersVersionDateTimeAdobeFormat (D:202207302015) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -785,7 +785,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202207301230) def
+/SoftwareVersionDateTimeAdobeFormat (D:202207302015) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -3522,31 +3522,25 @@ currentdict /SmallCapsDict undef
 	/RadiusMax exch def          % How big before drawing stops? Should be < 170 * RadiusBetweenArms.
 	/CentreY exch def
 	/CentreX exch def
-	/AngOffset exch def          % Small numeric. Typically 0.
-	/NumArms exch def            % Integer, god values being 5 or 3.
+	/AngOffset exch def          % Small numeric. Typically 0, 72, 144, 216, 288.
+	/NumArms exch def            % Integer, good values being 5 or 3.
 
 	/dRadius RadiusBetweenArms NumArms mul 360 div def
 
-	/AngSumSteps 0 def
 	/Angles
 	[
-		0 1 1023 % max number of loops: if this many done, so more than 170 laps, then something broken.
+		0 1 1023  % if this many done, so needing >=127 laps, then RadiusBetweenArms tiny relative to RadiusMax.
 		{
 			/i exch def
-			/Radius AngSumSteps abs dRadius mul def
-			Radius abs //PrinterEpsilon add  RadiusMax abs  gt
+			% Small steps at start. Peak curvature at sqrt2 radians ~= 81.0 degrees, so that included. Terminal 30 degree steps thought too slow; 45 the compromise.
+			/AngSumSteps   [ 0 9 30 54  81.02846845413954625996792719  111 144 180 ] dup length i gt {i get} {pop 45 AngSumSteps add} ifelse   def
+			/Radius AngSumSteps dRadius mul def
+			Radius abs  RadiusMax dup 0 lt {pop 0} if  gt
 			{
-				Radius abs RadiusMax abs gt {/AngSumSteps RadiusMax dRadius div AngSumSteps 0 lt {neg} if def} if
-				AngSumSteps  exit
-			}{
-				% July 2022, terminal step size reduced to 30 degrees from 60, partly because new command ArcAccurate uses 30 degrees.
-				% ArcAccurate makes mid-point correct, worst error ~= ang^6 / 55296.
-				% ApproximatingCurve matches curvature at end, worst error ~= ang^6 / -8192, which is 6.75 times worse.
-				% So for a circle-like piece, worst error would be -2.5 ppm, at 3600d.p.i. within half pixel if radius <= 55" ~= 140cm.
-				% Small steps at start for a smooth takeoff.  Also peak curvature at sqrt2 radians ~= 81.0 degrees, so that included.
-				AngSumSteps
-				/AngSumSteps   AngSumSteps   [ 3 3 6 6  9 9 9 9  9 9 9 9  30 ] dup length 1 sub dup i gt {pop i} if get   Clockwise {add} {sub} ifelse   def
-			} ifelse  % Within PrinterEpsilon of done
+				Radius abs RadiusMax abs gt {/AngSumSteps RadiusMax dRadius div def} if
+				dup AngSumSteps exch sub 0.05 gt {AngSumSteps} if  % Min increment is a twentieth of a degree.
+				exit
+			} {AngSumSteps} ifelse  % Radius ... RadiusMax ... gt
 		} for  % i
 	] def  % /Angles
 
