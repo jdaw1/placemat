@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Thursday 28th July 2022
+% This version 12:30 Saturday 30th July 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202207282000) def
+/ParametersVersionDateTimeAdobeFormat (D:202207301230) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -785,7 +785,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202207282000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202207301230) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -3492,47 +3492,96 @@ currentdict /SmallCapsDict undef
 } bind def  % /ApproximatingCurve
 
 % Immediate dependencies: DeBugLevel; OutputToLog; PrinterEpsilon; Epsilon; DegreeInRadians.
-% NumArms AngOffset CentreX CentreY RadiusMax RadiusBetweenArms Clockwise  ArchimedeanSpiralPath  -
+% NumArms AngOffset CentreX CentreY RadiusMax RadiusBetweenArms Clockwise InToOut StartOperator  ArchimedeanSpiralPath  -
+% Example use:
+% /PageSize 280 def   << /PageSize [PageSize dup] >> setpagedevice
+% gsave   PageSize 2 div  dup  translate
+% [
+% 	{gsave 1 0 0 setrgbcolor fill grestore 0.12 setlinewidth 0 setgray stroke}
+% 	{}
+% 	{gsave 0 1 0 setrgbcolor fill grestore 0.12 setlinewidth 0 setgray stroke}
+% ]{
+% 	dup length 0 gt
+% 	{
+% 		1   0  0 0  136.819  18  true  false  /m  ArchimedeanSpiralPath  % Goes in
+% 		1  90  0 0  136.819  18  true  true   /n  ArchimedeanSpiralPath  % Goes out
+% 		0 0 136.819  currentpoint exch atan  dup 90 add  arc closepath
+% 		exec
+% 	} {pop} ifelse
+% 	90 rotate
+% } forall
+% grestore
 /ArchimedeanSpiralPath
 {
 	//DeBugLevel 1 le {(+ArchimedeanSpiralPath) OutputToLog} if
 	28 dict begin
-	/Clockwise exch def  /RadiusBetweenArms exch def  /RadiusMax exch def  /CentreY exch def  /CentreX exch def  /AngOffset exch def  /NumArms exch def
+	/StartOperator exch def      % /m ==> moveto; /l ==> lineto; /n ==> nothing, presumably because already at start
+	/InToOut exch def            % Boolean
+	/Clockwise exch def          % Boolean
+	/RadiusBetweenArms exch def  % Numeric, a sensible value being 18
+	/RadiusMax exch def          % How big before drawing stops? Should be < 170 * RadiusBetweenArms.
+	/CentreY exch def
+	/CentreX exch def
+	/AngOffset exch def          % Small numeric. Typically 0.
+	/NumArms exch def            % Integer, god values being 5 or 3.
 
 	/dRadius RadiusBetweenArms NumArms mul 360 div def
 
-	0 1 NumArms 1 sub
-	{
-		/SpiralNum exch def
-		/LastLap false def
-		/AngSumSteps 0 def
-		/AngStart SpiralNum 360 mul NumArms div  AngOffset  add def
-		0 1 1023 % max number of loops: if this many done, something broken.
+	/AngSumSteps 0 def
+	/Angles
+	[
+		0 1 1023 % max number of loops: if this many done, so more than 170 laps, then something broken.
 		{
 			/i exch def
 			/Radius AngSumSteps abs dRadius mul def
-			Radius abs RadiusMax abs //PrinterEpsilon sub gt
+			Radius abs //PrinterEpsilon add  RadiusMax abs  gt
 			{
-				/LastLap true def
-				Radius abs RadiusMax abs gt {/AngSumSteps RadiusMax dRadius div AngSumSteps 0 lt {neg} if def  /Radius RadiusMax def} if
-			} if  % Within PrinterEpsilon of done
-			AngStart AngSumSteps add   {dup 360 ge {360 sub} {exit} ifelse} loop   {dup -270 le {360 add} {exit} ifelse} loop   dup sin /SinAng exch def cos /CosAng exch def
-			/Xe SinAng Radius mul CentreX add def    /dXe SinAng dRadius mul  CosAng //DegreeInRadians mul Radius mul  Clockwise {add} {sub} ifelse  def
-			/Ye CosAng Radius mul CentreY add def    /dYe CosAng dRadius mul  SinAng //DegreeInRadians mul Radius mul  Clockwise {sub} {add} ifelse  def
+				Radius abs RadiusMax abs gt {/AngSumSteps RadiusMax dRadius div AngSumSteps 0 lt {neg} if def} if
+				AngSumSteps  exit
+			}{
+				% July 2022, terminal step size reduced to 30 degrees from 60, partly because new command ArcAccurate uses 30 degrees.
+				% ArcAccurate makes mid-point correct, worst error ~= ang^6 / 55296.
+				% ApproximatingCurve matches curvature at end, worst error ~= ang^6 / -8192, which is 6.75 times worse.
+				% So for a circle-like piece, worst error would be -2.5 ppm, at 3600d.p.i. within half pixel if radius <= 55" ~= 140cm.
+				% Small steps at start for a smooth takeoff.  Also peak curvature at sqrt2 radians ~= 81.0 degrees, so that included.
+				AngSumSteps
+				/AngSumSteps   AngSumSteps   [ 3 3 6 6  9 9 9 9  9 9 9 9  30 ] dup length 1 sub dup i gt {pop i} if get   Clockwise {add} {sub} ifelse   def
+			} ifelse  % Within PrinterEpsilon of done
+		} for  % i
+	] def  % /Angles
+
+	0  1  NumArms 1 sub
+	{
+		/SpiralNum exch def
+		/AngStart  SpiralNum 360 mul NumArms div  AngOffset  add  def
+
+		/FirstLap //true def
+		InToOut {0  1  Angles length 1 sub} {Angles length 1 sub  -1  0} ifelse
+		{
+			Angles exch get  dup abs dRadius mul /Radius exch def
+			90 sub  dup floor cvi 360 idiv 360 mul sub  90 add
+			AngStart add dup   sin /SinAng exch def   cos /CosAng exch def
+			/Xe SinAng Radius mul CentreX add def
+			/Ye CosAng Radius mul CentreY add def
+			/dXe SinAng dRadius mul  CosAng //DegreeInRadians mul Radius mul  Clockwise {add} {sub} ifelse  InToOut not {neg} if def
+			/dYe CosAng dRadius mul  SinAng //DegreeInRadians mul Radius mul  Clockwise {sub} {add} ifelse  InToOut not {neg} if def
 			/ddXe SinAng //DegreeInRadians dup mul mul Radius mul neg  CosAng //DegreeInRadians mul dRadius mul  2 mul Clockwise {add} {sub} ifelse  def
 			/ddYe CosAng //DegreeInRadians dup mul mul Radius mul neg  SinAng //DegreeInRadians mul dRadius mul -2 mul Clockwise {add} {sub} ifelse  def
-			i 0 eq {Xe Ye moveto} {Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe ApproximatingCurve  Xe Ye curveto} ifelse
 			% GSave newpath Xe Ye 0.24 0 360 arc closepath 0.12 setlinewidth 1 0 0 setrgbcolor stroke GRestore
-			LastLap {exit} if
-			/Xs Xe def /dXs dXe def /ddXs ddXe def  /Ys Ye def /dYs dYe def /ddYs ddYe def
-			% July 2022, terminal step size reduced to 30 degrees from 60, partly because new command ArcAccurate uses 30 degrees.
-			% ArcAccurate makes mid-point correct, worst error ~= ang^6 / 55296.
-			% ApproximatingCurve matches curvature at end, worst error ~= ang^6 / -8192, which is 6.75 times worse.
-			% So for a circle-like piece, worst error would be -2.5 ppm, at 3600d.p.i. within half pixel if radius <= 55" ~= 140cm.
-			% Small steps at start for a smooth takeoff.
-			/AngSumSteps   AngSumSteps   [ 5 10 15 30 ] dup length 1 sub dup i gt {pop i} if get   Clockwise {add} {sub} ifelse   def
-		} for  % i
+
+			FirstLap
+			{
+				/FirstLap //false def
+				1 {
+					StartOperator dup /m eq exch /moveto eq or {Xe Ye moveto exit} if
+					StartOperator dup /l eq exch /lineto eq or {Xe Ye lineto exit} if
+				} repeat  % 1
+			} {Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe ApproximatingCurve  Xe Ye curveto} ifelse  % FirstLap
+			/Xs Xe def /dXs dXe def /ddXs ddXe def
+			/Ys Ye def /dYs dYe def /ddYs ddYe def
+		} for  % Angles
 	} for  % SpiralNum
+
 	end
 	//DeBugLevel 20 le {(-ArchimedeanSpiralPath) OutputToLog} if
 } bind def  % ArchimedeanSpiralPath
@@ -11895,7 +11944,7 @@ currentdict /GlyphShowKnownAbsences undef
 							SpiralCentreFromCentreAngle sin mul exch
 							SpiralCentreFromCentreAngle cos mul 3 -1 roll
 							abs RadiiCirclearrayInside SheetNum get add  2 add  % Embedded constant. Will be enough if linewidth <= 4.
-							SpiralRadiusBetweenArms  SpiralClockwise  ArchimedeanSpiralPath
+							SpiralRadiusBetweenArms  SpiralClockwise  true  /m  ArchimedeanSpiralPath
 						} ifelse  % SpiralRadiusBetweenArms abs Infinity ge
 						0.24 setlinewidth  0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash  SpiralStrokeCode  % Too thin was 0.12 setlinewidth as used http://www.jdawiseman.com/2022/20220120_blind.pdf
 						ClipRestore
