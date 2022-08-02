@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:00 Tuesday 2nd August 2022
+% This version 23:40 Tuesday 2nd August 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202208021900) def
+/ParametersVersionDateTimeAdobeFormat (D:202208022340) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -785,7 +785,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202208021900) def
+/SoftwareVersionDateTimeAdobeFormat (D:202208022340) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1696,6 +1696,13 @@ mark  (product = ) product (; languagelevel = ) /languagelevel where {pop langua
 } bind def  % /AdobeFormatDateToString
 
 mark
+[ /SoftwareVersionDateTimeAdobeFormat  /ParametersVersionDateTimeAdobeFormat  /WizardVersionDateTimeAdobeFormat dup where pop pop ]
+{
+	/NameDTAF exch def   /DTAF NameDTAF load def
+	DTAF length 14 ne {mark (Error: ) NameDTAF ( should be of length 14, in format \(D:YYYYMMDDHHMM\), but isn't.) ConcatenateToMark OutputToLog} if
+	DTAF 0 2 getinterval (D:) ne {mark (Error: ) NameDTAF ( should begin "D:", but doesn't.) ConcatenateToMark OutputToLog} if
+	//false  2  1  DTAF length 1 sub {/i exch def DTAF i get dup (0) 0 get lt exch (9) 0 get gt exch or {mark (Error: ) NameDTAF ( ) i ( get should be in range 0...9, but isn't.) ConcatenateToMark OutputToLog} if} for
+} forall
 (Software version  =    SoftwareVersionDateTimeAdobeFormat  =  ) SoftwareVersionDateTimeAdobeFormat   (  =  )  1 index AdobeFormatDateToString (\n)
 (These placemats  ~=  ParametersVersionDateTimeAdobeFormat  =  ) ParametersVersionDateTimeAdobeFormat (  =  )  1 index AdobeFormatDateToString ConcatenateToMark OutputToLog
 /WizardVersionDateTimeAdobeFormat where {pop  /WizardLongName where {pop
