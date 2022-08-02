@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:15 Saturday 30th July 2022
+% This version 19:00 Tuesday 2nd August 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202207302015) def
+/ParametersVersionDateTimeAdobeFormat (D:202208021900) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -310,9 +310,9 @@ if} bind def  % /VoteRecorderCrossedBox
 /OutlineTitlesAlsoOvertitles true def  % ignored if OutlineTitles is false
 
 /Spirals false def
-/SpiralNumArms {5   SpiralCentreFromCentreProportionRadiiInside 0 eq {CirclearraysN SheetNum get WithinPage get dup 4 mod 0 eq  {pop pop 4}  {3 mod 0 eq {pop 6} if}  ifelse} if} bind def
+/SpiralNumArms 5 def
 /SpiralAngleOffset 0 def
-/SpiralRadiusBetweenArms 18 def
+/SpiralRadiusBetweenArms 30 def
 /SpiralClockwise true def
 /SpiralCentreFromCentreProportionRadiiInside 0 def
 /SpiralCentreFromCentreAngle 0 def
@@ -785,7 +785,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202207302015) def
+/SoftwareVersionDateTimeAdobeFormat (D:202208021900) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -814,6 +814,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /ArcCosMinusOneThird 109.471220634490691369 def  % In degrees
 /ArcTanOneQuarter    14.03624346792647858289 def  % In degrees
 /ArcTanFiveEighths   32.00538320808349556079 def  % In degrees
+/Sqrt2Radians        81.0284684541395462599679 def  % In degrees
 /Infinity 32767 def  % 2^15-1, which in points ~= 455" ~= 38', so ~61% bigger than the ~283" diagonal of the 200"x200" maximum PDF page. Can be '8 exp 256.06251 mul' without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.40282*10^38.
 /InfinityNeg Infinity neg def
 /PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
@@ -3491,26 +3492,34 @@ currentdict /SmallCapsDict undef
 	//DeBugLevel 10 le {(-ApproximatingCurve) OutputToLog} if
 } bind def  % /ApproximatingCurve
 
+
+% Small steps at start. Peak curvature at Sqrt2 radians ~= 81.0 degrees, so that included.
+% If SpiralNumArms=5 and SpiralRadiusBetweenArms=30 then 2-degree point is ~=0.29mm from centre; 180-degree ~=26.5mm.
+/SpiralAngles [ 0 2 9 30 54  //Sqrt2Radians  111 144 180 ] def
+/SpiralAnglesLength SpiralAngles length def
 % Immediate dependencies: DeBugLevel; OutputToLog; PrinterEpsilon; Epsilon; DegreeInRadians.
-% NumArms AngOffset CentreX CentreY RadiusMax RadiusBetweenArms Clockwise InToOut StartOperator  ArchimedeanSpiralPath  -
+% CentreX CentreY RadiusMax NumArms RadiusBetweenArms AngOffset Clockwise InToOut StartOperator  ArchimedeanSpiralPath  -
 % Example use:
-% /PageSize 280 def   << /PageSize [PageSize dup] >> setpagedevice
-% gsave   PageSize 2 div  dup  translate
-% [
-% 	{gsave 1 0 0 setrgbcolor fill grestore 0.12 setlinewidth 0 setgray stroke}
-% 	{}
-% 	{gsave 0 1 0 setrgbcolor fill grestore 0.12 setlinewidth 0 setgray stroke}
-% ]{
-% 	dup length 0 gt
-% 	{
-% 		1   0  0 0  136.819  18  true  false  /m  ArchimedeanSpiralPath  % Goes in
-% 		1  90  0 0  136.819  18  true  true   /n  ArchimedeanSpiralPath  % Goes out
-% 		0 0 136.819  currentpoint exch atan  dup 90 add  arc closepath
-% 		exec
-% 	} {pop} ifelse
-% 	90 rotate
-% } forall
-% grestore
+%/PaintBackgroundInsideGlassCircles
+%{
+%	GSave  0 0 RadiiCirclearrayInside SheetNum get 0 360 /m ArcAccurate clip newpath
+%	[
+%		{gsave 0.875   setgray fill grestore 0.12 setlinewidth 0 setgray stroke}
+%		{}
+%		{gsave 0.96875 setgray fill grestore 0.12 setlinewidth 0 setgray stroke}
+%	]{
+%		dup length 0 gt
+%		{
+%			% Each call to ArchimedeanSpiralPath has only one arm, so the "72" is gap from arm to same arm.
+%			0 0  RadiiCirclearrayInside SheetNum get 0.5 add  1  72   0  true  false  /m  ArchimedeanSpiralPath  % Goes in
+%			0 0  RadiiCirclearrayInside SheetNum get 0.5 add  1  72  90  true  true   /n  ArchimedeanSpiralPath  % Goes out
+%			0 0  RadiiCirclearrayInside SheetNum get 1.0 add  currentpoint exch atan  dup 90 add  arc closepath  % A little further out doesn't hurt.
+%			exec
+%		} {pop} ifelse
+%		90 rotate
+%	} forall  % The variations of {... fill ... stroke}
+%	GRestore
+%} def  % /PaintBackgroundInsideGlassCircles
 /ArchimedeanSpiralPath
 {
 	//DeBugLevel 1 le {(+ArchimedeanSpiralPath) OutputToLog} if
@@ -3518,22 +3527,22 @@ currentdict /SmallCapsDict undef
 	/StartOperator exch def      % /m ==> moveto; /l ==> lineto; /n ==> nothing, presumably because already at start
 	/InToOut exch def            % Boolean
 	/Clockwise exch def          % Boolean
+	/AngOffset exch def          % Small numeric. Typically 0, 72, 144, 216, 288.
 	/RadiusBetweenArms exch def  % Numeric, a sensible value being 18
+	/NumArms exch def            % Integer, good values being 5 or 3.
 	/RadiusMax exch def          % How big before drawing stops? Should be < 170 * RadiusBetweenArms.
 	/CentreY exch def
 	/CentreX exch def
-	/AngOffset exch def          % Small numeric. Typically 0, 72, 144, 216, 288.
-	/NumArms exch def            % Integer, good values being 5 or 3.
 
 	/dRadius RadiusBetweenArms NumArms mul 360 div def
+	% mark (NumArms=) NumArms (; RadiusBetweenArms=) RadiusBetweenArms (: ) //SpiralAngles {(ang=) exch ( ==> radius=) 1 index dRadius mul 127 mul 360 div (mm) (, )} forall pop (\n) ConcatenateToMark =
 
 	/Angles
 	[
 		0 1 1023  % if this many done, so needing >=127 laps, then RadiusBetweenArms tiny relative to RadiusMax.
 		{
 			/i exch def
-			% Small steps at start. Peak curvature at sqrt2 radians ~= 81.0 degrees, so that included. Terminal 30 degree steps thought too slow; 45 the compromise.
-			/AngSumSteps   [ 0 9 30 54  81.02846845413954625996792719  111 144 180 ] dup length i gt {i get} {pop 45 AngSumSteps add} ifelse   def
+			/AngSumSteps  i //SpiralAnglesLength lt {//SpiralAngles i get} {45 AngSumSteps add} ifelse   def  % Terminal 30 degree steps thought too slow; 45 the compromise.
 			/Radius AngSumSteps dRadius mul def
 			Radius abs  RadiusMax dup 0 lt {pop 0} if  gt
 			{
@@ -3579,6 +3588,7 @@ currentdict /SmallCapsDict undef
 	end
 	//DeBugLevel 20 le {(-ArchimedeanSpiralPath) OutputToLog} if
 } bind def  % ArchimedeanSpiralPath
+currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 
 
 % Two uses.
@@ -11933,12 +11943,11 @@ currentdict /GlyphShowKnownAbsences undef
 								exch 2 copy  sin mul 3 1 roll  cos mul  rlineto  % extremity of arm
 							} for  % arm number
 						}{
-							SpiralNumArms  SpiralAngleOffset
 							RadiiCirclearrayInside SheetNum get  SpiralCentreFromCentreProportionRadiiInside  mul  dup dup
 							SpiralCentreFromCentreAngle sin mul exch
 							SpiralCentreFromCentreAngle cos mul 3 -1 roll
 							abs RadiiCirclearrayInside SheetNum get add  2 add  % Embedded constant. Will be enough if linewidth <= 4.
-							SpiralRadiusBetweenArms  SpiralClockwise  true  /m  ArchimedeanSpiralPath
+							SpiralNumArms SpiralRadiusBetweenArms SpiralAngleOffset SpiralClockwise //true /m ArchimedeanSpiralPath
 						} ifelse  % SpiralRadiusBetweenArms abs Infinity ge
 						0.24 setlinewidth  0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash  SpiralStrokeCode  % Too thin was 0.12 setlinewidth as used http://www.jdawiseman.com/2022/20220120_blind.pdf
 						ClipRestore
