@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:40 Tuesday 2nd August 2022
+% This version 23:30 Wednesday 3rd August 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202208022340) def
+/ParametersVersionDateTimeAdobeFormat (D:202208032330) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -785,7 +785,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202208022340) def
+/SoftwareVersionDateTimeAdobeFormat (D:202208032330) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -982,11 +982,11 @@ currentdict /ShellSortGapsLength1Subs undef
 		/UpperY  {{0  Coeffs length 1 sub -1 0 {exch UpperX mul exch Coeffs exch get add} for} Stopped {/UpperX UpperX 0.99 mul LowerX 0.01 mul add def} {exit} ifelse} loop  def  UpperY 0 eq {pop UpperX //true exit} if
 		LowerY 0 le UpperY 0 ge and  LowerY 0 ge UpperY 0 le and  or  % Multiplication before testing would risk an overflow error
 		{
+			/StepsRemaining  8  def  % ln(0.01/32767)/ln(0.143) ~= 7.7. PostScript has a 23-bit mantissa, and this algorithm, either gains 2.8 bits, or doubles bits, every loop.
 			{
+				/StepsRemaining   StepsRemaining 1 sub  UpperX LowerX sub abs Tolerance le {2  2 copy gt {exch} if pop} if  def
+				StepsRemaining 0 le {pop X //true exit} if
 				/X  LowerY dup UpperY sub div   Alternation {dup 0.143 lt {pop 0.143} {dup 0.857 gt {pop 0.857} if} ifelse} if   UpperX LowerX sub  mul LowerX add  def  % Constant good enough but approximate. Not known whether one/six seventh(s).
-				/StepsRemaining   UpperX LowerX sub abs Tolerance le {StepsRemaining 1 sub} {8} ifelse  def  % 8 is too many. PostScript has a 23-bit mantissa, and this either gains 3 bits, or doubles bits, every loop.
-				StepsRemaining 0 le  {pop X //true exit} if
-
 				/Y 0  Coeffs length 1 sub -1 0 {exch X mul exch Coeffs exch get add} for  def
 				Y 0 eq {pop X //true exit} if
 				Y 0 gt LowerY 0 gt and  Y 0 lt LowerY 0 lt and  or {/LowerX /LowerY} {/UpperX /UpperY} ifelse Y def X def
@@ -3568,15 +3568,15 @@ currentdict /SmallCapsDict undef
 		/FirstLap //true def
 		InToOut {0  1  Angles length 1 sub} {Angles length 1 sub  -1  0} ifelse
 		{
-			Angles exch get  dup abs dRadius mul /Radius exch def
+			Angles exch get  dup abs dRadius mul /Radius exch def  Clockwise not {neg} if
 			90 sub  dup floor cvi 360 idiv 360 mul sub  90 add
 			AngStart add dup   sin /SinAng exch def   cos /CosAng exch def
 			/Xe SinAng Radius mul CentreX add def
 			/Ye CosAng Radius mul CentreY add def
 			/dXe SinAng dRadius mul  CosAng //DegreeInRadians mul Radius mul  Clockwise {add} {sub} ifelse  InToOut not {neg} if def
 			/dYe CosAng dRadius mul  SinAng //DegreeInRadians mul Radius mul  Clockwise {sub} {add} ifelse  InToOut not {neg} if def
-			/ddXe SinAng //DegreeInRadians dup mul mul Radius mul neg  CosAng //DegreeInRadians mul dRadius mul  2 mul Clockwise {add} {sub} ifelse  def
-			/ddYe CosAng //DegreeInRadians dup mul mul Radius mul neg  SinAng //DegreeInRadians mul dRadius mul -2 mul Clockwise {add} {sub} ifelse  def
+			/ddXe SinAng //DegreeInRadians dup mul mul Radius mul neg  CosAng //DegreeInRadians mul dRadius mul 2 mul Clockwise {add} {sub} ifelse  def
+			/ddYe CosAng //DegreeInRadians dup mul mul Radius mul neg  SinAng //DegreeInRadians mul dRadius mul 2 mul Clockwise {sub} {add} ifelse  def
 			% GSave newpath Xe Ye 0.24 0 360 arc closepath 0.12 setlinewidth 1 0 0 setrgbcolor stroke GRestore
 
 			FirstLap
