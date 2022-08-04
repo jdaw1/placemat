@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:30 Wednesday 3rd August 2022
+% This version 22:15 Thursday 4th August 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202208032330) def
+/ParametersVersionDateTimeAdobeFormat (D:202208042215) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -785,7 +785,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202208032330) def
+/SoftwareVersionDateTimeAdobeFormat (D:202208042215) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -965,7 +965,7 @@ currentdict /ShellSortGapsLength1Subs undef
 
 
 % Immediate dependencies: DeBugLevel; OutputToLog.
-% [ c0 c1 ... ] LowerLimit UpperLimit Tolerance  PolynomialRoot  root true|false
+% [ c0 c1 ... ] LowerLimit UpperLimit Tolerance  PolynomialRoot  root true | false
 /PolynomialRoot
 {
 	//DeBugLevel 5 le {(+PolynomialRoot) OutputToLog} if
@@ -975,24 +975,24 @@ currentdict /ShellSortGapsLength1Subs undef
 	/LowerX exch def
 	/Coeffs exch def
 
-	//false
 	/Alternation false def
 	1 {
-		/LowerY  {{0  Coeffs length 1 sub -1 0 {exch LowerX mul exch Coeffs exch get add} for} Stopped {/LowerX LowerX 0.95 mul                     def} {exit} ifelse} loop  def  LowerY 0 eq {pop LowerX //true exit} if
-		/UpperY  {{0  Coeffs length 1 sub -1 0 {exch UpperX mul exch Coeffs exch get add} for} Stopped {/UpperX UpperX 0.99 mul LowerX 0.01 mul add def} {exit} ifelse} loop  def  UpperY 0 eq {pop UpperX //true exit} if
+		0  Coeffs length 1 sub -1 0 {exch LowerX mul exch Coeffs exch get add} for  /LowerY exch def  LowerY 0 eq {LowerX //true exit} if
+		0  Coeffs length 1 sub -1 0 {exch UpperX mul exch Coeffs exch get add} for  /UpperY exch def  UpperY 0 eq {UpperX //true exit} if
 		LowerY 0 le UpperY 0 ge and  LowerY 0 ge UpperY 0 le and  or  % Multiplication before testing would risk an overflow error
 		{
-			/StepsRemaining  8  def  % ln(0.01/32767)/ln(0.143) ~= 7.7. PostScript has a 23-bit mantissa, and this algorithm, either gains 2.8 bits, or doubles bits, every loop.
+			/StepsRemaining 120 def  % ln(0.01/32767)/ln(0.857) ~= 97.2, plus spares is 120. Single-precision uses 23-bit mantissa, and each loop algorithm either gains 2.8 bits or doubles bits.
 			{
-				/StepsRemaining   StepsRemaining 1 sub  UpperX LowerX sub abs Tolerance le {2  2 copy gt {exch} if pop} if  def
-				StepsRemaining 0 le {pop X //true exit} if
+				StepsRemaining 0 le {UpperX LowerX sub abs Tolerance le {X //true} {//false} ifelse  exit} if
 				/X  LowerY dup UpperY sub div   Alternation {dup 0.143 lt {pop 0.143} {dup 0.857 gt {pop 0.857} if} ifelse} if   UpperX LowerX sub  mul LowerX add  def  % Constant good enough but approximate. Not known whether one/six seventh(s).
 				/Y 0  Coeffs length 1 sub -1 0 {exch X mul exch Coeffs exch get add} for  def
-				Y 0 eq {pop X //true exit} if
+				Y 0 eq {X //true exit} if
 				Y 0 gt LowerY 0 gt and  Y 0 lt LowerY 0 lt and  or {/LowerX /LowerY} {/UpperX /UpperY} ifelse Y def X def
+				/StepsRemaining   StepsRemaining 1 sub  def
+				UpperX LowerX sub abs Tolerance le {StepsRemaining 2 gt {/StepsRemaining 2 def} if} if
 				/Alternation Alternation not def
 			} loop
-		} if  % LowerY UpperY different sides of 0
+		} {//false exit} ifelse  % LowerY UpperY different sides of 0
 	} repeat  % 1
 	end
 	//DeBugLevel 5 le {(-PolynomialRoot) OutputToLog} if
@@ -1173,7 +1173,7 @@ currentdict /ShellSortGapsLength1Subs undef
 			xC xF sub dup mul  yC yF sub dup mul  add  r dup mul  sub
 			xC xF sub xF xT sub mul  yC yF sub yF yT sub mul  add 2 mul
 			xF xT sub dup mul  yF yT sub dup mul  add
-		] -0.1 //false  1 //true  Epsilon  PolynomialRoots
+		] -0.1 //false  1 //true  //Epsilon  PolynomialRoots
 		Min def  % /ratio
 		ratio 0 le {exit} if  % This, and the -0.1, in case starting point very near another circle
 		ratio 1 lt
@@ -1210,7 +1210,7 @@ currentdict /ShellSortGapsLength1Subs undef
 					xC xF sub dup mul  yC yF sub dup mul  add  r dup mul  sub
 					xC xF sub xF xT sub mul  yC yF sub yF yT sub mul  add 2 mul
 					xF xT sub dup mul  yF yT sub dup mul  add
-				] -0.1 //false  1 //true  Epsilon  PolynomialRoots
+				] -0.1 //false  1 //true  //Epsilon  PolynomialRoots
 				Min  2 copy gt {exch   /CanWarn //true def} if pop
 			} {pop} ifelse  % ... WithinPageFrom ne
 		} for  % WithinPage
@@ -3364,13 +3364,13 @@ currentdict /SmallCapsDict undef
 % Have functions X[z] and Y[z], for z over some range. ApproximatingCurve approximates such a path with a single cubic Bezier curve. That approximation
 % has, at the _s_tart and _e_nd points, same position as original function, same tangent, same curvature. ApproximatingCurve returns the middle two
 % knot points of a cubic Bezier. The calling code might, for example, have the first as the currentpoint, and append the last before calling curveto.
-% Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe  ApproximatingCurve  X1 Y1 X2 Y2
+% Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe SpeedUpperLimit ApproximatingCurve  X1 Y1 X2 Y2
 % http://groups.google.com/g/comp.lang.postscript/c/3RIq0Jnwrbo
 /ApproximatingCurve
 {
 	//DeBugLevel 10 le {(+ApproximatingCurve) OutputToLog} if
-	32 dict begin
-	/ddYe exch def /ddXe exch def /ddYs exch def /ddXs exch def /dYe exch def /dXe exch def /dYs exch def /dXs exch def /Ye exch def /Xe exch def /Ys exch def /Xs exch def
+	31 dict begin
+	/SpeedUpperLimit exch def /ddYe exch def /ddXe exch def /ddYs exch def /ddXs exch def /dYe exch def /dXe exch def /dYs exch def /dXs exch def /Ye exch def /Xe exch def /Ys exch def /Xs exch def
 	currentpoint Ys ne exch Xs ne or {Xs Ys lineto} if
 	1 {
 		dXs 0 eq dYs 0 eq and
@@ -3385,8 +3385,6 @@ currentdict /SmallCapsDict undef
 		} if  % Zero speed at end
 
 		/Xgap Xe Xs sub def  /Ygap Ye Ys sub def  % Implicitly setting (Xs,Ys) to (0,0) lessens accumulated arithmetic errors.
-		/OrigSpeed_s dXs dup mul dYs dup mul add sqrt def
-		/OrigSpeed_e dXe dup mul dYe dup mul add sqrt def
 
 		% Two equations, each factors into two quartics. Can arrange Speed2 in terms of Speed1, but that has a divide-by-zero if end velocities
 		% parallel. Instead consider the four possibilities of one quartic from each equation, solve pairwise, take best. Inelegant, but functional.
@@ -3462,8 +3460,8 @@ currentdict /SmallCapsDict undef
 		0 1 3
 		{
 			/CoeffsNum exch def
-			/Speed1s  Speed1Coeffs CoeffsNum get  0  //false  //Infinity OrigSpeed_s dup 1 lt {div} {pop} ifelse  //true   //PrinterEpsilon OrigSpeed_s div Epsilon 2 copy gt {exch} if pop  PolynomialRoots  def
-			/Speed2s  Speed2Coeffs CoeffsNum get  0  //false  //Infinity OrigSpeed_e dup 1 lt {div} {pop} ifelse  //true   //PrinterEpsilon OrigSpeed_e div Epsilon 2 copy gt {exch} if pop  PolynomialRoots  def
+			/Speed1s  Speed1Coeffs CoeffsNum get  0  //false  SpeedUpperLimit  //true  //PrinterEpsilon  //Epsilon 2 copy gt {exch} if pop  PolynomialRoots  def
+			/Speed2s  Speed2Coeffs CoeffsNum get  0  //false  SpeedUpperLimit  //true  //PrinterEpsilon  //Epsilon 2 copy gt {exch} if pop  PolynomialRoots  def
 
 			Speed1s
 			{
@@ -3586,7 +3584,7 @@ currentdict /SmallCapsDict undef
 					StartOperator dup /m eq exch /moveto eq or {Xe Ye moveto exit} if
 					StartOperator dup /l eq exch /lineto eq or {Xe Ye lineto exit} if
 				} repeat  % 1
-			} {Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe ApproximatingCurve  Xe Ye curveto} ifelse  % FirstLap
+			} {Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe  Radius 2 mul  ApproximatingCurve  Xe Ye curveto} ifelse  % FirstLap
 			/Xs Xe def /dXs dXe def /ddXs ddXe def
 			/Ys Ye def /dYs dYe def /ddYs ddYe def
 		} for  % Angles
