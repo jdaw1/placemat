@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:15 Thursday 4th August 2022
+% This version 22:25 Thursday 4th August 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202208042215) def
+/ParametersVersionDateTimeAdobeFormat (D:202208042225) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -785,7 +785,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202208042215) def
+/SoftwareVersionDateTimeAdobeFormat (D:202208042225) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -981,7 +981,7 @@ currentdict /ShellSortGapsLength1Subs undef
 		0  Coeffs length 1 sub -1 0 {exch UpperX mul exch Coeffs exch get add} for  /UpperY exch def  UpperY 0 eq {UpperX //true exit} if
 		LowerY 0 le UpperY 0 ge and  LowerY 0 ge UpperY 0 le and  or  % Multiplication before testing would risk an overflow error
 		{
-			/StepsRemaining 120 def  % ln(0.01/32767)/ln(0.857) ~= 97.2, plus spares is 120. Single-precision uses 23-bit mantissa, and each loop algorithm either gains 2.8 bits or doubles bits.
+			/StepsRemaining 120 def  % ln(0.01/32767)/ln(0.857) ~= 97.2, plus spares is 120. Experimentally, 30 would have been more than enough.
 			{
 				StepsRemaining 0 le {UpperX LowerX sub abs Tolerance le {X //true} {//false} ifelse  exit} if
 				/X  LowerY dup UpperY sub div   Alternation {dup 0.143 lt {pop 0.143} {dup 0.857 gt {pop 0.857} if} ifelse} if   UpperX LowerX sub  mul LowerX add  def  % Constant good enough but approximate. Not known whether one/six seventh(s).
@@ -989,9 +989,11 @@ currentdict /ShellSortGapsLength1Subs undef
 				Y 0 eq {X //true exit} if
 				Y 0 gt LowerY 0 gt and  Y 0 lt LowerY 0 lt and  or {/LowerX /LowerY} {/UpperX /UpperY} ifelse Y def X def
 				/StepsRemaining   StepsRemaining 1 sub  def
-				UpperX LowerX sub abs Tolerance le {StepsRemaining 2 gt {/StepsRemaining 2 def} if} if
-				/Alternation Alternation not def
-			} loop
+				UpperX LowerX sub abs Tolerance le 
+					{/Alternation //false def   StepsRemaining 2 gt {/StepsRemaining 2 def} if}
+					{/Alternation Alternation not def}
+				ifelse  % ... Tolerance le
+			} loop  % StepsRemaining
 		} {//false exit} ifelse  % LowerY UpperY different sides of 0
 	} repeat  % 1
 	end
