@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:25 Thursday 4th August 2022
+% This version 22:00 Sunday 7th August 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202208042225) def
+/ParametersVersionDateTimeAdobeFormat (D:202208072200) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -785,7 +785,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202208042225) def
+/SoftwareVersionDateTimeAdobeFormat (D:202208072200) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -3043,7 +3043,9 @@ currentdict /SmallCapsDict undef
 	{
 		/X0 Angle1 cos R mul X add def
 		/Y0 Angle1 sin R mul Y add def
-		X0 Y0   StartOperator dup /m eq exch /moveto eq or {moveto} {{lineto} stopped {moveto} if} ifelse
+		% https://groups.google.com/g/comp.lang.postscript/c/0Wf8UYb-Xqk/m/bT7NnP9fLWgJ
+		% https://groups.google.com/g/comp.lang.postscript/c/KPnF5bKwz5U/m/MLGrZFPfaGoJ
+		X0 Y0   StartOperator dup /m eq exch /moveto eq or {moveto} {{lineto} stopped {$error /newerror //false put  moveto} if} ifelse
 	} if  % Not /n (/n would mean do nothing as aleady at start of curve)
 
 	{
