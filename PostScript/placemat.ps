@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:00 Sunday 7th August 2022
+% This version 23:00 Tuesday 9th August 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202208072200) def
+/ParametersVersionDateTimeAdobeFormat (D:202208092300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -785,7 +785,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202208072200) def
+/SoftwareVersionDateTimeAdobeFormat (D:202208092300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -814,7 +814,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /ArcCosMinusOneThird 109.471220634490691369 def  % In degrees
 /ArcTanOneQuarter    14.03624346792647858289 def  % In degrees
 /ArcTanFiveEighths   32.00538320808349556079 def  % In degrees
-/Sqrt2Radians        81.0284684541395462599679 def  % In degrees
 /Infinity 32767 def  % 2^15-1, which in points ~= 455" ~= 38', so ~61% bigger than the ~283" diagonal of the 200"x200" maximum PDF page. Can be '8 exp 256.06251 mul' without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.40282*10^38.
 /InfinityNeg Infinity neg def
 /PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
@@ -3502,9 +3501,14 @@ currentdict /SmallCapsDict undef
 } bind def  % /ApproximatingCurve
 
 
-% Small steps at start. Peak curvature at Sqrt2 radians ~= 81.0 degrees, so that included.
-% If SpiralNumArms=5 and SpiralRadiusBetweenArms=30 then 2-degree point is ~=0.29mm from centre; 180-degree ~=26.5mm.
-/SpiralAngles [ 0 2 9 30 54  //Sqrt2Radians  111 144 180 ] def
+% Small steps at start. Includes points at which double and triple derivatives of curvature are zero.
+% If SpiralNumArms=5 and SpiralRadiusBetweenArms=30 then 3-degree point is ~=0.44mm from centre; 180-degree ~=26.5mm.
+/SpiralAngles [
+	0 3 10
+	31.085889445163445342842  % 201 sqrt 13 sub sqrt 90 mul Pi div, d2Curvature/dAng2 == 0
+	53.382058785269409276474  % 505 sqrt 19 sub sqrt 90 mul Pi div, d3Curvature/dAng3 == 0
+	79 108 142 180
+] def  % /SpiralAngles
 /SpiralAnglesLength SpiralAngles length def
 % Immediate dependencies: DeBugLevel; OutputToLog; PrinterEpsilon; Epsilon; DegreeInRadians.
 % CentreX CentreY RadiusMax NumArms RadiusBetweenArms AngOffset Clockwise InToOut StartOperator  ArchimedeanSpiralPath  -
@@ -4305,6 +4309,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 % /Left|/Center|/Right  /Top|/Middle|/Bottom  Size  /Radius|/Diameter|/Height|/Width  AngleOffset  NumPoints  NumStep  DrawLinesInside  AntiClockwise
 % ...    Star    dict, the dictionary containing /LeftX, /CenterX, /RightX, /BottomY, /CenterY, /TopY, /Radius, /InnerRadius, /AntiClockwise
+% Immediate dependencies: DeBugLevel
 /Star
 {
 	//DeBugLevel 30 le {(+Star) OutputToLog} if
@@ -4345,7 +4350,7 @@ currentdict /GlyphShowKnownAbsences undef
 	yyMeaning /Bottom eq {/y yy FromCenterMinY r mul sub def} if
 	yyMeaning /Top    eq {/y yy FromCenterMaxY r mul sub def} if
 
-	% See www.jdawiseman.com/papers/easymath/surds_star_inner_radius.html
+	% See http://www.jdawiseman.com/papers/easymath/surds_star_inner_radius.html
 	/InnerRadius  m 180 mul n div cos  m 1 sub 180 mul n div cos  div  r mul def
 	DrawLinesInside
 	{
