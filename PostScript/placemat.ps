@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:45 Thursday 11th August 2022
+% This version 19:30 Tuesday 16th August 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202208112045) def
+/ParametersVersionDateTimeAdobeFormat (D:202208161930) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -532,6 +532,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /FillTextAnglePlaceNames 30 def
 /FillPrioritiseSmallFileSizeOverPortability true def
 
+/DropletsReversedHighlight {-1 NameNum eq} def  % Default always false. Typical use case is testing for being 0.
 /DropletsPathLength 12 def
 /DropletsAverageSeparation DropletsPathLength 2 mul def  % If <10 then far too crowded. And <4, such that there are >65k droplets on an A3, might cause stack overflow.
 /DropletsAverageMaxTweakPlusMinus {DropletsAverageSeparation 0.25 mul} bind def
@@ -786,7 +787,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202208112045) def
+/SoftwareVersionDateTimeAdobeFormat (D:202208161930) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -9947,6 +9948,40 @@ currentdict /GlyphShowKnownAbsences undef
 			} def  % /PaintProc
 			end  % DropletsForms SheetNum get
 		} bind for  % SheetNum
+		/DropletsReversedForms  [ NumSheets {5 dict} repeat ] def
+		0  1  NumSheets 1 sub
+		{
+			/SheetNum exch def
+			//false //false //false //false PaperType Orientation SetPaperSize   //true DefStoreMgns
+			DropletsReversedForms SheetNum get begin
+			/SheetNum SheetNum def
+			/FormType 1 def
+			/BBox [ MgnL 0.5 sub  MgnB 0.5 sub  PageWidth MgnR 0.5 sub sub  PageHeight MgnB 0.5 sub sub ] def
+			/Matrix matrix identmatrix def
+			/PaintProc
+			{
+				//DeBugLevel 100 le {(+DropletsReversedForms: PaintProc) OutputToLog} if
+				9 dict begin
+				/SheetNum get /SheetNum exch def
+				% () = (DropletsWhichReversed = [) = DropletsWhichReversed {==} forall (]) = () =
+				//false //false //false //false PaperType Orientation SetPaperSize   //true DefStoreMgns
+				ClipSave  MgnL  MgnB  PageWidth MgnL MgnR add sub  PageHeight MgnB MgnT add sub  rectclip
+				1 setlinecap  1 setlinejoin  [] 0 setdash
+				DropletsWhichReversed SheetNum get
+				{
+					dup type /integertype eq
+					{
+						DropletPaths SheetNum get exch get /ThisDroplet exch def
+						0  4  ThisDroplet length 1 sub {ThisDroplet 1 index 2 getinterval aload pop   3 -1 roll 0 eq {moveto} {lineto} ifelse} for
+						[ DropletsOuterWidthEnd DropletsOuterWidthStart 0.96 ] Max dup  2.5 mul setlinewidth 1 0 0 setrgbcolor GSave stroke GRestore 1.75 mul setlinewidth 1 setgray stroke
+					} {pop exit} ifelse  % /integertype
+				} forall  % DropletsWhichReversed ...
+				ClipRestore
+				end
+				//DeBugLevel 100 le {(-DropletsReversedForms: PaintProc) OutputToLog} if
+			} def  % /PaintProc
+			end  % DropletsReversedForms SheetNum get
+		} bind for  % SheetNum
 		UndefMgns
 		currentdict /SheetNum undef
 
@@ -12289,6 +12324,7 @@ currentdict /GlyphShowKnownAbsences undef
 		Droplets
 		{
 			//DeBugLevel 75 le {( GlassesPageInnerLoop: Droplets) OutputToLog} if
+			DropletsReversedHighlight {DropletsReversedForms SheetNum get execform} if  % Only pn Glasses, so that DropletsReversedHighlight can be a NameNum test.
 			DropletsForms SheetNum get execform
 		} if  % Droplets
 
