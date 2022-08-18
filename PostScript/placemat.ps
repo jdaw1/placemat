@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:30 Tuesday 16th August 2022
+% This version 22:30 Thursday 18th August 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202208161930) def
+/ParametersVersionDateTimeAdobeFormat (D:202208182230) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -787,7 +787,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202208161930) def
+/SoftwareVersionDateTimeAdobeFormat (D:202208182230) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -2487,7 +2487,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 	<< exch /UpdatePageCount exch  /i 0 >> begin
 	ShownPages TestingMaxNumPagesToShow lt
 	{
-		OneCircleSuppressOtherPageTypes
+		OneCircleSuppressOtherPageTypes  % Alas, https://groups.google.com/g/comp.lang.postscript/c/7a_jxsF6Yt8/m/eHyYcwaUwQoJ
 			{/OneCircle  TypeOfPagesBeingRendered ne}
 			{BottleWrapSuppressOtherPageTypes {/BottleWrap TypeOfPagesBeingRendered ne} {//false} ifelse}
 		ifelse
