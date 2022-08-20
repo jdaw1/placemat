@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:30 Thursday 18th August 2022
+% This version 12:40 Saturday 20th August 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202208182230) def
+/ParametersVersionDateTimeAdobeFormat (D:202208201240) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -787,7 +787,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202208182230) def
+/SoftwareVersionDateTimeAdobeFormat (D:202208201240) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -11135,7 +11135,7 @@ currentdict /GlyphShowKnownAbsences undef
 						/WithinCluster exch def
 						/ThisRowTotalRow  VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU  WithinPage VoteRecorderThisSheetLength 1 sub eq  and  def
 						/WithinTitles ThisRowTotalRow {//null} {VoteRecorderThisSheet ClusterNum GetEU WithinCluster GetEU} ifelse def
-						WithinTitles 0 ge
+						WithinTitles dup type /integertype eq {0 ge} {pop //false} ifelse
 						{
 							/ThisVoteRecorderTitle ThisRowTotalRow {()} {TitlesVoteRecorder WithinTitles get} ifelse  def
 							/ThisVoteRecorderSubtitle ThisRowTotalRow {()} {SubtitlesVoteRecorder WithinTitles get} ifelse  def
@@ -11145,7 +11145,7 @@ currentdict /GlyphShowKnownAbsences undef
 							SubtitlesFont  VoteRecorderTitlesFontSize  selectfont
 							VoteRecorderSubtitleWidths  WithinPage  /ThisVoteRecorderSubtitle load StringPathBBox pop exch pop exch sub
 							/VoteRecorderSubtitleWidthsMax dup load 2 index lt {1 index store} {pop} ifelse   put
-						} if  % WithinTitles 0 ge
+						} if  % WithinTitles ...0 ge
 						/WithinPage WithinPage 1 add def
 					} for  % WithinCluster, WithinTitles
 				} for  % ClusterNum
