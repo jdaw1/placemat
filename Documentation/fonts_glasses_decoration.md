@@ -310,7 +310,7 @@ But being maximally fussy can cause distillation to be very slow in Adobe Distil
 The balance between these can be influenced by the parameter `FillTextPedantry`m which can take one of three values.  
 * `/Quick`, causing the judgement about whether to paint the FillText to be done purely on the bounding boxes of the two paths. So more FillTexts are painted than necessary, sometimes many more, slowing the printer.  
 * `/Sensible`, causing the judgement to be done by the PostScript function `infill`. Generally this is good. But if the edging of the FillText would be inside, and would be inside by so much that it wouldn&rsquo;t be covered by something like `InlineTitlesBlackWidth`, then that small edging would be omitted. Choosing `/Sensible` seems to give optimal output, for only slightly slow distillation: hence its name.  
-* `/Fussy` tests sing `instroke`, which is much slower to distill, but pedantically correct.
+* `/Fussy` tests using `instroke`, which is much slower to distill, but pedantically correct.
 
 For example, in a draft placemat with `FillTitles`, changing `FillTextPrintQuickerDistillSlower` from `/Quick` to `/Sensible` to `/Fussy` decreased the file size 399k to 368k to 383k, but increased the distill time from 25 seconds to 47 seconds to 198 seconds. 
 And it might be that some printers are easily overwhelmed, so `/Quick` won&rsquo;t print at all. 
