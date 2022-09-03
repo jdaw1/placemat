@@ -305,10 +305,15 @@ The formatting of the `PlaceNames` generally matches that of the Titles, except 
 This can cause difficulties for some software; this can cause difficulties for some printers.
 
 Use of `FillTexts` makes distillation slow, and produces files that can be too complicated for some printers. 
-The balance between these two can be influenced by the Boolean `FillTextPrintQuickerDistillSlower`. 
-For example, in a draft placemat with `FillTitles` and `PlaceNames`, changing `FillTextPrintQuickerDistillSlower` from `false` to `true` decreased the file size from 1013k to 871k, but increased the distill time from 64 seconds to 40 minutes. 
-If distilling the PostScript via the web the latter would definitely have timed out the browser. 
-And it might be that, on some printers, the print-slowly option (`false`) won&rsquo;t print at all, whereas the print-quickly option (`true`) will. 
+But being maximally fussy can cause distillation to be very slow in Adobe Distiller, and even slower in GhostScript ([bug&nbsp;report](https://bugs.ghostscript.com/show_bug.cgi?id=695906)). 
+
+The balance between these can be influenced by the parameter `FillTextPedantry`m which can take one of three values.  
+* `/Quick`, causing the judgement about whether to paint the FillText to be done purely on the bounding boxes of the two paths. So more FillTexts are painted than necessary, sometimes many more, slowing the printer.  
+* `/Sensible`, causing the judgement to be done by the PostScript function `infill`. Generally this is good. But if the edging of the FillText would be inside, and would be inside by so much that it wouldn&rsquo;t be covered by something like `InlineTitlesBlackWidth`, then that small edging would be omitted. Choosing `/Sensible` seems to give optimal output, for only slightly slow distillation: hence its name.  
+* `/Fussy` tests sing `instroke`, which is much slower to distill, but pedantically correct.
+
+For example, in a draft placemat with `FillTitles`, changing `FillTextPrintQuickerDistillSlower` from `/Quick` to `/Sensible` to `/Fussy` decreased the file size 399k to 368k to 383k, but increased the distill time from 25 seconds to 47 seconds to 198 seconds. 
+And it might be that some printers are easily overwhelmed, so `/Quick` won&rsquo;t print at all. 
 But some printers can&rsquo;t cope with either; or the resolution is insufficient for the small grey text to look entirely satisfactory. 
 So test your printer; do not assume that anything will work first time; and do not assume that all larger more expensive printers cope better.
 

@@ -1,6 +1,6 @@
 %!PS
 
-% This version 12:40 Saturday 20th August 2022
+% This version 13:30 Saturday 3rd September 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202208201240) def
+/ParametersVersionDateTimeAdobeFormat (D:202209031300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -319,7 +319,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /SpiralCentreFromCentreAngle 0 def
 /SpiralStrokeCode {stroke} def
 
-/FillTextPrintQuickerDistillSlower false def  % Production version ==> true
+/FillTextPedantry /Sensible def  % /Quick, /Sensible, /Fussy. Production version ==> /Sensible or /Fussy.
 /FillTitles false def
 /FillAbovetitles {FillTitles} def
 /FillBelowtitles {FillTitles} def
@@ -787,7 +787,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202208201240) def
+/SoftwareVersionDateTimeAdobeFormat (D:202209031300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -2428,7 +2428,7 @@ DeBugLevel 100 le	 % This logging introduced in May 2011. In December 2021 decid
 			/OutlineTitlesMultiplierWhite /OutlineTitlesMultiplierBlack /DecanterLabelsShowOutlineTitles /OutlineTitlesMaxNum
 		]} if  % ... OutlineTitles ...
 		AnyFillTextingAtAll {[
-			/FillTitles /FillAbovetitles /FillBelowtitles /FillOvertitles /FillPlaceNames /FillTextAngle /FillTexts /FillTextPrintQuickerDistillSlower /FillPrioritiseSmallFileSizeOverPortability
+			/FillTitles /FillAbovetitles /FillBelowtitles /FillOvertitles /FillPlaceNames /FillTextAngle /FillTexts /FillTextPedantry /FillPrioritiseSmallFileSizeOverPortability
 			/FillTextNumSpaces /FillTextNumOutlines /FillTextMinFontSizeAbsolute /FillTextMinFontSizeProportionLargestTitleAboveBelowOver
 			{PlaceNames} MightBeTrue {/FillTextPlaceNames /FillTextAnglePlaceNames} if
 		]} if  % ... FillTitles ...
@@ -4185,7 +4185,7 @@ currentdict /GlyphShowKnownAbsences undef
 /RepeatClippedWithin
 {
 	//DeBugLevel 40 le {(+RepeatClippedWithin) OutputToLog} if
-	38 dict begin
+	39 dict begin
 	/OtherColor exch def
 	/InnerMostColor exch def
 	/NumOutlines exch def
@@ -4202,7 +4202,7 @@ currentdict /GlyphShowKnownAbsences undef
 	{
 		GSave  clip
 
-		/Filltext load StringPathBBox  /FilltextTa exch def  /FilltextRa exch def  /FilltextBa exch def  /FilltextLa exch def
+		matrix currentmatrix /Filltext load GSave 16384 dup scale newpath 0 0 moveto  //true Angle rotate CharPathRecursive setmatrix PathBBox GRestore  [/FilltextTa /FilltextRa /FilltextBa /FilltextLa] {exch 16384 div def} forall
 
 		PathBBox /ury exch def  /urx exch def  /lly exch def  /llx exch def
 		Angle rotate
@@ -4213,23 +4213,20 @@ currentdict /GlyphShowKnownAbsences undef
 		/AngleSin Angle sin def
 		/Xa  X AngleCos mul  Y AngleSin mul  sub  def
 		/Ya  Y AngleCos mul  X AngleSin mul  add  def
-		/SlowInsidenessTest FillTextPrintQuickerDistillSlower def
 		/WidthPower //GoldenRatio def
 		/FilltextSpacing  ( ) stringwidth pop  FillTextNumSpaces mul  def
 		/Xstep  FilltextR FilltextL sub FilltextSpacing add  def
 
-		SlowInsidenessTest
-		{
-			{//true upath} Stopped {/SlowInsidenessTest //false def} {/CurrentClipUPathA exch def} ifelse
-		} if  % SlowInsidenessTest
+		/TestStandard FillTextPedantry def
+		TestStandard /Quick ne { {//true upath} Stopped {/TestStandard /Quick def} {/CurrentClipUPathA exch def} ifelse} if
 
 		newpath  1 setlinecap  1 setlinejoin  [] 0 setdash
 
-		NumOutlines  -1  0
-		{
-			dup 2 mod 0 eq {InnerMostColor} {OtherColor} ifelse
-			dup 0 gt
-				{WidthPower exch exp 1 sub  WidthPower 1 sub  div  WidthPower sqrt sqrt mul}
+		% Could do a separate test for each HalfLineWidth. Slows execution by a factor of, almost always, at least three, to prune very few CharPathRecursive's.
+		/GoodStarts
+		[
+			NumOutlines 0 gt
+				{WidthPower NumOutlines exp 1 sub  WidthPower 1 sub  div  WidthPower sqrt sqrt mul}
 				{pop 0}
 			ifelse
 			FilltextLineStep 12 div dup 1 lt {pop 1} if mul  dup setlinewidth 2 div /HalfLineWidth exch def
@@ -4252,15 +4249,12 @@ currentdict /GlyphShowKnownAbsences undef
 							FilltextRa add HalfLineWidth add  llx  gt  exch
 							FilltextLa add HalfLineWidth sub  urx  lt  and
 							{
-								SlowInsidenessTest
+								TestStandard /Quick ne
 								{
-									newpath  Xfa Yfa moveto  /Filltext load  HalfLineWidth 0 le  CharPathRecursiveMoveto
-									/CurrentClipUPathA load  HalfLineWidth 0 le {infill} {instroke} ifelse
-								} {//true} ifelse  % SlowInsidenessTest
-								{
-									newpath Xfa Yfa moveto
-									/Filltext load  HalfLineWidth 0 le {//true  CharPathRecursiveMoveto fill} {//false CharPathRecursiveMoveto stroke} ifelse
-								} if  % SlowInsidenessTest {...} {//true} ifelse
+									newpath  Xfa Yfa moveto  /Filltext load  HalfLineWidth 0 le  CharPathRecursive
+									/CurrentClipUPathA load  HalfLineWidth 0 gt TestStandard /Fussy eq and {instroke} {infill} ifelse
+								} {//true} ifelse  % TestStandard
+								{Xfa Yfa} if  % TestStandard {...} {//true} ifelse
 							} if  % in original x range
 						} if  % in original y range
 					} if  % Xfa in angle-rotated range
@@ -4268,6 +4262,22 @@ currentdict /GlyphShowKnownAbsences undef
 					Xfa urxa ge {exit} if
 				} loop  % Xfa
 			} for  % Yfa
+		] def  % /GoodStarts
+
+		NumOutlines  -1  0
+		{
+			dup 2 mod 0 eq {InnerMostColor} {OtherColor} ifelse
+			dup 0 gt
+				{WidthPower exch exp 1 sub  WidthPower 1 sub  div  WidthPower sqrt sqrt mul}
+				{pop 0}
+			ifelse
+			FilltextLineStep 12 div dup 1 lt {pop 1} if mul  dup setlinewidth 2 div /HalfLineWidth exch def
+
+			0  2  GoodStarts length 1 sub
+			{
+				dup GoodStarts exch get exch  1 add GoodStarts exch get  moveto
+				/Filltext load  HalfLineWidth 0 le {//true CharPathRecursive fill} {//false CharPathRecursive stroke} ifelse
+			} for  % ... GoodStarts length ...
 		} for  % NumOutlines  -1  0
 
 		GRestore
@@ -7027,11 +7037,29 @@ currentdict /GlyphShowKnownAbsences undef
 	//DeBugLevel 40 le {(-CirclearrayInSemiRoundedRectangle) OutputToLog} if
 } bind def  % /CirclearrayInSemiRoundedRectangle
 
+/TimeIntervalString
+{
+	1 dict begin
+	dup 0 lt {cvr 4294967296.0 add} if  % PLRM3 p714 re usertime, p739 table B.1. Note 2^31 ms ~= 24 days + 20 hours + 31 minutes.
+	1000 div /usertimeInterval exch def
+	mark
+	1 {
+		( ~= ) usertimeInterval ( seconds)
+		usertimeInterval       60 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( minutes)} {pop exit} ifelse  % There have been some distillation times of multiple minutes.
+		usertimeInterval     3600 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( hours)  } {pop exit} ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
+		usertimeInterval    86400 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Aug 2022, JDAW's longest distillation time has been ~=22 minutes.
+		usertimeInterval  2629800 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. Likely impossible, as exceeding usertime's integer.
+		usertimeInterval 31557600 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( years)  } {pop exit} ifelse  % Years?! Something is very amiss.
+	} repeat  % 1
+	end
+	ConcatenateToMark
+} bind def  % TimeIntervalString
+
 % Do stuff: call the routines
 
 % This open curly brace starts code passed to stopped
 {
-	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: just before error checking, execution time ~= ) usertime usertimeStart sub 1000 div (s) ConcatenateToMark OutputToLog} if
+	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: just before error checking, execution time ) usertime usertimeStart TimeIntervalString ConcatenateToMark OutputToLog} if
 	% Elementary error checking
 	/ErrorFlag //false def
 
@@ -7753,11 +7781,16 @@ currentdict /GlyphShowKnownAbsences undef
 		} for  % WithinPage, WithinTitles
 	} bind for  % SheetNum
 
+
+	/CirclearraysFontSizesNext [ SheetLengths { [ exch {0} repeat] } forall ] def
+
 	% -  CirclearraysNScore  Score
 	% Score = Avg of CirclearraysN * CirclearraysW * CirclearraysFontSizes^2 / (Radii*TwoPi)  ~=  average area of painted Circlearrays / (Radius*TwoPi)
 	% We maximise this 'area', or ink usage. So if shrinking the font size adds enough to N to increase ink, it is done.
 	% Consider extreme case. Reducing font size by 30% will reduce area per instance by 51%. Going from 1.999 copies to 2 would almost offset that.
 	% But the multiplication by 1/0.7 won't get it above 2.85 instances, so the _maximum_ reduction in font size is less than 30%. Hence optimisation will always terminate.
+	% CirclearraysNScore is not a pure functional function. De facto input is CircletextsMinCopiesIndividually.
+	% Output is by populating CirclearraysFontSizes, CircletextMaxFontSizes, CirclearraysBMin, CirclearraysDescenderMin, RadiiCirclearrayBaseline.
 	/CirclearraysNScore
 	{
 		6 dict begin
@@ -7784,12 +7817,7 @@ currentdict /GlyphShowKnownAbsences undef
 					CircletextsBasicNC  CircletextsMinCopiesIndividually SheetNum get WithinPage get floor  lt
 					{
 						//TwoPi Radii SheetNum get mul  CircletextsMinCopiesIndividually SheetNum get WithinPage get floor CirclearraysPaddedW SheetNum get WithinPage get mul CirclearraysBMin SheetNum get //TwoPi mul sub  div
-					}{
-						CircletextMaxFontSizeMayBeSlightlyExceeded   CirclearraysPaddedW SheetNum get WithinPage get 0 gt  and
-						{
-							//TwoPi Radii SheetNum get mul  CircletextsBasicNC floor CirclearraysPaddedW SheetNum get WithinPage get mul CirclearraysBMin SheetNum get //TwoPi mul sub  div
-						} {CircletextsBasicFS} ifelse  % CircletextMaxFontSizeMayBeSlightlyExceeded ...
-					} ifelse  % CircletextsBasicNC ... lt
+					} {CircletextsBasicFS} ifelse  % CircletextsBasicNC ... lt
 					CircletextsBasicFS //SqrtSqrt2 mul  2 {2 copy gt {exch} if pop} repeat   end  % Embedded constant: 'Slightly' is a factor of not more than the fourth root of two.
 				} for  % WithinPage, WithinTitles
 				CircletextMaxFontSizes exch SheetNum exch put
@@ -7917,13 +7945,13 @@ currentdict /GlyphShowKnownAbsences undef
 	64  CircletextsTweakSize {-1} {1} ifelse  0
 	{
 		/CirclearraysAnyImprovement //false def
-		/CirclearraysUnroundedNBest [ CirclearraysUnroundedN {[ exch {} forall ]} forall ] def
+		/CirclearraysUnroundedNBest [ CirclearraysUnroundedN {[ exch {} forall ]} forall ] def  % Depth-2 copy
 		/CirclearraysProtoBestFontSize 0 def
 		/CirclearraysProtoBestScore //null def
 		/CirclearraysProtoBestSheetNum //null def
 		/CirclearraysProtoBestWithinPage //null def
 		/CirclearraysProtoBestMinCopies //null def
-		0 eq {(Warning: CirclearraysNScore not converging. Please submit an issue to http://github.com/jdaw1/placemat/issues/ . Execution continuing.) OutputToLog} if
+		0 eq {(Warning: CirclearraysNScore not converging. Execution continuing, but please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog} if
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
@@ -12389,6 +12417,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 		% TitleAboveBelowOverForms
 		//DeBugLevel 75 le {( GlassesPageInnerLoop: TitleAboveBelowOverForms) OutputToLog} if
+		/usertimeStartLocal usertime def
 		0  1  SheetLengths SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
@@ -12420,6 +12449,11 @@ currentdict /GlyphShowKnownAbsences undef
 		} for  % WithinPage, WithinTitles
 		currentdict /WithinPage undef
 		currentdict /WithinTitles undef
+		usertime usertimeStartLocal sub 1000 gt
+		{
+			mark ( GlassesPageInnerLoop, TitleAboveBelowOverForms: NameNum=) NameNum (; SheetNum=) SheetNum
+			(; execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
+		} if  % usertime usertimeStartLocal sub 1000 gt
 
 		% Names
 		SideBySideGlassesTastingNotes not
@@ -12474,7 +12508,9 @@ currentdict /GlyphShowKnownAbsences undef
 	/TastingNotesInnerLoop
 	{
 		//DeBugLevel 100 le {(+TastingNotesInnerLoop) OutputToLog} if
-		19 dict begin
+		20 dict begin
+
+		/usertimeStartLocal usertime def
 
 		TastingNotesReplaceNameWithPageNum {/ThisName TastingNotesPageNumCompoundString def} if
 
@@ -12490,15 +12526,11 @@ currentdict /GlyphShowKnownAbsences undef
 			//false DefStoreMgns
 		} if  % ShowHeadersAndFooters
 
-		//DeBugLevel 75 le {( TastingNotesInnerLoop: TastingNoteForms) OutputToLog} if
-		TastingNoteForms TNSheetNum get
-		0  1  GlassesOnTastingNotePages TNSheetNum GetEU length 1 sub
-		{
-			/WithinPage exch def
-			/WithinTitles GlassesOnTastingNotePages TNSheetNum GetEU WithinPage GetEU def
-		} for  % WithinPage, WithinTitles
-		execform    currentdict /WithinPage undef  currentdict /WithinTitles undef
 		/ThisNameASCII /ThisName load ASCIIfy def
+
+		//DeBugLevel 75 le {( TastingNotesInnerLoop: TastingNoteForms) OutputToLog} if
+		TastingNoteForms TNSheetNum get   execform
+		currentdict /WithinPage undef  currentdict /WithinTitles undef
 		12 dict begin
 		0  1  GlassesOnTastingNotePages TNSheetNum GetEU length 1 sub
 		{
@@ -12567,6 +12599,12 @@ currentdict /GlyphShowKnownAbsences undef
 		/ThisName load  StringPathBBox  pop  /ThisNameR exch def  /ThisNameB exch def  /ThisNameL exch def
 		NamesIsLeftHanderTN NameNum get {MgnL ThisNameL sub} {PageWidth MgnR sub ThisNameR sub} ifelse  MgnB ThisNameB sub  moveto
 		/ThisName load ShowRecursive
+
+		usertime usertimeStartLocal sub 1000 gt
+		{
+			mark ( TastingNotesInnerLoop, TastingNoteForms: NameNum= ) NameNum (; name=") ThisNameASCII ("; TNSheetNum=) TNSheetNum
+			(; execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
+		} if  % usertime usertimeStartLocal sub 1000 gt
 
 		end
 		//DeBugLevel 100 le {(-TastingNotesInnerLoop) OutputToLog} if
@@ -12658,7 +12696,7 @@ currentdict /GlyphShowKnownAbsences undef
 	/PrePourInnerLoop
 	{
 		//DeBugLevel 100 le {(+PrePourInnerLoop) OutputToLog} if
-
+		/usertimeStartLocal usertime def
 		CircleNonEmpty SheetNum get WithinPage get {PrePourForms SheetNum get WithinPage get  execform} if
 
 		ShowHeadersAndFooters
@@ -12667,6 +12705,11 @@ currentdict /GlyphShowKnownAbsences undef
 			HeadersAndFooters PaintHeadersFooters
 		} if  % ShowHeadersAndFooters
 
+		usertime usertimeStartLocal sub 1000 gt
+		{
+			mark ( PrePourInnerLoop, PrePourForms: SheetNum=) SheetNum (; WithinPage=) WithinPage (; WithinTitles=) WithinTitles
+			(; title~=") Titles WithinTitles get ASCIIfy ("; execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
+		} if  % usertime usertimeStartLocal sub 1000 gt
 		//DeBugLevel 100 le {(-PrePourInnerLoop) OutputToLog} if
 	} bind def  % /PrePourInnerLoop
 
@@ -12707,8 +12750,7 @@ currentdict /GlyphShowKnownAbsences undef
 		} {pop pop} ifelse  % EmptyPageString non-empty
 		/TypeOfPagesBeingRendered /Empty store ShowPage end
 	} if  % EmptyGlassesPageAtStart
-	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: starting outermost page-rendering loop: execution time ~= ) usertime usertimeStart sub 1000 div (s) ConcatenateToMark OutputToLog} if
-	/ShowHeadersAndFooters //true def
+	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: starting outermost page-rendering loop: execution time ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if	/ShowHeadersAndFooters //true def
 	UsedPageOrderings
 	{
 		/ThisPageOrdering exch def
@@ -12925,12 +12967,7 @@ currentdict /GlyphShowKnownAbsences undef
 						PlaceNamesPaperType ThisPaperType  eq   PageOrderingPlaceNames PlaceNameSetNum GetEU  ThisPageOrdering  eq   and
 						{
 							/ThisName NamesPlaceNames PlaceNameSetNum GetEU NameNum get def
-							AnyFillTextingAtAll
-							{
-								mark  ( Main: +PlaceName: NameNum = ) NameNum
-								(; PlaceNameSetNum = ) PlaceNameSetNum
-								(; execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog
-							} if  % AnyFillTextingAtAll
+							/usertimeStartLocal usertime def
 							matrix currentmatrix
 							/TypeOfPagesBeingRendered /PlaceName store
 							//false  //false  MirrorPagesPlaceNames PlaceNameSetNum GetEU  //true  PlaceNamesPaperType  PlaceNamesOrientation  SetPaperSize
@@ -12939,12 +12976,11 @@ currentdict /GlyphShowKnownAbsences undef
 							PlaceNamesInnerLoop
 							//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 							setmatrix   ShowPage
-							AnyFillTextingAtAll
+							usertime usertimeStartLocal sub 1000 gt
 							{
-								mark  ( Main: -PlaceName: NameNum = ) NameNum
-								(; PlaceNameSetNum = ) PlaceNameSetNum
-								(; execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog
-							} if  % AnyFillTextingAtAll
+								(\n) ( Main: -PlaceName: NameNum=) NameNum (; PlaceNameSetNum=) PlaceNameSetNum
+								(; execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
+							} if  % usertime usertimeStartLocal sub 1000 gt
 						} if  % ... ThisPaperType ... ThisPageOrdering ... and
 					} if  % NameNum  NamesPlaceNames PlaceNameSetNum GetEU length  lt
 				} for  % /PlaceNameSetNum
@@ -15056,19 +15092,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 	EpilogueCode
 
-	mark (Execution time ~= ) usertime usertimeStart sub
-	dup 0 lt {cvr 4294967296.0 add} if  % PLRM3 p714 re usertime, p739 table B.1. Note 2^31 ms ~= 24 days + 20 hours + 31 minutes.
-	1000 div ( seconds)
-	1 {
-		1 index 60      div dup abs 0.5 ge   {( ~= ) exch ( minutes)}   {pop exit}   ifelse  % There have been a few distillation times of multiple minutes.
-		1 index 60      div dup abs 0.5 ge   {( ~= ) exch ( hours)  }   {pop exit}   ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
-		1 index 24      div dup abs 0.5 ge   {( ~= ) exch ( days)   }   {pop exit}   ifelse  % As of Jan 2022, JDAW's longest distillation time has been ~=22 minutes.
-		1 index 30.4375 div dup abs 0.5 ge   {( ~= ) exch ( months) }   {pop exit}   ifelse  % Julian year of 365.25 days, divided by 12. Likely impossible, as exceeding usertime's integer.
-		1 index 12      div dup abs 0.5 ge   {( ~= ) exch ( years)  }   {pop exit}   ifelse  % Years?! Something is very amiss.
-	} repeat  % 1
-	counttomark 1 sub -1 0 {/i exch def i index type /realtype eq {i 1 add -1 roll dup 1 le {2} {1} ifelse FormatDecimalPlaces i 1 add 1 roll} if} for
-	(, excluding time for parameter assignments and log page(s).)
-	ConcatenateToMark  OutputToLog
+	mark (Execution time) usertime usertimeStart sub TimeIntervalString (, excluding time for parameter assignments and log page(s).) ConcatenateToMark  OutputToLog
 
 	/EndError //false def
 	count              dup  0 eq {(and is :-\))} {/EndError //true store (but isn't -- Error!)} ifelse  (     = count:              should = 0                     \n)   dup 0  5 -1 roll  ToString  putinterval dup 39 4 -1 roll putinterval  mark
