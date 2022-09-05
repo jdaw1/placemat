@@ -168,7 +168,7 @@ Extracts of code that made the image:
 In the image optimistically showing D78, the Titles and Belowtitles contain small random stars and flowers, with `InlineTitlesMaxNumberContours` at 3. 
 
 These are enabled by Booleans `ShapesInTitles`, with obvious variations `ShapesInAbovetitles`, `ShapesInBelowtitles`, `ShapesInOvertitles`, and `ShapesInPlaceNames`. 
-The array `ShapesToUse` defaults to `[/Flower /Star /Heart]`, and must contain at least one of these.
+The array `ShapesToUse` defaults to `[ /Flower /Star /Heart /Circle ]`, and must contain at least one of these.
 
 Each shape is filled with the code `ShapesTitlesFill` (or `ShapesAbovetitlesFill`, `ShapesBelowtitlesFill`, `ShapesOvertitlesFill`), which, if the shapes are `fill`ed, should end with a `fill`. 
 After which `ShapesTitlesStroke` (or `ShapesAbovetitlesStroke`, `ShapesBelowtitlesStroke`, `ShapesOvertitlesStroke`) which should end with a `stroke`.

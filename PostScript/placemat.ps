@@ -1,6 +1,6 @@
 %!PS
 
-% This version 13:30 Saturday 3rd September 2022
+% This version 19:30 Monday 5th September 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202209031300) def
+/ParametersVersionDateTimeAdobeFormat (D:202209051930) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -284,7 +284,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /ShapesInBelowtitles {ShapesInTitles} def
 /ShapesInOvertitles  {ShapesInTitles} def
 /ShapesInPlaceNames  {ShapesInTitles} def
-/ShapesToUse [/Flower /Star /Heart] def  % At least one of: /Flower /Star /Heart
+/ShapesToUse [ /Flower /Star /Heart /Circle ] def  % At least one of: /Flower /Star /Heart /Circle
 /ShapesStarsPointsAndStepsArray [[5 2] [6 2] [7 2] [7 3] [8 3]] def  % Less-polygonal more-pointy: [[3 1.31844] [4 1.79214] [5 2.27823] [6 2.77012] [7 3.26502] [8 3.76162] [9 4.25925]]
 
 /CrossHatchingOutside false def
@@ -787,7 +787,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202209031300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202209051930) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -990,7 +990,7 @@ currentdict /ShellSortGapsLength1Subs undef
 				Y 0 eq {X //true exit} if
 				Y 0 gt LowerY 0 gt and  Y 0 lt LowerY 0 lt and  or {/LowerX /LowerY} {/UpperX /UpperY} ifelse Y def X def
 				/StepsRemaining   StepsRemaining 1 sub  def
-				UpperX LowerX sub abs Tolerance le 
+				UpperX LowerX sub abs Tolerance le
 					{/Alternation //false def   StepsRemaining 2 gt {/StepsRemaining 2 def} if}
 					{/Alternation Alternation not def}
 				ifelse  % ... Tolerance le
@@ -4110,6 +4110,7 @@ currentdict /GlyphShowKnownAbsences undef
 	] dup dup length 1 sub 0 exch getinterval ShuffleArray pop  % The shuffling removes the apparent direction caused by overlapping
 	{
 		aload pop /ShapesIntY exch def /ShapesIntX exch def
+		0 setgray  0.48 setlinewidth  0 setlinejoin  1 setlinecap  [] 0 setdash
 		/Shapes_rand_X rand def   /Shapes_rand_Y rand def   /Shapes_rand_R rand def  % Saved for possible use by ShapesTitlesFill | ShapesTitlesStroke
 		/ThisShape ShapesToUse  dup length dup 1 le {1 sub} {rand exch mod} ifelse  get  def
 		ShapesIntY 0 eq  ShapesIntX 0 eq  and
@@ -4120,50 +4121,50 @@ currentdict /GlyphShowKnownAbsences undef
 			/ThisShapeRadius Shapes_rand_R //RandMax div ShapesEnclosingCircleRadiusMax ShapesEnclosingCircleRadiusMin sub mul ShapesEnclosingCircleRadiusMin add def
 		} ifelse  % At centre?
 
-		/PerhapsShow
-			x 0.8 ThisShapeRadius mul add  llx  gt       x 0.8 ThisShapeRadius mul sub  urx  lt  and  % Can't compare to RadiiCirclearrayInsideUsableTAB because might be a PlaceName page.
-			y 0.8 ThisShapeRadius mul add  lly  gt  and  y 0.8 ThisShapeRadius mul sub  ury  lt  and  % The 0.8s reject some of the inelegant cases where only a thin sliver of the shape is painted.
-			x ThisShapeRadius add  OuterRegionLlx  gt and  x ThisShapeRadius sub  OuterRegionUrx  lt and  % These tests might be redundant.
-			y ThisShapeRadius add  OuterRegionLly  gt and  y ThisShapeRadius sub  OuterRegionUry  lt and  % These tests might be redundant.
-		def  % /PerhapsShow = some of shape in T|A|B|O's bounding box
-
-		/Star ThisShape eq
+		x 0.8 ThisShapeRadius mul add  llx  gt       x 0.8 ThisShapeRadius mul sub  urx  lt  and  % Can't compare to RadiiCirclearrayInsideUsableTAB because might be a PlaceName page.
+		y 0.8 ThisShapeRadius mul add  lly  gt  and  y 0.8 ThisShapeRadius mul sub  ury  lt  and  % The 0.8s reject some of the inelegant cases where only a thin sliver of the shape is painted.
+		x ThisShapeRadius add  OuterRegionLlx  gt and  x ThisShapeRadius sub  OuterRegionUrx  lt and  % These tests might be redundant.
+		y ThisShapeRadius add  OuterRegionLly  gt and  y ThisShapeRadius sub  OuterRegionUry  lt and  % These tests might be redundant.
 		{
-			ShapesIntY 0 ne ShapesIntX 0 ne or {rand //RandMax div 360 mul} {0} ifelse
-			ShapesStarsPointsAndStepsArray dup length rand exch mod get aload pop
-			PerhapsShow
+			//false
+			/Circle ThisShape eq {x y ThisShapeRadius 0 360 arc closepath  pop //true} if
+
+			/Star ThisShape eq
 			{
+				ShapesIntY 0 ne ShapesIntX 0 ne or {rand //RandMax div 360 mul} {0} ifelse
+				ShapesStarsPointsAndStepsArray dup length rand exch mod get aload pop
 				x y moveto   /Center  /Middle  ThisShapeRadius  /Radius  7 -3 roll  //false //false   Star pop
-				ShapesPrintQuickerDistillSlower {/UClipPath load infill} {//true} ifelse {GSave FillCode GRestore StrokeCode} if newpath  % Insideness assumes path width of zero
-			} {pop pop pop} ifelse  % PerhapsShow
-		} if  % /Star
+				pop //true
+			} if  % /Star
 
-		/Flower ThisShape eq
-		{
-			rand //RandMax div  ShapesFlowersNumPetalsMax 1 add ShapesFlowersNumPetalsMin sub  mul  cvi  ShapesFlowersNumPetalsMin add
-			dup 360 exch div  rand //RandMax div  ShapesFlowersAngularWidthMax ShapesFlowersAngularWidthMin sub mul  ShapesFlowersAngularWidthMin add  mul
-			//ArcCosMinusOneThird 2 copy gt {exch} if pop
-			ThisShapeRadius
-			ShapesIntY 0 ne ShapesIntX 0 ne or {rand //RandMax div 360 mul} {0} ifelse
-			rand 2 mod 0 eq
-			PerhapsShow
+			/Flower ThisShape eq
 			{
+				rand //RandMax div  ShapesFlowersNumPetalsMax 1 add ShapesFlowersNumPetalsMin sub  mul  cvi  ShapesFlowersNumPetalsMin add
+				dup 360 exch div  rand //RandMax div  ShapesFlowersAngularWidthMax ShapesFlowersAngularWidthMin sub mul  ShapesFlowersAngularWidthMin add  mul
+				//ArcCosMinusOneThird 2 copy gt {exch} if pop
+				ThisShapeRadius
+				ShapesIntY 0 ne ShapesIntX 0 ne or {rand //RandMax div 360 mul} {0} ifelse
+				rand 2 mod 0 eq
 				x y moveto //true  Flower  % Always strokeable, because filling works on strokeable but stroke not with just fillable
-				ShapesPrintQuickerDistillSlower {/UClipPath load infill} {//true} ifelse {GSave FillCode GRestore StrokeCode} if newpath  % Insideness assumes path width of zero
-			} {pop pop pop pop pop} ifelse  % PerhapsShow
-		} if  % Flower
+				pop //true
+			} if  % Flower
 
-		/Heart ThisShape eq
-		{
-			rand //HalfRandMax div 1 sub //ArcTanFiveEighths mul
-			PerhapsShow
+			/Heart ThisShape eq
 			{
+				rand //HalfRandMax div 1 sub //ArcTanFiveEighths mul
 				matrix currentmatrix x y translate  exch ShapesIntY 0 ne ShapesIntX 0 ne or {rotate} {pop} ifelse
 				ThisShapeRadius 6 sqrt mul dup scale 0 -0.3846762000998701793217521379 translate
 				0 0 moveto 0.8 0.5 0.25 1 0 0.65526715987207729968624 CurvetoFourPieces -0.25 1 -0.8 0.5 0 0 CurvetoFourPieces closepath  setmatrix  % The 0.655... minimises the path length
-				ShapesPrintQuickerDistillSlower {/UClipPath load infill} {//true} ifelse {GSave FillCode GRestore StrokeCode} if newpath  % Insideness assumes path width of zero
-			} {pop} ifelse  % PerhapsShow
-		} if  % /Heart
+				pop //true
+			} if  % /Heart
+
+			{
+				ShapesPrintQuickerDistillSlower {/UClipPath load infill} {//true} ifelse  % Insideness assumes path width of zero
+				{
+					/FillCode load {} ne  /StrokeCode load {} ne { {GSave FillCode GRestore} if StrokeCode} { {FillCode} {newpath} ifelse} ifelse
+				} {newpath} ifelse
+			} if  % ThisShape is valid
+		} if  % Some of shape in T|A|B|O's bounding box
 	} forall  % 'ShapesInts'
 	GRestore end
 	//DeBugLevel 40 le {(-ShapesClippedToPath) OutputToLog} if
@@ -12756,7 +12757,7 @@ currentdict /GlyphShowKnownAbsences undef
 		/ThisPageOrdering exch def
 
 
-		% Doesn't use a PageType, so outside UsedPaperTypes loop. 
+		% Doesn't use a PageType, so outside UsedPaperTypes loop.
 		{OneCircles} MightBeTrue  PageOrderingOneCircle ThisPageOrdering eq  and
 		{
 			/TypeOfPagesBeingRendered /OneCircle store
