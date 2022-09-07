@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:30 Monday 5th September 2022
+% This version 19:30 Tuesday 6th September 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202209051930) def
+/ParametersVersionDateTimeAdobeFormat (D:202209061930) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -787,7 +787,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202209051930) def
+/SoftwareVersionDateTimeAdobeFormat (D:202209061930) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -12766,13 +12766,13 @@ currentdict /GlyphShowKnownAbsences undef
 			0  1  NumSheets 1 sub
 			{
 				/SheetNum exch def
-				//false //false //false //false PaperType Orientation SetPaperSize   //true DefStoreMgns
 				0  1  SheetLengths SheetNum get 1 sub
 				{
 					WithinPage-WithinTitles-def
 					OneCircles  //false PageSuppressed not and  CircleNonEmpty SheetNum get WithinPage get  and
 					{
-						//false  //false  MirrorPagesOneCircle  //true  [Radii SheetNum get 2 mul  dup]  /Portrait  SetPaperSize
+						//false  //false  MirrorPagesOneCircle  //true  [Radii SheetNum get 2 mul  dup]  /Portrait   SetPaperSize  % MirrorPagesOneCircle could vary by WithinTitles.
+						//false  //false //false                //false PaperType                        Orientation SetPaperSize   //true DefStoreMgns  % Defs PageHeight etc.
 						matrix currentmatrix    Radii SheetNum get  dup  translate  newpath    /MatrixGlasses matrix currentmatrix def
 						ClipSave   0 0  Radii SheetNum get  0 360  /m ArcAccurate   clip  1 setgray fill
 
@@ -13833,14 +13833,14 @@ currentdict /GlyphShowKnownAbsences undef
 							} if  % ... ThisPaperType ... ThisPageOrdering ... and
 						} for  % /SheetNum
 
-						DLTotalNumCopies 1 gt
+						DLTotalNumCopies 0 gt
 						{
 							DLNumCols DLTotalNumCopies gt {/DLNumCols DLTotalNumCopies def} if
 							/DLNumRows DLTotalNumCopies DLNumCols div ceiling cvi dup DLNumRows div ceiling cvi div ceiling cvi def
 
 							/DLNumOnPage 0 def
 							/FirstX DLEachOrientation {DecanterLabelsMaxSmallerDimension} {DecanterLabelsMaxLargerDimension} ifelse 2 div MgnL add def
-							DLNumCols 1 gt {/StepX PageWidth  DLEachOrientation {DecanterLabelsMaxSmallerDimension} {DecanterLabelsMaxLargerDimension} ifelse MgnL MgnR add add sub  DLNumCols 1 sub div  def} if
+							/StepX DLNumCols 1 gt {PageWidth  DLEachOrientation {DecanterLabelsMaxSmallerDimension} {DecanterLabelsMaxLargerDimension} ifelse MgnL MgnR add add sub  DLNumCols 1 sub div} {0} ifelse  def
 							/StepY  PageHeight MgnB MgnT add DecanterLabelsTopTextT DecanterLabelsTopTextB sub add   DLBackgroundOrFooters
 								{DLEachOrientation {DecanterLabelsMaxLargerDimension} {DecanterLabelsMaxSmallerDimension} ifelse dup 4 1 roll DLNumRows mul add sub DLNumRows 1 add div add}
 								{sub DLNumRows div}
