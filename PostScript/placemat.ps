@@ -1,6 +1,6 @@
 %!PS
 
-% This version 18:00 Monday 10th October 2022
+% This version 18:45 Saturday 29th October 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202210101800) def
+/ParametersVersionDateTimeAdobeFormat (D:202210291845) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -62,7 +62,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 20) {SuperscriptOn} (th) {SuperscriptOff} ( December 2022)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 21) {SuperscriptOn} (st) {SuperscriptOff} ( February 2023)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -787,7 +787,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202210101800) def
+/SoftwareVersionDateTimeAdobeFormat (D:202210291845) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -823,8 +823,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /AsciiTab (\t) 0 get def   /AsciiNewline (\n) 0 get def   /AsciiSpace ( ) 0 get def
 
 /OneThird 1 3 div def   /Cbrt {dup dup 0 lt {neg //OneThird exp neg} {//OneThird exp} ifelse  dup abs 1290 le {dup cvi dup dup mul mul 3 -1 roll eq {cvi} if} {exch pop} ifelse} bind def  % 1290^3 < IntegerMax < 1291^3
-
-PrinterEpsilon setflat  % According to PLRM3 p669, automatically substituted with 0.2, being the smallest allowed value. Presumably from an era of lower resolution printers. Happily, most PDF renderers seem to ignore this, substituting ~= 1 pixel.
 
 /TypeOfPagesBeingRendered /Multiple def  % Always being one of /Multiple /Glasses /TastingNotes /PlaceName /PrePour /VoteRecorder /DecantingNotes /Accounts /CorkDisplay /NeckTags /DecanterLabels /BottleWrap /StickyLabels /DistillerLog
 /UserScratchDict << >> def  % Not 0 dict, to avoid addition of /DictionaryOriginalSize
