@@ -79,7 +79,7 @@ On a Mac right-click the file, and &lsquo;Open With&rsquo; Preview.
 It should convert to a PDF. 
 On a PC, in your preferred web browser, open [online2pdf.com/convert-ps-to-pdf](http://online2pdf.com/convert-ps-to-pdf) (or, with fewer fonts available, [ps2pdf.org](http://www.ps2pdf.org/convert.htm) (and perhaps also [ps2pdf.com](http://www.xconvert.com/convert-ps-to-pdf)); &lsquo;Select files&hellip;&rsquo;; and &lsquo;Convert&rsquo; it. 
 If it that has made a PDF resembling [this](images/placemat.pdf), then you can successfully convert the PostScript to PDF: hurray! 
-(On Unix use ps2pdf which comes as part of [GhostScript](http://en.wikipedia.org/wiki/Ghostscript).)
+(On Unix use `ps2pdf` which comes as part of [GhostScript](http://en.wikipedia.org/wiki/Ghostscript).)
 
 (It can happen that the PS&rarr;PDF conversion produces an error resembling &ldquo;**PostScript Conversion Warning** &hellip; *&lt;font-name&gt;* not found, using Courier.&rdquo; On a Mac this can be caused by an older version of macOS: try a different [font](fonts_glasses_decoration.md#readme).)
 
