@@ -32,7 +32,7 @@ And having done that, there might also be need for matching pages:
 * to assist with computing the split of the costs, allowing for bottles provided.
 
 This PostScript program creates all the paperwork useful for managing such tastings, large or small. 
-Many examples from previous tastings are at [jdawiseman.com/placemats_list.html](http://www.jdawiseman.com/placemats_list.html).
+Lots of examples from previous tastings are at [jdawiseman.com/placemats_list.html](http://www.jdawiseman.com/placemats_list.html) (lots: that page has &ge;&#8239;22&#8239;MB of PNGs, so WiFi rather than mobile data).
 
 [The program](../PostScript/placemat.ps) does not hide its being written wholly in PostScript ([wikipedia](http://en.wikipedia.org/wiki/PostScript), [Adobe&nbsp;&#7448;&#671;&#640;&#7437;](http://www.adobe.com/content/dam/acom/en/devnet/actionscript/articles/PLRM.pdf)). 
 The program consists of a single long text file, with user-chosen parameters defined at the top, underneath which are many lines of code to make the pages. 
@@ -198,8 +198,8 @@ E.g.:
 If it isn&rsquo;t a [ThePortForum](http://www.theportforum.com/viewforum.php?f=3) event, remove the ThePortForum logos&nbsp;(![The Port Forum Icon](images/TPF_clr_16.png)&nbsp;![The Port Forum Icon](images/TPF_bw_16.png)) by setting [`ThePortForumIconPlacement`](page_level.md#the-port-forum-icon-the-port-forum-icon-the-port-forum-icon) and `ThePortForumIconTastingNotePlacement` to `/None` (again, a name-type parameter).
 
 One more parameter. 
-Some PDF viewers can show a sidebar, typically containing bookmarks to places within the document. This can also contain external links, typically to the likes of: the thread in which the tasting was arranged; the latest version of the PDF file; perhaps websites of winemaker and restaurant; etc. 
-These are configured in the array [`ExternalLinks`](document.md#external-links), which is of length a multiple of three: Boolean (*pro tem*, set all to `false`), then text description, then URL (e.g., `http://www.example.com/`); then the next Boolean/description/URL; etc. 
+Some PDF viewers can show a sidebar, typically containing bookmarks to places within the document. This can also contain external links, typically to the likes of: the thread in which the tasting was arranged; the latest version of the PDF file; websites of winemaker and restaurant; etc. 
+These are configured in the array [`ExternalLinks`](document.md#external-links), which is of length a multiple of three: Boolean (*pro tem*, set all to `false`), then text description, then URL (e.g., `http://www.jdawiseman.com/`); then the next Boolean/description/URL; etc. 
 Populate `ExternalLinks`.
 
 ### Output

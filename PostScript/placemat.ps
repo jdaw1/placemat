@@ -1,6 +1,6 @@
 %!PS
 
-% This version 08:45 Thursday 17th November 2022
+% This version 15:00 Saturday 10th December 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202211170845) def
+/ParametersVersionDateTimeAdobeFormat (D:202212101500) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -569,6 +569,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /NamesFontSize 18 def
 
 % GhostScript doesn't pickle settransfer; Preview doesn't see non-pickled settransfer. The bug is in Preview. http://groups.google.com/g/comp.lang.postscript/c/NJLAfvN_jwU
+/TastingNotes_NumVerticalFolds 1 def  % If table likely to be very space-constrained, set to 2.
 /TastingNotesCirclesBehind {IsDistiller  {GlassesNumCopies 1 ge} MightBeTrue and  BackgroundTextsTastingNotes not and  SideBySideGlassesTastingNotes not and} bind def
 /TastingNotesCirclesBehindFitAndCentreInRow false def
 /TastingNotesCirclesBehindFadingFactorIfAllBlack 0.125 def
@@ -787,7 +788,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202211170845) def
+/SoftwareVersionDateTimeAdobeFormat (D:202212101500) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -12151,14 +12152,14 @@ currentdict /GlyphShowKnownAbsences undef
 				dup 0 eq {pop 1} {PageWidth MgnL MgnR add sub exch div} ifelse
 			def
 
-			TastingNotesColumnHeadings length 0 gt
+			TastingNotesColumnHeadings length 0 gt  TastingNotes_NumVerticalFolds 1 eq  and
 			{
 				HeaderFont TastingNotesColumnHeadingsFontSize selectfont
 				TastingNotesColumnHeadings StringPathBBox  /TastingNotesColumnHeadingsT exch def  pop  /TastingNotesColumnHeadingsB exch def  pop
 				/TNtop  PageHeight MgnT sub  TastingNotesColumnHeadingsT sub TastingNotesColumnHeadingsB -0.48 2 copy gt {exch} if pop add  def
 			} {/TNtop  PageHeight MgnT sub def} ifelse  % TastingNotesColumnHeadings length 0 gt
 
-			/TastingNotesCirclesBehind load MightBeTrue
+			/TastingNotesCirclesBehind load MightBeTrue  TastingNotes_NumVerticalFolds 1 eq  and
 			{
 				/H TNtop MgnB sub def  /W PageWidth MgnL MgnR add sub def
 				/TNCirclesBehindR
@@ -12236,17 +12237,17 @@ currentdict /GlyphShowKnownAbsences undef
 				currentdict /SheetNum undef
 				currentdict /WithinPage undef
 				currentdict /WithinTitles undef
-			} if  % ... TastingNotesCirclesBehind ...
+			} if  % ... TastingNotesCirclesBehind ...  TastingNotes_NumVerticalFolds 1 eq  and
 
-			0  1  TastingNotesColumnHeadings length 2 sub
+			0  1  TastingNotesColumnHeadings length 2 sub  TastingNotes_NumVerticalFolds 1 ne {pop -1} if
 			{
 				0  exch -1 0 {TastingNotesColumnRelativeWidths exch GetEU add} for  TNColumnMultiplier mul MgnL add
 				dup PageHeight MgnT sub moveto MgnB lineto TastingNotesColumnStrokeCode newpath
 			} for  % 0  1  TastingNotesColumnHeadings length 2 sub
 
-			0 setgray  0.24 setlinewidth  1 setlinecap  1 setlinejoin  [] 0 setdash
-			TastingNotesColumnHeadings length 0 gt
+			TastingNotesColumnHeadings length 0 gt  TastingNotes_NumVerticalFolds 1 eq  and
 			{
+				0 setgray  0.24 setlinewidth  1 setlinecap  1 setlinejoin  [] 0 setdash
 				HeaderFont TastingNotesColumnHeadingsFontSize selectfont
 
 				RightBoundaryNameTastingNotes  TNSheetNum  PageWidth MgnR sub  put
@@ -12275,18 +12276,22 @@ currentdict /GlyphShowKnownAbsences undef
 						GRestore
 					} if  % TastingNotesColumnHeadings i get NonEmptyCompoundObject
 				} for  % TastingNotesColumnHeadings length 1 sub  -1  0
-			} if  % TastingNotesColumnHeadings length 0 gt
+			} if  % TastingNotesColumnHeadings length 0 gt  TastingNotes_NumVerticalFolds 1 eq  and
 
-			/TNRowHeight N 0 eq {0} {TNtop MgnB sub N div} ifelse  def
+			/TN_NumPerCol  N  TastingNotes_NumVerticalFolds dup 1 gt {div ceiling cvi} {pop} ifelse  def
+			/TNRowHeight N 0 eq {0} {TNtop MgnB sub TN_NumPerCol div} ifelse  def
 
 			0  1  N 1 sub
 			{
 				/WithinPage exch def
 				/WithinTitles GlassesOnTastingNotePages TNSheetNum GetEU WithinPage GetEU def
 
-				/CurrentTop  N WithinPage sub TNRowHeight mul MgnB add  def
-				MgnL CurrentTop moveto
-				CirclearraysTastingNotes WithinTitles get  {0 setgray CircletextFont TastingNotesPageCircletextFontSize selectfont}  CircletextsMinNumSpacesBetween //true  PageWidth MgnL MgnR add sub  //false  -1  CirclearrayInStraightLine
+				/CurrentTop   TN_NumPerCol  dup WithinPage exch mod sub TNRowHeight mul MgnB add  def
+				/TastingNotes_FoldSectionsGap 18 def  % Embedded constant, perhaps promotable to being a parameter.
+				/ThisW  PageWidth MgnL MgnR add sub  TastingNotes_NumVerticalFolds 2 ge {TastingNotes_NumVerticalFolds 1 sub TastingNotes_FoldSectionsGap mul sub  TastingNotes_NumVerticalFolds div} if  def
+				/ThisL  TastingNotes_NumVerticalFolds 2 lt {MgnL} {WithinPage TN_NumPerCol div //Epsilon add floor cvi  ThisW TastingNotes_FoldSectionsGap add mul  MgnL add} ifelse  def
+				ThisL CurrentTop moveto
+				CirclearraysTastingNotes WithinTitles get  {0 setgray CircletextFont TastingNotesPageCircletextFontSize selectfont}  CircletextsMinNumSpacesBetween //true  ThisW  //false  -1  CirclearrayInStraightLine
 				sub CurrentTop add TastingNotesLineGap sub /CurrentTop exch def pop pop
 
 				TastingNotesStarTops TNSheetNum  2 copy get //null eq {GlassesOnTastingNotePages TNSheetNum GetEU length array put} {pop pop} ifelse
@@ -12295,13 +12300,13 @@ currentdict /GlyphShowKnownAbsences undef
 				0 setgray  0.24 setlinewidth
 				TNRowHeight 2 div TastingNotesSubtitleFontSizeProportionTitles 1 add div TastingNotesTitlesFontSizeMax 2 copy gt {exch} if pop  dup TitlesFont exch 2 copy  % embedded constant in "2 div"
 				selectfont   TitlesTastingNotes WithinTitles get  StringPathBBox  /urY exch def pop /llY exch def pop
-				selectfont   MgnL CurrentTop urY sub moveto  TitlesTastingNotes WithinTitles get ShowRecursive
+				selectfont   ThisL CurrentTop urY sub moveto  TitlesTastingNotes WithinTitles get ShowRecursive
 				/CurrentTop CurrentTop TastingNotesLineGap urY llY sub add sub def
 
 				0 setgray  0.24 setlinewidth
 				TastingNotesSubtitleFontSizeProportionTitles mul SubtitlesFont exch 2 copy
 				selectfont   SubtitlesTastingNotes WithinTitles get  StringPathBBox  /urY exch def  pop pop pop
-				selectfont   MgnL CurrentTop urY sub moveto  SubtitlesTastingNotes WithinTitles get ShowRecursive
+				selectfont   ThisL CurrentTop urY sub moveto  SubtitlesTastingNotes WithinTitles get ShowRecursive
 			} for  % WithinPage, WithinTitles
 			end
 			//DeBugLevel 100 le {(-TastingNoteForms: PaintProc) OutputToLog} if
