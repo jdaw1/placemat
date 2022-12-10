@@ -104,6 +104,12 @@ The fourth of each set of four is one of:
 * `/Alternating` = ![Alternating](images/TastingNotesStarsNameColsRowsArrangement_Alternating.png)
 
 
+Sometimes, too small a table is going to be a squeeze. 
+When so, it is helpful to be able to fold the TN sheets, so they take less space, and can be rested on a smaller morsel of table. 
+`TastingNotes_NumVerticalSections` defaults to `1`, and for a tight table could be set to `2`. 
+Doing so suppresses the column headings, suppresses the column-separating lines, and suppresses the effect of `TastingNotesCirclesBehind`.
+
+
 ### Superfluous
 
 The elements of `TitlesTastingNotes` are shown at a size not exceeding `TastingNotesTitlesFontSizeMax`, and the elements of `SubtitlesTastingNotes` are shown at `TastingNotesSubtitleFontSizeProportionTitles` times the size of the `TitlesTastingNotes`. 
