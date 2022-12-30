@@ -1,6 +1,6 @@
 %!PS
 
-% This version 15:15 Saturday 10th December 2022
+% This version 23:30 Friday 30th December 2022
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202212101515) def
+/ParametersVersionDateTimeAdobeFormat (D:202212302330) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -80,8 +80,8 @@
 % Links for some restaurants and many Port houses at http://github.com/jdaw1/placemat/blob/main/PostScript/ExternalLinks_data.ps
 /ExternalLinks [
 	false   (Thread on ThePortForum.com)                 (http://www.theportforum.com/viewtopic.php?t=00175&view=unread#unread)
-%	false   (Latest version this placemat)               (http://www.jdawiseman.com/2022/    .pdf)
-%	true    (in list of placemats)                       (http://www.jdawiseman.com/papers/placemat/placemats_list.html#a2022MMDD)
+%	false   (Latest version this placemat)               (http://www.jdawiseman.com/2023/    .pdf)
+%	true    (in list of placemats)                       (http://www.jdawiseman.com/papers/placemat/placemats_list.html#a2023MMDD)
 	false   (Boot & Flogger)                             (http://www.davy.co.uk/wine-bar/boot-and-flogger/)
 	true    [/ellipsis (OpenStreetMap)]                  (http://www.openstreetmap.org/node/534961998)
 	true    [/ellipsis (google.co.uk)]                   (http://goo.gl/maps/7NEiwAMEZpG2)
@@ -90,7 +90,7 @@
 	true    [/ellipsis (bing.com)]                       (http://www.bing.com/maps/default.aspx?where1=SE1+1TA&cp=51.50428~-0.0935)
 ] def  % /ExternalLinks
 
-/CopyrightStatementPlacemats (Copyright 2022 Julian D. A. Wiseman of www.jdawiseman.com) def
+/CopyrightStatementPlacemats (Copyright 2023 Julian D. A. Wiseman of www.jdawiseman.com) def
 
 % % % % % % % % % % %
 % Non-Glasses Pages %
@@ -788,7 +788,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202212101515) def
+/SoftwareVersionDateTimeAdobeFormat (D:202212302330) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -7047,7 +7047,7 @@ currentdict /GlyphShowKnownAbsences undef
 		( ~= ) usertimeInterval ( seconds)
 		usertimeInterval       60 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( minutes)} {pop exit} ifelse  % There have been some distillation times of multiple minutes.
 		usertimeInterval     3600 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( hours)  } {pop exit} ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
-		usertimeInterval    86400 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Aug 2022, JDAW's longest distillation time has been ~=22 minutes.
+		usertimeInterval    86400 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Dec 2022, JDAW's longest distillation time has been ~=22 minutes.
 		usertimeInterval  2629800 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. Likely impossible, as exceeding usertime's integer.
 		usertimeInterval 31557600 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( years)  } {pop exit} ifelse  % Years?! Something is very amiss.
 	} repeat  % 1
@@ -11236,19 +11236,15 @@ currentdict /GlyphShowKnownAbsences undef
 				} for  % NameNum
 				currentdict /NameNum undef
 
-				VoteRecorderNamesWidthsLogged not
+				VoteRecorderNamesWidthsLogged not  NamesVoteRecorder length 4 ge  and
 				{
 					/NamesVoteRecorderWidths VoteRecorderNameR VoteRecorderNameL  {sub} //false TwoArraysFunction 0 NamesVoteRecorder length getinterval def
 					NamesVoteRecorderWidths //false exch {0 ne {pop //true exit} if} forall
 					{
 						/SortIncreasingVR
-						1 {
-							NamesVoteRecorder length 9 ge {2   NamesVoteRecorder length 4 sub exit} if
-							NamesVoteRecorder length 3 ge {NamesVoteRecorder length 2 sub 4 div   dup round cvi   exch 3 mul round cvi exit} if
-							0   0
-						} repeat  % 1
-						NamesVoteRecorderWidths exch get  exch NamesVoteRecorderWidths exch get  ge
-						def  % /SortIncreasingVR
+						0   NamesVoteRecorderWidths  NamesVoteRecorder length 2 idiv 1 sub  dup NamesVoteRecorder length 1 sub exch sub exch  getinterval {add} forall
+						0   NamesVoteRecorderWidths  1                  NamesVoteRecorder length 2 idiv 1 sub                                 getinterval {add} forall
+						ge   def  % /SortIncreasingVR
 
 						% VoteRecorder slightly neater if names sorted by length. Usual practice to begin with honoured guest, then organiser, then the others sorted by length. These logs help sorting.
 						mark () (NamesVoteRecorder, sorted ) (longer) (shorter) SortIncreasingVR {exch} if (-to-) exch (: )
@@ -11274,7 +11270,7 @@ currentdict /GlyphShowKnownAbsences undef
 						/VoteRecorderNamesWidthsLogged //true store
 					} if  % any non-0 widths
 					currentdict /NamesVoteRecorderWidths undef
-				} if  % VoteRecorderNamesWidthsLogged not
+				} if  % VoteRecorderNamesWidthsLogged not  NamesVoteRecorder length 4 ge  and
 
 				/VoteRecorderHeightFirstRow  0
 					0  1  VoteRecorderNumNames 1 sub  {dup VoteRecorderNameR exch get exch VoteRecorderNameL exch get sub   2 copy lt {exch} if pop} for
