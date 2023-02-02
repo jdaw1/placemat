@@ -1,7 +1,7 @@
 %!PS
 
-% This version 19:30 Monday 6th December 2021
-% Copyright 2021 Julian D. A. Wiseman of www.jdawiseman.com.
+% This version 20:30 Thursday 2nd February 2023
+% Copyright 2021-2023 Julian D. A. Wiseman of www.jdawiseman.com.
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
@@ -12,7 +12,7 @@
 
 
 
-/TrebuchetMS  % Chosen font
+/Gotham-Book  % Chosen font
 
 true  % true => A4; false => US Letter
 
@@ -57,16 +57,19 @@ ifelse  % Page size: A4 or US Letter?
 [
 	% ShellSort is very fast at short arrays, but QuickSort's segregation helps multi-CPU with long arrays.
 	% PostScript's max array size usually 65535 (PLRM3, p739, table B.1), but an implementation could allow longer.
-	% Included are those up to PostScript's max integer = 2^31 - 1, and commented out are subsequent up to 10^15.
+	% Included are those up to PostScript's max integer = 2^31 - 1, subsequent being commented out.
 	% From http://en.wikipedia.org/wiki/Shellsort
-	% > Gonnet and Baeza-Yates observed that Shellsort makes the fewest comparisons on average when the ratios of successive gaps are
-	% > roughly equal to 2.2. This is why their sequence with ratio 2.2 and Tokuda's sequence with ratio 2.25 prove efficient. However,
-	% > it is not known why this is so. Sedgewick recommends using gaps which have low greatest common divisors or are pairwise coprime.
-	% Here each is closest to previous * Sqrt5 that is coprime to all previous, so ratios tend to ~=2.236. From 51 ratios >2.21568 and <2.24303.
-	1 2 5 11 23 51 113 251 563 1259 2813 6289 14063 31439  % Below 2^16
-	70297 157189 351487 785947 1757431 3929741 8787169 19648709 43935851 98243549 219679249 491217733 1098396241  % Below 2^31
-	% 2456088659 5491981199 12280443293 27459905999 61402216471 137299529999 307011082351 686497649983 1535055411751
-	% 3432488249899 7675277058739 17162441249483 38376385293691 85812206247419 191881926468461 429061031237099 959409632342311
+	%   > Gonnet and Baeza-Yates observed that Shellsort makes the fewest comparisons on average when the ratios of successive gaps are
+	%   > roughly equal to 2.2. This is why their sequence with ratio 2.2 and Tokuda's sequence with ratio 2.25 prove efficient. However,
+	%   > it is not known why this is so. Sedgewick recommends using gaps which have low greatest common divisors or are pairwise coprime.
+	% Here each is closest to immediately previous * Sqrt5 that is coprime to all smaller,
+	% so ratios tend to ~=2.236. From values of 83 the ratios >2.2358 and <2.2531.
+	1 3 7 16 37 83 187 419 937 2099 4693 10499 23479 52501  % Below 2^16 = 65536, so sufficient for PostScript.
+	117391 262495 586961 1312481 2934793 6562397 14673961 32811973 73369801 164059859 366848983 820299269 1834244921  % Below 2^31 ~= 2 billion
+	% 4101496331 9171224603 20507481647 45856123009 102537408229 229280615033 512687041133 1146403075157 2563435205663 5732015375783
+	% 12817176028331 28660076878933 64085880141667 143300384394667 320429400708323 716501921973329 1602147003541613 3582509609866643
+	% 8010735017708063 17912548049333207 40053675088540303 89562740246666023 200268375442701509 447813701233330109
+	% 1001341877213507537 2239068506166650537 5006709386067537661 11195342530833252689  % Below 2^64 ~= 18 quintillion
 ] readonly def  % /ShellSortGaps
 /ShellSortGapsLength1Sub ShellSortGaps length 1 sub def
 % Immediate dependencies: DeBugLevel; ShellSortGaps; ShellSortGapsLength1Sub.
@@ -170,31 +173,33 @@ def  % /Fonts
 FontName FontSize 3 mul selectfont
 FontName 256 string cvs dup stringwidth pop PageWidth exch sub 2 div Y moveto show
 FontName FontSize selectfont
+/Top_D  gsave  0 0 moveto 1024 dup scale (D) true charpath flattenpath pathbbox 4 1 roll pop pop pop  grestore  def
 /Y Y LineStep sub def
-[ Fonts length 10 string cvs  ( characters, shown at ) FontSize 10 string cvs (pt) ]
+[ Fonts length 10 string cvs  ( characters, shown at ) FontSize 10 string cvs (pt, grey from baseline to top of D) ]
 0  1 index  {stringwidth pop add} forall  PageWidth exch sub 2 div  Y moveto {show} forall
 [
 	(THE FIVE BOXING WIZARDS JUMP QUICKLY  !"#$%&'\(\)*+,-./:;<=>?@[\\]^_`{|}~)  % all ASCII characters
 	(the quick brown fox jumps over a lazy dog  0123456789)
-	(K47  D78  Mz96  Ck12  Ni27  S35  Cr45  W55  SW63  G66  D70  F85  T92  RP97  N00  V03  Qv11)
+	(S97 K47 D78 Mz96 Ck12 Ni27 Cr45 TSQ47 W55 SW63 G66 D70 F85 T92 RP97 N00 V03 Qv11)
 	(http://github.com/jdaw1/placemat/blob/main/PostScript/glyph_log.ps)
 	(http://github.com/jdaw1/placemat/blob/main/Documentation/compound_strings_characters.md#unicode)
 ]{
 	/Y Y LineStep sub def
 	dup 0 4 getinterval (http) eq
 	{
-		FontName FontSize 5 sqrt 1 sub 2 div mul selectfont
+		FontName FontSize 2 div selectfont
 		Xs 0 get Xs 1 get add 2 div  Y Yadj add moveto
-		/Yadj Yadj FontSize 0.5 mul add def
+		/Yadj Yadj FontSize 0.7 mul add def
 	}{
-		0.9 setgray  //Margin  Y  PageWidth Margin 2 mul sub  1.92  rectfill  0 setgray
+		0.9 setgray  //Margin  Y  PageWidth Margin 2 mul sub  Top_D  rectfill  0 setgray  % Grey box goes from baseline to top of capital D
 		FontName FontSize selectfont
 		Xs 0 get  Y  moveto
 	} ifelse  % http
 	show
 } bind forall
+
 FontName FontSize selectfont
-/Y Y LineStep 2 mul sub def
+/Y Y LineStep 1.25 mul sub def
 /Ystart Y def
 /Any false def
 /PageDested false def
