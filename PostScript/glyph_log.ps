@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:30 Thursday 2nd February 2023
+% This version 18:00 Saturday 4th February 2023
 % Copyright 2021-2023 Julian D. A. Wiseman of www.jdawiseman.com.
 
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -8,13 +8,15 @@
 % licensed works and modifications, which include larger works using a licensed work, under the same license.
 % Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
 
-% http://github.com/jdaw1/placemat/blob/main/Documentation/compound_strings_characters.md#unicode
+% http://github.com/jdaw1/placemat/blob/main/PostScript/glyph_log.ps
+% http://github.com/jdaw1/placemat/blob/main/Documentation/compound_strings_characters.md#readme
 
 
 
 /Gotham-Book  % Chosen font
 
 true  % true => A4; false => US Letter
+
 
 
 
@@ -176,13 +178,13 @@ FontName FontSize selectfont
 /Top_D  gsave  0 0 moveto 1024 dup scale (D) true charpath flattenpath pathbbox 4 1 roll pop pop pop  grestore  def
 /Y Y LineStep sub def
 [ Fonts length 10 string cvs  ( characters, shown at ) FontSize 10 string cvs (pt, grey from baseline to top of D) ]
-0  1 index  {stringwidth pop add} forall  PageWidth exch sub 2 div  Y moveto {show} forall
+0  1 index  {stringwidth pop add} forall  PageWidth exch sub 2 div  dup Margin lt {pop Margin} if  Y moveto {show} forall
 [
 	(THE FIVE BOXING WIZARDS JUMP QUICKLY  !"#$%&'\(\)*+,-./:;<=>?@[\\]^_`{|}~)  % all ASCII characters
 	(the quick brown fox jumps over a lazy dog  0123456789)
 	(S97 K47 D78 Mz96 Ck12 Ni27 Cr45 TSQ47 W55 SW63 G66 D70 F85 T92 RP97 N00 V03 Qv11)
 	(http://github.com/jdaw1/placemat/blob/main/PostScript/glyph_log.ps)
-	(http://github.com/jdaw1/placemat/blob/main/Documentation/compound_strings_characters.md#unicode)
+	(http://github.com/jdaw1/placemat/blob/main/Documentation/compound_strings_characters.md#readme)
 ]{
 	/Y Y LineStep sub def
 	dup 0 4 getinterval (http) eq
@@ -238,6 +240,9 @@ Fonts
 } bind forall  % Fonts
 Any {showpage} if
 
+mark  /Color [0.6 0.6 0.6]  /F 2  /Title (\273 PostScript original)  /Action << /Subtype /URI /URI (http://github.com/jdaw1/placemat/blob/main/PostScript/glyph_log.ps) >>  /OUT  pdfmark
+mark  /Color [0.6 0.6 0.6]  /F 2  /Title (\273 Non-ASCII chars in placemat software)  /Action << /Subtype /URI /URI (http://github.com/jdaw1/placemat/blob/main/Documentation/compound_strings_characters.md#readme) >>  /OUT  pdfmark
+mark  /Color [0.6 0.6 0.6]  /F 2  /Title (\273 Author=J.D.A.Wiseman)  /Action << /Subtype /URI /URI (http://www.jdawiseman.com/author.html) >>  /OUT  pdfmark
 
 (\n\n\nExecution time ~=              ) dup dup  21 10 getinterval usertime usertimeStart sub 1000 div exch cvs length 21 add (s) 0 get put =
 
