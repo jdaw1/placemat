@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:30 Thursday 2nd February 2023
+% This version 20:40 Monday 6th February 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202302022030) def
+/ParametersVersionDateTimeAdobeFormat (D:202302062040) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -62,7 +62,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 21) {SuperscriptOn} (st) {SuperscriptOff} ( February 2023)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 20) {SuperscriptOn} (th) {SuperscriptOff} ( June 2023)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -788,7 +788,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202302022030) def
+/SoftwareVersionDateTimeAdobeFormat (D:202302062040) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -817,7 +817,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /ArcCosMinusOneThird 109.471220634490691369 def  % In degrees
 /ArcTanOneQuarter    14.03624346792647858289 def  % In degrees
 /ArcTanFiveEighths   32.00538320808349556079 def  % In degrees
-/Infinity 32767 def  % 2^15-1, which in points ~= 455" ~= 38', so ~61% bigger than the ~283" diagonal of the 200"x200" maximum PDF page. Can be '8 exp 256.06251 mul' without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.40282*10^38.
+/Infinity 32767 def  % 2^15-1, which in pt ~= 455" ~= 38' ~= 11.6m, so ~61% bigger than the ~283" diagonal of the 200"x200" maximum PDF page. Can be '8 exp 256.06251 mul' without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.40282*10^38.
 /InfinityNeg Infinity neg def
 /PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
 /Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, so about 419 times the single-precision minimum.
@@ -8700,14 +8700,6 @@ currentdict /GlyphShowKnownAbsences undef
 		Belowtitles NonEmptyCompoundObject {(BelowtitleFontSizes = ) BelowtitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
 		Overtitles NonEmptyCompoundObject {(OvertitleFontSizes = ) OvertitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
 	} if  % ... GlassesNumCopies 1 ge ...
-	{GlassesNumCopies 1 ge  DecanterLabelsNumCopies 1 ge  PrePourNumCopies 1 ge  BottleWrapNumCopies 1 ge  StickyLabelsNumCopies 1 ge  or or or or} MightBeTrue
-	{
-		()
-		Abovetitles NonEmptyCompoundObject {(AbovetitleFontSizes/TitleFontSizes = ) AbovetitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
-		Belowtitles NonEmptyCompoundObject {(BelowtitleFontSizes/TitleFontSizes = ) BelowtitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
-		Overtitles NonEmptyCompoundObject {(OvertitleFontSizes/TitleFontSizes = ) OvertitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
-	} if  % ... GlassesNumCopies 1 ge ... StickyLabelsNumCopies 1 ge ...
-	pop ConcatenateToMark OutputToLog
 
 	/TitleFontSizesMaxByPage [ TitleFontSizes {0 exch {2 copy lt {exch} if pop} forall} forall ] def
 	/AbovetitleFontSizesMaxByPage [ AbovetitleFontSizes {0 exch {2 copy lt {exch} if pop} forall} forall ] def
@@ -8719,6 +8711,9 @@ currentdict /GlyphShowKnownAbsences undef
 	/TitleAboveBelowOverB [ SheetLengths {[ exch {0} repeat ]} forall ] def
 	/TitleAboveBelowOverT [ SheetLengths {[ exch {0} repeat ]} forall ] def
 	//DeBugLevel 100 le {( Main: Computation of TitleAboveBelowOverL, ...R, ...B, ...T.) OutputToLog} if
+	9 dict begin
+	/TABO_MaxT InfinityNeg def  /TABO_MaxT_SheetNum -1 def  /TABO_MaxT_WithinPage -1 def
+	/TABO_MinB Infinity    def  /TABO_MinB_SheetNum -1 def  /TABO_MinB_WithinPage -1 def
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
@@ -8801,13 +8796,28 @@ currentdict /GlyphShowKnownAbsences undef
 				OvertitleProportionFontSizeR SheetNum get WithinPage get  OvertitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get add  OvertitleFontSizes SheetNum get WithinPage get  mul  2 copy lt {exch} if pop
 			} if  % ... NonEmptyCompoundObject
 			put  % TitleAboveBelowOverR ...
+
+			TitleAboveBelowOverT SheetNum get WithinPage get  dup TABO_MaxT gt {/TABO_MaxT exch def  /TABO_MaxT_SheetNum SheetNum def  /TABO_MaxT_WithinPage WithinPage def} {pop} ifelse
+			TitleAboveBelowOverB SheetNum get WithinPage get  dup TABO_MinB lt {/TABO_MinB exch def  /TABO_MinB_SheetNum SheetNum def  /TABO_MinB_WithinPage WithinPage def} {pop} ifelse
 		} for  % WithinPage, WithinTitles
-		currentdict /WithinTitles undef
-		currentdict /WithinPage undef
 	} bind for  % SheetNum
-	currentdict /SheetNum undef
-	currentdict /NameNum undef
-	currentdict /ThisName undef
+	{GlassesNumCopies 1 ge  DecanterLabelsNumCopies 1 ge  PrePourNumCopies 1 ge  BottleWrapNumCopies 1 ge  StickyLabelsNumCopies 1 ge  or or or or} MightBeTrue
+	{
+		()
+		Abovetitles NonEmptyCompoundObject {(AbovetitleFontSizes/TitleFontSizes = ) AbovetitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
+		Belowtitles NonEmptyCompoundObject {(BelowtitleFontSizes/TitleFontSizes = ) BelowtitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
+		Overtitles NonEmptyCompoundObject {(OvertitleFontSizes/TitleFontSizes = ) OvertitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
+		TABO_MaxT_WithinPage 0 ge  TABO_MinB_WithinPage 0 ge  and
+		{
+			TABO_MaxT_SheetNum (,) TABO_MaxT_WithinPage (,)  GlassesOnSheets TABO_MaxT_SheetNum get TABO_MaxT_WithinPage get (,) Titles 2 index get ASCIIfy
+			TABO_MaxT_SheetNum TABO_MinB_SheetNum eq TABO_MaxT_WithinPage TABO_MinB_WithinPage eq and
+				{( has )}
+				{( and ) TABO_MinB_SheetNum (,) TABO_MinB_WithinPage (,)  GlassesOnSheets TABO_MinB_SheetNum get TABO_MinB_WithinPage get (,) Titles 2 index get ASCIIfy ( have )}
+			ifelse  (the max TitleAboveBelowOverT and the min TitleAboveBelowOverB, ) TABO_MaxT ( and ) TABO_MinB (.)
+		} {pop} ifelse  % ... 0 gt
+	} if  % ... GlassesNumCopies 1 ge ... StickyLabelsNumCopies 1 ge ...
+	ConcatenateToMark OutputToLog
+   end
 
 	{PrePourNumCopies 1 ge} MightBeTrue
 	{
