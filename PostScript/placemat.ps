@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:40 Monday 6th February 2023
+% This version 23:00 Monday 6th February 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202302062040) def
+/ParametersVersionDateTimeAdobeFormat (D:202302062300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -753,7 +753,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /OuterMarginT 0 def
 /OuterMarginB 0 def
 
-1 srand  % Change for different randomisation (1 is the initial value for both GhostScript and Adobe Distiller).
+/RandomisationSeed 1 def  % Change for different randomisation (1 is the initial value for both GhostScript and Adobe Distiller).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -788,7 +788,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202302062040) def
+/SoftwareVersionDateTimeAdobeFormat (D:202302062300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -10191,6 +10191,7 @@ currentdict /GlyphShowKnownAbsences undef
 				/WithinTitles get /WithinTitles exch def
 				/WithinPage get /WithinPage exch def
 
+				RandomisationSeed  SheetNum 257 mul add  WithinPage 17 mul add  WithinTitles add  srand
 				TitleAboveBelowOverRandomSeeds WithinTitles 2 copy get //null eq {rrand put} {get srand} ifelse
 				/NextRand rrand def
 
@@ -12693,6 +12694,7 @@ currentdict /GlyphShowKnownAbsences undef
 				matrix currentmatrix  [-1 0 0 -1 PageWidth PageHeight] concat
 				<< /MgnL MgnR /MgnR MgnL  /MgnB MgnT  /MgnT MgnB >> begin
 			} if  % SideFacingNamedPerson not
+			RandomisationSeed  PlaceNameSetNum add  NameNum 1 add 263 mul add  srand
 			PlaceNamesRandomSeeds PlaceNameSetNum get NameNum 2 copy get //null eq {rrand put} {get srand} ifelse
 			/PlaceNamesFontSize /Null def
 			PaintPlaceName   PlaceNamesFontSizes PlaceNameSetNum get NameNum PlaceNamesFontSize put
