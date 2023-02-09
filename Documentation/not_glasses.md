@@ -388,6 +388,8 @@ Within each page the nesting order is determined by `PackingNestingColumnMajor` 
 Pages are titled with `CorkDisplayTopText`, defaulting to `(The Corks)`. 
 The paper type is `CorkDisplayPaperType`; the orientation being chosen automatically.
 
+The `TitlesCorkDisplay` are shown at a font size that is &le;&nbsp;`CorkDisplayTitleFontSizeMax`.
+
 
 <div style="clear: both;"></div>
 

@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:30 Thursday 9th February 2023
+% This version 23:00 Thursday 9th February 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202302092130) def
+/ParametersVersionDateTimeAdobeFormat (D:202302092300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -636,6 +636,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /CorkDisplayMinWidth 216 def
 /CorkDisplayMinHeight 216 def
 /CorkDisplayPaperType /DecantingNotesPaperType load def
+/CorkDisplayTitleFontSizeMax 15 def
 
 /NeckTagsMinWidth 250 def
 /NeckTagsMaxWidth 300 def
@@ -788,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202302092130) def
+/SoftwareVersionDateTimeAdobeFormat (D:202302092300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -13339,7 +13340,7 @@ currentdict /GlyphShowKnownAbsences undef
 						} forall  % CDOrientation
 
 						/CDCircletextFontSize [ 5  CDBestWidthOneCork 36 div  CDBestHeightOneCork 36 div ] Min def  % embedded constant
-						/CDTitleFontSize [ CDTopTextFontSize  15  CDBestHeightOneCork 6 div  CDBestWidthOneCork 6 div ] Min def
+						/CDTitleFontSize [ CDTopTextFontSize  CorkDisplayTitleFontSizeMax  CDBestHeightOneCork 6 div  CDBestWidthOneCork 6 div ] Min def
 						/CDSubtitleFontSize  VoteRecorderSubtitleFontSizeProportionTitles dup IsNumber not {pop 0.5} if  CDTitleFontSize mul def  % Embedded constant
 
 						/CDSpareHoles  CDNumGlasses 0 gt {CDBestNumCols CDBestNumRows mul CDBestNumPages mul  CDNumGlasses sub} {0} ifelse  def
