@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:30 Wednesday 8th February 2023
+% This version 21:30 Thursday 9th February 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202302082130) def
+/ParametersVersionDateTimeAdobeFormat (D:202302092130) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -788,7 +788,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202302082130) def
+/SoftwareVersionDateTimeAdobeFormat (D:202302092130) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -14477,7 +14477,10 @@ currentdict /GlyphShowKnownAbsences undef
 		2 dict begin  aload pop  /Prefix exch def  /NumThisType exch def
 		NumThisType 0 gt {Prefix (0) NumThisType 2 ge {NumThisType 2 eq {(, )} {( ... )} ifelse Prefix NumThisType 1 sub} if (; )} if
 		end
-	} forall	pop ConcatenateToMark  OutputLogToPage {dup length 0 gt {(; )} if (DistillationLog)} if
+	} forall	pop ConcatenateToMark
+	OutputLogToPage  OneCircleSuppressOtherPageTypes not and  BottleWrapSuppressOtherPageTypes not and
+		{dup length 0 gt {(; )} if (DistillationLog)}
+	if  % Log pages likely to exist
 	ShownGlassesCircles 0 gt
 	{
 		1 index mark ne {(; )} if
