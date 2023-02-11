@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Thursday 9th February 2023
+% This version 13:30 Saturday 11th February 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202302092300) def
+/ParametersVersionDateTimeAdobeFormat (D:202302111330) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202302092300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202302111330) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -1194,14 +1194,13 @@ currentdict /ShellSortGapsLength1Subs undef
 			/yT  yT yF sub ratio mul yF add  def
 		} if  % ratio 1 lt
 
-		/ratio
-		[
+		/ratio  mark
 			% Trim to margins
 			xT xF //PrinterEpsilon add gt {PageWidth  MgnR sub xF sub  xT xF sub  div} if
 			yT yF //PrinterEpsilon add gt {PageHeight MgnT sub yF sub  yT yF sub  div} if
 			xT xF //PrinterEpsilon sub lt {           MgnL     xF sub  xT xF sub  div} if
 			yT yF //PrinterEpsilon sub lt {           MgnB     yF sub  yT yF sub  div} if
-		] Min
+		MinToMark
 		% Avoid collision with other circles
 		/CanWarn //false def
 		0  1  GlassPositions SheetNum get length 1 sub
@@ -2664,8 +2663,10 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 
 /IsNumber {type dup /integertype eq exch /realtype eq or} bind def
 
-/Min {//Infinity exch {2 copy gt {exch} if pop} forall} bind def
+/Min {//Infinity    exch {2 copy gt {exch} if pop} forall} bind def
 /Max {//InfinityNeg exch {2 copy lt {exch} if pop} forall} bind def
+/MinToMark {//Infinity    {exch dup mark eq {pop exit} if  2 copy gt {exch} if pop} loop} bind def
+/MaxToMark {//InfinityNeg {exch dup mark eq {pop exit} if  2 copy lt {exch} if pop} loop} bind def
 
 % array  ShuffleArray  array
 /ShuffleArray
@@ -5074,14 +5075,14 @@ currentdict /GlyphShowKnownAbsences undef
 					/a  V V mul 8 mul  NGaE V 4 mul sub NGaE mul add  4 sub  def
 					/b  H V mul 4 mul  NGaE V 2 mul sub W mul add  neg  def
 					/c  W W mul 4 div H H mul add  def
-					[
+					mark
 					[ c b a ]  0  //true  [V 0 gt {H //PrinterEpsilon add V 2 mul div} if  NGaE V 2 mul gt {W //PrinterEpsilon add NGaE V 2 mul sub 2 mul div} if] Min  //true  //PrinterEpsilon  PolynomialRoots
 					dup length [ {pop H  V 1 add 2 mul  div   NGaE V 2 mul sub  dup 0 gt {2 mul W exch div} {pop //Infinity} ifelse} {0 get} {Min (Warning: ProcessOnePackingType, PostsAndLintel, two seemingly good solutions.) OutputToLog} ] exch get exec
 					W 4 div  H 2 div  % As above geometry doesn't prevent overlapping of non-adjacent circles
 					CentralGlasses 1 eq {W 6 div  H NGaE 2 mod 0 eq {//Sqrt3 2 add} {4} ifelse div} if
 					CentralGlasses 2 eq {W 8 div  H NGaE 2 mod 1 eq {//Sqrt3 2 add} {4} ifelse div} if
 					CentralGlasses 3 eq {W 8 div  H NGaE 2 mod 1 eq {//Sqrt3 4 add} {//Sqrt3 2 mul 2 add} ifelse div} if
-					] Min /R exch def
+					MinToMark /R exch def
 
 					R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
 					R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
@@ -5114,13 +5115,13 @@ currentdict /GlyphShowKnownAbsences undef
 				% Inner attempts to jiggle circles into place. If possible with distance >= 2R, that R good. If not possible, or too hard to tell, fails.
 				% Can be slow and complicated, though many cases fail quickly.
 				19 dict begin
-				/UpperR [
+				/UpperR  mark
 					90 NGiA 1 sub div  NGiA 2 mod 0 eq {dup sin 1 exch div dup 3 -1 roll cos mul} {sin 1 exch div dup} ifelse  2 add H exch div exch  1 add W 2 div exch div   2 copy lt {exch} if pop
 					CentralGlasses 0 eq {W 4 div   H 2 div} if
 					CentralGlasses 1 eq {W 6 div   H  NGiA 2 mod 1 eq {4} {//Sqrt3 2 add} ifelse  div} if
 					CentralGlasses 2 eq {W 8 div   H  NGiA 2 mod 0 eq {4} {//Sqrt3 2 add} ifelse  div} if
 					CentralGlasses 3 eq {W 8 div   H  NGiA 2 mod 0 eq {//Sqrt3 2 mul 2 add} {//Sqrt3 4 add} ifelse  div} if
-				] Min def  % /UpperR
+				MinToMark def  % /UpperR
 				/LowerR  [ H H mul W W mul 4 div add
 				NGiA 2 mod 0 eq
 					{H 2 mul W add -2 mul   4 NGiA sub NGiA mul 4 add}
@@ -5840,7 +5841,7 @@ currentdict /GlyphShowKnownAbsences undef
 			} {pop  /OcticOK //false def} ifelse
 			OcticOK not
 			{
-				{/Row0X  [ Dist 2 div R add  L 2 div N 1 sub 2 div Dist mul sub ] Min  def}  % For exec'ing inside the next ifelse
+				{/Row0X  mark  Dist 2 div R add  L 2 div N 1 sub 2 div Dist mul sub  MinToMark  def}  % For exec'ing inside the next ifelse
 				R N 1 add 2 mul mul  L  le
 					{/Dist L R 2 mul sub N div def                     exec   /Row3X Row0X def   /Row1Y S 2 div def                                                                              /Row2Y Row1Y             def}
 					{/Dist L R 2 mul sub N 2 sub //Sqrt3 add div def   exec   /Row3X R     def   /Row1Y 4 2 //Sqrt3 mul sub R mul S 2 mul sub R mul S S mul add  2 S mul 4 R mul sub  div  def   /Row2Y Row1Y R add 2 div def}
@@ -10047,7 +10048,7 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						DropletPaths SheetNum get exch get /ThisDroplet exch def
 						0  4  ThisDroplet length 1 sub {ThisDroplet 1 index 2 getinterval aload pop   3 -1 roll 0 eq {moveto} {lineto} ifelse} for
-						[ DropletsOuterWidthEnd DropletsOuterWidthStart 0.96 ] Max dup  2.5 mul setlinewidth 1 0 0 setrgbcolor GSave stroke GRestore 1.75 mul setlinewidth 1 setgray stroke
+						mark DropletsOuterWidthEnd DropletsOuterWidthStart 0.96 MaxToMark dup  2.5 mul setlinewidth 1 0 0 setrgbcolor GSave stroke GRestore 1.75 mul setlinewidth 1 setgray stroke
 					} {pop exit} ifelse  % /integertype
 				} forall  % DropletsWhichReversed ...
 				ClipRestore
@@ -12602,12 +12603,12 @@ currentdict /GlyphShowKnownAbsences undef
 						TNtype /Upright     eq {/xStepFactor 1.979367 def  /yStepFactor 1.459220 def  /Angle 0                                      def  exit} if
 						mark (Error: unknown star arrangement in item ) i (+3 = ) i 3 add ( of TastingNotesStarsNameColsRowsArrangement: neither /Alternating nor /Sideways nor /Upright.) ConcatenateToMark OutputToLog stop
 					} repeat  % 1
-					/StarRadius [
+					/StarRadius  mark
 						10
 						TitlesFont TastingNotesTitlesFontSizeMax selectfont (DFGKNOSTVW) StringHeight  1 //Sqrt5 5 div sub mul  % Embedded constant string
 						TastingNotesStarTops TNSheetNum get dup length 1 sub get MgnB sub  TNrows dup 0 le {pop} {1 sub yStepFactor mul 2 add div} ifelse 2 div  % Approx, because stars packed tighter than circles. Final "2 div" to take not more than half space.
 						PageWidth MgnL MgnR add sub 0.25 mul  TNcols dup 0 eq {pop} {1 sub xStepFactor mul 2 add div} ifelse  % Approx, because stars packed tighter than circles
-					] Min   def  % /StarRadius
+					MinToMark   def  % /StarRadius
 					0  1  TNcols 1 sub
 					{
 						/ColNum exch def
@@ -13254,7 +13255,7 @@ currentdict /GlyphShowKnownAbsences undef
 			{CorkDisplayNumCopies 1 ge} MightBeTrue
 			{
 				//DeBugLevel 100 le {(+CorkDisplay) OutputToLog} if
-				58 dict begin
+				56 dict begin
 				/TypeOfPagesBeingRendered /CorkDisplay store
 				/ThisName (Cork display) def
 				0  1  GlassesClusteredOnCorkDisplay length 1 sub
@@ -13262,7 +13263,7 @@ currentdict /GlyphShowKnownAbsences undef
 					/CorkDisplaySetNum exch def
 					//false //false //false //false CorkDisplayPaperType /Portrait SetPaperSize
 					//true DefStoreMgns
-					/CDTopTextFontSize 16 def  % embedded constant
+					/CDTopTextFontSize 14 def  % embedded constant
 					HeaderFont CDTopTextFontSize selectfont  CorkDisplayTopText StringPathBBox  /CDTopTextT exch def  /CDTopTextR exch def  /CDTopTextB exch def  /CDTopTextL exch def
 					/CorkDisplayTopTextHeight CDTopTextT CDTopTextB sub def
 					CorkDisplayPaperType ThisPaperType  eq   PageOrderingCorkDisplay CorkDisplaySetNum GetEU  ThisPageOrdering  eq   and
@@ -13339,9 +13340,31 @@ currentdict /GlyphShowKnownAbsences undef
 							} for  % CDNumCols
 						} forall  % CDOrientation
 
-						/CDCircletextFontSize [ 5  CDBestWidthOneCork 36 div  CDBestHeightOneCork 36 div ] Min def  % embedded constant
-						/CDTitleFontSize [ CDTopTextFontSize  CorkDisplayTitleFontSizeMax  CDBestHeightOneCork 6 div  CDBestWidthOneCork 6 div ] Min def
-						/CDSubtitleFontSize  VoteRecorderSubtitleFontSizeProportionTitles dup IsNumber not {pop 0.5} if  CDTitleFontSize mul def  % Embedded constant
+						/CDCircletextFontSize [ 6  CDBestWidthOneCork 36 div  CDBestHeightOneCork 36 div ] Min def  % embedded constants
+						/CDUsableWidth  CDBestWidthOneCork CDCircletextFontSize 2.5 mul sub  def  % 2.5 approximate
+						/CDTitleFontSize  mark
+						CorkDisplayTitleFontSizeMax    CDTopTextFontSize dup 7 lt {pop} if % Test should be redundant.
+						CDBestHeightOneCork 6 div   dup CDCircletextFontSize 2.5 mul sub dup 0 le {pop} if  % 2.5 approximate: should use a MaxT-MinB, but precision not important.
+						CDUsableWidth //PrinterEpsilon gt
+						{
+							GlassesClusteredOnCorkDisplay CorkDisplaySetNum GetEU {execU
+							{
+								/WithinTitles exch execU def    TitlesFont 1 selectfont
+								TitlesCorkDisplay    WithinTitles get StringWidthRecursive  dup 0 gt {CDUsableWidth exch div} {pop} ifelse
+							} forall} forall
+						} if  % CDUsableWidth //PrinterEpsilon gt
+						MinToMark def  % /CDTitleFontSize
+						/CDSubtitleFontSize  mark
+						CDTitleFontSize   CorkDisplayTitleFontSizeMax VoteRecorderSubtitleFontSizeProportionTitles dup IsNumber not {pop 0.5} if  mul
+						CDUsableWidth //PrinterEpsilon gt
+						{
+							GlassesClusteredOnCorkDisplay CorkDisplaySetNum GetEU {execU
+							{
+								/WithinTitles exch execU def    SubtitlesFont 1 selectfont
+								SubtitlesCorkDisplay WithinTitles get StringWidthRecursive  dup 0 gt {CDUsableWidth exch div} {pop} ifelse
+							} forall} forall
+						} if  % CDUsableWidth //PrinterEpsilon gt
+						MinToMark def  % /CDSubtitleFontSize
 
 						/CDSpareHoles  CDNumGlasses 0 gt {CDBestNumCols CDBestNumRows mul CDBestNumPages mul  CDNumGlasses sub} {0} ifelse  def
 
@@ -13398,7 +13421,6 @@ currentdict /GlyphShowKnownAbsences undef
 										SubtitlesCorkDisplay WithinTitles get  StringPathBBox  /CDSubtitlesT exch def  /CDSubtitlesR exch def  /CDSubtitlesB exch def  /CDSubtitlesL exch def
 										CDSubtitlesT CDSubtitlesB gt  CDSubtitlesR CDSubtitlesL gt  and
 										{
-											CDLeft CDBottom moveto
 											CDLeft  CDBottom CDSubtitlesB sub moveto  SubtitlesCorkDisplay WithinTitles get  ShowRecursive
 											/CDBottom CDBottom CDSubtitlesB sub CDSubtitlesT add 0.96 add def  % Embedded constant
 										} if  % non-empty
@@ -13407,7 +13429,6 @@ currentdict /GlyphShowKnownAbsences undef
 										TitlesCorkDisplay WithinTitles get  StringPathBBox  /CDTitlesT exch def  /CDTitlesR exch def  /CDTitlesB exch def  /CDTitlesL exch def
 										CDTitlesT CDTitlesB gt  CDTitlesR CDTitlesL gt  and
 										{
-											CDLeft CDBottom moveto
 											CDLeft  CDBottom CDTitlesB sub moveto  TitlesCorkDisplay WithinTitles get  ShowRecursive
 										} if  % non-empty
 									} if  % WithinTitles type /integertype eq ... WithinTitles 0 ge ...
