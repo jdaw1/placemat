@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:30 Friday 17th February 2023
+% This version 13:30 Saturday 18th February 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202302172030) def
+/ParametersVersionDateTimeAdobeFormat (D:202302181330) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202302172030) def
+/SoftwareVersionDateTimeAdobeFormat (D:202302181330) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -4089,7 +4089,7 @@ currentdict /GlyphShowKnownAbsences undef
 % Everything clipped to current path, which is left unchanged
 /ShapesClippedToPath
 {
-	//DeBugLevel 44 le {(+ShapesClippedToPath) OutputToLog} if
+	//DeBugLevel 42 le {(+ShapesClippedToPath) OutputToLog} if
 	22 dict begin  GSave
 	GSave flattenpath pathbbox /ury exch def /urx exch def /lly exch def /llx exch def GRestore  % pathbbox rather than PathBBox because approximate suffices, and is faster
 	{clip} if  % DoActuallyClip
@@ -4150,7 +4150,7 @@ currentdict /GlyphShowKnownAbsences undef
 	]  % Double-depth array [ ... [ShapesIntX ShapesIntY X Y ThisShapeRadius ThisShape] ... ]
 	{
 		aload pop  /ThisShape exch def   /ThisShapeRadius exch def  /Y exch def  /X exch def  /ShapesIntY exch def /ShapesIntX exch def
-		/Rand1 rand def  /Rand2 rand def  /Rand3 rand def  /Rand4 rand def  % Sometimes, by rounding, a transformed TABO can select differently, which should't desynchronise rand usage; hence rands always done.
+		/Rand1 rand def  /Rand2 rand def  % Sometimes, by rounding, a transformed TABO can select differently, which should't desynchronise rand usage; hence rands always done.
 		0 setgray  0.48 setlinewidth  0 setlinejoin  1 setlinecap  [] 0 setdash
 		X 0.8 ThisShapeRadius mul add  llx  gt       X 0.8 ThisShapeRadius mul sub  urx  lt  and  % Can't compare to RadiiCirclearrayInsideUsableTAB because might be a PlaceName page.
 		Y 0.8 ThisShapeRadius mul add  lly  gt  and  Y 0.8 ThisShapeRadius mul sub  ury  lt  and  % The 0.8s reject some of the inelegant cases where only a thin sliver of the shape is painted.
@@ -4158,31 +4158,31 @@ currentdict /GlyphShowKnownAbsences undef
 		Y ThisShapeRadius add  OuterRegionLly  gt and  Y ThisShapeRadius sub  OuterRegionUry  lt and  % These tests might be redundant.
 		{
 			//false
-			/Circle ThisShape eq {X Y ThisShapeRadius 0 360 arc closepath  pop //true} if
+			/Circle ThisShape eq {X Y ThisShapeRadius 0 360 arc closepath  pop //true} if  % Nothing ever placed on boundary, so no need for ArcAccurate.
 
 			/Star ThisShape eq
 			{
 				SpecialPlace /None eq  ShapesIntX 0 ne or  ShapesIntY 0 ne or {Rand1 //RandMax div 360 mul} {0} ifelse
-				ShapesStarsPointsAndStepsArray dup length Rand2 exch mod get aload pop
+				ShapesStarsPointsAndStepsArray dup length Rand1 exch mod get aload pop
 				X Y moveto   /Center  /Middle  ThisShapeRadius  /Radius  7 -3 roll  //false //false   Star pop
 				pop //true
 			} if  % /Star
 
 			/Flower ThisShape eq
 			{
-				Rand1 //RandMax div  ShapesFlowersNumPetalsMax 1 add ShapesFlowersNumPetalsMin sub  mul  cvi  ShapesFlowersNumPetalsMin add
-				dup 360 exch div  Rand2 //RandMax div  ShapesFlowersAngularWidthMax ShapesFlowersAngularWidthMin sub mul  ShapesFlowersAngularWidthMin add  mul
+				ShapesFlowersNumPetalsMin Rand1 ShapesFlowersNumPetalsMax 2 index sub 1 add mod  add
+				dup 360 exch div  ShapesFlowersAngularWidthMin  Rand2 //RandMax div  ShapesFlowersAngularWidthMax 2 index sub mul  add  mul
 				//ArcCosMinusOneThird 2 copy gt {exch} if pop
 				ThisShapeRadius
-				SpecialPlace /None eq  ShapesIntX 0 ne or  ShapesIntY 0 ne or {Rand3 //RandMax div 360 mul} {0} ifelse
-				Rand4 2 mod 0 eq
+				SpecialPlace /None eq  ShapesIntX 0 ne or  ShapesIntY 0 ne or {Rand1 //RandMax div 360 mul} {0} ifelse
+				Rand2 2 mod 0 eq
 				X Y moveto //true  Flower  % Always strokeable, because filling works on strokeable but stroke not with just fillable
 				pop //true
 			} if  % Flower
 
 			/Heart ThisShape eq
 			{
-				matrix currentmatrix X Y translate   Rand1 //HalfRandMax div 1 sub //ArcTanFiveEighths mul
+				matrix currentmatrix X Y translate   Rand1 //HalfRandMax div 1 sub dup 0 lt 5 3 div exch {exch neg exch exp neg} {exp} ifelse //ArcTanFiveEighths mul % Nudged to vertical
 				SpecialPlace /None eq  ShapesIntX 0 ne or  ShapesIntY 0 ne or {rotate} {pop} ifelse
 				ThisShapeRadius 6 sqrt mul dup scale 0 -0.3846762000998701793217521379 translate
 				0 0 moveto 0.8 0.5 0.25 1 0 0.65526715987207729968624 CurvetoFourPieces -0.25 1 -0.8 0.5 0 0 CurvetoFourPieces closepath  % The 0.655... minimises the path length
