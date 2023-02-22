@@ -1,6 +1,6 @@
 %!PS
 
-% This version 13:55 Saturday 18th February 2023
+% This version 19:30 Wednesday 22nd February 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2022.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202302181355) def
+/ParametersVersionDateTimeAdobeFormat (D:202302221930) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202302181355) def
+/SoftwareVersionDateTimeAdobeFormat (D:202302221930) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -4182,8 +4182,12 @@ currentdict /GlyphShowKnownAbsences undef
 
 			/Heart ThisShape eq
 			{
-				matrix currentmatrix X Y translate   Rand1 //HalfRandMax div 1 sub dup 0 lt 5 3 div exch {exch neg exch exp neg} {exp} ifelse //ArcTanFiveEighths mul % Nudged to vertical
-				SpecialPlace /None eq  ShapesIntX 0 ne or  ShapesIntY 0 ne or {rotate} {pop} ifelse
+				matrix currentmatrix X Y translate
+				SpecialPlace /None eq  ShapesIntX 0 ne or  ShapesIntY 0 ne or
+				{
+					Rand1 //RandMax div dup 0.5 le {2 mul sqrt 1} {1 exch sub 2 mul sqrt 1 exch} ifelse sub  % Isosceles triangle dist'n: {(-1,0),(0,1),(+1,0)}.
+					//ArcTanFiveEighths mul  rotate
+				} if  % Rotatable
 				ThisShapeRadius 6 sqrt mul dup scale 0 -0.3846762000998701793217521379 translate
 				0 0 moveto 0.8 0.5 0.25 1 0 0.65526715987207729968624 CurvetoFourPieces -0.25 1 -0.8 0.5 0 0 CurvetoFourPieces closepath  % The 0.655... minimises the path length
 				setmatrix  pop //true
