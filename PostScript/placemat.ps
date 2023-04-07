@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:30 Monday 3rd April 2023
+% This version 22:50 Friday 7th April 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202304032230) def
+/ParametersVersionDateTimeAdobeFormat (D:202304072250) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202304032230) def
+/SoftwareVersionDateTimeAdobeFormat (D:202304072250) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -8849,14 +8849,13 @@ currentdict /GlyphShowKnownAbsences undef
 		Abovetitles NonEmptyCompoundObject {(AbovetitleFontSizes/TitleFontSizes = ) AbovetitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
 		Belowtitles NonEmptyCompoundObject {(BelowtitleFontSizes/TitleFontSizes = ) BelowtitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
 		Overtitles NonEmptyCompoundObject {(OvertitleFontSizes/TitleFontSizes = ) OvertitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
-		TABO_MaxT_WithinPage 0 ge  TABO_MinB_WithinPage 0 ge  and
+		TABO_MaxT_WithinPage 0 ge  TABO_MinB_WithinPage 0 le  or
 		{
 			TABO_MaxT_SheetNum (,) TABO_MaxT_WithinPage (,)  GlassesOnSheets TABO_MaxT_SheetNum get TABO_MaxT_WithinPage get (,) Titles 2 index get ASCIIfy
-			TABO_MaxT_SheetNum TABO_MinB_SheetNum eq TABO_MaxT_WithinPage TABO_MinB_WithinPage eq and
-				{( has )}
-				{( and ) TABO_MinB_SheetNum (,) TABO_MinB_WithinPage (,)  GlassesOnSheets TABO_MinB_SheetNum get TABO_MinB_WithinPage get (,) Titles 2 index get ASCIIfy ( have )}
-			ifelse  (the max TitleAboveBelowOverT and the min TitleAboveBelowOverB, ) TABO_MaxT ( and ) TABO_MinB (.)
-		} {pop} ifelse  % ... 0 gt
+			( has max TitleAboveBelowOverT ~= ) TitleAboveBelowOverT TABO_MinB_SheetNum get TABO_MinB_WithinPage get (; )
+			TABO_MinB_SheetNum (,) TABO_MinB_WithinPage (,)  GlassesOnSheets TABO_MinB_SheetNum get TABO_MinB_WithinPage get (,) Titles 2 index get ASCIIfy
+			( has min TitleAboveBelowOverB ~= ) TitleAboveBelowOverB TABO_MinB_SheetNum get TABO_MinB_WithinPage get (.)
+		} {pop} ifelse  % ... 0 ge ... 0 le  or
 	} if  % ... GlassesNumCopies 1 ge ... StickyLabelsNumCopies 1 ge ...
 	ConcatenateToMark OutputToLog
    end
