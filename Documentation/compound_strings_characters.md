@@ -63,6 +63,7 @@ Some examples:
 | `[(Quinta do Bom) /fi (m)]`                                   | Quinta do Bom&#64257;m                   |
 | `[(Croft Quinta da Ro) /ecircumflex (da S) /emacron (rikos)]` | Croft Quinta da Ro&ecirc;da S&#275;rikos |
 | `[(Ch) /acircumflex (teau L) /eacute (oville-Barton)]`        | Ch&acirc;teau L&eacute;oville-Barton     |
+| `[(Tinta C) /atilde (o)]`                                     | Tinta C&atilde;o                         |
 | `[(Mo) /edieresis (t & Chandon)]`                             | Mo&euml;t & Chandon                      |
 | `(JDAW)`                                                      | ![&lsquo;JDAW&rsquo;, not kerned](images/JDAW_unkerned.png) |
 | `[(JDA) {-0.06 Kern} (W)]`                                    | ![&lsquo;JDAW&rsquo;, kerned](images/JDAW_kerned.png) |
