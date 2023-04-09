@@ -62,8 +62,8 @@ Some examples:
 | `[(Po) /ccedilla (as)]`                                       | Po&ccedil;as                             |
 | `[(Quinta do Bom) /fi (m)]`                                   | Quinta do Bom&#64257;m                   |
 | `[(Croft Quinta da Ro) /ecircumflex (da S) /emacron (rikos)]` | Croft Quinta da Ro&ecirc;da S&#275;rikos |
-| `[(Ch) /acircumflex (teau L) /eacute (oville-Barton)]`        | Ch&acirc;teau L&eacute;oville-Barton     |
 | `[(Tinta C) /atilde (o)]`                                     | Tinta C&atilde;o                         |
+| `[(Ch) /acircumflex (teau L) /eacute (oville-Barton)]`        | Ch&acirc;teau L&eacute;oville-Barton     |
 | `[(Mo) /edieresis (t & Chandon)]`                             | Mo&euml;t & Chandon                      |
 | `(JDAW)`                                                      | ![&lsquo;JDAW&rsquo;, not kerned](images/JDAW_unkerned.png) |
 | `[(JDA) {-0.06 Kern} (W)]`                                    | ![&lsquo;JDAW&rsquo;, kerned](images/JDAW_kerned.png) |
@@ -258,7 +258,12 @@ Typically four hex digits are prefixed with &ldquo;`/uni`&rdquo;; five hex digit
 E.g.,&nbsp;`/uni1D00` =&nbsp;&ldquo;&#x1D00;&rdquo; =&nbsp;[small&#8209;caps&nbsp;A](http://www.fileformat.info/info/unicode/char/1d00/index.htm); 
 `/u1D538` =&nbsp;&ldquo;&#x1D538;&rdquo; =&nbsp;[double&#8209;struck&nbsp;A](http://www.fileformat.info/info/unicode/char/1d538/index.htm).
 
-But this glyph naming is not consistently available: not in all fonts; not necessarily all glyphs within a font. 
-The usual advice applies: carefully check the output.
 
-As a small assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15, and shows them in a simple PDF.
+## Errors
+
+Not all fonts have all glyphs, and not all fonts allow Unicode-style naming. 
+Indeed, more strongly, few fonts have most glyphs. 
+So the usual advice applies: carefully check the output.
+
+Attempts to use a non-existent glyph are logged. 
+Further, as a small assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15, and shows them in a simple PDF.
