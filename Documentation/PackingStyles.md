@@ -22,7 +22,7 @@
 
 The core purpose of the software is to have a place to put glasses. 
 Already known are the `PaperType` (e.g., `/A3`), the margins, and how many glasses are to go on the page. 
-The user has much control over the layout of the glasses.
+Further, the user has much direct control over the layout of the glasses.
 
 The user has much control, but the default is also good. 
 Unless there is a compelling need to change things, users are encouraged to take the easy course of letting the defaults do their work.
@@ -32,7 +32,7 @@ In turn each style from the list is taken, and each allowed variation is tested.
 Broadly, if a later-tested style allows a larger radius than the current best, then the old best is replaced by this better style.
 
 If the element of `PackingStyles` is just the style, it doesn&rsquo;t need to be in an array. 
-But the elements of `PackingStyles` can have constraints and small variations. 
+But the elements of `PackingStyles` can have constraints and variations. 
 If an element of `PackingStyles` is to have such extra detail, then that element must be an array, starting with the style name. 
 E.g. (which is unrealistically verbose to show some of the possibilities): 
 ```PostScript
