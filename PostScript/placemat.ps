@@ -1,6 +1,6 @@
 %!PS
 
-% This version 09:45 Sunday 9th April 2023
+% This version 19:30 Monday 10th April 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202304090945) def
+/ParametersVersionDateTimeAdobeFormat (D:202304101930) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202304090945) def
+/SoftwareVersionDateTimeAdobeFormat (D:202304101930) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -10155,6 +10155,34 @@ currentdict /GlyphShowKnownAbsences undef
 		currentdict /SheetNum undef
 	} if  % ... FlightSeparations ...
 
+	/CHCX_CHCY
+	{
+		NamesShowTop SheetNum get {NamePlacementTopX} {NamePlacementBottomX} ifelse SheetNum get  % default CentreX for CrossHatching
+		CrossHatchingCentreX IsNumber {pop CrossHatchingCentreX} if
+		/Left   CrossHatchingCentreX eq {pop OuterGlassesMarginL} if
+		/Center CrossHatchingCentreX eq {pop PageWidth MgnL MgnR sub OuterGlassesMarginL OuterGlassesMarginR sub add add 2 div} if
+		/Right  CrossHatchingCentreX eq {pop PageWidth OuterGlassesMarginR sub} if
+		/CenterSheetsSamePageOrdering CrossHatchingCentreX eq  SideBySideGlassesTastingNotes not  and
+		{
+			pop OuterGlassesMarginL
+			0  1  GlassesOnSheets length 1 sub
+			{
+				/SheetNum0 exch def
+				PageOrderingGlasses dup SheetNum0 GetEU exch SheetNum GetEU eq
+				{
+					//false //false //false //false  << /SheetNum SheetNum0 >> begin PaperType Orientation end  SetPaperSize
+					PageWidth OuterGlassesMarginL OuterGlassesMarginR add sub SheetNum0 SheetNum lt {sub} {add} ifelse
+				} if  % PageOrderingGlasses ... eq
+			} for  % SheetNum0
+			2 div   currentdict /SheetNum0 undef   //false //false //false //false PaperType Orientation SetPaperSize
+		} if  % /CrossHatchingCentreX /CenterSheetsSamePageOrdering eq  SideBySideGlassesTastingNotes not  and
+
+		NamesShowTop SheetNum get {PageHeight MgnT sub} {MgnB} ifelse  % cross hatching centre y
+		CrossHatchingCentreY IsNumber {pop CrossHatchingCentreY} if
+		/Bottom CrossHatchingCentreY eq {pop OuterGlassesMarginB} if
+		/Middle CrossHatchingCentreY eq {pop PageHeight MgnB MgnT sub add 2 div} if
+		/Top    CrossHatchingCentreY eq {pop PageHeight OuterGlassesMarginT sub} if
+	} bind def  % /CHCX_CHCY
 
 	//DeBugLevel 100 le {( Main: TitleAboveBelowOverForms) OutputToLog} if
 	/TypeOfPagesBeingRendered /Glasses store
@@ -10279,32 +10307,7 @@ currentdict /GlyphShowKnownAbsences undef
 				CrossHatchingTitles CrossHatchingAbovetitles CrossHatchingBelowtitles CrossHatchingOvertitles or or or
 				{
 					matrix currentmatrix
-
-					NamesShowTop SheetNum get {NamePlacementTopX} {NamePlacementBottomX} ifelse SheetNum get  % default CentreX for CrossHatching
-					CrossHatchingCentreX IsNumber {pop CrossHatchingCentreX} if
-					/Left   CrossHatchingCentreX eq {pop 0} if
-					/Center CrossHatchingCentreX eq {pop PageWidth MgnL MgnR sub add 2 div} if
-					/Right  CrossHatchingCentreX eq {pop PageWidth} if
-					/CenterSheetsSamePageOrdering CrossHatchingCentreX eq  SideBySideGlassesTastingNotes not  and
-					{
-						pop 0
-						0  1  GlassesOnSheets length 1 sub
-						{
-							/SheetNum0 exch def
-							PageOrderingGlasses dup SheetNum0 GetEU exch SheetNum GetEU eq
-							{
-								//false //false //false //false  << /SheetNum SheetNum0 >> begin PaperType Orientation end  SetPaperSize   PageWidth  SheetNum0 SheetNum lt {sub} {add} ifelse
-							} if  % PageOrderingGlasses ... eq
-						} for  % SheetNum0
-						2 div   currentdict /SheetNum0 undef   //false //false //false //false PaperType Orientation SetPaperSize
-					} if  % /CrossHatchingCentreX /CenterSheetsSamePageOrdering eq  SideBySideGlassesTastingNotes not  and
-
-					NamesShowTop SheetNum get {PageHeight MgnT sub} {MgnB} ifelse  % cross hatching centre y
-					CrossHatchingCentreY IsNumber {pop CrossHatchingCentreY} if
-					/Bottom CrossHatchingCentreY eq {pop 0} if
-					/Middle CrossHatchingCentreY eq {pop PageHeight MgnB MgnT sub add 2 div} if
-					/Top    CrossHatchingCentreY eq {pop PageHeight} if
-
+					CHCX_CHCY
 					RotationTitlesAboveBelowOverCirclearray dup 0 ne {neg rotate} {pop} ifelse  GlassPositions SheetNum get WithinPage get aload pop neg exch neg exch translate
 					moveto setmatrix currentpoint newpath  /CHCY exch def /CHCX exch def
 				} if  % CrossHatchingTitles CrossHatchingAbovetitles CrossHatchingBelowtitles CrossHatchingOvertitles or or or
@@ -11798,33 +11801,7 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				//DeBugLevel 100 le {(+CrossHatchingOutsideForms: PaintProc) OutputToLog} if
 				pop 3 dict begin
-
-				NamesShowTop SheetNum get {NamePlacementTopX} {NamePlacementBottomX} ifelse SheetNum get  % cross hatching centre x
-				CrossHatchingCentreX IsNumber {pop CrossHatchingCentreX} if
-				CrossHatchingCentreX /Left   eq {pop 0} if
-				CrossHatchingCentreX /Center eq {pop PageWidth MgnL MgnR sub add 2 div} if
-				CrossHatchingCentreX /Right  eq {pop PageWidth} if
-				/CenterSheetsSamePageOrdering CrossHatchingCentreX eq  SideBySideGlassesTastingNotes not  and
-				{
-					pop 0
-					0  1  GlassesOnSheets length 1 sub
-					{
-						/SheetNum0 exch def
-						PageOrderingGlasses dup SheetNum0 GetEU exch SheetNum GetEU eq
-						{
-							//false //false //false //false  << /SheetNum SheetNum0 >> begin PaperType Orientation end  SetPaperSize   PageWidth  SheetNum0 SheetNum lt {sub} {add} ifelse
-						} if  % PageOrderingGlasses ... eq
-					} for  % SheetNum0
-					2 div   currentdict /SheetNum0 undef   //false //false //false //false PaperType Orientation SetPaperSize
-				} if  % /CrossHatchingCentreX /CenterSheetsSamePageOrdering eq  SideBySideGlassesTastingNotes not  and
-				/CHCX exch def
-
-				NamesShowTop SheetNum get {PageHeight MgnT sub} {MgnB} ifelse  % cross hatching centre y
-				CrossHatchingCentreY IsNumber {pop CrossHatchingCentreY} if
-				CrossHatchingCentreY /Bottom eq {pop 0} if
-				CrossHatchingCentreY /Middle eq {pop PageHeight MgnB MgnT sub add 2 div} if
-				CrossHatchingCentreY /Top    eq {pop PageHeight} if
-				/CHCY exch def
+				CHCX_CHCY  /CHCY exch def  /CHCX exch def
 
 				% If two circles have a machine-precision overlap, it will look just as if they had a machine-precision underlap. No problem.
 				% But circles overlapping page edge can look wrong, as eye will see fragments outside margin. And a preliminary rectclip will also speed rasterisation.
@@ -11878,32 +11855,7 @@ currentdict /GlyphShowKnownAbsences undef
 					CrossHatchingInside
 					{
 						matrix currentmatrix
-
-						NamesShowTop SheetNum get {NamePlacementTopX} {NamePlacementBottomX} ifelse SheetNum get  % cross hatching centre x
-						CrossHatchingCentreX IsNumber {pop CrossHatchingCentreX} if
-						CrossHatchingCentreX /Left   eq {pop 0} if
-						CrossHatchingCentreX /Center eq {pop PageWidth MgnL MgnR sub add 2 div} if
-						CrossHatchingCentreX /Right  eq {pop PageWidth} if
-						/CenterSheetsSamePageOrdering CrossHatchingCentreX eq  SideBySideGlassesTastingNotes not  and
-						{
-							pop 0
-							0  1  GlassesOnSheets length 1 sub
-							{
-								/SheetNum0 exch def
-								PageOrderingGlasses dup SheetNum0 GetEU exch SheetNum GetEU eq
-								{
-									//false //false //false //false  << /SheetNum SheetNum0 >> begin PaperType Orientation end  SetPaperSize   PageWidth  SheetNum0 SheetNum lt {sub} {add} ifelse
-								} if  % PageOrderingGlasses ... eq
-							} for  % SheetNum0
-							2 div   currentdict /SheetNum0 undef   //false //false //false //false PaperType Orientation SetPaperSize
-						} if  % /CrossHatchingCentreX /CenterSheetsSamePageOrdering eq  SideBySideGlassesTastingNotes not  and
-
-						NamesShowTop SheetNum get {PageHeight MgnT sub} {MgnB} ifelse  % cross hatching centre y
-						CrossHatchingCentreY IsNumber {pop CrossHatchingCentreY} if
-						CrossHatchingCentreY /Bottom eq {pop 0} if
-						CrossHatchingCentreY /Middle eq {pop PageHeight MgnB MgnT sub add 2 div} if
-						CrossHatchingCentreY /Top    eq {pop PageHeight} if
-
+						CHCX_CHCY
 						RotationTitlesAboveBelowOverCirclearray dup 0 ne {neg rotate} {pop} ifelse  GlassPositions SheetNum get WithinPage get aload pop neg exch neg exch translate
 						moveto setmatrix currentpoint newpath  /CHCY exch def /CHCX exch def
 
