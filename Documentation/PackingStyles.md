@@ -294,7 +294,7 @@ The example image shows, on `/A3`, an alternation of the previous code extract t
 </div>
 
 The difference is the movement of the circles at (2,2) and (4,2), both towards (3,2). 
-For the author&rsquo;s taste, the closer relationship of the two B0 circles means they should be touching, rather than equally spaced between A0 and C0.
+For the author&rsquo;s taste, the closer relationship of the two B0 circles (same wine in single and magnum) means they should be touching, rather than equally spaced between A0 and C0.
 
 ## Other flags, constraints, and sub-parameters
 
