@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:30 Monday 10th April 2023
+% This version 19:15 Tuesday 11th April 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202304101930) def
+/ParametersVersionDateTimeAdobeFormat (D:202304111915) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202304101930) def
+/SoftwareVersionDateTimeAdobeFormat (D:202304111915) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -2024,9 +2024,9 @@ currentdict /ForReverseBinaryDict undef
 % First two params ignored if Callsetpagedevice is false
 /SetPaperSize
 {
-	//DeBugLevel 15 le {(+SetPaperSize) OutputToLog} if
+	//DeBugLevel 16 le {(+SetPaperSize) OutputToLog} if
 	2 copy Dimensions /PageHeight exch def  /PageWidth exch def
-	14 dict begin
+	15 dict begin
 	pop  /PaperType exch def  /Callsetpagedevice exch def  /Mirror exch def  /Rotate180 exch def  /ShowCropMarks exch def
 
 	Callsetpagedevice  % Sets the page size; and attempts to disable duplex; draws crop marks
@@ -2080,7 +2080,7 @@ currentdict /ForReverseBinaryDict undef
 		} if  % OMR 0 gt
 		{0 setgray  0.24 setlinewidth  0 setlinecap  stroke} if  end  InitialMatrix setmatrix
 
-		/TrimInstructionsFontSize 8 def  /Courier TrimInstructionsFontSize selectfont  0.25 setgray
+		/TrimInstructionsFontSize 7 def  /Courier TrimInstructionsFontSize selectfont  0.2 setgray
 		OMT MarginT TrimInstructionsFontSize 1.5 mul add gt
 		{
 			PageWidth OML OMR sub add 2 div  PageHeight MarginT sub  moveto
@@ -2088,7 +2088,11 @@ currentdict /ForReverseBinaryDict undef
 				(Top trim ) OMT 127 mul 360 div 1 FormatDecimalPlaces (mm )
 				/approxequal ( ) OMT 72 div 2 FormatDecimalPlaces (" )
 				/approxequal ( ) OMT round cvi (pt below top edge of )
-				PaperType 2 string cvs ( paper.)
+				PaperType 2 string cvs ( paper. Post-trim page height )
+				/PageSizeDeOutered PageHeight OMB OMT add sub def
+				/approxequal ( ) PageSizeDeOutered 127 mul 360 div 1 FormatDecimalPlaces (mm )
+				/approxequal ( ) PageSizeDeOutered          72 div 2 FormatDecimalPlaces (" )
+				/approxequal ( ) PageSizeDeOutered round cvi (pt.)
 			] dup OuterMarginLogsAdd  dup StringPathBBox  /T exch def  /R exch def  pop  /L exch def
 			R L sub  PageWidth OMR OML add MarginR MarginL add add sub  le {R L add -2 div T neg rmoveto ShowRecursive} {pop} ifelse
 		} if  % OMT ... gt
@@ -2100,7 +2104,11 @@ currentdict /ForReverseBinaryDict undef
 				(Left trim ) OML 127 mul 360 div 1 FormatDecimalPlaces (mm )
 				/approxequal ( ) OML 72 div 2 FormatDecimalPlaces (" )
 				/approxequal ( ) OML round cvi (pt from left edge of )
-				PaperType 2 string cvs ( paper.)
+				PaperType 2 string cvs ( paper. Post-trim page width )
+				/PageSizeDeOutered PageWidth OML OMR add sub def
+				/approxequal ( ) PageSizeDeOutered 127 mul 360 div 1 FormatDecimalPlaces (mm )
+				/approxequal ( ) PageSizeDeOutered          72 div 2 FormatDecimalPlaces (" )
+				/approxequal ( ) PageSizeDeOutered round cvi (pt.)
 			] dup OuterMarginLogsAdd  dup StringPathBBox  pop  /R exch def  /B exch def  /L exch def
 			R L sub  PageHeight OMT OMB add MarginT MarginB add add sub  le {R L add -2 div B neg rmoveto ShowRecursive} {pop} ifelse
 			setmatrix
@@ -2112,7 +2120,11 @@ currentdict /ForReverseBinaryDict undef
 				(Bottom trim ) OMB 127 mul 360 div 1 FormatDecimalPlaces (mm )
 				/approxequal ( ) OMB 72 div 2 FormatDecimalPlaces (" )
 				/approxequal ( ) OMB round cvi (pt above bottom edge of )
-				PaperType 2 string cvs ( paper.)
+				PaperType 2 string cvs ( paper. Post-trim page height )
+				/PageSizeDeOutered PageHeight OMB OMT add sub def
+				/approxequal ( ) PageSizeDeOutered 127 mul 360 div 1 FormatDecimalPlaces (mm )
+				/approxequal ( ) PageSizeDeOutered          72 div 2 FormatDecimalPlaces (" )
+				/approxequal ( ) PageSizeDeOutered round cvi (pt.)
 			] dup OuterMarginLogsAdd  dup StringPathBBox  pop  /R exch def  /B exch def  /L exch def
 			R L sub  PageWidth OMR OML add MarginR MarginL add add sub  le {R L add -2 div B neg rmoveto ShowRecursive} {pop} ifelse
 		} if  % OMB ... gt
@@ -2124,7 +2136,11 @@ currentdict /ForReverseBinaryDict undef
 				(Right trim ) OMR 127 mul 360 div 1 FormatDecimalPlaces (mm )
 				/approxequal ( ) OMR 72 div 2 FormatDecimalPlaces (" )
 				/approxequal ( ) OMR round cvi (pt from right edge of )
-				PaperType 2 string cvs ( paper.)
+				PaperType 2 string cvs ( paper. Post-trim page width )
+				/PageSizeDeOutered PageWidth OML OMR add sub def
+				/approxequal ( ) PageSizeDeOutered 127 mul 360 div 1 FormatDecimalPlaces (mm )
+				/approxequal ( ) PageSizeDeOutered          72 div 2 FormatDecimalPlaces (" )
+				/approxequal ( ) PageSizeDeOutered round cvi (pt.)
 			] dup OuterMarginLogsAdd  dup StringPathBBox  pop  /R exch def  /B exch def  /L exch def
 			R L sub  PageHeight OMT OMB add MarginT MarginB add add sub  le {R L add -2 div B neg rmoveto ShowRecursive} {pop} ifelse
 			setmatrix
