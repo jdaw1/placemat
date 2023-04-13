@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:40 Tuesday 11th April 2023
+% This version 20:30 Thursday 13th April 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202304112240) def
+/ParametersVersionDateTimeAdobeFormat (D:202304132030) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202304112240) def
+/SoftwareVersionDateTimeAdobeFormat (D:202304132030) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -10193,7 +10193,11 @@ currentdict /GlyphShowKnownAbsences undef
 			2 div   currentdict /SheetNum0 undef   //false //false //false //false PaperType Orientation SetPaperSize
 		} if  % /CrossHatchingCentreX /CenterSheetsSamePageOrdering eq  SideBySideGlassesTastingNotes not  and
 
-		NamesShowTop SheetNum get {PageHeight MgnT sub} {MgnB} ifelse  % cross hatching centre y
+		<< /TypeOfPagesBeingRendered /Glasses  /SheetNum 0 >> begin NamesFont NamesFontSize end selectfont (W) StringPathBBox 4 1 roll pop exch pop  % Y_T, Y_B
+		NamesShowTop SheetNum get
+			{PageHeight MgnT sub   3 1 roll pop  2 div sub}
+			{MgnB                  exch sub exch 2 div add}
+		ifelse  % cross hatching centre y
 		CrossHatchingCentreY IsNumber {pop CrossHatchingCentreY} if
 		/Bottom CrossHatchingCentreY eq {pop OuterGlassesMarginB} if
 		/Middle CrossHatchingCentreY eq {pop PageHeight MgnB MgnT sub add 2 div OuterGlassesMarginB add} if
