@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:30 Thursday 13th April 2023
+% This version 18:45 Tuesday 18th April 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202304132030) def
+/ParametersVersionDateTimeAdobeFormat (D:202304181845) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -191,7 +191,7 @@
 /VoteRecorderShowTotalRow [ false ] def  % Same length as VoteRecorderTopTexts
 /GlassesClusteredOnVoteRecorders [ VoteRecorderTopTexts length {GlassesOnTastingNotePages} repeat ] def  % triple-depth array, same length as VoteRecorderTopTexts and VoteRecorderShowTotalRow
 /VoteRecorderCrossedBox {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU dup
-	{pop Titles WithinTitles get ASCIIfy ThisName ASCIIfy eq ThisName length 0 gt and}
+	{pop TitlesVoteRecorder WithinTitles get ASCIIfy ThisName ASCIIfy eq ThisName length 0 gt and}
 if} bind def  % /VoteRecorderCrossedBox
 
 /Rotate180AlternateNames false def
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202304132030) def
+/SoftwareVersionDateTimeAdobeFormat (D:202304181845) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
