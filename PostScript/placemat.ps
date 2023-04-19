@@ -1,6 +1,6 @@
 %!PS
 
-% This version 18:45 Tuesday 18th April 2023
+% This version 22:30 Wednesday 19th April 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202304181845) def
+/ParametersVersionDateTimeAdobeFormat (D:202304192230) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202304181845) def
+/SoftwareVersionDateTimeAdobeFormat (D:202304192230) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -11470,14 +11470,17 @@ currentdict /GlyphShowKnownAbsences undef
 								{
 									/NameNum exch def  % Different variable
 									/ThisName VoteRecorderNames NameNum get def
+									//DeBugLevel 100 le {( VoteRecorderForms: PaintProc, +VoteRecorderCrossedBox) OutputToLog} if
 									VoteRecorderCrossedBox
 									{
+										//DeBugLevel 100 le {mark ( VoteRecorderForms: PaintProc, VoteRecorderCrossedBox=true, NameNum=) NameNum (; WithinTitles=) WithinTitles ConcatenateToMark OutputToLog} if
 										/x   PageWidth MgnL MgnR add sub VoteRecorderWidthColFirst sub  NameNum 0.5 add mul  VoteRecorderNumNames div   MgnL add  VoteRecorderWidthColFirst add   def
 										x VoteRecorderColWidth 2 div sub VoteRecorderCrossLineWidth 2 mul add  CurrentTop VoteRecorderCrossLineWidth 2 mul sub  2 copy moveto
 										x VoteRecorderColWidth 2 div add VoteRecorderCrossLineWidth 2 mul sub  CurrentTop VoteRecorderRowHeight CirclearraysVoteRecorderT CirclearraysVoteRecorderB sub sub sub VoteRecorderCrossLineWidth 2 mul add  2 copy lineto
 										3 1 roll exch moveto lineto
 										0 setgray VoteRecorderCrossLineWidth dup setlinewidth 2.16 ge {GSave stroke GRestore 1 setgray VoteRecorderCrossLineWidth 3 div setlinewidth stroke} {stroke} ifelse
 									} if  % VoteRecorderCrossedBox
+									//DeBugLevel 100 le {( VoteRecorderForms: PaintProc, -VoteRecorderCrossedBox) OutputToLog} if
 								} for  % NameNum
 								currentdict /NameNum undef  currentdict /ThisName undef
 
