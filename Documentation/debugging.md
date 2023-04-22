@@ -43,7 +43,7 @@ Observe: no line number.
 The placemat code has &asymp;2.8k instances of `sub`, and the programmer is told only that an unspecified one of them has failed. 
 As written in *Port Vintages* (2018), J.&#8239;D.&#8239;A.&#8239;Wiseman:
 
-> “If you don’t ﬁnd it in the index, look very carefully through the entire catalogue”, *Sears Roebuck and Co., Consumers Guide* (1897), as quoted in *The Art of Computer Programming: Volume 3, Sorting and Searching* (1973), Donald E. Knuth. 
+> &ldquo;If you don&rsquo;t find it in the index, look very carefully through the entire catalogue&rdquo;, *Sears Roebuck and Co., Consumers Guide* (1897), as quoted in *The Art of Computer Programming: Volume 3, Sorting and Searching* (1973), Donald E. Knuth. 
 
 Luckily, we can sometimes do better than to &ldquo;look very carefully&rdquo; through the whole program. 
 Built-in to the software is some diagnostic assistance. 
