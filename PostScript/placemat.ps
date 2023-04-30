@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:30 Wednesday 19th April 2023
+% This version 10:15 Sunday 30th April 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202304192230) def
+/ParametersVersionDateTimeAdobeFormat (D:202304301015) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -496,7 +496,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /CrossHatchingAbovetitlesStrokeCode {InlineAbovetitles ColourSchemeCurrent /MidGrey eq {{0.4 0.15} {0 0.24}} {{0 0.06} {1 0.24}} ifelse ifelse TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if setlinewidth setgray stroke} def
 /CrossHatchingBelowtitlesStrokeCode {InlineBelowtitles ColourSchemeCurrent /MidGrey eq {{0.4 0.15} {0 0.24}} {{0 0.06} {1 0.24}} ifelse ifelse TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if setlinewidth setgray stroke} def
 /CrossHatchingOvertitlesStrokeCode  {InlineOvertitles  ColourSchemeCurrent /MidGrey eq {{0.4 0.15} {0 0.24}} {{0 0.06} {1 0.24}} ifelse ifelse TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesDetailsScalingFactor mul} if setlinewidth setgray stroke} def
-/CrossHatchingNumRadialLines 80 def
+/CrossHatchingNumRadialLines 80 def  % Best that this be a multiple of 4.
 /CrossHatchingCellArea 1296 def  % (36pt)^2 = (0.5")^2 = (12.7mm)^2
 /CrossHatchingCentreX /CenterSheetsSamePageOrdering def  % number /Name /Left /Center /Right /CenterSheetsSamePageOrdering
 /CrossHatchingCentreY /Bottom def  % number /Name /Bottom /Middle /Top
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202304192230) def
+/SoftwareVersionDateTimeAdobeFormat (D:202304301015) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
