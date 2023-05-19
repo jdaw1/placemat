@@ -425,10 +425,10 @@ Observe that this code is executed at parameter assignment; it is not injected.
 It has two imperfections. 
 
 * In PostScript strings are `eq`ual, but arrays are not. 
-I.e. `(Julian) (Julian) eq` returns true, but `[(Julian)] [(Julian)] eq` returns false. 
+I.e. `(Julian) (Julian) eq` returns <samp>true</samp>, but `[(Julian)] [(Julian)] eq` returns <samp>false</samp>. 
 So names that are compound strings, so all those with kerning or accents, should be assigned to a variable and that variable used. E.g., &ldquo;Jo&atilde;o&rdquo; should be organised via `/Joao [(J) {-0.02 Kern} (o) /atilde (o)] def`.
 
-* If `CircletextFont` &ne; `NamesFont`, then presence or quantities of kerning might need to differ. 
+* If `CircletextFont` &ne; `NamesFont`, then presence or quantities of `Kern`ing might need to differ. 
 In this case, `Names` must be set manually.
 
 
