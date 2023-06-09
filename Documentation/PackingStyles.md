@@ -351,7 +351,9 @@ There is also the simple numerical parameter `MaxRadius`, defaulting to 150 &rAr
 
 ## Page size and glass diameters
 
-the following shows glass diameters for various numbers of glasses on various page sizes, using the default value of `PackingStyles`, and assuming `MaxRadius`&ge;<span title="(45446 &minus; 3&radic;182333347)&times;6/127 &asymp; 233.231824288364">233.232</span>.
+the following shows glass diameters for various numbers of glasses on various page sizes, using the default value of `PackingStyles`, and assuming `MaxRadius`&ge;<span title="The code that made these examples set:
+/&#x1D67C;&#x1D68A;&#x1D6A1;&#x1D681;&#x1D68A;&#x1D68D;&#x1D692;&#x1D69E;&#x1D69C;&nbsp;&#x1D7FF;&#x1D7FF;&#x1D7FF;&#x1D7FF;&nbsp;&#x1D68D;&#x1D68E;&#x1D68F;
+but that value could have been as low as (45446 &minus; 3&radic;182333347)&times;6/127 &asymp; 233.231824288364.">233.232</span>.
 
 <div align="center">
 
