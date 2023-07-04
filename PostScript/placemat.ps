@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:40 Tuesday 4th July 2023
+% This version 22:45 Tuesday 4th July 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202307042040) def
+/ParametersVersionDateTimeAdobeFormat (D:202307042245) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202307042040) def
+/SoftwareVersionDateTimeAdobeFormat (D:202307042245) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -7824,18 +7824,18 @@ currentdict /GlyphShowKnownAbsences undef
 		{
 			WithinPage-WithinTitles-def
 			CircletextsMinCopiesIndividually SheetNum get WithinPage CircletextsMinCopies put
-			CircletextFont 1000 selectfont
-			0  Circlearrays WithinTitles get {StringWidthRecursive add} forall 1000 div  % if an item of the array is a user path then joining the paths would fail
+			CircletextFont //DeSizeRounding selectfont
+			0  Circlearrays WithinTitles get {StringWidthRecursive add} forall //DeSizeRounding div  % if an item of the array is a user path then joining the paths would fail
 			dup CirclearraysW SheetNum get exch WithinPage exch put
-			( ) stringwidth pop  CircletextsMinNumSpacesBetween mul  Circlearrays WithinTitles get length mul  1000 div
+			( ) stringwidth pop  CircletextsMinNumSpacesBetween mul  Circlearrays WithinTitles get length mul  //DeSizeRounding div
 			add  CirclearraysPaddedW SheetNum get exch WithinPage exch put
 
-			CircletextFont 1000 selectfont   CirclearraysT SheetNum get WithinPage //InfinityNeg put   CirclearraysB SheetNum get WithinPage //Infinity put
+			CircletextFont //DeSizeRounding selectfont   CirclearraysT SheetNum get WithinPage //InfinityNeg put   CirclearraysB SheetNum get WithinPage //Infinity put
 			Circlearrays WithinTitles get
 			{
 				StringPathBBox
-				1000 div  CirclearraysT SheetNum get WithinPage 3 copy get gt {3 -1 roll put} {pop pop pop} ifelse pop
-				1000 div  CirclearraysB SheetNum get WithinPage 3 copy get lt {3 -1 roll put} {pop pop pop} ifelse pop
+				//DeSizeRounding div  CirclearraysT SheetNum get WithinPage 3 copy get gt {3 -1 roll put} {pop pop pop} ifelse pop
+				//DeSizeRounding div  CirclearraysB SheetNum get WithinPage 3 copy get lt {3 -1 roll put} {pop pop pop} ifelse pop
 			} forall  % Circlearrays WithinTitles get
 			CirclearraysB SheetNum get WithinPage get  CirclearraysBMin SheetNum 3 copy get lt {3 -1 roll put} {pop pop pop} ifelse
 		} for  % WithinPage, WithinTitles
@@ -12777,7 +12777,7 @@ currentdict /GlyphShowKnownAbsences undef
 		PageLesser 6 div add exch PageLesser 6 div sub  moveto   PageLesser 6 div sub exch PageLesser 6 div add  lineto
 		PageLesser 6 div sub exch PageLesser 6 div sub  moveto   PageLesser 6 div add exch PageLesser 6 div add  lineto
 		0.75 setgray PageLesser 40 div setlinewidth [] 0 setdash 1 setlinecap stroke  0 setgray  % Embedded constant
-		1000 selectfont EmptyPageString StringPathBBox  1000 div [/ury /urx /lly /llx ] {exch 1000 div def} forall
+		//DeSizeRounding selectfont EmptyPageString StringPathBBox  //DeSizeRounding div [/ury /urx /lly /llx ] {exch //DeSizeRounding div def} forall
 		urx llx sub //PrinterEpsilon gt  ury lly sub //PrinterEpsilon gt  and
 		{
 			/FontSize  32  PageWidth MgnL MgnR add sub urx llx sub div  PageHeight MgnT MgnB add sub 6 div ury lly sub div  2 {2 copy gt {exch} if pop} repeat  def  % Embedded constants
