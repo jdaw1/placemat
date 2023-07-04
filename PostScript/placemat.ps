@@ -1,6 +1,6 @@
 %!PS
 
-% This version 10:15 Sunday 30th April 2023
+% This version 20:40 Tuesday 4th July 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202304301015) def
+/ParametersVersionDateTimeAdobeFormat (D:202307042040) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -62,7 +62,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 20) {SuperscriptOn} (th) {SuperscriptOff} ( June 2023)]
+	0  [(Boot & Flogger, W) {-0.08 Kern} (ednesday 20) {SuperscriptOn} (th) {SuperscriptOff} ( September 2023)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -257,7 +257,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /ExclusionAnnulusProportionInnerRadiusOvertitles 0 def
 /FontSizesSetsGlassesPages {PageOrderingGlasses} def
 /FontSizesSetsAboveBelowOver [ 0 0 0 ] def  % Array of length 3, representing which of Abovetitles, Belowtitles, and Overtitles are considered together for font-size purposes
-/FontSizesRatioTitlesMin 1.1892 def  % If font sizes closer than this ratio ~= 2^0.25, then collapsed to smaller.
+/FontSizesRatioTitlesMin 1.166666 def  % If font sizes closer than this ratio, then collapsed to smaller.
 /FontSizesRatioAboveBelowOverMin 999 def  % If font sizes closer than this ratio, then collapsed to smaller.
 /FontSizesTitlesNotSmallerIfTitlesNotLonger false def  % If using FontSizesTitlesEquivalences then this probably should be false. If true then font size of "W" cannot be smaller than that of "II"; and "Df" must be same as "Dl".
 /FontSizesAboveBelowOverNotSmallerIfTitlesNotLonger false def
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202304301015) def
+/SoftwareVersionDateTimeAdobeFormat (D:202307042040) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -823,6 +823,8 @@ if} bind def  % /VoteRecorderCrossedBox
 /PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
 /Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, so about 419 times the single-precision minimum.
 /AsciiTab (\t) 0 get def   /AsciiNewline (\n) 0 get def   /AsciiSpace ( ) 0 get def
+
+/DeSizeRounding 64 def  % 1000 just too big. 250 seems OK. This small for safety, and it's good enough for task.
 
 /OneThird 1 3 div def   /Cbrt {dup dup 0 lt {neg //OneThird exp neg} {//OneThird exp} ifelse  dup abs 1290 le {dup cvi dup dup mul mul 3 -1 roll eq {cvi} if} {exch pop} ifelse} bind def  % 1290^3 < IntegerMax < 1291^3
 
@@ -3708,7 +3710,7 @@ currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 /StringPathBBox
 {
 	//DeBugLevel 10 le {(+StringPathBBox) OutputToLog} if
-	GSave 16384 dup scale newpath 0 0 moveto  //true CharPathRecursive PathBBox GRestore
+	GSave //DeSizeRounding dup scale newpath 0 0 moveto  //true CharPathRecursive PathBBox GRestore
 	//DeBugLevel 10 le {(-StringPathBBox) OutputToLog} if
 } bind def  % /StringPathBBox
 
@@ -3746,7 +3748,7 @@ currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 /StringWidthRecursive
 {
 	//DeBugLevel 10 le {(+StringWidthRecursive) OutputToLog} if
-	GSave newpath 0 0 moveto  %  NullDevice  16384 dup scale
+	GSave newpath 0 0 moveto  %  NullDevice  //DeSizeRounding dup scale
 	StringWidthRec GRestore
 	//DeBugLevel 10 le {(-StringWidthRecursive) OutputToLog} if
 } bind def  % moveto in case no currentpoint
@@ -4260,7 +4262,7 @@ currentdict /GlyphShowKnownAbsences undef
 	{
 		GSave  clip
 
-		matrix currentmatrix /Filltext load GSave 16384 dup scale newpath 0 0 moveto  //true Angle rotate CharPathRecursive setmatrix PathBBox GRestore  [/FilltextTa /FilltextRa /FilltextBa /FilltextLa] {exch 16384 div def} forall
+		matrix currentmatrix /Filltext load GSave //DeSizeRounding dup scale newpath 0 0 moveto  //true Angle rotate CharPathRecursive setmatrix PathBBox GRestore  [/FilltextTa /FilltextRa /FilltextBa /FilltextLa] {exch //DeSizeRounding div def} forall
 
 		PathBBox /ury exch def  /urx exch def  /lly exch def  /llx exch def
 		Angle rotate
@@ -8167,11 +8169,11 @@ currentdict /GlyphShowKnownAbsences undef
 		{
 			WithinPage-WithinTitles-def
 			ColourSchemeTitles /MidGrey eq {/TitlesAnyGrey //true store} if
-			TitlesFont 16384 selectfont  Titles WithinTitles get  StringPathBBox
-			16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 lt {pop 0} if} if   TitleProportionFontSizeT SheetNum get  WithinPage  3 -1 roll  put
-			16384 div                                                                   TitleProportionFontSizeR SheetNum get  WithinPage  3 -1 roll  put
-			16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 gt {pop 0} if} if   TitleProportionFontSizeB SheetNum get  WithinPage  3 -1 roll  put
-			16384 div                                                                   TitleProportionFontSizeL SheetNum get  WithinPage  3 -1 roll  put
+			TitlesFont //DeSizeRounding selectfont  Titles WithinTitles get  StringPathBBox
+			//DeSizeRounding div  VerticalMiddlingIncludeBaselineTitles {dup 0 lt {pop 0} if} if   TitleProportionFontSizeT SheetNum get  WithinPage  3 -1 roll  put
+			//DeSizeRounding div                                                                   TitleProportionFontSizeR SheetNum get  WithinPage  3 -1 roll  put
+			//DeSizeRounding div  VerticalMiddlingIncludeBaselineTitles {dup 0 gt {pop 0} if} if   TitleProportionFontSizeB SheetNum get  WithinPage  3 -1 roll  put
+			//DeSizeRounding div                                                                   TitleProportionFontSizeL SheetNum get  WithinPage  3 -1 roll  put
 			TitleOffsetsProportionFontSizeHorizontal SheetNum get   WithinPage
 			TitleProportionFontSizeR SheetNum get WithinPage get
 			TitleProportionFontSizeL SheetNum get WithinPage get  add 2 div neg   put
@@ -8187,9 +8189,9 @@ currentdict /GlyphShowKnownAbsences undef
 	/VerticalMiddlingStringTitles load XcheckRecursive not
 	/VerticalMiddlingIncludeBaselineTitles load XcheckRecursive not  and and
 	{
-		TitlesFont 16384 selectfont  VerticalMiddlingStringTitles  StringPathBBox
-		16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 lt {pop 0} if}  if /VMSTT exch def  pop
-		16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 gt {pop 0} if}  if /VMSTB exch def  pop
+		TitlesFont //DeSizeRounding selectfont  VerticalMiddlingStringTitles  StringPathBBox
+		//DeSizeRounding div  VerticalMiddlingIncludeBaselineTitles {dup 0 lt {pop 0} if}  if /VMSTT exch def  pop
+		//DeSizeRounding div  VerticalMiddlingIncludeBaselineTitles {dup 0 gt {pop 0} if}  if /VMSTB exch def  pop
 	} {/VMSTT /Null def /VMSTB /Null def} ifelse  % ... XcheckRecursive not ...
 	0  1  NumSheets 1 sub
 	{
@@ -8230,10 +8232,10 @@ currentdict /GlyphShowKnownAbsences undef
 				{
 					VMSTT /Null eq  VMSTB /Null eq  or
 					{
-						TitlesFont 16384 selectfont
+						TitlesFont //DeSizeRounding selectfont
 						/VerticalMiddlingStringTitles load  StringPathBBox
-						16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 lt {pop 0} if} if   /MaxTops    exch def  pop
-						16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 gt {pop 0} if} if   /MinBottoms exch def  pop
+						//DeSizeRounding div  VerticalMiddlingIncludeBaselineTitles {dup 0 lt {pop 0} if} if   /MaxTops    exch def  pop
+						//DeSizeRounding div  VerticalMiddlingIncludeBaselineTitles {dup 0 gt {pop 0} if} if   /MinBottoms exch def  pop
 					}{
 						/MaxTops VMSTT def
 						/MinBottoms VMSTB def
@@ -8287,15 +8289,15 @@ currentdict /GlyphShowKnownAbsences undef
 				TitleProportionFontSizeR SheetNum get WithinPage get
 				TitleProportionFontSizeL SheetNum get WithinPage get
 			sub def  % /TitlesRLsub
-			TitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get  16384 mul neg
-			TitleOffsetsProportionFontSizeVertical   SheetNum get WithinPage get  16384 mul neg
+			TitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get  //DeSizeRounding mul neg
+			TitleOffsetsProportionFontSizeVertical   SheetNum get WithinPage get  //DeSizeRounding mul neg
 			GSave  NullDevice  newpath
-			TitlesFont 16384 selectfont  0 0 moveto  Titles WithinTitles get  //true  CharPathRecursive
+			TitlesFont //DeSizeRounding selectfont  0 0 moveto  Titles WithinTitles get  //true  CharPathRecursive
 			0  0.12  PathBRadiusSquared  % sub-1pt tolerance probably much tighter than needed, but underestimation of radius could be bad.
 			GRestore
 			dup 0 gt
 			{
-				sqrt  RadiiCirclearrayInsideUsableTAB SheetNum get exch div 16384 mul
+				sqrt  RadiiCirclearrayInsideUsableTAB SheetNum get exch div //DeSizeRounding mul
 				2 copy  gt {exch} if pop
 			} {pop} ifelse  % ... PathBRadiusSquared ... 0 gt
 			TitlesTBsub 0 gt
@@ -8470,7 +8472,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  SheetLengths SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
-			AbovetitlesFont 16384 selectfont  Abovetitles WithinTitles get  StringPathBBox   4 {16384 div 4 1 roll} repeat
+			AbovetitlesFont //DeSizeRounding selectfont  Abovetitles WithinTitles get  StringPathBBox   4 {//DeSizeRounding div 4 1 roll} repeat
 			AbovetitleProportionFontSizeT SheetNum get  WithinPage  3 -1 roll  put
 			AbovetitleProportionFontSizeR SheetNum get  WithinPage  3 -1 roll  put
 			AbovetitleProportionFontSizeB SheetNum get  WithinPage  3 -1 roll  put
@@ -8481,7 +8483,7 @@ currentdict /GlyphShowKnownAbsences undef
 			AbovetitleProportionFontSizeR SheetNum get  WithinPage get
 			add 2 div neg put
 
-			BelowtitlesFont 16384 selectfont  Belowtitles WithinTitles get  StringPathBBox   4 {16384 div 4 1 roll} repeat
+			BelowtitlesFont //DeSizeRounding selectfont  Belowtitles WithinTitles get  StringPathBBox   4 {//DeSizeRounding div 4 1 roll} repeat
 			BelowtitleProportionFontSizeT SheetNum get  WithinPage  3 -1 roll  put
 			BelowtitleProportionFontSizeR SheetNum get  WithinPage  3 -1 roll  put
 			BelowtitleProportionFontSizeB SheetNum get  WithinPage  3 -1 roll  put
@@ -8492,7 +8494,7 @@ currentdict /GlyphShowKnownAbsences undef
 			BelowtitleProportionFontSizeR SheetNum get WithinPage get
 			add 2 div neg put
 
-			OvertitlesFont 16384 selectfont  Overtitles WithinTitles get  StringPathBBox   4 {16384 div 4 1 roll} repeat
+			OvertitlesFont //DeSizeRounding selectfont  Overtitles WithinTitles get  StringPathBBox   4 {//DeSizeRounding div 4 1 roll} repeat
 			VerticalMiddlingIncludeBaselineOvertitles {dup 0 lt {pop 0} if} if
 			OvertitleProportionFontSizeT SheetNum get  WithinPage  3 -1 roll  put
 			OvertitleProportionFontSizeR SheetNum get  WithinPage  3 -1 roll  put
@@ -8540,9 +8542,9 @@ currentdict /GlyphShowKnownAbsences undef
 			/VerticalMiddlingStringOvertitles load XcheckRecursive not
 			/VerticalMiddlingIncludeBaselineOvertitles load XcheckRecursive not  and and and
 			{
-				OvertitlesFont 16384 selectfont  VerticalMiddlingStringOvertitles  StringPathBBox
-				16384 div  VerticalMiddlingIncludeBaselineOvertitles {dup 0 lt {pop 0} if}  if /VMSST exch def  pop
-				16384 div  VerticalMiddlingIncludeBaselineOvertitles {dup 0 gt {pop 0} if}  if /VMSSB exch def  pop
+				OvertitlesFont //DeSizeRounding selectfont  VerticalMiddlingStringOvertitles  StringPathBBox
+				//DeSizeRounding div  VerticalMiddlingIncludeBaselineOvertitles {dup 0 lt {pop 0} if}  if /VMSST exch def  pop
+				//DeSizeRounding div  VerticalMiddlingIncludeBaselineOvertitles {dup 0 gt {pop 0} if}  if /VMSSB exch def  pop
 			} {/VMSST /Null def /VMSSB /Null def} ifelse  % ... XcheckRecursive not ...
 			% Calculate offset so as to know the location of the centre of the circle, then compute the size, then call SizeConstraints.
 			/MinBottoms OvertitleProportionFontSizeB SheetNum get WithinPage get  def
@@ -8575,9 +8577,9 @@ currentdict /GlyphShowKnownAbsences undef
 				{
 					VMSST /Null eq  VMSSB /Null eq  or
 					{
-						OvertitlesFont 16384 selectfont  /VerticalMiddlingStringOvertitles load  StringPathBBox
-						16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 lt {pop 0} if} if   /MaxTops    exch def  pop
-						16384 div  VerticalMiddlingIncludeBaselineTitles {dup 0 gt {pop 0} if} if   /MinBottoms exch def  pop
+						OvertitlesFont //DeSizeRounding selectfont  /VerticalMiddlingStringOvertitles load  StringPathBBox
+						//DeSizeRounding div  VerticalMiddlingIncludeBaselineTitles {dup 0 lt {pop 0} if} if   /MaxTops    exch def  pop
+						//DeSizeRounding div  VerticalMiddlingIncludeBaselineTitles {dup 0 gt {pop 0} if} if   /MinBottoms exch def  pop
 						exit
 					}{
 						/MaxTops VMSST def
@@ -8612,38 +8614,38 @@ currentdict /GlyphShowKnownAbsences undef
 			TitleProportionFontSizeB SheetNum get WithinPage get  add  mul  exch 1 exch sub mul sub neg  BelowtitleOffsetsAbsoluteVertical SheetNum get exch WithinPage exch put
 
 			% CentreX CentreY MinMaxRadiusSquared Tolerance   PathBRadiusSquared   MaxRadiusSquared
-			OvertitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get  16384 mul neg
-			OvertitleOffsetsProportionFontSizeVertical SheetNum get WithinPage get  16384 mul neg
+			OvertitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get  //DeSizeRounding mul neg
+			OvertitleOffsetsProportionFontSizeVertical SheetNum get WithinPage get  //DeSizeRounding mul neg
 			GSave  NullDevice  newpath
-			OvertitlesFont 16384 selectfont  0 0 moveto  Overtitles WithinTitles get  //true  CharPathRecursive
+			OvertitlesFont //DeSizeRounding selectfont  0 0 moveto  Overtitles WithinTitles get  //true  CharPathRecursive
 			0  0.12  PathBRadiusSquared  % sub-1pt tolerance probably much tighter than needed, but underestimation of radius could be bad.
 			GRestore
-			dup 0 gt {sqrt RadiiCirclearrayInsideUsableO SheetNum get exch div 16384 mul} {pop //Infinity} ifelse
+			dup 0 gt {sqrt RadiiCirclearrayInsideUsableO SheetNum get exch div //DeSizeRounding mul} {pop //Infinity} ifelse
 			TitleFontSizes SheetNum get WithinPage get dup //PrinterEpsilon le {pop} {OvertitleMaxFontSizeProportionTitles mul 2 copy gt {exch} if pop} ifelse
 			OvertitleFontSizes SheetNum get exch WithinPage exch put
 
 			GSave  NullDevice  newpath
-			AbovetitlesFont 16384 selectfont
+			AbovetitlesFont //DeSizeRounding selectfont
 			GlassPositions SheetNum get WithinPage get aload pop  % circle centre
 			2 copy  AbovetitleOffsetsAbsoluteVertical SheetNum get WithinPage get  add  % Expansion centre
 			2 copy  exch
 			AbovetitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get
-			16384 mul add  exch  AbovetitleProportionFontSizeB SheetNum get WithinPage get  16384 mul  sub
+			//DeSizeRounding mul add  exch  AbovetitleProportionFontSizeB SheetNum get WithinPage get  //DeSizeRounding mul  sub
 			moveto  Abovetitles WithinTitles get  //true  CharPathRecursive
-			4 2 roll  RadiiCirclearrayInsideUsableTAB SheetNum get   PathMaxScalingFitCircle   16384 mul
+			4 2 roll  RadiiCirclearrayInsideUsableTAB SheetNum get   PathMaxScalingFitCircle   //DeSizeRounding mul
 			GRestore
 			TitleFontSizes SheetNum get WithinPage get dup //PrinterEpsilon le {pop} {AbovetitleMaxFontSizeProportionTitles mul 2 copy gt {exch} if pop} ifelse
 			AbovetitleFontSizes SheetNum get exch WithinPage exch put
 
 			GSave  NullDevice  newpath
-			BelowtitlesFont 16384 selectfont
+			BelowtitlesFont //DeSizeRounding selectfont
 			GlassPositions SheetNum get WithinPage get aload pop  % circle centre
 			2 copy  BelowtitleOffsetsAbsoluteVertical SheetNum get WithinPage get  add  % Expansion centre
 			2 copy  exch
 			BelowtitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get
-			16384 mul add  exch  BelowtitleProportionFontSizeT SheetNum get WithinPage get  16384 mul  sub
+			//DeSizeRounding mul add  exch  BelowtitleProportionFontSizeT SheetNum get WithinPage get  //DeSizeRounding mul  sub
 			moveto  Belowtitles WithinTitles get  //true  CharPathRecursive
-			4 2 roll  RadiiCirclearrayInsideUsableTAB SheetNum get   PathMaxScalingFitCircle   16384 mul
+			4 2 roll  RadiiCirclearrayInsideUsableTAB SheetNum get   PathMaxScalingFitCircle   //DeSizeRounding mul
 			GRestore
 			TitleFontSizes SheetNum get WithinPage get dup //PrinterEpsilon le {pop} {BelowtitleMaxFontSizeProportionTitles mul 2 copy gt {exch} if pop} ifelse
 			BelowtitleFontSizes SheetNum get exch WithinPage exch put
@@ -9202,7 +9204,7 @@ currentdict /GlyphShowKnownAbsences undef
 					//false //false //false //false PageType 0 eq {PaperType Orientation} {TastingNotesPaperType TastingNotesOrientation} ifelse SetPaperSize   //true DefStoreMgns
 					PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse
 					BackgroundTextsOrientation dup /Rotated eq exch  PageType 0 eq {Orientation} {TastingNotesOrientation} ifelse  2 copy  /Landscape eq exch /Portrait eq and  3 1 roll  /Portrait eq exch /Landscape eq and  or or  put
-					BackgroundTextsFont 16384 selectfont  /BackgroundTextThis load StringPathBBox [ /BgT /BgR /BgB /BgL ] {exch 16384 div def} forall
+					BackgroundTextsFont //DeSizeRounding selectfont  /BackgroundTextThis load StringPathBBox [ /BgT /BgR /BgB /BgL ] {exch //DeSizeRounding div def} forall
 
 					TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup dup type /arraytype eq
 					{
@@ -10734,15 +10736,15 @@ currentdict /GlyphShowKnownAbsences undef
 		/Y PageHeight 4 div MgnB FooterExtraOffset add MgnT sub 2 div add def
 
 		newpath
-		PlaceNamesFont 16384 selectfont  /ThisName load  StringPathBBox  /URY exch def  /URX exch def  /LLY exch def  /LLX exch def
-		URY LLY sub  dup 0 gt {PageHeight 2 div MgnB MgnT add sub 2.4 sub FooterExtraOffset sub  exch div 16384 mul} {pop PageHeight 2 div} ifelse  % embedded constant
-		URX LLX sub  dup 0 gt {PageWidth MgnL MgnR add sub 4.8 sub  exch div 16384 mul} {pop PageHeight 2 div} ifelse  % embedded constant
+		PlaceNamesFont //DeSizeRounding selectfont  /ThisName load  StringPathBBox  /URY exch def  /URX exch def  /LLY exch def  /LLX exch def
+		URY LLY sub  dup 0 gt {PageHeight 2 div MgnB MgnT add sub 2.4 sub FooterExtraOffset sub  exch div //DeSizeRounding mul} {pop PageHeight 2 div} ifelse  % embedded constant
+		URX LLX sub  dup 0 gt {PageWidth MgnL MgnR add sub 4.8 sub  exch div //DeSizeRounding mul} {pop PageHeight 2 div} ifelse  % embedded constant
 		PlaceNamesMaxFontSizeAbsolute   2 {2 copy gt {exch} if pop} repeat /PlaceNamesFontSize exch store
 
 		PlaceNamesFont  PlaceNamesFontSize  selectfont
 		% http://groups.google.com/g/comp.lang.postscript/c/b6f1e9ec3da9cc87/
-		/XX  X  URX LLX add 16384 div PlaceNamesFontSize mul 2 div  sub  def
-		/YY  Y  URY LLY add 16384 div PlaceNamesFontSize mul 2 div  sub  def
+		/XX  X  URX LLX add //DeSizeRounding div PlaceNamesFontSize mul 2 div  sub  def
+		/YY  Y  URY LLY add //DeSizeRounding div PlaceNamesFontSize mul 2 div  sub  def
 
 		PlaceNamesFontSize  0  gt
 		{
