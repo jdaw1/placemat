@@ -211,7 +211,10 @@ This should be an elegant functional set of placemats.
 If the tasting is being arranged via a wine bulletin board, upload the PDF to the web, and post in an appropriate thread a link labelled something like &ldquo;Current draft of the placemats&rdquo;. 
 Allow some time for comments and corrections and changes. Update as appropriate.
 
-Print, of course using toner not ink as wet causes ink to smudge.
+Print. 
+(Use toner not ink as wet causes ink to smudge. 
+It has been reported that, on a Xerox or HP printer, the mats don&rsquo;t print properly with the &ldquo;Save ink/toner&ldquo; option. 
+Y&#7437;&#7437;&#7456;.)
 
 Enjoy the tasting. 
 
