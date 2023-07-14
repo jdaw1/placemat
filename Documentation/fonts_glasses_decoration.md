@@ -99,7 +99,7 @@ And indeed, `NamesFont` is set to a little code, that is executed each time `Nam
 (The `bind` is a slight optimisation, which could have been omitted.)
 
 As of the third millennium, most programming environments frown on code injection. 
-But in this PostScrpt program code injection is allowed, often encouraged, and occasionally necessary. 
+But in this PostScript program code injection is allowed, often encouraged, and occasionally necessary. 
 Those not comfortable with that may safely leave such parameters at their default values. 
 
 ## CrossHatching
@@ -140,7 +140,7 @@ In parts of this documentation such parameters are headed &ldquo;superfluous&rdq
 ### Superfluous
 
 The number of straight lines is `CrossHatchingNumRadialLines`, defaulting to `80` so 4&frac12;&deg; apart. 
-The radii are chosen such that each cell has area `CrossHatchingCellArea`, defaulting to `1296`&nbsp;pt&sup2; = (36pt)&sup2; = (&frac12;&Prime;)&sup2; = (12.7mm)&sup2;.
+The radii are chosen such that each cell has area `CrossHatchingCellArea`, defaulting to `1296`&nbsp;pt&sup2; = (36pt)&sup2; = (&frac12;&Prime;)&sup2; = (12.7mm)&sup2; = 161.29mm&sup2;.
 
 `CrossHatchingOutsideToPaperEdge` is a Boolean affecting the &lsquo;Outside&rsquo; lines: to paper edge, or to the internal margin? 
 
@@ -165,7 +165,7 @@ Extracts of code that made the image:
 
 <img align="right" width="504" height="222" src="images/Shapes.png">
 
-In the image optimistically showing D78, the Titles and Belowtitles contain small random stars and flowers, with `InlineTitlesMaxNumberContours` at 3. 
+In the image optimistically showing D78, the Titles and Belowtitles contain small random stars and flowers, with `InlineTitlesMaxNumberContours` at&nbsp;3. 
 
 These are enabled by Booleans `ShapesInTitles`, with obvious variations `ShapesInAbovetitles`, `ShapesInBelowtitles`, `ShapesInOvertitles`, and `ShapesInPlaceNames`. 
 The array `ShapesToUse` defaults to `[ /Flower /Star /Heart /Circle ]`, and must contain at least one of these.
