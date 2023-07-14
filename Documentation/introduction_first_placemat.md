@@ -34,7 +34,7 @@ And having done that, there might also be need for matching pages:
 This PostScript program creates all the paperwork useful for managing such tastings, large or small. 
 Lots of examples from previous tastings are at [jdawiseman.com/placemats_list.html](http://www.jdawiseman.com/placemats_list.html) (lots: that page has &ge;&#8239;23&#8239;MB of PNGs, so WiFi rather than mobile data).
 
-[The program](../PostScript/placemat.ps) does not hide its being written wholly in PostScript ([wikipedia](http://en.wikipedia.org/wiki/PostScript), [Adobe&nbsp;&#7448;&#671;&#640;&#7437;](http://www.adobe.com/content/dam/acom/en/devnet/actionscript/articles/PLRM.pdf)). 
+[The program](../PostScript/placemat.ps) does not hide its being written wholly in PostScript ([wikipedia](http://en.wikipedia.org/wiki/PostScript), [Adobe&nbsp;&#7448;&#671;&#640;&#7437;](https://www.adobe.com/jp/print/postscript/pdfs/PLRM.pdf)). 
 The program consists of a single long text file, with user-chosen parameters defined at the top, underneath which are many lines of code to make the pages. 
 Those user-chosen parameters are written in Postscript, in PostScript syntax, optionally with embedded PostScript code.
 
