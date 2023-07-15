@@ -40,8 +40,8 @@ Stack:
 ```
 
 Observe: no line number. 
-The placemat code has &asymp;2.8k instances of `sub`, and the programmer is told only that an unspecified one of them has failed. 
-As written in *Port Vintages* (2018), J.&#8239;D.&#8239;A.&#8239;Wiseman:
+The placemat code has &asymp;3k instances of `sub`, and the programmer is told only that an unspecified one of them has failed. 
+As written in [*Port Vintages* (2018)](https://academieduvinlibrary.com/product/port-vintages/), J.&#8239;D.&#8239;A.&#8239;Wiseman:
 
 > &ldquo;If you don&rsquo;t find it in the index, look very carefully through the entire catalogue&rdquo;, *Sears Roebuck and Co., Consumers Guide* (1897), as quoted in *The Art of Computer Programming: Volume 3, Sorting and Searching* (1973), Donald E. Knuth. 
 
