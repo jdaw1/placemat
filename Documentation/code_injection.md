@@ -147,7 +147,7 @@ Of course, variation can be purely decorative.
 `FontSizesTitlesNotSmallerIfTitlesNotLonger` causes the font size to be affected by the length of a string, measured in characters. 
 That means it must be known how many deemed characters is something painted by user code. 
 This can be set within the code, as `/EffectiveNumCharacters 1 def` (or other integer &ge;0). 
-This has been used very rarely, indeed, prior to June 2021, exactly once.
+This has been used very rarely, indeed, prior to July 2023, exactly once.
 
 
 ## Variables that parameters may inspect
@@ -167,8 +167,9 @@ Multiple variables can be available for inspection.
 		* `/DecantingNotes`; 
 		* `/Accounts`; 
 		* `/CorkDisplay`; 
+		* `/DecanterLabels`; 
 		* `/BottleWrap`; 
-		* `/DecanterLabels`; and 
+		* `/OneCircle`; and 
 		* `/Multiple` if doing calculations applicable to multiple types of page.
 
 	- `PageWidth` and `PageHeight`, from which it might be necessary to subtract some of the current used margins: `MgnL`, `MgnR`, `MgnT`, `MgnB`. (Unless `SideBySideGlassesTastingNotes` is true, these will equal `MarginL`, `MarginR`, `MarginT`, `MarginB`.)
@@ -213,7 +214,7 @@ Multiple variables can be available for inspection.
 ### Berry Bros & Rudd Selection
 
 Berry Brothers&rsquo; name contains an abbreviation, shown as a small &lsquo;s&rsquo; above a dot. 
-This entails writing some PostScript.
+This entails some PostScript.
 
 The code below starts by saving the current font size in `BrosOriginalFontSize`. 
 Then it calculates the height of the &lsquo;s&rsquo; (using the handy `StringHeight` function), of the &lsquo;o&rsquo;, and the dot, from which it can deduce the font size such that the dot, a gap half height of the dot, and the &lsquo;s&rsquo;, in the new size, sum to the height of the &lsquo;o&rsquo; in the old, and also deduce the vertical offset of the &lsquo;s&rsquo; (`BrosVerticalOffset`). 
@@ -260,7 +261,7 @@ In fonts `/Garamond` and `/TrebuchetMS`:
 
 </div>
 
-Maybe, the first time, it wasn&rsquo;t worth the effort. 
+Maybe, the [first time](https://www.theportforum.com/viewtopic.php?t=1127), it wasn&rsquo;t worth the effort. 
 But the code having been written, the effort of a copy-paste is justified by the elegance.
 
 
