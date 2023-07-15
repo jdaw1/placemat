@@ -121,7 +121,7 @@ For a multi-session tasting, it is worth the effort of changing these.
 
 If printing a page to the underside of acetate, the page would need to be mirrored. 
 For this there are `MirrorPages…` parameters, arrays of Booleans, of the same length as the similarly named `PageOrdering…` parameters. 
-(Added to code in September 2009; as of August 2021 never used live.)
+(Added to code in September 2009; as of July 2023 never used live &mdash; so if you are going to use this, do so substantially in advance of the tasting in case subtle bugs are revealed.)
 
 
 ### Suppressing pages
@@ -310,20 +310,20 @@ So the following makes space for `1` inserted page before the first instance (in
 
 ### #Linking to specific pages within the PDF
 
-This is a feature of ther PDF, but one not controlled by the parameters. 
+This is a feature of the PDF, but one not controlled by the parameters. 
 
 So that it is possible to link to specific pages within the PDF, the PDF includes some &lsquo;nameddest&rsquo;s. 
 However, the use of these is imperfectly reliable. 
 It seems to work when opening a PDF within the browser, but if the PDF is read by a separate application, it seems not to work.
 
-To link to the first of the pages of glasses the URL should end &hellip;#Glasses_0. 
-For second page, …#Glasses_1; etc. 
+To link to the first of the pages of glasses the URL should end `#Glasses_0`. 
+For second page, `#Glasses_1`; etc. 
 Links for other types of pages are shown in the table. 
 The log file also contains a list of the &ldquo;URL # tags&rdquo; added to the PDF.
 
 If `GlassesDestForEachCircle` is true, there are also # tags for individual glass circles, as detailed in the log. 
 (But not all PDF viewers correctly zoom to these circles: see bugs [in Apple Preview](http://discussions.apple.com/thread/7234631) and [in Google Chrome](http://bugs.chromium.org/p/chromium/issues/detail?id=535978).) 
-For some actual placemats, changing `GlassesDestForEachCircle` from false to true increased the file size from &asymp;&nbsp;360k to &asymp;&nbsp;400k, &asymp;&nbsp;11%: not tiny. 
+Changing `GlassesDestForEachCircle` from false to true increases the file size, in a typical example from &asymp;&nbsp;360k to &asymp;&nbsp;400k, &asymp;&nbsp;11%: not tiny. 
 These &lsquo;Dest&rsquo;s are most useful for the placemat maker, speeding the checking of an individual circle&mdash;but there&rsquo;s no need to check the same circle on multiples `Names`, because they are all the same. 
 So `GlassesDestForEachCircle`&rsquo;s default value is `{NameNum 0 eq}`, which makes them for only the first of the `Names`.
 
