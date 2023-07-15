@@ -1,4 +1,4 @@
-# Debugging
+port-# Debugging
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
@@ -41,10 +41,11 @@ Stack:
 
 Observe: no line number. 
 The placemat code has &asymp;3k instances of `sub`, and the programmer is told only that an unspecified one of them has failed. 
-As written in [*Port Vintages* (2018)](https://academieduvinlibrary.com/product/port-vintages/), J.&#8239;D.&#8239;A.&#8239;Wiseman:
+As written in the first edition of [*Port Vintages* (2018)](https://academieduvinlibrary.com/product/port-vintages/), J.&#8239;D.&#8239;A.&#8239;Wiseman:
 
 > &ldquo;If you don&rsquo;t find it in the index, look very carefully through the entire catalogue&rdquo;, *Sears Roebuck and Co., Consumers Guide* (1897), as quoted in *The Art of Computer Programming: Volume 3, Sorting and Searching* (1973), Donald E. Knuth. 
 
+(In the second edition replaced with an [Addams Family](https://en.wikipedia.org/wiki/The_Addams_Family) quotation!) 
 Luckily, we can sometimes do better than to &ldquo;look very carefully&rdquo; through the whole program. 
 Built-in to the software is some diagnostic assistance. 
 However, if the failure is in the parameters, before the diagnostics are enabled, then this assistance will be absent.
