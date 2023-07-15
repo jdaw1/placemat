@@ -355,7 +355,7 @@ So `GlassesDestForEachCircle`&rsquo;s default value is `{NameNum 0 eq}`, which
 
 The `CopyrightStatementPlacemats`, `LicensingAgreementTextPlacemats`, and `LicensingAgreementLinkPlacemats` are all output to the log. 
 
-It is intended that the latter two, or at least the least, will be embedded in the PDF in a machine-readable searchable filterable manner, per [issue 16](http://github.com/jdaw1/placemat/issues/16). 
+It is intended that the latter two, or at least the last, will be embedded in the PDF in a machine-readable searchable filterable manner, per [issue 16](http://github.com/jdaw1/placemat/issues/16). 
 (Expert help wanted: be not shy about replying to an issue.)
 
 ## Debugging and documentation generation
