@@ -61,7 +61,7 @@ Consider:
 ] def
 ```
 
-PostSript arrays start at zero, so if `Titles` etc are of length *n* then the integers must be &ge;&nbsp;0 and &le;&nbsp;*n*&minus;1. 
+PostScript arrays start at zero, so if `Titles` etc are of length *n* then the integers must be &ge;&nbsp;0 and &le;&nbsp;*n*&minus;1. 
 The example has two pages. 
 
 Because this is the standard pattern, there is help, in the form of `GlassesOnSheetsMaxPerSheet`. 
@@ -265,7 +265,7 @@ The integer a can be replaced with `[xa ya]` (making `[[xa ya] b]`), and likewis
 * Between two pieces the non-array item `/Arc` causes the sharp corner between two straight lines to be replaced with a soft arc having radius `FlightSeparationsArcProportionRadius` &times; the radius of the circles. 
 * The last or first non-`/Closed` piece may be `[/Left …]`. 
 This goes to the far left of the page, at a *y* specifed by the &lsquo;&hellip;&rsquo;, which is an average of at least one absolute level, perhaps &plusmn; some real number of radii. 
-Absolutes can be /Bottom (with obvious meaning); /Top (ditto); or an integer, in which case the *y* is that of the centre of that circle number. 
+Absolutes can be `/Bottom` (with obvious meaning); `/Top` (ditto); or an integer, in which case the *y* is that of the centre of that circle number. 
 Or several integers, in which case the *y* is the average of the centres of those circle numbers. 
 Optionally there may also be a real, that number of radii being added to the average. 
 So `[/Left 0 3 -0.5]` is a horizontal line to the left of the page, at a *y* value of the average of those of circles 0 and 3, minus half a radius. 
