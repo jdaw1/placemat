@@ -107,6 +107,8 @@ The default values are as follows.
 | `PageOrderingCorkDisplay`      |  `GlassesClusteredOnCorkDisplay`    | 1 | |
 | `PageOrderingNeckTags`         |  `GlassesOnSheets`                  | 1 | |
 | `PageOrderingPrePourPages`     |  `GlassesOnSheets`                  | 1 | |
+| `PageOrderingBottleWrap`       |  `GlassesOnSheets`                  | 1 | |
+| `PageOrderingOneCircle`        |  *Not array; single value*          | 1 | |
 | `PageOrderingPlaceNames`       |  `NamesPlaceNames`                  | 100 | Late, for folding. |
 | `PageOrderingDecanterLabels`   |  `GlassesOnSheets`                  | 200 | Near-last, for cutting and gluing before the tasting day. |
 | `PageOrderingStickyLabels`     |  `GlassesOnSheets`                  | 300 | Last, for manual change of paper in the printer. |
@@ -153,6 +155,8 @@ E.g., to show only the first page of each type, and none of the log:
 	/PlaceName      1
 	/DecanterLabels 1
 	/StickyLabels   1
+	/BottleWrap     1
+	/OneCircle      1
 	/DistillerLog
 ] def  % /TestingSuppressPageTypes
 ```
@@ -329,19 +333,21 @@ So `GlassesDestForEachCircle`&rsquo;s default value is `{NameNum 0 eq}`, which
 
 <div align="center">
 
-| Page type     | `TypeOfPagesBeingRendered` | URL ending of first<br>page of this type |
-|:--------------|:--------------------------:|-----------------------------------------:|
-| Glasses       | /Glasses          | &hellip;#Glasses_0        |
-Tasting notes   | `/TastingNotes`   | &hellip;#TastingNotes_0   |
-Vote recorders  | `/VoteRecorder`   | &hellip;#VoteRecorder_0   |
-Decanting notes | `/DecantingNotes` | &hellip;#DecantingNotes_0 |
-Accounts        | `/Accounts`       | &hellip;#Accounts_0       |
-Cork display    | `/CorkDisplay`    | &hellip;#CorkDisplay_0    |
-Neck-tags       | `/NeckTags`       | &hellip;#NeckTags_0       |
-Pre-pours       | `/PrePour`        | &hellip;#PrePour_0        |
-Place names     | `/PlaceName`      | &hellip;#PlaceName_0      |
-Decanter labels | `/DecanterLabels` | &hellip;#DecanterLabels_0 |
-Sticky labels   | `/StickyLabels`   | &hellip;#StickyLabels_0   |
+| `TypeOfPagesBeingRendered` | URL ending of first<br>page of this type |
+|:--------------------------:|-----------------------------------------:|
+| `/Glasses`        | `#Glasses_0`        |
+| `/TastingNotes`   | `#TastingNotes_0`   |
+| `/VoteRecorder`   | `#VoteRecorder_0`   |
+| `/DecantingNotes` | `#DecantingNotes_0` |
+| `/Accounts`       | `#Accounts_0`       |
+| `/CorkDisplay`    | `#CorkDisplay_0`    |
+| `/NeckTags`       | `#NeckTags_0`       |
+| `/PrePour`        | `#PrePour_0`        |
+| `/PlaceName`      | `#PlaceName_0`      |
+| `/DecanterLabels` | `#DecanterLabels_0` |
+| `/StickyLabels`   | `#StickyLabels_0`   |
+| `/BottleWrap`     | `#BottleWrap_0`     |
+| `/OneCircle`      | `#OneCircle_0`      |
 
 </div>
 
