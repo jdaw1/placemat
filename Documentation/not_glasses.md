@@ -467,7 +467,7 @@ This is the only page type for which there isn&rsquo;t a `PaperType`: the size o
 
 ## BottleWrap
 
-At some blind tasting, particularly of wines served cold and undecanted, it is natural to bring the wine in its original bottle, wrapped in anonymising paper. 
+At a blind tasting, particularly of wines served cold and undecanted, it is natural to bring the wine in its original bottle, wrapped in anonymising paper. 
 
 <div align="center">
 
