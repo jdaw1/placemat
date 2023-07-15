@@ -42,18 +42,23 @@ Integers:
 * `TastingNotePagesNumCopies`;
 * `DecantingNotesNumCopies`;
 * `AccountsNumCopies`;
-* `StickyLabelsNumCopies`.
+* `StickyLabelsNumCopies`;
+* `BottleWrapNumCopies`.
 
 Booleans:
 * `VoteRecorders`;
-* `PlaceNames`.
+* `PlaceNames`;
+* `OneCircles`.
 
-Three page types reproduce what is on the glasses pages:  
+Some page types reproduce what is on the glasses pages:  
 * pre-pour;  
 * neck tags;  
-* sticky labels.
+* sticky labels;
+* bottle wraps;
+* one circle.
 
-It is possible to make these pages without the glasses page by making the glasses pages, and `/GlassesNumCopies 0 def` to not show them.
+It is possible to make these pages without the glasses page by making the glasses pages, and `/GlassesNumCopies 0 def` to not show them. 
+This happens automatically for the last two, via `BottleWrapSuppressOtherPageTypes` and `OneCircleSuppressOtherPageTypes`.
 
 
 ### Margins
