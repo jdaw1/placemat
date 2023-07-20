@@ -56,7 +56,7 @@ A code editor, a good text editor, is a boon, and it should be one that understa
 The basic text editor that came pre-installed on your computer will make life harder than it needs to be. 
 A code editor that understands PostScript will prevent many errors and save much labour. 
 On both Mac and PC [Sublime&nbsp;Text](http://www.sublimetext.com/) is my preferred editor, though making Sublime understand PostScript requires a small technical step ([source](http://www.sublimetext.com/forum/viewtopic.php?t=17312&start=11)): 
-Sublime &gt; **View** menu &gt; fifth item of which is **Show Console** &gt; into which paste 
+Sublime &gt; **View** menu &gt; the fifth (Mac) or sixth (Windows) item of which is **Show Console** &gt; into which paste 
 ```
 import shutil;import urllib.request;import os;import tempfile;l='https://raw.githubusercontent.com/textmate/postscript.tmbundle/master/Syntaxes/Postscript.tmLanguage';d=urllib.request.urlopen(l);f=d.read().decode('utf-8');p=os.path.join(sublime.packages_path(),'User','PostScript.tmLanguage');_, t = tempfile.mkstemp(dir=tempfile.gettempdir());th = open(t, 'w');th.writelines(f);th.close();shutil.move(t, p) if f.find('plist') != -1 else sublime.error_dialog('Something went wrong, file is corrupt');dh = open(p);ok = True if dh.read().find("Postscript") != "-1" else False;sublime.message_dialog('Installation completted successfully') if ok is True else sublime.error_dialog('Installation aborted - deleting file %s ' % p);os.remove(p) if not ok else print("File created successfully");
 ```
