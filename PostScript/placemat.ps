@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:45 Tuesday 4th July 2023
+% This version 20:00 Tuesday 25th July 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202307042245) def
+/ParametersVersionDateTimeAdobeFormat (D:202307252000) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202307042245) def
+/SoftwareVersionDateTimeAdobeFormat (D:202307252000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -3395,17 +3395,29 @@ currentdict /SmallCapsDict undef
 	//DeBugLevel 10 le {(+ApproximatingCurve) OutputToLog} if
 	29 dict begin
 	/SpeedUpperLimit exch def /ddYe exch def /ddXe exch def /ddYs exch def /ddXs exch def /dYe exch def /dXe exch def /dYs exch def /dXs exch def /Ye exch def /Xe exch def /Ys exch def /Xs exch def
-	currentpoint Ys ne exch Xs ne or {Xs Ys lineto} if
+
 	1 {
-		dXs 0 eq dYs 0 eq and
+		dXs dup mul dYs dup mul add dup mul  0  eq
 		{
-			(Warning in ApproximatingCurve: function to be approximated has zero speed at start. This case has not been coded. Straight line output.) OutputToLog
-			Xs 2 mul Xe add 3 div  Ys 2 mul Ye add 3 div   Xs Xe 2 mul add 3 div  Ys Ye 2 mul add 3 div   exit
+			ddXs dup mul ddYs dup mul add dup mul  0  eq
+			{
+				(Warning in ApproximatingCurve: function to be approximated has zero speed and acceleration at start. Straight line output.) OutputToLog
+				Xs 2 mul Xe add 3 div  Ys 2 mul Ye add 3 div   Xs Xe 2 mul add 3 div  Ys Ye 2 mul add 3 div   exit
+			}{
+				(Warning in ApproximatingCurve: function to be approximated has zero speed at start. Assuming zero curvature.) OutputToLog
+				/dXs ddXs def   /dYs ddYs def
+			} ifelse  % Zero acceleration at start
 		} if  % Zero speed at start
-		dXe 0 eq dYe 0 eq and
+		dXe dup mul dYe dup mul add dup mul  0  eq
 		{
-			(Warning in ApproximatingCurve: function to be approximated has zero speed at end. This case has not been coded. Straight line output.) OutputToLog
-			Xs 2 mul Xe add 3 div  Ys 2 mul Ye add 3 div   Xs Xe 2 mul add 3 div  Ys Ye 2 mul add 3 div   exit
+			ddXe dup mul ddYe dup mul add dup mul  0  eq
+			{
+				(Warning in ApproximatingCurve: function to be approximated has zero speed and acceleration at end. Straight line output.) OutputToLog
+				Xe 2 mul Xe add 3 div  Ye 2 mul Ye add 3 div   Xe Xe 2 mul add 3 div  Ye Ye 2 mul add 3 div   exit
+			}{
+				(Warning in ApproximatingCurve: function to be approximated has zero speed at end. Assuming zero curvature.) OutputToLog
+				/dXe ddXe def   /dYe ddYe def
+			} ifelse  % Zero acceleration at end
 		} if  % Zero speed at end
 
 		/Xgap Xe Xs sub def  /Ygap Ye Ys sub def  % Implicitly setting (Xs,Ys) to (0,0) lessens accumulated arithmetic errors.
@@ -3608,7 +3620,7 @@ currentdict /SmallCapsDict undef
 					StartOperator dup /m eq exch /moveto eq or {Xe Ye moveto exit} if
 					StartOperator dup /l eq exch /lineto eq or {Xe Ye lineto exit} if
 				} repeat  % 1
-			} {Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe  Radius 2 mul  ApproximatingCurve  Xe Ye curveto} ifelse  % FirstLap
+			} {Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe  Radius 24 mul  ApproximatingCurve  Xe Ye curveto} ifelse  % FirstLap
 			/Xs Xe def /dXs dXe def /ddXs ddXe def
 			/Ys Ye def /dYs dYe def /ddYs ddYe def
 		} for  % Angles
