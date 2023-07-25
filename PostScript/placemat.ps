@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Tuesday 25th July 2023
+% This version 23:30 Tuesday 25th July 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202307252000) def
+/ParametersVersionDateTimeAdobeFormat (D:202307252330) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202307252000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202307252330) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -3397,9 +3397,9 @@ currentdict /SmallCapsDict undef
 	/SpeedUpperLimit exch def /ddYe exch def /ddXe exch def /ddYs exch def /ddXs exch def /dYe exch def /dXe exch def /dYs exch def /dXs exch def /Ye exch def /Xe exch def /Ys exch def /Xs exch def
 
 	1 {
-		dXs dup mul dYs dup mul add dup mul  0  eq
+		dXs abs 2.5E-10 le  dYs abs 2.5E-10 le  and  % One part in four billion. Just about fourth-powerable without being zero.
 		{
-			ddXs dup mul ddYs dup mul add dup mul  0  eq
+			ddXs abs 2.5E-10 le  ddYs abs 2.5E-10 le  and
 			{
 				(Warning in ApproximatingCurve: function to be approximated has zero speed and acceleration at start. Straight line output.) OutputToLog
 				Xs 2 mul Xe add 3 div  Ys 2 mul Ye add 3 div   Xs Xe 2 mul add 3 div  Ys Ye 2 mul add 3 div   exit
@@ -3408,9 +3408,9 @@ currentdict /SmallCapsDict undef
 				/dXs ddXs def   /dYs ddYs def
 			} ifelse  % Zero acceleration at start
 		} if  % Zero speed at start
-		dXe dup mul dYe dup mul add dup mul  0  eq
+		dXe abs 2.5E-10 le  dYe abs 2.5E-10 le  and
 		{
-			ddXe dup mul ddYe dup mul add dup mul  0  eq
+			ddXe abs 2.5E-10 le  ddYe abs 2.5E-10 le  and
 			{
 				(Warning in ApproximatingCurve: function to be approximated has zero speed and acceleration at end. Straight line output.) OutputToLog
 				Xe 2 mul Xe add 3 div  Ye 2 mul Ye add 3 div   Xe Xe 2 mul add 3 div  Ye Ye 2 mul add 3 div   exit
