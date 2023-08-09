@@ -346,7 +346,7 @@ This is controlled by `ShrinkRadii`, which can be:
 * `/ToSmallest`, which ensures consistency over the whole document;
 * `[ 0 0 0 … 1 1 1 … 2 2 ]`, which is an arbitrary array of the same length as `GlassesOnSheets`, pages&rsquo; radii being forced to their lesser if elements satisfy PostScript&rsquo;s `eq` condition.
 
-There is also the simple numerical parameter `MaxRadius`, defaulting to 150 &rArr; diameter &le;&nbsp;300pt =&nbsp;4&#8537;&Prime; =&nbsp;105&#8538;mm.
+There is also the simple numerical parameter `MaxRadius`, defaulting to `150` &rArr; diameter &le;&nbsp;300pt =&nbsp;4&#8537;&Prime; =&nbsp;105&frac56;mm.
 
 
 ## Page size and glass diameters
