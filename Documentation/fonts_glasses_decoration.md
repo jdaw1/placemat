@@ -55,6 +55,8 @@ There are four relevant parameters, which can take the values `/MidGrey` or `/Bl
 ```
 ## Fonts
 
+![images/font_examples.png](Font examples, including from families Trebuchet, Gotham, Garamond, Times, Didot, Cochin, Harrington)
+
 The code may access any fonts appropriately installed on the machine doing the PS&nbsp;&rarr;&nbsp;PDF conversion. 
 Fonts are accessed by their PostScript name. 
 On a Mac, in the application *Font Book*, select a font and its PostScript name is shown. 
@@ -78,6 +80,7 @@ By default fonts are set as follows.
 /HeaderFont          {CircletextFont} def
 /FooterFont          {HeaderFont} def
 ```
+
 It is mostly self-explanatory, even though the reader will not have been introduced to where all these are used. 
 Two font parameters are set to particular fonts, the other font parameters copying them. 
 

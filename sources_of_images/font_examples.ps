@@ -1,0 +1,37 @@
+%!PS
+
+% This version 08:15 Wednesday 9th August 2023
+
+/Fonts [
+	/TrebuchetMS-Bold
+	/Gotham-Book
+	/Gotham-Medium
+	/Gotham-Bold
+	/GothamNarrow-Book
+	/GothamNarrow-Medium
+	/GothamNarrow-Bold
+	/Garamond
+	/Garamond-Bold
+	/TimesNewRomanPS-BoldMT
+	/Didot
+	/Didot-Bold
+	/Cochin
+	/Cochin-Bold
+	/Harrington
+] def
+
+/FontSize 24 def
+
+/Text (D78 N31 T45 G60 F92  ) def
+
+/Y 600 def
+
+Fonts
+{
+	/FontName exch def
+	FontName FontSize selectfont
+	36 Y moveto  Text show  FontName 32 string cvs show
+	/Y Y FontSize 1.1 mul sub def
+} forall
+
+showpage
