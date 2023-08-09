@@ -55,8 +55,6 @@ There are four relevant parameters, which can take the values `/MidGrey` or `/Bl
 ```
 ## Fonts
 
-![Font examples, including from families Trebuchet, Gotham, Garamond, Times, Didot, Cochin, Harrington](images/font_examples.png)
-
 The code may access any fonts appropriately installed on the machine doing the PS&nbsp;&rarr;&nbsp;PDF conversion. 
 Fonts are accessed by their PostScript name. 
 On a Mac, in the application *Font Book*, select a font and its PostScript name is shown. 
@@ -83,6 +81,12 @@ By default fonts are set as follows.
 
 It is mostly self-explanatory, even though the reader will not have been introduced to where all these are used. 
 Two font parameters are set to particular fonts, the other font parameters copying them. 
+
+<div align="center">
+
+![Font examples, including from families Trebuchet, Gotham, Garamond, Times, Didot, Cochin, Harrington](images/font_examples.png)
+
+</div>
 
 Other good fonts to use include: 
 `/Didot` and `/Didot-Bold` (the bold being a slightly decorative but stylish choice for the titles of a vertical which are hence digits); 
