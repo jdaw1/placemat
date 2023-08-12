@@ -172,7 +172,7 @@ Extracts of code that made the image:
 
 <img align="right" width="504" height="222" src="images/Shapes.png">
 
-In the image optimistically showing D78, the Titles and Belowtitles contain small random stars and flowers, with `InlineTitlesMaxNumberContours` at&nbsp;3. 
+In the cluttered image optimistically showing D78, the Titles and Belowtitles contain small random stars and flowers, with `InlineTitlesMaxNumberContours` at&nbsp;3. 
 
 These are enabled by Booleans `ShapesInTitles`, with obvious variations `ShapesInAbovetitles`, `ShapesInBelowtitles`, `ShapesInOvertitles`, and `ShapesInPlaceNames`. 
 The array `ShapesToUse` defaults to `[ /Flower /Star /Heart /Circle ]`, and must contain at least one of these.
