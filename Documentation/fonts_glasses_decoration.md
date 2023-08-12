@@ -106,7 +106,7 @@ And indeed, `NamesFont` is set to a little code, that is executed each time `Nam
 (The `bind` is a slight optimisation, which could have been omitted.)
 
 As of the third millennium, most programming environments frown on code injection. 
-But in this PostScript program code injection is allowed, often encouraged, and occasionally necessary. 
+But in this PostScript program [code injection](code_injection.md#readme) is allowed, often encouraged, and occasionally necessary. 
 Those not comfortable with that may safely leave such parameters at their default values. 
 
 ## CrossHatching
