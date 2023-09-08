@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:10 Friday 8th September 2023
+% This version 22:30 Friday 8th September 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202309082210) def
+/ParametersVersionDateTimeAdobeFormat (D:202309082230) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202309082210) def
+/SoftwareVersionDateTimeAdobeFormat (D:202309082230) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -9484,7 +9484,7 @@ currentdict /GlyphShowKnownAbsences undef
 				P02_array  i  YY dup mul 6 mul  XX dup mul 2 mul sub  Sp 5 mul XX mul YY mul                 DistSqrd sqrt div add  Ch mul  DistSqrd dup dup mul mul div  put
 				P11_array  i  XX YY mul 8 mul                         Sp 2.5 mul XX YY sub XX YY add mul mul DistSqrd sqrt div add  Ch mul  DistSqrd dup dup mul mul div  put
 			}{
-				P00_array  i  C 0 ne {1e+19 C 0 lt {neg} if} {0} ifelse  put
+				P00_array  i  Ch 0 ne {1e+19 Ch 0 lt {neg} if} {0} ifelse  put
 				P10_array  i  0  put
 				P01_array  i  0  put
 				P20_array  i  0  put
