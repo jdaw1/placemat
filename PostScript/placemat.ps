@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:30 Tuesday 25th July 2023
+% This version 22:10 Friday 8th September 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202307252330) def
+/ParametersVersionDateTimeAdobeFormat (D:202309082210) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -62,7 +62,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, W) {-0.08 Kern} (ednesday 20) {SuperscriptOn} (th) {SuperscriptOff} ( September 2023)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 21) {SuperscriptOn} (st) {SuperscriptOff} ( November 2023)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202307252330) def
+/SoftwareVersionDateTimeAdobeFormat (D:202309082210) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -2152,29 +2152,6 @@ currentdict /ForReverseBinaryDict undef
 	//DeBugLevel 15 le {(-SetPaperSize) OutputToLog} if
 } bind def  % /SetPaperSize
 
-
-/CompassPoints16
-[
-	(north)
-			(north-northeast)
-		(north-east)
-			(east-northeast)
-	(east)
-			(east-southeast)
-		(south-east)
-			(south-southeast)
-	(south)
-			(south-southwest)
-		(south-west)
-			(west-southwest)
-	(west)
-			(west-northwest)
-		(north-west)
-			(north-northwest)
-] dup {readonly pop} forall readonly def  % readonly so CompassPoints16 can't be corrupted.
-% angle  CompassPointText  text
-/CompassPointText {16 mul 360 div round cvi 16 mod 16 add 16 mod //CompassPoints16 exch get} bind def  % /CompassPointText
-currentdict	/CompassPoint16 undef
 
 //DeBugLevel 100 le {( Main: computing PaperTypes, UsedPaperTypes, UsedPageOrderings) OutputToLog} if
 /TypeOfPagesBeingRendered /Glasses store
@@ -9808,34 +9785,6 @@ currentdict /GlyphShowKnownAbsences undef
 			[ FrequencyDict { [ 3 1 roll ] } forall ] dup {0 get exch 0 get gt} ShellSort   dup dup length 1 sub get 0 get /LengthsMax exch def
 			{aload pop (*) exch dup 2 gt {dup 100 mul LengthsNum div dup 0.15 gt {dup 1 FormatDecimalPlaces dup cvr 3 -1 roll sub abs 0.001 le {(=)} {(~=)} ifelse exch (%)} {pop} ifelse} if (; )} forall pop
 			(. Total = ) LengthsSum (; avg length ) LengthsSum LengthsNum div  dup 2 FormatDecimalPlaces dup cvr 3 -1 roll sub abs 0.00001 le {(= )} {(~= )} ifelse exch (.)
-			LengthsMax 4 gt
-			{
-				(\nE.g. of length ) LengthsMax (:)
-				0  1  NumSheets 1 sub
-				{
-					/SheetNum exch def
-					/RemainingMaxToShow 4 def
-					DropletPaths SheetNum get
-					{
-						dup length LengthsMax 4 mul eq
-						{
-							dup length 4 sub 2 getinterval aload pop /Y exch def /X exch def
-							/DistsSqrdBest //Infinity dup mul def
-							0  1  GlassPositions SheetNum get length 1 sub
-							{
-								/WithinPage exch def
-								GlassPositions SheetNum get WithinPage get aload pop Y sub dup mul exch X sub dup mul add
-								dup DistsSqrdBest lt {/DistsSqrdBest exch def  /WithinPageBest WithinPage def} {pop} ifelse
-							} for  % WithinPage
-							( on SheetNum=) SheetNum ( head is )
-							GlassPositions SheetNum get WithinPageBest get aload pop Y sub dup mul exch X sub dup mul add sqrt Radii SheetNum get div  2 FormatDecimalPlaces ( radii )
-							GlassPositions SheetNum get WithinPageBest get aload pop Y exch sub exch X exch sub exch atan  CompassPointText
-							( of centre of circle with Title=") Titles GlassesOnSheets SheetNum GetEU WithinPageBest GetEU get ASCIIfy (") (;)
-							/RemainingMaxToShow RemainingMaxToShow 1 sub def   RemainingMaxToShow 0 le {pop exit} if
-						} {pop} ifelse  % longest
-					} forall % Droplets in DropletPaths SheetNum get
-				} for pop (.)  % SheetNum
-			} if  % LengthsMax 4 get
 		} if  % LengthsNum 0 gt
 		ConcatenateToMark OutputToLog
 		end
