@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:30 Friday 8th September 2023
+% This version 12:15 Saturday 9th September 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202309082230) def
+/ParametersVersionDateTimeAdobeFormat (D:202309091215) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -545,6 +545,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /DropletsInnerGrayEnd    1      def
 /DropletsInnerGrayStart  1      def
 /DropletsPaintAtEnd {} def
+/DropletsPaintAtEndRotate true def  % Relevant only if DropletsPaintAtEnd used. If true then 'up' points away from end.
 /DropletsShowSaddlePoints  true  3 4 DropletsCharges length 1 sub {DropletsCharges exch get 0 ne {pop //false exit} if} for  def
 
 /CircletextsMaxCopies {dup 32 gt {dup dup 4 mod sub} {65535} ifelse} bind def
@@ -789,7 +790,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202309082230) def
+/SoftwareVersionDateTimeAdobeFormat (D:202309091215) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -821,6 +822,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /Infinity 32767 def  % 2^15-1, which in pt ~= 455" ~= 38' ~= 11.6m, so ~61% bigger than the ~283" diagonal of the 200"x200" maximum PDF page. Can be '8 exp 256.06251 mul' without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.40282*10^38.
 /InfinityNeg Infinity neg def
 /PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
+/PrinterEpsilonSquared PrinterEpsilon dup mul def
 /Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, so about 419 times the single-precision minimum.
 /AsciiTab (\t) 0 get def   /AsciiNewline (\n) 0 get def   /AsciiSpace ( ) 0 get def
 
@@ -9108,10 +9110,10 @@ currentdict /GlyphShowKnownAbsences undef
 					Xj MgnL 1.0 sub lt  Xj PageWidth  MgnR sub 1.0 add gt  or
 					Yj MgnB 1.0 sub lt  Yj PageHeight MgnT sub 1.0 add gt  or or {/DirectionsParallel //true def} if
 				} if  % DirectionsParallel not  DirectionsBothNonZero  and
-				dL0 //PrinterEpsilon dup mul gt {X1 X0 sub dX0 mul  Y1 Y0 sub dY0 mul  add  dX0 dup mul dY0 dup mul add  div  2 div} {0} ifelse dup
+				dL0 //PrinterEpsilonSquared gt {X1 X0 sub dX0 mul  Y1 Y0 sub dY0 mul  add  dX0 dup mul dY0 dup mul add  div  2 div} {0} ifelse dup
 				dX0 mul X0 add  /Xh0 exch def
 				dY0 mul Y0 add  /Yh0 exch def
-				dL1 //PrinterEpsilon dup mul gt {X0 X1 sub dX1 mul  Y0 Y1 sub dY1 mul  add  dX1 dup mul dY1 dup mul add  div  2 div} {0} ifelse dup
+				dL1 //PrinterEpsilonSquared gt {X0 X1 sub dX1 mul  Y0 Y1 sub dY1 mul  add  dX1 dup mul dY1 dup mul add  div  2 div} {0} ifelse dup
 				dX1 mul X1 add  /Xh1 exch def
 				dY1 mul Y1 add  /Yh1 exch def
 
@@ -9941,7 +9943,17 @@ currentdict /GlyphShowKnownAbsences undef
 													} ifelse  % Greys close and widths the same
 												} if  % Widths non-negative and at least 1 positive
 											} for  % i, loop not happening unless any point of droplet inside Llx Lly Urx Ury
-											/DropletsPaintAtEnd load dup length 0 gt {X1 Y1 moveto  exec} {pop} ifelse
+											/DropletsPaintAtEnd load dup length 0 gt
+											{
+												DropletsPaintAtEndRotate
+												{
+													matrix currentmatrix exch
+													X1 Y1 translate  0 0 moveto
+													X1 X0 sub  Y1 Y0 sub
+													2 copy dup mul exch dup mul add //PrinterEpsilonSquared gt {atan neg rotate} {pop pop} ifelse
+													exec  setmatrix
+												} {X1 Y1 moveto  exec} ifelse  % DropletsPaintAtEndRotate
+											} {pop} ifelse  % DropletsPaintAtEnd
 										} if  % DpWS 0 gt  DpWE 0 gt  or
 									} for  % IsInner
 								} if  % DistTotal //PrinterEpsilon gt
