@@ -1,6 +1,6 @@
 %!PS
 
-% This version 12:15 Saturday 9th September 2023
+% This version 14:30 Saturday 9th September 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202309091215) def
+/ParametersVersionDateTimeAdobeFormat (D:202309091430) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -546,7 +546,6 @@ if} bind def  % /VoteRecorderCrossedBox
 /DropletsInnerGrayStart  1      def
 /DropletsPaintAtEnd {} def
 /DropletsPaintAtEndRotate true def  % Relevant only if DropletsPaintAtEnd used. If true then 'up' points away from end.
-/DropletsShowSaddlePoints  true  3 4 DropletsCharges length 1 sub {DropletsCharges exch get 0 ne {pop //false exit} if} for  def
 
 /CircletextsMaxCopies {dup 32 gt {dup dup 4 mod sub} {65535} ifelse} bind def
 
@@ -790,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202309091215) def
+/SoftwareVersionDateTimeAdobeFormat (D:202309091430) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 % Checks whether initial dictionary sizes are sufficient. It is neater that they are, even though redundant.
@@ -7098,7 +7097,7 @@ currentdict /GlyphShowKnownAbsences undef
 		( ~= ) usertimeInterval ( seconds)
 		usertimeInterval       60 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( minutes)} {pop exit} ifelse  % There have been some distillation times of multiple minutes.
 		usertimeInterval     3600 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( hours)  } {pop exit} ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
-		usertimeInterval    86400 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Dec 2022, JDAW's longest distillation time has been ~=22 minutes.
+		usertimeInterval    86400 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Sep 2023, JDAW's longest distillation time has been ~=22 minutes.
 		usertimeInterval  2629800 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. Likely impossible, as exceeding usertime's integer.
 		usertimeInterval 31557600 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( years)  } {pop exit} ifelse  % Years?! Something is very amiss.
 	} repeat  % 1
@@ -9611,7 +9610,6 @@ currentdict /GlyphShowKnownAbsences undef
 					ChargesData IT 3 add get     10 string cvs dup length 10 exch sub {( ) exch} repeat
 				} for   ConcatenateToMark put  % DropletsChargesText
 				rrand
-				/i  DropletsShowSaddlePoints {ChargesData length 4 div 4 add} {-1} ifelse  def  % How many starting points to find saddle? This an estimate.
 				srand
 				/DropMinProximitySqd  0
 					0 1 15  % This a kludge. Copes if width dependent on DropletNum mod something modest.
