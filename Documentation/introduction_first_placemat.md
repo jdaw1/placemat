@@ -76,8 +76,11 @@ You have saved a .ps file.
 This file is to be opened in two different ways: with the code editor; and with a program to convert it from .ps to .pdf. 
 Let&rsquo;s master the latter. 
 There are several possible means by which the PostScript can be &lsquo;distilled&rsquo; into a PDF. 
-* On a Mac right-click the file, and &lsquo;Open With&rsquo; Preview: it should convert to a PDF. 
-* On a PC, in your preferred web browser, open [online2pdf.com/convert-ps-to-pdf](http://online2pdf.com/convert-ps-to-pdf) (or, with fewer fonts available, [ps2pdf.org](http://www.ps2pdf.org/convert.htm) (and perhaps also [ps2pdf.com](http://www.xconvert.com/convert-ps-to-pdf)); &lsquo;Select files&hellip;&rsquo;; and &lsquo;Convert&rsquo; it. 
+* On a Mac right-click the file, and &lsquo;Open With&rsquo; Preview: it should convert to a PDF.  
+* On a PC, in your preferred web browser, open 
+[ps2pdf.org](http://www.ps2pdf.org/convert.htm) or 
+[xconvert.com/convert-ps-to-pdf](http://www.xconvert.com/convert-ps-to-pdf), 
+&lsquo;Choose&rsquo;&nbsp;|&nbsp;&lsquo;Add&rsquo; the file; and &lsquo;Convert&rsquo; it.  
 * On Unix use `ps2pdf` which comes as part of [GhostScript](http://en.wikipedia.org/wiki/Ghostscript).
 
 If it that has made a PDF resembling [this](images/placemat.pdf), then you can successfully convert the PostScript to PDF: hurray! 
@@ -99,7 +102,7 @@ The code has parameters already in place, for a Port tasting, alas fictitious.
 The pre-existing values are to be changed to those for your tasting. 
 
 The `Titles` appear in the centre of the circles, in a large font size. 
-The `Titles` should be short, ideally 2 or 3 characters, certainly &le;5 characters. 
+The `Titles` should be short, ideally 1 to 3 characters, certainly &le;5 characters. 
 In the initial state of the code, assuming synchronised documentation, they are defined as:
 ```PostScript
 /Titles [
