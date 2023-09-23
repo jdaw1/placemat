@@ -217,10 +217,10 @@ Then the pourer knows what to pour; and those moving the glasses to the table kn
 The number of copies of these pre-pour sheets is `PrePourNumCopies,` the default being 1 if the length of Names is &ge;12, otherwise 0. 
 In an awkward working space `/PrePourNumCopies 2 def` might be useful.
 
-In a typical vertical tasting, the oldest wines come first in the list, so as to be top-left of the sheet. But decanting is in the reverse order, youngest to oldest, so it is convenient to reverse the order of the pre-pour sheets. This is controlled by `PrePourReverseOrder`, which defaults to true. 
+In a typical vertical tasting, the oldest wines come first in the list, so as to be top-left of the sheet. But decanting is in the reverse order, youngest to oldest, so it is convenient to reverse the order of the pre-pour sheets. This is controlled by `PrePourReverseOrder`, which defaults to `true`. 
 
 `PrePourShowBackgroundTexts` and `PrePourShowDroplets` control whether the [background texts](page_level.md#backgroundtexts) and [droplets](page_level.md#droplets), present on the glasses pages, appear on the pre-pour pages. 
-These parameters are re-ised, with same meaning, on the [one-circle](#onecircle) pages.
+These parameters are re-used, with same meaning, on the [one-circle](#onecircle) pages.
 
 ### Superfluous
 
@@ -230,7 +230,9 @@ Collation of multiple copies is controlled by the Boolean `PrePourCollate`: if t
 
 There are also obvious parameters `PrePourPaperType` and `PrePourOrientation`.
 
-For some layouts, it may be desirable for a specific bottle to appear on more than one glasses sheet (e.g. when using overlapping sheets). The consequent duplication of pre-pour sheets is removed by `PrePourRemoveDuplicatesByWithinTitles` being true, its default value. The guillotine-and-overlap trick also messes with the order of the pre-pour sheets, sometimes fixable with `PrePourSortByWithinTitles`.
+For some layouts, it may be desirable for a specific bottle to appear on more than one glasses sheet (e.g. when using overlapping sheets). 
+The consequent duplication of pre-pour sheets is removed by `PrePourRemoveDuplicatesByWithinTitles` being `true`, its default value. 
+The guillotine-and-overlap trick also messes with the order of the pre-pour sheets, sometimes fixable with `PrePourSortByWithinTitles`.
 
 Most of the design is exactly copied from the glasses pages. 
 But the text in the outermost box comes from `CirclearraysPrePour`, which could in theory, but so far never in practice, differ from `Circlearrays`.
@@ -244,12 +246,13 @@ If `RotationTitlesAboveBelowOverCirclearray`&nbsp;&ne;&nbsp;0, then small arrows
 
 <img align="right" width="397" height="247" src="images/NonGlasses_VR.png">
 
-
 At the end of a tasting there is typically a vote for the Wine Of The Night (WOTN), and for large tastings there might also be a vote after each flight or page. 
 The vote-recorder design records public votes; it is not a ballot paper. 
 To assist the &lsquo;returning officer&rsquo; there is paper on which votes can be recorded. 
 For WOTN it is the points that should be recorded, rather than the ranks, as doing so simplifies the addition of the totals. 
 (There is also benefit in there being agreement as to what is recorded: if you record, but I retain the vote-recorder sheet and enter it into a description of the tasting, it is useful that &ldquo;3&rdquo; be unambiguously &lsquo;first place three points&rsquo;.)
+
+(At [ThePortForum tastings](https://www.theportforum.com/viewforum.php?f=4), the rule is that each person has 6 points to allocate, not more than 3 points going to any one wine, and scores must be integer multiples of &frac12;. So valid vote distributions are: &frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;; 1+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;; 1&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;; 1&frac12;+1+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;; 2+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;; 2+1+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;; 2+1&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;; 2+1&frac12;+1+&frac12;+&frac12;+&frac12;; 2&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;; 2&frac12;+1+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;; 2&frac12;+1&frac12;+&frac12;+&frac12;+&frac12;+&frac12;; 2&frac12;+1&frac12;+1+&frac12;+&frac12;; 2&frac12;+2+&frac12;+&frac12;+&frac12;; 2&frac12;+2+1+&frac12;; 2&frac12;+2+1&frac12;+; 3+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;+&frac12;; 3+1+&frac12;+&frac12;+&frac12;+&frac12;; 3+1&frac12;+&frac12;+&frac12;+&frac12;; 3+1&frac12;+1+&frac12;; 3+2+&frac12;+&frac12;; 3+2+1+; 3+2&frac12;+&frac12;.)
 
 Vote recorder sheets can also be used to hold, in a blind tasting, guesstimates of which is what.
 
