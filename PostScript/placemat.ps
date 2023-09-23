@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:10 Monday 11th September 2023
+% This version 19:30 Saturday 23rd September 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202309112310) def
+/ParametersVersionDateTimeAdobeFormat (D:202309231930) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202309112310) def
+/SoftwareVersionDateTimeAdobeFormat (D:202309231930) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -981,7 +981,7 @@ currentdict /ShellSortGapsLength1Subs undef
 	/LowerX exch def
 	/Coeffs exch def
 
-	/Alternation false def
+	/Alternation //false def
 	1 {
 		0  Coeffs length 1 sub -1 0 {exch LowerX mul exch Coeffs exch get add} for  /LowerY exch def  LowerY 0 eq {LowerX //true exit} if
 		0  Coeffs length 1 sub -1 0 {exch UpperX mul exch Coeffs exch get add} for  /UpperY exch def  UpperY 0 eq {UpperX //true exit} if
@@ -5152,7 +5152,7 @@ currentdict /GlyphShowKnownAbsences undef
 				{
 					% mark (NGiA = ) NGiA 3 string cvs (; LowerR = ) LowerR 15 string cvs (; UpperR = ) UpperR 15 string cvs (; diff = ) UpperR LowerR sub (; R = ) R 15 string cvs ConcatenateToMark =
 					UpperR BestRadius le {exit} if  % Continuing purposeless
-					true BestX {IsNumber not {pop //false exit} if} forall BestY {IsNumber not {pop //false exit} if} forall  UpperR LowerR sub //PrinterEpsilon le  and {exit} if
+					//true BestX {IsNumber not {pop //false exit} if} forall BestY {IsNumber not {pop //false exit} if} forall  UpperR LowerR sub //PrinterEpsilon le  and {exit} if
 					/RR4 R R mul 4 mul def
 					/EllipseSemiX  W 2 div R sub  def
 					/EllipseSemiY  H R 2 mul sub  def
@@ -7737,7 +7737,7 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				/Thing0 load length /Thing1 load length eq
 				{
-					true    0  1  /Thing0 load length 1 sub
+					//true    0  1  /Thing0 load length 1 sub
 					{
 						dup /Thing0 load exch get exch /Thing1 load exch get TwoArraysEqual not {pop //false exit} if
 					} for
@@ -9550,7 +9550,7 @@ currentdict /GlyphShowKnownAbsences undef
 			0  1  NumSheets 1 sub
 			{
 				/SheetNum exch def
-				//false //false //false //false PaperType Orientation SetPaperSize   true DefStoreMgns
+				//false //false //false //false PaperType Orientation SetPaperSize   //true DefStoreMgns
 
 				/ChargesData  % length a multiple of 4: X0 Y0 Charge0 Spin0 X1 Y1 Charge1 Spin1 ...
 				[
@@ -9936,7 +9936,7 @@ currentdict /GlyphShowKnownAbsences undef
 																		/C1 Gr1
 																		/N 1
 																	>>  % /Function
-																	/Extend [ true true ]
+																	/Extend [ //true //true ]
 																>> shfill cliprestore newpath
 															} ifelse  % Greys close
 														} repeat  % 1
@@ -11137,7 +11137,7 @@ currentdict /GlyphShowKnownAbsences undef
 	/VoteRecorders load MightBeTrue
 	{
 		//DeBugLevel 100 le {( Main: VoteRecorderForms) OutputToLog} if
-		/VoteRecorderNamesWidthsLogged false def
+		/VoteRecorderNamesWidthsLogged //false def
 		/TypeOfPagesBeingRendered /VoteRecorder store
 		/VoteRecorderForms [ GlassesClusteredOnVoteRecorders length {6 dict} repeat ] def
 		0  1  GlassesClusteredOnVoteRecorders length 1 sub
@@ -13679,7 +13679,7 @@ currentdict /GlyphShowKnownAbsences undef
 						SheetLengths SheetNum get 1 sub  PrePourReverseOrder {-1 0} {0 exch 1 exch} ifelse
 						{
 							WithinPage-WithinTitles-def
-							true
+							//true
 							PrePourRemoveDuplicatesByWithinTitles {counttomark 1 sub 1 exch 1 exch {index 2 get WithinTitles eq {pop //false exit} if} for} if
 							{ [ SheetNum WithinPage WithinTitles ] } if
 						} for  % WithinPage, WithinTitles
@@ -13738,7 +13738,7 @@ currentdict /GlyphShowKnownAbsences undef
 						SheetLengths SheetNum get 1 sub  BottleWrapReverseOrder {-1 0} {0 exch 1 exch} ifelse
 						{
 							WithinPage-WithinTitles-def
-							true
+							//true
 							BottleWrapRemoveDuplicatesByWithinTitles {counttomark 1 sub 1 exch 1 exch {index 2 get WithinTitles eq {pop //false exit} if} for} if
 							{ [ SheetNum WithinPage WithinTitles ] } if
 						} for  % WithinPage, WithinTitles
@@ -14049,7 +14049,7 @@ currentdict /GlyphShowKnownAbsences undef
 							SheetLengths SheetNum get 1 sub  StickyLabelsReverseOrder {-1 0} {0 exch 1 exch} ifelse
 							{
 								WithinPage-WithinTitles-def
-								true   StickyLabelsRemoveDuplicatesByWithinTitles {counttomark 1 sub 1 exch 1 exch {index 2 get WithinTitles eq {pop //false exit} if} for} if
+								//true   StickyLabelsRemoveDuplicatesByWithinTitles {counttomark 1 sub 1 exch 1 exch {index 2 get WithinTitles eq {pop //false exit} if} for} if
 								{ [ SheetNum WithinPage WithinTitles ] } if
 							} for  % WithinPage, WithinTitles
 						} if  % ... ThisPaperType ... ThisPageOrdering ... and
