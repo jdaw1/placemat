@@ -538,7 +538,7 @@ If not using a default, the user must change the specification of the label layo
 
 * `StickyLabelsWithPagePortraitNumRows` is the number of rows whilst holding the page portrait.
 * `StickyLabelsWithPagePortraitNumCols` is the number of columns.
-* `StickyLabelsColumnsChangeFaster` controls the ordering of the row and column loops: `true` &rArr; columns change faster then true; `false` &rArr; the rows change faster.
+* `StickyLabelsColumnsChangeFaster` controls the ordering of the row and column loops: `true`&nbsp;&rArr;&nbsp;columns change faster; `false`&nbsp;&rArr;&nbsp;rows change faster.
 * `StickyLabelsWithPagePortraitGapBetweenRows` is the gap between the rows of labels; and `StickyLabelsWithPagePortraitGapBetweenCols` is the gap between the columns of labels. Either of these could be zero; neither may be negative.
 * `StickyLabelsWithPagePortraitGapL` is the margin on the left of the page, that is, the gap between the edge of the page and the left edge of the leftmost column of labels. *Mutatis mutandis*, `StickyLabelsWithPagePortraitGapR`, `StickyLabelsWithPagePortraitGapT`, and `StickyLabelsWithPagePortraitGapB`.
 * `StickyLabelsPaperType` is the paper type of the sticky labels, accepting values such as `/A4` or `/USL`, and defaulting to `/A4`.
