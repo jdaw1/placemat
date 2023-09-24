@@ -514,7 +514,7 @@ Confusion can be prevented by a sticky label, or by a neck tag, or by a decanter
 At such an event it can help to stick to the foot of the glass (always foot; never bowl) a small sticky label identifying the current contents and the glass&rsquo;s owner. 
 
 Specifying either of these requires describing the sheet of labels. 
-The defaults specify the sizes for sheets of sticky labels readily avaialble in the UK. 
+The defaults specify the sizes for sheets of sticky labels readily available in the UK. 
 If the defaults should know of other standard sizes, please raise an [issue](http://github.com/jdaw1/placemat/issues) to that effect.
 
 Sticky labels appear if `StickyLabelsNumCopies` exceeds zero. 
