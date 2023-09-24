@@ -454,6 +454,12 @@ The decanter labels are on paper `DecanterLabelsPaperType`.
 ## OneCircle
 
 Nice to post online can be a GIF animation of all the glass circles.
+(Examples from 2023: 
+[07&nbsp;Feb](http://www.jdawiseman.com/2023/20230207_awards_oc.gif), 
+[28&nbsp;Feb](http://www.jdawiseman.com/2023/20230228_decanting_experiments_oc.gif), 
+[28&nbsp;Mar](http://www.jdawiseman.com/2023/20230328_Cavadinha_oc.gif), 
+[04&nbsp;Apr](http://www.jdawiseman.com/2023/20230424_reprise_oc.gif), 
+[12&nbsp;Sep](http://www.jdawiseman.com/2023/20230912_1966s_oc.gif).)
 
 The natural way to proceed is to have the software make single-glass pages. 
 For each page, width = height = 2&nbsp;&times;&nbsp;radius, with the circle centred. 
@@ -464,7 +470,7 @@ By default that activates `OneCircleSuppressOtherPageTypes`, which suppresses al
 
 The parameters `PrePourShowBackgroundTexts` and `PrePourShowDroplets` also apply to the one-circle pages.
 
-This is the only page type for which there isn&rsquo;t a `PaperType`: the size of each page is determined by the size of its circle.
+For this page type there isn&rsquo;t a `PaperType`: the size of each page is determined by the size of its circle.
 
 <div style="clear: both;"></div>
 
