@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:30 Saturday 23rd September 2023
+% This version 23:40 Saturday 7th October 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202309231930) def
+/ParametersVersionDateTimeAdobeFormat (D:202310072340) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202309231930) def
+/SoftwareVersionDateTimeAdobeFormat (D:202310072340) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -9773,7 +9773,8 @@ currentdict /GlyphShowKnownAbsences undef
 			(% of non-margin bare page \(ignoring overlaps and hollow inners, assuming no sharp turns, etc\).\n)
 		} Stopped pop  % Stopped in case any of these parameters are code referring to something presently undefined.
 		(DropletsCharges is equivalent to [) DropletsChargesText aload pop (  ]  % Reminder: SheetNum [X Y] Charge Spin ...\n)
-		(DropletsProportionBackwards = )  /DropletsProportionBackwards load (.)
+		(DropletsProportionBackwards = )  /DropletsProportionBackwards load
+		DropletsProportionBackwards dup 0.0001 gt exch 0.5 lt and {( ~= 1/) 1 DropletsProportionBackwards div} if   (.)
 		(\nDropletPaths, number on each SheetNum = ) [ DropletPaths {length} forall ] ToString TrimSpaces
 		(. Frequencies of the number of points in individual droplets: )
 		11 dict begin  /FrequencyDict << >> def
