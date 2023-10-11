@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:40 Saturday 7th October 2023
+% This version 21:45 Wednesday 11th October 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202310072340) def
+/ParametersVersionDateTimeAdobeFormat (D:202310112145) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -62,7 +62,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 21) {SuperscriptOn} (st) {SuperscriptOff} ( November 2023)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 20) {SuperscriptOn} (th) {SuperscriptOff} ( February 2024)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202310072340) def
+/SoftwareVersionDateTimeAdobeFormat (D:202310112145) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -5652,7 +5652,7 @@ currentdict /GlyphShowKnownAbsences undef
 			/NR BestParamsDict /NumRows get def
 			/NC BestParamsDict /NumCols get def
 
-			Echo {mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /)  BaseStyle ( with ) NR ( rows and ) NC ( columns.)  AreaText ConcatenateToMark OutputToLog} if
+			Echo {mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /)  BaseStyle ( with ) NR ( row)  NR 1 ne {(s)} if  ( and ) NC ( column)  NC 1 ne {(s)} if  (.)  AreaText ConcatenateToMark OutputToLog} if
 			/NamePlacementTopX W 4 div X add def /NamePlacementBottomX NamePlacementTopX def  % Relevant if only one column
 			[
 				PackingNestingColumnMajor
@@ -5706,7 +5706,7 @@ currentdict /GlyphShowKnownAbsences undef
 			/NR BestParamsDict /NumRows get def
 			/NC BestParamsDict /NumCols get def
 
-			Echo {mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /)  BaseStyle ( with ) NR ( rows and, of course, ) NC ( columns.)  AreaText ConcatenateToMark OutputToLog} if
+			Echo {mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /)  BaseStyle ( with ) NR ( rows and, of course, ) NC ( column)  NC 1 ne {(s)} if  (.)  AreaText ConcatenateToMark OutputToLog} if
 
 			[
 				PackingNestingColumnMajor
@@ -5747,7 +5747,7 @@ currentdict /GlyphShowKnownAbsences undef
 			//DeBugLevel 50 le {( CirclePacking, /RectangularDislocation) OutputToLog} if
 			/NR BestParamsDict /NumRows get def
 			/NC BestParamsDict /NumCols get def
-			Echo {mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /RectangularDislocation with ) NR ( rows and ) NC ( columns.)  AreaText ConcatenateToMark OutputToLog} if
+			Echo {mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /RectangularDislocation with ) NR ( row) NR 1 ne {(s)} if  ( and ) NC ( column)  NC 1 ne {(s)} if  (.)  AreaText ConcatenateToMark OutputToLog} if
 			[
 				NC NR mul NG eq
 				{
@@ -5911,8 +5911,8 @@ currentdict /GlyphShowKnownAbsences undef
 
 			Echo
 			{
-				mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /Diamonds with ) NR ( rows and )
-				NC ( columns; max. capacity of this arrangement being ) Capacity (.)  AreaText ConcatenateToMark OutputToLog
+				mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /Diamonds with ) NR ( row)  NR 1 ne {(s)} if  ( and )
+				NC ( column)  NC 1 ne {(s)} if  (; max. capacity of this arrangement being ) Capacity (.)  AreaText ConcatenateToMark OutputToLog
 			} if  % Echo
 
 			[
@@ -5953,7 +5953,11 @@ currentdict /GlyphShowKnownAbsences undef
 			/NR BestParamsDict /NumRows get def
 			/CentralGlasses BestParamsDict /CentralGlasses get def
 			/NGaE NG CentralGlasses sub def  % Num Glasses at Edge
-			Echo {mark  NGaE ( glasses: best BaseStyle, with radius ) R (, is /PostsAndLintel with ) NR ( rows and ) CentralGlasses ( extra circles.) AreaText ConcatenateToMark OutputToLog} if
+			Echo
+			{
+				mark  NGaE ( glasses: best BaseStyle, with radius ) R (, is /PostsAndLintel with ) NR ( row)  NR 1 ne {(s)} if  ( and )
+				CentralGlasses ( extra circle)  CentralGlasses 1 ne {(s)} if  (.) AreaText ConcatenateToMark OutputToLog
+			} if  % Echo
 
 			NGaE 1 eq
 			{
@@ -6108,7 +6112,7 @@ currentdict /GlyphShowKnownAbsences undef
 				Echo
 				{
 					mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /DiamondsAndRectangular with )
-					NC ( columns, ) NR NSR sub ( rows of ) BestParamsDict /NumInLongerRows get ( glasses, and ) NSR ( rows with one fewer glass.) AreaText ConcatenateToMark  OutputToLog
+					NC ( column)  NC 1 ne {(s)} if  (, ) NR NSR sub ( row)  1 index 1 ne {(s)} if  ( of ) BestParamsDict /NumInLongerRows get ( glass)  1 index 1 ne {(es)} if  (, and ) NSR ( rows with one fewer glass.) AreaText ConcatenateToMark  OutputToLog
 				} if  % Echo
 				/DistX NC 1 ge {W 2 R mul sub NC 1 sub div} {0} ifelse def
 				[
@@ -6144,7 +6148,7 @@ currentdict /GlyphShowKnownAbsences undef
 				Echo
 				{
 					mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /DiamondsAndRectangular with )
-					NR ( rows, ) NC NSC sub ( columns of ) BestParamsDict /NumInLongerCols get ( glasses, and ) NSC ( columns with one fewer glass.) AreaText ConcatenateToMark  OutputToLog
+					NR ( row)  NR 1 ne {(s)} if  (, ) NC NSC sub ( column)  1 index 1 ne {(s)} if  ( of ) BestParamsDict /NumInLongerCols get ( glass)  1 index 1 ne {(es)} if  (, and ) NSC ( columns with one fewer glass.) AreaText ConcatenateToMark  OutputToLog
 				} if  % Echo
 				/DistY NR 1 ge {H 2 R mul sub NR 1 sub div} {0} ifelse def
 				[
@@ -6209,7 +6213,7 @@ currentdict /GlyphShowKnownAbsences undef
 			Echo
 			{
 				mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is ) BaseStyle ( with )
-				NC ( columns, ) NR ( rows, and alternate )
+				NC ( column)  NC 1 ne {(s)} if  (, ) NR ( row)  NR 1 ne {(s)} if  (, and alternate )
 				NudgeRows {(rows nudged, part left and part right)} {(columns nudged, part up and part down)} ifelse  (, by )  NudgeAmount (pt.) AreaText ConcatenateToMark  OutputToLog
 			} if  % Echo
 
@@ -6271,7 +6275,7 @@ currentdict /GlyphShowKnownAbsences undef
 			Echo
 			{
 				mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is ) BaseStyle ( with )
-				NC ( columns, ) NR ( rows, and alternate )
+				NC ( column)  NC 1 ne {(s)} if  (, ) NR ( row)  NR 1 ne {(s)} if  (, and alternate )
 				NudgeRows {(rows)} {(columns)} ifelse  ( nudged by )  NudgeAmount (pt.) AreaText ConcatenateToMark  OutputToLog
 			} if  % Echo
 
