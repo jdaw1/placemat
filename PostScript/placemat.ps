@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:45 Wednesday 11th October 2023
+% This version 20:15 Thursday 12th October 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202310112145) def
+/ParametersVersionDateTimeAdobeFormat (D:202310122015) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202310112145) def
+/SoftwareVersionDateTimeAdobeFormat (D:202310122015) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -5583,7 +5583,7 @@ currentdict /GlyphShowKnownAbsences undef
 	/RectColsToLeftOrRowsBelow {BestParamsDict /AboveBelow get {NR NSR} {NC NSC} ifelse  2 mul 1 add sub  dup 2 mod 0 eq {2 idiv} {pop 0} ifelse} def  % Middle if possible, otherwise 0
 	/TempleExtraColsToLeftOrRowsBelow {BestParamsDict /N get dup 2 mod 0 eq {2 idiv} {pop 0} ifelse} def  % Middle if possible, otherwise 0
 	/HorizontalAlignment /Centre def  % Only in /SquareGrid
-	/VerticalAlignment /Top def  % Only in /SquareGrid
+	/VerticalAlignment /Justify def  % In /SquareGrid, /Sides, /LeftSide, /RightSide
 	PackingDescriptor type /arraytype eq
 	{
 		/i 1 def
@@ -5680,10 +5680,11 @@ currentdict /GlyphShowKnownAbsences undef
 							1 {
 								BaseStyle /SquareGrid eq
 								{
-									VerticalAlignment /Bottom eq {RowNum NR add R mul  exit} if
+									VerticalAlignment /Top eq {RowNum NR sub R mul H add  exit} if
 									VerticalAlignment /Middle eq {RowNum R mul  H 2 div add  exit} if
-									VerticalAlignment /Justify eq {H R 2 mul sub  NR 1 le {pop 0} {RowNum mul NR 1 sub 2 mul div} ifelse H 2 div add  exit} if
-									RowNum NR sub R mul H add  exit  % Top, being the default
+									VerticalAlignment /Bottom eq {RowNum NR add R mul  exit} if
+									NR 1 le {H 2 div  exit} if
+									VerticalAlignment /Justify eq {H R 2 mul sub  NR 1 le {pop 0} {RowNum mul NR 1 sub 2 mul div} ifelse H 2 div add  exit} if  % Justify, being the default
 								} if  % BaseStyle /SquareGrid eq
 								BaseStyle /BottomRow  eq {R  exit} if
 								BaseStyle /MiddleRow  eq {H 2 div  exit} if
@@ -5724,11 +5725,11 @@ currentdict /GlyphShowKnownAbsences undef
 						{[
 							/LeftSide BaseStyle eq {X R add} {/RightSide BaseStyle eq {X R sub W add} {ColNum 0 eq  {ShoveRight {W R 3 mul sub} {R} ifelse}  {ShoveLeft  {R 3 mul} {W R sub} ifelse}  ifelse  X add} ifelse} ifelse
 							1 {
-								NR 1 le {H 2 div  exit} if
-								VerticalAlignment /Justify eq {H R 2 mul sub RowNum mul NR 1 sub div R add  exit} if
-								VerticalAlignment /Bottom eq {RowNum 2 mul 1 add R mul  exit} if
+								VerticalAlignment /Top eq {H NR RowNum sub 2 mul 1 sub R mul sub  exit} if
 								VerticalAlignment /Middle eq {RowNum 2 mul 1 add NR sub R mul  H 2 div add  exit} if
-								H RowNum 2 mul 1 add R mul sub  exit  % Top, being the default
+								VerticalAlignment /Bottom eq {RowNum 2 mul 1 add R mul  exit} if
+								NR 1 le {H 2 div  exit} if
+								H R 2 mul sub RowNum mul NR 1 sub div R add  exit  % Justify, being the default
 							} repeat  % 1
 							Y add
 						]} if  % Within row, even if shortened
