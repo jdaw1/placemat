@@ -341,11 +341,13 @@ This can be done by fading those circles for those people, or by crossing them o
 Hence the rarely used `GlassesCrossedOut`, a Boolean; and `GlassesCirclesFadingFactor`, a number &ge;0 and &le;1, in which 0 means entirely faded away and 1 is the black-is-black default. 
 The selection of &ldquo;those circles for those people&rdquo; is done with code, by accessing the internal variables `NameNum` and `WithinPage`.
 E.g.:
+
 ```PostScript
 /GlassesCirclesFadingFactor
 {
-	(Julian) Names NameNum get eq  WithinPage 0 eq  and {0.125} {1} ifelse
-} def
+	Names NameNum get (Julian)   eq  WithinPage 0 eq  and 
+	Names NameNum get (MaryAnne) eq  WithinPage 1 eq  and  or  {0.125} {1}  ifelse
+} def  % /GlassesCirclesFadingFactor
 ```
 
 ## GlassesPageWhiteCirclesBehind and CirclearraysFillBehind
