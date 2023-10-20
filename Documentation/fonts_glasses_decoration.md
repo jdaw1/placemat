@@ -312,7 +312,7 @@ The formatting of the `PlaceNames` generally matches that of the Titles, except 
 This can cause difficulties for some software; this can cause difficulties for some printers.
 
 Use of `FillTexts` makes distillation slow, and produces files that can be too complicated for some printers. 
-But being maximally fussy can cause distillation to be very slow in Adobe Distiller, and even slower in GhostScript ([bug&nbsp;report](https://bugs.ghostscript.com/show_bug.cgi?id=695906)). 
+But being maximally fussy can cause distillation to be very slow in Adobe Distiller, and even slower in &le;&thinsp;2017 versions of GhostScript ([bug&nbsp;report](https://bugs.ghostscript.com/show_bug.cgi?id=695906)). 
 
 The balance between these can be influenced by the parameter `FillTextPedantry`m which can take one of three values.  
 * `/Quick`, causing the judgement about whether to paint the FillText to be done purely on the bounding boxes of the two paths. So more FillTexts are painted than necessary, sometimes many more, slowing the printer.  
