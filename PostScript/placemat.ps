@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:15 Thursday 12th October 2023
+% This version 20:00 Wednesday 25th October 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202310122015) def
+/ParametersVersionDateTimeAdobeFormat (D:202310252000) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202310122015) def
+/SoftwareVersionDateTimeAdobeFormat (D:202310252000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -839,7 +839,7 @@ RandomisationSeed srand
 
 /OutputLog 127 array def  /OutputtedToLog 1 def
 OutputLog  0  (!!! Error !!! Error !!!   An error occurred. More information below.   !!! Error !!! Error !!!) put  % This overwritten if all good.
-% If taking this because other subroutines are being copied, perhaps replace with  /OutputToLog {=} bind def
+% If taking this because other subroutines are being copied, perhaps replace with  /OutputToLog {dup type /stringtype eq {=} {==} ifelse flush} bind def
 /OutputToLog
 {
 	4 dict begin
@@ -856,6 +856,7 @@ OutputLog  0  (!!! Error !!! Error !!!   An error occurred. More information bel
 			} for
 			j i sub 1 add 0 ge {Output i j i sub 1 add getinterval dup length 0 gt /ShowBlankLine exch def =} if   ShowBlankLine {() =} if
 		} {/Output load ==} ifelse flush  % ... /stringtype ...
+		flush
 	} if  % OutputLogToLog
 	OutputtedToLog OutputLog length ge {/OutputLog  OutputLog length 2 mul 1 add dup 65535 le {array dup  0  OutputLog  putinterval  store} {pop pop} ifelse} if
 	OutputtedToLog OutputLog length lt {OutputLog OutputtedToLog /Output load  put  /OutputtedToLog dup load 1 add store} if
