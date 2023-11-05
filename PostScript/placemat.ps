@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Wednesday 25th October 2023
+% This version 21:45 Sunday 5th November 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202310252000) def
+/ParametersVersionDateTimeAdobeFormat (D:202311052145) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202310252000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202311052145) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -15195,8 +15195,8 @@ OutputLogToPage {false PageSuppressed not} {false} ifelse
 	% Fixed page size based on type of first page. Also will use 27 margins all round. Page not really for high-quality printing.
 	/SPS {//false  //false  //false  //true  TastingNotesPaperType NorthAmericanPaperSize {/USL} {/A4} ifelse  /Portrait  SetPaperSize} bind def
 	SPS    mark  /Dest /DistillationLog  /View [/FitH PageHeight]  /DEST  pdfmark    mark  /Label (Distillation log)  /PAGELABEL  pdfmark
-	/FontSize 6.5 def   /Courier FontSize selectfont  /WidthW (W) stringwidth pop def
-	/FontSize  PageWidth 54 sub //PrinterEpsilon sub  dup WidthW div ceiling  132  2 copy lt {exch} if pop  WidthW mul div FontSize mul def
+	/FontSize 6.25 def   /Courier FontSize selectfont  /WidthW (W) stringwidth pop def  % Large initial FontSize, constrained by >=132 char limit, on A4 is FontSize ~=6.833; 6.25 leads to 6.22043.
+	/FontSize  PageWidth 54 sub //PrinterEpsilon sub  dup WidthW div ceiling  132  2 copy lt {exch} if pop  WidthW mul div FontSize mul def  % /FontSize WatchExpression
 	/YlineStep FontSize 1.125 mul def
 	/YparaExtra FontSize 0.75 mul def
 	/YblankLine 0 def
