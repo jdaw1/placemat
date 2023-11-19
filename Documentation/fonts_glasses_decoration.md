@@ -212,9 +212,9 @@ Extracts of code that made the image for the Dow &rsquo;78:
 <img align="right" width="477" height="477" src="images/Spirals.png">
 
 Another playful decoration, a background spiral, is engaged by the Boolean `Spirals`. 
-The number of arms is `SpiralNumArms`, and the whole pattern can be rotated by `SpiralAngleOffset`. 
-The radius betweem arms, measured to the centre rather than perpendicular to the direction of travel, is `SpiralRadiusBetweenArms`. 
-The meaning of the Boolean `SpiralClockwise` is obvious. 
+The number of arms is `SpiralNumArms`, and `SpiralAngleOffset` rotates the whole pattern. 
+`SpiralRadiusBetweenArms` is the radius between arms (albeit measured to the centre rather than perpendicular to the direction of travel). 
+The meaning of the Boolean `SpiralClockwise` is obvious.
 
 `SpiralStrokeCode`, by default a boring `{stroke}`, can hold formatting of the line (e.g., `{gsave 0.6 setgray 1.44 setlinewidth stroke grestore 1 setgray 0.48 setlinewidth stroke}`). 
 
