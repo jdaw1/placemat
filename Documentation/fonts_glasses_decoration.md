@@ -220,7 +220,7 @@ The number of arms is `SpiralNumArms`, and `SpiralAngleOffset` rotates the whole
 The meaning of the Boolean `SpiralClockwise` is obvious.
 
 `SpiralRadiusBetweenArms` is the radius between arms (albeit measured to the centre rather than perpendicular to a tangent). 
-If `SpiralRadiusBetweenArms` &ge;&nbsp;32767 =&nbsp;2&sup1;&#8309;&nbsp;&minus;&nbsp;1 =&nbsp;`Infinity`, then it is deemed that `SpiralRadiusBetweenArms`&nbsp;=&nbsp;&infin;&nbsp;&nbsp; &DoubleLongRightArrow;&nbsp;the spiral arms are replaced with straight lines radiating from the centre of this degenerate spiral.
+If `SpiralRadiusBetweenArms` &ge;&nbsp;32767 =&nbsp;2&sup1;&#8309;&nbsp;&minus;&nbsp;1 =&nbsp;`Infinity`, then it is deemed that `SpiralRadiusBetweenArms`&nbsp;=&nbsp;&infin;&nbsp;&nbsp; &DoubleLongRightArrow;&nbsp;the spiral arms are replaced with straight lines radiating from the centre of this degenerate &lsquo;spiral&rsquo;.
 
 `SpiralStrokeCode`, by default a boring `{stroke}`, can hold formatting of the line (e.g., `{gsave 0.6 setgray 1.44 setlinewidth stroke grestore 1 setgray 0.48 setlinewidth stroke}`). 
 
