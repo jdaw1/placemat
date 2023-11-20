@@ -209,16 +209,20 @@ Extracts of code that made the image for the Dow &rsquo;78:
 
 ## Spirals
 
-<img align="right" width="477" height="477" src="images/Spirals.png">
+<img align="right" width="342" height="341" src="images/Spirals.png">
 
 Another playful decoration, a background spiral, is engaged by the Boolean `Spirals`. 
-The number of arms is `SpiralNumArms`, and `SpiralAngleOffset` rotates the whole pattern. 
-`SpiralRadiusBetweenArms` is the radius between arms (albeit measured to the centre rather than perpendicular to the direction of travel). 
+
+The location of the centre of the spiral is controlled by `SpiralCentreFromCentreAngle` and by `SpiralCentreFromCentreProportionRadiiInside`. 
+
+The number of arms is `SpiralNumArms`, and `SpiralAngleOffset` rotates the whole pattern.
+
 The meaning of the Boolean `SpiralClockwise` is obvious.
 
-`SpiralStrokeCode`, by default a boring `{stroke}`, can hold formatting of the line (e.g., `{gsave 0.6 setgray 1.44 setlinewidth stroke grestore 1 setgray 0.48 setlinewidth stroke}`). 
+`SpiralRadiusBetweenArms` is the radius between arms (albeit measured to the centre rather than perpendicular to a tangent). 
+If `SpiralRadiusBetweenArms` &ge;&nbsp;32767 =&nbsp;2&sup1;&#8309;&nbsp;&minus;&nbsp;1 =&nbsp;`Infinity`, then it is deemed that `SpiralRadiusBetweenArms`&nbsp;=&nbsp;&infin;&nbsp;&nbsp; &DoubleLongRightArrow;&nbsp;the spiral arms are replaced with straight lines radiating from the centre of this degenerate spiral.
 
-The centre of the spiral does not have to be the centre of the circle, as controlled by `SpiralCentreFromCentreAngle` and by `SpiralCentreFromCentreProportionRadiiInside`. 
+`SpiralStrokeCode`, by default a boring `{stroke}`, can hold formatting of the line (e.g., `{gsave 0.6 setgray 1.44 setlinewidth stroke grestore 1 setgray 0.48 setlinewidth stroke}`). 
 
 Extracts of code that made the image:
 ```PostScript
