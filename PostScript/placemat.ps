@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:45 Sunday 5th November 2023
+% This version 23:00 Monday 20th November 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202311052145) def
+/ParametersVersionDateTimeAdobeFormat (D:202311202300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202311052145) def
+/SoftwareVersionDateTimeAdobeFormat (D:202311202300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -8770,8 +8770,8 @@ currentdict /GlyphShowKnownAbsences undef
 	/TitleAboveBelowOverT [ SheetLengths {[ exch {0} repeat ]} forall ] def
 	//DeBugLevel 100 le {( Main: Computation of TitleAboveBelowOverL, ...R, ...B, ...T.) OutputToLog} if
 	9 dict begin
-	/TABO_MaxT InfinityNeg def  /TABO_MaxT_SheetNum -1 def  /TABO_MaxT_WithinPage -1 def
-	/TABO_MinB Infinity    def  /TABO_MinB_SheetNum -1 def  /TABO_MinB_WithinPage -1 def
+	/TABO_MaxT //InfinityNeg def  /TABO_MaxT_SheetNum -1 def  /TABO_MaxT_WithinPage -1 def
+	/TABO_MinB //Infinity    def  /TABO_MinB_SheetNum -1 def  /TABO_MinB_WithinPage -1 def
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
@@ -11002,7 +11002,7 @@ currentdict /GlyphShowKnownAbsences undef
 						PageHeight  MgnB MgnT add sub  AD sub
 						TitleAboveBelowOverT SheetNum get WithinPage get
 						TitleAboveBelowOverB SheetNum get WithinPage get sub BottleWrapScalingMin mul  AD add  BottleWrapPadding 2 mul add
-						dup //PrinterEpsilon gt {div} {pop pop AD PrinterEpsilon gt {PageHeight  MgnB MgnT add sub  AD div 2 div} {12} ifelse} ifelse
+						dup //PrinterEpsilon gt {div} {pop pop AD //PrinterEpsilon gt {PageHeight  MgnB MgnT add sub  AD div 2 div} {12} ifelse} ifelse
 						dup 48 gt {pop 48} {dup 1 le {pop 1} {floor cvi} ifelse} ifelse
 					def  % /BottleWrapNumRows
 
@@ -12013,7 +12013,7 @@ currentdict /GlyphShowKnownAbsences undef
 					RadiiCirclearrayInside SheetNum get  0 gt  Spirals and
 					{
 						ClipSave newpath  0 0  RadiiCirclearrayInside SheetNum get  0 360  /m  ArcAccurate  clip newpath
-						SpiralRadiusBetweenArms abs Infinity ge
+						SpiralRadiusBetweenArms abs //Infinity ge
 						{
 							0  1  SpiralNumArms 1 sub
 							{
@@ -12029,7 +12029,7 @@ currentdict /GlyphShowKnownAbsences undef
 							SpiralCentreFromCentreAngle cos mul 3 -1 roll
 							abs RadiiCirclearrayInside SheetNum get add  2 add  % Embedded constant. Will be enough if linewidth <= 4.
 							SpiralNumArms SpiralRadiusBetweenArms SpiralAngleOffset SpiralClockwise //true /m ArchimedeanSpiralPath
-						} ifelse  % SpiralRadiusBetweenArms abs Infinity ge
+						} ifelse  % SpiralRadiusBetweenArms abs //Infinity ge
 						0.24 setlinewidth  0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash  SpiralStrokeCode  % Too thin was 0.12 setlinewidth as used http://www.jdawiseman.com/2022/20220120_blind.pdf
 						ClipRestore
 					} if  % RadiiCirclearrayInside SheetNum get  0 gt  Spirals and
