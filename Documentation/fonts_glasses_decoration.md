@@ -351,8 +351,8 @@ E.g.:
 {
 	Names NameNum get (Julian)   eq  WithinTitles 0 eq  and 
 	Names NameNum get (MaryAnne) eq  WithinTitles 1 eq  and  or
-		{0.125}
-		{1}
+		{0.125}  % Mostly faded away
+		{1}      % The black-is-black default
 	ifelse
 } def  % /GlassesCirclesFadingFactor
 ```
