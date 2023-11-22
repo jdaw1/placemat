@@ -209,11 +209,11 @@ Extracts of code that made the image for the Dow &rsquo;78:
 
 ## Spirals
 
-<img align="right" width="342" height="341" src="images/Spirals.png">
-
 Another playful decoration, a background spiral, is engaged by the Boolean `Spirals`. 
 
 The location of the centre of the spiral is controlled by `SpiralCentreFromCentreAngle` and by `SpiralCentreFromCentreProportionRadiiInside`. 
+
+<img align="right" width="342" height="341" src="images/Spirals.png">
 
 The number of arms is `SpiralNumArms`, and `SpiralAngleOffset` rotates the whole pattern.
 
@@ -349,8 +349,11 @@ E.g.:
 ```PostScript
 /GlassesCirclesFadingFactor
 {
-	Names NameNum get (Julian)   eq  WithinPage 0 eq  and 
-	Names NameNum get (MaryAnne) eq  WithinPage 1 eq  and  or  {0.125} {1}  ifelse
+	Names NameNum get (Julian)   eq  WithinTitles 0 eq  and 
+	Names NameNum get (MaryAnne) eq  WithinTitles 1 eq  and  or
+		{0.125}
+		{1}
+	ifelse
 } def  % /GlassesCirclesFadingFactor
 ```
 
