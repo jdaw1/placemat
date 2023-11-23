@@ -343,7 +343,7 @@ It helps with set-up if these exclusions are plainly marked.
 This can be done by fading those circles for those people, or by crossing them out, or both. 
 
 Hence the rarely used `GlassesCrossedOut`, a Boolean; and `GlassesCirclesFadingFactor`, a number &ge;0 and &le;1, in which 0 means entirely faded away and 1 is the black-is-black default. 
-The selection of &ldquo;those circles for those people&rdquo; is done with code, by accessing the internal variables `NameNum` and `WithinPage`.
+The selection of &ldquo;those circles for those people&rdquo; is done with code, most likely by accessing the internal variables `NameNum` and `WithinTitles`. 
 E.g.:
 
 ```PostScript
