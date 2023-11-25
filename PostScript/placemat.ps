@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Monday 20th November 2023
+% This version 15:30 Saturday 25th November 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202311202300) def
+/ParametersVersionDateTimeAdobeFormat (D:202311251530) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -789,7 +789,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202311202300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202311251530) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -3371,6 +3371,7 @@ currentdict /SmallCapsDict undef
 % knot points of a cubic Bezier. The calling code might, for example, have the first as the currentpoint, and append the last before calling curveto.
 % Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe SpeedUpperLimit ApproximatingCurve  X1 Y1 X2 Y2
 % http://groups.google.com/g/comp.lang.postscript/c/3RIq0Jnwrbo
+% https://math.stackexchange.com/a/4810490/822964
 /ApproximatingCurve
 {
 	//DeBugLevel 10 le {(+ApproximatingCurve) OutputToLog} if
