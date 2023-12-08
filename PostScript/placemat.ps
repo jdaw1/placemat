@@ -1,6 +1,6 @@
 %!PS
 
-% This version 15:30 Saturday 25th November 2023
+% This version 23:50 Thursday 7th December 2023
 
 % Copyright Julian D. A. Wiseman 1988 to 2023.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202311251530) def
+/ParametersVersionDateTimeAdobeFormat (D:202312072350) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -381,6 +381,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /VoteRecorderTotalColTitle [(T) {-0.06 Kern} (otal)] def
 /VoteRecorderTotalRowTitle [(T) {-0.09 Kern} (otal)] def
 /VoteRecorderMonkeyName (Monkey) def
+/VoteRecorderMonkeyVote (D70) def  % Can refer to WithinTitles
 
 /TastingNotesColumnHeadings [  (Times)  (Eye)  (Nose)  (Mouth)  (Score)  ] def
 /TastingNotesPageNumCompoundString [(Page ) {TNSheetNum 1 add 5 string cvs}] def
@@ -789,7 +790,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202311251530) def
+/SoftwareVersionDateTimeAdobeFormat (D:202312072350) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -11454,15 +11455,30 @@ currentdict /GlyphShowKnownAbsences undef
 									/NameNum exch def  % Different variable
 									/ThisName VoteRecorderNames NameNum get def
 									//DeBugLevel 100 le {( VoteRecorderForms: PaintProc, +VoteRecorderCrossedBox) OutputToLog} if
+									/x   PageWidth MgnL MgnR add sub VoteRecorderWidthColFirst sub  NameNum 0.5 add mul  VoteRecorderNumNames div   MgnL add  VoteRecorderWidthColFirst add   def
+									/VoteRecorderRowHeight2  VoteRecorderRowHeight CirclearraysVoteRecorderT CirclearraysVoteRecorderB sub sub  2 div  def
+									/y   CurrentTop VoteRecorderRowHeight2 sub  def
 									VoteRecorderCrossedBox
 									{
 										//DeBugLevel 100 le {mark ( VoteRecorderForms: PaintProc, VoteRecorderCrossedBox=true, NameNum=) NameNum (; WithinTitles=) WithinTitles ConcatenateToMark OutputToLog} if
-										/x   PageWidth MgnL MgnR add sub VoteRecorderWidthColFirst sub  NameNum 0.5 add mul  VoteRecorderNumNames div   MgnL add  VoteRecorderWidthColFirst add   def
-										x VoteRecorderColWidth 2 div sub VoteRecorderCrossLineWidth 2 mul add  CurrentTop VoteRecorderCrossLineWidth 2 mul sub  2 copy moveto
-										x VoteRecorderColWidth 2 div add VoteRecorderCrossLineWidth 2 mul sub  CurrentTop VoteRecorderRowHeight CirclearraysVoteRecorderT CirclearraysVoteRecorderB sub sub sub VoteRecorderCrossLineWidth 2 mul add  2 copy lineto
+										x VoteRecorderColWidth 2 div sub VoteRecorderCrossLineWidth 2 mul add  y VoteRecorderRowHeight2 add VoteRecorderCrossLineWidth 2 mul sub  2 copy moveto
+										x VoteRecorderColWidth 2 div add VoteRecorderCrossLineWidth 2 mul sub  y VoteRecorderRowHeight2 sub VoteRecorderCrossLineWidth 2 mul add  2 copy lineto
 										3 1 roll exch moveto lineto
 										0 setgray VoteRecorderCrossLineWidth dup setlinewidth 2.16 ge {GSave stroke GRestore 1 setgray VoteRecorderCrossLineWidth 3 div setlinewidth stroke} {stroke} ifelse
 									} if  % VoteRecorderCrossedBox
+									NameNum  VoteRecorderNumNames VoteRecorderShowTotalCol VoteRecorderSheetNum GetEU {2} {1} ifelse sub  eq
+									ThisName VoteRecorderMonkeyName eq  and  /VoteRecorderMonkeyVote load NonEmptyCompoundObject  and
+									{
+										5 dict begin
+										TitlesFont 1 selectfont  VoteRecorderMonkeyVote StringPathBBox  /T exch def /R exch def /B exch def /L exch def
+										T B 0.01 add gt  R L 0.01 add gt  and
+										{
+											/FS  VoteRecorderColWidth 0.8 mul R L sub div  VoteRecorderRowHeight2 1.6 mul T B sub div   2 copy gt {exch} if pop  def  % Filling <=80% of width and height 
+											x R L add FS mul 2 div sub  y T B add FS mul 2 div sub  moveto
+											TitlesFont FS selectfont  0.6 setgray  VoteRecorderMonkeyVote ShowRecursive  % Not quite black
+										} if  % Non-zero size
+										end
+									} if  % Monkey
 									//DeBugLevel 100 le {( VoteRecorderForms: PaintProc, -VoteRecorderCrossedBox) OutputToLog} if
 								} for  % NameNum
 								currentdict /NameNum undef  currentdict /ThisName undef

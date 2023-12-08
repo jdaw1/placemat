@@ -280,7 +280,8 @@ The array `VoteRecorderShowTotalRow` is of the same length as `VoteRecorderTopTe
 There is a blind-tasting mischief in adding control guesses, as a discipline on those attending. 
 This could be a constant guess &mdash; the first few times this was done by [ThePortForum](http://www.theportforum.com/viewtopic.php?t=11769&p=105522#p105522) crowd, the &lsquo;Monkey&rsquo; always guessed Dow 1970. 
 Or somebody not present could be asked to guess. 
-The appearance of the monkey column is controlled by `VoteRecorderMonkeyWhenShowTotalRow`, and the name of the Monkey is `/VoteRecorderMonkeyName`.
+The appearance of the monkey column is controlled by `VoteRecorderMonkeyWhenShowTotalRow`, and the name of the Monkey is `/VoteRecorderMonkeyName`. 
+If `VoteRecorderMonkeyVote` is not empty, then the monkey&rsquo;s guess is printed (rather than handwritten).
 
 `GlassesClusteredOnVoteRecorders` is a triple-depth array, the same length as `VoteRecorderTopTexts` and `VoteRecorderShowTotalRow`, and can remain at its default value except for the largest tastings.
 The outermost array is one per vote-recorder page: voting on separate days, with different people or wines, or different total-column-row flags, should be recorded on separate sheets. 
