@@ -1,8 +1,8 @@
 %!PS
 
-% This version 23:50 Thursday 7th December 2023
+% This version 15:40 Monday 1st January 2024
 
-% Copyright Julian D. A. Wiseman 1988 to 2023.
+% Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
 % licensed works and modifications, which include larger works using a licensed work, under the same license.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202312072350) def
+/ParametersVersionDateTimeAdobeFormat (D:202401011540) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -80,8 +80,8 @@
 % Links for some restaurants and many Port houses at http://github.com/jdaw1/placemat/blob/main/PostScript/ExternalLinks_data.ps
 /ExternalLinks [
 	false   (Thread on ThePortForum.com)                 (http://www.theportforum.com/viewtopic.php?t=00175&view=unread#unread)
-%	false   (Latest version this placemat)               (http://www.jdawiseman.com/2023/    .pdf)
-%	true    (in list of placemats)                       (http://www.jdawiseman.com/papers/placemat/placemats_list.html#a2023MMDD)
+%	false   (Latest version this placemat)               (http://www.jdawiseman.com/2024/    .pdf)
+%	true    (in list of placemats)                       (http://www.jdawiseman.com/papers/placemat/placemats_list.html#a2024MMDD)
 	false   (Boot & Flogger)                             (http://www.davy.co.uk/wine-bar/boot-and-flogger/)
 	true    [/ellipsis (OpenStreetMap)]                  (http://www.openstreetmap.org/node/534961998)
 	true    [/ellipsis (google.co.uk)]                   (http://goo.gl/maps/7NEiwAMEZpG2)
@@ -90,7 +90,7 @@
 	true    [/ellipsis (bing.com)]                       (http://www.bing.com/maps?where1=SE1+1TA)
 ] def  % /ExternalLinks
 
-/CopyrightStatementPlacemats (Copyright 2023 Julian D. A. Wiseman of www.jdawiseman.com) def
+/CopyrightStatementPlacemats (Copyright 2024 Julian D. A. Wiseman of www.jdawiseman.com) def
 
 % % % % % % % % % % %
 % Non-Glasses Pages %
@@ -141,7 +141,7 @@
 % % % % % % % % % % % % % % % % % % % % % % %
 
 % GlassesOnSheetsMaxPerSheet: 6 default, USLegal => 9; A3 or Tabloid => 13. For all on one sheet replace with "/GlassesOnSheetsMaxPerSheet 999 def".
-/GlassesOnSheetsMaxPerSheet  6  /PaperType load dup /A3 eq exch /Tabloid eq or {pop 14} if  /PaperType load /USLegal eq {pop 9} if  def
+/GlassesOnSheetsMaxPerSheet  6  /PaperType load dup /A3 eq exch /Tabloid eq or {pop 15} if  /PaperType load /USLegal eq {pop 9} if  def
 /GlassesOnSheets [
 	% For a custom arrangement replace the next line  with something of the form "[0 1 2 3] [4 5 6 7 8 9] [10 11 12 13]"
 	% The code below spreads glasses evenly over the sheets, the sheets one glass larger being last. Replace "floor": with "ceiling" for larger sheets to be early; with "round" for them to be scattered.
@@ -547,6 +547,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /DropletsInnerGrayStart  1      def
 /DropletsPaintAtEnd {} def
 /DropletsPaintAtEndRotate true def  % Relevant only if DropletsPaintAtEnd used. If true then 'up' points away from end.
+/Droplets_SideBySide_UnderTNs true def  % Relevant only if SideBySideGlassesTastingNotes is true
 
 /CircletextsMaxCopies {dup 32 gt {dup dup 4 mod sub} {65535} ifelse} bind def
 
@@ -790,7 +791,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202312072350) def
+/SoftwareVersionDateTimeAdobeFormat (D:202401011540) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -7107,8 +7108,8 @@ currentdict /GlyphShowKnownAbsences undef
 		( ~= ) usertimeInterval ( seconds)
 		usertimeInterval       60 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( minutes)} {pop exit} ifelse  % There have been some distillation times of multiple minutes.
 		usertimeInterval     3600 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( hours)  } {pop exit} ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
-		usertimeInterval    86400 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Sep 2023, JDAW's longest distillation time has been ~=22 minutes.
-		usertimeInterval  2629800 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. Likely impossible, as exceeding usertime's integer.
+		usertimeInterval    86400 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of 01 Jan 2024, JDAW's longest distillation time has been ~=22 minutes.
+		usertimeInterval  2629800 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. PostScript's max integer is just bigger than half a month.
 		usertimeInterval 31557600 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( years)  } {pop exit} ifelse  % Years?! Something is very amiss.
 	} repeat  % 1
 	end
@@ -9554,11 +9555,15 @@ currentdict /GlyphShowKnownAbsences undef
 			% DropletPaths has one array element for each SheetNum. Within which, one per droplet, each of which is an array.
 			% Most of these droplets are of length a multiple of four, being: X; Y; DistanceTravelled; Potential.
 			% A small number of droplets are of length precisely five, the fifth being an array [x' y'], an eigenvector of the Hessian.
-			42 dict begin
+			46 dict begin
 			0  1  NumSheets 1 sub
 			{
 				/SheetNum exch def
 				//false //false //false //false PaperType Orientation SetPaperSize   //true DefStoreMgns
+				/DrpMgnL Droplets_SideBySide_UnderTNs {MarginL} {MgnL} ifelse def
+				/DrpMgnR Droplets_SideBySide_UnderTNs {MarginR} {MgnR} ifelse def
+				/DrpMgnB Droplets_SideBySide_UnderTNs {MarginB} {MgnB} ifelse def
+				/DrpMgnT Droplets_SideBySide_UnderTNs {MarginT} {MgnT} ifelse def
 
 				/ChargesData  % length a multiple of 4: X0 Y0 Charge0 Spin0 X1 Y1 Charge1 Spin1 ...
 				[
@@ -9633,23 +9638,23 @@ currentdict /GlyphShowKnownAbsences undef
 				[
 					Droplets
 					{
-						PageHeight MgnB MgnT add sub
-						PageWidth  MgnL MgnR add sub add //SqrtSixth mul DropletsAverageMaxTweakPlusMinus abs add DropletsAverageSeparation abs div floor cvi neg
+						PageHeight DrpMgnB DrpMgnT add sub
+						PageWidth  DrpMgnL DrpMgnR add sub add //SqrtSixth mul DropletsAverageMaxTweakPlusMinus abs add DropletsAverageSeparation abs div floor cvi neg
 						1  1 index abs
 						{
 							/Dim1 exch def
-							PageHeight MgnB MgnT add sub 3 //Sqrt3 add mul
-							PageWidth  MgnL MgnR add sub 3 //Sqrt3 sub mul add 6 div //SqrtHalf mul DropletsAverageMaxTweakPlusMinus abs add DropletsAverageSeparation abs div floor cvi neg
+							PageHeight DrpMgnB DrpMgnT add sub 3 //Sqrt3 add mul
+							PageWidth  DrpMgnL DrpMgnR add sub 3 //Sqrt3 sub mul add 6 div //SqrtHalf mul DropletsAverageMaxTweakPlusMinus abs add DropletsAverageSeparation abs div floor cvi neg
 							1  1 index abs
 							{
 								/Dim2 exch def
 								/RandAng rand 360 mod def
 								/RandRadii DropletsAverageMaxTweakPlusMinus rand mul RandMax div def
 
-								/X PageWidth  MgnL MgnR sub add 2 div  Dim2 //SqrtHalf mul Dim1 //Cos15 mul add DropletsAverageSeparation mul add  RandAng sin RandRadii mul add def
-								/Y PageHeight MgnB MgnT sub add 2 div  Dim2 //SqrtHalf mul Dim1 //Sin15 mul sub DropletsAverageSeparation mul add  RandAng cos RandRadii mul add def
-								X MgnL DropletsPathLength sub gt  X PageWidth  MgnR sub DropletsPathLength add lt  and
-								Y MgnB DropletsPathLength sub gt  Y PageHeight MgnT sub DropletsPathLength add lt  and and
+								/X PageWidth  DrpMgnL DrpMgnR sub add 2 div  Dim2 //SqrtHalf mul Dim1 //Cos15 mul add DropletsAverageSeparation mul add  RandAng sin RandRadii mul add def
+								/Y PageHeight DrpMgnB DrpMgnT sub add 2 div  Dim2 //SqrtHalf mul Dim1 //Sin15 mul sub DropletsAverageSeparation mul add  RandAng cos RandRadii mul add def
+								X DrpMgnL DropletsPathLength sub gt  X PageWidth  DrpMgnR sub DropletsPathLength add lt  and
+								Y DrpMgnB DropletsPathLength sub gt  Y PageHeight DrpMgnT sub DropletsPathLength add lt  and and
 								{
 									/Drplt ChargesData  X  Y  DropletsPathLength  0.36  DropletPath def  % Embedded constant.
 									Drplt length 8 ge
@@ -9659,8 +9664,8 @@ currentdict /GlyphShowKnownAbsences undef
 										{
 											/i exch def
 											Drplt dup i get /X exch def i 1 add get /Y exch def
-											X MgnL ge  X PageWidth  MgnR sub le  and
-											Y MgnB ge  Y PageHeight MgnT sub le  and and
+											X DrpMgnL ge  X PageWidth  DrpMgnR sub le  and
+											Y DrpMgnB ge  Y PageHeight DrpMgnT sub le  and and
 											{
 												Drplt i 2 add get dup dup dup
 												OnPageStart lt {/OnPageStart exch def} {pop} ifelse
@@ -10011,17 +10016,26 @@ currentdict /GlyphShowKnownAbsences undef
 			DropletsForms SheetNum get begin
 			/SheetNum SheetNum def
 			/FormType 1 def
-			/BBox [ MgnL 0.5 sub  MgnB 0.5 sub  PageWidth MgnR 0.5 sub sub  PageHeight MgnB 0.5 sub sub ] def
+			/BBox [
+				Droplets_SideBySide_UnderTNs {MarginL} {MgnL} ifelse 0.5 sub
+				Droplets_SideBySide_UnderTNs {MarginB} {MgnB} ifelse 0.5 sub
+				PageWidth  Droplets_SideBySide_UnderTNs {MarginR} {MgnR} ifelse 0.5 sub sub
+				PageHeight Droplets_SideBySide_UnderTNs {MarginB} {MgnB} ifelse 0.5 sub sub
+			] def  % /BBox
 			/Matrix matrix identmatrix def
 			/PaintProc
 			{
 				//DeBugLevel 100 le {(+DropletsForms: PaintProc) OutputToLog} if
-				7 dict begin
+				11 dict begin
 				/SheetNum get /SheetNum exch def
+				/DrpMgnL Droplets_SideBySide_UnderTNs {MarginL} {MgnL} ifelse def
+				/DrpMgnR Droplets_SideBySide_UnderTNs {MarginR} {MgnR} ifelse def
+				/DrpMgnB Droplets_SideBySide_UnderTNs {MarginB} {MgnB} ifelse def
+				/DrpMgnT Droplets_SideBySide_UnderTNs {MarginT} {MgnT} ifelse def
 				newpath  1 setlinecap  [] 0 setdash
 				//false //false //false //false PaperType Orientation SetPaperSize   //true DefStoreMgns
-				ClipSave  MgnL  MgnB  PageWidth MgnL MgnR add sub  PageHeight MgnB MgnT add sub  rectclip
-				SheetNum  MgnL  MgnB  PageWidth MgnR sub  PageHeight MgnT sub  -1  //null  DropletsPaint  ClipRestore
+				ClipSave  DrpMgnL  DrpMgnB  PageWidth DrpMgnL DrpMgnR add sub  PageHeight DrpMgnB DrpMgnT add sub  rectclip
+				SheetNum  DrpMgnL  DrpMgnB  PageWidth DrpMgnR sub  PageHeight DrpMgnT sub  -1  //null  DropletsPaint  ClipRestore
 				end
 				//DeBugLevel 100 le {(-DropletsForms: PaintProc) OutputToLog} if
 			} def  % /PaintProc
@@ -10035,16 +10049,25 @@ currentdict /GlyphShowKnownAbsences undef
 			DropletsReversedForms SheetNum get begin
 			/SheetNum SheetNum def
 			/FormType 1 def
-			/BBox [ MgnL 0.5 sub  MgnB 0.5 sub  PageWidth MgnR 0.5 sub sub  PageHeight MgnB 0.5 sub sub ] def
+			/BBox [
+				Droplets_SideBySide_UnderTNs {MarginL} {MgnL} ifelse 0.5 sub
+				Droplets_SideBySide_UnderTNs {MarginB} {MgnB} ifelse 0.5 sub
+				PageWidth  Droplets_SideBySide_UnderTNs {MarginR} {MgnR} ifelse 0.5 sub sub
+				PageHeight Droplets_SideBySide_UnderTNs {MarginB} {MgnB} ifelse 0.5 sub sub
+			] def  % /BBox
 			/Matrix matrix identmatrix def
 			/PaintProc
 			{
 				//DeBugLevel 100 le {(+DropletsReversedForms: PaintProc) OutputToLog} if
-				9 dict begin
+				13 dict begin
+				/DrpMgnL Droplets_SideBySide_UnderTNs {MarginL} {MgnL} ifelse def
+				/DrpMgnR Droplets_SideBySide_UnderTNs {MarginR} {MgnR} ifelse def
+				/DrpMgnB Droplets_SideBySide_UnderTNs {MarginB} {MgnB} ifelse def
+				/DrpMgnT Droplets_SideBySide_UnderTNs {MarginT} {MgnT} ifelse def
 				/SheetNum get /SheetNum exch def
 				% () = (DropletsWhichReversed = [) = DropletsWhichReversed {==} forall (]) = () =
 				//false //false //false //false PaperType Orientation SetPaperSize   //true DefStoreMgns
-				ClipSave  MgnL  MgnB  PageWidth MgnL MgnR add sub  PageHeight MgnB MgnT add sub  rectclip
+				ClipSave  DrpMgnL  DrpMgnB  PageWidth DrpMgnL DrpMgnR add sub  PageHeight DrpMgnB DrpMgnT add sub  rectclip
 				1 setlinecap  1 setlinejoin  [] 0 setdash
 				DropletsWhichReversed SheetNum get
 				{

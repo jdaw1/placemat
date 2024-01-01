@@ -129,9 +129,8 @@ The boolean `TastingNotesCirclesBehindFitAndCentreInRow` controls whether the ci
 There has been [discussion](http://www.theportforum.com/viewtopic.php?t=175&p=51344#p51344) of printing A6 booklets to hold the tasting-note pages, one wine per page. To aid this it is possible to replace the names with page numbers via `TastingNotesReplaceNameWithPageNum`, the page-number string being defined in `TastingNotesPageNumCompoundString`, and being shown in a font size reduced by a factor of `TastingNotesPageNumFontSizeFactor`. 
 This feature has never been used.
 
+<a name="SideBySideGlassesTastingNotes"></a>
 <img align="right" width="421" height="595" src="images/SideBySideGlassesTastingNotes.png">
-
-
 ### Side-by-side Glasses
 
 If having a mini tasting of only three wines, one might wish to print everything on one sheet, especially if everything must be squeezed onto a small round bar table. 

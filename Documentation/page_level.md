@@ -209,6 +209,8 @@ There are also Boolean parameters `PrePourShowDroplets`, `NeckTagsShowDroplets`,
 ] def
 ```
 
+If [`SideBySideGlassesTastingNotes`](not_glasses.md#SideBySideGlassesTastingNotes) is `true`, the Boolean `Droplets_SideBySide_UnderTNs` controls whether the Droplets span just the glasses, or also the TNs.
+
 
 ## Separating flights within a page
 
