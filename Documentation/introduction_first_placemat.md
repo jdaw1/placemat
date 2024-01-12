@@ -76,6 +76,7 @@ You have saved a .ps file.
 This file is to be opened in two different ways: with the code editor; and with a program to convert it from .ps to .pdf. 
 Let&rsquo;s master the latter. 
 There are several possible means by which the PostScript can be &lsquo;distilled&rsquo; into a PDF. 
+* If you have [Adobe Distiller](https://en.wikipedia.org/wiki/Adobe_Distiller), usually as part of a larger Adobe package, use it.  
 * On a Mac right-click the file, and &lsquo;Open With&rsquo; Preview: it should convert to a PDF.  
 * On a PC, in your preferred web browser, open 
 [ps2pdf.org](http://www.ps2pdf.org/convert.htm) or 
@@ -156,7 +157,7 @@ Each of these arrays is evenly spaced around the perimeter of each glass&rsquo;s
 Each person&rsquo;s paperwork is named, and `Names` also appear on some of [the other page types](not_glasses.md#readme), such as the vote recorders. 
 `Names` is an array, not necessarily of the same length as the previous three. 
 ```PostScript
-/Names [ (Julian)  (Alice)  (Ben)  (Caroline)  (Derek)  (Elizabeth)  () ] def
+/Names [ (Julian)  (Alex)  (Brigitte)  (Caroline)  (Derek)  (Elizabeth)  () ] def
 ```
 
 Including a blank name, `()`, is very strongly recommended: last-minute changes to the guest list do happen.

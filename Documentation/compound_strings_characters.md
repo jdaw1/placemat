@@ -266,4 +266,4 @@ Indeed, more strongly, few fonts have most glyphs.
 So the usual advice applies: carefully check the output.
 
 Attempts to use a non-existent glyph are logged. 
-Further, as a small assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15, and shows them in a simple PDF.
+Further, as a small assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15, and shows them in a simple PDF (e.g., [`/TrebuchetMS-Bold`](images/TrebuchetMS-Bold.pdf), [`/Gotham-Book`](images/Gotham-Book.pdf), [`/Garamond`](images/Garamond.pdf), [`/TimesNewRomanPSMT`](images/TimesNewRomanPSMT.pdf)).
