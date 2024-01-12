@@ -318,7 +318,7 @@ This can cause difficulties for some software; this can cause difficulties for s
 Use of `FillTexts` makes distillation slow, and produces files that can be too complicated for some printers. 
 But being maximally fussy can cause distillation to be very slow in Adobe Distiller, and even slower in &le;&thinsp;2017 versions of GhostScript ([bug&nbsp;report](https://bugs.ghostscript.com/show_bug.cgi?id=695906)). 
 
-The balance between these can be influenced by the parameter `FillTextPedantry`m which can take one of three values.  
+The balance between these can be influenced by the parameter `FillTextPedantry`, which can take one of three values.  
 * `/Quick`, causing the judgement about whether to paint the FillText to be done purely on the bounding boxes of the two paths. So more FillTexts are painted than necessary, sometimes many more, slowing the printer.  
 * `/Sensible`, causing the judgement to be done by the PostScript function `infill`. Generally this is good. But if the edging of the FillText would be inside, and would be inside by so much that it wouldn&rsquo;t be covered by something like `InlineTitlesBlackWidth`, then that small edging would be omitted. Choosing `/Sensible` seems to give optimal output, for only slightly slow distillation: hence its name.  
 * `/Fussy` tests using `instroke`, which is much slower to distill, but pedantically correct.
