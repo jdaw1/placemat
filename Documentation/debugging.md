@@ -1,4 +1,4 @@
-port-# Debugging
+# Debugging
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
