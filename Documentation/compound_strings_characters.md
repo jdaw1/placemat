@@ -266,21 +266,21 @@ Indeed, more strongly, few fonts have most glyphs.
 So the usual advice applies: carefully check the output.
 
 Attempts to use a non-existent glyph are logged, but some fonts have the glyph name but not a proper glyph. 
-E.g., several glyphs in Harrington paint as ![Missing glyph in Harrington font](Harrington_notdef.png). 
+E.g., several glyphs in Harrington paint as ![Missing glyph in Harrington font](images/Harrington_notdef.png). 
 So, as an assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15, and shows them in a simple PDF. 
 Some useful examples: sans-serif fonts&nbsp;&mdash; 
 [`/TrebuchetMS-Bold`](images/TrebuchetMS-Bold.pdf), 
 [`/Gotham-Book`](images/Gotham-Book.pdf), 
-[`Verdana`](images/Verdana.pdf), 
-[`LucidaSans-Demi`](images/LucidaSans-Demi.pdf), 
-[`Optima-Bold`](images/Optima-Bold.pdf), 
-[`OpenSans-Regular`](images/OpenSans-Regular.pdf), 
-[`FiraSans-Medium`](images/FiraSans-Medium.pdf), 
-[`GillSans-CondensedBold`](images/GillSans-CondensedBold.pdf); serif fonts&nbsp;&mdash; 
+[`/Verdana`](images/Verdana.pdf), 
+[`/LucidaSans-Demi`](images/LucidaSans-Demi.pdf), 
+[`/Optima-Bold`](images/Optima-Bold.pdf), 
+[`/OpenSans-Regular`](images/OpenSans-Regular.pdf), 
+[`/FiraSans-Medium`](images/FiraSans-Medium.pdf), 
+[`/GillSans-CondensedBold`](images/GillSans-CondensedBold.pdf); serif fonts&nbsp;&mdash; 
 [`/Garamond`](images/Garamond.pdf), 
 [`/TimesNewRomanPSMT`](images/TimesNewRomanPSMT.pdf)
-[`Didot-Bold`](images/Didot-Bold.pdf), 
-[`Cochin`](images/Cochin.pdf), 
-[`Palatino-Roman`](images/Palatino-Roman.pdf), 
-[`RobotoSlab-Regular`](images/RobotoSlab-Regular.pdf); and a decorative font&nbsp;&mdash; 
-[`Harrington`](images/Harrington.pdf).
+[`/Didot-Bold`](images/Didot-Bold.pdf), 
+[`/Cochin`](images/Cochin.pdf), 
+[`/Palatino-Roman`](images/Palatino-Roman.pdf), 
+[`/RobotoSlab-Regular`](images/RobotoSlab-Regular.pdf); and a decorative font&nbsp;&mdash; 
+[`/Harrington`](images/Harrington.pdf).
