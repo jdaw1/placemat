@@ -1,6 +1,6 @@
 %!PS
 
-% This version 15:40 Monday 1st January 2024
+% This version 22:00 Tuesday 23rd January 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202401011540) def
+/ParametersVersionDateTimeAdobeFormat (D:202401232200) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -791,7 +791,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202401011540) def
+/SoftwareVersionDateTimeAdobeFormat (D:202401232200) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -2999,6 +2999,7 @@ currentdict /SmallCapsDict undef
 % Pieces no wider than 30 degrees ==> radius correct to one part in 2,683,397
 % So, on a 3600 dpi printer, accurate to half a pixel if radius <= 9.46 metres ~= 31 foot.
 % (Ignoring machine precision; ignoring De Casteljau's approximation; ignoring paper roller speed.)
+% https://stackoverflow.com/questions/77855798/postscript-circles-how-accurate-how-improve/
 % http://github.com/jdaw1/placemat/issues/164
 % http://groups.google.com/g/comp.lang.postscript/c/B23RW2QpIjU
 /ArcAccurateBoth
@@ -3372,6 +3373,7 @@ currentdict /SmallCapsDict undef
 % has, at the _s_tart and _e_nd points, same position as original function, same tangent, same curvature. ApproximatingCurve returns the middle two
 % knot points of a cubic Bezier. The calling code might, for example, have the first as the currentpoint, and append the last before calling curveto.
 % Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe SpeedUpperLimit ApproximatingCurve  X1 Y1 X2 Y2
+% http://stackoverflow.com/questions/77862965/how-approximate-xz-yz-functions-as-b%c3%a9zier-cubic/
 % http://groups.google.com/g/comp.lang.postscript/c/3RIq0Jnwrbo
 % https://math.stackexchange.com/a/4810490/822964
 /ApproximatingCurve
