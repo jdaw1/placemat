@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:00 Tuesday 23rd January 2024
+% This version 23:30 Friday 23rd February 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202401232200) def
+/ParametersVersionDateTimeAdobeFormat (D:202402232330) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -62,7 +62,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 20) {SuperscriptOn} (th) {SuperscriptOff} ( February 2024)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 19) {SuperscriptOn} (th) {SuperscriptOff} ( November 2024)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -791,7 +791,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202401232200) def
+/SoftwareVersionDateTimeAdobeFormat (D:202402232330) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -11342,12 +11342,10 @@ currentdict /GlyphShowKnownAbsences undef
 						1  1  NamesVoteRecorderWidths length 2 sub
 						{
 							/NameNum exch def
-							NamesVoteRecorderWidths NameNum 1 sub get 0 gt
-							NamesVoteRecorderWidths NameNum       get 0 gt and
-							NamesVoteRecorderWidths NameNum 1 add get 0 gt and
+							//true  -1 1 1 {NameNum add NamesVoteRecorderWidths exch get 0 le {pop //false exit} if} for
 							{
-								NamesVoteRecorderWidths NameNum get   NamesVoteRecorderWidths NameNum 1 sub get  1 index  NamesVoteRecorderWidths NameNum 1 add get  4 copy
-								gt 3 1 roll gt and 5 1 roll  lt 3 1 roll lt and  or
+								-1 1 1 {NameNum add NamesVoteRecorderWidths exch get} for
+								1 index sub  3 1 roll sub  2 copy abs 0.06 ge exch abs 0.06 ge and  3 1 roll  mul 0 gt and  % Embedded constant, being 1px at 1200d.p.i.
 								{
 									NamesVoteRecorder NameNum get ASCIIfy (; )
 								} if  % Non-montonic
