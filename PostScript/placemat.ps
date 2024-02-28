@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:30 Friday 23rd February 2024
+% This version 23:30 Wednesday 28th February 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202402232330) def
+/ParametersVersionDateTimeAdobeFormat (D:202402282330) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -791,7 +791,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202402232330) def
+/SoftwareVersionDateTimeAdobeFormat (D:202402282330) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -1398,8 +1398,8 @@ currentdict /ArrowCircleToCircle_CanWarn undef
 {
 	1 dict begin  dup type cvlit /Type exch def
 	1 {
-		Type /integertype  eq {11 string cvs exit} if
-		Type /realtype     eq {16 string cvs exit} if
+		Type /integertype  eq {11 string cvs exit ( ) Concatenate} if
+		Type /realtype     eq {16 string cvs exit ( ) Concatenate} if
 		Type /nametype     eq {dup length string cvs exit} if
 		Type /stringtype   eq {exit} if
 		Type /booleantype  eq {5 string cvs exit} if
