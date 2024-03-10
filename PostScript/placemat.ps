@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:30 Wednesday 28th February 2024
+% This version 23:00 Sunday 10th March 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202402282330) def
+/ParametersVersionDateTimeAdobeFormat (D:202403102300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -791,7 +791,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202402282330) def
+/SoftwareVersionDateTimeAdobeFormat (D:202403102300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -833,7 +833,7 @@ RandomisationSeed srand
 
 /OneThird 1 3 div def   /Cbrt {dup dup 0 lt {neg //OneThird exp neg} {//OneThird exp} ifelse  dup abs 1290 le {dup cvi dup dup mul mul 3 -1 roll eq {cvi} if} {exch pop} ifelse} bind def  % 1290^3 < IntegerMax < 1291^3
 
-/TypeOfPagesBeingRendered /Multiple def  % Always being one of /Multiple /Glasses /TastingNotes /PlaceName /PrePour /VoteRecorder /DecantingNotes /Accounts /CorkDisplay /NeckTags /DecanterLabels /BottleWrap /StickyLabels /DistillerLog
+/TypeOfPagesBeingRendered /Multiple def  % Always being one of /Multiple /Glasses /TastingNotes /PlaceName /PrePour /VoteRecorder /DecantingNotes /Accounts /CorkDisplay /NeckTags /DecanterLabels /BottleWrap /StickyLabels /OneCircle /Empty /DistillerLog
 /UserScratchDict << >> def  % Not 0 dict, to avoid addition of /DictionaryOriginalSize
 /execU {    //UserScratchDict begin exec end} bind def
 /GetEU {get //UserScratchDict begin exec end} bind def
