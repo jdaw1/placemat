@@ -185,9 +185,12 @@ Activate with the Boolean `Droplets`.
 
 The array `DropletsCharges` is of a length that is a multiple of four, as follows.  
 * 0: An integer, a value of `SheetNum` for this charge, or `/All` meaning all sheets.  
-* 1: A location: this can be an integer, the centre of the `WithinPage` circle on that sheet; or a length array of length two, `[x y]` in which `[0 0]` is bottom-left of the page. (But locations at &plusmn;huge can cause overflow: experiments suggest it&rsquo;s safe with both |x| and |y|&nbsp;&le;&nbsp;10&#8310;&nbsp;&asymp; 353&nbsp;metres.)  
-* 2: A numeric charge, droplets flowing away from &minus;ve charges and to +ve charges.  
-* 3: A numeric spin; with +ve charge and +ve spin the droplets approach clockwise. (At a distance from a lone charge of *spin* points, the angle of the droplets is 45&deg;.)
+* 1: A location: this can be:
+    * an integer, the centre of the `WithinPage` circle on that sheet; or 
+    * an array of integers `[WithinPage0, WithinPage1, …]`, the location being the average of the centres of these `WithinPage` circles; or 
+    * an array of length two, `[x y]`, with *x* and *y* both non-integer float, in which `[0 0]` is bottom-left of the page (but locations at &plusmn;huge can cause overflow: experiments suggest it&rsquo;s safe with both |*x*| and |*y*|&nbsp;&le;&nbsp;10&#8310; &asymp;&nbsp;353&nbsp;metres).  
+* 2: A numeric charge, droplets flowing away from &minus;ve charges and to +ve charges (so signed like the gravitational effect of mass).  
+* 3: A numeric spin; with +ve charge and +ve spin the droplets approach clockwise (at a distance from a lone charge of *spin* points, the angle of the droplets is 45&deg;).
 
 Starting locations of the drops have a distance apart of `DropletsAverageSeparation` adjusted by a random fraction of `DropletsAverageMaxTweakPlusMinus`, and path length is `DropletsPathLength`.
 

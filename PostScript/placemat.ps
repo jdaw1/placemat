@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Sunday 10th March 2024
+% This version 21:40 Saturday 16th March 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202403102300) def
+/ParametersVersionDateTimeAdobeFormat (D:202403162140) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -347,7 +347,7 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /Droplets false def
 /DropletsCharges [  % Length a multiple of 4
-	/All  [297.638 777.685]  -1    0  % SheetNum Location Charge Spin. SheetNum can be /All; location is [x y] or circle number.
+	/All  [297.638 777.685]  -1    0  % SheetNum Location Charge Spin. SheetNum can be /All; location is WithinPage, or reals [x y], or integers [WithinPage0, WithinPag1, ...].
 	/All  [160.819 538.760]   4  300  % Default settings look best for A4, 5 glasses, RectangularDislocation.
 	/All  [365.625 298.482]  -1    0
 ] def  % DropletsCharges
@@ -791,7 +791,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202403102300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202403162140) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -9571,60 +9571,66 @@ currentdict /GlyphShowKnownAbsences undef
 				[
 					DropletsCharges length 4 mod 0 eq
 					{
-						% The parameter has length a multiple of 4: SheetNum (/All ==> all); position being either a WithinPage integer, or array [x y]; charge being numeric; spin being numeric.
+						% The parameter has length a multiple of 4: SheetNum (/All ==> all); position being either a WithinPage integer, or array [x y] of reals, or array [i j k ...] of WithinPages to be averaged; charge being numeric; spin being numeric.
 						0  4  DropletsCharges length 4 sub
 						{
-							/IT exch def
-							/This DropletsCharges IT GetEU def
+							/ChargeNum exch def
+							/This DropletsCharges ChargeNum GetEU def
 							This /All eq  This type /integertype eq  or
 							{
 								This /All eq  This SheetNum eq  or
 								{
-									/This DropletsCharges IT 1 add GetEU def
+									/This DropletsCharges ChargeNum 1 add GetEU def
 									/ThisGood //false def
 									This type dup /arraytype eq exch /integertype eq or
 									{
 										This type /arraytype eq
 										{
-											This length 2 eq
+											This length 2 eq  ThisGood not and {//true This {type /realtype    ne {pop //false exit} if} forall} {//false} ifelse
 											{
-												This 0 GetEU This 1 GetEU  2 copy IsNumber exch IsNumber and
-													{/ThisGood //true def}
-													{pop pop mark (Error: DropletsCharges ) IT 1 add ( is an array of length 2, but contains non-numbers. Ignoring and continuing.) ConcatenateToMark OutputToLog}
-												ifelse  % Both numbers
-											} {mark (Error: DropletsCharges ) IT 1 add ( is an array, but not of length 2. Ignoring and continuing.) ConcatenateToMark OutputToLog} ifelse  % This length 2 eq
-										}{
-											This 0 ge
+												/ThisGood //true def
+												This aload pop
+											} if   % [x y]
+											This length 1 ge  ThisGood not and {//true This {type /integertype ne {pop //false exit} if} forall} {//false} ifelse
 											{
-												This  SheetLengths SheetNum get  lt
+												//true This {dup 0 lt exch SheetLengths SheetNum get ge or {pop //false exit} if} forall
 												{
-													GlassPositions SheetNum get This get aload pop	 /ThisGood //true def
-												} {mark (Error: DropletsCharges ) IT 1 add ( is integer but too large. Ignoring and continuing.) ConcatenateToMark OutputToLog} ifelse
-											} {mark (Error: DropletsCharges ) IT 1 add ( is integer but negative. Ignoring and continuing.) ConcatenateToMark OutputToLog} ifelse
+													/ThisGood //true def
+													0  This {GlassPositions SheetNum get exch get 0 get add} forall  This length div
+													0  This {GlassPositions SheetNum get exch get 1 get add} forall  This length div
+												} {mark (Error: DropletsCharges ) ChargeNum 1 add ( = ) This ToString ( is an array of integers, more than none of which are out of bounds.) ConcatenateToMark OutputToLog} ifelse  % In range
+											} if  % [WithinPage0 WithinPage1 ... ]
+											ThisGood not {mark (Error: DropletsCharges ) ChargeNum 1 add ( get is validly an array, but should be either two reals, or >=1 in-range integers. Ignoring and continuing.) ConcatenateToMark OutputToLog} if
+										}{
+											This type /integertype eq {This 0 ge  This SheetLengths SheetNum get lt  and} {//false} ifelse
+											{
+												/ThisGood //true def
+												GlassPositions SheetNum get This get aload pop
+											} {mark (Error: DropletsCharges ) ChargeNum 1 add (neither array, nor in-bounds integer. Ignoring and continuing.) ConcatenateToMark OutputToLog} ifelse
 										} ifelse  % ... /arraytype ...
-									} {mark (Error: DropletsCharges ) IT 1 add ( get neither an integer \(for a WithinPage\) nor an array \([x y]\).)} ifelse
+									} {mark (Error: DropletsCharges ) ChargeNum 1 add ( get neither an integer \(WithinPage\) nor an array \([x y]\) nor an array \([WithinPage0 ...]\).) ConcatenateToMark OutputToLog} ifelse
 									ThisGood
 									{
-										DropletsCharges IT 2 add GetEU   DropletsCharges IT 3 add GetEU
+										DropletsCharges ChargeNum 2 add GetEU   DropletsCharges ChargeNum 3 add GetEU
 										2 copy IsNumber exch IsNumber and
 											{1 index 0 eq {pop pop pop pop} if}
-											{pop pop pop pop mark (Error: DropletsCharges ) IT 2 add ( or ) IT 3 add ( non-numeric. Ignoring and continuing.) ConcatenateToMark OutputToLog}
+											{pop pop pop pop mark (Error: DropletsCharges ) ChargeNum 2 add ( or ) ChargeNum 3 add ( non-numeric. Ignoring and continuing.) ConcatenateToMark OutputToLog}
 										ifelse  % ... IsNumber ... IsNumber and
 									} if  % ThisGood
 								} if  % If charge used on this SheetNum
-							} {mark (Error: DropletsCharges ) IT ( get neither an integer \(for a specific SheetNum\) nor /All.) ConcatenateToMark OutputToLog stop} ifelse
-						} for  % IT
+							} {mark (Error: DropletsCharges ) ChargeNum ( get neither an integer \(for a specific SheetNum\) nor /All.) ConcatenateToMark OutputToLog stop} ifelse
+						} for  % ChargeNum
 					} {mark (Error: DropletsCharges length = ) DropletsCharges length ( which is not a multiple of 4.) ConcatenateToMark OutputToLog stop} ifelse
 				] def  % /ChargesData
 				DropletsChargesText  SheetNum  mark
 				0  4  ChargesData length 4 sub
 				{
-					/IT exch def
+					/ChargeNum exch def
 					(\n)            SheetNum      5 string cvs dup length  5 exch sub {( ) exch} repeat (    [)
-					ChargesData IT       get cvr 10 string cvs dup length 10 exch sub {( ) exch} repeat (  )
-					ChargesData IT 1 add get cvr 10 string cvs dup length 10 exch sub {( ) exch} repeat (]  )
-					ChargesData IT 2 add get     10 string cvs dup length 10 exch sub {( ) exch} repeat
-					ChargesData IT 3 add get     10 string cvs dup length 10 exch sub {( ) exch} repeat
+					ChargesData ChargeNum       get cvr 10 string cvs dup length 10 exch sub {( ) exch} repeat (  )
+					ChargesData ChargeNum 1 add get cvr 10 string cvs dup length 10 exch sub {( ) exch} repeat (]  )
+					ChargesData ChargeNum 2 add get     10 string cvs dup length 10 exch sub {( ) exch} repeat
+					ChargesData ChargeNum 3 add get     10 string cvs dup length 10 exch sub {( ) exch} repeat
 				} for   ConcatenateToMark put  % DropletsChargesText
 				rrand
 				srand
