@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:40 Saturday 16th March 2024
+% This version 21:00 Friday 29th March 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202403162140) def
+/ParametersVersionDateTimeAdobeFormat (D:202403292100) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -791,7 +791,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202403162140) def
+/SoftwareVersionDateTimeAdobeFormat (D:202403292100) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -824,9 +824,9 @@ RandomisationSeed srand
 /ArcTanFiveEighths   32.00538320808349556079 def  % In degrees
 /Infinity 32767 def  % 2^15-1, which in pt ~= 455" ~= 38' ~= 11.6m, so ~61% bigger than the ~283" diagonal of the 200"x200" maximum PDF page. Can be '8 exp 256.06251 mul' without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.40282*10^38.
 /InfinityNeg Infinity neg def
+/Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, and experimentally 839 times the single-precision minimum increment over 1.
 /PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
 /PrinterEpsilonSquared PrinterEpsilon dup mul def
-/Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, so about 419 times the single-precision minimum.
 /AsciiTab (\t) 0 get def   /AsciiNewline (\n) 0 get def   /AsciiSpace ( ) 0 get def
 
 /DeSizeRounding 64 def  % 1000 just too big. 250 seems OK. This small for safety, and it's good enough for task.
@@ -3071,7 +3071,7 @@ currentdict /SmallCapsDict undef
 	end
 } bind def  % ArcAccurateBoth
 
-% x y r angle1 angle2 StartOperator  ArcAccurate  –
+% x y r angle1 angle2 StartOperator  ArcAccurate  -
 % Mostly as arc.
 % StartOperator is /m or /l or /n.
 % /m ==> start with a moveto.
@@ -3079,7 +3079,7 @@ currentdict /SmallCapsDict undef
 % /n ==> nothing, so may assume already at the start of the arc. If not there, user's problem.
 /ArcAccurate  {//true  ArcAccurateBoth} bind def  % ArcAccurate
 
-% x y r angle1 angle2 StartOperator  ArcAccurateN  –
+% x y r angle1 angle2 StartOperator  ArcAccurateN  -
 % Mostly as arcn.  StartOperator as ArcAccurate.
 /ArcAccurateN {//false ArcAccurateBoth} bind def  % ArcAccurateN
 
