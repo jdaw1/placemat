@@ -43,7 +43,7 @@ And having done that, there might also be need for matching pages:
 * to assist with computing the split of the costs, allowing for bottles provided.
 
 This PostScript program creates all the paperwork useful for managing such tastings, large or small. 
-Lots of previous output is at [jdawiseman.com/papers/placemat/placemats_list.html](http://www.jdawiseman.com/papers/placemat/placemats_list.html) (lots: that page has &ge;&#8239;23&#8239;MB of PNGs, so don&rsquo;t access using mobile data).
+Lots of previous output is at [jdawiseman.com/papers/placemat/placemats_list.html](http://www.jdawiseman.com/papers/placemat/placemats_list.html) (lots: that page has &gap;&#8239;25&#8239;MB of PNGs, so don&rsquo;t access using mobile data).
 
 New users should start at the [Introduction, and a first placemat](Documentation/introduction_first_placemat.md#readme).
 
