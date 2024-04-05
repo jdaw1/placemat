@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:00 Friday 29th March 2024
+% This version 19:15 Friday 5th April 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202403292100) def
+/ParametersVersionDateTimeAdobeFormat (D:202404051915) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -158,7 +158,7 @@
 % /OnlyIfSheetNumMin /OnlyIfSheetNumMax  /OnlyIfOrientation  /GlassesNumMin /GlassesNumMax    /ImprovementPointsMin /ImprovementProportionMin
 % /PackingDirectionTopToBottom /PackingDirectionLeftToRight /PackingNestingColumnMajor  /RowsNumMin /RowsNumMax  /CentralGlasses /RectColsToLeftOrRowsBelow /TempleExtraColsToLeftOrRowsBelow
 % /SquareGrid only, /HorizontalAlignment is followed by one of /Left /Right /Centre /Justify; and /VerticalAlignment by one of /Top /Bottom /Middle /Justify.
-% Also the flags /SuppressNonRightOrnaments and /SuppressNonLeftOrnaments suppress headers, icons, and water boxes that not on the labelled side (i.e., on other side or in centre).
+% To suppress, by placement, headers, icons, and water boxes, use flags /SuppressOrnamentsLeft, /SuppressOrnamentsRight, and /SuppressOrnamentsCentre.
 /PackingNestingColumnMajor {Orientation /Landscape eq  SideBySideGlassesTastingNotes not  and} def  % Default value, which can be overridden at the level of the individual item of PackingStyles
 /PackingDirectionTopToBottom true def  % Ditto
 /PackingDirectionLeftToRight true def  % Ditto
@@ -174,7 +174,7 @@
 	[ /Temple        /OnlyIfOrientation /Landscape  /ImprovementPointsMin 1 ]
 	[ /Temple        /OnlyIfOrientation /Portrait   /ImprovementPointsMin 2 ]
 	[ /RectangularAlternateNudge  /ImprovementPointsMin 2 ]
-	% [ /RightSide  /GlassesNumMax 3  /OnlyIfOrientation /Portrait  /VerticalAlignment /Justify  /SuppressNonRightOrnaments ]
+	% [ /RightSide  /GlassesNumMax 3  /OnlyIfOrientation /Portrait  /VerticalAlignment /Justify  /SuppressOrnamentsLeft  /SuppressOrnamentsCentre ]
 	% [ /PostsAndLintel  /CentralGlasses 1  /GlassesNumMin 7  /OnlyIfOrientation /Landscape ]
 	% [ /Arch            /CentralGlasses 1  /GlassesNumMin 6  /OnlyIfOrientation /Landscape ]
 ] def  % /PackingStyles
@@ -791,7 +791,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202403292100) def
+/SoftwareVersionDateTimeAdobeFormat (D:202404051915) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -4545,16 +4545,16 @@ currentdict /GlyphShowKnownAbsences undef
 				param /LowerNonName eq {/param NamesIsLeftHanderTN NameNum get {/LowerRight} {/LowerLeft} ifelse def} if
 				param /LowerName    eq {/param NamesIsLeftHanderTN NameNum get {/LowerLeft} {/LowerRight} ifelse def} if
 			} if  % TypeOfPagesBeingRendered /TastingNotes eq
-			//true TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressNonRightOrnaments eq {pop //false exit} if} forall} {pop} ifelse} if
+			//true TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressOrnamentsLeft eq {pop //false exit} if} forall} {pop} ifelse} if
 			{
 				param /LowerLeft  eq {matrix currentmatrix MgnL MgnB translate IconSize dup scale IconForm execform setmatrix} if
 				param /UpperLeft  eq {matrix currentmatrix MgnL PageHeight MgnT sub IconSize sub translate IconSize dup scale IconForm execform setmatrix} if
-			} if  % not /SuppressNonRightOrnaments
-			//true TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressNonLeftOrnaments  eq {pop //false exit} if} forall} {pop} ifelse} if
+			} if  % not /SuppressOrnamentsLeft
+			//true TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressOrnamentsRight  eq {pop //false exit} if} forall} {pop} ifelse} if
 			{
 				param /LowerRight eq {matrix currentmatrix PageWidth MgnR sub IconSize sub MgnB translate IconSize dup scale IconForm execform setmatrix} if
 				param /UpperRight eq {matrix currentmatrix PageWidth MgnR sub IconSize sub PageHeight MgnT sub IconSize sub translate IconSize dup scale IconForm execform setmatrix} if
-			} if  % not SuppressNonLeftOrnaments
+			} if  % not SuppressOrnamentsRight
 			TypeOfPagesBeingRendered /PrePour eq  param /None ne  and
 			{
 				% Parameter not an empty array
@@ -4809,8 +4809,9 @@ currentdict /GlyphShowKnownAbsences undef
 				dup  /ImprovementProportionMin    eq {pop  /ImprovementProportionMin    PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /Positions eq {pop  /PositionsStart  i 1 add store  PositionsStart 1 PackingDescriptor length 1 sub {dup PackingDescriptor exch get type /arraytype eq {/PositionsEnd exch store} {pop exit} ifelse} for /i PositionsEnd 1 add store  exit} if
 				dup  /Mirror                           eq {pop  /i i 1 add store  exit} if
-				dup  /SuppressNonLeftOrnaments         eq {pop  /i i 1 add store  exit} if
-				dup  /SuppressNonRightOrnaments        eq {pop  /i i 1 add store  exit} if
+				dup  /SuppressOrnamentsLeft            eq {pop  /i i 1 add store  exit} if
+				dup  /SuppressOrnamentsRight           eq {pop  /i i 1 add store  exit} if
+				dup  /SuppressOrnamentsCentre          eq {pop  /i i 1 add store  exit} if
 				dup  /VerticalAlignment                eq {pop  /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=79314#p79314
 				dup  /HorizontalAlignment              eq {pop  /i i 2 add store  exit} if
 				dup  /RectColsToLeftOrRowsBelow        eq {pop  /i i 2 add store  exit} if
@@ -5611,8 +5612,9 @@ currentdict /GlyphShowKnownAbsences undef
 				dup  /Positions                         eq {pop  /i PackingDescriptor length store  exit} if
 				dup  /ProhibitVerticalNudging           eq {pop  /i i 1 add store  exit} if
 				dup  /ProhibitHorizontalNudging         eq {pop  /i i 1 add store  exit} if
-				dup  /SuppressNonLeftOrnaments          eq {pop  /i i 1 add store  exit} if
-				dup  /SuppressNonRightOrnaments         eq {pop  /i i 1 add store  exit} if
+				dup  /SuppressOrnamentsLeft             eq {pop  /i i 1 add store  exit} if
+				dup  /SuppressOrnamentsRight            eq {pop  /i i 1 add store  exit} if
+				dup  /SuppressOrnamentsCentre           eq {pop  /i i 1 add store  exit} if
 				dup  /RowsNumMin                        eq {pop  /i i 2 add store  exit} if
 				dup  /RowsNumMax                        eq {pop  /i i 2 add store  exit} if
 				dup  /GlassesNumMin                     eq {pop  /i i 2 add store  exit} if
@@ -9211,8 +9213,9 @@ currentdict /GlyphShowKnownAbsences undef
 
 					TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup dup type /arraytype eq
 					{
-						//false exch {/SuppressNonRightOrnaments eq {pop //true exit} if} forall  {mark (Warning: SheetNum=) SheetNum ( has BackgroundText, but its PackingStyle contains /SuppressNonRightOrnaments.) ConcatenateToMark OutputToLog} if
-						//false exch {/SuppressNonLeftOrnaments  eq {pop //true exit} if} forall  {mark (Warning: SheetNum=) SheetNum ( has BackgroundText, but its PackingStyle contains /SuppressNonLeftOrnaments.)  ConcatenateToMark OutputToLog} if
+						//false exch {/SuppressOrnamentsLeft   eq {pop //true exit} if} forall  {mark (Warning: SheetNum=) SheetNum ( has BackgroundText, but its PackingStyle contains /SuppressOrnamentsLeft.)   ConcatenateToMark OutputToLog} if
+						//false exch {/SuppressOrnamentsRight  eq {pop //true exit} if} forall  {mark (Warning: SheetNum=) SheetNum ( has BackgroundText, but its PackingStyle contains /SuppressOrnamentsRight.)  ConcatenateToMark OutputToLog} if
+						//false exch {/SuppressOrnamentsCentre eq {pop //true exit} if} forall  {mark (Warning: SheetNum=) SheetNum ( has BackgroundText, but its PackingStyle contains /SuppressOrnamentsCentre.) ConcatenateToMark OutputToLog} if
 					} {pop pop} ifelse} if  % /arraytype, /Glasses
 				} {/BgT 0 def /BgR 0 def /BgB 0 def /BgL 0 def} ifelse % /BackgroundTextThis load length 0 gt
 				PageType 0 eq
@@ -9411,8 +9414,8 @@ currentdict /GlyphShowKnownAbsences undef
 
 		newpath
 		[
-			ShowLeft {//false TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressNonRightOrnaments eq {pop exit} if} forall} {pop} ifelse} if} if
-			ShowRight {//true TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressNonLeftOrnaments  eq {pop exit} if} forall} {pop} ifelse} if} if
+			ShowLeft {//false TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressOrnamentsLeft  eq {pop exit} if} forall} {pop} ifelse} if} if
+			ShowRight {//true TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressOrnamentsRight eq {pop exit} if} forall} {pop} ifelse} if} if
 		]{
 			/IsRight exch def
 			/WBtoPaint 0 def
@@ -11194,7 +11197,7 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				//DeBugLevel 100 le {(+VoteRecorderForms: PaintProc) OutputToLog} if
 				pop  % dictionary parameter of execform
-				50 dict begin
+				52 dict begin
 				/VoteRecorderSheetNum VoteRecorderSheetNum def
 				/TypeOfPagesBeingRendered /VoteRecorder store
 
@@ -12145,30 +12148,43 @@ currentdict /GlyphShowKnownAbsences undef
 	/PaintHeadersFooters
 	{
 		//DeBugLevel 75 le {(+PaintHeadersFooters) OutputToLog} if
-		9 dict begin
+		10 dict begin
 		/FooterRight exch def  /FooterCenter exch def  /FooterLeft exch def
 		/HeaderRight exch def  /HeaderCenter exch def  /HeaderLeft exch def
 
-		/SuppressNonRight //false TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressNonRightOrnaments eq {pop //true exit} if} forall} {pop} ifelse} if def
-		/SuppressNonLeft  //false TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressNonLeftOrnaments  eq {pop //true exit} if} forall} {pop} ifelse} if def
+		/ShowLeft //true def  /ShowCentre //true def  /ShowRight //true def
+		TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get type /arraytype eq} {//false} ifelse
+		{
+			PackingDescriptors SheetNum get  % Usually of length 3 to 9, so not worth being complicatedly efficient.
+			{
+				execU dup dup
+				/SuppressOrnamentsLeft   eq {/ShowLeft   //false def} if
+				/SuppressOrnamentsCentre eq {/ShowCentre //false def} if
+				/SuppressOrnamentsRight  eq {/ShowRight  //false def} if
+			} forall  % 'PackingDescriptor'
+		} if  % /Glasses, etc
+
+		% Show Left then Centre then Right, so that copy-paste works naturally.
 
 		/Y PageHeight TypeOfPagesBeingRendered /PlaceName eq {2 div} if HeaderBaselineFromPageTop sub def
-		SuppressNonRight not {HeaderFont HeaderFontSize selectfont   0 setgray   MgnL Y moveto  /HeaderLeft load ShowRecursive} if
-		SuppressNonLeft  not {HeaderFont HeaderFontSize selectfont   0 setgray   PageWidth MgnR sub Y moveto  /HeaderRight load dup StringWidthRecursive neg 0 rmoveto ShowRecursive} if
-		SuppressNonRight SuppressNonLeft or not
+		{HeaderFont HeaderFontSize selectfont  0 setgray} dup dup
+		ShowLeft  {exec   MgnL               Y moveto  /HeaderLeft  load                                        ShowRecursive} {pop} ifelse
+		ShowCentre
 		{
-			HeaderFont HeaderFontSize selectfont   0 setgray
-			TypeOfPagesBeingRendered /Glasses eq {HeaderFooterCenterX} {PageWidth MgnL MgnR sub add 2 div} ifelse  Y moveto  /HeaderCenter load dup StringWidthRecursive 2 div neg 0 rmoveto ShowRecursive
-		} if
+			exec   TypeOfPagesBeingRendered /Glasses eq {HeaderFooterCenterX} {PageWidth MgnL MgnR sub add 2 div} ifelse  Y moveto
+			/HeaderCenter load dup StringWidthRecursive 2 div neg 0 rmoveto ShowRecursive
+		} {pop} ifelse  % ShowCentre
+		ShowRight {exec   PageWidth MgnR sub Y moveto  /HeaderRight load dup StringWidthRecursive neg 0 rmoveto ShowRecursive} {pop} ifelse
 
 		/Y FooterTopFromPageBottom BaseHeight sub  TypeOfPagesBeingRendered /PlaceName eq {PlaceNamesFirstAndThirdFoldsFromEdge  FooterFontSize 2 mul add  MgnB sub dup 0 gt {add} {pop} ifelse} if def
-		SuppressNonRight not {FooterFont FooterFontSize selectfont   0 setgray   MgnL Y moveto  /FooterLeft load ShowRecursive} if
-		SuppressNonLeft  not {FooterFont FooterFontSize selectfont   0 setgray   PageWidth MgnR sub Y moveto  /FooterRight load dup StringWidthRecursive neg 0 rmoveto ShowRecursive} if
-		SuppressNonRight SuppressNonLeft or not
+		{FooterFont FooterFontSize selectfont  0 setgray} dup dup
+		ShowLeft  {exec   MgnL               Y moveto  /FooterLeft  load                                        ShowRecursive} {pop} ifelse
+		ShowCentre
 		{
-			FooterFont FooterFontSize selectfont   0 setgray
-			TypeOfPagesBeingRendered /Glasses eq {HeaderFooterCenterX} {PageWidth MgnL MgnR sub add 2 div} ifelse  Y moveto  /FooterCenter load dup StringWidthRecursive 2 div neg 0 rmoveto ShowRecursive
-		} if
+			exec  TypeOfPagesBeingRendered /Glasses eq {HeaderFooterCenterX} {PageWidth MgnL MgnR sub add 2 div} ifelse  Y moveto
+			/FooterCenter load dup StringWidthRecursive 2 div neg 0 rmoveto ShowRecursive
+		} {pop} ifelse  % ShowCentre
+		ShowRight {exec   PageWidth MgnR sub Y moveto  /FooterRight load dup StringWidthRecursive neg 0 rmoveto ShowRecursive} {pop} ifelse
 
 		end
 		//DeBugLevel 75 le {(-PaintHeadersFooters) OutputToLog} if
