@@ -77,12 +77,12 @@ This file is to be opened in two different ways: with the code editor; and with 
 Let&rsquo;s master the latter. 
 There are several possible means by which the PostScript can be &lsquo;distilled&rsquo; into a PDF. 
 * If you have [Adobe Distiller](https://en.wikipedia.org/wiki/Adobe_Distiller), usually as part of a larger Adobe package, use it.  
-* On a Mac right-click the file, and &lsquo;Open With&rsquo; Preview: it should convert to a PDF.  
+* On macOS &le;12.7.4 = Monterey, right-click the file, and &lsquo;Open With&rsquo; Preview: it should convert to a PDF.  
+* On macOS 13.* = Ventura, and on Unix, use `ps2pdf` which comes as part of [GhostScript](http://en.wikipedia.org/wiki/Ghostscript).
 * On a PC, in your preferred web browser, open 
 [ps2pdf.org](http://www.ps2pdf.org/convert.htm) or 
 [xconvert.com/convert-ps-to-pdf](http://www.xconvert.com/convert-ps-to-pdf), 
 &lsquo;Choose&rsquo; or &lsquo;Add&rsquo; the file, and &lsquo;Convert&rsquo; it.  
-* On Unix use `ps2pdf` which comes as part of [GhostScript](http://en.wikipedia.org/wiki/Ghostscript).
 
 If it that has made a PDF resembling [this](images/placemat.pdf), then you can successfully convert the PostScript to PDF: hurray! 
 
