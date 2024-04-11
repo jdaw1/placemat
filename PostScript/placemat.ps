@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:15 Friday 5th April 2024
+% This version 07:30 Thursday 11th April 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202404051915) def
+/ParametersVersionDateTimeAdobeFormat (D:202404110730) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -180,7 +180,6 @@
 ] def  % /PackingStyles
 
 /WaterBoxes { {GlassesNumCopies 0 le} MightBeTrue {/Both} {/Glasses} ifelse} bind def  % /Glasses /TastingNotes /Both, any other value being none
-/WaterBoxesNum 15 def  % triangle number most elegant: 6, 10, 15, 21
 
 /SideBySideGlassesTastingNotes false def  % If true TastingNotesPaperType and TastingNotesOrientation ignored
 
@@ -560,13 +559,14 @@ if} bind def  % /VoteRecorderCrossedBox
 /BackgroundTextsDecanterLabels /BackgroundTextsGlasses load def
 /PrePourShowBackgroundTexts /BackgroundTextsGlasses load def
 
+/WaterBoxesNum 15 def  % triangle number most elegant: 6, 10, 15, 21
 /WaterBoxesOverrideShowEverySheet true def
-/WaterBoxesSizeMax 15 def
-/WaterBoxesGapProportionSize 0.25 def
-/WaterBoxesFormatStroke {stroke} def
 /WaterBoxesShowLeft [ 0 1 GlassesOnSheets length 1 sub {<< exch /i exch >> begin true  0 1 i 1 sub {PageOrderingGlasses exch get PageOrderingGlasses i get eq {pop false exit} if} for end} for ] def
 /WaterBoxesShowRight [ 0 1 GlassesOnSheets length 1 sub {<< exch /i exch >> begin true  i 1 add 1 GlassesOnSheets length 1 sub {PageOrderingGlasses exch get PageOrderingGlasses i get eq {pop false exit} if} for end} for ] def
 /WaterBoxesShowTN [ 0 1 GlassesOnTastingNotePages length 1 sub {<< exch /i exch >> begin true PageOrderingTastingNotePages 0 i getinterval {PageOrderingTastingNotePages i get eq {pop false exit} if} forall end} for ] def
+/WaterBoxesSizeMax 15 def
+/WaterBoxesGapProportionSize 0.25 def
+/WaterBoxesFormatStroke {stroke} def
 
 /NamesFontSize 18 def
 
@@ -728,15 +728,15 @@ if} bind def  % /VoteRecorderCrossedBox
 /PagesToBeInsertedDescriptions [ (Food order) ] def
 
 /LicensingAgreementLinkPlacemats (http://creativecommons.org/licenses/by-sa/4.0/deed.en) def  % To be consistent with LicensingAgreementTextPlacemats
-/PageLabelOverride false def  % E.g., {/Glasses TypeOfPagesBeingRendered eq}
+/PageLabelOverride false def  % E.g., {/Glasses TypeOfPagesBeingRendered eq}. So far, used only in the generation of some of the documentation.
 /PageLabelOverrideWith {[(PageNum) ShownPages 5 string cvs]} def
 /PrologueCode {} def  % Executed once, just before painting pages
 /EpilogueCode {} def  % Executed once, just after painting pages
-/EmptyGlassesPageAtStart false def
+/EmptyGlassesPageAtStart false def  % Temporary page, to make PNG, to replace an image of a no-longer existing page on a server.
 /EmptyGlassesPageOrientation /Portrait def
-/OneCircleSuppressOtherPageTypes   /OneCircles          load false  ne  def
-/BottleWrapSuppressOtherPageTypes  /BottleWrapNumCopies load   0    ne  def
-/TestingSuppressPageTypes [ ] def  % [ /Glasses 1  /TastingNotes 1  /VoteRecorder 1  /DecantingNotes 1  /Accounts 1  /CorkDisplay 1  /NeckTags 1  /PrePour 1  /PlaceName 1  /DecanterLabels 1  /BottleWrap 1  /StickyLabels 1 ]. Also, no int, /DistillerLog
+/OneCircleSuppressOtherPageTypes   /OneCircles          load false  ne  def  % OneCircle always a separate document.
+/BottleWrapSuppressOtherPageTypes  /BottleWrapNumCopies load   0    ne  def  % BottleWrap usually a separate document, people printing their page(s) in advance.
+/TestingSuppressPageTypes [ ] def  % [ /Glasses 1  /TastingNotes 1  /VoteRecorder 1  /DecantingNotes 1  /Accounts 1  /CorkDisplay 1  /NeckTags 1  /PrePour 1  /PlaceName 1  /DecanterLabels 1  /BottleWrap 1  /OneCircle 1  /StickyLabels 1 ]. Also, no int, /DistillerLog
 /TestingMaxNumPagesToShow 2147483647 def
 /TestingShowThesePagesOnly null def   % Either null, in which case having no effect, or an array of integers. If making a PDF for insertion to another doc, perhaps also "/pdfmark {cleartomark} def".
 
@@ -791,7 +791,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202404051915) def
+/SoftwareVersionDateTimeAdobeFormat (D:202404110730) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -14537,7 +14537,7 @@ currentdict /GlyphShowKnownAbsences undef
 		} if} if  % Sensible to express as a multiplication
 		( glass-circle zooms of form Circle_#NameNum_#SheetNum_#WithinPage)  {GlassesNumCopies 2 ge} MightBeTrue {([_#GlassesCopyNum])} if
 		(, from )  ShownGlassesCirclesData 0 get /GlassesCircleDestName get ( to ) ShownGlassesCirclesData ShownGlassesCircles 1 sub get /GlassesCircleDestName get (.)
-		IsDistiller not {( \(But distillation might be in Ghostscript, so these # tags might be missing.\))} if
+		IsDistiller not {( \(But distillation might not be in Distiller, so these # tags might be missing.\))} if
 	} {(.)} ifelse   1 index mark ne {ConcatenateToMark () OutputToLog OutputToLog} {cleartomark} ifelse
 
 	//DeBugLevel 50 le {( Main: pdfmark's, DOCVIEW, DOCINFO, {Catalog}...PUT) OutputToLog} if
