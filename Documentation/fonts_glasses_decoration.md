@@ -94,7 +94,7 @@ various weights of `/Gotham`, being a sans-serif font with a hint of drama;
 `/TimesNewRomanPS-BoldMT`, which has glyphs for effectively all the accent-letter combinations; 
 `/Didot` and `/Didot-Bold` (the bold being a slightly decorative but stylish choice for the titles of a vertical which are hence digits); 
 `/Cochin` and `/Cochin-Bold` (Port-style titles of the form &lsquo;T70&rsquo; being particularly fine); 
-`/Harrington` (mischievously over-ornate); and
+`/Harrington` (mischievously over-ornate); 
 and many others. 
 
 There is another fussiness in this default. 
