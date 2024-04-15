@@ -84,7 +84,7 @@ Two font parameters are set to particular fonts, the other font parameters copyi
 
 <div align="center">
 
-[![Font examples, including from families Gotham, DejaVuSerif, DejaVuSans, Trebuchet, Times, Didot, Cochin](images/font_examples.png)](images/font_examples.pdf)
+[![Font examples, including from families Gotham, DejaVuSerif, DejaVuSans, Trebuchet, Times, Didot, Cochin, Harrington](images/font_examples.png)](images/font_examples.pdf)
 
 </div>
 
