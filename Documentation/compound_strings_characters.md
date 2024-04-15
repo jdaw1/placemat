@@ -270,13 +270,16 @@ E.g., several glyphs in Harrington paint as ![Missing glyph in Harrington font](
 So, as an assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15, and shows them in a simple PDF. 
 Some useful examples: sans-serif fonts&nbsp;&mdash; 
 [`/TrebuchetMS-Bold`](images/TrebuchetMS-Bold.pdf), 
+[`/GothamNarrow-Bold`](images/GothamNarrow-Bold.pdf), 
 [`/Gotham-Book`](images/Gotham-Book.pdf), 
+[`/DejaVuSans`](images/DejaVuSans.pdf), 
 [`/Verdana`](images/Verdana.pdf), 
 [`/LucidaSans-Demi`](images/LucidaSans-Demi.pdf), 
 [`/Optima-Bold`](images/Optima-Bold.pdf), 
 [`/OpenSans-Regular`](images/OpenSans-Regular.pdf), 
 [`/FiraSans-Medium`](images/FiraSans-Medium.pdf), 
 [`/GillSans-CondensedBold`](images/GillSans-CondensedBold.pdf); serif fonts&nbsp;&mdash; 
+[`/DejaVuSerif`](images/DejaVuSerif.pdf), 
 [`/Garamond`](images/Garamond.pdf), 
 [`/TimesNewRomanPSMT`](images/TimesNewRomanPSMT.pdf)
 [`/Didot-Bold`](images/Didot-Bold.pdf), 

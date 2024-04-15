@@ -63,8 +63,8 @@ Or, **much recommended, distill the file [fonts_illustrated.ps](../PostScript/fo
 
 By default fonts are set as follows.
 ```PostScript
-/TitlesFont          /TrebuchetMS-Bold def
-/CircletextFont      /Garamond def
+/TitlesFont          /GothamNarrow-Bold def
+/CircletextFont      /DejaVuSerif def
 /AbovetitlesFont     {TitlesFont} def
 /BelowtitlesFont     {AbovetitlesFont} def
 /OvertitlesFont      {TitlesFont} def
@@ -84,16 +84,17 @@ Two font parameters are set to particular fonts, the other font parameters copyi
 
 <div align="center">
 
-[![Font examples, including from families Trebuchet, Gotham, Garamond, Times, Didot, Cochin, Harrington](images/font_examples.png)](images/font_examples.pdf)
+[![Font examples, including from families Gotham, DejaVuSerif, DejaVuSans, Trebuchet, Times, Didot, Cochin](images/font_examples.png)](images/font_examples.pdf)
 
 </div>
 
 Other good fonts to use include: 
+various weights of `/Gotham`, being a sans-serif font with a hint of drama; 
+`DejaVuSerif` and `/DejaVuSans`, which have many unicode characters; 
+`/TimesNewRomanPS-BoldMT`, which has glyphs for effectively all the accent-letter combinations; 
 `/Didot` and `/Didot-Bold` (the bold being a slightly decorative but stylish choice for the titles of a vertical which are hence digits); 
 `/Cochin` and `/Cochin-Bold` (Port-style titles of the form &lsquo;T70&rsquo; being particularly fine); 
-`/Harrington` (mischievously over-ornate); 
-various weights of `/Gotham`, being a sans-serif font with a hint of drama; and
-`/TimesNewRomanPS-BoldMT`, which has glyphs for effectively all the accent-letter combinations; 
+`/Harrington` (mischievously over-ornate); and
 and many others. 
 
 There is another fussiness in this default. 
