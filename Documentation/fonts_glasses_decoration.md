@@ -39,7 +39,7 @@ Extracts of code that made the image, for later explanation:
 /FontSizesSetsAboveBelowOver [ 0 0 1 ] def
 /InlineTitles false def
 /FillTitles true def
-/CircletextFontSize 11 def
+/CircletextFontSize 12 def
 ```
 
 
@@ -165,15 +165,17 @@ Extracts of code that made the image:
 /CrossHatchingTitles true def
 /CrossHatchingTitlesStrokeCode     {0 setgray 0.24 setlinewidth stroke} def
 /CrossHatchingOvertitlesStrokeCode {1 setgray 0.72 setlinewidth stroke} def
+/CrossHatchingCellArea 576 def  % (24pt)^2, (0.333333")^2, (8.466666mm)^2
 /InlineTitles true def
 /ColourSchemeTitles /Black def
+/OvertitleMaxFontSizeProportionTitles  0.333333 def
 ```
 
 ## Shapes: stars and flowers and hearts
 
 <img align="right" width="504" height="222" src="images/Shapes.png">
 
-In the cluttered image optimistically showing D78, the Titles and Belowtitles contain small random stars and flowers, with `InlineTitlesMaxNumberContours` at&nbsp;3. 
+In the cluttered image optimistically showing D78, the Titles and Belowtitles contain small random flowers and stars and hearts and circles. 
 
 These are enabled by Booleans `ShapesInTitles`, with obvious variations `ShapesInAbovetitles`, `ShapesInBelowtitles`, `ShapesInOvertitles`, and `ShapesInPlaceNames`. 
 The array `ShapesToUse` defaults to `[ /Flower /Star /Heart /Circle ]`, and must contain at least one of these.
@@ -203,7 +205,6 @@ Extracts of code that made the image for the Dow &rsquo;78:
 ```PostScript
 /ColourSchemeTitles /Black def
 /InlineTitles true def
-/InlineTitlesMaxNumberContours 3 def
 /ShapesInTitles true def
 ```
 
@@ -278,7 +279,7 @@ This decoration is engaged by default, the relevant Booleans being `InlineTitles
 How many steps in should it go? 
 This is capped at `InlineTitlesMaxNumberContours`, `InlineAbovetitlesMaxNumberContours`, `InlineBelowtitlesMaxNumberContours`, and `InlineOvertitlesMaxNumberContours`. 
 (InlinePlaceNames uses the sub-parameters of InlineTitles.)
-By default his cap is an elegantly sparse `1`; the Dow&nbsp;&rsquo;78 example shows it at `3`. 
+By default his cap is an elegantly sparse `1`, though `2` can also be elegant.
 
 In the Titles the lines have widths of `InlineTitlesBlackWidth` and `InlineTitlesWhiteWidth`; with obvious variations `InlineAbovetitlesBlackWidth`, `InlineAbovetitlesWhiteWidth`, `InlineBelowtitlesBlackWidth`, `InlineBelowtitlesWhiteWidth`, `InlineOvertitlesBlackWidth` and `InlineOvertitlesWhiteWidth`. 
 If the colour scheme is /MidGrey then &ldquo;black&rdquo; means the darker of the two shades, and &ldquo;white&rdquo; the lighter.
