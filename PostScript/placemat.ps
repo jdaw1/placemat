@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:45 Sunday 14th April 2024
+% This version 23:35 Sunday 28th April 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202404141945) def
+/ParametersVersionDateTimeAdobeFormat (D:202404282335) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -791,7 +791,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202404141945) def
+/SoftwareVersionDateTimeAdobeFormat (D:202404282335) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -9211,12 +9211,13 @@ currentdict /GlyphShowKnownAbsences undef
 					BackgroundTextsOrientation dup /Rotated eq exch  PageType 0 eq {Orientation} {TastingNotesOrientation} ifelse  2 copy  /Landscape eq exch /Portrait eq and  3 1 roll  /Portrait eq exch /Landscape eq and  or or  put
 					BackgroundTextsFont //DeSizeRounding selectfont  /BackgroundTextThis load StringPathBBox [ /BgT /BgR /BgB /BgL ] {exch //DeSizeRounding div def} forall
 
-					TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup dup type /arraytype eq
+					TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq
 					{
+						dup dup
 						//false exch {/SuppressOrnamentsLeft   eq {pop //true exit} if} forall  {mark (Warning: SheetNum=) SheetNum ( has BackgroundText, but its PackingStyle contains /SuppressOrnamentsLeft.)   ConcatenateToMark OutputToLog} if
 						//false exch {/SuppressOrnamentsRight  eq {pop //true exit} if} forall  {mark (Warning: SheetNum=) SheetNum ( has BackgroundText, but its PackingStyle contains /SuppressOrnamentsRight.)  ConcatenateToMark OutputToLog} if
 						//false exch {/SuppressOrnamentsCentre eq {pop //true exit} if} forall  {mark (Warning: SheetNum=) SheetNum ( has BackgroundText, but its PackingStyle contains /SuppressOrnamentsCentre.) ConcatenateToMark OutputToLog} if
-					} {pop pop} ifelse} if  % /arraytype, /Glasses
+					} {pop} ifelse} if  % /arraytype, /Glasses
 				} {/BgT 0 def /BgR 0 def /BgB 0 def /BgL 0 def} ifelse % /BackgroundTextThis load length 0 gt
 				PageType 0 eq
 					{BackgroundTextsGlassesL SheetNum        BackgroundTextsGlassesR BackgroundTextsGlassesB BackgroundTextsGlassesT BackgroundTextsGlassesMinB BackgroundTextsGlassesMaxT}
@@ -9224,7 +9225,7 @@ currentdict /GlyphShowKnownAbsences undef
 				ifelse   5 index BgT put 4 index BgB put 3 index BgT put 2 index BgB put 1 index BgR put BgL put
 			} for  % SheetNum|TNSheetNum
 
-		//true BackgroundTextsGlassesSameSizeIfAllOf {dup //false eq exch /False eq or {pop //false exit} if} forall
+			//true BackgroundTextsGlassesSameSizeIfAllOf {dup //false eq exch /False eq or {pop //false exit} if} forall
 			{
 				0  1   PageType 0 eq {NumSheets} {GlassesOnTastingNotePages length} ifelse 1 sub
 				{
