@@ -259,7 +259,7 @@ E.g.,&nbsp;`/uni1D00` =&nbsp;&ldquo;&#x1D00;&rdquo; =&nbsp;[small&#8209;caps&nbs
 `/u1D538` =&nbsp;&ldquo;&#x1D538;&rdquo; =&nbsp;[double&#8209;struck&nbsp;A](http://www.fileformat.info/info/unicode/char/1d538/index.htm).
 
 
-## Errors
+## Lists and errors
 
 Not all fonts have all glyphs, and not all fonts allow Unicode-style naming. 
 Indeed, more strongly, few fonts have most glyphs. 
@@ -268,27 +268,27 @@ So the usual advice applies: carefully check the output.
 Attempts to use a non-existent glyph are logged, but some fonts have the glyph name but not a proper glyph. 
 E.g., several glyphs in Harrington paint as ![Missing glyph in Harrington font](images/Harrington_notdef.png). 
 So, as an assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15, and shows them in a simple PDF. 
-Some useful examples: 
-* sans-serif fonts&nbsp;&mdash; 
-    * [`/TrebuchetMS-Bold`](images/TrebuchetMS-Bold.pdf), 
-    * [`/GothamNarrow-Bold`](images/GothamNarrow-Bold.pdf), 
-    * [`/Gotham-Book`](images/Gotham-Book.pdf), 
-    * [`/DejaVuSans`](images/DejaVuSans.pdf), 
-    * [`/Verdana`](images/Verdana.pdf), 
-    * [`/LucidaSans-Demi`](images/LucidaSans-Demi.pdf), 
-    * [`/Optima-Bold`](images/Optima-Bold.pdf), 
-    * [`/OpenSans-Regular`](images/OpenSans-Regular.pdf), 
-    * [`/FiraSans-Medium`](images/FiraSans-Medium.pdf), 
-    * [`/GillSans-Bold`](images/GillSans-Bold.pdf), 
-    * [`/GillSans-CondensedBold`](images/GillSans-CondensedBold.pdf), 
-    * [`/GillSansMT-ExtCondensedBold`](images/GillSansMT-ExtCondensedBold.pdf); 
-* serif fonts&nbsp;&mdash; 
-    * [`/DejaVuSerif`](images/DejaVuSerif.pdf), 
-    * [`/Garamond`](images/Garamond.pdf), 
+Some examples follow. 
+* Sans-serif fonts: 
+    * [`/TrebuchetMS-Bold`](images/TrebuchetMS-Bold.pdf) 
+    * [`/GothamNarrow-Bold`](images/GothamNarrow-Bold.pdf) 
+    * [`/Gotham-Book`](images/Gotham-Book.pdf) 
+    * [`/DejaVuSans`](images/DejaVuSans.pdf) 
+    * [`/Verdana`](images/Verdana.pdf) 
+    * [`/LucidaSans-Demi`](images/LucidaSans-Demi.pdf) 
+    * [`/Optima-Bold`](images/Optima-Bold.pdf) 
+    * [`/OpenSans-Regular`](images/OpenSans-Regular.pdf) 
+    * [`/FiraSans-Medium`](images/FiraSans-Medium.pdf) 
+    * [`/GillSans-Bold`](images/GillSans-Bold.pdf) 
+    * [`/GillSans-CondensedBold`](images/GillSans-CondensedBold.pdf) 
+    * [`/GillSansMT-ExtCondensedBold`](images/GillSansMT-ExtCondensedBold.pdf) 
+* Serif fonts: 
+    * [`/DejaVuSerif`](images/DejaVuSerif.pdf) 
+    * [`/Garamond`](images/Garamond.pdf) 
     * [`/TimesNewRomanPSMT`](images/TimesNewRomanPSMT.pdf)
-    * [`/Didot-Bold`](images/Didot-Bold.pdf), 
-    * [`/Cochin`](images/Cochin.pdf), 
-    * [`/Palatino-Roman`](images/Palatino-Roman.pdf), 
-    * [`/RobotoSlab-Regular`](images/RobotoSlab-Regular.pdf); 
-* and a decorative font&nbsp;&mdash; 
-    * [`/Harrington`](images/Harrington.pdf).
+    * [`/Didot-Bold`](images/Didot-Bold.pdf) 
+    * [`/Cochin`](images/Cochin.pdf) 
+    * [`/Palatino-Roman`](images/Palatino-Roman.pdf) 
+    * [`/RobotoSlab-Regular`](images/RobotoSlab-Regular.pdf) 
+* A decorative font: 
+    * [`/Harrington`](images/Harrington.pdf)
