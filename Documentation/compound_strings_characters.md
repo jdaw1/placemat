@@ -278,7 +278,9 @@ Some useful examples: sans-serif fonts&nbsp;&mdash;
 [`/Optima-Bold`](images/Optima-Bold.pdf), 
 [`/OpenSans-Regular`](images/OpenSans-Regular.pdf), 
 [`/FiraSans-Medium`](images/FiraSans-Medium.pdf), 
-[`/GillSans-CondensedBold`](images/GillSans-CondensedBold.pdf); serif fonts&nbsp;&mdash; 
+[`/GillSans-Bold`](images/GillSans-Bold.pdf), 
+[`/GillSans-CondensedBold`](images/GillSans-CondensedBold.pdf), 
+[`/GillSansMT-ExtCondensedBold`](images/GillSansMT-ExtCondensedBold.pdf); serif fonts&nbsp;&mdash; 
 [`/DejaVuSerif`](images/DejaVuSerif.pdf), 
 [`/Garamond`](images/Garamond.pdf), 
 [`/TimesNewRomanPSMT`](images/TimesNewRomanPSMT.pdf)
