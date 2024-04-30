@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:35 Sunday 28th April 2024
+% This version 19:55 Tuesday 30th April 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202404282335) def
+/ParametersVersionDateTimeAdobeFormat (D:202404301955) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -791,7 +791,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202404282335) def
+/SoftwareVersionDateTimeAdobeFormat (D:202404301955) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -10890,8 +10890,13 @@ currentdict /GlyphShowKnownAbsences undef
 					PageWidth MgnL MgnR sub add 2 div  PageHeight MgnB MgnT sub add 2 div  translate   PrePourScalingFactors SheetNum get dup scale
 					/MatrixGlasses matrix currentmatrix def
 
-					% Show Circlearrays only if centre-to-corner >= scaled[ Radii + Radii-RadiiCirclearrayInside ]
-					/PPShowCirclearrays PageWidth MgnL MgnR add sub dup mul PageHeight MgnB MgnT add sub dup mul add sqrt 2 div  Radii SheetNum get 2 mul RadiiCirclearrayInside SheetNum get sub PrePourScalingFactors SheetNum get mul  ge def
+					% Show Circlearrays only if centre-to-corner * 0.9 >= scaled[ Radii ]
+					/PPShowCirclearrays
+						CirclearraysFontSizes SheetNum get WithinPage get  2 mul  % CirclearraysFontSizes rather than PPCirclearraysV for consistency as WithinTitles varies.
+						PageWidth   MgnL MgnR add sub  1 index   sub  dup mul
+						PageHeight  MgnB MgnT add sub  3 -1 roll sub  dup mul  add sqrt  0.9 mul  % 0.9 approx aesthetic judgement <=~=> 'some' of circle visible
+						RadiiCirclearrayBaseline SheetNum get  PrePourScalingFactors SheetNum get mul  2 mul  % Doubling converts radius to diameter
+					ge def  % /PPShowCirclearrays
 					/PPCirclearraysV  CircletextFont  CirclearraysFontSizes SheetNum get WithinPage get  selectfont  CirclearraysPrePour WithinTitles get  StringHeight  def
 
 					PrePourShowBackgroundTexts   Droplets {PrePourShowDroplets or} if
