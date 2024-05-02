@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:55 Tuesday 30th April 2024
+% This version 20:45 Thursday 2nd May 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202404301955) def
+/ParametersVersionDateTimeAdobeFormat (D:202405022045) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -791,7 +791,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202404301955) def
+/SoftwareVersionDateTimeAdobeFormat (D:202405022045) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -9264,43 +9264,50 @@ currentdict /GlyphShowKnownAbsences undef
 
 			0  1  PageType 0 eq {NumSheets} {GlassesOnTastingNotePages length} ifelse 1 sub
 			{
-			  dup  /SheetNum exch def  /TNSheetNum exch def  % In case BackgroundTextsSquooshMin/...Max depend on SheetNum|TastingNotes
-				PageType 0 eq {BackgroundTextsGlassesL BackgroundTextsGlassesR BackgroundTextsGlassesMinB BackgroundTextsGlassesMaxT} {BackgroundTextsTNsL BackgroundTextsTNsR BackgroundTextsTNsMinB BackgroundTextsTNsMaxT} ifelse  % Note MinB, MaxT
-				4 {SheetNum get 4 1 roll} repeat   /BgT exch def  /BgB exch def  /BgR exch def  /BgL exch def
-				BgR BgL gt  BgT BgB gt  and
+				dup  /SheetNum exch def  /TNSheetNum exch def  % In case BackgroundTextsSquooshMin/...Max depend on SheetNum|TastingNotes
+				PageType 0 eq {/BackgroundTextsGlasses} {/BackgroundTextsTastingNotes} ifelse load MightBeTrue
 				{
-					//false //false //false //false PageType 0 eq {PaperType Orientation} {TastingNotesPaperType TastingNotesOrientation} ifelse SetPaperSize   //true DefStoreMgns
-					PageHeight MgnB MgnT add sub  PageWidth MgnL MgnR add sub  PageType 0 eq {BackgroundTextsGlassesRotated} {BackgroundTextsTNsRotated} ifelse SheetNum get {exch} if
-					/FontSizeOrigX  exch  BgR BgL sub  dup //Epsilon le {pop pop 1} {div} ifelse  def
-					/FontSizeOrigY  exch  BgT BgB sub  dup //Epsilon le {pop pop 1} {div} ifelse  def
-					/FontSizeX  FontSizeOrigX FontSizeOrigY BackgroundTextsSquooshMin div gt {FontSizeOrigY BackgroundTextsSquooshMin div} {FontSizeOrigX} ifelse  BackgroundTextsFontSizeMax 2 copy gt {exch} if pop  def
-					/FontSizeY  FontSizeOrigY FontSizeOrigX BackgroundTextsSquooshMax mul gt {FontSizeOrigX BackgroundTextsSquooshMax mul} {FontSizeOrigY} ifelse  BackgroundTextsFontSizeMax 2 copy gt {exch} if pop  def
-					PageType 0 eq {BackgroundTextsGlassesFontSizeX} {BackgroundTextsTNsFontSizeX} ifelse  SheetNum  FontSizeX put
-					PageType 0 eq {BackgroundTextsGlassesFontSizeY} {BackgroundTextsTNsFontSizeY} ifelse  SheetNum  FontSizeY put
-					//true  0 1 BackgroundUsedFontSizesNum 1 sub
+					PageType 0 eq
+						{BackgroundTextsGlassesL BackgroundTextsGlassesR BackgroundTextsGlassesMinB BackgroundTextsGlassesMaxT}
+						{BackgroundTextsTNsL     BackgroundTextsTNsR     BackgroundTextsTNsMinB     BackgroundTextsTNsMaxT    }
+					ifelse  % Note MinB, MaxT
+					4 {SheetNum get 4 1 roll} repeat   /BgT exch def  /BgB exch def  /BgR exch def  /BgL exch def
+					BgR BgL gt  BgT BgB gt  and
 					{
-						/i exch def
-						BackgroundUsedFontSizesOrigX i get FontSizeOrigX sub abs //PrinterEpsilon le
-						BackgroundUsedFontSizesOrigY i get FontSizeOrigY sub abs //PrinterEpsilon le  and
-						BackgroundUsedFontSizesX     i get FontSizeX     sub abs //PrinterEpsilon le  and
-						BackgroundUsedFontSizesY     i get FontSizeY     sub abs //PrinterEpsilon le  and {pop //false exit} if
-					} for  % ... BackgroundUsedFontSizesNum ...
-					{
-						BackgroundUsedFontSizesOrigX BackgroundUsedFontSizesNum FontSizeOrigX put
-						BackgroundUsedFontSizesOrigY BackgroundUsedFontSizesNum FontSizeOrigY put
-						BackgroundUsedFontSizesX     BackgroundUsedFontSizesNum FontSizeX     put
-						BackgroundUsedFontSizesY     BackgroundUsedFontSizesNum FontSizeY     put
-						/BackgroundUsedFontSizesNum dup load 1 add store
-						mark   (BackgroundTexts: FontSizeX=)  FontSizeX   (; FontSizeY=)  FontSizeY
-						(, on )  TypeOfPagesBeingRendered  TypeOfPagesBeingRendered  /TastingNotes eq {( TNSheetNum=) TNSheetNum} {( SheetNum=) SheetNum} ifelse  ( and perhaps others)
-						PageType 0 eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TNSheetNum} ifelse  get  LengthCompoundObject 2 ge
+						//false //false //false //false PageType 0 eq {PaperType Orientation} {TastingNotesPaperType TastingNotesOrientation} ifelse SetPaperSize   //true DefStoreMgns
+						PageHeight MgnB MgnT add sub  PageWidth MgnL MgnR add sub  PageType 0 eq {BackgroundTextsGlassesRotated} {BackgroundTextsTNsRotated} ifelse SheetNum get {exch} if
+						/FontSizeOrigX  exch  BgR BgL sub  dup //Epsilon le {pop pop 1} {div} ifelse  def
+						/FontSizeOrigY  exch  BgT BgB sub  dup //Epsilon le {pop pop 1} {div} ifelse  def
+						/FontSizeX  FontSizeOrigX FontSizeOrigY BackgroundTextsSquooshMin div gt {FontSizeOrigY BackgroundTextsSquooshMin div} {FontSizeOrigX} ifelse  BackgroundTextsFontSizeMax 2 copy gt {exch} if pop  def
+						/FontSizeY  FontSizeOrigY FontSizeOrigX BackgroundTextsSquooshMax mul gt {FontSizeOrigX BackgroundTextsSquooshMax mul} {FontSizeOrigY} ifelse  BackgroundTextsFontSizeMax 2 copy gt {exch} if pop  def
+						PageType 0 eq {BackgroundTextsGlassesFontSizeX} {BackgroundTextsTNsFontSizeX} ifelse  SheetNum  FontSizeX put
+						PageType 0 eq {BackgroundTextsGlassesFontSizeY} {BackgroundTextsTNsFontSizeY} ifelse  SheetNum  FontSizeY put
+						//true  0 1 BackgroundUsedFontSizesNum 1 sub
 						{
-							PageWidth MgnL MgnR add sub PageHeight MgnB MgnT add sub   PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get {exch} if div  BgT BgB sub mul BgR BgL sub sub
-							dup abs 0.0001 ge  {( \(for snug fit insert "{)  exch  dup 0 gt {(+) exch} if  ( Kern}"\))}  {pop ( \(which fits snugly\))}  ifelse  % If so small that would be shown in scientific notation, don't show. And on A3 1E-4 ~= 0.1pt
-						} if  % at least two characters
-						(.)  ConcatenateToMark OutputToLog
-					}  if  % Not previous logged
-				} if   % Non-zero bounding box
+							/i exch def
+							BackgroundUsedFontSizesOrigX i get FontSizeOrigX sub abs //PrinterEpsilon le
+							BackgroundUsedFontSizesOrigY i get FontSizeOrigY sub abs //PrinterEpsilon le  and
+							BackgroundUsedFontSizesX     i get FontSizeX     sub abs //PrinterEpsilon le  and
+							BackgroundUsedFontSizesY     i get FontSizeY     sub abs //PrinterEpsilon le  and {pop //false exit} if
+						} for  % ... BackgroundUsedFontSizesNum ...
+						{
+							BackgroundUsedFontSizesOrigX BackgroundUsedFontSizesNum FontSizeOrigX put
+							BackgroundUsedFontSizesOrigY BackgroundUsedFontSizesNum FontSizeOrigY put
+							BackgroundUsedFontSizesX     BackgroundUsedFontSizesNum FontSizeX     put
+							BackgroundUsedFontSizesY     BackgroundUsedFontSizesNum FontSizeY     put
+							/BackgroundUsedFontSizesNum dup load 1 add store
+							mark   (BackgroundTexts: FontSizeX = )  FontSizeX   (, FontSizeY = )  FontSizeY
+							FontSizeX abs 0.1 gt FontSizeY abs 0.1 gt and {( => 'Squoosh' ~= ) FontSizeY FontSizeX div  dup 1.0 eq {pop 1} if ( ~= 1 / ) FontSizeX FontSizeY div  dup 1.0 eq {pop 1} if} if
+							(, on )  TypeOfPagesBeingRendered  TypeOfPagesBeingRendered  /TastingNotes eq {( TNSheetNum=) TNSheetNum} {( SheetNum=) SheetNum} ifelse  ( and perhaps others)
+							PageType 0 eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TNSheetNum} ifelse  get  LengthCompoundObject 2 ge
+							{
+								PageWidth MgnL MgnR add sub PageHeight MgnB MgnT add sub   PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get {exch} if div  BgT BgB sub mul BgR BgL sub sub
+								dup abs 0.0001 ge  {( \(for snug fit insert "{)  exch  dup 0 gt {(+) exch} if  ( Kern}"\))}  {pop ( \(which fits snugly\))}  ifelse  % If so small that would be shown in scientific notation, don't show. And on A3 1E-4 ~= 0.1pt
+							} if  % at least two characters
+							(.)  ConcatenateToMark OutputToLog
+						}  if  % Not previous logged
+					} if   % Non-zero bounding box
+				} if  % BackgroundTextsGlasses | BackgroundTextsTastingNotes
 			} for  % SheetNum|TNSheetNum
 
 		} bind for  % PageType
