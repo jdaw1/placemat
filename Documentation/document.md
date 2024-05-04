@@ -97,21 +97,21 @@ The default values are as follows.
 
 <div align="center">
 
-| Parameter | Same length as | Default<br>element  | Notes |
-|:----------|:---------------|:--------:|:---|
-| `PageOrderingGlasses`          |  `GlassesOnSheets`                  | 1 | |
-| `PageOrderingTastingNotePages` |  `GlassesOnTastingNotePages`        | 1 | |
-| `PageOrderingVoteRecorder`     |  `GlassesClusteredOnVoteRecorders`  | 1 | |
-| `PageOrderingDecantingNotes`   |  `GlassesClusteredOnDecantingNotes` | 1 | |
-| `PageOrderingAccounts`         |  `PageOrderingVoteRecorder`         | 1 | |
-| `PageOrderingCorkDisplay`      |  `GlassesClusteredOnCorkDisplay`    | 1 | |
-| `PageOrderingNeckTags`         |  `GlassesOnSheets`                  | 1 | |
-| `PageOrderingPrePourPages`     |  `GlassesOnSheets`                  | 1 | |
-| `PageOrderingBottleWrap`       |  `GlassesOnSheets`                  | 1 | |
-| `PageOrderingOneCircle`        |  *Not array; single value*          | 1 | |
-| `PageOrderingPlaceNames`       |  `NamesPlaceNames`                  | 100 | Late, for folding. |
-| `PageOrderingDecanterLabels`   |  `GlassesOnSheets`                  | 200 | Near-last, for cutting and gluing before the tasting day. |
-| `PageOrderingStickyLabels`     |  `GlassesOnSheets`                  | 300 | Last, for manual change of paper in the printer. |
+|           Parameter            |           Same length as            | Default<br>element | Notes |
+|:-------------------------------|:------------------------------------|-------------------:|:------|
+| `PageOrderingGlasses`          |                    `GlassesOnSheets`|                  1 |       |
+| `PageOrderingTastingNotePages` |          `GlassesOnTastingNotePages`|                  1 |       |
+| `PageOrderingVoteRecorder`     |    `GlassesClusteredOnVoteRecorders`|                  1 |       |
+| `PageOrderingDecantingNotes`   |   `GlassesClusteredOnDecantingNotes`|                  1 |       |
+| `PageOrderingAccounts`         |           `PageOrderingVoteRecorder`|                  1 |       |
+| `PageOrderingCorkDisplay`      |      `GlassesClusteredOnCorkDisplay`|                  1 |       |
+| `PageOrderingNeckTags`         |                    `GlassesOnSheets`|                  1 |       |
+| `PageOrderingPrePourPages`     |                    `GlassesOnSheets`|                  1 |       |
+| `PageOrderingBottleWrap`       |                    `GlassesOnSheets`|                  1 |       |
+| `PageOrderingOneCircle`        |            *Not array; single value*|                  1 |       |
+| `PageOrderingPlaceNames`       |                    `NamesPlaceNames`|                100 | Late, for folding. |
+| `PageOrderingDecanterLabels`   |                    `GlassesOnSheets`|                200 | Near-last, for cutting and gluing before the tasting day. |
+| `PageOrderingStickyLabels`     |                    `GlassesOnSheets`|                300 | Last, for manual change of paper in the printer. |
 
 </div>
 

@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:45 Thursday 2nd May 2024
+% This version 16:45 Saturday 4th May 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202405022045) def
+/ParametersVersionDateTimeAdobeFormat (D:202405041645) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -553,7 +553,8 @@ if} bind def  % /VoteRecorderCrossedBox
 /SideBySideGlassesTastingNotesWidthGutter 0 def  % 0 works well for small numbers of glasses
 /SideBySideGlassesTastingNotesProportionPageGlasses 0.5 def
 
-/BackgroundTextsFontSizeMax 9999 def
+/BackgroundTextsFontSizeMaxX 9999 def
+/BackgroundTextsFontSizeMaxY 9999 def
 /BackgroundTextsGlassesSameSizeIfAllOf [ /SamePageOrdering /SamePaperSize /TextSameLength ] def  % /False /OnSheetWithSameNumberGlasses /RadiiShrunkToBeSame /OnSheetWithSameRadius /SamePaperSize /TextSameLength /SamePageOrdering
 /BackgroundTextsGlassesVerticalMiddling /MatchSamePaperSize def  % /MatchNone /MatchSamePaperSize /MatchAll
 /BackgroundTextsDecanterLabels /BackgroundTextsGlasses load def
@@ -791,7 +792,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202405022045) def
+/SoftwareVersionDateTimeAdobeFormat (D:202405041645) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -2435,7 +2436,7 @@ DeBugLevel 100 le	 % This logging introduced in May 2011. In December 2021 decid
 		/TastingNotesCirclesBehind load MightBeTrue {[ /TastingNotesCirclesBehind /TastingNotesCirclesBehindFadingFactorIfAllBlack /TastingNotesCirclesBehindFadingFactorIfAnyGrey /TastingNotesCirclesBehindTopX /TastingNotesCirclesBehindBottomX ]} if
 		/BackgroundTextsGlasses load MightBeTrue {[
 			/BackgroundTextsGlasses /BackgroundTextsGlassesTexts /BackgroundTextsSquooshMin /BackgroundTextsSquooshMax /BackgroundTextsTastingNotes /PrePourShowBackgroundTexts
-			/BackgroundTextsFontSizeMax /BackgroundTextsOrientation /BackgroundTextsGlassesPaintCode /BackgroundTextsGlassesSameSizeIfAllOf /BackgroundTextsGlassesVerticalMiddling
+			/BackgroundTextsFontSizeMaxX /BackgroundTextsFontSizeMaxY /BackgroundTextsOrientation /BackgroundTextsGlassesPaintCode /BackgroundTextsGlassesSameSizeIfAllOf /BackgroundTextsGlassesVerticalMiddling
 		]} if  % ... BackgroundTextsGlasses ...
 		/PaintBackgroundCode load length 0 gt {[/PaintBackgroundCode]} if
 		/PaintForegroundCode load length 0 gt {[/PaintForegroundCode]} if
@@ -9278,8 +9279,8 @@ currentdict /GlyphShowKnownAbsences undef
 						PageHeight MgnB MgnT add sub  PageWidth MgnL MgnR add sub  PageType 0 eq {BackgroundTextsGlassesRotated} {BackgroundTextsTNsRotated} ifelse SheetNum get {exch} if
 						/FontSizeOrigX  exch  BgR BgL sub  dup //Epsilon le {pop pop 1} {div} ifelse  def
 						/FontSizeOrigY  exch  BgT BgB sub  dup //Epsilon le {pop pop 1} {div} ifelse  def
-						/FontSizeX  FontSizeOrigX FontSizeOrigY BackgroundTextsSquooshMin div gt {FontSizeOrigY BackgroundTextsSquooshMin div} {FontSizeOrigX} ifelse  BackgroundTextsFontSizeMax 2 copy gt {exch} if pop  def
-						/FontSizeY  FontSizeOrigY FontSizeOrigX BackgroundTextsSquooshMax mul gt {FontSizeOrigX BackgroundTextsSquooshMax mul} {FontSizeOrigY} ifelse  BackgroundTextsFontSizeMax 2 copy gt {exch} if pop  def
+						/FontSizeX  FontSizeOrigX FontSizeOrigY BackgroundTextsSquooshMin div gt {FontSizeOrigY BackgroundTextsSquooshMin div} {FontSizeOrigX} ifelse  BackgroundTextsFontSizeMaxX 2 copy gt {exch} if pop  def
+						/FontSizeY  FontSizeOrigY FontSizeOrigX BackgroundTextsSquooshMax mul gt {FontSizeOrigX BackgroundTextsSquooshMax mul} {FontSizeOrigY} ifelse  BackgroundTextsFontSizeMaxY 2 copy gt {exch} if pop  def
 						PageType 0 eq {BackgroundTextsGlassesFontSizeX} {BackgroundTextsTNsFontSizeX} ifelse  SheetNum  FontSizeX put
 						PageType 0 eq {BackgroundTextsGlassesFontSizeY} {BackgroundTextsTNsFontSizeY} ifelse  SheetNum  FontSizeY put
 						//true  0 1 BackgroundUsedFontSizesNum 1 sub

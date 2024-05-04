@@ -124,8 +124,23 @@ This precise fitting can be done by inserting into the compound string some `{±
 
 `BackgroundTextsGlassesSameSizeIfAllOf` determines whether the background texts on different pages are compelled to be the same size. 
 They are if all the &lsquo;conditions&rsquo; specified are true. 
-Valid conditions are `/False` (always false, so each is fitted separately); `/OnSheetWithSameNumberGlasses` (obvious meaning); `/OnSheetWithSameRadius` (ditto); `/SamePageOrdering` (ditto); `/SamePaperSize` (ditto); `/TextSameLength` (ditto); and `/RadiiShrunkToBeSame` (referring to `ShrinkRadii`).
-Neither the *x* nor the *y* size may exceed `BackgroundTextsFontSizeMax`, which defaults to large.
+Valid conditions are `/False` (always false, so each is fitted separately); `/OnSheetWithSameNumberGlasses` (obvious meaning); `/OnSheetWithSameRadius` (ditto); `/SamePageOrdering` (ditto); `/SamePaperSize` (ditto); `/TextSameLength` (ditto); and `/RadiiShrunkToBeSame` (referring to `ShrinkRadii`). 
+
+The *x* and *y* font sizes may not exceed `BackgroundTextsFontSizeMaxX` and `BackgroundTextsFontSizeMaxY`, which default to large. 
+Like [`CircletextsMaxCopies`](fonts_glasses_decoration.md#Circlearrays), when each of these is used the &lsquo;current font size&rsquo; is on the stack, which allows the following code. 
+```PostScript
+/BackgroundTextsSquooshMin 0.5 def  % Allow very wide
+
+/BackgroundTextsFontSizeMaxX
+{
+	dup                               % Value to which compared
+	PageWidth MgnL MgnR add sub       % Usable pade wide
+	dup Radii SheetNum get 2 mul sub  % ditto, minus 2*radius
+	exch div mul   % Used X font size reduced by the ratio,
+	               % so level with centre of L-&-R edge circles
+} bind def  % /BackgroundTextsFontSizeMaxX
+```
+
 
 `BackgroundTextsGlassesVerticalMiddling` determines whether the vertical alignment is determined jointly or separately, much like the `VerticalMiddling…` parameters. 
 `BackgroundTextsGlassesVerticalMiddling` must be one of `/MatchAll`, `/MatchSamePaperSize`, or `/MatchNone`.
