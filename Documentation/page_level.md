@@ -129,15 +129,15 @@ Valid conditions are `/False` (always false, so each is fitted separately); `/On
 The *x* and *y* font sizes may not exceed `BackgroundTextsFontSizeMaxX` and `BackgroundTextsFontSizeMaxY`, which default to large. 
 Like [`CircletextsMaxCopies`](fonts_glasses_decoration.md#Circlearrays), when each of these is used the &lsquo;current font size&rsquo; is on the stack, which allows the following code. 
 ```PostScript
-/BackgroundTextsSquooshMin 0.5 def  % Allow very wide
+/BackgroundTextsSquooshMin 0.25 def  % Allow very wide
 
 /BackgroundTextsFontSizeMaxX
 {
 	dup                               % Value to which compared
-	PageWidth MgnL MgnR add sub       % Usable pade wide
+	PageWidth MgnL MgnR add sub       % Usable page width
 	dup Radii SheetNum get 2 mul sub  % ditto, minus 2*radius
 	exch div mul   % Used X font size reduced by the ratio,
-	               % so level with centre of L-&-R edge circles
+	               % so level with centres of L-&-R edge circles
 } bind def  % /BackgroundTextsFontSizeMaxX
 ```
 
@@ -203,7 +203,7 @@ The array `DropletsCharges` is of a length that is a multiple of four, as follow
 * 1: A location: this can be:
     * an integer, the centre of the `WithinPage` circle on that sheet; or 
     * an array of integers `[WithinPage0, WithinPage1, …]`, the location being the average of the centres of these `WithinPage` circles; or 
-    * an array of length two, `[x y]`, with *x* and *y* both non-integer float, in which `[0 0]` is bottom-left of the page (but locations at &plusmn;huge can cause overflow: experiments suggest it&rsquo;s safe with both |*x*| and |*y*|&nbsp;&le;&nbsp;10&#8310; &asymp;&nbsp;353&nbsp;metres).  
+    * an array of length two, `[x y]`, with *x* and *y* both non-integer float, in which `[0.0 0.0]` is bottom-left of the page (but locations at &plusmn;huge can cause overflow: experiments suggest it&rsquo;s safe with both |*x*| and |*y*|&nbsp;&le;&nbsp;10&#8310; &asymp;&nbsp;353&nbsp;metres).  
 * 2: A numeric charge, droplets flowing away from &minus;ve charges and to +ve charges (so signed like the gravitational effect of mass).  
 * 3: A numeric spin; with +ve charge and +ve spin the droplets approach clockwise (at a distance from a lone charge of *spin* points, the angle of the droplets is 45&deg;).
 
@@ -305,7 +305,7 @@ If `FlightSeparationPaintSeparately` then `FlightSeparationPaintCode` is invoked
 If `FlightSeparationPaintSeparately not`, then all the lines on the current page are drawn, after which is the single call of `FlightSeparationPaintCode`. 
 The former is better if the format is not constant; the latter preferred if overlapping or crossing lines are to be double-stroked.
 
-There is a [bug in (at least some versions of) Adobe Distiller](http://groups.google.com/g/comp.lang.postscript/c/amUp28S-JFM), such that if `FlightSeparationPaintSeparately` is `false` and there are multiple lines on one page (&hArr; `FlightSeparationLines SheetNum get length` &ge; 2), the apparent ends of some lines are controlled by `setlinejoin` rather than `setlinecap`. 
+There is a [bug in (at least some versions of) Adobe Distiller](http://groups.google.com/g/comp.lang.postscript/c/amUp28S-JFM), such that if `FlightSeparationPaintSeparately` is `false` and there are multiple lines on one page (&Longleftrightarrow; `FlightSeparationLines SheetNum get length` &ge; 2), the apparent ends of some lines are controlled by `setlinejoin` rather than `setlinecap`. 
 It is a small aesthetic imperfection, but an aesthetic imperfection nonetheless. 
 The problem can be avoided if no line begins where the previous one ended, achievable by reversing the direction of individual lines, or by re-ordering the set of lines.
 

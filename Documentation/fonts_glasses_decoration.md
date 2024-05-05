@@ -44,7 +44,7 @@ Extracts of code that made the image, for later explanation:
 
 ## Circlearrays
 
-The number of copies of each instance of `Circlearrays` is constrained by `CircletextsMinCopies` and CircletextsMaxCopies`. 
+The number of copies of each instance of `Circlearrays` is constrained by `CircletextsMinCopies` and `CircletextsMaxCopies`. 
 When the latter is used, the &lsquo;current number&rsquo; of copies is on the stack. 
 This allows a default value of `/CircletextsMaxCopies {dup 32 gt {dup dup 4 mod sub} {65535} ifelse} bind def`: if there are more than 32, the number is slightly reduced to a multiple of 4. 
 
