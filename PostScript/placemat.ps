@@ -1,6 +1,6 @@
 %!PS
 
-% This version 16:45 Saturday 4th May 2024
+% This version 22:10 Sunday 5th May 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202405041645) def
+/ParametersVersionDateTimeAdobeFormat (D:202405052210) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -792,7 +792,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202405041645) def
+/SoftwareVersionDateTimeAdobeFormat (D:202405052210) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -9298,7 +9298,7 @@ currentdict /GlyphShowKnownAbsences undef
 							BackgroundUsedFontSizesY     BackgroundUsedFontSizesNum FontSizeY     put
 							/BackgroundUsedFontSizesNum dup load 1 add store
 							mark   (BackgroundTexts: FontSizeX = )  FontSizeX   (, FontSizeY = )  FontSizeY
-							FontSizeX abs 0.1 gt FontSizeY abs 0.1 gt and {( => 'Squoosh' ~= ) FontSizeY FontSizeX div  dup 1.0 eq {pop 1} if ( ~= 1 / ) FontSizeX FontSizeY div  dup 1.0 eq {pop 1} if} if
+							FontSizeX abs 0.1 gt FontSizeY abs 0.1 gt and {( => 'Squoosh' ~= ) FontSizeY FontSizeX div  dup 1.0 eq {pop 1} if ( ~= 1 / ) FontSizeX FontSizeY div  dup 1.0 eq {pop pop} if} if
 							(, on )  TypeOfPagesBeingRendered  TypeOfPagesBeingRendered  /TastingNotes eq {( TNSheetNum=) TNSheetNum} {( SheetNum=) SheetNum} ifelse  ( and perhaps others)
 							PageType 0 eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TNSheetNum} ifelse  get  LengthCompoundObject 2 ge
 							{
