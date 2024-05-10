@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:10 Sunday 5th May 2024
+% This version 23:00 Friday 10th May 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202405052210) def
+/ParametersVersionDateTimeAdobeFormat (D:202405102300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -792,7 +792,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202405052210) def
+/SoftwareVersionDateTimeAdobeFormat (D:202405102300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -9277,10 +9277,10 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						//false //false //false //false PageType 0 eq {PaperType Orientation} {TastingNotesPaperType TastingNotesOrientation} ifelse SetPaperSize   //true DefStoreMgns
 						PageHeight MgnB MgnT add sub  PageWidth MgnL MgnR add sub  PageType 0 eq {BackgroundTextsGlassesRotated} {BackgroundTextsTNsRotated} ifelse SheetNum get {exch} if
-						/FontSizeOrigX  exch  BgR BgL sub  dup //Epsilon le {pop pop 1} {div} ifelse  def
-						/FontSizeOrigY  exch  BgT BgB sub  dup //Epsilon le {pop pop 1} {div} ifelse  def
-						/FontSizeX  FontSizeOrigX FontSizeOrigY BackgroundTextsSquooshMin div gt {FontSizeOrigY BackgroundTextsSquooshMin div} {FontSizeOrigX} ifelse  BackgroundTextsFontSizeMaxX 2 copy gt {exch} if pop  def
-						/FontSizeY  FontSizeOrigY FontSizeOrigX BackgroundTextsSquooshMax mul gt {FontSizeOrigX BackgroundTextsSquooshMax mul} {FontSizeOrigY} ifelse  BackgroundTextsFontSizeMaxY 2 copy gt {exch} if pop  def
+						/FontSizeOrigX  exch  BgR BgL sub  dup //Epsilon le {pop pop 1} {div} ifelse  BackgroundTextsFontSizeMaxX 2 copy gt {exch} if pop  def
+						/FontSizeOrigY  exch  BgT BgB sub  dup //Epsilon le {pop pop 1} {div} ifelse  BackgroundTextsFontSizeMaxY 2 copy gt {exch} if pop  def
+						/FontSizeX  FontSizeOrigX FontSizeOrigY BackgroundTextsSquooshMin div gt {FontSizeOrigY BackgroundTextsSquooshMin div} {FontSizeOrigX} ifelse  def
+						/FontSizeY  FontSizeOrigY FontSizeOrigX BackgroundTextsSquooshMax mul gt {FontSizeOrigX BackgroundTextsSquooshMax mul} {FontSizeOrigY} ifelse  def
 						PageType 0 eq {BackgroundTextsGlassesFontSizeX} {BackgroundTextsTNsFontSizeX} ifelse  SheetNum  FontSizeX put
 						PageType 0 eq {BackgroundTextsGlassesFontSizeY} {BackgroundTextsTNsFontSizeY} ifelse  SheetNum  FontSizeY put
 						//true  0 1 BackgroundUsedFontSizesNum 1 sub
