@@ -107,7 +107,14 @@ It is possible to add a background text, scaled to fit the whole page, such as &
 This is activated by setting `BackgroundTextsGlasses` to `true`. 
 Then `BackgroundTextsGlassesTexts` is an array of the same length as `GlassesOnSheets`, containing the strings to be shown on glasses pages. 
 The strings should be short: one or two characters is recommended, and are shown in font `BackgroundTextsFont`. 
-The text is aligned with `BackgroundTextsAlignmentVertical` being one of `/Middle`, `/Bottom`, `/Top)`; and `BackgroundTextsAlignmentHorizontal` being one of `/Centre`, `/Left`, `/Right`.
+
+The text is aligned with `BackgroundTextsAlignmentVertical` being one of `/Middle`, `/Bottom`, `/Top`; and `BackgroundTextsAlignmentHorizontal` being one of `/Centre`, `/Left`, `/Right`. 
+These are orientated with the text: so if the text is rotated, `/Top` means towards the left of the page.
+
+Can the text fill the whole page? `BackgroundTextsSpaceX` and `BackgroundTextsSpaceY` can be `/PageLessMargins` or `/PageWhole`, and ignored not on glasses pages, `/CirclesEdges` or `/CirclesCentres`. 
+These are orientated with the page. 
+The default of `/CirclesEdges` copes well if the used element of [`PackingStyles`](PackingStyles.md) is, say, `/RightSide`.
+
 
 <div align="center">
 

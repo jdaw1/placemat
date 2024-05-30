@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Friday 10th May 2024
+% This version 23:30 Thursday 30th May 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202405102300) def
+/ParametersVersionDateTimeAdobeFormat (D:202405302330) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -337,12 +337,14 @@ if} bind def  % /VoteRecorderCrossedBox
 /BackgroundTextsGlassesTexts [ GlassesOnSheets length {()} repeat ] def
 /BackgroundTextsTNsTexts [ 0 1 GlassesOnTastingNotePages length 1 sub {BackgroundTextsGlassesTexts exch 1 index length mul GlassesOnTastingNotePages length div floor cvi get} for ] def
 /BackgroundTextsAlignmentVertical {1 TypeOfPagesBeingRendered /TastingNotes eq {TNSheetNum GlassesOnTastingNotePages} {SheetNum GlassesOnSheets} ifelse length dup 1 le {pop pop pop 0.5} {1 sub div sub} ifelse} bind def  % number /Middle /Bottom /Top
-/BackgroundTextsAlignmentHorizontal /Centre def  % number /Centre /Left /Right
+/BackgroundTextsAlignmentHorizontal /Centre def  % number /Centre /Left /Right. This is relative to direction of text.
 /BackgroundTextsSquooshMax 1 def  % y/x scaling, bigger being taller, smaller being fatter
 /BackgroundTextsSquooshMin 1  BackgroundTextsSquooshMax dup 1 eq {pop} {div} ifelse  def
 /BackgroundTextsTastingNotes BackgroundTextsGlasses def
 /BackgroundTextsOrientation /Landscape def  % /Landscape /Portrait /Natural /Rotated
 /BackgroundTextsGlassesPaintCode {clip 4.32 setlinewidth 0.9375 setgray stroke} def
+/BackgroundTextsSpaceX /CirclesEdges def  % /PageLessMargins /PageWhole, and ignored not on glasses pages, /CirclesEdges /CirclesCentres . This is relative to page.
+/BackgroundTextsSpaceY /CirclesEdges def  % /PageLessMargins /PageWhole, and ignored not on glasses pages, /CirclesEdges /CirclesCentres . This is relative to page.
 
 /Droplets false def
 /DropletsCharges [  % Length a multiple of 4
@@ -792,7 +794,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202405102300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202405302330) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -824,7 +826,7 @@ RandomisationSeed srand
 /ArcTanOneQuarter    14.03624346792647858289 def  % In degrees
 /ArcTanFiveEighths   32.00538320808349556079 def  % In degrees
 /Infinity 32767 def  % 2^15-1, which in pt ~= 455" ~= 38' ~= 11.6m, so ~61% bigger than the ~283" diagonal of the 200"x200" maximum PDF page. Can be '8 exp 256.06251 mul' without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.40282*10^38.
-/InfinityNeg Infinity neg def
+/InfinNeg Infinity neg def
 /Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, and experimentally 839 times the single-precision minimum increment over 1.
 /PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
 /PrinterEpsilonSquared PrinterEpsilon dup mul def
@@ -2665,10 +2667,10 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 
 /IsNumber {type dup /integertype eq exch /realtype eq or} bind def
 
-/Min {//Infinity    exch {2 copy gt {exch} if pop} forall} bind def
-/Max {//InfinityNeg exch {2 copy lt {exch} if pop} forall} bind def
-/MinToMark {//Infinity    {exch dup mark eq {pop exit} if  2 copy gt {exch} if pop} loop} bind def
-/MaxToMark {//InfinityNeg {exch dup mark eq {pop exit} if  2 copy lt {exch} if pop} loop} bind def
+/Min {//Infinity exch {2 copy gt {exch} if pop} forall} bind def
+/Max {//InfinNeg exch {2 copy lt {exch} if pop} forall} bind def
+/MinToMark {//Infinity {exch dup mark eq {pop exit} if  2 copy gt {exch} if pop} loop} bind def
+/MaxToMark {//InfinNeg {exch dup mark eq {pop exit} if  2 copy lt {exch} if pop} loop} bind def
 
 % array  ShuffleArray  array
 /ShuffleArray
@@ -3369,7 +3371,7 @@ currentdict /SmallCapsDict undef
 } bind def  % PathMaxScalingFitCircle
 
 
-% Immediate dependencies: DeBugLevel; OutputToLog; PrinterEpsilon; Epsilon; Infinity; InfinityNeg; PolynomialRoots.
+% Immediate dependencies: DeBugLevel; OutputToLog; PrinterEpsilon; Epsilon; Infinity; InfinNeg; PolynomialRoots.
 % Have functions X[z] and Y[z], for z over some range. ApproximatingCurve approximates such a path with a single cubic Bezier curve. That approximation
 % has, at the _s_tart and _e_nd points, same position as original function, same tangent, same curvature. ApproximatingCurve returns the middle two
 % knot points of a cubic Bezier. The calling code might, for example, have the first as the currentpoint, and append the last before calling curveto.
@@ -3477,8 +3479,8 @@ currentdict /SmallCapsDict undef
 		/CurvatureWanted_s dXs ddYs mul dYs ddXs mul sub  dXs dup mul dYs dup mul add dup sqrt mul  div def
 		/CurvatureWanted_e dXe ddYe mul dYe ddXe mul sub  dXe dup mul dYe dup mul add dup sqrt mul  div def
 		/BestError //Infinity def
-		/BestSpeed1 //InfinityNeg def
-		/BestSpeed2 //InfinityNeg def
+		/BestSpeed1 //InfinNeg def
+		/BestSpeed2 //InfinNeg def
 
 		0 1 3
 		{
@@ -5478,8 +5480,8 @@ currentdict /GlyphShowKnownAbsences undef
 			PackingDescriptor length PositionsStart sub  NG  ge
 			PositionsStart 1 PackingDescriptor length 1 sub {PackingDescriptor exch GetEU dup type /arraytype eq {length 1 le {pop //false exit} if} {pop pop //false exit} ifelse} for
 			{
-				/MinXX //Infinity def  /MaxXX //InfinityNeg def
-				/MinYY //Infinity def  /MaxYY //InfinityNeg def
+				/MinXX //Infinity def  /MaxXX //InfinNeg def
+				/MinYY //Infinity def  /MaxYY //InfinNeg def
 				PositionsStart  1  PackingDescriptor length 1 sub
 				{
 					PackingDescriptor exch GetEU dup  0 GetEU /XX exch def  1 GetEU /YY exch def
@@ -6872,7 +6874,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 	Circlearray length 0 gt
 	{
-		/AscenderMax //InfinityNeg def
+		/AscenderMax //InfinNeg def
 		/DescenderMin //Infinity def
 		/PieceW Circlearray length array def
 		/PieceL Circlearray length array def
@@ -7836,7 +7838,7 @@ currentdict /GlyphShowKnownAbsences undef
 			( ) stringwidth pop  CircletextsMinNumSpacesBetween mul  Circlearrays WithinTitles get length mul  //DeSizeRounding div
 			add  CirclearraysPaddedW SheetNum get exch WithinPage exch put
 
-			CircletextFont //DeSizeRounding selectfont   CirclearraysT SheetNum get WithinPage //InfinityNeg put   CirclearraysB SheetNum get WithinPage //Infinity put
+			CircletextFont //DeSizeRounding selectfont   CirclearraysT SheetNum get WithinPage //InfinNeg put   CirclearraysB SheetNum get WithinPage //Infinity put
 			Circlearrays WithinTitles get
 			{
 				StringPathBBox
@@ -8778,8 +8780,8 @@ currentdict /GlyphShowKnownAbsences undef
 	/TitleAboveBelowOverT [ SheetLengths {[ exch {0} repeat ]} forall ] def
 	//DeBugLevel 100 le {( Main: Computation of TitleAboveBelowOverL, ...R, ...B, ...T.) OutputToLog} if
 	9 dict begin
-	/TABO_MaxT //InfinityNeg def  /TABO_MaxT_SheetNum -1 def  /TABO_MaxT_WithinPage -1 def
-	/TABO_MinB //Infinity    def  /TABO_MinB_SheetNum -1 def  /TABO_MinB_WithinPage -1 def
+	/TABO_MaxT //InfinNeg def  /TABO_MaxT_SheetNum -1 def  /TABO_MaxT_WithinPage -1 def
+	/TABO_MinB //Infinity def  /TABO_MinB_SheetNum -1 def  /TABO_MinB_WithinPage -1 def
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
@@ -9192,9 +9194,14 @@ currentdict /GlyphShowKnownAbsences undef
 		/BackgroundTextsTNsMinB      GlassesOnTastingNotePages length array def   /BackgroundTextsGlassesMinB      NumSheets array def
 		/BackgroundTextsTNsMaxT      GlassesOnTastingNotePages length array def   /BackgroundTextsGlassesMaxT      NumSheets array def
 		/BackgroundTextsTNsOffsetY   GlassesOnTastingNotePages length array def   /BackgroundTextsGlassesOffsetY   NumSheets array def
+		/BackgroundTextsTNsSpaceL    GlassesOnTastingNotePages length array def   /BackgroundTextsSpaceL           NumSheets array def
+		/BackgroundTextsTNsSpaceR    GlassesOnTastingNotePages length array def   /BackgroundTextsSpaceR           NumSheets array def
+		/BackgroundTextsTNsSpaceB    GlassesOnTastingNotePages length array def   /BackgroundTextsSpaceB           NumSheets array def
+		/BackgroundTextsTNsSpaceT    GlassesOnTastingNotePages length array def   /BackgroundTextsSpaceT           NumSheets array def
 		/BackgroundUsedFontSizesX  NumSheets  GlassesOnTastingNotePages length add  Titles length add  array  def  % Way too many should be enough
 		[ /BackgroundUsedFontSizesY /BackgroundUsedFontSizesOrigX /BackgroundUsedFontSizesOrigY ] {BackgroundUsedFontSizesX length array def} forall
 		/BackgroundUsedFontSizesNum 0 def
+
 		21 dict begin
 		0 1 1
 		{
@@ -9209,20 +9216,21 @@ currentdict /GlyphShowKnownAbsences undef
 				{
 					//false //false //false //false PageType 0 eq {PaperType Orientation} {TastingNotesPaperType TastingNotesOrientation} ifelse SetPaperSize   //true DefStoreMgns
 					PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse
-					BackgroundTextsOrientation dup /Rotated eq exch  PageType 0 eq {Orientation} {TastingNotesOrientation} ifelse  2 copy  /Landscape eq exch /Portrait eq and  3 1 roll  /Portrait eq exch /Landscape eq and  or or  put
+					1 {BackgroundTextsOrientation dup /Natural eq {pop //false exit} if  dup /Rotated eq {pop //true exit} if  PageType 0 eq {Orientation} {TastingNotesOrientation} ifelse ne} repeat  put
+
 					BackgroundTextsFont //DeSizeRounding selectfont  /BackgroundTextThis load StringPathBBox [ /BgT /BgR /BgB /BgL ] {exch //DeSizeRounding div def} forall
 
-					TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq
+					TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq  BackgroundTextsSpaceX dup /CirclesEdges ne exch /CirclesCentres ne and  and
 					{
 						dup dup
 						//false exch {/SuppressOrnamentsLeft   eq {pop //true exit} if} forall  {mark (Warning: SheetNum=) SheetNum ( has BackgroundText, but its PackingStyle contains /SuppressOrnamentsLeft.)   ConcatenateToMark OutputToLog} if
 						//false exch {/SuppressOrnamentsRight  eq {pop //true exit} if} forall  {mark (Warning: SheetNum=) SheetNum ( has BackgroundText, but its PackingStyle contains /SuppressOrnamentsRight.)  ConcatenateToMark OutputToLog} if
 						//false exch {/SuppressOrnamentsCentre eq {pop //true exit} if} forall  {mark (Warning: SheetNum=) SheetNum ( has BackgroundText, but its PackingStyle contains /SuppressOrnamentsCentre.) ConcatenateToMark OutputToLog} if
-					} {pop} ifelse} if  % /arraytype, /Glasses
+					} {pop} ifelse} if  % BackgroundTextsSpaceX != , /arraytype, /Glasses
 				} {/BgT 0 def /BgR 0 def /BgB 0 def /BgL 0 def} ifelse % /BackgroundTextThis load length 0 gt
 				PageType 0 eq
 					{BackgroundTextsGlassesL SheetNum        BackgroundTextsGlassesR BackgroundTextsGlassesB BackgroundTextsGlassesT BackgroundTextsGlassesMinB BackgroundTextsGlassesMaxT}
-					{BackgroundTextsTNsL     TNSheetNum BackgroundTextsTNsR     BackgroundTextsTNsB     BackgroundTextsTNsT     BackgroundTextsTNsMinB     BackgroundTextsTNsMaxT}
+					{BackgroundTextsTNsL     TNSheetNum      BackgroundTextsTNsR     BackgroundTextsTNsB     BackgroundTextsTNsT     BackgroundTextsTNsMinB     BackgroundTextsTNsMaxT}
 				ifelse   5 index BgT put 4 index BgB put 3 index BgT put 2 index BgB put 1 index BgR put BgL put
 			} for  % SheetNum|TNSheetNum
 
@@ -9262,27 +9270,72 @@ currentdict /GlyphShowKnownAbsences undef
 					} for  % SNum1
 				} for  % SNum0
 			} if  % not /False
-
 			0  1  PageType 0 eq {NumSheets} {GlassesOnTastingNotePages length} ifelse 1 sub
 			{
 				dup  /SheetNum exch def  /TNSheetNum exch def  % In case BackgroundTextsSquooshMin/...Max depend on SheetNum|TastingNotes
 				PageType 0 eq {/BackgroundTextsGlasses} {/BackgroundTextsTastingNotes} ifelse load MightBeTrue
 				{
-					PageType 0 eq
-						{BackgroundTextsGlassesL BackgroundTextsGlassesR BackgroundTextsGlassesMinB BackgroundTextsGlassesMaxT}
-						{BackgroundTextsTNsL     BackgroundTextsTNsR     BackgroundTextsTNsMinB     BackgroundTextsTNsMaxT    }
-					ifelse  % Note MinB, MaxT
-					4 {SheetNum get 4 1 roll} repeat   /BgT exch def  /BgB exch def  /BgR exch def  /BgL exch def
+					[ PageType 0 eq
+						{BackgroundTextsGlassesL BackgroundTextsGlassesR BackgroundTextsGlassesMinB BackgroundTextsGlassesMaxT}  % Note MinB, MaxT
+						{BackgroundTextsTNsL     BackgroundTextsTNsR     BackgroundTextsTNsMinB     BackgroundTextsTNsMaxT    }  % Note MinB, MaxT
+					ifelse ] {PageType 0 eq {SheetNum} {TNSheetNum} ifelse get} forall   /BgT exch def  /BgB exch def  /BgR exch def  /BgL exch def
 					BgR BgL gt  BgT BgB gt  and
 					{
 						//false //false //false //false PageType 0 eq {PaperType Orientation} {TastingNotesPaperType TastingNotesOrientation} ifelse SetPaperSize   //true DefStoreMgns
-						PageHeight MgnB MgnT add sub  PageWidth MgnL MgnR add sub  PageType 0 eq {BackgroundTextsGlassesRotated} {BackgroundTextsTNsRotated} ifelse SheetNum get {exch} if
-						/FontSizeOrigX  exch  BgR BgL sub  dup //Epsilon le {pop pop 1} {div} ifelse  BackgroundTextsFontSizeMaxX 2 copy gt {exch} if pop  def
-						/FontSizeOrigY  exch  BgT BgB sub  dup //Epsilon le {pop pop 1} {div} ifelse  BackgroundTextsFontSizeMaxY 2 copy gt {exch} if pop  def
+
+						% X space
+						1 {
+							MgnL  PageWidth MgnR sub  % /PageLessMargins, also default value if BackgroundTextsSpaceX not recognised.
+							BackgroundTextsSpaceX /PageLessMargins eq {exit} if
+							BackgroundTextsSpaceX /PageWhole       eq {pop pop   0  PageWidth  exit} if
+							PageType 0 ne {exit} if
+							BackgroundTextsSpaceX dup /CirclesCentres eq exch /CirclesEdges eq or {pop pop
+								//Infinity GlassPositions SheetNum get {0 get 2 copy gt {exch} if pop} forall  % Left
+								//InfinNeg GlassPositions SheetNum get {0 get 2 copy lt {exch} if pop} forall  % Right
+								/CirclesEdges BackgroundTextsSpaceX eq {Radii SheetNum get 3 -1 roll 1 index sub 3 1 roll add} if
+							exit} if  % /CirclesEdges /CirclesCentres
+							mark (Warning: value of BackgroundTextsSpaceX = ) BackgroundTextsSpaceX ( not recognised. Assuming /PageLessMargins; continuing.) ConcatenateToMark OutputToLog
+						} repeat  % 1
+						PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get
+							{/BTSpaceB exch PageWidth exch sub def /BTSpaceT exch PageWidth exch sub def}
+							{/BTSpaceR exch                    def /BTSpaceL exch                    def}
+						ifelse  % Rotated
+
+						% Y space
+						1 {
+							MgnB  PageHeight MgnT sub  % /PageLessMargins, also default value if BackgroundTextsSpaceY not recognised.
+							BackgroundTextsSpaceY /PageLessMargins eq {exit} if
+							BackgroundTextsSpaceY /PageWhole       eq {pop pop   0  PageHeight  exit} if
+							PageType 0 ne {exit} if
+							BackgroundTextsSpaceY dup /CirclesCentres eq exch /CirclesEdges eq or {pop pop
+								//Infinity GlassPositions SheetNum get {1 get 2 copy gt {exch} if pop} forall  % Bottom
+								//InfinNeg GlassPositions SheetNum get {1 get 2 copy lt {exch} if pop} forall  % Top
+								/CirclesEdges BackgroundTextsSpaceY eq {Radii SheetNum get 3 -1 roll 1 index sub 3 1 roll add} if
+							exit} if  % /CirclesEdges /CirclesCentres
+							mark (Warning: value of BackgroundTextsSpaceY = ) BackgroundTextsSpaceY ( not recognised. Assuming /PageLessMargins; continuing.) ConcatenateToMark OutputToLog
+						} repeat  % 1
+						PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get
+							{/BTSpaceR exch def /BTSpaceL exch def}
+							{/BTSpaceT exch def /BTSpaceB exch def}
+						ifelse  % Rotated
+
+						PageType 0 eq {
+							BackgroundTextsSpaceL      SheetNum BTSpaceL put  % L
+							BackgroundTextsSpaceR      SheetNum BTSpaceR put  % R
+							BackgroundTextsSpaceB      SheetNum BTSpaceB put  % B
+							BackgroundTextsSpaceT      SheetNum BTSpaceT put  % T
+						}{
+							BackgroundTextsTNsSpaceL TNSheetNum BTSpaceL put  % L
+							BackgroundTextsTNsSpaceR TNSheetNum BTSpaceR put  % R
+							BackgroundTextsTNsSpaceB TNSheetNum BTSpaceB put  % B
+							BackgroundTextsTNsSpaceT TNSheetNum BTSpaceT put  % T
+						} ifelse
+						/FontSizeOrigX  BTSpaceR BTSpaceL sub  BgR BgL sub  dup //Epsilon le {pop pop 1} {div} ifelse  BackgroundTextsFontSizeMaxY 2 copy gt {exch} if pop  def
+						/FontSizeOrigY  BTSpaceT BTSpaceB sub  BgT BgB sub  dup //Epsilon le {pop pop 1} {div} ifelse  BackgroundTextsFontSizeMaxY 2 copy gt {exch} if pop  def
 						/FontSizeX  FontSizeOrigX FontSizeOrigY BackgroundTextsSquooshMin div gt {FontSizeOrigY BackgroundTextsSquooshMin div} {FontSizeOrigX} ifelse  def
 						/FontSizeY  FontSizeOrigY FontSizeOrigX BackgroundTextsSquooshMax mul gt {FontSizeOrigX BackgroundTextsSquooshMax mul} {FontSizeOrigY} ifelse  def
-						PageType 0 eq {BackgroundTextsGlassesFontSizeX} {BackgroundTextsTNsFontSizeX} ifelse  SheetNum  FontSizeX put
-						PageType 0 eq {BackgroundTextsGlassesFontSizeY} {BackgroundTextsTNsFontSizeY} ifelse  SheetNum  FontSizeY put
+						PageType 0 eq {BackgroundTextsGlassesFontSizeX SheetNum} {BackgroundTextsTNsFontSizeX TNSheetNum} ifelse  FontSizeX put
+						PageType 0 eq {BackgroundTextsGlassesFontSizeY SheetNum} {BackgroundTextsTNsFontSizeY TNSheetNum} ifelse  FontSizeY put
 						//true  0 1 BackgroundUsedFontSizesNum 1 sub
 						{
 							/i exch def
@@ -9298,14 +9351,17 @@ currentdict /GlyphShowKnownAbsences undef
 							BackgroundUsedFontSizesY     BackgroundUsedFontSizesNum FontSizeY     put
 							/BackgroundUsedFontSizesNum dup load 1 add store
 							mark   (BackgroundTexts: FontSizeX = )  FontSizeX   (, FontSizeY = )  FontSizeY
-							FontSizeX abs 0.1 gt FontSizeY abs 0.1 gt and {( => 'Squoosh' ~= ) FontSizeY FontSizeX div  dup 1.0 eq {pop 1} if ( ~= 1 / ) FontSizeX FontSizeY div  dup 1.0 eq {pop pop} if} if
+							FontSizeX abs 0.1 gt FontSizeY abs 0.1 gt and {( => 'Squoosh' ) (~= ) FontSizeY FontSizeX div  dup 1.0 eq {pop pop (= 1)} {( ~= 1 / ) FontSizeX FontSizeY div} ifelse} if
 							(, on )  TypeOfPagesBeingRendered  TypeOfPagesBeingRendered  /TastingNotes eq {( TNSheetNum=) TNSheetNum} {( SheetNum=) SheetNum} ifelse  ( and perhaps others)
 							PageType 0 eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TNSheetNum} ifelse  get  LengthCompoundObject 2 ge
 							{
-								PageWidth MgnL MgnR add sub PageHeight MgnB MgnT add sub   PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get {exch} if div  BgT BgB sub mul BgR BgL sub sub
-								dup abs 0.0001 ge  {( \(for snug fit insert "{)  exch  dup 0 gt {(+) exch} if  ( Kern}"\))}  {pop ( \(which fits snugly\))}  ifelse  % If so small that would be shown in scientific notation, don't show. And on A3 1E-4 ~= 0.1pt
+								BTSpaceR BTSpaceL sub  BTSpaceT BTSpaceB sub div  BgT BgB sub mul BgR BgL sub sub
+								dup abs 0.0001 ge  % If so small that would be shown in scientific notation, don't show. And on A3 1E-4 ~= 0.1pt
+									{(: for snug fit insert "{)  exch  dup 0 gt {(+) exch} if  ( Kern}".)}
+									{pop (, which fits snugly.)}
+								ifelse
 							} if  % at least two characters
-							(.)  ConcatenateToMark OutputToLog
+							ConcatenateToMark OutputToLog
 						}  if  % Not previous logged
 					} if   % Non-zero bounding box
 				} if  % BackgroundTextsGlasses | BackgroundTextsTastingNotes
@@ -9317,34 +9373,56 @@ currentdict /GlyphShowKnownAbsences undef
 		/BackgroundTextsPaint
 		{
 			//DeBugLevel 50 le {(+BackgroundTextsPaint) OutputToLog} if
-			9 dict begin
-			/BackgroundTextThis TypeOfPagesBeingRendered /Glasses eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TNSheetNum} ifelse get def
-			/BackgroundTextThis load length 0 gt
+			13 dict begin
+			TypeOfPagesBeingRendered /Glasses eq
 			{
-				/BTAH  BackgroundTextsAlignmentHorizontal  dup /Left   eq {pop 0} if  dup /Centre eq {pop 0.5} if  dup /Right eq {pop 1} if  def
-				/BTAV  BackgroundTextsAlignmentVertical    dup /Bottom eq {pop 0} if  dup /Middle eq {pop 0.5} if  dup /Top   eq {pop 1} if  def
+				/BackgroundTextThis BackgroundTextsGlassesTexts SheetNum
+				/BTSpaceL BackgroundTextsSpaceL    2 index  % L
+				/BTSpaceR BackgroundTextsSpaceR    2 index  % R
+				/BTSpaceB BackgroundTextsSpaceB    2 index  % B
+				/BTSpaceT BackgroundTextsSpaceT    2 index  % T
+			}{
+				/BackgroundTextThis BackgroundTextsTNsTexts TNSheetNum
+				/BTSpaceL BackgroundTextsTNsSpaceL 2 index  % L
+				/BTSpaceR BackgroundTextsTNsSpaceR 2 index  % R
+				/BTSpaceB BackgroundTextsTNsSpaceB 2 index  % B
+				/BTSpaceT BackgroundTextsTNsSpaceT 2 index  % T
+			} ifelse   5 {get def} repeat
+			/Glasses TypeOfPagesBeingRendered eq
+				{BackgroundTextsGlassesFontSizeX SheetNum get  BackgroundTextsGlassesFontSizeY SheetNum get}
+				{BackgroundTextsTNsFontSizeX   TNSheetNum get  BackgroundTextsTNsFontSizeY   TNSheetNum get}
+			ifelse  abs 2 gt exch abs 2 gt and  /BackgroundTextThis load length 0 gt and  % Embedded constant of minimum font sizes
+			{
+				/BTAH  BackgroundTextsAlignmentHorizontal
+					dup /Left   eq {pop 0} if  dup /Centre eq {pop 0.5} if  dup /Right eq {pop 1} if
+					dup IsNumber not {mark (Error: BackgroundTextsAlignmentHorizontal = ) 3 -1 roll (, not numeric, nor /Left nor /Centre nor /Right. Continuing as if 0.5.) ConcatenateToMark OutputToLog  0.5} if
+				def  % /BTAH
+				/BTAV  BackgroundTextsAlignmentVertical
+					dup /Bottom eq {pop 0} if  dup /Middle eq {pop 0.5} if  dup /Top   eq {pop 1} if
+					dup IsNumber not {mark (Error: BackgroundTextsAlignmentVertical = )   3 -1 roll (, not numeric, nor /Bottom nor /Middle nor /Top. Continuing as if 0.5.) ConcatenateToMark OutputToLog  0.5} if
+				def  % /BTAV
 				matrix currentmatrix
-				TypeOfPagesBeingRendered /Glasses eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get
-				{
-					PageWidth 0 translate 90 rotate  /MgnL MgnB /MgnB MgnR /MgnR MgnT /MgnT MgnL  /PageHeight PageWidth /PageWidth PageHeight  6 {def} repeat
-				} if  % rotated
+				TypeOfPagesBeingRendered /Glasses eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get {PageWidth 0 translate 90 rotate} if  % rotated
 
-				PageWidth MgnL MgnR add sub BTAH mul MgnL add  PageHeight MgnB MgnT add sub BTAV mul MgnB add  moveto
+				matrix currentmatrix
+				1 BTAH sub BTSpaceL mul  BTAH BTSpaceR mul  add
+				1 BTAV sub BTSpaceB mul  BTAV BTSpaceT mul  add   moveto
+
 				TypeOfPagesBeingRendered /Glasses eq
 				{
-					matrix currentmatrix   BackgroundTextsGlassesFontSizeX SheetNum get BackgroundTextsGlassesFontSizeY SheetNum get scale
-					BackgroundTextsGlassesL SheetNum get neg  1 BTAH sub mul  BackgroundTextsGlassesR SheetNum get neg BTAH mul add
-					BackgroundTextsGlassesB SheetNum get neg  1 BTAV sub mul  BackgroundTextsGlassesT SheetNum get neg BTAV mul add  rmoveto
+					BackgroundTextsGlassesFontSizeX    SheetNum get     BackgroundTextsGlassesFontSizeY SheetNum get  scale
+					1 BTAH sub BackgroundTextsGlassesL SheetNum get mul    BTAH BackgroundTextsGlassesR SheetNum get mul  add neg
+					1 BTAV sub BackgroundTextsGlassesB SheetNum get mul    BTAV BackgroundTextsGlassesT SheetNum get mul  add neg  rmoveto
 				}{
-					matrix currentmatrix   BackgroundTextsTNsFontSizeX TNSheetNum get BackgroundTextsTNsFontSizeY TNSheetNum get scale
-					BackgroundTextsTNsL TNSheetNum get neg  1 BTAH sub mul  BackgroundTextsTNsR TNSheetNum get neg BTAH mul add
-					BackgroundTextsTNsB TNSheetNum get neg  1 BTAV sub mul  BackgroundTextsTNsT TNSheetNum get neg BTAV mul add  rmoveto
+					BackgroundTextsTNsFontSizeX      TNSheetNum get     BackgroundTextsTNsFontSizeY   TNSheetNum get  scale
+					1 BTAH sub BackgroundTextsTNsL   TNSheetNum get mul    BTAH BackgroundTextsTNsR   TNSheetNum get mul  add neg
+					1 BTAV sub BackgroundTextsTNsB   TNSheetNum get mul    BTAV BackgroundTextsTNsT   TNSheetNum get mul  add neg  rmoveto
 				} ifelse  % ... /Glasses
 				BackgroundTextsFont 1 selectfont   /BackgroundTextThis load //true CharPathRecursive
-				setmatrix  0.9375 setgray  4.32 setlinewidth  1 setlinecap
-				1 setlinejoin  [] 0 setdash  ClipSave BackgroundTextsGlassesPaintCode ClipRestore
+				setmatrix  0.9375 setgray  4.32 setlinewidth  1 setlinejoin  1 setlinecap  [] 0 setdash
+				ClipSave BackgroundTextsGlassesPaintCode ClipRestore
 				setmatrix
-			} if  % /BackgroundTextThis load length 0 gt
+			} if  % /BackgroundTextThis load length 0 gt, and font sizes non-trivally positive
 			end
 			//DeBugLevel 50 le {(-BackgroundTextsPaint) OutputToLog} if
 		} bind def  % /BackgroundTextsPaint
@@ -9679,7 +9757,7 @@ currentdict /GlyphShowKnownAbsences undef
 									/Drplt ChargesData  X  Y  DropletsPathLength  0.36  DropletPath def  % Embedded constant.
 									Drplt length 8 ge
 									{
-										/OnPageStart //Infinity def  /OnPageEnd //InfinityNeg def
+										/OnPageStart //Infinity def  /OnPageEnd //InfinNeg def
 										0  4  Drplt length 4 sub  % Is any part of droplet inside paintable page?
 										{
 											/i exch def
@@ -10929,7 +11007,7 @@ currentdict /GlyphShowKnownAbsences undef
 								GSave  MatrixPrePour setmatrix newpath
 								MgnL MgnB moveto  PageWidth MgnR sub MgnB lineto  PageWidth MgnR sub PageHeight MgnT sub lineto  MgnL PageHeight MgnT sub lineto
 								MatrixGlasses setmatrix  GlassPositions SheetNum get WithinPage get {neg} forall translate  pathbbox	GRestore
-							} {//InfinityNeg  //InfinityNeg  //Infinity  //Infinity} ifelse  % RotationTitlesAboveBelowOverCirclearray 0 eq
+							} {//InfinNeg  //InfinNeg  //Infinity  //Infinity} ifelse  % RotationTitlesAboveBelowOverCirclearray 0 eq
 							WithinPage  1.0  DropletsPaint  % If rotating too complicated to rotate box; the WithinPage must suffice.
 						} if  % Droplets PrePourShowDroplets and
 						ClipRestore
@@ -12467,7 +12545,7 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				NamesFont exch selectfont  /ThisName load StringPathBBox  pop /ThisNameR exch def pop /ThisNameL exch def
 				NamePlacementBottomX SheetNum get  ThisNameR ThisNameL sub 2 div  2 copy sub 3 1 roll add
-			} {pop //Infinity  //InfinityNeg} ifelse  % NamesShowBottom ...
+			} {pop //Infinity  //InfinNeg} ifelse  % NamesShowBottom ...
 			NamesIsLeftHander NameNum get not  WaterBoxesOverrideShowEverySheet not {WaterBoxesShowRight SheetNum get execU  and} if
 			NamesIsLeftHander NameNum get      WaterBoxesOverrideShowEverySheet not {WaterBoxesShowLeft  SheetNum get execU  and} if
 			/PaintBackgroundCode load length 0 gt  /Droplets load MightBeTrue or  CrossHatchingOutside or  /FlightSeparations load MightBeTrue {FlightSeparationLines SheetNum get length 0 gt or} if  WaterBoxesPaintProc  % Ignoring BackgroundTextsGlasses.
@@ -13313,7 +13391,7 @@ currentdict /GlyphShowKnownAbsences undef
 						/CDBestFailureAmount //Infinity def
 						/CDBestOrientation /Portrait def
 						/CDBestNumPages CDNumGlasses 1 add def
-						/CDBestSizeScore //InfinityNeg def
+						/CDBestSizeScore //InfinNeg def
 						/CDBestWidthOneCork 0 def
 						/CDBestHeightOneCork 0 def
 						/CDBestNumRows //null def
@@ -13688,7 +13766,7 @@ currentdict /GlyphShowKnownAbsences undef
 														NTBestWidthPer -2 div NTBestHeightPer -2 div moveto  NTBestWidthPer  2 div NTBestHeightPer -2 div lineto
 														NTBestWidthPer  2 div NTBestHeightPer  2 div lineto  NTBestWidthPer -2 div NTBestHeightPer  2 div lineto
 														MatrixTitlesEtc setmatrix  GlassPositions SheetNum get WithinPage get {neg} forall translate  pathbbox  GRestore
-													} {//InfinityNeg  //InfinityNeg  //Infinity  //Infinity} ifelse  % RotationTitlesAboveBelowOverCirclearray 0 eq
+													} {//InfinNeg  //InfinNeg  //Infinity  //Infinity} ifelse  % RotationTitlesAboveBelowOverCirclearray 0 eq
 													WithinPage  1.0  DropletsPaint  % If rotating too complicated to rotate box; the WithinPage must suffice.
 												} if  % Droplets NeckTagsShowDroplets and
 												ClipRestore
@@ -14307,7 +14385,7 @@ currentdict /GlyphShowKnownAbsences undef
 													StickyLabelX StickyLabelsWithPagePortraitWidth 2 div add StickyLabelY StickyLabelsWithPagePortraitHeight 2 div add lineto
 													StickyLabelX StickyLabelsWithPagePortraitWidth 2 div add StickyLabelY StickyLabelsWithPagePortraitHeight 2 div sub lineto
 													StickyLabelsGlassesMatrix setmatrix  GlassPositions SheetNum get WithinPage get {neg} forall translate  pathbbox  GRestore
-												} {//InfinityNeg  //InfinityNeg  //Infinity  //Infinity} ifelse  % RotationTitlesAboveBelowOverCirclearray 0 eq
+												} {//InfinNeg  //InfinNeg  //Infinity  //Infinity} ifelse  % RotationTitlesAboveBelowOverCirclearray 0 eq
 												WithinPage  1.0  DropletsPaint
 											} if  % Droplets StickyLabelsShowDroplets and
 											setmatrix ClipRestore
