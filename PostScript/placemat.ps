@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:30 Thursday 30th May 2024
+% This version 00:40 Sunday 2nd June 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202405302330) def
+/ParametersVersionDateTimeAdobeFormat (D:202406020040) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -342,7 +342,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /BackgroundTextsSquooshMin 1  BackgroundTextsSquooshMax dup 1 eq {pop} {div} ifelse  def
 /BackgroundTextsTastingNotes BackgroundTextsGlasses def
 /BackgroundTextsOrientation /Landscape def  % /Landscape /Portrait /Natural /Rotated
-/BackgroundTextsGlassesPaintCode {clip 4.32 setlinewidth 0.9375 setgray stroke} def
+/BackgroundTextsGlassesPaintCode {clip stroke} def
 /BackgroundTextsSpaceX /CirclesEdges def  % /PageLessMargins /PageWhole, and ignored not on glasses pages, /CirclesEdges /CirclesCentres . This is relative to page.
 /BackgroundTextsSpaceY /CirclesEdges def  % /PageLessMargins /PageWhole, and ignored not on glasses pages, /CirclesEdges /CirclesCentres . This is relative to page.
 
@@ -794,7 +794,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202405302330) def
+/SoftwareVersionDateTimeAdobeFormat (D:202406020040) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -2747,8 +2747,8 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 {
 	//DeBugLevel 5 le {(+CurrentFontSize) OutputToLog} if
 	currentfont dup
-	/FontMatrix get 3 get  % current y scale
-	exch /FontName get findfont /FontMatrix get 3 get  % original y scale
+	/FontMatrix get 0 get  % current x scale (June 2024 switched from y to x, so works naturally with Kern).
+	exch /FontName get findfont /FontMatrix get 0 get  % original x scale
 	div
 	//DeBugLevel 5 le {(-CurrentFontSize) OutputToLog} if
 } bind def  % /CurrentFontSize
@@ -3623,6 +3623,7 @@ currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 
 % Two uses.
 % Bug in Adobe Distiller 8.1.3 (23/10/2006). In attempting to treat paths derived from text as copyable text, it fails to cope with paths made partly thereby and partly from a upath.
+% Bug in Adobe Distiller 20.0, 20.005.30635, PostScript software version 3018.101, in which sometimes, perhaps if rotated, a clip of a text-derived charpath had no effect.
 % Also, eliminates some types of problems with embedding fonts.
 /DeFontPath
 {
@@ -9203,20 +9204,20 @@ currentdict /GlyphShowKnownAbsences undef
 		/BackgroundUsedFontSizesNum 0 def
 
 		21 dict begin
-		0 1 1
+		[ /G /TN ]
 		{
 			/PageType exch def
-			/TypeOfPagesBeingRendered  PageType 0 eq {/Glasses} {/TastingNotes} ifelse  store
-			0  1  PageType 0 eq {NumSheets} {GlassesOnTastingNotePages length} ifelse 1 sub
+			/TypeOfPagesBeingRendered  PageType /G eq {/Glasses} {/TastingNotes} ifelse  store
+			0  1  PageType /G eq {NumSheets} {GlassesOnTastingNotePages length} ifelse 1 sub
 			{
-				PageType 0 eq {/SheetNum} {/TNSheetNum} ifelse exch def
-				/BackgroundTextThis  PageType 0 eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TNSheetNum} ifelse  get def
+				PageType /G eq {/SheetNum} {/TNSheetNum} ifelse exch def
+				/BackgroundTextThis  PageType /G eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TNSheetNum} ifelse  get def
 
 				/BackgroundTextThis load length 0 gt
 				{
-					//false //false //false //false PageType 0 eq {PaperType Orientation} {TastingNotesPaperType TastingNotesOrientation} ifelse SetPaperSize   //true DefStoreMgns
-					PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse
-					1 {BackgroundTextsOrientation dup /Natural eq {pop //false exit} if  dup /Rotated eq {pop //true exit} if  PageType 0 eq {Orientation} {TastingNotesOrientation} ifelse ne} repeat  put
+					//false //false //false //false PageType /G eq {PaperType Orientation} {TastingNotesPaperType TastingNotesOrientation} ifelse SetPaperSize   //true DefStoreMgns
+					PageType /G eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse
+					1 {BackgroundTextsOrientation dup /Natural eq {pop //false exit} if  dup /Rotated eq {pop //true exit} if  PageType /G eq {Orientation} {TastingNotesOrientation} ifelse ne} repeat  put
 
 					BackgroundTextsFont //DeSizeRounding selectfont  /BackgroundTextThis load StringPathBBox [ /BgT /BgR /BgB /BgL ] {exch //DeSizeRounding div def} forall
 
@@ -9228,23 +9229,22 @@ currentdict /GlyphShowKnownAbsences undef
 						//false exch {/SuppressOrnamentsCentre eq {pop //true exit} if} forall  {mark (Warning: SheetNum=) SheetNum ( has BackgroundText, but its PackingStyle contains /SuppressOrnamentsCentre.) ConcatenateToMark OutputToLog} if
 					} {pop} ifelse} if  % BackgroundTextsSpaceX != , /arraytype, /Glasses
 				} {/BgT 0 def /BgR 0 def /BgB 0 def /BgL 0 def} ifelse % /BackgroundTextThis load length 0 gt
-				PageType 0 eq
+				PageType /G eq
 					{BackgroundTextsGlassesL SheetNum        BackgroundTextsGlassesR BackgroundTextsGlassesB BackgroundTextsGlassesT BackgroundTextsGlassesMinB BackgroundTextsGlassesMaxT}
 					{BackgroundTextsTNsL     TNSheetNum      BackgroundTextsTNsR     BackgroundTextsTNsB     BackgroundTextsTNsT     BackgroundTextsTNsMinB     BackgroundTextsTNsMaxT}
 				ifelse   5 index BgT put 4 index BgB put 3 index BgT put 2 index BgB put 1 index BgR put BgL put
 			} for  % SheetNum|TNSheetNum
 
-			//true BackgroundTextsGlassesSameSizeIfAllOf {dup //false eq exch /False eq or {pop //false exit} if} forall
+			PageType /G eq {//true BackgroundTextsGlassesSameSizeIfAllOf {dup //false eq exch /False eq or {pop //false exit} if} forall} {//false} ifelse
 			{
-				0  1   PageType 0 eq {NumSheets} {GlassesOnTastingNotePages length} ifelse 1 sub
+				0  1   NumSheets 1 sub
 				{
 					/SNum0 exch def
 					0  1   SNum0 1 sub
 					{
 						/SNum1 exch def
 						//true  BackgroundTextsGlassesSameSizeIfAllOf
-						PageType 0 eq
-						{ {
+						{
 							dup /SamePageOrdering eq {PageOrderingGlasses dup SNum0 GetEU exch SNum1 GetEU ne {pop pop //false exit} if} if
 							dup /OnSheetWithSameNumberGlasses eq {GlassesOnSheets SNum0 GetEU length GlassesOnSheets SNum1 GetEU length ne {pop pop //false exit} if} if
 							dup /OnSheetWithSameRadius eq {Radii SNum0 GetEU Radii SNum1 GetEU RadiiEffectivelyEqual not {pop pop //false exit} if} if
@@ -9252,16 +9252,9 @@ currentdict /GlyphShowKnownAbsences undef
 							dup /TextSameLength eq {BackgroundTextsGlassesTexts SNum0 get LengthCompoundObject BackgroundTextsGlassesTexts SNum1 get LengthCompoundObject ne {pop pop //false exit} if} if
 							dup /RadiiShrunkToBeSame eq {ShrinkRadiiSquareArray SNum0 GetEU SNum1 GetEU not {pop pop //false exit} if} if
 							pop
-						} }
-						{ {
-							dup /SamePageOrdering eq {PageOrderingTastingNotePages dup SNum0 GetEU exch SNum1 GetEU ne {pop pop //false exit} if} if
-							dup /OnSheetWithSameNumberGlasses eq {GlassesOnTastingNotePages SNum0 GetEU length GlassesOnTastingNotePages SNum1 GetEU length ne {pop pop //false exit} if} if
-							dup /SamePaperSize eq {<< /TNSheetNum SNum0 /SheetNum SNum0 >> begin TastingNotesPaperType end  << /TNSheetNum SNum1 /SheetNum SNum1 >> begin TastingNotesPaperType end ne {pop pop //false exit} if} if
-							dup /TextSameLength eq {BackgroundTextsTNsTexts SNum0 get LengthCompoundObject BackgroundTextsTNsTexts SNum1 get LengthCompoundObject ne {pop pop //false exit} if} if
-							pop
-						} } ifelse forall  % BackgroundTextsGlassesSameSizeIfAllOf
+						} forall  % BackgroundTextsGlassesSameSizeIfAllOf
 						{
-							PageType 0 eq {BackgroundTextsGlassesMinB dup BackgroundTextsGlassesMaxT dup} {BackgroundTextsTNsMinB dup BackgroundTextsTNsMaxT dup} ifelse
+							BackgroundTextsGlassesMinB dup BackgroundTextsGlassesMaxT dup
 							SNum1 2 copy get  2 index SNum0 get dup 3 1 roll  lt {put} {pop pop pop} ifelse
 							SNum0 2 copy get  2 index SNum1 get dup 3 1 roll  lt {put} {pop pop pop} ifelse
 							SNum1 2 copy get  2 index SNum0 get dup 3 1 roll  gt {put} {pop pop pop} ifelse
@@ -9269,26 +9262,27 @@ currentdict /GlyphShowKnownAbsences undef
 						} if  % passes all possible tests
 					} for  % SNum1
 				} for  % SNum0
-			} if  % not /False
-			0  1  PageType 0 eq {NumSheets} {GlassesOnTastingNotePages length} ifelse 1 sub
+			} if  % PageType /G eq,  BackgroundTextsGlassesSameSizeIfAllOf not /False
+
+			0  1  PageType /G eq {NumSheets} {GlassesOnTastingNotePages length} ifelse 1 sub
 			{
 				dup  /SheetNum exch def  /TNSheetNum exch def  % In case BackgroundTextsSquooshMin/...Max depend on SheetNum|TastingNotes
-				PageType 0 eq {/BackgroundTextsGlasses} {/BackgroundTextsTastingNotes} ifelse load MightBeTrue
+				PageType /G eq {/BackgroundTextsGlasses} {/BackgroundTextsTastingNotes} ifelse load MightBeTrue
 				{
-					[ PageType 0 eq
+					[ PageType /G eq
 						{BackgroundTextsGlassesL BackgroundTextsGlassesR BackgroundTextsGlassesMinB BackgroundTextsGlassesMaxT}  % Note MinB, MaxT
 						{BackgroundTextsTNsL     BackgroundTextsTNsR     BackgroundTextsTNsMinB     BackgroundTextsTNsMaxT    }  % Note MinB, MaxT
-					ifelse ] {PageType 0 eq {SheetNum} {TNSheetNum} ifelse get} forall   /BgT exch def  /BgB exch def  /BgR exch def  /BgL exch def
+					ifelse ] {PageType /G eq {SheetNum} {TNSheetNum} ifelse get} forall   /BgT exch def  /BgB exch def  /BgR exch def  /BgL exch def
 					BgR BgL gt  BgT BgB gt  and
 					{
-						//false //false //false //false PageType 0 eq {PaperType Orientation} {TastingNotesPaperType TastingNotesOrientation} ifelse SetPaperSize   //true DefStoreMgns
+						//false //false //false //false PageType /G eq {PaperType Orientation} {TastingNotesPaperType TastingNotesOrientation} ifelse SetPaperSize   //true DefStoreMgns
 
 						% X space
 						1 {
 							MgnL  PageWidth MgnR sub  % /PageLessMargins, also default value if BackgroundTextsSpaceX not recognised.
 							BackgroundTextsSpaceX /PageLessMargins eq {exit} if
 							BackgroundTextsSpaceX /PageWhole       eq {pop pop   0  PageWidth  exit} if
-							PageType 0 ne {exit} if
+							PageType /G ne {exit} if
 							BackgroundTextsSpaceX dup /CirclesCentres eq exch /CirclesEdges eq or {pop pop
 								//Infinity GlassPositions SheetNum get {0 get 2 copy gt {exch} if pop} forall  % Left
 								//InfinNeg GlassPositions SheetNum get {0 get 2 copy lt {exch} if pop} forall  % Right
@@ -9296,7 +9290,7 @@ currentdict /GlyphShowKnownAbsences undef
 							exit} if  % /CirclesEdges /CirclesCentres
 							mark (Warning: value of BackgroundTextsSpaceX = ) BackgroundTextsSpaceX ( not recognised. Assuming /PageLessMargins; continuing.) ConcatenateToMark OutputToLog
 						} repeat  % 1
-						PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get
+						PageType /G eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get
 							{/BTSpaceB exch PageWidth exch sub def /BTSpaceT exch PageWidth exch sub def}
 							{/BTSpaceR exch                    def /BTSpaceL exch                    def}
 						ifelse  % Rotated
@@ -9306,7 +9300,7 @@ currentdict /GlyphShowKnownAbsences undef
 							MgnB  PageHeight MgnT sub  % /PageLessMargins, also default value if BackgroundTextsSpaceY not recognised.
 							BackgroundTextsSpaceY /PageLessMargins eq {exit} if
 							BackgroundTextsSpaceY /PageWhole       eq {pop pop   0  PageHeight  exit} if
-							PageType 0 ne {exit} if
+							PageType /G ne {exit} if
 							BackgroundTextsSpaceY dup /CirclesCentres eq exch /CirclesEdges eq or {pop pop
 								//Infinity GlassPositions SheetNum get {1 get 2 copy gt {exch} if pop} forall  % Bottom
 								//InfinNeg GlassPositions SheetNum get {1 get 2 copy lt {exch} if pop} forall  % Top
@@ -9314,12 +9308,12 @@ currentdict /GlyphShowKnownAbsences undef
 							exit} if  % /CirclesEdges /CirclesCentres
 							mark (Warning: value of BackgroundTextsSpaceY = ) BackgroundTextsSpaceY ( not recognised. Assuming /PageLessMargins; continuing.) ConcatenateToMark OutputToLog
 						} repeat  % 1
-						PageType 0 eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get
+						PageType /G eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get
 							{/BTSpaceR exch def /BTSpaceL exch def}
 							{/BTSpaceT exch def /BTSpaceB exch def}
 						ifelse  % Rotated
 
-						PageType 0 eq {
+						PageType /G eq {
 							BackgroundTextsSpaceL      SheetNum BTSpaceL put  % L
 							BackgroundTextsSpaceR      SheetNum BTSpaceR put  % R
 							BackgroundTextsSpaceB      SheetNum BTSpaceB put  % B
@@ -9334,8 +9328,8 @@ currentdict /GlyphShowKnownAbsences undef
 						/FontSizeOrigY  BTSpaceT BTSpaceB sub  BgT BgB sub  dup //Epsilon le {pop pop 1} {div} ifelse  BackgroundTextsFontSizeMaxY 2 copy gt {exch} if pop  def
 						/FontSizeX  FontSizeOrigX FontSizeOrigY BackgroundTextsSquooshMin div gt {FontSizeOrigY BackgroundTextsSquooshMin div} {FontSizeOrigX} ifelse  def
 						/FontSizeY  FontSizeOrigY FontSizeOrigX BackgroundTextsSquooshMax mul gt {FontSizeOrigX BackgroundTextsSquooshMax mul} {FontSizeOrigY} ifelse  def
-						PageType 0 eq {BackgroundTextsGlassesFontSizeX SheetNum} {BackgroundTextsTNsFontSizeX TNSheetNum} ifelse  FontSizeX put
-						PageType 0 eq {BackgroundTextsGlassesFontSizeY SheetNum} {BackgroundTextsTNsFontSizeY TNSheetNum} ifelse  FontSizeY put
+						PageType /G eq {BackgroundTextsGlassesFontSizeX SheetNum} {BackgroundTextsTNsFontSizeX TNSheetNum} ifelse  FontSizeX put
+						PageType /G eq {BackgroundTextsGlassesFontSizeY SheetNum} {BackgroundTextsTNsFontSizeY TNSheetNum} ifelse  FontSizeY put
 						//true  0 1 BackgroundUsedFontSizesNum 1 sub
 						{
 							/i exch def
@@ -9352,10 +9346,10 @@ currentdict /GlyphShowKnownAbsences undef
 							/BackgroundUsedFontSizesNum dup load 1 add store
 							mark   (BackgroundTexts: FontSizeX = )  FontSizeX   (, FontSizeY = )  FontSizeY
 							FontSizeX abs 0.1 gt FontSizeY abs 0.1 gt and {( => 'Squoosh' ) (~= ) FontSizeY FontSizeX div  dup 1.0 eq {pop pop (= 1)} {( ~= 1 / ) FontSizeX FontSizeY div} ifelse} if
-							(, on )  TypeOfPagesBeingRendered  TypeOfPagesBeingRendered  /TastingNotes eq {( TNSheetNum=) TNSheetNum} {( SheetNum=) SheetNum} ifelse  ( and perhaps others)
-							PageType 0 eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TNSheetNum} ifelse  get  LengthCompoundObject 2 ge
+							(, on )  TypeOfPagesBeingRendered  TypeOfPagesBeingRendered  /Glasses eq {( SheetNum=) SheetNum} {( TNSheetNum=) TNSheetNum} ifelse  ( and perhaps others)
+							PageType /G eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TNSheetNum} ifelse  get  LengthCompoundObject 2 ge
 							{
-								BTSpaceR BTSpaceL sub  BTSpaceT BTSpaceB sub div  BgT BgB sub mul BgR BgL sub sub
+								BTSpaceR BTSpaceL sub  BTSpaceT BTSpaceB sub div  BgT BgB sub mul  BgR BgL sub sub
 								dup abs 0.0001 ge  % If so small that would be shown in scientific notation, don't show. And on A3 1E-4 ~= 0.1pt
 									{(: for snug fit insert "{)  exch  dup 0 gt {(+) exch} if  ( Kern}".)}
 									{pop (, which fits snugly.)}
@@ -9367,63 +9361,66 @@ currentdict /GlyphShowKnownAbsences undef
 				} if  % BackgroundTextsGlasses | BackgroundTextsTastingNotes
 			} for  % SheetNum|TNSheetNum
 
-		} bind for  % PageType
+		} bind forall  % PageType
 		end
 
 		/BackgroundTextsPaint
 		{
 			//DeBugLevel 50 le {(+BackgroundTextsPaint) OutputToLog} if
-			13 dict begin
-			TypeOfPagesBeingRendered /Glasses eq
+			//false
+			/Glasses      TypeOfPagesBeingRendered eq {pop  BackgroundTextsGlasses      BackgroundTextsGlassesTexts SheetNum get length 0 gt  and} if
+			/TastingNotes TypeOfPagesBeingRendered eq {pop  BackgroundTextsTastingNotes BackgroundTextsTNsTexts   TNSheetNum get length 0 gt  and} if
 			{
-				/BackgroundTextThis BackgroundTextsGlassesTexts SheetNum
-				/BTSpaceL BackgroundTextsSpaceL    2 index  % L
-				/BTSpaceR BackgroundTextsSpaceR    2 index  % R
-				/BTSpaceB BackgroundTextsSpaceB    2 index  % B
-				/BTSpaceT BackgroundTextsSpaceT    2 index  % T
-			}{
-				/BackgroundTextThis BackgroundTextsTNsTexts TNSheetNum
-				/BTSpaceL BackgroundTextsTNsSpaceL 2 index  % L
-				/BTSpaceR BackgroundTextsTNsSpaceR 2 index  % R
-				/BTSpaceB BackgroundTextsTNsSpaceB 2 index  % B
-				/BTSpaceT BackgroundTextsTNsSpaceT 2 index  % T
-			} ifelse   5 {get def} repeat
-			/Glasses TypeOfPagesBeingRendered eq
-				{BackgroundTextsGlassesFontSizeX SheetNum get  BackgroundTextsGlassesFontSizeY SheetNum get}
-				{BackgroundTextsTNsFontSizeX   TNSheetNum get  BackgroundTextsTNsFontSizeY   TNSheetNum get}
-			ifelse  abs 2 gt exch abs 2 gt and  /BackgroundTextThis load length 0 gt and  % Embedded constant of minimum font sizes
-			{
-				/BTAH  BackgroundTextsAlignmentHorizontal
-					dup /Left   eq {pop 0} if  dup /Centre eq {pop 0.5} if  dup /Right eq {pop 1} if
-					dup IsNumber not {mark (Error: BackgroundTextsAlignmentHorizontal = ) 3 -1 roll (, not numeric, nor /Left nor /Centre nor /Right. Continuing as if 0.5.) ConcatenateToMark OutputToLog  0.5} if
-				def  % /BTAH
-				/BTAV  BackgroundTextsAlignmentVertical
-					dup /Bottom eq {pop 0} if  dup /Middle eq {pop 0.5} if  dup /Top   eq {pop 1} if
-					dup IsNumber not {mark (Error: BackgroundTextsAlignmentVertical = )   3 -1 roll (, not numeric, nor /Bottom nor /Middle nor /Top. Continuing as if 0.5.) ConcatenateToMark OutputToLog  0.5} if
-				def  % /BTAV
-				matrix currentmatrix
-				TypeOfPagesBeingRendered /Glasses eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get {PageWidth 0 translate 90 rotate} if  % rotated
-
-				matrix currentmatrix
-				1 BTAH sub BTSpaceL mul  BTAH BTSpaceR mul  add
-				1 BTAV sub BTSpaceB mul  BTAV BTSpaceT mul  add   moveto
-
+				13 dict begin
 				TypeOfPagesBeingRendered /Glasses eq
 				{
-					BackgroundTextsGlassesFontSizeX    SheetNum get     BackgroundTextsGlassesFontSizeY SheetNum get  scale
-					1 BTAH sub BackgroundTextsGlassesL SheetNum get mul    BTAH BackgroundTextsGlassesR SheetNum get mul  add neg
-					1 BTAV sub BackgroundTextsGlassesB SheetNum get mul    BTAV BackgroundTextsGlassesT SheetNum get mul  add neg  rmoveto
+					/BackgroundTextThis BackgroundTextsGlassesTexts SheetNum
+					/BTSpaceL BackgroundTextsSpaceL    2 index  % L
+					/BTSpaceR BackgroundTextsSpaceR    2 index  % R
+					/BTSpaceB BackgroundTextsSpaceB    2 index  % B
+					/BTSpaceT BackgroundTextsSpaceT    2 index  % T
 				}{
-					BackgroundTextsTNsFontSizeX      TNSheetNum get     BackgroundTextsTNsFontSizeY   TNSheetNum get  scale
-					1 BTAH sub BackgroundTextsTNsL   TNSheetNum get mul    BTAH BackgroundTextsTNsR   TNSheetNum get mul  add neg
-					1 BTAV sub BackgroundTextsTNsB   TNSheetNum get mul    BTAV BackgroundTextsTNsT   TNSheetNum get mul  add neg  rmoveto
-				} ifelse  % ... /Glasses
-				BackgroundTextsFont 1 selectfont   /BackgroundTextThis load //true CharPathRecursive
-				setmatrix  0.9375 setgray  4.32 setlinewidth  1 setlinejoin  1 setlinecap  [] 0 setdash
-				ClipSave BackgroundTextsGlassesPaintCode ClipRestore
-				setmatrix
-			} if  % /BackgroundTextThis load length 0 gt, and font sizes non-trivally positive
-			end
+					/BackgroundTextThis BackgroundTextsTNsTexts TNSheetNum
+					/BTSpaceL BackgroundTextsTNsSpaceL 2 index  % L
+					/BTSpaceR BackgroundTextsTNsSpaceR 2 index  % R
+					/BTSpaceB BackgroundTextsTNsSpaceB 2 index  % B
+					/BTSpaceT BackgroundTextsTNsSpaceT 2 index  % T
+				} ifelse   5 {get def} repeat
+				/Glasses TypeOfPagesBeingRendered eq
+					{BackgroundTextsGlassesFontSizeX SheetNum get  BackgroundTextsGlassesFontSizeY SheetNum get}
+					{BackgroundTextsTNsFontSizeX   TNSheetNum get  BackgroundTextsTNsFontSizeY   TNSheetNum get}
+				ifelse  abs 2 gt exch abs 2 gt and  /BackgroundTextThis load length 0 gt and  % Embedded constant of minimum font sizes
+				{
+					/BTAH  BackgroundTextsAlignmentHorizontal
+						dup /Left   eq {pop 0} if  dup /Centre eq {pop 0.5} if  dup /Right eq {pop 1} if
+						dup IsNumber not {mark (Error: BackgroundTextsAlignmentHorizontal = ) 3 -1 roll (, not numeric, nor /Left nor /Centre nor /Right. Continuing as if 0.5.) ConcatenateToMark OutputToLog  0.5} if
+					def  % /BTAH
+					/BTAV  BackgroundTextsAlignmentVertical
+						dup /Bottom eq {pop 0} if  dup /Middle eq {pop 0.5} if  dup /Top   eq {pop 1} if
+						dup IsNumber not {mark (Error: BackgroundTextsAlignmentVertical = )   3 -1 roll (, not numeric, nor /Bottom nor /Middle nor /Top. Continuing as if 0.5.) ConcatenateToMark OutputToLog  0.5} if
+					def  % /BTAV
+					matrix currentmatrix
+					TypeOfPagesBeingRendered /Glasses eq {BackgroundTextsGlassesRotated SheetNum} {BackgroundTextsTNsRotated TNSheetNum} ifelse get {PageWidth 0 translate 90 rotate} if  % rotated
+
+					1 BTAH sub BTSpaceL mul  BTAH BTSpaceR mul  add
+					1 BTAV sub BTSpaceB mul  BTAV BTSpaceT mul  add   moveto
+
+					TypeOfPagesBeingRendered /Glasses eq
+					{
+						1 BTAH sub BackgroundTextsGlassesL SheetNum get mul    BTAH BackgroundTextsGlassesR SheetNum get mul  add neg  BackgroundTextsGlassesFontSizeX SheetNum get mul
+						1 BTAV sub BackgroundTextsGlassesB SheetNum get mul    BTAV BackgroundTextsGlassesT SheetNum get mul  add neg  BackgroundTextsGlassesFontSizeY SheetNum get mul  rmoveto
+						BackgroundTextsFont [BackgroundTextsGlassesFontSizeX SheetNum get  0  0  BackgroundTextsGlassesFontSizeY SheetNum get  0  0] selectfont  % PLRM3: p656, p624
+					}{
+						1 BTAH sub BackgroundTextsTNsL   TNSheetNum get mul    BTAH BackgroundTextsTNsR   TNSheetNum get mul  add neg  BackgroundTextsTNsFontSizeX TNSheetNum get mul
+						1 BTAV sub BackgroundTextsTNsB   TNSheetNum get mul    BTAV BackgroundTextsTNsT   TNSheetNum get mul  add neg  BackgroundTextsTNsFontSizeY TNSheetNum get mul  rmoveto
+						BackgroundTextsFont [BackgroundTextsTNsFontSizeX TNSheetNum get  0  0  BackgroundTextsTNsFontSizeY TNSheetNum get  0  0] selectfont  % PLRM3: p656, p624
+					} ifelse  % ... /Glasses
+					0.9375 setgray  7.68 setlinewidth  1 setlinejoin  1 setlinecap  [] 0 setdash
+					/BackgroundTextThis load //true CharPathRecursive   DeFontPath   ClipSave BackgroundTextsGlassesPaintCode ClipRestore newpath
+					setmatrix  % Undoing the rotate done 17 lines up
+				} if  % /BackgroundTextThis load length 0 gt, and font sizes non-trivally positive
+				end
+			} if  % BackgroundTextsGlasses | BackgroundTextsTastingNotes, non-empty text
 			//DeBugLevel 50 le {(-BackgroundTextsPaint) OutputToLog} if
 		} bind def  % /BackgroundTextsPaint
 
@@ -11597,7 +11594,7 @@ currentdict /GlyphShowKnownAbsences undef
 										TitlesFont 1 selectfont  VoteRecorderMonkeyVote StringPathBBox  /T exch def /R exch def /B exch def /L exch def
 										T B 0.01 add gt  R L 0.01 add gt  and
 										{
-											/FS  VoteRecorderColWidth 0.8 mul R L sub div  VoteRecorderRowHeight2 1.6 mul T B sub div   2 copy gt {exch} if pop  def  % Filling <=80% of width and height 
+											/FS  VoteRecorderColWidth 0.8 mul R L sub div  VoteRecorderRowHeight2 1.6 mul T B sub div   2 copy gt {exch} if pop  def  % Filling <=80% of width and height
 											x R L add FS mul 2 div sub  y T B add FS mul 2 div sub  moveto
 											TitlesFont FS selectfont  0.6 setgray  VoteRecorderMonkeyVote ShowRecursive  % Not quite black
 										} if  % Non-zero size
