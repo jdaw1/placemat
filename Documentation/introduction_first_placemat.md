@@ -68,7 +68,7 @@ Also good on Windows is [Notepad++](https://notepad-plus-plus.org/).
 
 Bookmark this manual, and download to your machine a copy of [the PostScript code](../PostScript/placemat.ps?raw=1) (update this copy every time: new versions fix bugs; add features; improve default settings). 
 Store it in a directory named something like &ldquo;placemats&rdquo;. 
-Give the PostScript file a name which will make sense in aeons to come, perhaps YYYYMMDD.ps, or YYYYMMDD_TastingName.ps, as if it will become the first item in your placemat archive.
+Give the PostScript file a name which will make sense in aeons to come, perhaps <kbd>YYYYMMDD.ps</kbd>, or <kbd>YYYYMMDD_TastingName.ps</kbd>, as if it will become the first item in your placemat archive.
 
 ### Converting the .ps to PDF
 
