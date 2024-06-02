@@ -1,6 +1,6 @@
 %!PS
 
-% This version 00:40 Sunday 2nd June 2024
+% This version 23:00 Sunday 2nd June 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202406020040) def
+/ParametersVersionDateTimeAdobeFormat (D:202406022300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -794,7 +794,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202406020040) def
+/SoftwareVersionDateTimeAdobeFormat (D:202406022300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -3624,6 +3624,9 @@ currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 % Two uses.
 % Bug in Adobe Distiller 8.1.3 (23/10/2006). In attempting to treat paths derived from text as copyable text, it fails to cope with paths made partly thereby and partly from a upath.
 % Bug in Adobe Distiller 20.0, 20.005.30635, PostScript software version 3018.101, in which sometimes, perhaps if rotated, a clip of a text-derived charpath had no effect.
+% https://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+% https://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
+% https://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/48495926-postscript-distiller-ignores-clip-after-charpath
 % Also, eliminates some types of problems with embedding fonts.
 /DeFontPath
 {
