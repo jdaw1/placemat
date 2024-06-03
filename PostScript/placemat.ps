@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Sunday 2nd June 2024
+% This version 21:55 Monday 3rd June 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202406022300) def
+/ParametersVersionDateTimeAdobeFormat (D:202406022155) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -794,7 +794,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202406022300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202406022155) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -2743,23 +2743,33 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 } bind def  % /AnyMatches
 
 % http://bugs.ghostscript.com/show_bug.cgi?id=689664
-/CurrentFontSize
+/CurrentFontSizeX
 {
-	//DeBugLevel 5 le {(+CurrentFontSize) OutputToLog} if
+	//DeBugLevel 5 le {(+CurrentFontSizeX) OutputToLog} if
 	currentfont dup
-	/FontMatrix get 0 get  % current x scale (June 2024 switched from y to x, so works naturally with Kern).
+	/FontMatrix get 0 get
 	exch /FontName get findfont /FontMatrix get 0 get  % original x scale
 	div
-	//DeBugLevel 5 le {(-CurrentFontSize) OutputToLog} if
-} bind def  % /CurrentFontSize
+	//DeBugLevel 5 le {(-CurrentFontSizeX) OutputToLog} if
+} bind def  % /CurrentFontSizeX
+/CurrentFontSizeY
+{
+	//DeBugLevel 5 le {(+CurrentFontSizeY) OutputToLog} if
+	currentfont dup
+	/FontMatrix get 3 get
+	exch /FontName get findfont /FontMatrix get 3 get  % original x scale
+	div
+	//DeBugLevel 5 le {(-CurrentFontSizeY) OutputToLog} if
+} bind def  % /CurrentFontSizeY
 % http://groups.google.com/g/comp.lang.postscript/c/cteFkRmWMVg
 /CurrentFontName {currentfont /FontName get} bind def
 
-/SubscriptOn {0 CurrentFontSize -0.25 mul rmoveto  CurrentFontName CurrentFontSize 1.7 div selectfont} bind def
-/SubscriptOff {CurrentFontName CurrentFontSize 1.7 mul selectfont  0 CurrentFontSize 0.25 mul rmoveto} bind def
-/SuperscriptOn {0 CurrentFontSize 0.375 mul rmoveto  CurrentFontName CurrentFontSize 1.7 div selectfont} bind def
-/SuperscriptOff {CurrentFontName CurrentFontSize 1.7 mul selectfont  0 CurrentFontSize -0.375 mul rmoveto} bind def
-/Kern {CurrentFontSize mul 0 rmoveto} bind def
+/SubscriptOn   {-0.25  VKern   CurrentFontName [CurrentFontSizeX 1.7 div 0 0 CurrentFontSizeY 1.7 div 0 0] selectfont} bind def
+/SuperscriptOn {+0.375 VKern   CurrentFontName [CurrentFontSizeX 1.7 div 0 0 CurrentFontSizeY 1.7 div 0 0] selectfont} bind def
+/SubscriptOff                 {CurrentFontName [CurrentFontSizeX 1.7 mul 0 0 CurrentFontSizeY 1.7 mul 0 0] selectfont   +0.25  VKern} bind def
+/SuperscriptOff               {CurrentFontName [CurrentFontSizeX 1.7 mul 0 0 CurrentFontSizeY 1.7 mul 0 0] selectfont   -0.375 VKern} bind def
+/Kern {CurrentFontSizeX mul  0      rmoveto} bind def
+/VKern {CurrentFontSizeY mul  0 exch rmoveto} bind def
   /UnderlineX0 //null def    /UnderlineY0 //null def    /UnderlineMatrix //null def
 /ThroughlineX0 //null def  /ThroughlineY0 //null def  /ThroughlineMatrix //null def
   /UnderlineBegin {  /UnderlineMatrix matrix currentmatrix store  currentpoint   /UnderlineY0 exch store   /UnderlineX0 exch store} def
@@ -2787,14 +2797,14 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 	{
 		/HalfPrepstnlineWidth
 		currentfont /FontInfo known {currentfont /FontInfo get /UnderlineThickness known} {//false} ifelse
-			{currentfont /FontInfo get /UnderlineThickness get CurrentFontSize mul}
-			{CurrentFontSize 20.48 div}  % 20.48 is actual constant for /TimesNewRomanPS-ItalicMT
+			{currentfont /FontInfo get /UnderlineThickness get CurrentFontSizeY mul}
+			{CurrentFontSizeY 20.48 div}  % 20.48 is actual constant for /TimesNewRomanPS-ItalicMT
 		ifelse  2 div def  % /HalfPrepstnlineWidth
 		/OffsetY 1 {
 			/Under PrepositionWhich eq
 			{
 				currentfont /FontInfo known {currentfont /FontInfo get /UnderlinePosition known} {//false} ifelse
-					{currentfont /FontInfo get /UnderlinePosition get CurrentFontSize mul}
+					{currentfont /FontInfo get /UnderlinePosition get CurrentFontSizeY mul}
 					{(Qgjpqy) StringPathBBox  pop pop exch pop   3 div   currentlinewidth 2 div sub}
 				ifelse
 				exit
@@ -9347,16 +9357,23 @@ currentdict /GlyphShowKnownAbsences undef
 							BackgroundUsedFontSizesX     BackgroundUsedFontSizesNum FontSizeX     put
 							BackgroundUsedFontSizesY     BackgroundUsedFontSizesNum FontSizeY     put
 							/BackgroundUsedFontSizesNum dup load 1 add store
-							mark   (BackgroundTexts: FontSizeX = )  FontSizeX   (, FontSizeY = )  FontSizeY
-							FontSizeX abs 0.1 gt FontSizeY abs 0.1 gt and {( => 'Squoosh' ) (~= ) FontSizeY FontSizeX div  dup 1.0 eq {pop pop (= 1)} {( ~= 1 / ) FontSizeX FontSizeY div} ifelse} if
-							(, on )  TypeOfPagesBeingRendered  TypeOfPagesBeingRendered  /Glasses eq {( SheetNum=) SheetNum} {( TNSheetNum=) TNSheetNum} ifelse  ( and perhaps others)
+							mark   (BackgroundTexts)
+							(, on )  PageType /G eq {(Glasses SheetNum=) SheetNum} {(TastingNotes TNSheetNum=) TNSheetNum} ifelse  ( and perhaps others: )
+							(FontSizeX = )  FontSizeX   (, FontSizeY = )  FontSizeY
+							FontSizeX abs 0.1 gt  FontSizeY abs 0.1 gt  and  % Embeded constant, which doesn't matter.
+							{
+								( => 'Squoosh' ) (~= ) FontSizeY FontSizeX div
+								dup 1.0 eq  {pop pop (= 1)}  {( ~= 1 / ) FontSizeX FontSizeY div}  ifelse
+							} if  % FontSizeX FontSizeY allow division
 							PageType /G eq {BackgroundTextsGlassesTexts SheetNum} {BackgroundTextsTNsTexts TNSheetNum} ifelse  get  LengthCompoundObject 2 ge
 							{
 								BTSpaceR BTSpaceL sub  BTSpaceT BTSpaceB sub div  BgT BgB sub mul  BgR BgL sub sub
 								dup abs 0.0001 ge  % If so small that would be shown in scientific notation, don't show. And on A3 1E-4 ~= 0.1pt
-									{(: for snug fit insert "{)  exch  dup 0 gt {(+) exch} if  ( Kern}".)}
-									{pop (, which fits snugly.)}
-								ifelse
+								{
+									(. For snug fit insert "{)  exch  dup 0 gt {(+) exch} if  ( Kern}")
+									BTSpaceT BTSpaceB sub  BTSpaceR BTSpaceL sub div  BgR BgL sub mul  BgT BgB sub sub
+									dup 0.0001 gt {( or, if character heights even, {) exch ( VKern}" or minus that.)} {pop} ifelse
+								} {pop (, which fits snugly.)} ifelse
 							} if  % at least two characters
 							ConcatenateToMark OutputToLog
 						}  if  % Not previous logged
@@ -12433,7 +12450,7 @@ currentdict /GlyphShowKnownAbsences undef
 							neg  TastingNotesColumnRelativeWidths i GetEU TNColumnMultiplier mul add  2 div   0   rmoveto
 							RightBoundaryNameTastingNotes  TNSheetNum  currentpoint pop  put
 						} ifelse  % text wider than column
-						CurrentFontSize 60 div  setlinewidth
+						CurrentFontSizeX 60 div  setlinewidth
 						TastingNotesColumnRelativeWidths i GetEU  0  gt {TastingNotesColumnHeadings i get ShowRecursive} if
 						GRestore
 					} if  % TastingNotesColumnHeadings i get NonEmptyCompoundObject
@@ -12803,7 +12820,7 @@ currentdict /GlyphShowKnownAbsences undef
 				GSave
 				0 setgray
 				FooterFont   PlaceNamesFirstAndThirdFoldsFromEdge MgnB sub  dup 12 gt {pop 12} if  0.6 mul   selectfont  % embedded constant
-				MgnL  MgnB CurrentFontSize 0.15 mul add  moveto  % descenders away from MgnB
+				MgnL  MgnB CurrentFontSizeY 0.15 mul add  moveto  % descenders away from MgnB
 				(Fold sheet in half, then along dashed lines. Press hard on folds.)
 				HeadersAndFooters [ 4 1 roll ] NonEmptyCompoundObject [ 5 2 roll ] NonEmptyCompoundObject
 				{
@@ -12821,12 +12838,12 @@ currentdict /GlyphShowKnownAbsences undef
 					dup StringWidthRecursive dup  PageWidth MgnL MgnR add sub 2 div  exch div dup  1 lt
 					{
 						GSave
-						PageWidth MgnL MgnR sub add 2 div  MgnB CurrentFontSize 0.15 mul add  moveto
+						PageWidth MgnL MgnR sub add 2 div  MgnB CurrentFontSizeY 0.15 mul add  moveto
 						1 scale  pop
 						ShowRecursive
 						GRestore
 					}{
-						PageWidth MgnR sub  MgnB CurrentFontSize 0.15 mul add  moveto
+						PageWidth MgnR sub  MgnB CurrentFontSizeY 0.15 mul add  moveto
 						pop neg 0 rmoveto ShowRecursive
 					} ifelse % Leftie string too long
 				} if  % WaterBoxes and left-handed
