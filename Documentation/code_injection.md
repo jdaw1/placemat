@@ -224,32 +224,37 @@ Moves back down, and horizontally such that the &lsquo;s&rsquo; and the dot will
 Moves forwards to the end of the &lsquo;s&rsquo; (since the dot is narrower), and finally reverts the font size back to `BrosOriginalFontSize`, before showing the remainder of string, `( & Rudd Selection)`.
 
 ```PostScript
-[
-	(Berry Bro) 
+[{
+	8 dict begin
+	(Berry Bro)
 	{
-		/BrosOriginalFontSize CurrentFontSize def
-		/BrosHeight-s (s) StringHeight def
-		/BrosHeight-o (o) StringHeight def
-		/BrosHeight-dot (.) StringHeight def
-		/BrosVerticalOffset  BrosHeight-o  BrosHeight-s 1.5 div BrosHeight-dot div 1 add  div  def
-		CurrentFontName   
-		BrosOriginalFontSize BrosHeight-o mul  BrosHeight-dot 1.5 mul BrosHeight-s add  div   
-		selectfont
-		/BrosWidth-s (s) StringWidthRecursive def
-		/BrosWidth-dot (.) StringWidthRecursive def
+		/BrosOrigFontSizeX CurrentFontSizeX def
+		/BrosOrigFontSizeY CurrentFontSizeY def
+		/BrosHeight_s   (s) StringHeight def
+		/BrosHeight_dot (.) StringHeight def
+		/BrosHeight_o   (o) StringHeight def
+		/BrosVerticalOffset  BrosHeight_o  BrosHeight_s 1.5 div BrosHeight_dot div 1 add  div  def
+		CurrentFontName [
+			[BrosOrigFontSizeX 0 0 BrosOrigFontSizeY 0 0]
+			{BrosHeight_o mul BrosHeight_dot 1.5 mul BrosHeight_s add div}
+			forall
+		] selectfont
+		/BrosWidth_s   (s) StringWidthRecursive def
+		/BrosWidth_dot (.) StringWidthRecursive def
 
-		BrosWidth-dot BrosWidth-s gt {BrosWidth-dot BrosWidth-s sub 2 div} {0} ifelse
+		BrosWidth_dot BrosWidth_s gt {BrosWidth_dot BrosWidth_s sub 2 div} {0} ifelse
 		BrosVerticalOffset  rmoveto
 	}
 	(s)
-	{BrosWidth-s BrosWidth-dot add -2 div   BrosVerticalOffset neg   rmoveto}
+	{BrosWidth_s BrosWidth_dot add -2 div   BrosVerticalOffset neg   rmoveto}
 	(.)
 	{
-		BrosWidth-s BrosWidth-dot gt {BrosWidth-s BrosWidth-dot sub 2 div 0 rmoveto} if
-		CurrentFontName BrosOriginalFontSize selectfont
+		BrosWidth_s BrosWidth_dot gt {BrosWidth_s BrosWidth_dot sub 2 div 0 rmoveto} if
+		CurrentFontName [BrosOrigFontSizeX 0 0 BrosOrigFontSizeY 0 0] selectfont
 	}
 	( & Rudd Selection)
-]
+	end
+}]
 ```
 The software can cope with this both in a straight line, and typeset around a circle as an element of an element of `Circlearrays`. 
 In fonts `/Garamond` and `/TrebuchetMS`:
