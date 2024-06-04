@@ -216,12 +216,12 @@ Multiple variables can be available for inspection.
 Berry Brothers&rsquo; name contains an abbreviation, shown as a small &lsquo;s&rsquo; above a dot. 
 This entails some PostScript.
 
-The code below starts by saving the current font size in `BrosOriginalFontSize`. 
+The code below starts by saving the current font sizes. 
 Then it calculates the height of the &lsquo;s&rsquo; (using the handy `StringHeight` function), of the &lsquo;o&rsquo;, and the dot, from which it can deduce the font size such that the dot, a gap half height of the dot, and the &lsquo;s&rsquo;, in the new size, sum to the height of the &lsquo;o&rsquo; in the old, and also deduce the vertical offset of the &lsquo;s&rsquo; (`BrosVerticalOffset`). 
 Then the code changes the font size, and `rmoveto`s up (it would also `rmoveto` right if the dot were wider than the &lsquo;s&rsquo;). 
 Shows the &lsquo;s&rsquo;. 
 Moves back down, and horizontally such that the &lsquo;s&rsquo; and the dot will have aligned centres, and shows the dot. 
-Moves forwards to the end of the &lsquo;s&rsquo; (since the dot is narrower), and finally reverts the font size back to `BrosOriginalFontSize`, before showing the remainder of string, `( & Rudd Selection)`.
+Moves forwards to the end of the &lsquo;s&rsquo; (since the dot is narrower), and finally reverts the *x* and *y* font sizes, before showing the remainder of string, `( & Rudd Selection)`.
 
 ```PostScript
 [{
