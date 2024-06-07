@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:55 Monday 3rd June 2024
+% This version 22:20 Friday 7th June 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202406022155) def
+/ParametersVersionDateTimeAdobeFormat (D:202406072220) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -794,7 +794,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202406022155) def
+/SoftwareVersionDateTimeAdobeFormat (D:202406072220) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -9372,7 +9372,7 @@ currentdict /GlyphShowKnownAbsences undef
 								{
 									(. For snug fit insert "{)  exch  dup 0 gt {(+) exch} if  ( Kern}")
 									BTSpaceT BTSpaceB sub  BTSpaceR BTSpaceL sub div  BgR BgL sub mul  BgT BgB sub sub
-									dup 0.0001 gt {( or, if character heights even, {) exch ( VKern}" or minus that.)} {pop} ifelse
+									dup 0.0001 gt {( or, between lowest descender and highest ascender, "{) exch ( VKern}", or negative that if in reverse order.)} {pop (.)} ifelse
 								} {pop (, which fits snugly.)} ifelse
 							} if  % at least two characters
 							ConcatenateToMark OutputToLog
