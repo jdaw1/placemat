@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:20 Friday 7th June 2024
+% This version 23:55 Saturday 29th June 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202406072220) def
+/ParametersVersionDateTimeAdobeFormat (D:202406292355) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -107,7 +107,7 @@
 /DecantingNotesNumCopies  Circlearrays length 15 ge {1} {0} ifelse  def
 /AccountsNumCopies  Names length 8 ge {1} {0} ifelse  def
 /StickyLabelsNumCopies 0 def
-/StickyLabelsTypes [0 1] def  % 0 = 2x4 on A4; 1 = 5x13 on A4
+/StickyLabelsTypes [ /Avery_2_4 /Avery_5_13 ] def  % /Avery_2_4 = 2x4 on A4; /Avery_5_13 = 5x13 on A4; /Dymo89_36mm 1x1 on 89mm x 36mm
 /BottleWrapNumCopies 0 def  % Activates BottleWrapSuppressOtherPageTypes
 /OneCircles false def       % Activates OneCircleSuppressOtherPageTypes
 
@@ -667,29 +667,30 @@ if} bind def  % /VoteRecorderCrossedBox
 /DecanterLabelsOrientation /Automatic def  % of labels, not of paper. /Landscape /Portrait /Automatic
 
 % Defaults:
-% Type 0 = www.ryman.co.uk/0220013460/Product ;
-% Type 1 = www.amazon.co.uk/exec/obidos/ASIN/B000SHP9OC/jdaw  www.avery.co.uk/avery/en_gb/Products/Labels/Labels-for-Letters-%26-Envelopes/White-Address-Labels/White-Mini-Inkjet-Labels_J8651_25.htm
-/StickyLabelsPaperType {[/A4 /A4] StickyLabelsTypeThis get} bind def
+% Type /Avery_2_4  = www.avery.co.uk/blank-labels/rectangle-105x74mm
+% Type /Avery_5_13 = www.avery.co.uk/blank-labels/rectangle-38x21mm  www.amazon.co.uk/exec/obidos/ASIN/B000SHP9OC/jdaw
+% Type /Dymo89_36mm as used by www.dymo.com/label-makers-printers/labelwriter-label-printers/dymo-labelwriter-450-direct-thermal-label-printer/SAP_1752264.html
+/StickyLabelsPaperType {/Dymo89_36mm StickyLabelsTypeThis eq {[252.283 102.047]} {/A4} ifelse} bind def
 /StickyLabelsByNameWhichReplaceCirclearrays {StickyLabelsWithPagePortraitNumRows StickyLabelsWithPagePortraitNumCols mul 24 gt} bind def
-/StickyLabelsNamesChangeFaster {[false false] StickyLabelsTypeThis get} bind def
+/StickyLabelsNamesChangeFaster false def
 /StickyLabelsAvoidAcrossColumnsOrRows true def  % Ignored unless StickyLabelsByNameWhichReplaceCirclearrays
 /StickyLabelsAvoidAcrossPages true def  % Ignored unless StickyLabelsByNameWhichReplaceCirclearrays
-/StickyLabelsWithPagePortraitNumRows {[4 13] StickyLabelsTypeThis get} bind def
-/StickyLabelsWithPagePortraitNumCols {[2 5] StickyLabelsTypeThis get} bind def
+/StickyLabelsWithPagePortraitNumRows {<< /Avery_2_4 4  /Avery_5_13 13  /Dymo89_36mm 1 >> StickyLabelsTypeThis get} bind def
+/StickyLabelsWithPagePortraitNumCols {<< /Avery_2_4 2  /Avery_5_13  5  /Dymo89_36mm 1 >> StickyLabelsTypeThis get} bind def
 /StickyLabelsWithPagePortraitGapL 12 def
 /StickyLabelsWithPagePortraitGapR 12 def
-/StickyLabelsWithPagePortraitGapT {[36 31] StickyLabelsTypeThis get} bind def
-/StickyLabelsWithPagePortraitGapB {[36 31] StickyLabelsTypeThis get} bind def
+/StickyLabelsWithPagePortraitGapT {<< /Avery_2_4 36  /Avery_5_13 31  /Dymo89_36mm 1 >> StickyLabelsTypeThis get} bind def
+/StickyLabelsWithPagePortraitGapB {<< /Avery_2_4 36  /Avery_5_13 31  /Dymo89_36mm 1 >> StickyLabelsTypeThis get} bind def
 /StickyLabelsWithPagePortraitGapBetweenRows 0 def
 /StickyLabelsWithPagePortraitGapBetweenCols 8 def
 /StickyLabelsOrientation /Automatic def  % of labels, not of paper. /Landscape /Portrait /Automatic
-/StickyLabelsColumnsChangeFaster {[true false] StickyLabelsTypeThis get} bind def
+/StickyLabelsColumnsChangeFaster {<< /Avery_2_4 true  /Avery_5_13 false >> StickyLabelsTypeThis get} bind def
 /StickyLabelsFirstPageStartPosition 0 def
-/StickyLabelsPaddingWithPagePortraitTB {[12 6] StickyLabelsTypeThis get} bind def
-/StickyLabelsPaddingWithPagePortraitRL {[6 3] StickyLabelsTypeThis get} bind def
-/StickyLabelsShowBackgroundTexts {[true false] StickyLabelsTypeThis get} bind def
-/StickyLabelsShowDroplets {[false false] StickyLabelsTypeThis get} bind def
-/StickyLabelsShowCirclearraysInCircle {[false false] StickyLabelsTypeThis get} bind def
+/StickyLabelsPaddingWithPagePortraitTB {<< /Avery_2_4 12  /Avery_5_13 6  /Dymo89_36mm 4 >> StickyLabelsTypeThis get} bind def
+/StickyLabelsPaddingWithPagePortraitRL {<< /Avery_2_4  6  /Avery_5_13 3  /Dymo89_36mm 4 >> StickyLabelsTypeThis get} bind def
+/StickyLabelsShowBackgroundTexts {/Avery_5_13 StickyLabelsTypeThis ne} bind def
+/StickyLabelsShowDroplets false def
+/StickyLabelsShowCirclearraysInCircle false def
 /StickyLabelsReverseOrder false def
 /StickyLabelsRemoveDuplicatesByWithinTitles true def
 /StickyLabelsSortByWithinTitles true def
@@ -794,7 +795,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202406072220) def
+/SoftwareVersionDateTimeAdobeFormat (D:202406292355) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -1929,20 +1930,20 @@ currentdict /ForReverseBinaryDict undef
 	1 dict begin
 	exch /PaperType exch def
 	1 {
-		/A4       PaperType eq {595.27559   841.88976 exit} if  % 210mm by 297mm. For speed start with the values most often used.
-		/A3       PaperType eq {841.88976  1190.55118 exit} if  % 297mm by 420mm
-		/USL      PaperType eq {612         792       exit} if  % 8.5" by 11"
-		/USLegal  PaperType eq {612        1008       exit} if  % 8.5" by 14"
-		/Tabloid  PaperType eq {792        1224       exit} if  % 11"  by 17", http://github.com/jdaw1/placemat/issues/159
-		/Ledger   PaperType eq {792        1224       exit} if  % 11"  by 17"
-		/USL2     PaperType eq {792        1224       exit} if  % 11"  by 17"
-		/arraytype PaperType type eq {PaperType dup 0 get exch 1 get exit} if  % [SmallerPts LargerPts], ignoring anything after first two elements
+		/A4       PaperType eq { 595.27559   841.88976 exit} if  % 210mm by 297mm. For speed start with the values most often used.
+		/A3       PaperType eq { 841.88976  1190.55118 exit} if  % 297mm by 420mm
+		/A2       PaperType eq {1190.55118  1683.77953 exit} if  % 420mm by 594mm
+		/USL      PaperType eq { 612         792       exit} if  % 8.5" by 11"
+		/USLegal  PaperType eq { 612        1008       exit} if  % 8.5" by 14"
+		/Tabloid  PaperType eq { 792        1224       exit} if  % 11"  by 17", http://github.com/jdaw1/placemat/issues/159
+		/Ledger   PaperType eq { 792        1224       exit} if  % 11"  by 17"
+		/USL2     PaperType eq { 792        1224       exit} if  % 11"  by 17"
+		PaperType type /arraytype eq {PaperType dup 0 get exch 1 get exit} if  % [SmallerPts LargerPts], ignoring anything after first two elements
+		/Dymo_36_89 PaperType type eq {36 mm 89 mm exit} if
 		/Berliner PaperType eq {315 mm      470 mm    exit} if  % http://www.theguardian.com/gpc/berliner-format
-		PaperType type /arraytype eq {PaperType {execU} forall exit} if  % [ Small Large ]
 		/A4_USL PaperType eq {210 mm 792 exit} if  % Smaller of the A4/USL widths; smaller of the heights
 		/A0  PaperType eq { 841 mm 1189 mm  exit} if  % A0 can hold 106 glasses slightly larger than five on A4. Which is a large enough page size.
 		/A1  PaperType eq { 594 mm  841 mm  exit} if
-		/A2  PaperType eq { 420 mm  594 mm  exit} if
 		/A5  PaperType eq { 148 mm  210 mm  exit} if
 		/A6  PaperType eq { 105 mm  148 mm  exit} if
 		/A7  PaperType eq {  74 mm  105 mm  exit} if
@@ -6286,12 +6287,12 @@ currentdict /GlyphShowKnownAbsences undef
 			/NudgeAmount
 			NudgeRows
 			{
-				W R 2 mul sub  NC 2 mul 1 sub  div
+				W  NC 2 mul R mul  sub   dup 0 lt {pop 0} if
 				/a  NC 2 sub NC mul  NR 1 sub dup mul  mul def
 				/b  NR 1 sub dup mul 2 mul  W R 2 mul sub mul  def
 				/c  NC 1 sub H mul  NR NC sub 2 mul R mul add  NR 1 sub W mul sub   NC 1 sub H mul  NR 1 sub W mul add  NR NC add 2 sub 2 mul R mul sub   mul def
 			}{
-				H R 2 mul sub  NR 2 mul 1 sub  div
+				H  NR 2 mul R mul  sub   dup 0 lt {pop 0} if
 				/a  NR 2 sub NR mul  NC 1 sub dup mul  mul def
 				/b  NC 1 sub dup mul 2 mul  H R 2 mul sub mul  def
 				/c  NR 1 sub W mul  NC NR sub 2 mul R mul add  NC 1 sub H mul sub   NR 1 sub W mul  NC 1 sub H mul add  NC NR add 2 sub 2 mul R mul sub   mul def
@@ -7776,6 +7777,15 @@ currentdict /GlyphShowKnownAbsences undef
 		} {pop //false} ifelse
 		GRestore end
 	} bind def  % /TwoArraysEqual
+
+	% PT0 PT1  PaperTypesEqual  boolean
+	/PaperTypesEqual
+	{
+		/Portrait Dimensions  3 -1 roll  % W H PT
+		/Portrait Dimensions  3 -1 roll  % W W H H
+		sub abs //PrinterEpsilon le  3 1 roll
+		sub abs //PrinterEpsilon le  and
+	} bind def  % /PaperTypesEqual
 
 	mark (Radii = ) Radii SizeArrayOutput TrimSpaces ( => diameters ~= )
 	() [ Radii {mark exch dup 127 mul 180 div 1 FormatDecimalPlaces exch 36 div 2 FormatDecimalPlaces (mm~=) exch (") ConcatenateToMark} forall ] SizeArrayOutput TrimSpaces (.) ConcatenateToMark OutputToLog
@@ -13016,8 +13026,6 @@ currentdict /GlyphShowKnownAbsences undef
 		{
 			/ThisPaperType exch def
 
-
-
 			0  1  Names length 1 sub
 			{
 				/NameNum exch def
@@ -13033,7 +13041,7 @@ currentdict /GlyphShowKnownAbsences undef
 						{
 							/TNSheetNum SheetNum def
 							NameNum Names length lt {PageOrderingGlasses} {PageOrderingDecanterLabels} ifelse   SheetNum GetEU  ThisPageOrdering  eq
-							ThisPaperType PaperType ne {PaperType type /arraytype eq ThisPaperType type /arraytype eq and {0 1 1 {dup PaperType exch GetEU exch ThisPaperType exch GetEU sub abs //PrinterEpsilon lt} for and and} {pop //false} ifelse} if
+							ThisPaperType PaperType PaperTypesEqual and 
 							{
 								0  1  GlassesNumCopies 1 sub
 								{
@@ -13091,7 +13099,7 @@ currentdict /GlyphShowKnownAbsences undef
 						{
 							/ThisName  Names NameNum get  def
 							NameNum Names length lt {PageOrderingGlasses} {PageOrderingDecanterLabels} ifelse   SheetNum GetEU  ThisPageOrdering  eq
-							ThisPaperType PaperType ne {PaperType type /arraytype eq ThisPaperType type /arraytype eq and {0 1 1 {dup PaperType exch GetEU exch ThisPaperType exch GetEU sub abs //PrinterEpsilon lt} for and and} {pop //false} ifelse} if
+							ThisPaperType PaperType PaperTypesEqual and
 							{
 								0  1  GlassesNumCopies 1 sub
 								{
@@ -13118,7 +13126,7 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						/TNSheetNum exch def
 						/TypeOfPagesBeingRendered /TastingNotes store
-						TastingNotesPaperType ThisPaperType eq   PageOrderingTastingNotePages TNSheetNum GetEU  ThisPageOrdering  eq   and
+						TastingNotesPaperType ThisPaperType PaperTypesEqual   PageOrderingTastingNotePages TNSheetNum GetEU  ThisPageOrdering  eq   and
 						{
 							NameNum NamesTastingNotes length lt
 							{
@@ -13151,7 +13159,7 @@ currentdict /GlyphShowKnownAbsences undef
 					/PlaceNameSetNum exch def
 					NameNum  NamesPlaceNames PlaceNameSetNum GetEU length  lt
 					{
-						PlaceNamesPaperType ThisPaperType  eq   PageOrderingPlaceNames PlaceNameSetNum GetEU  ThisPageOrdering  eq   and
+						PlaceNamesPaperType ThisPaperType PaperTypesEqual   PageOrderingPlaceNames PlaceNameSetNum GetEU  ThisPageOrdering  eq   and
 						{
 							/ThisName NamesPlaceNames PlaceNameSetNum GetEU NameNum get def
 							/usertimeStartLocal usertime def
@@ -13192,7 +13200,7 @@ currentdict /GlyphShowKnownAbsences undef
 					/VoteRecorderSheetNum exch def
 					/VoteRecorderThisSheet GlassesClusteredOnVoteRecorders VoteRecorderSheetNum GetEU def
 					/VoteRecorderThisSheetLength  0  VoteRecorderThisSheet {execU length add} forall  VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU {1 add} if  def
-					VoteRecorderPaperType ThisPaperType  eq   PageOrderingVoteRecorder VoteRecorderSheetNum get  ThisPageOrdering  eq   and
+					VoteRecorderPaperType ThisPaperType PaperTypesEqual   PageOrderingVoteRecorder VoteRecorderSheetNum get  ThisPageOrdering  eq   and
 					{
 						0  1  VoteRecorderTopTexts VoteRecorderSheetNum get length 1 sub
 						{
@@ -13242,7 +13250,7 @@ currentdict /GlyphShowKnownAbsences undef
 						/DecantingNotesCopyNum exch def
 						/DecantingNotesThisSheet GlassesClusteredOnDecantingNotes DecantingNotesSheetNum GetEU def
 
-						DecantingNotesPaperType ThisPaperType  eq   PageOrderingDecantingNotes DecantingNotesSheetNum get  ThisPageOrdering  eq   and
+						DecantingNotesPaperType ThisPaperType PaperTypesEqual   PageOrderingDecantingNotes DecantingNotesSheetNum get  ThisPageOrdering  eq   and
 						{
 							/DecantingNotesThisSheetLength  0  DecantingNotesThisSheet {execU length add} forall  def
 							/TypeOfPagesBeingRendered /DecantingNotes store
@@ -13267,7 +13275,7 @@ currentdict /GlyphShowKnownAbsences undef
 				35 dict begin
 				/TypeOfPagesBeingRendered /Accounts store
 				/ThisName (Accounts) def
-				//false  AccountsPaperType ThisPaperType eq {PageOrderingAccounts {execU ThisPageOrdering eq {pop //true exit} if} forall} if
+				//false  AccountsPaperType ThisPaperType PaperTypesEqual {PageOrderingAccounts {execU ThisPageOrdering eq {pop //true exit} if} forall} if
 				{
 				  AccountsNumCopies
 					{
@@ -13398,7 +13406,7 @@ currentdict /GlyphShowKnownAbsences undef
 					/CDTopTextFontSize 14 def  % embedded constant
 					HeaderFont CDTopTextFontSize selectfont  CorkDisplayTopText StringPathBBox  /CDTopTextT exch def  /CDTopTextR exch def  /CDTopTextB exch def  /CDTopTextL exch def
 					/CorkDisplayTopTextHeight CDTopTextT CDTopTextB sub def
-					CorkDisplayPaperType ThisPaperType  eq   PageOrderingCorkDisplay CorkDisplaySetNum GetEU  ThisPageOrdering  eq   and
+					CorkDisplayPaperType ThisPaperType PaperTypesEqual   PageOrderingCorkDisplay CorkDisplaySetNum GetEU  ThisPageOrdering  eq   and
 					{CorkDisplayNumCopies 1 ge} MightBeTrue  and  dup {//false PageSuppressed {pop //false} if} if
 					{
 						/CDNumGlasses  0 GlassesClusteredOnCorkDisplay CorkDisplaySetNum GetEU {execU {/WithinTitles exch def CorkDisplayNumCopies add} forall} forall def
@@ -13610,7 +13618,7 @@ currentdict /GlyphShowKnownAbsences undef
 					0  1  SheetLengths SheetNum get 1 sub
 					{
 						WithinPage-WithinTitles-def
-						NeckTagsPaperType ThisPaperType  eq   PageOrderingNeckTags SheetNum GetEU  ThisPageOrdering  eq   and   NeckTagsNumCopies 1 ge  and
+						NeckTagsPaperType ThisPaperType PaperTypesEqual   PageOrderingNeckTags SheetNum GetEU  ThisPageOrdering  eq   and   NeckTagsNumCopies 1 ge  and
 						{
 							/NTNumGlasses dup load NeckTagsNumCopies add store
 							/NTTitleAboveBelowOverPropRMinL  TitleAboveBelowOverL  SheetNum get WithinPage get RadiiCirclearrayInside SheetNum get div dup 2 index load lt {store} {pop pop} ifelse
@@ -13732,7 +13740,7 @@ currentdict /GlyphShowKnownAbsences undef
 								/NTRadiiDiffPlusGap Radii SheetNum get RadiiCirclearrayInside SheetNum get sub NTGapInside add def
 								NeckTagsMaxHeight   NeckTagsHoleRadius 2 mul NeckTagsSpaceAboveTitlesEtc NeckTagsSpaceBelowTitlesEtc add add NeckTagsSpaceAboveHole add NTRadiiDiffPlusGap add 6 add gt  % Embedded constant
 								{
-									NeckTagsPaperType ThisPaperType  eq   PageOrderingNeckTags SheetNum GetEU  ThisPageOrdering  eq   and
+									NeckTagsPaperType ThisPaperType PaperTypesEqual   PageOrderingNeckTags SheetNum GetEU  ThisPageOrdering  eq   and
 									CircleNonEmpty SheetNum get WithinPage get   and
 									{
 										0  1  NTBestScalingFactor //Epsilon le {-1} {NeckTagsNumCopies 1 sub} ifelse
@@ -13852,7 +13860,7 @@ currentdict /GlyphShowKnownAbsences undef
 				NumSheets 1 sub  PrePourReverseOrder {-1 0} {0 exch 1 exch} ifelse
 				{
 					/SheetNum exch def
-					PrePourPaperType ThisPaperType  eq   PageOrderingPrePourPages SheetNum GetEU  ThisPageOrdering  eq   and  % Note SheetNum not PrePourSheetNum
+					PrePourPaperType ThisPaperType PaperTypesEqual   PageOrderingPrePourPages SheetNum GetEU  ThisPageOrdering  eq   and  % Note SheetNum not PrePourSheetNum
 					{
 						SheetLengths SheetNum get 1 sub  PrePourReverseOrder {-1 0} {0 exch 1 exch} ifelse
 						{
@@ -13911,7 +13919,7 @@ currentdict /GlyphShowKnownAbsences undef
 				NumSheets 1 sub  BottleWrapReverseOrder {-1 0} {0 exch 1 exch} ifelse
 				{
 					/SheetNum exch def
-					BottleWrapPaperType ThisPaperType  eq   PageOrderingBottleWrap SheetNum GetEU  ThisPageOrdering  eq   and  % Note SheetNum not BottleWrapSheetNum
+					BottleWrapPaperType ThisPaperType PaperTypesEqual   PageOrderingBottleWrap SheetNum GetEU  ThisPageOrdering  eq   and  % Note SheetNum not BottleWrapSheetNum
 					{
 						SheetLengths SheetNum get 1 sub  BottleWrapReverseOrder {-1 0} {0 exch 1 exch} ifelse
 						{
@@ -13969,7 +13977,7 @@ currentdict /GlyphShowKnownAbsences undef
 				0  1  NumSheets 1 sub
 				{
 					/SheetNum exch def
-					DecanterLabelsPaperType ThisPaperType  eq   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and {pop //true exit} if
+					DecanterLabelsPaperType ThisPaperType PaperTypesEqual   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and {pop //true exit} if
 				} for  % /SheetNum
 				{
 					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+DecanterLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
@@ -14014,7 +14022,7 @@ currentdict /GlyphShowKnownAbsences undef
 						0  1  NumSheets 1 sub
 						{
 							/SheetNum exch def
-							DecanterLabelsPaperType ThisPaperType  eq   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and
+							DecanterLabelsPaperType ThisPaperType PaperTypesEqual   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and
 							{
 								0  1  SheetLengths SheetNum get 1 sub
 								{
@@ -14055,7 +14063,7 @@ currentdict /GlyphShowKnownAbsences undef
 							0  1  NumSheets 1 sub
 							{
 								/SheetNum exch def
-								DecanterLabelsPaperType ThisPaperType  eq   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and
+								DecanterLabelsPaperType ThisPaperType PaperTypesEqual   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and
 								{
 									0  1  SheetLengths SheetNum get 1 sub
 									{
@@ -14222,7 +14230,7 @@ currentdict /GlyphShowKnownAbsences undef
 					NumSheets 1 sub  StickyLabelsReverseOrder {-1 0} {0 exch 1 exch} ifelse
 					{
 						/SheetNum exch def
-						StickyLabelsPaperType ThisPaperType  eq   PageOrderingStickyLabels SheetNum GetEU  ThisPageOrdering  eq   and  % Note SheetNum not StickyLabelsSheetNum
+						StickyLabelsPaperType ThisPaperType PaperTypesEqual   PageOrderingStickyLabels SheetNum GetEU  ThisPageOrdering  eq   and  % Note SheetNum not StickyLabelsSheetNum
 						{
 							SheetLengths SheetNum get 1 sub  StickyLabelsReverseOrder {-1 0} {0 exch 1 exch} ifelse
 							{
@@ -14270,7 +14278,7 @@ currentdict /GlyphShowKnownAbsences undef
 								StickyLabelsSheetNumWithinPageWithinTitles StickieNum get aload pop
 								dup WithinTitles ne StickyLabelsByNameWhichReplaceCirclearrays not StickyLabelsNamesChangeFaster or and {/StickyLabelsThisPageTitlesNamesDoThis //true def} if
 								/WithinTitles exch def  /WithinPage exch def  /SheetNum exch def   //true DefStoreMgns
-								StickyLabelsPaperType ThisPaperType  eq   PageOrderingStickyLabels SheetNum GetEU  ThisPageOrdering  eq   and  % Note SheetNum. Also note that 'PageOrderingStickyLabels SheetNum get' could be code.
+								StickyLabelsPaperType ThisPaperType PaperTypesEqual   PageOrderingStickyLabels SheetNum GetEU  ThisPageOrdering  eq   and  % Note SheetNum. Also note that 'PageOrderingStickyLabels SheetNum get' could be code.
 								{
 									StickyLabelsPaperSizeSet not {//false //false MirrorPagesStickyLabels SheetNum GetEU //true StickyLabelsPaperType /Portrait SetPaperSize  /StickyLabelsPaperSizeSet //true def} if
 									/StickyLabelsCirclearraysMaxFontSize 7 def  % Embedded constant: max 7pt
@@ -14713,7 +14721,7 @@ currentdict /GlyphShowKnownAbsences undef
 				/NewNamePages [ ShownPageThis
 					{
 						ShownPageThis NumPagesThisType add  ShownPages  ge {exit} if
-						ThisPageOrdering ThisPaperType  ShownPagesData ShownPageThis NumPagesThisType add get begin  ThisPaperType ne exch ThisPageOrdering ne or {end exit} if
+						ThisPageOrdering ThisPaperType  ShownPagesData ShownPageThis NumPagesThisType add get begin  ThisPaperType PaperTypesEqual not exch ThisPageOrdering ne or {end exit} if
 						TypeOfPagesBeingRendered dup dup /Glasses ne exch /TastingNotes ne and exch /PlaceName ne and {end exit} if
 						/PlaceName TypeOfPagesBeingRendered eq {/PagesCountPlaceName dup load 1 add store}
 						{
