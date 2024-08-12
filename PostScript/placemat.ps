@@ -1,8 +1,8 @@
 %!PS
 
-% This version 23:55 Saturday 29th June 2024
+% This version 20:00 Monday 12th August 2024
 
-% Copyright Julian D. A. Wiseman 1988 to 2024.
+% Copyright Julian D. A. Wiseman 1988 to 2024.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
 % licensed works and modifications, which include larger works using a licensed work, under the same license.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202406292355) def
+/ParametersVersionDateTimeAdobeFormat (D:202408122000) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -52,7 +52,7 @@
 ] def  % /Names
 /LeftHanders [ (RMW)  (SRG) (Simon G.)  (HEG) (Helen G.)  (CSD) (Chris D.)  (JG) (Jeff G.)  (ZDR) (Zak R.)  (DWP) (Douglas P.)  (LAB) (Lee B.) ] def
 
-/PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]
+/PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]; good value is   {SheetNumGlasses SheetNum get 7 le {/A4} {/A3} ifelse} bind
 /TastingNotesPaperType /A4 def  % If this is /USL then the distiller log is also on 8.5"x11", otherwise log on /A4
 
 /ThePortForumIconPlacement /LowerNonWaterBox def  % /None
@@ -98,7 +98,7 @@
 
 /VoteRecorders true def
 /CorkDisplayNumCopies 1 def
-/NeckTagsNumCopies 1 def
+/NeckTagsNumCopies 0 def
 /PrePourNumCopies  Names length 12 ge {1} {0} ifelse def
 /PlaceNames false def
 /DecanterLabelsNumCopies 0 def
@@ -183,11 +183,18 @@
 
 /SideBySideGlassesTastingNotes false def  % If true TastingNotesPaperType and TastingNotesOrientation ignored
 
-/VoteRecorderTopTexts [  % Must be same length as GlassesClusteredOnVoteRecorders, each sub-array containing some number of TopTexts
-	[ (Wine Of The Night?)  /questiondown ]
-	% [ (What is it?) ]  % If uncommenting this, insert a 'true' into the VoteRecorderShowTotalRow array.
-] def  % /VoteRecorderTopTexts, Must be same length as GlassesClusteredOnVoteRecorders
-/VoteRecorderShowTotalRow [ false ] def  % Same length as VoteRecorderTopTexts
+/VoteRecorderTopTexts  % Each sub-array contains some TopTexts. Must be same length as GlassesClusteredOnVoteRecorders and as VoteRecorderShowTotalRow
+[
+	[ % This block's element of VoteRecorderShowTotalRow defaults to false
+		(Wine Of The Night?)
+		% /questiondown  % Commented out as used approximately never.
+	]
+	[ % This block's element of VoteRecorderShowTotalRow defaults to true. The possibilities here are uncommentable.
+		% (What is it?)
+		% (Vintage?)   [(Y) {-0.12 Kern} (ear?)]   (Age?)
+		% (Shipper?)   (Quinta?)   (Distillery?)   (Vineyard?)   [(Ch) /acircumflex (teau?)]
+	]
+] def  % /VoteRecorderTopTexts, Must be same length as GlassesClusteredOnVoteRecorders and VoteRecorderShowTotalRow
 /GlassesClusteredOnVoteRecorders [ VoteRecorderTopTexts length {GlassesOnTastingNotePages} repeat ] def  % triple-depth array, same length as VoteRecorderTopTexts and VoteRecorderShowTotalRow
 /VoteRecorderCrossedBox {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU dup
 	{pop TitlesVoteRecorder WithinTitles get ASCIIfy ThisName ASCIIfy eq ThisName length 0 gt and}
@@ -199,7 +206,6 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /TastingNotesStarsNameColsRowsArrangement  % (ASCIIfied Name) NumCols NumRows /Alternating|/Sideways|/Upright
 [
-	(JDAW) 5 1 /Upright      (Julian W.)   4 copy pop
 	(DRT)  5 1 /Upright      (Derek T.)    4 copy pop
 	(NAC)  5 1 /Upright      (Neil C.)     4 copy pop
 	(CSD)  5 1 /Upright      (Chris D.)    4 copy pop
@@ -378,11 +384,11 @@ if} bind def  % /VoteRecorderCrossedBox
 % Please submit others to http://github.com/jdaw1/placemat/issues                               %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
+/VoteRecorderMonkeyVote (D70) def  % Can refer to WithinTitles
+/VoteRecorderMonkeyName (Monkey) def
 /VoteRecorderInstruction {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU {()} {(Record points, not rank.)} ifelse} bind def
 /VoteRecorderTotalColTitle [(T) {-0.06 Kern} (otal)] def
 /VoteRecorderTotalRowTitle [(T) {-0.09 Kern} (otal)] def
-/VoteRecorderMonkeyName (Monkey) def
-/VoteRecorderMonkeyVote (D70) def  % Can refer to WithinTitles
 
 /TastingNotesColumnHeadings [  (Times)  (Eye)  (Nose)  (Mouth)  (Score)  ] def
 /TastingNotesPageNumCompoundString [(Page ) {TNSheetNum 1 add 5 string cvs}] def
@@ -503,7 +509,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /CrossHatchingCentreX /CenterSheetsSamePageOrdering def  % number /Name /Left /Center /Right /CenterSheetsSamePageOrdering
 /CrossHatchingCentreY /Bottom def  % number /Name /Bottom /Middle /Top
 
-/InlineTitlesPrefillWhite {CrossHatchingInside Spirals or} def
+/InlineTitlesPrefillWhite {CrossHatchingInside Spirals or Droplets or} def
 /InlineAbovetitlesPrefillWhite /InlineTitlesPrefillWhite load def
 /InlineBelowtitlesPrefillWhite /InlineTitlesPrefillWhite load def
 /InlineOvertitlesPrefillWhite true def
@@ -573,7 +579,7 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /NamesFontSize 18 def
 
-% GhostScript doesn't pickle settransfer; Preview doesn't see non-pickled settransfer. The bug is in Preview. http://groups.google.com/g/comp.lang.postscript/c/NJLAfvN_jwU
+% GhostScript doesn't pickle settransfer; Preview doesn't see non-pickled settransfer. The bug is in Preview. http://groups.google.com/g/comp.lang.postscript/c/NJLAfvN_jwU  "execform, 75% faded", 30 Jul 2012
 /TastingNotes_NumVerticalSections 1 def  % If table likely to be very space-constrained, set to 2.
 /TastingNotesCirclesBehind {IsDistiller  {GlassesNumCopies 1 ge} MightBeTrue and  BackgroundTextsTastingNotes not and  SideBySideGlassesTastingNotes not and} bind def
 /TastingNotesCirclesBehindFitAndCentreInRow false def
@@ -618,7 +624,8 @@ if} bind def  % /VoteRecorderCrossedBox
 /BottleWrapShowCrossHatchingInside true def  % ignored if CrossHatchingInside is false
 
 /VoteRecorderNamesOrientation /Either def  % /Horizontal /Vertical /Either
-/VoteRecorderShowTotalCol [ GlassesClusteredOnVoteRecorders length {true} repeat ] def  % Must be same length as GlassesClusteredOnVoteRecorders
+/VoteRecorderShowTotalRow [ false true ] def  % Must be same length as VoteRecorderTopTexts and GlassesClusteredOnVoteRecorders
+/VoteRecorderShowTotalCol [ GlassesClusteredOnVoteRecorders length {true} repeat ] def  % Must be same length as GlassesClusteredOnVoteRecorders etc
 /VoteRecorderPaperType {<< /TNSheetNum 0 >> begin TastingNotesPaperType end} bind def
 /VoteRecorderOrientation /Portrait def
 /VoteRecorderTitlesFontSizeMax 24 def
@@ -795,7 +802,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202406292355) def
+/SoftwareVersionDateTimeAdobeFormat (D:202408122000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -870,7 +877,7 @@ OutputLog  0  (!!! Error !!! Error !!!   An error occurred. More information bel
 } bind def  % /OutputToLog
 
 
-/SuppressANN   % http://groups.google.com/g/comp.lang.postscript/c/8V9XFDwuLPg
+/SuppressANN   % http://groups.google.com/g/comp.lang.postscript/c/8V9XFDwuLPg  "Is 'mark ... /ANN pdfmark' allowed?", 23 Feb 2015
 /currentdistillerparams where
 {
 	pop currentdistillerparams /CheckCompliance 2 copy known {get //false exch {dup /PDFX1a:2001 eq exch /PDFX3:2002 eq or or} forall} {pop pop //false} ifelse
@@ -885,7 +892,7 @@ OutputLog  0  (!!! Error !!! Error !!!   An error occurred. More information bel
 	ifelse  % Use testing routine
 } {/globaldict where {pop globaldict} {userdict} ifelse  /pdfmark /cleartomark load put} ifelse  % /pdfmark where
 
-% http://groups.google.com/g/comp.lang.postscript/c/DWky6YmjQQI
+% http://groups.google.com/g/comp.lang.postscript/c/DWky6YmjQQI  "countgraphicsstack", 17 Nov 2006
 /NullDevices where {pop} {/NullDevices 31 array def  NullDevices 0 0 put} ifelse  % 5 would be enough. Done here to allow immediate execution.
 /CountGraphicsStack where {pop} {
 	/CountGraphicsStack 0 def
@@ -915,6 +922,7 @@ ifelse} bind def  % /Stopped
 
 /ShellSortGaps
 [
+	% Simple tests are consistent with this set of gaps being O( n * ln(n)^(4/3) ). Proper testing necessary.
 	% ShellSort is very fast at short arrays, but QuickSort's segregation helps multi-CPU with long arrays.
 	% PostScript's max array size usually 65535 (PLRM3, p739, table B.1), but an implementation could allow longer.
 	% Included are those up to PostScript's max integer = 2^31 - 1, subsequent being commented out.
@@ -1138,7 +1146,7 @@ currentdict /ShellSortGapsLength1Subs undef
 } bind def  % /PolynomialRoots
 
 /NumSheets GlassesOnSheets length def
-/SheetLengths [ 0 1 NumSheets 1 sub {/SheetNum exch def  GlassesOnSheets SheetNum GetEU length} for ] def
+/SheetNumGlasses [ 0 1 NumSheets 1 sub {/SheetNum exch def  GlassesOnSheets SheetNum GetEU length} for ] def
 
 % Immediate dependencies: SheetNum, Radii, GlassPositions, PolynomialRoots, PrinterEpsilon
 % WithinPageFrom WithinPageTo GapFromCircles OffsetRightBool OffsetMin TargetLength HeadLength HeadWidth {PathCode} HeadFromBool HeadToBool {HeadCode}  ArrowCircleToCircle  -
@@ -1676,7 +1684,7 @@ mark  (product = ) product (; languagelevel = ) /languagelevel where {pop langua
 
 /MonthNames [(Jan) (Feb) (March) (April) (May) (June) (July) (Aug) (Sep) (Oct) (Nov) (Dec)] def
 % http://en.wikibooks.org/wiki/PostScript_FAQ#How_to_get_date_and_time.3F
-% http://groups.google.com/g/comp.lang.postscript/c/UAkMrNLakKs
+% http://groups.google.com/g/comp.lang.postscript/c/UAkMrNLakKs  "Can PostScript access the machine clock, expressed as a date and time?", 15 Aug 2015
 (\%Calendar\%) dup /IODevice resourcestatus
 {
 	pop pop  currentdevparams begin
@@ -1728,14 +1736,14 @@ TestingMaxNumPagesToShow 2147483647 lt  TestingShowThesePagesOnly //null ne  Tes
 	mark  (Nota bene: some pages might be suppressed = not shown, perhaps because this is an example or a test.)
 	(\nAt the end there might be an extra page, blank, caused by a bug in erasepage.)
 	(\nhttp://github.com/jdaw1/placemat/issues/109)
-	(\nhttp://groups.google.com/g/comp.lang.postscript/c/HVZVz0eBwrw)
+	(\nhttp://groups.google.com/g/comp.lang.postscript/c/HVZVz0eBwrw)  % "Adobe Distiller: erasepage erroneously transmits a page", 10 Sept 2017
 	TestingMaxNumPagesToShow 2147483647 lt {(\nTestingMaxNumPagesToShow = ) TestingMaxNumPagesToShow} if
 	TestingShowThesePagesOnly   //null    ne {(\nTestingShowThesePagesOnly = ) TestingShowThesePagesOnly} if
 	TestingSuppressPageTypes  length 0  gt {(\nTestingSuppressPageTypes = [) TestingSuppressPageTypes {dup type /nametype eq {( /) exch} if ( )} forall (])} if
 	ConcatenateToMark OutputToLog
 } if  % TestingMaxNumPagesToShow ... TestingShowThesePagesOnly ... TestingSuppressPageTypes ... or or
 
-% Changes RGB black to proper CMYK printers' black. http://groups.google.com/g/comp.lang.postscript/c/6JW6VamdVlw
+% Changes RGB black to proper CMYK printers' black. http://groups.google.com/g/comp.lang.postscript/c/6JW6VamdVlw  "100% black, as required by a book printer", 30 July 2017
 CMYK0001replacesRGB000   /setcolor load type /operatortype eq   and
 {
 	(Black is a printers' black with "0 0 0 1 setcmykcolor" rather than screen black with "0 setgray", by CMYK0001replacesRGB000.) OutputToLog
@@ -1923,7 +1931,7 @@ currentdict /ForReverseBinaryDict undef
 /mm {2.83464566929 mul} bind def  % 360 127 div
 
 % PaperType Orientation  Dimensions  PageWidth PageHeight
-% http://groups.google.com/g/comp.lang.postscript/c/vlfF8eGOCMA
+% http://groups.google.com/g/comp.lang.postscript/c/vlfF8eGOCMA  "Change paper size", 21 Oct 2015
 /Dimensions
 {
 	//DeBugLevel 10 le {(+Dimensions) OutputToLog} if
@@ -2174,7 +2182,7 @@ currentdict /ForReverseBinaryDict undef
 	PaperTypes aload pop   TastingNotesPaperTypes aload pop
 	{PlaceNames} MightBeTrue {0  1  NamesPlaceNames length 1 sub {/PlaceNameSetNum exch def  PlaceNamesPaperType} for} if
 	/VoteRecorders load MightBeTrue {0  1  GlassesClusteredOnVoteRecorders length 1 sub {/VoteRecorderSheetNum exch def  /VoteRecorders load MightBeTrue {VoteRecorderPaperType} if} for} if
-	0  1  NumSheets 1 sub {/SheetNum exch def  0 1 SheetLengths SheetNum get 1 sub {
+	0  1  NumSheets 1 sub {/SheetNum exch def  0 1 SheetNumGlasses SheetNum get 1 sub {
 		WithinPage-WithinTitles-def
 		{PrePourNumCopies        1 ge} MightBeTrue {       PrePourPaperType} if
 		{NeckTagsNumCopies       1 ge} MightBeTrue {      NeckTagsPaperType} if
@@ -2491,7 +2499,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 	<< exch /UpdatePageCount exch  /i 0 >> begin
 	ShownPages TestingMaxNumPagesToShow lt
 	{
-		OneCircleSuppressOtherPageTypes  % Alas, https://groups.google.com/g/comp.lang.postscript/c/7a_jxsF6Yt8/m/eHyYcwaUwQoJ
+		OneCircleSuppressOtherPageTypes  % Alas, https://groups.google.com/g/comp.lang.postscript/c/7a_jxsF6Yt8/m/eHyYcwaUwQoJ  "Multiple PDFs from a single PS", 18 May 2007
 			{/OneCircle  TypeOfPagesBeingRendered ne}
 			{BottleWrapSuppressOtherPageTypes {/BottleWrap TypeOfPagesBeingRendered ne} {//false} ifelse}
 		ifelse
@@ -2570,7 +2578,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 			TypeOfPagesBeingRendered /Empty          eq {pop [ (Empty: )                                                                EmptyPageString ]} if
 		} ifelse  % PageLabelOverride
 
-		% http://groups.google.com/g/comp.lang.postscript/c/xqXz9g44ATs
+		% http://groups.google.com/g/comp.lang.postscript/c/xqXz9g44ATs  "Adobe Distiller bug report: pdfmark and the PDF encoding", 13 Nov 2015
 		% http://www.jdawiseman.com/papers/bugs/20151113_PDFDocEncodingify.txt
 		% http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19268545--pagelabel-pdfmark-does-not-allow-pdf-encoding
 		IsDistiller {version {cvr} stopped {pop //true} {3018.1009999 gt} ifelse} {//true} ifelse {PDFDocEncodingify} {ASCIIfy} ifelse
@@ -2633,7 +2641,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 		TypeOfPagesBeingRendered /Glasses eq dup {pop /GlassesDestForEachCircle load MightBeTrue} if
 		{
 			4 dict begin
-			0  1  SheetLengths SheetNum get 1 sub
+			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				WithinPage-WithinTitles-def
 				CircleNonEmpty SheetNum get WithinPage get
@@ -2663,7 +2671,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 		end
 		TestingShowThesePagesOnly dup type /arraytype eq {//false exch {execU ShownPages eq {pop //true exit} if} forall} {pop //true} ifelse {showpage} {erasepage initgraphics} ifelse
 		/ShownPages dup load 1 add store
-	} {erasepage initgraphics} ifelse  % PageSuppressed not  % http://groups.google.com/g/comp.lang.postscript/c/HVZVz0eBwrw
+	} {erasepage initgraphics} ifelse  % PageSuppressed not  % http://groups.google.com/g/comp.lang.postscript/c/HVZVz0eBwrw  "Adobe Distiller: erasepage erroneously transmits a page", 10 Sep 2017
 } bind def  % /ShowPage
 
 /IsNumber {type dup /integertype eq exch /realtype eq or} bind def
@@ -2762,7 +2770,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 	div
 	//DeBugLevel 5 le {(-CurrentFontSizeY) OutputToLog} if
 } bind def  % /CurrentFontSizeY
-% http://groups.google.com/g/comp.lang.postscript/c/cteFkRmWMVg
+% http://groups.google.com/g/comp.lang.postscript/c/cteFkRmWMVg  "How to determine name of a font.", 03 Feb 1993
 /CurrentFontName {currentfont /FontName get} bind def
 
 /SubscriptOn   {-0.25  VKern   CurrentFontName [CurrentFontSizeX 1.7 div 0 0 CurrentFontSizeY 1.7 div 0 0] selectfont} bind def
@@ -3015,7 +3023,7 @@ currentdict /SmallCapsDict undef
 % (Ignoring machine precision; ignoring De Casteljau's approximation; ignoring paper roller speed.)
 % https://stackoverflow.com/questions/77855798/postscript-circles-how-accurate-how-improve/
 % http://github.com/jdaw1/placemat/issues/164
-% http://groups.google.com/g/comp.lang.postscript/c/B23RW2QpIjU
+% http://groups.google.com/g/comp.lang.postscript/c/B23RW2QpIjU  "ArcPrecise, an accurate arc", 19 July 2022
 /ArcAccurateBoth
 {
 	18 dict begin
@@ -3061,8 +3069,8 @@ currentdict /SmallCapsDict undef
 	{
 		/X0 Angle1 cos R mul X add def
 		/Y0 Angle1 sin R mul Y add def
-		% https://groups.google.com/g/comp.lang.postscript/c/0Wf8UYb-Xqk/m/bT7NnP9fLWgJ
-		% https://groups.google.com/g/comp.lang.postscript/c/KPnF5bKwz5U/m/MLGrZFPfaGoJ
+		% https://groups.google.com/g/comp.lang.postscript/c/0Wf8UYb-Xqk/m/bT7NnP9fLWgJ  "nocurrentpoint", 11 Oct 1991
+		% https://groups.google.com/g/comp.lang.postscript/c/KPnF5bKwz5U/m/MLGrZFPfaGoJ  "How to find if nocurrentpoint is True/False.", 05 Oct 1991
 		X0 Y0   StartOperator dup /m eq exch /moveto eq or {moveto} {{lineto} stopped {$error /newerror //false put  moveto} if} ifelse
 	} if  % Not /n (/n would mean do nothing as aleady at start of curve)
 
@@ -3388,7 +3396,7 @@ currentdict /SmallCapsDict undef
 % knot points of a cubic Bezier. The calling code might, for example, have the first as the currentpoint, and append the last before calling curveto.
 % Xs Ys Xe Ye dXs dYs dXe dYe ddXs ddYs ddXe ddYe SpeedUpperLimit ApproximatingCurve  X1 Y1 X2 Y2
 % http://stackoverflow.com/questions/77862965/how-approximate-xz-yz-functions-as-b%c3%a9zier-cubic/
-% http://groups.google.com/g/comp.lang.postscript/c/3RIq0Jnwrbo
+% http://groups.google.com/g/comp.lang.postscript/c/3RIq0Jnwrbo  "Mathematical functions as a single Bezier cubic", 03 Feb 2019
 % https://math.stackexchange.com/a/4810490/822964
 /ApproximatingCurve
 {
@@ -3635,7 +3643,7 @@ currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 % Two uses.
 % Bug in Adobe Distiller 8.1.3 (23/10/2006). In attempting to treat paths derived from text as copyable text, it fails to cope with paths made partly thereby and partly from a upath.
 % Bug in Adobe Distiller 20.0, 20.005.30635, PostScript software version 3018.101, in which sometimes, perhaps if rotated, a clip of a text-derived charpath had no effect.
-% https://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+% https://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
 % https://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
 % https://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/48495926-postscript-distiller-ignores-clip-after-charpath
 % Also, eliminates some types of problems with embedding fonts.
@@ -3668,7 +3676,7 @@ currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 	//DeBugLevel 10 le {(-CharPathRecMoveto) OutputToLog} if
 } bind def  % /CharPathRecMoveto
 
-% http://groups.google.com/g/comp.lang.postscript/c/hZmiLPonDl8
+% http://groups.google.com/g/comp.lang.postscript/c/hZmiLPonDl8  "Possible bug in Mac Distiller's charpath", 16 Feb 2008
 /CharPathRecursiveMoveto
 {
 	//DeBugLevel 10 le {(+CharPathRecursiveMoveto) OutputToLog} if
@@ -3698,7 +3706,7 @@ currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 	//DeBugLevel 9 le {(-CharPathRec) OutputToLog} if
 } bind def  % /CharPathRec
 
-% http://groups.google.com/g/comp.lang.postscript/c/hZmiLPonDl8
+% http://groups.google.com/g/comp.lang.postscript/c/hZmiLPonDl8  "Possible bug in Mac Distiller's charpath?", 16 Feb 2008
 /CharPathRecursive
 {
 	//DeBugLevel 10 le {(+CharPathRecursive) OutputToLog} if
@@ -3708,7 +3716,7 @@ currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 	//DeBugLevel 10 le {(-CharPathRecursive) OutputToLog} if
 } bind def  % /CharPathRecursive
 
-% nulldevice causes some bad rounding: http://groups.google.com/g/comp.lang.postscript/c/7RQ2cQy_k-Y
+% nulldevice causes some bad rounding: http://groups.google.com/g/comp.lang.postscript/c/7RQ2cQy_k-Y  "nulldevice & charpath: rounding and other oddities", 15 Feb 2007
 /ExecUExceptNotBindedPainting  % executes the one parameter, without painting
 {
 	//DeBugLevel 5 le {(+ExecUExceptNotBindedPainting) OutputToLog} if
@@ -3755,7 +3763,7 @@ currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 		dup xcheck {currentpoint pop exch [exch ExecUExceptNotBindedPainting] StringWidthRec exch currentpoint pop exch sub add exit} if
 		dup type dup /integertype eq exch /realtype eq or {ToString} if  % no 'exit'
 		dup type /stringtype eq {stringwidth pop exit}  if
-		dup type /nametype eq {matrix currentmatrix GSave newpath setmatrix 0 0 moveto //true GlyphPath currentpoint GRestore pop exit} if  % http://groups.google.com/g/comp.lang.postscript/c/gQppSBL-x74
+		dup type /nametype eq {matrix currentmatrix GSave newpath setmatrix 0 0 moveto //true GlyphPath currentpoint GRestore pop exit} if  % http://groups.google.com/g/comp.lang.postscript/c/gQppSBL-x74  "glyph widths", 21 July 1998
 		dup type /arraytype eq {0 exch {StringWidthRec add} forall exit} if
 		mark exch dup (Error: StringWidthRec parameter ) counttomark -1 roll 0 //true ThingToDebugText ( is of type ) counttomark -1 roll type ToString ( rather than executable, string, name or array.) ConcatenateToMark OutputToLog stop
 	} repeat
@@ -3772,7 +3780,7 @@ currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 % TargetAccuracy  LineWidthThatCoversPath  WidthMax WidthMin
 % Calculates, for the current path, the greatest distance from an interior point to the edge.
 % WidthMin is known to be less than this distance. WidthMax will be greater.
-% http://groups.google.com/g/comp.lang.postscript/c/86b7Sg8v7B0
+% http://groups.google.com/g/comp.lang.postscript/c/86b7Sg8v7B0  "How 'thick' is a glyph?", 29 Mar 2014
 /LineWidthThatCoversPath
 {
 	//DeBugLevel 25 le {(+LineWidthThatCoversPath) OutputToLog} if
@@ -3856,7 +3864,7 @@ currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 % In a typical case, the most distant point will be on the edge of the circle. So these points are denser.
 % But if the path is the likes of a large letter 'O', the relevant point could be internal, so there are plenty of these as well.
 % http://www.ThePortForum.com/viewtopic.php?t=6608&p=55028#p55028 (reason for doing this computation)
-% http://groups.google.com/g/comp.lang.postscript/c/86b7Sg8v7B0 (non-discussion about how to do it)
+% http://groups.google.com/g/comp.lang.postscript/c/86b7Sg8v7B0  "How 'thick' is a glyph?", 29 Mar 2014
 /LineWidthThatCoversCircle
 {
 	//DeBugLevel 25 le {(+LineWidthThatCoversCircle) OutputToLog} if
@@ -3974,7 +3982,7 @@ currentdict /GlyphShowKnownAbsences undef
 } bind def  % /GlyphShow
 
 % Computes the path of a glyph, with the charpath-style boolean flag, destroying the currentpoint.
-% http://groups.google.com/g/comp.lang.postscript/c/rvAGfbsbLVw
+% http://groups.google.com/g/comp.lang.postscript/c/rvAGfbsbLVw  "glyphpath", 26 May 2006
 /GlyphPath
 {
 	//DeBugLevel 10 le {(+GlyphPath) OutputToLog} if
@@ -4250,7 +4258,7 @@ currentdict /GlyphShowKnownAbsences undef
 % Renders multiple copies of Filltext, outlined in alternate colors, within the clipping region.
 % Used X Y to determine offset of repeats, so that multiple calls can be aligned.
 % Some coding help was requested and provided at
-% http://groups.google.com/g/comp.lang.postscript/c/XegnvWwDAC4
+% http://groups.google.com/g/comp.lang.postscript/c/XegnvWwDAC4  "Insideness testing of paths not points", 08 Nov 2006
 %
 % As repeated stroke'ing of text makes PDF files heavy and slow to render,
 % there is an attempt not to paint anything entirely outside the clipping region.
@@ -5652,7 +5660,7 @@ currentdict /GlyphShowKnownAbsences undef
 	NG 0 eq {/NamePlacementBottomX W 2 div X add dup /NamePlacementTopX exch def def} if
 
 	/AreaText {
-		( Of non-margin area ) R dup mul //Pi mul  SheetLengths SheetNum get  mul  PageWidth MgnL MgnR add sub  PageHeight MgnB MgnT add sub  mul
+		( Of non-margin area ) R dup mul //Pi mul  SheetNumGlasses SheetNum get  mul  PageWidth MgnL MgnR add sub  PageHeight MgnB MgnT add sub  mul
 		div 100 mul dup exch (\% within circles = ) exch  2 mul //Sqrt3 mul //Pi div (\% of infinite-plane exact-hexagonal maximum.)
 		R  43.2 360 mul 127 div  le
 		{
@@ -5834,7 +5842,7 @@ currentdict /GlyphShowKnownAbsences undef
 			O 0 eq {/L W /S H} {/L H /S W} ifelse  def def
 			Echo {mark  (SheetNum=) SheetNum (, with ) NG ( glasses: best BaseStyle, with radius ) R (, is /Temple with ) N  O 0 eq {( columns.)} {( rows.)} ifelse  AreaText ConcatenateToMark OutputToLog} if
 			[
-				% http://groups.google.com/g/comp.lang.postscript/c/5pJw5Gvf_YI
+				% http://groups.google.com/g/comp.lang.postscript/c/5pJw5Gvf_YI  "Mathematica PostScriptForm[] function for Mathematica --> PostScript translation", 18 Dec 2015
 				% http://mathematica.stackexchange.com/questions/101954/looking-for-postscriptform-or-forthform-to-print-expressions-as-rpn-code
 				% http://github.com/jdaw1/placemat/blob/main/Supporting_code/PackingStyles_formulae.nb
 				L 8 R mul sub L mul 4 2 R mul 4 S mul add R mul S dup mul sub mul add L mul 16 R mul 2 R mul 4 S mul sub R mul S dup mul add mul add L mul 16 13 R mul 28 S mul sub R mul 23 S dup mul
@@ -7453,7 +7461,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
-			0  1  SheetLengths SheetNum get 1 sub
+			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				WithinPage-WithinTitles-def
 				{RotationTitlesAboveBelowOverCirclearray abs //ArcTanOneQuarter gt} MightBeTrue  PrePourNumCopies 1 ge  and  % RotationTitlesAboveBelowOverCirclearray might reference other variables such as MgnB
@@ -7605,7 +7613,7 @@ currentdict /GlyphShowKnownAbsences undef
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			/VoteRecorderSubtitleFontSizeProportionTitles load dup IsNumber {0 le} {pop //false} ifelse
@@ -7628,11 +7636,11 @@ currentdict /GlyphShowKnownAbsences undef
 
 	//DeBugLevel 100 le {( Main: some pre-computations) OutputToLog} if
 
-	/CircleNonEmpty [ SheetLengths {array} forall ] def
+	/CircleNonEmpty [ SheetNumGlasses {array} forall ] def
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			CircleNonEmpty SheetNum get  WithinPage   //false  [ Circlearrays Titles Overtitles Abovetitles Belowtitles ] {WithinTitles get NonEmptyCompoundObject {pop //true exit} if} forall   put
@@ -7667,7 +7675,7 @@ currentdict /GlyphShowKnownAbsences undef
 		% Call  CirclePacking
 		% LeftX BottomY Width Height NumGlasses MaxRadius  CirclePacking  [[x1 y1] ...] Radius NamePlacementTopX NamePlacementBottomX
 		MgnL   MgnB   PageWidth MgnL MgnR add sub  PageHeight MgnB MgnT add sub
-		SheetLengths SheetNum get   /MaxRadius load  Echo
+		SheetNumGlasses SheetNum get   /MaxRadius load  Echo
 		CirclePacking
 		NamePlacementBottomX SheetNum  3 -1 roll  put
 		NamePlacementTopX    SheetNum  3 -1 roll  put
@@ -7677,7 +7685,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 		% Check GlassPositions. There shouldn't be errors, but there might be uncaught special cases.
 		/GlassPositionsBug //false def
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			/WithinPage exch def
 			GlassPositions SheetNum get WithinPage get aload pop 2 copy
@@ -7691,7 +7699,7 @@ currentdict /GlyphShowKnownAbsences undef
 				GlassPositions SheetNum get dup WithinPage get aload pop 3 -1 roll WP get aload pop  3 -1 roll sub dup mul 3 1 roll sub dup mul add  dup  Radii SheetNum get //PrinterEpsilon sub dup mul  lt
 				{
 					mark (Error: GlassPositions too close by ) counttomark 2 add -1 roll sqrt Radii SheetNum get sub (pt, on SheetNum = ) SheetNum (WithinPage = ) WP ( and ) WithinPage (, )
-					SheetLengths SheetNum get ( glasses as ) PackingDescriptors SheetNum get ( on ) PaperType (.) ConcatenateToMark OutputToLog /GlassPositionsBug //true def
+					SheetNumGlasses SheetNum get ( glasses as ) PackingDescriptors SheetNum get ( on ) PaperType (.) ConcatenateToMark OutputToLog /GlassPositionsBug //true def
 				} {pop} ifelse  % too close
 			} for  % WP
 		} for  % WithinPage
@@ -7832,27 +7840,27 @@ currentdict /GlyphShowKnownAbsences undef
 	ConcatenateToMark OutputToLog  % Matching 'mark' about 14 lines up
 
 	//DeBugLevel 100 le {( Main: computing RadiiCirclearrayBaseline, CirclearraysFontSizes, RadiiCirclearrayInside, CirclearraysN) OutputToLog} if
-	/CirclearraysFontSizes [ SheetLengths {array} forall ] def
-	/CirclearraysN [ SheetLengths {array} forall ] def
-	/CirclearraysUnroundedN [ SheetLengths {array} forall ] def
-	/CircletextsMinCopiesIndividually [ SheetLengths {array} forall ] def
+	/CirclearraysFontSizes [ SheetNumGlasses {array} forall ] def
+	/CirclearraysN [ SheetNumGlasses {array} forall ] def
+	/CirclearraysUnroundedN [ SheetNumGlasses {array} forall ] def
+	/CircletextsMinCopiesIndividually [ SheetNumGlasses {array} forall ] def
 	/RadiiCirclearrayBaseline NumSheets array def
 	/RadiiCirclearrayInside NumSheets array def
 	/RadiiCirclearrayInsideUsableTAB NumSheets array def
 	/RadiiCirclearrayInsideUsableO NumSheets array def
 	/CircletextMaxFontSizes [ NumSheets {//Infinity} repeat ] def
-	/CirclearraysB [ SheetLengths {array} forall ] def
-	/CirclearraysT [ SheetLengths {array} forall ] def
+	/CirclearraysB [ SheetNumGlasses {array} forall ] def
+	/CirclearraysT [ SheetNumGlasses {array} forall ] def
 	/CirclearraysDescenderMin [ NumSheets {0} repeat ] def
 	18 dict begin
-	/CirclearraysW [ SheetLengths {array} forall ] def
-	/CirclearraysPaddedW [ SheetLengths {array} forall ] def
+	/CirclearraysW [ SheetNumGlasses {array} forall ] def
+	/CirclearraysPaddedW [ SheetNumGlasses {array} forall ] def
 	/CirclearraysBMin [ NumSheets {0} repeat ] def
 
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			CircletextsMinCopiesIndividually SheetNum get WithinPage CircletextsMinCopies put
@@ -7874,7 +7882,7 @@ currentdict /GlyphShowKnownAbsences undef
 	} bind for  % SheetNum
 
 
-	/CirclearraysFontSizesNext [ SheetLengths { [ exch {0} repeat] } forall ] def
+	/CirclearraysFontSizesNext [ SheetNumGlasses { [ exch {0} repeat] } forall ] def
 
 	% -  CirclearraysNScore  Score
 	% Score = Avg of CirclearraysN * CirclearraysW * CirclearraysFontSizes^2 / (Radii*TwoPi)  ~=  average area of painted Circlearrays / (Radius*TwoPi)
@@ -7897,7 +7905,7 @@ currentdict /GlyphShowKnownAbsences undef
 			CircletextsSameFontSizeIfRadiiShrunkToBeSame
 			{
 				//Infinity
-				0  1  SheetLengths SheetNum get 1 sub
+				0  1  SheetNumGlasses SheetNum get 1 sub
 				{
 					4 dict begin   WithinPage-WithinTitles-def
 					/CircletextsBasicFS CircletextFontSize def
@@ -7919,7 +7927,7 @@ currentdict /GlyphShowKnownAbsences undef
 					ShrinkRadiiSquareArray SheetNum get SN1 get {CircletextMaxFontSizes SN1 get  CircletextMaxFontSizes SheetNum  3 copy get lt {3 -1 roll put} {pop pop pop} ifelse} if
 				} for  % SN1
 				RadiiCirclearrayBaseline  SheetNum  CircletextMaxFontSizes SheetNum get CirclearraysBMin SheetNum get mul  Radii SheetNum get  add  put
-				0  1  SheetLengths SheetNum get 1 sub {CirclearraysFontSizes SheetNum get exch CircletextMaxFontSizes SheetNum get put} for
+				0  1  SheetNumGlasses SheetNum get 1 sub {CirclearraysFontSizes SheetNum get exch CircletextMaxFontSizes SheetNum get put} for
 				0  1  NumSheets 1 sub
 				{
 					/SN1 exch def
@@ -7927,11 +7935,11 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						3 -1 roll put
 						RadiiCirclearrayBaseline  SN1  CircletextMaxFontSizes SN1 get CirclearraysBMin SN1 get mul  Radii SN1 get  add  put
-						0  1  SheetLengths SN1 get 1 sub {CirclearraysFontSizes SN1 get exch CircletextMaxFontSizes SN1 get put} for
+						0  1  SheetNumGlasses SN1 get 1 sub {CirclearraysFontSizes SN1 get exch CircletextMaxFontSizes SN1 get put} for
 					} {pop pop pop} ifelse} if  % ShrinkRadiiSquareArray ...
 				} for  % SN1
 			}{
-				0  1  SheetLengths SheetNum get 1 sub
+				0  1  SheetNumGlasses SheetNum get 1 sub
 				{
 					WithinPage-WithinTitles-def
 					CirclearraysPaddedW SheetNum get WithinPage get CircletextsMinCopiesIndividually SheetNum get WithinPage get mul //TwoPi div  CirclearraysB SheetNum get WithinPage get sub
@@ -7960,7 +7968,7 @@ currentdict /GlyphShowKnownAbsences undef
 			CircletextsSameFontSizeIfRadiiShrunkToBeSame not
 			{
 				RadiiCirclearrayBaseline  SheetNum  Radii SheetNum get CirclearraysDescenderMin SheetNum get add  put
-				0  1  SheetLengths SheetNum get 1 sub
+				0  1  SheetNumGlasses SheetNum get 1 sub
 				{
 					WithinPage-WithinTitles-def
 					CirclearraysPaddedW SheetNum get WithinPage get CircletextsMinCopiesIndividually SheetNum get WithinPage get mul  dup 0 gt
@@ -7977,7 +7985,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
-			0  1  SheetLengths SheetNum get 1 sub
+			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				/WithinPage exch def
 				RadiiCirclearrayBaseline SheetNum get  CirclearraysT SheetNum get WithinPage get  CirclearraysFontSizes SheetNum get WithinPage get  mul sub
@@ -8002,7 +8010,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
-			0  1  SheetLengths SheetNum get 1 sub
+			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				WithinPage-WithinTitles-def
 				CirclearraysPaddedW SheetNum get WithinPage get  CirclearraysFontSizes SheetNum get WithinPage get  mul
@@ -8020,7 +8028,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
-			0  1  SheetLengths SheetNum get 1 sub
+			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				/WithinPage exch def
 				CirclearraysN SheetNum get WithinPage  CirclearraysUnroundedN SheetNum get WithinPage get  floor cvi
@@ -8029,7 +8037,7 @@ currentdict /GlyphShowKnownAbsences undef
 				CirclearraysW SheetNum get WithinPage get  mul  CirclearraysFontSizes SheetNum get WithinPage get dup mul  mul  Radii SheetNum get div add
 			} for  % WithinPage
 		} for  % SheetNum
-		//TwoPi div  0 SheetLengths {add} forall dup 0 le {pop 1} if  div
+		//TwoPi div  0 SheetNumGlasses {add} forall dup 0 le {pop 1} if  div
 		end
 	} bind def  % /CirclearraysNScore
 
@@ -8047,7 +8055,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
-			0  1  SheetLengths SheetNum get 1 sub
+			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				WithinPage-WithinTitles-def
 				/CircletextsOriginal CircletextsMinCopiesIndividually SheetNum get WithinPage get  def
@@ -8150,7 +8158,7 @@ currentdict /GlyphShowKnownAbsences undef
 				/NameY Top {PageHeight MgnT sub} {MgnB} ifelse def
 				/NameX Top {NamePlacementTopX} {NamePlacementBottomX} ifelse SheetNum get def
 
-				0  1  SheetLengths SheetNum get 1 sub
+				0  1  SheetNumGlasses SheetNum get 1 sub
 				{
 					/WithinPage exch def
 					GlassPositions SheetNum get WithinPage get aload pop /CircleY exch def /CircleX exch def
@@ -8195,9 +8203,9 @@ currentdict /GlyphShowKnownAbsences undef
 		//true DefStoreMgns
 		TitleProportionFontSizeT TitleProportionFontSizeB TitleOffsetsProportionFontSizeVertical
 		TitleProportionFontSizeL TitleProportionFontSizeR TitleOffsetsProportionFontSizeHorizontal
-		6 {SheetNum  SheetLengths SheetNum get array  put} repeat
+		6 {SheetNum  SheetNumGlasses SheetNum get array  put} repeat
 
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			ColourSchemeTitles /MidGrey eq {/TitlesAnyGrey //true store} if
@@ -8230,7 +8238,7 @@ currentdict /GlyphShowKnownAbsences undef
 		/SheetNum exch def
 		//false //false //false //false PaperType Orientation SetPaperSize
 		//true DefStoreMgns
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			/MinBottoms TitleProportionFontSizeB SheetNum get WithinPage get  def
@@ -8287,15 +8295,15 @@ currentdict /GlyphShowKnownAbsences undef
 	/TypeOfPagesBeingRendered /Glasses store
 	/TitleFontSizes NumSheets array def
 	/TitleMaxHeightProportionInnerRadiusRelevantNum 0 def
-	/TitleMaxHeightProportionInnerRadiusRelevantSheetNumWithinPage  0 SheetLengths {add} forall 2 mul  array  def
+	/TitleMaxHeightProportionInnerRadiusRelevantSheetNumWithinPage  0 SheetNumGlasses {add} forall 2 mul  array  def
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
 		//false //false //false //false PaperType Orientation SetPaperSize
 		//true DefStoreMgns
-		TitleFontSizes  SheetNum  SheetLengths SheetNum get array  put
+		TitleFontSizes  SheetNum  SheetNumGlasses SheetNum get array  put
 
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			TitleFontSizes SheetNum get  WithinPage
@@ -8368,7 +8376,7 @@ currentdict /GlyphShowKnownAbsences undef
 					/SheetNum0 exch def
 					SheetMatches SheetNum get  SheetMatches SheetNum0 get  eq
 					{
-						0  1  SheetLengths SheetNum get 1 sub
+						0  1  SheetNumGlasses SheetNum get 1 sub
 						{
 							WithinPage-WithinTitles-def
 							0  1  GlassesOnSheets SheetNum0 GetEU length 1 sub
@@ -8425,7 +8433,7 @@ currentdict /GlyphShowKnownAbsences undef
 								/NumArrayToAlter exch def
 								ArrayMatches NumArrayToAlter0 get  ArrayMatches NumArrayToAlter get  eq
 								{
-									0  1  SheetLengths SheetNum get 1 sub
+									0  1  SheetNumGlasses SheetNum get 1 sub
 									{
 										WithinPage-WithinTitles-def
 										ArraysStrings NumArrayToAlter get WithinTitles get NonEmptyCompoundObject
@@ -8471,7 +8479,7 @@ currentdict /GlyphShowKnownAbsences undef
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			SoloTitleFontSizes SheetNum get WithinPage get  TitleFontSizes SheetNum get WithinPage get  le {SheetNum (,) WithinPage 1 index WithinTitles 1 index Titles WithinTitles get (; )} if
@@ -8499,9 +8507,9 @@ currentdict /GlyphShowKnownAbsences undef
 		BelowtitleProportionFontSizeL BelowtitleProportionFontSizeR BelowtitleOffsetsProportionFontSizeHorizontal
 		OvertitleProportionFontSizeT OvertitleProportionFontSizeB
 		OvertitleProportionFontSizeL OvertitleProportionFontSizeR OvertitleOffsetsProportionFontSizeHorizontal
-		15 {SheetNum  SheetLengths SheetNum get array  put} repeat
+		15 {SheetNum  SheetNumGlasses SheetNum get array  put} repeat
 
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			AbovetitlesFont //DeSizeRounding selectfont  Abovetitles WithinTitles get  StringPathBBox   4 {//DeSizeRounding div 4 1 roll} repeat
@@ -8550,12 +8558,12 @@ currentdict /GlyphShowKnownAbsences undef
 	% From that compute size using PathMaxScalingFitCircle. Apply contraints. Then adjust ...titleOffsetsAbsoluteVertical to point to baseline.
 	//DeBugLevel 100 le {( Main: computing [Above|Below|Over]titleFontSizes, OvertitleOffsetsProportionFontSizeVertical, [Above|Below]titleOffsetsAbsoluteVertical) OutputToLog} if
 	/TypeOfPagesBeingRendered /Glasses store
-	/AbovetitleFontSizes [ 0  1  NumSheets 1 sub {/SheetNum exch def  [ SheetLengths SheetNum get {//PrinterEpsilon} repeat ]} for ] def
-	/BelowtitleFontSizes [ 0  1  NumSheets 1 sub {/SheetNum exch def  [ SheetLengths SheetNum get {//PrinterEpsilon} repeat ]} for ] def
-	/OvertitleFontSizes  [ 0  1  NumSheets 1 sub {/SheetNum exch def  [ SheetLengths SheetNum get {//PrinterEpsilon} repeat ]} for ] def
-	/OvertitleOffsetsProportionFontSizeVertical [ 0  1  NumSheets 1 sub  {/SheetNum exch def  SheetLengths SheetNum get array} for ] def
-	/AbovetitleOffsetsAbsoluteVertical [ 0  1  NumSheets 1 sub  {/SheetNum exch def  SheetLengths SheetNum get array} for ] def
-	/BelowtitleOffsetsAbsoluteVertical [ 0  1  NumSheets 1 sub  {/SheetNum exch def  SheetLengths SheetNum get array} for ] def
+	/AbovetitleFontSizes [ 0  1  NumSheets 1 sub {/SheetNum exch def  [ SheetNumGlasses SheetNum get {//PrinterEpsilon} repeat ]} for ] def
+	/BelowtitleFontSizes [ 0  1  NumSheets 1 sub {/SheetNum exch def  [ SheetNumGlasses SheetNum get {//PrinterEpsilon} repeat ]} for ] def
+	/OvertitleFontSizes  [ 0  1  NumSheets 1 sub {/SheetNum exch def  [ SheetNumGlasses SheetNum get {//PrinterEpsilon} repeat ]} for ] def
+	/OvertitleOffsetsProportionFontSizeVertical [ 0  1  NumSheets 1 sub  {/SheetNum exch def  SheetNumGlasses SheetNum get array} for ] def
+	/AbovetitleOffsetsAbsoluteVertical [ 0  1  NumSheets 1 sub  {/SheetNum exch def  SheetNumGlasses SheetNum get array} for ] def
+	/BelowtitleOffsetsAbsoluteVertical [ 0  1  NumSheets 1 sub  {/SheetNum exch def  SheetNumGlasses SheetNum get array} for ] def
 	currentdict /SheetNum undef
 	/FirstError //true def
 	0  1  NumSheets 1 sub
@@ -8563,7 +8571,7 @@ currentdict /GlyphShowKnownAbsences undef
 		/SheetNum exch def
 		//false //false //false //false PaperType Orientation SetPaperSize
 		//true DefStoreMgns
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 
@@ -8711,7 +8719,7 @@ currentdict /GlyphShowKnownAbsences undef
 		/SheetNum exch def
 		//false //false //false //false PaperType Orientation SetPaperSize
 		//true DefStoreMgns
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			% AbovetitleOffsetsAbsoluteVertical needs adjusting, to point to baseline rather than bottom
@@ -8798,10 +8806,10 @@ currentdict /GlyphShowKnownAbsences undef
 	/BelowtitleFontSizesMaxByPage [ BelowtitleFontSizes {0 exch {2 copy lt {exch} if pop} forall} forall ] def
 	/OvertitleFontSizesMaxByPage [ OvertitleFontSizes {0 exch {2 copy lt {exch} if pop} forall} forall ] def
 
-	/TitleAboveBelowOverL [ SheetLengths {[ exch {0} repeat ]} forall ] def
-	/TitleAboveBelowOverR [ SheetLengths {[ exch {0} repeat ]} forall ] def
-	/TitleAboveBelowOverB [ SheetLengths {[ exch {0} repeat ]} forall ] def
-	/TitleAboveBelowOverT [ SheetLengths {[ exch {0} repeat ]} forall ] def
+	/TitleAboveBelowOverL [ SheetNumGlasses {[ exch {0} repeat ]} forall ] def
+	/TitleAboveBelowOverR [ SheetNumGlasses {[ exch {0} repeat ]} forall ] def
+	/TitleAboveBelowOverB [ SheetNumGlasses {[ exch {0} repeat ]} forall ] def
+	/TitleAboveBelowOverT [ SheetNumGlasses {[ exch {0} repeat ]} forall ] def
 	//DeBugLevel 100 le {( Main: Computation of TitleAboveBelowOverL, ...R, ...B, ...T.) OutputToLog} if
 	9 dict begin
 	/TABO_MaxT //InfinNeg def  /TABO_MaxT_SheetNum -1 def  /TABO_MaxT_WithinPage -1 def
@@ -8809,7 +8817,7 @@ currentdict /GlyphShowKnownAbsences undef
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 
@@ -8919,7 +8927,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
-			0  1  SheetLengths SheetNum get 1 sub
+			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				WithinPage-WithinTitles-def
 				{PrePourNumCopies 1 ge} MightBeTrue
@@ -8951,7 +8959,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
-			0  1  SheetLengths SheetNum get 1 sub
+			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				WithinPage-WithinTitles-def
 				WithinTitles param eq {/AnsFound //true def  exit} if
@@ -8965,8 +8973,8 @@ currentdict /GlyphShowKnownAbsences undef
 	% FlightSeparationPath takes a single array parameter and appends a segment to the current path.
 	% The range of permitted parameters is described at http://github.com/jdaw1/placemat/blob/main/Documentation/page_level.md#separating-flights-within-a-page
 	/FlightSeparationDone [ NumSheets {//false} repeat ] def
-	/FlightSeparationInterestingsTB [ SheetLengths {4 mul array} forall ] def
-	/FlightSeparationInterestingsLR [ SheetLengths {4 mul array} forall ] def
+	/FlightSeparationInterestingsTB [ SheetNumGlasses {4 mul array} forall ] def
+	/FlightSeparationInterestingsLR [ SheetNumGlasses {4 mul array} forall ] def
 	/FlightSeparationPath
 	{
 		//DeBugLevel 50 le {(+FlightSeparationPath) OutputToLog} if
@@ -9554,7 +9562,7 @@ currentdict /GlyphShowKnownAbsences undef
 						WaterBoxesMaxRowLengths length dup 0 gt {1 sub WaterBoxRow 2 copy gt {exch} if pop WaterBoxesMaxRowLengths exch GetEU WaterBoxCol le {/WBok //false def exit} if} {pop} ifelse
 
 						/WBok //true def
-						0  1  SheetLengths SheetNum get 1 sub
+						0  1  SheetNumGlasses SheetNum get 1 sub
 						{
 							/WithinPage exch def
 							CircleNonEmpty SheetNum get WithinPage get
@@ -9710,7 +9718,7 @@ currentdict /GlyphShowKnownAbsences undef
 											} if   % [x y]
 											This length 1 ge  ThisGood not and {//true This {type /integertype ne {pop //false exit} if} forall} {//false} ifelse
 											{
-												//true This {dup 0 lt exch SheetLengths SheetNum get ge or {pop //false exit} if} forall
+												//true This {dup 0 lt exch SheetNumGlasses SheetNum get ge or {pop //false exit} if} forall
 												{
 													/ThisGood //true def
 													0  This {GlassPositions SheetNum get exch get 0 get add} forall  This length div
@@ -9719,7 +9727,7 @@ currentdict /GlyphShowKnownAbsences undef
 											} if  % [WithinPage0 WithinPage1 ... ]
 											ThisGood not {mark (Error: DropletsCharges ) ChargeNum 1 add ( get is validly an array, but should be either two reals, or >=1 in-range integers. Ignoring and continuing.) ConcatenateToMark OutputToLog} if
 										}{
-											This type /integertype eq {This 0 ge  This SheetLengths SheetNum get lt  and} {//false} ifelse
+											This type /integertype eq {This 0 ge  This SheetNumGlasses SheetNum get lt  and} {//false} ifelse
 											{
 												/ThisGood //true def
 												GlassPositions SheetNum get This get aload pop
@@ -10241,7 +10249,7 @@ currentdict /GlyphShowKnownAbsences undef
 				FlightSeparations {FlightSeparationLines SheetNum GetEU length 0 gt} {//false} ifelse
 				{
 					/MinCentreSeparation2  PageHeight MgnB MgnT add sub Radii SheetNum get 2 mul sub dup mul  PageWidth MgnL MgnR add sub Radii SheetNum get 2 mul sub dup mul  add def
-					1  1  SheetLengths SheetNum get 1 sub
+					1  1  SheetNumGlasses SheetNum get 1 sub
 					{
 						/WithinPageA exch def
 						/WithinTitlesA GlassesOnSheets SheetNum GetEU WithinPageA GetEU def
@@ -10387,16 +10395,16 @@ currentdict /GlyphShowKnownAbsences undef
 		} for  % 'GlassesAnnotations'
 		end
 	} bind def  % AnnotateGlass
-	/InlineTitlesNumberContours      [ SheetLengths {array} forall ] def
-	/InlineAbovetitlesNumberContours [ SheetLengths {array} forall ] def
-	/InlineBelowtitlesNumberContours [ SheetLengths {array} forall ] def
-	/InlineOvertitlesNumberContours  [ SheetLengths {array} forall ] def
+	/InlineTitlesNumberContours      [ SheetNumGlasses {array} forall ] def
+	/InlineAbovetitlesNumberContours [ SheetNumGlasses {array} forall ] def
+	/InlineBelowtitlesNumberContours [ SheetNumGlasses {array} forall ] def
+	/InlineOvertitlesNumberContours  [ SheetNumGlasses {array} forall ] def
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
 		//false //false //false //false PaperType Orientation SetPaperSize
 		//true DefStoreMgns
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			dup TitleAboveBelowOverForms SheetNum get exch get begin
 			WithinPage-WithinTitles-def
@@ -10476,7 +10484,9 @@ currentdict /GlyphShowKnownAbsences undef
 					1 setlinecap  1 setlinejoin  [] 0 setdash
 					InlineTitles
 					{
-						/InlinePath % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ    http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
+						% http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
+						% http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
+						/InlinePath
 						{
 							TitlesFont  TitleFontSizes SheetNum get WithinPage get  selectfont
 							TitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get
@@ -10486,7 +10496,7 @@ currentdict /GlyphShowKnownAbsences undef
 							moveto
 							Titles WithinTitles get  //true  CharPathRecursive
 						} def  % /InlinePath
-						InlinePath GSave clip InlineTitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+						InlinePath GSave clip InlineTitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
 						/InlineBlackPlusWhite  InlineTitlesBlackWidth InlineTitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineTitlesAttemptMinimiseNumContours
 						{
@@ -10556,7 +10566,7 @@ currentdict /GlyphShowKnownAbsences undef
 					} if  % ShapesInTitles
 					InlineTitles  % Doing the terminal '1' from the loop 50ish lines above here
 					{
-						GSave newpath InlinePath clip newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+						GSave newpath InlinePath clip newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
 						InlineTitlesBlackWidth 2 mul setlinewidth TitlesAboveBelowOverInlineDarkStrokeCode GRestore
 					} if  % InlineTitles
 					newpath
@@ -10575,7 +10585,9 @@ currentdict /GlyphShowKnownAbsences undef
 					2 copy gt {exch} if pop   FillOvertitles {1.25 mul} if   setlinewidth
 					InlineOvertitles
 					{
-						/InlinePath % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ     http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
+						% http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
+						% http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
+						/InlinePath
 						{
 							OvertitlesFont  OvertitleFontSizes SheetNum get WithinPage get  selectfont
 							OvertitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get
@@ -10668,7 +10680,9 @@ currentdict /GlyphShowKnownAbsences undef
 					2 copy gt {exch} if pop   FillBelowtitles {1.25 mul} if   setlinewidth
 					InlineBelowtitles
 					{
-						/InlinePath % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ     http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
+						% http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
+						% http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
+						/InlinePath
 						{
 							BelowtitlesFont  BelowtitleFontSizes SheetNum get WithinPage get  selectfont
 							BelowtitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get
@@ -10676,7 +10690,8 @@ currentdict /GlyphShowKnownAbsences undef
 							BelowtitleOffsetsAbsoluteVertical SheetNum get WithinPage get
 							moveto   Belowtitles WithinTitles get  //true  CharPathRecursive
 						} def  % InlinePath
-						InlinePath GSave clip InlineBelowtitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+						% http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
+						InlinePath GSave clip InlineBelowtitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath
 						/InlineBlackPlusWhite  InlineBelowtitlesBlackWidth InlineBelowtitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineAboveBelowOverAttemptMinimiseNumContours
 						{
@@ -10761,7 +10776,9 @@ currentdict /GlyphShowKnownAbsences undef
 					2 copy gt {exch} if pop   FillAbovetitles {1.25 mul} if   setlinewidth
 					InlineAbovetitles
 					{
-						/InlinePath % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ     http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
+						% http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
+						% http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19193479-distiller-charpath-clip-stroke-does-not-honou
+						/InlinePath
 						{
 							AbovetitlesFont  AbovetitleFontSizes SheetNum get WithinPage get  selectfont
 							AbovetitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get
@@ -10769,7 +10786,8 @@ currentdict /GlyphShowKnownAbsences undef
 							AbovetitleOffsetsAbsoluteVertical SheetNum get WithinPage get
 							moveto   Abovetitles WithinTitles get  //true  CharPathRecursive
 						} def  % InlinePath
-						InlinePath GSave clip InlineAbovetitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+						% http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
+						InlinePath GSave clip InlineAbovetitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath
 						/InlineBlackPlusWhite  InlineAbovetitlesBlackWidth InlineAbovetitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineAboveBelowOverAttemptMinimiseNumContours
 						{
@@ -10835,7 +10853,8 @@ currentdict /GlyphShowKnownAbsences undef
 					} if  % ShapesInAbovetitles
 					InlineAbovetitles  % Doing the terminal '1' from the loop 47ish lines above here
 					{
-						GSave newpath InlinePath clip newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+						% http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
+						GSave newpath InlinePath clip newpath InlinePath
 						InlineAbovetitlesBlackWidth 2 mul setlinewidth TitlesAboveBelowOverInlineDarkStrokeCode GRestore
 					} if  % InlineAbovetitles
 					newpath
@@ -10873,6 +10892,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 		PlaceNamesFont  PlaceNamesFontSize  selectfont
 		% http://groups.google.com/g/comp.lang.postscript/c/b6f1e9ec3da9cc87/
+		% https://groups.google.com/g/comp.lang.postscript/c/tvHp7D2pzIc  "Large bug in stringwidth", 07 July 2009
 		/XX  X  URX LLX add //DeSizeRounding div PlaceNamesFontSize mul 2 div  sub  def
 		/YY  Y  URY LLY add //DeSizeRounding div PlaceNamesFontSize mul 2 div  sub  def
 
@@ -10909,7 +10929,7 @@ currentdict /GlyphShowKnownAbsences undef
 					PlaceNamesFont  PlaceNamesFontSize  selectfont
 					XX YY moveto
 					/ThisName load  //true  CharPathRecursive
-				} dup exec ClipSave clip newpath exec  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+				} dup exec ClipSave clip newpath exec  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
 				/InlineBlackPlusWhite  InlineTitlesBlackWidth InlineTitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 				% Discussion: http://www.theportforum.com/viewtopic.php?t=175&start=913
 				InlinePlaceNamesAttemptMinimiseNumContours {InlineBlackPlusWhite LineWidthThatCoversPath pop InlineBlackPlusWhite div ceiling cvi} {//IntegerMax} ifelse
@@ -10966,7 +10986,7 @@ currentdict /GlyphShowKnownAbsences undef
 					PlaceNamesFont  PlaceNamesFontSize  selectfont
 					XX YY moveto
 					/ThisName load  //true  CharPathRecursive
-				} dup exec ClipSave clip newpath exec  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+				} dup exec ClipSave clip newpath exec  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Large bug in stringwidth", 05 Jan 2009
 				GSave InlineTitlesBlackWidth 2 mul setlinewidth TitlesAboveBelowOverInlineDarkStrokeCode GRestore  % 2 mul because half of the linewidth clip'ped away
 				ClipRestore
 			} if  % InlinePlaceNames
@@ -10984,7 +11004,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
-			0  1  SheetLengths SheetNum get 1 sub
+			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				dup PrePourForms SheetNum get exch get begin
 				WithinPage-WithinTitles-def
@@ -11133,7 +11153,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
-			0  1  SheetLengths SheetNum get 1 sub
+			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				dup BottleWrapForms SheetNum get exch get begin
 				WithinPage-WithinTitles-def
@@ -11982,7 +12002,7 @@ currentdict /GlyphShowKnownAbsences undef
 				CrossHatchingOutsideToPaperEdge {0 0 PageWidth PageHeight} {MgnL MgnB PageWidth MgnL MgnR add sub PageHeight MgnB MgnT add sub} ifelse  rectclip newpath
 				% This path passed to RadialCrossHatching
 				CrossHatchingOutsideToPaperEdge {PageWidth 0  1 index PageHeight  0 1 index  0 0} {PageWidth MgnR sub MgnB  1 index PageHeight MgnT sub  MgnL 1 index  MgnL MgnB} ifelse  moveto lineto lineto lineto closepath
-				0  1  SheetLengths SheetNum get 1 sub
+				0  1  SheetNumGlasses SheetNum get 1 sub
 				{
 					/WithinPage exch def
 					CircleNonEmpty SheetNum get WithinPage get {GlassPositions SheetNum get WithinPage get aload pop Radii SheetNum get 0 360 /m ArcAccurate closepath} if
@@ -12002,13 +12022,13 @@ currentdict /GlyphShowKnownAbsences undef
 	{
 		//DeBugLevel 100 le {( Main: CrossHatchingInsideForms) OutputToLog} if
 		/TypeOfPagesBeingRendered /Glasses store
-		/CrossHatchingInsideForms [ SheetLengths {[ exch {6 dict} repeat]} forall ] def
+		/CrossHatchingInsideForms [ SheetNumGlasses {[ exch {6 dict} repeat]} forall ] def
 
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
 
-			0  1  SheetLengths SheetNum get 1 sub
+			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				dup CrossHatchingInsideForms SheetNum get exch get begin
 				WithinPage-WithinTitles-def
@@ -12050,7 +12070,7 @@ currentdict /GlyphShowKnownAbsences undef
 	/OutlineTitles load MightBeTrue
 	{
 		//DeBugLevel 100 le {( Main: OutlineForms) OutputToLog} if
-		/OutlineTitlesNumberContours [ SheetLengths {array} forall ] def
+		/OutlineTitlesNumberContours [ SheetNumGlasses {array} forall ] def
 		/TypeOfPagesBeingRendered /Glasses store
 		/OutlineForms [ GlassesOnSheets {[ exch execU length {6 dict} repeat]} forall ] def
 
@@ -12058,7 +12078,7 @@ currentdict /GlyphShowKnownAbsences undef
 		{
 			/SheetNum exch def
 
-			0  1  SheetLengths SheetNum get 1 sub
+			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				dup OutlineForms SheetNum get exch get begin
 				WithinPage-WithinTitles-def
@@ -12162,7 +12182,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
-			0  1  SheetLengths SheetNum get 1 sub
+			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				dup SpiralForms SheetNum get exch get begin
 				WithinPage-WithinTitles-def
@@ -12198,7 +12218,7 @@ currentdict /GlyphShowKnownAbsences undef
 							abs RadiiCirclearrayInside SheetNum get add  2 add  % Embedded constant. Will be enough if linewidth <= 4.
 							SpiralNumArms SpiralRadiusBetweenArms SpiralAngleOffset SpiralClockwise //true /m ArchimedeanSpiralPath
 						} ifelse  % SpiralRadiusBetweenArms abs //Infinity ge
-						0.24 setlinewidth  0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash  SpiralStrokeCode  % Too thin was 0.12 setlinewidth as used http://www.jdawiseman.com/2022/20220120_blind.pdf
+						0.18 setlinewidth  0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash  SpiralStrokeCode  % Too thin was 0.12 setlinewidth as used http://www.jdawiseman.com/2022/20220120_blind.pdf
 						ClipRestore
 					} if  % RadiiCirclearrayInside SheetNum get  0 gt  Spirals and
 					//DeBugLevel 100 le {(-SpiralForms: PaintProc) OutputToLog} if
@@ -12219,7 +12239,7 @@ currentdict /GlyphShowKnownAbsences undef
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			dup CirclearrayForms SheetNum get exch get begin
 			WithinPage-WithinTitles-def
@@ -12384,7 +12404,7 @@ currentdict /GlyphShowKnownAbsences undef
 						0  1  NumSheets 1 sub
 						{
 							/SheetNum exch def
-							0  1  SheetLengths SheetNum get 1 sub
+							0  1  SheetNumGlasses SheetNum get 1 sub
 							{
 								/WithinPage exch def
 								WithinTitles  GlassesOnSheets SheetNum GetEU WithinPage GetEU  eq {/FoundOnGlassSheet //true def exit} if
@@ -12517,13 +12537,13 @@ currentdict /GlyphShowKnownAbsences undef
 		13 dict begin
 		/TypeOfPagesBeingRendered /Glasses store
 
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			GlassesPageWhiteCirclesBehind  CircleNonEmpty SheetNum get WithinPage get  and {newpath GlassPositions SheetNum get WithinPage get aload pop Radii SheetNum get 0 360 /m ArcAccurate 1 setgray fill} if
 		} for  % WithinPage, WithinTitles
 
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=94014#p94014
@@ -12545,7 +12565,7 @@ currentdict /GlyphShowKnownAbsences undef
 		Droplets
 		{
 			//DeBugLevel 75 le {( GlassesPageInnerLoop: Droplets) OutputToLog} if
-			DropletsReversedHighlight {DropletsReversedForms SheetNum get execform} if  % Only pn Glasses, so that DropletsReversedHighlight can be a NameNum test.
+			DropletsReversedHighlight {DropletsReversedForms SheetNum get execform} if  % Only on Glasses, so that DropletsReversedHighlight can be a NameNum test.
 			DropletsForms SheetNum get execform
 		} if  % Droplets
 
@@ -12580,7 +12600,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 		% Outlined titles, and CrossHatchingInside after outlining as that spreads much white paint
 		//DeBugLevel 75 le {( GlassesPageInnerLoop: OutlineTitles and CrossHatchingInside) OutputToLog} if
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			CircleNonEmpty SheetNum get WithinPage get
@@ -12611,7 +12631,7 @@ currentdict /GlyphShowKnownAbsences undef
 		% TitleAboveBelowOverForms
 		//DeBugLevel 75 le {( GlassesPageInnerLoop: TitleAboveBelowOverForms) OutputToLog} if
 		/usertimeStartLocal usertime def
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			GlassesCirclesFadingFactor dup //Epsilon ge
@@ -12678,7 +12698,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 		% Circletext over everything
 		//DeBugLevel 75 le {( GlassesPageInnerLoop: CirclearrayForms) OutputToLog} if
-		0  1  SheetLengths SheetNum get 1 sub
+		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
 			GlassesCirclesFadingFactor dup //Epsilon ge
@@ -12962,7 +12982,7 @@ currentdict /GlyphShowKnownAbsences undef
 			0  1  NumSheets 1 sub
 			{
 				/SheetNum exch def
-				0  1  SheetLengths SheetNum get 1 sub
+				0  1  SheetNumGlasses SheetNum get 1 sub
 				{
 					WithinPage-WithinTitles-def
 					OneCircles  //false PageSuppressed not and  CircleNonEmpty SheetNum get WithinPage get  and
@@ -13615,7 +13635,7 @@ currentdict /GlyphShowKnownAbsences undef
 				0  1  NumSheets 1 sub
 				{
 					/SheetNum exch def
-					0  1  SheetLengths SheetNum get 1 sub
+					0  1  SheetNumGlasses SheetNum get 1 sub
 					{
 						WithinPage-WithinTitles-def
 						NeckTagsPaperType ThisPaperType PaperTypesEqual   PageOrderingNeckTags SheetNum GetEU  ThisPageOrdering  eq   and   NeckTagsNumCopies 1 ge  and
@@ -13652,7 +13672,7 @@ currentdict /GlyphShowKnownAbsences undef
 								0  1  NumSheets 1 sub
 								{
 									/SheetNum exch def
-									0  1  SheetLengths SheetNum get 1 sub
+									0  1  SheetNumGlasses SheetNum get 1 sub
 									{
 										WithinPage-WithinTitles-def
 										/NTRadiiDiffPlusGap Radii SheetNum get RadiiCirclearrayInside SheetNum get sub NTGapInside add def
@@ -13734,7 +13754,7 @@ currentdict /GlyphShowKnownAbsences undef
 						0  1  NumSheets 1 sub
 						{
 							/SheetNum exch def
-							0  1  SheetLengths SheetNum get 1 sub
+							0  1  SheetNumGlasses SheetNum get 1 sub
 							{
 								WithinPage-WithinTitles-def
 								/NTRadiiDiffPlusGap Radii SheetNum get RadiiCirclearrayInside SheetNum get sub NTGapInside add def
@@ -13862,7 +13882,7 @@ currentdict /GlyphShowKnownAbsences undef
 					/SheetNum exch def
 					PrePourPaperType ThisPaperType PaperTypesEqual   PageOrderingPrePourPages SheetNum GetEU  ThisPageOrdering  eq   and  % Note SheetNum not PrePourSheetNum
 					{
-						SheetLengths SheetNum get 1 sub  PrePourReverseOrder {-1 0} {0 exch 1 exch} ifelse
+						SheetNumGlasses SheetNum get 1 sub  PrePourReverseOrder {-1 0} {0 exch 1 exch} ifelse
 						{
 							WithinPage-WithinTitles-def
 							//true
@@ -13921,7 +13941,7 @@ currentdict /GlyphShowKnownAbsences undef
 					/SheetNum exch def
 					BottleWrapPaperType ThisPaperType PaperTypesEqual   PageOrderingBottleWrap SheetNum GetEU  ThisPageOrdering  eq   and  % Note SheetNum not BottleWrapSheetNum
 					{
-						SheetLengths SheetNum get 1 sub  BottleWrapReverseOrder {-1 0} {0 exch 1 exch} ifelse
+						SheetNumGlasses SheetNum get 1 sub  BottleWrapReverseOrder {-1 0} {0 exch 1 exch} ifelse
 						{
 							WithinPage-WithinTitles-def
 							//true
@@ -13970,7 +13990,7 @@ currentdict /GlyphShowKnownAbsences undef
 			% Decanter labels. Because there is, in inner loops, testing of DecanterLabelsPaperType and PageOrderingDecanterLabels, this is not in an ...InnerLoop code.
 			{DecanterLabelsNumCopies 1 ge} MightBeTrue
 			{
-				/DLRotations dup where {pop pop} {[ SheetLengths {array} forall ] def} ifelse
+				/DLRotations dup where {pop pop} {[ SheetNumGlasses {array} forall ] def} ifelse
 				45 dict begin
 
 				//false
@@ -14024,7 +14044,7 @@ currentdict /GlyphShowKnownAbsences undef
 							/SheetNum exch def
 							DecanterLabelsPaperType ThisPaperType PaperTypesEqual   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and
 							{
-								0  1  SheetLengths SheetNum get 1 sub
+								0  1  SheetNumGlasses SheetNum get 1 sub
 								{
 									WithinPage-WithinTitles-def
 									/DLTotalNumCopies dup load DecanterLabelsNumCopies add def
@@ -14065,7 +14085,7 @@ currentdict /GlyphShowKnownAbsences undef
 								/SheetNum exch def
 								DecanterLabelsPaperType ThisPaperType PaperTypesEqual   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and
 								{
-									0  1  SheetLengths SheetNum get 1 sub
+									0  1  SheetNumGlasses SheetNum get 1 sub
 									{
 										WithinPage-WithinTitles-def   /DLRSW DLRotations SheetNum get WithinPage get def
 										0  1  DecanterLabelsNumCopies 1 sub    CircleNonEmpty SheetNum get WithinPage get not {pop -1} if
@@ -14232,7 +14252,7 @@ currentdict /GlyphShowKnownAbsences undef
 						/SheetNum exch def
 						StickyLabelsPaperType ThisPaperType PaperTypesEqual   PageOrderingStickyLabels SheetNum GetEU  ThisPageOrdering  eq   and  % Note SheetNum not StickyLabelsSheetNum
 						{
-							SheetLengths SheetNum get 1 sub  StickyLabelsReverseOrder {-1 0} {0 exch 1 exch} ifelse
+							SheetNumGlasses SheetNum get 1 sub  StickyLabelsReverseOrder {-1 0} {0 exch 1 exch} ifelse
 							{
 								WithinPage-WithinTitles-def
 								//true   StickyLabelsRemoveDuplicatesByWithinTitles {counttomark 1 sub 1 exch 1 exch {index 2 get WithinTitles eq {pop //false exit} if} for} if
@@ -14647,9 +14667,9 @@ currentdict /GlyphShowKnownAbsences undef
 	{
 		1 index mark ne {(; )} if
 		(and also ) ShownGlassesCircles
-		/GlassesNumCopies load type /integertype eq {dup 0 SheetLengths {add} forall Names length mul GlassesNumCopies mul eq    NumSheets 1 ge  and
+		/GlassesNumCopies load type /integertype eq {dup 0 SheetNumGlasses {add} forall Names length mul GlassesNumCopies mul eq    NumSheets 1 ge  and
 		{
-			(=) Names length (*)  //true 1 1 NumSheets 1 sub {dup 1 sub SheetLengths exch get exch SheetLengths exch get eq and} for  {NumSheets (*) SheetLengths 0 get}  {(\() SheetLengths {(+)} forall pop (\))}  ifelse
+			(=) Names length (*)  //true 1 1 NumSheets 1 sub {dup 1 sub SheetNumGlasses exch get exch SheetNumGlasses exch get eq and} for  {NumSheets (*) SheetNumGlasses 0 get}  {(\() SheetNumGlasses {(+)} forall pop (\))}  ifelse
 			GlassesNumCopies dup 1 gt {(*) exch} {pop} ifelse
 		} if} if  % Sensible to express as a multiplication
 		( glass-circle zooms of form Circle_#NameNum_#SheetNum_#WithinPage)  {GlassesNumCopies 2 ge} MightBeTrue {([_#GlassesCopyNum])} if
@@ -14779,7 +14799,7 @@ currentdict /GlyphShowKnownAbsences undef
 									/Glasses TypeOfPagesBeingRendered eq
 									{
 										ThisNameNumTypes 2 ge {(G\220s: )} {()} ifelse  mark ()
-										0  1  SheetLengths SheetNum get 1 sub
+										0  1  SheetNumGlasses SheetNum get 1 sub
 										{
 											WithinPage-WithinTitles-def
 											Titles WithinTitles get PDFDocEncodingify TrimSpaces dup length 0 gt {(; )} if
@@ -15094,7 +15114,7 @@ currentdict /GlyphShowKnownAbsences undef
 		} forall  % ShownPagesData ...
 		//false  ShownPagesBySheetNum {0 gt {pop //true exit} if} forall  ShownPagesByTastingSheetNum {0 gt {pop //true exit} if} forall
 		{
-			% http://groups.google.com/g/comp.lang.postscript/c/dcOto3ySuYE
+			% http://groups.google.com/g/comp.lang.postscript/c/dcOto3ySuYE  "mark /Action ... /OUT pdfmark", 29 Aug 2015
 			mark  /Action << >>  /Color [0 0 0]  /F 0  /Title ()  /OUT pdfmark
 			mark  /Action << >>  /Color [0 0 0]  /F 2  /Title (\247 Re-ordered)  /OUT pdfmark
 
@@ -15132,7 +15152,7 @@ currentdict /GlyphShowKnownAbsences undef
 									mark
 										/Action /GoTo /Dest PageDestName
 										/Color [0 0 1]  /F 0  /Count  ShownPagesBySheetNum SheetNum get neg
-										/Title  mark mark  ()  0  1  SheetLengths SheetNum get 1 sub
+										/Title  mark mark  ()  0  1  SheetNumGlasses SheetNum get 1 sub
 										{
 											2 dict begin  WithinPage-WithinTitles-def  Titles WithinTitles get PDFDocEncodingify TrimSpaces  dup length 0 gt {(; )} if  end
 										} for  % WithinPage
@@ -15236,9 +15256,9 @@ currentdict /GlyphShowKnownAbsences undef
 				mark
 					/Action /GoTo /Dest GlassesCircleDestName
 					/Color [0 0 0]  /F 0  /Count  FirstGlasses length 1 add neg  % 1 add because of links to bug report
-					/Title  mark (Zooms of ) /GlassesNumCopies load type /integertype eq Names length 0 gt and {0 SheetLengths {add} forall Names length mul GlassesNumCopies mul ShownGlassesCircles eq
+					/Title  mark (Zooms of ) /GlassesNumCopies load type /integertype eq Names length 0 gt and {0 SheetNumGlasses {add} forall Names length mul GlassesNumCopies mul ShownGlassesCircles eq
 					{
-						ShownGlassesCircles (=) Names length (\327)  0 SheetLengths {add} forall  GlassesNumCopies dup 1 gt {(\327) exch} {pop} ifelse ( )
+						ShownGlassesCircles (=) Names length (\327)  0 SheetNumGlasses {add} forall  GlassesNumCopies dup 1 gt {(\327) exch} {pop} ifelse ( )
 					} if} if  (glass circles) ConcatenateToMark
 				/OUT pdfmark
 			} if  % First circle. Code must be here because GlassesCircleDestName needed.
@@ -15377,13 +15397,13 @@ OutputLogToPage {false PageSuppressed not} {false} ifelse
 	/FontSize 6.25 def   /Courier FontSize selectfont  /WidthW (W) stringwidth pop def  % Large initial FontSize, constrained by >=132 char limit, on A4 is FontSize ~=6.833; 6.25 leads to 6.22043.
 	/FontSize  PageWidth 54 sub //PrinterEpsilon sub  dup WidthW div ceiling  132  2 copy lt {exch} if pop  WidthW mul div FontSize mul def  % /FontSize WatchExpression
 	/YlineStep FontSize 1.125 mul def
-	/YparaExtra FontSize 0.75 mul def
+	/YparaExtra FontSize 0.5 mul def
 	/YblankLine 0 def
 	/Y PageHeight 27 sub YlineStep sub def
 	/ForcedLineBreak //false def
 
-	/Courier-Bold FontSize selectfont   27 Y moveto  0 0 0.9333333 setrgbcolor  % #0000EE  http://www.w3.org/TR/html5/rendering.html  http://stackoverflow.com/questions/4774022/
-	/LogHeaders [ (http://github.com/jdaw1/placemat/)  (http://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps) ] def
+	/Courier-Bold FontSize selectfont   27 Y moveto  0 0 0.93333333 setrgbcolor  % #0000EE  http://www.w3.org/TR/html5/rendering.html  http://stackoverflow.com/questions/4774022/
+	/LogHeaders [ (https://github.com/jdaw1/placemat/#readme)  (http://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps?raw=1) ] def
 	/LogHeaderGap PageWidth 54 sub LogHeaders {stringwidth pop sub} forall LogHeaders length dup 3 ge {1 sub div} {pop} ifelse def
 	LogHeaders {show LogHeaderGap 0 rmoveto   /AnythingOnPage //true def} forall
 	/Y Y YlineStep sub YparaExtra sub def
