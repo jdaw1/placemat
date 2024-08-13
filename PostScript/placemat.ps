@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Tuesday 13th August 2024
+% This version 20:15 Tuesday 13th August 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202408132000) def
+/ParametersVersionDateTimeAdobeFormat (D:202408132015) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -802,7 +802,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202408132000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202408132015) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -11733,9 +11733,9 @@ currentdict /GlyphShowKnownAbsences undef
 								} if  % Non-montonic
 							} if  % ... 0 gt
 						} for  % i
-						(; ) eq {TerminatingFullStopAppend} if  ConcatenateToMark OutputToLog
+						counttomark {dup () eq {pop} {dup (;) eq {pop} {dup (; ) eq {pop} {exit} ifelse} ifelse} ifelse} repeat  TerminatingFullStopAppend  ConcatenateToMark OutputToLog
 						/VoteRecorderNamesWidthsLogged //true store
-					} if  % at least three non-0 widths
+					} if  % at least four non-0 widths
 					currentdict /NamesVoteRecorderWidths undef
 				} if  % VoteRecorderNamesWidthsLogged not  NamesVoteRecorder length 4 ge  and  VoteRecorderNamesOrientationIsHorizontal not  and
 
