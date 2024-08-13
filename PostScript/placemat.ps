@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Monday 12th August 2024
+% This version 20:00 Tuesday 13th August 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202408122000) def
+/ParametersVersionDateTimeAdobeFormat (D:202408132000) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -802,7 +802,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202408122000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202408132000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -920,18 +920,18 @@ OutputLog  0  (!!! Error !!! Error !!!   An error occurred. More information bel
 ifelse} bind def  % /Stopped
 
 
+% Simple tests are consistent with this set of Shell sort gaps being O( n * ln(n)^(4/3) ). Proper testing necessary.
+% ShellSort is very fast at short arrays, but QuickSort's segregation helps multi-CPU with long arrays.
+% From http://en.wikipedia.org/wiki/Shellsort
+%   > Gonnet and Baeza-Yates observed that Shellsort makes the fewest comparisons on average when the ratios of successive gaps are
+%   > roughly equal to 2.2. This is why their sequence with ratio 2.2 and Tokuda's sequence with ratio 2.25 prove efficient. However,
+%   > it is not known why this is so. Sedgewick recommends using gaps which have low greatest common divisors or are pairwise coprime.
+% Here each is closest to immediately previous * Sqrt5 that is coprime to all smaller,
+% so ratios tend to ~=2.236. From values of 83 the ratios >2.2358 and <2.2531.
+% PostScript's max array size usually 65535 (PLRM3, p739, table B.1), but an implementation could allow
+% longer. Included are gaps up to PostScript's max integer = 2^31 - 1, subsequent being commented out.
 /ShellSortGaps
 [
-	% Simple tests are consistent with this set of gaps being O( n * ln(n)^(4/3) ). Proper testing necessary.
-	% ShellSort is very fast at short arrays, but QuickSort's segregation helps multi-CPU with long arrays.
-	% PostScript's max array size usually 65535 (PLRM3, p739, table B.1), but an implementation could allow longer.
-	% Included are those up to PostScript's max integer = 2^31 - 1, subsequent being commented out.
-	% From http://en.wikipedia.org/wiki/Shellsort
-	%   > Gonnet and Baeza-Yates observed that Shellsort makes the fewest comparisons on average when the ratios of successive gaps are
-	%   > roughly equal to 2.2. This is why their sequence with ratio 2.2 and Tokuda's sequence with ratio 2.25 prove efficient. However,
-	%   > it is not known why this is so. Sedgewick recommends using gaps which have low greatest common divisors or are pairwise coprime.
-	% Here each is closest to immediately previous * Sqrt5 that is coprime to all smaller,
-	% so ratios tend to ~=2.236. From values of 83 the ratios >2.2358 and <2.2531.
 	1 3 7 16 37 83 187 419 937 2099 4693 10499 23479 52501  % Below 2^16 = 65536, so sufficient for PostScript.
 	117391 262495 586961 1312481 2934793 6562397 14673961 32811973 73369801 164059859 366848983 820299269 1834244921  % Below 2^31 ~= 2 billion
 	% 4101496331 9171224603 20507481647 45856123009 102537408229 229280615033 512687041133 1146403075157 2563435205663 5732015375783
@@ -11336,7 +11336,7 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				//DeBugLevel 100 le {(+VoteRecorderForms: PaintProc) OutputToLog} if
 				pop  % dictionary parameter of execform
-				52 dict begin
+				53 dict begin
 				/VoteRecorderSheetNum VoteRecorderSheetNum def
 				/TypeOfPagesBeingRendered /VoteRecorder store
 
@@ -11471,40 +11471,6 @@ currentdict /GlyphShowKnownAbsences undef
 				} for  % NameNum
 				currentdict /NameNum undef
 
-				VoteRecorderNamesWidthsLogged not  NamesVoteRecorder length 4 ge  and
-				{
-					/NamesVoteRecorderWidths VoteRecorderNameR VoteRecorderNameL  {sub} //false TwoArraysFunction 0 NamesVoteRecorder length getinterval def
-					NamesVoteRecorderWidths //false exch {0 ne {pop //true exit} if} forall
-					{
-						/SortIncreasingVR
-						0   NamesVoteRecorderWidths  NamesVoteRecorder length 2 idiv 1 sub  dup NamesVoteRecorder length 1 sub exch sub exch  getinterval {add} forall
-						0   NamesVoteRecorderWidths  1                  NamesVoteRecorder length 2 idiv 1 sub                                 getinterval {add} forall
-						ge   def  % /SortIncreasingVR
-
-						% VoteRecorder slightly neater if names sorted by length. Usual practice to begin with honoured guest, then organiser, then the others sorted by length. These logs help sorting.
-						mark () (NamesVoteRecorder, sorted ) (longer) (shorter) SortIncreasingVR {exch} if (-to-) exch (: )
-						[ 0  1  NamesVoteRecorder length 1 sub {[exch dup NamesVoteRecorder exch get ASCIIfy exch NamesVoteRecorderWidths exch get]  dup 1 get 0 eq {pop} if} for ]
-						dup {1 get exch 1 get SortIncreasingVR {gt} {lt} ifelse} ShellSort  {0 get (; )} forall pop
-						dup (; ) eq {pop TerminatingFullStopAppend} if  % pop until string that is neither () nor (; )
-						(  Names with lengths locally non-monotonic: )
-						1  1  NamesVoteRecorderWidths length 2 sub
-						{
-							/NameNum exch def
-							//true  -1 1 1 {NameNum add NamesVoteRecorderWidths exch get 0 le {pop //false exit} if} for
-							{
-								-1 1 1 {NameNum add NamesVoteRecorderWidths exch get} for
-								1 index sub  3 1 roll sub  2 copy abs 0.06 ge exch abs 0.06 ge and  3 1 roll  mul 0 gt and  % Embedded constant, being 1px at 1200d.p.i.
-								{
-									NamesVoteRecorder NameNum get ASCIIfy (; )
-								} if  % Non-montonic
-							} if  % ... 0 gt
-						} for  % i
-						(; ) eq {TerminatingFullStopAppend} if  ConcatenateToMark OutputToLog
-						/VoteRecorderNamesWidthsLogged //true store
-					} if  % any non-0 widths
-					currentdict /NamesVoteRecorderWidths undef
-				} if  % VoteRecorderNamesWidthsLogged not  NamesVoteRecorder length 4 ge  and
-
 				/VoteRecorderHeightFirstRow  0
 					0  1  VoteRecorderNumNames 1 sub  {dup VoteRecorderNameR exch get exch VoteRecorderNameL exch get sub   2 copy lt {exch} if pop} for
 					PageHeight MgnB MgnT add VoteRecorderTopTextHeight add sub dup 8 div exch  3 mul VoteRecorderThisSheetLength 3 add div  2 {2 copy gt {exch} if pop} repeat  % Not to exceed 1/8 space of rows, nor 3 times other rows
@@ -11524,7 +11490,8 @@ currentdict /GlyphShowKnownAbsences undef
 					/VoteRecorderColWidth  PageWidth MgnL MgnR add sub VoteRecorderWidthColFirst sub VoteRecorderNumNames div  def
 
 					% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=80997#p80997
-					VoteRecorderNamesOrientation dup /Horizontal eq  exch /Vertical ne VoteRecorderColWidth VoteRecorderHeightFirstRow 0.9375 mul ge and  or
+					/VoteRecorderNamesOrientationIsHorizontal VoteRecorderNamesOrientation dup /Horizontal eq  exch /Vertical ne VoteRecorderColWidth VoteRecorderHeightFirstRow 0.9375 mul ge and  or def
+					VoteRecorderNamesOrientationIsHorizontal
 					{
 						% Might as well show VoteRecorderNames horizontally. So can shrink VoteRecorderHeightFirstRow.
 						/VoteRecorderHeightFirstRow  VoteRecorderNamesMaxT VoteRecorderNamesMinB sub 1.0625 mul  def
@@ -11687,7 +11654,7 @@ currentdict /GlyphShowKnownAbsences undef
 					NamesFont VoteRecorderNamesFontSize selectfont
 					0 setgray
 					% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=80997#p80997
-					VoteRecorderNamesOrientation dup /Horizontal eq  exch /Vertical ne VoteRecorderColWidth VoteRecorderHeightFirstRow ge and  or
+					VoteRecorderNamesOrientationIsHorizontal
 					{
 						% Horizontal
 						PageHeight MgnT sub VoteRecorderTopTextHeight sub  VoteRecorderHeightFirstRow VoteRecorderNamesMaxT VoteRecorderNamesMinB add add 2 div sub
@@ -11723,7 +11690,7 @@ currentdict /GlyphShowKnownAbsences undef
 							90 rotate  /ThisName load ShowRecursive
 						} ifelse  % VoteRecorderHeightFirstRow ... VoteRecorderNameR ... VoteRecorderNameL ... sub  ... lt
 						setmatrix
-					} ifelse  % VoteRecorderColWidth  VoteRecorderHeightFirstRow gt
+					} ifelse  % VoteRecorderNamesOrientationIsHorizontal
 				} for  % NameNum
 				currentdict /NameNum undef
 
@@ -11738,6 +11705,39 @@ currentdict /GlyphShowKnownAbsences undef
 					MgnL VoteRecorderWidthColFirst 2 div add VRTTT VRTTB sub 2 div add  PageHeight MgnT sub VoteRecorderTopTextHeight sub VoteRecorderHeightFirstRow sub  translate  90 rotate  0 0 moveto
 					VRTTR VRTTL sub VoteRecorderHeightFirstRow gt {VoteRecorderHeightFirstRow VRTTR VRTTL sub div 1 scale} {VoteRecorderHeightFirstRow VRTTR VRTTL sub sub 2 div 0 rmoveto} ifelse
 				} ifelse  VoteRecorderInstruction ShowRecursive   setmatrix  % Show horizontally
+
+				VoteRecorderNamesWidthsLogged not  NamesVoteRecorder length 4 ge  and  VoteRecorderNamesOrientationIsHorizontal not  and
+				{
+					/NamesVoteRecorderWidths VoteRecorderNameR VoteRecorderNameL  {sub} //false TwoArraysFunction 0 NamesVoteRecorder length getinterval def
+					0 NamesVoteRecorderWidths {0 ne {1 add} if} forall  3 gt
+					{
+						/SortIncreasingVR
+						0   NamesVoteRecorderWidths  NamesVoteRecorder length 2 idiv 1 sub  dup NamesVoteRecorder length 1 sub exch sub exch  getinterval {add} forall
+						0   NamesVoteRecorderWidths  1                  NamesVoteRecorder length 2 idiv 1 sub                                 getinterval {add} forall
+						ge   def  % /SortIncreasingVR
+
+						% VoteRecorder slightly neater if names sorted by length. Usual practice to begin with honoured guest, then organiser, then the others sorted by length. These logs help sorting.
+						mark () (NamesVoteRecorder, sorted ) (longer) (shorter) SortIncreasingVR {exch} if (-to-) exch (: )
+						[ 0  1  NamesVoteRecorder length 1 sub {[exch dup NamesVoteRecorder exch get ASCIIfy exch NamesVoteRecorderWidths exch get]  dup 1 get 0 eq {pop} if} for ]
+						dup {1 get exch 1 get SortIncreasingVR {gt} {lt} ifelse} ShellSort  {0 get  dup length 0 gt {(; )} {pop} ifelse} forall pop  TerminatingFullStopAppend
+						(  Names with lengths locally non-monotonic: )
+						1  1  NamesVoteRecorderWidths length 2 sub
+						{
+							/NameNum exch def
+							//true  -1 1 1 {NameNum add NamesVoteRecorderWidths exch get 0 le {pop //false exit} if} for
+							{
+								-1 1 1 {NameNum add NamesVoteRecorderWidths exch get} for
+								1 index sub  3 1 roll sub  2 copy abs 0.06 ge exch abs 0.06 ge and  3 1 roll  mul 0 gt and  % Embedded constant, being 1px at 1200d.p.i.
+								{
+									NamesVoteRecorder NameNum get ASCIIfy (; )
+								} if  % Non-montonic
+							} if  % ... 0 gt
+						} for  % i
+						(; ) eq {TerminatingFullStopAppend} if  ConcatenateToMark OutputToLog
+						/VoteRecorderNamesWidthsLogged //true store
+					} if  % at least three non-0 widths
+					currentdict /NamesVoteRecorderWidths undef
+				} if  % VoteRecorderNamesWidthsLogged not  NamesVoteRecorder length 4 ge  and  VoteRecorderNamesOrientationIsHorizontal not  and
 
 				end
 				//DeBugLevel 100 le {(-VoteRecorderForms: PaintProc) OutputToLog} if
