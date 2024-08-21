@@ -201,7 +201,8 @@ Sometimes, albeit rarely, this `clip`ping is not wanted.
 For instance, if the stars are filled white with no border, the clipping achieves no good. 
 Not only no good, but there can be a tiny bleed between the underlying letter&rsquo;s fill and the clipped shape, such that a very thin black border remains. 
 Or this non-`clip`ping might be wanted for visual effect. 
-Whatever the reason, controlled with the Boolean parameters `ShapesTitlesClip`, `ShapesAbovetitlesClip`, `ShapesBelowtitlesClip`, `ShapesOvertitlesClip`, `ShapesPlaceNamesClip`, for which true means do clip.
+Whatever the reason, controlled with the Boolean parameters `ShapesTitlesClip`, `ShapesAbovetitlesClip`, `ShapesBelowtitlesClip`, `ShapesOvertitlesClip`, `ShapesPlaceNamesClip`, for which true means do clip. 
+However, it can be an aesthetic fail if all of: filled white with no border; not `clip`ped; `CrossHatchingInside` or `OutlineTitles` being `true`.
 
 Some parameters affect just one of the possible values of `ShapesToUse`.
 
