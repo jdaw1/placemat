@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:15 Wednesday 11th September 2024
+% This version 23:20 Wednesday 11th September 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202409112315) def
+/ParametersVersionDateTimeAdobeFormat (D:202409112320) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -802,7 +802,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202409112315) def
+/SoftwareVersionDateTimeAdobeFormat (D:202409112320) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -7150,7 +7150,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 % This open curly brace starts code passed to stopped
 {
-	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: just before error checking, execution time ) usertime usertimeStart TimeIntervalString ConcatenateToMark OutputToLog} if
+	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: just before error checking, execution time) usertime usertimeStart TimeIntervalString ConcatenateToMark OutputToLog} if
 	% Elementary error checking
 	/ErrorFlag //false def
 
@@ -12967,7 +12967,7 @@ currentdict /GlyphShowKnownAbsences undef
 		} {pop pop} ifelse  % EmptyPageString non-empty
 		/TypeOfPagesBeingRendered /Empty store ShowPage end
 	} if  % EmptyGlassesPageAtStart
-	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: starting outermost page-rendering loop: execution time ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if	/ShowHeadersAndFooters //true def
+	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: starting outermost page-rendering loop: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if	/ShowHeadersAndFooters //true def
 	UsedPageOrderings
 	{
 		/ThisPageOrdering exch def
@@ -13900,7 +13900,7 @@ currentdict /GlyphShowKnownAbsences undef
 					PrePourCollate {/PrePourSheetNum 0 def} if
 					{
 						/Finished //true def
-						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: +PrePour: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
+						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: +PrePour: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 						PrePourSheetNumWithinPageWithinTitles
 						{
 							aload pop /WithinTitles exch def  /WithinPage exch def  /SheetNum exch def
@@ -13919,7 +13919,7 @@ currentdict /GlyphShowKnownAbsences undef
 								setmatrix   ShowPage
 							} for  % PrePourSheetNum, if not collating
 						} forall  % PrePourSheetNumWithinPageWithinTitles
-						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: -PrePour: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
+						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: -PrePour: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 						Finished  PrePourCollate not  or {exit} if
 						/PrePourSheetNum PrePourSheetNum 1 add def
 					} loop  % PrePourSheetNum, if collating
@@ -13959,7 +13959,7 @@ currentdict /GlyphShowKnownAbsences undef
 					BottleWrapCollate {/BottleWrapSheetNum 0 def} if
 					{
 						/Finished //true def
-						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: +BottleWrap: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
+						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: +BottleWrap: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 						BottleWrapSheetNumWithinPageWithinTitles
 						{
 							aload pop /WithinTitles exch def  /WithinPage exch def  /SheetNum exch def
@@ -13978,7 +13978,7 @@ currentdict /GlyphShowKnownAbsences undef
 								setmatrix   ShowPage
 							} for  % BottleWrapSheetNum, if not collating
 						} forall  % BottleWrapSheetNumWithinPageWithinTitles
-						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: -BottleWrap: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
+						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: -BottleWrap: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 						Finished  BottleWrapCollate not  or {exit} if
 						/BottleWrapSheetNum BottleWrapSheetNum 1 add def
 					} loop  % BottleWrapSheetNum, if collating
@@ -14000,7 +14000,7 @@ currentdict /GlyphShowKnownAbsences undef
 					DecanterLabelsPaperType ThisPaperType PaperTypesEqual   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and {pop //true exit} if
 				} for  % /SheetNum
 				{
-					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+DecanterLabels: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+DecanterLabels: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 					/TypeOfPagesBeingRendered /DecanterLabels store  //false //false //false //false DecanterLabelsPaperType /Portrait SetPaperSize   //true DefStoreMgns
 					/ThisName (Decanter labels) def
 					/DecanterLabelsGap 8 def  % embedded constant
@@ -14191,7 +14191,7 @@ currentdict /GlyphShowKnownAbsences undef
 							DLNumOnPage 0 gt {ShowPage} if
 						} if  % DLTotalNumCopies 1 gt
 					} ifelse  % DLBestNumOnPage 1 lt
-					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (-DecanterLabels: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (-DecanterLabels: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 				} if  % ... ThisPaperType ... ThisPageOrdering ... and
 				end
 			} if  % ... DecanterLabelsNumCopies 1 ge ...
@@ -14205,7 +14205,7 @@ currentdict /GlyphShowKnownAbsences undef
 				/StickyLabelsTypeThis exch def
 				{StickyLabelsNumCopies 1 ge} MightBeTrue
 				{
-					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+StickyLabels: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+StickyLabels: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 					/TypeOfPagesBeingRendered /StickyLabels store
 
 					//false //false //false //false StickyLabelsPaperType /Portrait SetPaperSize   //true DefStoreMgns
@@ -14585,7 +14585,7 @@ currentdict /GlyphShowKnownAbsences undef
 					} for  % NameNum, or not loop
 					StickyLabelsNumPaintedOnCurrentPage 0 gt {AnnotatePDF ShowPage  /StickyLabelsNumPaintedOnCurrentPage 0 def} if
 					setmatrix
-					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (-StickyLabels: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (-StickyLabels: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 				} if  % ... StickyLabelsNumCopies 1 ge ...
 				end
 			} forall  % StickyLabelsTypeThis drawn from StickyLabelsTypes
@@ -15330,7 +15330,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 	EpilogueCode
 
-	mark (Execution time) usertime usertimeStart sub TimeIntervalString (, excluding time for parameter assignments and log page(s).) ConcatenateToMark  OutputToLog
+	mark (Execution time) usertime usertimeStart sub TimeIntervalString (, excluding time for parameter assignments, log page(s), finishing, and output.) ConcatenateToMark  OutputToLog
 
 	/EndError //false def
 	count mark exch    dup                0 eq    {(:-\)    )} {/EndError //true store (Error! )} ifelse exch (      = count:              should = 0\n)   dup  3 -1 roll 5 string cvs dup length 5 exch sub exch putinterval
