@@ -147,7 +147,7 @@ Of course, variation can be purely decorative.
 `FontSizesTitlesNotSmallerIfTitlesNotLonger` causes the font size to be affected by the length of a string, measured in characters. 
 That means it must be known how many deemed characters is something painted by user code. 
 This can be set within the code, as `/EffectiveNumCharacters 1 def` (or other integer &ge;0). 
-This has been used very rarely, indeed, prior to July 2023, exactly once.
+This has been used very rarely, indeed, prior to September 2024, exactly once.
 
 
 ## Variables that parameters may inspect

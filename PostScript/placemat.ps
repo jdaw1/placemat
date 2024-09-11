@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:30 Thursday 15th August 2024
+% This version 23:15 Wednesday 11th September 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202408151930) def
+/ParametersVersionDateTimeAdobeFormat (D:202409112315) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -802,7 +802,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202408151930) def
+/SoftwareVersionDateTimeAdobeFormat (D:202409112315) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -7135,12 +7135,12 @@ currentdict /GlyphShowKnownAbsences undef
 	1000 div /usertimeInterval exch def
 	mark
 	1 {
-		( ~= ) usertimeInterval ( seconds)
-		usertimeInterval       60 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( minutes)} {pop exit} ifelse  % There have been some distillation times of multiple minutes.
-		usertimeInterval     3600 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( hours)  } {pop exit} ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
-		usertimeInterval    86400 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of 01 Jan 2024, JDAW's longest distillation time has been ~=22 minutes.
-		usertimeInterval  2629800 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. PostScript's max integer is just bigger than half a month.
-		usertimeInterval 31557600 div dup 0.5 ge {dup 1 lt {2} {1} ifelse FormatDecimalPlaces 3 index exch ( years)  } {pop exit} ifelse  % Years?! Something is very amiss.
+		( ~= ) usertimeInterval dup cvi 2 copy eq {exch} if pop ( seconds)  % Recent Distiller versions seems to report usertime in whole seconds.
+		usertimeInterval       60 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( minutes)} {pop exit} ifelse  % There have been some distillation times of multiple minutes.
+		usertimeInterval     3600 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( hours)  } {pop exit} ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
+		usertimeInterval    86400 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Sept 2024, JDAW's longest distillation time has been ~=22 minutes.
+		usertimeInterval  2629800 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. PostScript's max integer ~= 0.8 months.
+		usertimeInterval 31557600 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( years)  } {pop exit} ifelse  % Years?! Something is very amiss.
 	} repeat  % 1
 	end
 	ConcatenateToMark
@@ -13900,7 +13900,7 @@ currentdict /GlyphShowKnownAbsences undef
 					PrePourCollate {/PrePourSheetNum 0 def} if
 					{
 						/Finished //true def
-						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: +PrePour: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: +PrePour: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 						PrePourSheetNumWithinPageWithinTitles
 						{
 							aload pop /WithinTitles exch def  /WithinPage exch def  /SheetNum exch def
@@ -13919,7 +13919,7 @@ currentdict /GlyphShowKnownAbsences undef
 								setmatrix   ShowPage
 							} for  % PrePourSheetNum, if not collating
 						} forall  % PrePourSheetNumWithinPageWithinTitles
-						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: -PrePour: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: -PrePour: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 						Finished  PrePourCollate not  or {exit} if
 						/PrePourSheetNum PrePourSheetNum 1 add def
 					} loop  % PrePourSheetNum, if collating
@@ -13959,7 +13959,7 @@ currentdict /GlyphShowKnownAbsences undef
 					BottleWrapCollate {/BottleWrapSheetNum 0 def} if
 					{
 						/Finished //true def
-						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: +BottleWrap: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: +BottleWrap: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 						BottleWrapSheetNumWithinPageWithinTitles
 						{
 							aload pop /WithinTitles exch def  /WithinPage exch def  /SheetNum exch def
@@ -13978,7 +13978,7 @@ currentdict /GlyphShowKnownAbsences undef
 								setmatrix   ShowPage
 							} for  % BottleWrapSheetNum, if not collating
 						} forall  % BottleWrapSheetNumWithinPageWithinTitles
-						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: -BottleWrap: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: -BottleWrap: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 						Finished  BottleWrapCollate not  or {exit} if
 						/BottleWrapSheetNum BottleWrapSheetNum 1 add def
 					} loop  % BottleWrapSheetNum, if collating
@@ -14000,7 +14000,7 @@ currentdict /GlyphShowKnownAbsences undef
 					DecanterLabelsPaperType ThisPaperType PaperTypesEqual   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and {pop //true exit} if
 				} for  % /SheetNum
 				{
-					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+DecanterLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+DecanterLabels: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 					/TypeOfPagesBeingRendered /DecanterLabels store  //false //false //false //false DecanterLabelsPaperType /Portrait SetPaperSize   //true DefStoreMgns
 					/ThisName (Decanter labels) def
 					/DecanterLabelsGap 8 def  % embedded constant
@@ -14191,7 +14191,7 @@ currentdict /GlyphShowKnownAbsences undef
 							DLNumOnPage 0 gt {ShowPage} if
 						} if  % DLTotalNumCopies 1 gt
 					} ifelse  % DLBestNumOnPage 1 lt
-					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (-DecanterLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (-DecanterLabels: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 				} if  % ... ThisPaperType ... ThisPageOrdering ... and
 				end
 			} if  % ... DecanterLabelsNumCopies 1 ge ...
@@ -14205,7 +14205,7 @@ currentdict /GlyphShowKnownAbsences undef
 				/StickyLabelsTypeThis exch def
 				{StickyLabelsNumCopies 1 ge} MightBeTrue
 				{
-					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+StickyLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+StickyLabels: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 					/TypeOfPagesBeingRendered /StickyLabels store
 
 					//false //false //false //false StickyLabelsPaperType /Portrait SetPaperSize   //true DefStoreMgns
@@ -14585,7 +14585,7 @@ currentdict /GlyphShowKnownAbsences undef
 					} for  % NameNum, or not loop
 					StickyLabelsNumPaintedOnCurrentPage 0 gt {AnnotatePDF ShowPage  /StickyLabelsNumPaintedOnCurrentPage 0 def} if
 					setmatrix
-					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (-StickyLabels: execution time ~= ) usertime usertimeStart sub 1000 div (s)  ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (-StickyLabels: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 				} if  % ... StickyLabelsNumCopies 1 ge ...
 				end
 			} forall  % StickyLabelsTypeThis drawn from StickyLabelsTypes
