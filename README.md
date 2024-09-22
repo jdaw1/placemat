@@ -37,13 +37,13 @@ And having done that, there might also be need for matching pages:
 * on which to write tasting notes,  
 * to organise pre-pouring,  
 * to display the corks,  
-* to record votes for the Wine Of The Night, and  
+* to record votes for the Wine Of The Night,  
 * to label each person&rsquo;s place-setting (so everybody knows who everybody else is),  
-* to label decanters and bottles,  
+* to label decanters and bottles, and  
 * to assist with computing the split of the costs, allowing for bottles provided.
 
 This PostScript program creates all the paperwork useful for managing such tastings, large or small. 
-Lots of previous output is at [jdawiseman.com/papers/placemat/placemats_list.html](http://www.jdawiseman.com/papers/placemat/placemats_list.html) (lots: that page has &gap;&#8239;30&#8239;MB of PNGs, so don&rsquo;t access using mobile data).
+Lots of previous output is linked from [jdawiseman.com/papers/placemat/placemats_list.html](http://www.jdawiseman.com/papers/placemat/placemats_list.html) (lots: that page has &gap;&#8239;30&#8239;MB of PNGs, so don&rsquo;t access using mobile data).
 
 New users should start at the [*Introduction, and a first placemat*](Documentation/introduction_first_placemat.md#readme).
 
@@ -54,7 +54,18 @@ Code started November 2002 for the private use of J.&#8239;D.&#8239;A.&#8239;Wis
 in September 2005 uploaded to [jdawiseman.com](http://www.jdawiseman.com/papers/placemat/placemat.html); 
 in January 2021 transferred to [GitHub](http://github.com/jdaw1/placemat/#readme).
 
-Since 2005, there have been &gap;&nbsp;&frac12;k versions of this software.
+Since 2005, at least &frac12;k versions of this software have been released.
+
+
+## Issues ##
+
+Is something is wrong, or something that fits the software &lsquo;should&rsquo; be added, post an [issue](https://github.com/jdaw1/placemat/issues) saying so.
+
+
+## Translations ##
+
+The code uses some strings, such as page titles, the default values of which are in English. 
+Help with [translations](https://github.com/jdaw1/placemat/blob/main/Documentation/translations.md#readme) would be very much welcomed.
 
 
 ## Be nice ##
