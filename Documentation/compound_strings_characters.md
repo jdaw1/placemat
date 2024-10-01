@@ -273,6 +273,7 @@ Some examples follow.
     * [`/TrebuchetMS-Bold`](images/TrebuchetMS-Bold.pdf) 
     * [`/GothamNarrow-Bold`](images/GothamNarrow-Bold.pdf) 
     * [`/Gotham-Book`](images/Gotham-Book.pdf) 
+    * [`/AvenirNextCondensed-DemiBold`](images/AvenirNextCondensed-DemiBold.pdf) 
     * [`/DejaVuSans`](images/DejaVuSans.pdf) 
     * [`/Verdana`](images/Verdana.pdf) 
     * [`/LucidaSans-Demi`](images/LucidaSans-Demi.pdf) 
