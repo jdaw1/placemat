@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:30 Wednesday 2nd October 2024
+% This version 22:00 Wednesday 2nd October 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202410021930) def
+/ParametersVersionDateTimeAdobeFormat (D:202410022230) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -802,7 +802,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202410021930) def
+/SoftwareVersionDateTimeAdobeFormat (D:202410022230) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -833,7 +833,7 @@ RandomisationSeed srand
 /ArcCosMinusOneThird 109.471220634490691369 def  % In degrees
 /ArcTanOneQuarter    14.03624346792647858289 def  % In degrees
 /ArcTanFiveEighths   32.00538320808349556079 def  % In degrees
-/Infinity 32767 def  % 2^15-1, which in pt ~= 455" ~= 38' ~= 11.6m, so ~61% bigger than the ~283" diagonal of the 200"x200" maximum PDF page. Can be '8 exp 256.06251 mul' without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.40282*10^38.
+/Infinity 32767 def  % 2^15-1, which in pt ~= 455" ~= 38' ~= 11.6m, so ~61% bigger than the ~283" diagonal of the 200"x200" max PDF page. Can be '8 exp 256.06251 mul' without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.40282*10^38.
 /InfinNeg Infinity neg def
 /Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, and experimentally 839 times the single-precision minimum increment over 1.
 /PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
@@ -8914,8 +8914,12 @@ currentdict /GlyphShowKnownAbsences undef
 			( has max TitleAboveBelowOverT ~= ) MaxT (; )
 			TABO_MinB_SheetNum (,) TABO_MinB_WithinPage (,)  GlassesOnSheets TABO_MinB_SheetNum get TABO_MinB_WithinPage get (,) Titles 2 index get ASCIIfy
 			( has min TitleAboveBelowOverB ~= ) MinB (.)
-			% Next line: 36 mul is scaling for whole page PNG; 4 spare pixels; result is GIF scaling that results in GIF and PNG same pixels high.
-			MaxT MinB sub 12 gt {( Scaling for GIF, height match, 2px above below, <~= ) PageHeight 36 mul 72 div 4 sub MaxT MinB sub div 72 mul} if
+			% Next line: 36 mul is scaling for whole page PNG; 4 or 2 spare pixels; result is GIF scaling that results in GIF and PNG same pixels high.
+			OneCircles  MaxT MinB sub 6 ge  and {
+				( Scaling for GIF, height match, 2px above below, <~= ) PageHeight 36 mul 72 div 4 sub MaxT MinB sub div 72 mul
+				(; cropping only top ==> ) PageHeight 36 mul 72 div 2 sub MaxT Radii SheetNum get add div 72 mul
+				(; whole circle ==> ) PageHeight 36 mul 72 div Radii SheetNum get 2 mul div 72 mul (.)
+			} if  % OneCircles  MaxT MinB sub 6 ge  and
 			end  % /MaxT, /MinB
 		} {pop} ifelse  % ... 0 ge ... 0 le  or
 	} if  % ... GlassesNumCopies 1 ge ... StickyLabelsNumCopies 1 ge ...
@@ -15345,7 +15349,7 @@ currentdict /GlyphShowKnownAbsences undef
 	ConcatenateToMark OutputToLog
 	EndError
 		{(!!! Error !!! Error !!! Error !!!      !!! Error !!! Error !!! Error !!!      !!! Error !!! Error !!! Error !!!) OutputToLog}
-		{OutputLog  0  (:-\)   :-\)   Happily, execution successfully completed.   :-\)   :-\))  put}
+		{OutputLog  0  (:-\)   Execution successfully completed. George Burns: "Happiness is having a large, loving, caring, close-knit family, in another city."   :-\))  put}
 	ifelse  % EndError
 	count 0 ne {(+pstack) = pstack (-pstack) =} if
 } stopped  % From about 7.9k lines above.
