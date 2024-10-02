@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:20 Wednesday 11th September 2024
+% This version 19:30 Wednesday 2nd October 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202409112320) def
+/ParametersVersionDateTimeAdobeFormat (D:202410021930) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -541,17 +541,17 @@ if} bind def  % /VoteRecorderCrossedBox
 /FillPrioritiseSmallFileSizeOverPortability true def
 
 /DropletsReversedHighlight {-1 NameNum eq} def  % Default always false. Typical use case is testing for being 0.
-/DropletsPathLength 12 def
-/DropletsAverageSeparation DropletsPathLength 2 mul def  % If <10 then far too crowded. And <4, such that there are >65k droplets on an A3, might cause stack overflow.
+/DropletsPathLength 9 def
+/DropletsAverageSeparation DropletsPathLength 3 mul def  % If <10pt then too crowded. And <4pt might cause >65k droplets so stack overflow.
 /DropletsAverageMaxTweakPlusMinus {DropletsAverageSeparation 0.25 mul} bind def
-/DropletsOuterWidthEnd   4.32   def
-/DropletsOuterWidthStart 0.48   def
+/DropletsOuterWidthEnd   4   def
+/DropletsOuterWidthStart 0.5 def
 /DropletsInnerWidthEnd   DropletsOuterWidthEnd 4 div def
 /DropletsInnerWidthStart {DropletsInnerWidthEnd DropletsOuterWidthEnd sub DropletsOuterWidthStart add} bind def
 /DropletsOuterGrayEnd    {DropletNum 4 mod 12 add 16 div} def
 /DropletsOuterGrayStart  {DropletsOuterGrayEnd} def
-/DropletsInnerGrayEnd    1      def
-/DropletsInnerGrayStart  1      def
+/DropletsInnerGrayEnd    1 def
+/DropletsInnerGrayStart  1 def
 /DropletsPaintAtEnd {} def
 /DropletsPaintAtEndRotate true def  % Relevant only if DropletsPaintAtEnd used. If true then 'up' points away from end.
 /Droplets_SideBySide_UnderTNs true def  % Relevant only if SideBySideGlassesTastingNotes is true
@@ -802,7 +802,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202409112320) def
+/SoftwareVersionDateTimeAdobeFormat (D:202410021930) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -8909,10 +8909,14 @@ currentdict /GlyphShowKnownAbsences undef
 		Overtitles NonEmptyCompoundObject {(OvertitleFontSizes/TitleFontSizes = ) OvertitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
 		TABO_MaxT_WithinPage 0 ge  TABO_MinB_WithinPage 0 le  or
 		{
+			<< /MaxT TitleAboveBelowOverT TABO_MaxT_SheetNum get TABO_MaxT_WithinPage get   /MinB TitleAboveBelowOverB TABO_MinB_SheetNum get TABO_MinB_WithinPage get >> begin
 			TABO_MaxT_SheetNum (,) TABO_MaxT_WithinPage (,)  GlassesOnSheets TABO_MaxT_SheetNum get TABO_MaxT_WithinPage get (,) Titles 2 index get ASCIIfy
-			( has max TitleAboveBelowOverT ~= ) TitleAboveBelowOverT TABO_MinB_SheetNum get TABO_MinB_WithinPage get (; )
+			( has max TitleAboveBelowOverT ~= ) MaxT (; )
 			TABO_MinB_SheetNum (,) TABO_MinB_WithinPage (,)  GlassesOnSheets TABO_MinB_SheetNum get TABO_MinB_WithinPage get (,) Titles 2 index get ASCIIfy
-			( has min TitleAboveBelowOverB ~= ) TitleAboveBelowOverB TABO_MinB_SheetNum get TABO_MinB_WithinPage get (.)
+			( has min TitleAboveBelowOverB ~= ) MinB (.)
+			% Next line: 36 mul is scaling for whole page PNG; 4 spare pixels; result is GIF scaling that results in GIF and PNG same pixels high.
+			MaxT MinB sub 12 gt {( Scaling for GIF, height match, 2px above below, <~= ) PageHeight 36 mul 72 div 4 sub MaxT MinB sub div 72 mul} if
+			end  % /MaxT, /MinB
 		} {pop} ifelse  % ... 0 ge ... 0 le  or
 	} if  % ... GlassesNumCopies 1 ge ... StickyLabelsNumCopies 1 ge ...
 	ConcatenateToMark OutputToLog
