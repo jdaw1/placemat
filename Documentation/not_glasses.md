@@ -234,7 +234,7 @@ The consequent duplication of pre-pour sheets is removed by `PrePourRemoveDuplic
 The guillotine-and-overlap trick also messes with the order of the pre-pour sheets, sometimes fixable with `PrePourSortByWithinTitles`.
 
 Most of the design is exactly copied from the glasses pages. 
-But the text in the outermost box comes from `CirclearraysPrePour`, which could in theory, but so far never in practice, differ from `Circlearrays`.
+But the text in the outermost box comes from `CirclearraysPrePour`, which has differed from `Circlearrays` only once ([08&nbsp;Oct&nbsp;2024, 1970s, Undisturbed and Others](https://www.jdawiseman.com/2024/20241008_1970s.pdf#PrePour_1)).
 
 If `RotationTitlesAboveBelowOverCirclearray`&nbsp;&ne;&nbsp;0, then small arrows appear on the pre-pour sheets indicating the correct orientation.
 
