@@ -455,12 +455,17 @@ The decanter labels are on paper `DecanterLabelsPaperType`.
 ## OneCircle
 
 Nice to post online can be a GIF animation of all the glass circles.
-(Examples from 2023: 
-[07&nbsp;Feb](http://www.jdawiseman.com/2023/20230207_awards_oc.gif), 
+(Examples: 
+[07&nbsp;Feb&nbsp;2023](http://www.jdawiseman.com/2023/20230207_awards_oc.gif), 
 [28&nbsp;Feb](http://www.jdawiseman.com/2023/20230228_decanting_experiments_oc.gif), 
 [28&nbsp;Mar](http://www.jdawiseman.com/2023/20230328_Cavadinha_oc.gif), 
-[04&nbsp;Apr](http://www.jdawiseman.com/2023/20230424_reprise_oc.gif), 
-[12&nbsp;Sep](http://www.jdawiseman.com/2023/20230912_1966s_oc.gif).)
+[24&nbsp;Apr](http://www.jdawiseman.com/2023/20230424_reprise_oc.gif), 
+[12&nbsp;Sep](http://www.jdawiseman.com/2023/20230912_1966s_oc.gif),
+[14&nbsp;Oct](http://www.jdawiseman.com/2023/20231014_1963s_at_Bomfim_oc.gif),
+[26&nbsp;Mar&nbsp;2024](http://www.jdawiseman.com/2024/20240326_1994s_oc.gif),
+[01&nbsp;July](http://www.jdawiseman.com/2024/20240701_Strawberry_Fields_oc.gif),
+[24&nbsp;Sep](http://www.jdawiseman.com/2024/20240924_Symmetry_oc.gif),
+[08&nbsp;Oct](http://www.jdawiseman.com/2024/20241008_1970s_oc.gif).)
 
 The natural way to proceed is to have the software make single-glass pages. 
 For each page, width = height = 2&nbsp;&times;&nbsp;radius, with the circle centred. 
