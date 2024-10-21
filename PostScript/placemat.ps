@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:00 Sunday 20th October 2024
+% This version 23:20 Monday 21st October 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202410201900) def
+/ParametersVersionDateTimeAdobeFormat (D:202410212320) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -802,7 +802,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202410201900) def
+/SoftwareVersionDateTimeAdobeFormat (D:202410212320) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -5664,14 +5664,14 @@ currentdict /GlyphShowKnownAbsences undef
 		div 100 mul dup exch (\% within circles = ) exch  2 mul //Sqrt3 mul //Pi div (\% of infinite-plane exact-hexagonal maximum.)
 		R  43.2 360 mul 127 div  le
 		{
-			(\nWarning! Radius~=) R 1 FormatDecimalPlaces (pt~=) R 127 mul 360 div 1 FormatDecimalPlaces (mm~=) R 72 div 2 FormatDecimalPlaces (" is )
+			(\nWarning! Diameter~=) R 2 mul 1 FormatDecimalPlaces (pt~=) R 2 mul 127 mul 360 div 1 FormatDecimalPlaces (mm~=) R 2 mul 72 div 2 FormatDecimalPlaces (" is )
 			R  36 360 mul 127 div  lt
 			{
 				R  30 360 mul 127 div  lt
-					{(less than the 30mm~=85pt radius of an INAO/ISO3591 tasting glass.)}
-					{(a tight fit for the 30mm~=85pt radius of an INAO/ISO3591 tasting glass, and too small for the 36mm~=102pt radius of the foot of an IVDP glass.)}
+					{(less than the 60mm~=170pt~=2.36" diameter of an INAO/ISO3591 tasting glass.)}
+					{(a tight fit for the 60mm~=170pt~=2.36" diameter of an INAO/ISO3591 tasting glass, and too small for the 72mm~=204pt~=2.83" diameter of the foot of an IVDP glass.)}
 				ifelse  % Radius < 30mm
-			} {(a tight fit for the 36mm~=102pt radius of the foot of an IVDP glass.)} ifelse  % Radius < 36mm
+			} {(a tight fit for the 72mm~=204pt~=2.83" diameter of the foot of an IVDP glass.)} ifelse  % Radius < 36mm
 		} if  % Radius <= 43.2mm
 	} def  % /AreaText
 
