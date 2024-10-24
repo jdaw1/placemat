@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:20 Monday 21st October 2024
+% This version 23:00 Thursday 24th October 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202410212320) def
+/ParametersVersionDateTimeAdobeFormat (D:202410242300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -554,7 +554,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /DropletsInnerGrayStart  1 def
 /DropletsPaintAtEnd {} def
 /DropletsPaintAtEndRotate true def  % Relevant only if DropletsPaintAtEnd used. If true then 'up' points away from end.
-/Droplets_SideBySide_UnderTNs true def  % Relevant only if SideBySideGlassesTastingNotes is true
+/Droplets_SideBySide_UnderTNs false def  % Relevant only if SideBySideGlassesTastingNotes is true
 
 /CircletextsMaxCopies {dup 32 gt {dup dup 4 mod sub} {65535} ifelse} bind def
 
@@ -802,7 +802,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202410212320) def
+/SoftwareVersionDateTimeAdobeFormat (D:202410242300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -9695,10 +9695,8 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				/SheetNum exch def
 				//false //false //false //false PaperType Orientation SetPaperSize   //true DefStoreMgns
-				/DrpMgnL Droplets_SideBySide_UnderTNs {MarginL} {MgnL} ifelse def
-				/DrpMgnR Droplets_SideBySide_UnderTNs {MarginR} {MgnR} ifelse def
-				/DrpMgnB Droplets_SideBySide_UnderTNs {MarginB} {MgnB} ifelse def
-				/DrpMgnT Droplets_SideBySide_UnderTNs {MarginT} {MgnT} ifelse def
+				Droplets_SideBySide_UnderTNs {MarginL MarginR MarginB MarginT} {MgnL MgnR MgnB MgnT} ifelse
+				/DrpMgnT exch def   /DrpMgnB exch def   /DrpMgnR exch def   /DrpMgnL exch def
 
 				/ChargesData  % length a multiple of 4: X0 Y0 Charge0 Spin0 X1 Y1 Charge1 Spin1 ...
 				[
@@ -10169,10 +10167,8 @@ currentdict /GlyphShowKnownAbsences undef
 				//DeBugLevel 100 le {(+DropletsForms: PaintProc) OutputToLog} if
 				11 dict begin
 				/SheetNum get /SheetNum exch def
-				/DrpMgnL Droplets_SideBySide_UnderTNs {MarginL} {MgnL} ifelse def
-				/DrpMgnR Droplets_SideBySide_UnderTNs {MarginR} {MgnR} ifelse def
-				/DrpMgnB Droplets_SideBySide_UnderTNs {MarginB} {MgnB} ifelse def
-				/DrpMgnT Droplets_SideBySide_UnderTNs {MarginT} {MgnT} ifelse def
+				Droplets_SideBySide_UnderTNs {MarginL MarginR MarginB MarginT} {MgnL MgnR MgnB MgnT} ifelse
+				/DrpMgnT exch def   /DrpMgnB exch def   /DrpMgnR exch def   /DrpMgnL exch def
 				newpath  1 setlinecap  [] 0 setdash
 				//false //false //false //false PaperType Orientation SetPaperSize   //true DefStoreMgns
 				ClipSave  DrpMgnL  DrpMgnB  PageWidth DrpMgnL DrpMgnR add sub  PageHeight DrpMgnB DrpMgnT add sub  rectclip
@@ -10201,10 +10197,8 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				//DeBugLevel 100 le {(+DropletsReversedForms: PaintProc) OutputToLog} if
 				13 dict begin
-				/DrpMgnL Droplets_SideBySide_UnderTNs {MarginL} {MgnL} ifelse def
-				/DrpMgnR Droplets_SideBySide_UnderTNs {MarginR} {MgnR} ifelse def
-				/DrpMgnB Droplets_SideBySide_UnderTNs {MarginB} {MgnB} ifelse def
-				/DrpMgnT Droplets_SideBySide_UnderTNs {MarginT} {MgnT} ifelse def
+				Droplets_SideBySide_UnderTNs {MarginL MarginR MarginB MarginT} {MgnL MgnR MgnB MgnT} ifelse
+				/DrpMgnT exch def   /DrpMgnB exch def   /DrpMgnR exch def   /DrpMgnL exch def
 				/SheetNum get /SheetNum exch def
 				% () = (DropletsWhichReversed = [) = DropletsWhichReversed {==} forall (]) = () =
 				//false //false //false //false PaperType Orientation SetPaperSize   //true DefStoreMgns
