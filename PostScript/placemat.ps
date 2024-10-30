@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Thursday 24th October 2024
+% This version 20:45 Wednesday 30th October 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202410242300) def
+/ParametersVersionDateTimeAdobeFormat (D:202410302045) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -802,7 +802,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202410242300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202410302045) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -849,6 +849,18 @@ RandomisationSeed srand
 /execU {    //UserScratchDict begin exec end} bind def
 /GetEU {get //UserScratchDict begin exec end} bind def
 /WithinPage-WithinTitles-def {/WithinPage exch def   /WithinTitles //GlassesOnSheets SheetNum get //UserScratchDict begin exec WithinPage get exec end def} bind def
+
+% Redundant commands might needlessly bloat a PDF, depending on which (version of) which application is distilling PS->PDF. Some are easily trimmed.
+/setgray         type /operatortype eq {/setgray {currentcolorspace /DeviceGray eq {dup currentgray eq} {//false} ifelse {pop} {setgray} ifelse} bind def} if
+/setdash         type /operatortype eq {/setdash {1 index length 0 eq currentdash pop length 0 eq and {pop pop} {setdash} ifelse} bind def} if  % Only "[] 0 setdash"
+/setlinewidth    type /operatortype eq {/setlinewidth    {dup currentlinewidth    eq {pop} {setlinewidth   } ifelse} bind def} if
+/setlinejoin     type /operatortype eq {/setlinejoin     {dup currentlinejoin     eq {pop} {setlinejoin    } ifelse} bind def} if
+/setlinecap      type /operatortype eq {/setlinecap      {dup currentlinecap      eq {pop} {setlinecap     } ifelse} bind def} if
+/setstrokeadjust type /operatortype eq {/setstrokeadjust {dup currentstrokeadjust eq {pop} {setstrokeadjust} ifelse} bind def} if
+/setmiterlimit   type /operatortype eq {/setmiterlimit   {dup currentmiterlimit   eq {pop} {setmiterlimit  } ifelse} bind def} if
+/setsmoothness   type /operatortype eq {/setsmoothness   {dup currentsmoothness   eq {pop} {setsmoothness  } ifelse} bind def} if
+/setoverprint    type /operatortype eq {/setoverprint    {dup currentoverprint    eq {pop} {setoverprint   } ifelse} bind def} if
+/setflat         type /operatortype eq {/setflat         {dup currentflat         eq {pop} {setflat        } ifelse} bind def} if
 
 /OutputLog 127 array def  /OutputtedToLog 1 def
 OutputLog  0  (!!! Error !!! Error !!!   An error occurred. More information below.   !!! Error !!! Error !!!) put  % This overwritten if all good.
@@ -2777,7 +2789,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 /SuperscriptOn {+0.375 VKern   CurrentFontName [CurrentFontSizeX 1.7 div 0 0 CurrentFontSizeY 1.7 div 0 0] selectfont} bind def
 /SubscriptOff                 {CurrentFontName [CurrentFontSizeX 1.7 mul 0 0 CurrentFontSizeY 1.7 mul 0 0] selectfont   +0.25  VKern} bind def
 /SuperscriptOff               {CurrentFontName [CurrentFontSizeX 1.7 mul 0 0 CurrentFontSizeY 1.7 mul 0 0] selectfont   -0.375 VKern} bind def
-/Kern {CurrentFontSizeX mul  0      rmoveto} bind def
+/Kern  {CurrentFontSizeX mul  0      rmoveto} bind def
 /VKern {CurrentFontSizeY mul  0 exch rmoveto} bind def
   /UnderlineX0 //null def    /UnderlineY0 //null def    /UnderlineMatrix //null def
 /ThroughlineX0 //null def  /ThroughlineY0 //null def  /ThroughlineMatrix //null def
@@ -11586,9 +11598,8 @@ currentdict /GlyphShowKnownAbsences undef
 
 								newpath  1 setlinecap  1 setlinejoin  [] 0 setdash
 								/VoteRecorderCrossLineWidth
-									4.32    VoteRecorderColWidth 12 div
-									VoteRecorderRowHeight CirclearraysVoteRecorderT CirclearraysVoteRecorderB sub sub 12 div
-									2 {2 copy gt {exch} if pop} repeat
+									VoteRecorderRowHeight CirclearraysVoteRecorderT CirclearraysVoteRecorderB sub sub
+									VoteRecorderColWidth   2 copy gt {exch} if pop  12 div   4.32   2 copy gt {exch} if pop
 								def % VoteRecorderCrossLineWidth
 								0  1  VoteRecorderNumNames 1 sub  % Different upper bound
 								{
@@ -11601,9 +11612,8 @@ currentdict /GlyphShowKnownAbsences undef
 									VoteRecorderCrossedBox
 									{
 										//DeBugLevel 100 le {mark ( VoteRecorderForms: PaintProc, VoteRecorderCrossedBox=true, NameNum=) NameNum (; WithinTitles=) WithinTitles ConcatenateToMark OutputToLog} if
-										x VoteRecorderColWidth 0.3 mul sub VoteRecorderCrossLineWidth add  y VoteRecorderRowHeight2 0.6 mul add VoteRecorderCrossLineWidth sub  2 copy moveto
-										x VoteRecorderColWidth 0.3 mul add VoteRecorderCrossLineWidth sub  y VoteRecorderRowHeight2 0.6 mul sub VoteRecorderCrossLineWidth add  2 copy lineto
-										3 1 roll exch moveto lineto
+										<< /hs  VoteRecorderColWidth 0.25 mul  VoteRecorderRowHeight2 0.5 mul  2 copy gt {exch} if pop  VoteRecorderCrossLineWidth sub >> begin  % Half Size
+										x hs add  y hs add  x hs sub  y hs sub  end  4 copy moveto lineto  3 1 roll exch moveto lineto
 										0 setgray VoteRecorderCrossLineWidth dup setlinewidth 2.16 ge {GSave stroke GRestore 1 setgray VoteRecorderCrossLineWidth 3 div setlinewidth stroke} {stroke} ifelse
 									} if  % VoteRecorderCrossedBox
 									NameNum  VoteRecorderNumNames VoteRecorderShowTotalCol VoteRecorderSheetNum GetEU {2} {1} ifelse sub  eq
