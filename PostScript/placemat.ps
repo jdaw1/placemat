@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:45 Wednesday 30th October 2024
+% This version 19:00 Thursday 7th November 2024
 
 % Copyright Julian D. A. Wiseman 1988 to 2024.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202410302045) def
+/ParametersVersionDateTimeAdobeFormat (D:202411071900) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -62,7 +62,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 19) {SuperscriptOn} (th) {SuperscriptOff} ( November 2024)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( March 2025)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -80,8 +80,8 @@
 % Links for some restaurants and many Port houses at http://github.com/jdaw1/placemat/blob/main/PostScript/ExternalLinks_data.ps
 /ExternalLinks [
 	false   (Thread on ThePortForum.com)                 (http://www.theportforum.com/viewtopic.php?t=00175&view=unread#unread)
-%	false   (Latest version this placemat)               (http://www.jdawiseman.com/2024/    .pdf)
-%	true    (in list of placemats)                       (http://www.jdawiseman.com/papers/placemat/placemats_list.html#a2024MMDD)
+%	false   (Latest version this placemat)               (http://www.jdawiseman.com/2025/    .pdf)
+%	true    (in list of placemats)                       (http://www.jdawiseman.com/papers/placemat/placemats_list.html#a2025MMDD)
 	false   (Boot & Flogger)                             (http://www.davy.co.uk/wine-bar/boot-and-flogger/)
 	true    [/ellipsis (OpenStreetMap)]                  (http://www.openstreetmap.org/node/534961998)
 	true    [/ellipsis (google.co.uk)]                   (http://goo.gl/maps/7NEiwAMEZpG2)
@@ -802,7 +802,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202410302045) def
+/SoftwareVersionDateTimeAdobeFormat (D:202411071900) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -4067,7 +4067,7 @@ currentdict /GlyphShowKnownAbsences undef
 	GSave
 	12 dict begin
 	/FormatStrokeCode exch def  /Y exch def  /X exch def
-	% /up false upath def
+	0 setgray  0 setlinecap  1 setlinejoin  [] 0 setdash
 	PathBBox /ury exch def /urx exch def /lly exch def /llx exch def
 	clip
 	urx llx gt  ury lly gt  and
@@ -10482,7 +10482,7 @@ currentdict /GlyphShowKnownAbsences undef
 				{
 					matrix currentmatrix
 					CHCX_CHCY
-					RotationTitlesAboveBelowOverCirclearray dup 0 ne {neg rotate} {pop} ifelse  GlassPositions SheetNum get WithinPage get aload pop neg exch neg exch translate
+					RotationTitlesAboveBelowOverCirclearray dup 0 ne {neg rotate} {pop} ifelse  GlassPositions SheetNum get WithinPage get {neg} forall translate
 					moveto setmatrix currentpoint newpath  /CHCY exch def /CHCX exch def
 				} if  % CrossHatchingTitles CrossHatchingAbovetitles CrossHatchingBelowtitles CrossHatchingOvertitles or or or
 
@@ -10566,11 +10566,7 @@ currentdict /GlyphShowKnownAbsences undef
 						Titles WithinTitles get  //false  CharPathRecursive
 						GSave TitlesStrokeCode GRestore GSave TitlesAboveBelowOverFillCode GRestore
 					} if  % FillTextsCurrent not  InlineTitles not  and
-					CrossHatchingTitles
-					{
-						0.5 setgray  0 setlinecap  1 setlinejoin  [] 0 setdash
-						CHCX CHCY /CrossHatchingTitlesStrokeCode load RadialCrossHatching
-					} if  % CrossHatchingTitles
+					CrossHatchingTitles {CHCX CHCY /CrossHatchingTitlesStrokeCode load RadialCrossHatching} if
 					ShapesInTitles
 					{
 						0.5 setgray  0 setlinecap  0 setlinejoin  [] 0 setdash
@@ -10661,11 +10657,7 @@ currentdict /GlyphShowKnownAbsences undef
 						Overtitles WithinTitles get //true CharPathRecursive
 						GSave OvertitlesStrokeCode GRestore GSave TitlesAboveBelowOverFillCode GRestore
 					}  if  % FillOvertitles not  InlineOvertitles not  and
-					CrossHatchingOvertitles
-					{
-						0.5 setgray  0 setlinecap  1 setlinejoin  [] 0 setdash
-						CHCX CHCY /CrossHatchingOvertitlesStrokeCode load RadialCrossHatching
-					} if  % CrossHatchingOvertitles
+					CrossHatchingOvertitles {CHCX CHCY /CrossHatchingOvertitlesStrokeCode load RadialCrossHatching} if
 					ShapesInOvertitles
 					{
 						0.5 setgray  0 setlinecap  0 setlinejoin  [] 0 setdash
@@ -10757,11 +10749,7 @@ currentdict /GlyphShowKnownAbsences undef
 						Belowtitles WithinTitles get //true CharPathRecursive
 						GSave BelowtitlesStrokeCode GRestore GSave TitlesAboveBelowOverFillCode GRestore
 					}  if  % FillBelowtitles not  InlineBelowtitles not  and
-					CrossHatchingBelowtitles
-					{
-						0.5 setgray  0 setlinecap  1 setlinejoin  [] 0 setdash
-						CHCX CHCY /CrossHatchingBelowtitlesStrokeCode load RadialCrossHatching
-					} if  % CrossHatchingBelowtitles
+					CrossHatchingBelowtitles {CHCX CHCY /CrossHatchingBelowtitlesStrokeCode load RadialCrossHatching} if
 					ShapesInBelowtitles
 					{
 						0.5 setgray  0 setlinecap  0 setlinejoin  [] 0 setdash
@@ -10853,11 +10841,7 @@ currentdict /GlyphShowKnownAbsences undef
 						Abovetitles WithinTitles get //true CharPathRecursive
 						GSave AbovetitlesStrokeCode GRestore GSave TitlesAboveBelowOverFillCode GRestore
 					}  if  % FillAbovetitles not  InlineAbovetitles not  and
-					CrossHatchingAbovetitles
-					{
-						0.5 setgray  0 setlinecap  1 setlinejoin  [] 0 setdash
-						CHCX CHCY /CrossHatchingAbovetitlesStrokeCode load RadialCrossHatching
-					} if  % CrossHatchingAbovetitles
+					CrossHatchingAbovetitles {CHCX CHCY /CrossHatchingAbovetitlesStrokeCode load RadialCrossHatching} if
 					ShapesInAbovetitles
 					{
 						0.5 setgray  0 setlinecap  0 setlinejoin  [] 0 setdash
@@ -10982,11 +10966,7 @@ currentdict /GlyphShowKnownAbsences undef
 				/ThisName load  //false  CharPathRecursive
 				GSave TitlesStrokeCode GRestore GSave TitlesAboveBelowOverFillCode GRestore
 			} if  % FillTextsCurrent not  InlinePlaceNames not  and
-			CrossHatchingPlaceNames
-			{
-				0.5 setgray  0 setlinecap  1 setlinejoin  [] 0 setdash
-				CHCX CHCY /CrossHatchingTitlesStrokeCode load RadialCrossHatching
-			} if  % CrossHatchingPlaceNames
+			CrossHatchingPlaceNames {CHCX CHCY /CrossHatchingTitlesStrokeCode load RadialCrossHatching} if
 			ShapesInPlaceNames
 			{
 				0.5 setgray  0 setlinecap  0 setlinejoin  [] 0 setdash
@@ -12061,7 +12041,7 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						matrix currentmatrix
 						CHCX_CHCY
-						RotationTitlesAboveBelowOverCirclearray dup 0 ne {neg rotate} {pop} ifelse  GlassPositions SheetNum get WithinPage get aload pop neg exch neg exch translate
+						RotationTitlesAboveBelowOverCirclearray dup 0 ne {neg rotate} {pop} ifelse  GlassPositions SheetNum get WithinPage get {neg} forall translate
 						moveto setmatrix currentpoint newpath  /CHCY exch def /CHCX exch def
 
 						0 0  RadiiCirclearrayInside SheetNum get  0 360  /m  ArcAccurate
