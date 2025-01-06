@@ -1,8 +1,8 @@
 %!PS
 
-% This version 19:50 Thursday 7th November 2024
+% This version 19:15 Monday 6th January 2025
 
-% Copyright Julian D. A. Wiseman 1988 to 2024.  http://github.com/jdaw1/placemat/#readme
+% Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
 % licensed works and modifications, which include larger works using a licensed work, under the same license.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202411071950) def
+/ParametersVersionDateTimeAdobeFormat (D:202501061915) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -90,7 +90,7 @@
 	true    [/ellipsis (bing.com)]                       (http://www.bing.com/maps?where1=SE1+1TA)
 ] def  % /ExternalLinks
 
-/CopyrightStatementPlacemats (Copyright 2024 Julian D. A. Wiseman of www.jdawiseman.com) def
+/CopyrightStatementPlacemats (Copyright 2025 Julian D. A. Wiseman of www.jdawiseman.com) def
 
 % % % % % % % % % % %
 % Non-Glasses Pages %
@@ -802,7 +802,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202411071950) def
+/SoftwareVersionDateTimeAdobeFormat (D:202501061915) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -5589,7 +5589,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 
 % LeftX BottomY Width Height NumGlasses MaxRadius Echo  CirclePacking  [[x1 y1] ...] Radius PackingDescriptor NamePlacementTopX NamePlacementBottomX
-% This code has grown over the years from 2001, and has a lack of internal consistency. E.g., in some patters RowNum increases from top to bottom; in others from bottom to top.
+% This code has grown over the years from 2001, and has a lack of internal consistency. E.g., in some patterns RowNum increases from top to bottom; in others from bottom to top.
 /CirclePacking
 {
 	//DeBugLevel 100 le {(+CirclePacking) OutputToLog} if
@@ -7150,7 +7150,7 @@ currentdict /GlyphShowKnownAbsences undef
 		( ~= ) usertimeInterval dup cvi 2 copy eq {exch} if pop ( seconds)  % Recent Distiller versions seems to report usertime in whole seconds.
 		usertimeInterval       60 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( minutes)} {pop exit} ifelse  % There have been some distillation times of multiple minutes.
 		usertimeInterval     3600 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( hours)  } {pop exit} ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
-		usertimeInterval    86400 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Sept 2024, JDAW's longest distillation time has been ~=22 minutes.
+		usertimeInterval    86400 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Jan 2025, JDAW's longest distillation time has been ~=22 minutes.
 		usertimeInterval  2629800 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. PostScript's max integer ~= 0.8 months.
 		usertimeInterval 31557600 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( years)  } {pop exit} ifelse  % Years?! Something is very amiss.
 	} repeat  % 1
