@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:15 Monday 6th January 2025
+% This version 20:30 Thursday 6th February 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202501061915) def
+/ParametersVersionDateTimeAdobeFormat (D:202502062030) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -509,11 +509,12 @@ if} bind def  % /VoteRecorderCrossedBox
 /CrossHatchingCentreX /CenterSheetsSamePageOrdering def  % number /Name /Left /Center /Right /CenterSheetsSamePageOrdering
 /CrossHatchingCentreY /Bottom def  % number /Name /Bottom /Middle /Top
 
+/InlineStrokePreformatting {0 setlinejoin} bind def  % Use 1 for internal curves. Perhaps also call setmiterlimit.
 /InlineTitlesPrefillWhite {CrossHatchingInside Spirals or Droplets or} def
 /InlineAbovetitlesPrefillWhite /InlineTitlesPrefillWhite load def
 /InlineBelowtitlesPrefillWhite /InlineTitlesPrefillWhite load def
 /InlineOvertitlesPrefillWhite true def
-/InlineTitlesBlackWidth {InlineTitlesMaxNumberContours 1 gt {0.96} {1.44} ifelse} bind def  % Black isn't always black. Sometimes it's grey.
+/InlineTitlesBlackWidth {InlineTitlesMaxNumberContours 1 gt {1.20} {2.16} ifelse} bind def  % Black isn't always black. Sometimes it's grey.
 /InlineTitlesWhiteWidth {InlineTitlesBlackWidth 2 mul} bind def  % White isn't always white. Sometimes it's grey.
 /InlineAbovetitlesBlackWidth {InlineTitlesBlackWidth 2 div} bind def  % Black isn't always black. Sometimes it's grey.
 /InlineAbovetitlesWhiteWidth {InlineTitlesWhiteWidth 2 div} bind def  % White isn't always white. Sometimes it's grey.
@@ -802,7 +803,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202501061915) def
+/SoftwareVersionDateTimeAdobeFormat (D:202502062030) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -10382,8 +10383,8 @@ currentdict /GlyphShowKnownAbsences undef
 		} ifelse  % ColourSchemeCurrent /MidGrey eq
 	} bind def  % /OvertitlesStrokeCode
 	/TitlesAboveBelowOverFillCode {ColourSchemeCurrent /MidGrey eq {0.75} {0} ifelse setgray fill} bind def
-	/TitlesAboveBelowOverInlinePaleStrokeCode {1 setlinejoin  1 setgray stroke} bind def
-	/TitlesAboveBelowOverInlineDarkStrokeCode {1 setlinejoin  ColourSchemeCurrent /MidGrey eq {0.4} {0} ifelse setgray stroke} bind def
+	/TitlesAboveBelowOverInlinePaleStrokeCode {InlineStrokePreformatting  1 setgray stroke} bind def
+	/TitlesAboveBelowOverInlineDarkStrokeCode {InlineStrokePreformatting  ColourSchemeCurrent /MidGrey eq {0.4} {0} ifelse setgray stroke} bind def
 
 	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=90575#p90575
 	/AnnotateGlass
