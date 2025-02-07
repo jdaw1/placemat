@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:30 Thursday 6th February 2025
+% This version 18:20 Friday 7th February 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202502062030) def
+/ParametersVersionDateTimeAdobeFormat (D:202502071820) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -803,7 +803,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202502062030) def
+/SoftwareVersionDateTimeAdobeFormat (D:202502071820) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -11336,6 +11336,17 @@ currentdict /GlyphShowKnownAbsences undef
 				/TypeOfPagesBeingRendered /VoteRecorder store
 
 				/TypeOfPagesBeingRendered /TastingNotes store  % only those elements of names with non-zero TN pages
+				/VoteRecorderNumNames  0  NamesVoteRecorder {length 0 gt {1 add} if} forall  def  % Temporary sue of variable. Soon to be reassigned.
+				VoteRecorderNumNames 14 gt  % One bottle, less angels' share, less decanting loss, fourteen ways, is 5cl: a small functional taste.
+				{
+					mark  (\nWarning: NamesVoteRecorder has )
+					[ (fifteen) (sixteen) (seventeen) (eighteen) (nineteen) (twenty) (twenty-one) ]
+					dup length VoteRecorderNumNames 15 sub gt {VoteRecorderNumNames 15 sub get} {pop VoteRecorderNumNames 5 string cvs} ifelse
+					( non-empty names. )
+					(But one bottle, less angels' share, less decanting loss, fourteen ways, ~= 5cl, which is not more than a small functional taste. )
+					(So there might be an error in NamesVoteRecorder, or carelessly too many people have been invited, or it is an abstemious event, or -- optimal answer -- you're opening magnums+.)
+					ConcatenateToMark OutputToLog  (\n) OutputToLog
+				} if  % VoteRecorderNumNames 14 gt
 				/VoteRecorderNames [
 					NamesVoteRecorder aload pop
 					VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU  VoteRecorderMonkeyWhenShowTotalRow  and {/VoteRecorderMonkeyName load} if
