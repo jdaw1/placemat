@@ -1,6 +1,6 @@
 %!PS
 
-% This version 18:20 Friday 7th February 2025
+% This version 23:45 Saturday 15th February 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202502071820) def
+/ParametersVersionDateTimeAdobeFormat (D:202502152345) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -430,7 +430,6 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /NamesShowTop    [ GlassesOnSheets length {false} repeat ] def
 /NamesShowBottom [ GlassesOnSheets length {true } repeat ] def
-/GlassesPageWhiteCirclesBehind false def
 
 /HeaderFontSize 6 def
 /HeaderBaselineFromPageTop {MgnT HeaderFontSize 2 div sub} bind def
@@ -579,6 +578,23 @@ if} bind def  % /VoteRecorderCrossedBox
 /WaterBoxesFormatStroke {stroke} def
 
 /NamesFontSize 18 def
+
+/PageEdgingEdges [
+	0  1  PageOrderingGlasses length 1 sub
+	{
+		/SheetNum exch def
+		[
+			SheetNum                            0     gt {PageOrderingGlasses SheetNum 2 copy get 3 1 roll 1 sub get ne} {true} ifelse
+			SheetNum PageOrderingGlasses length 1 sub lt {PageOrderingGlasses SheetNum 2 copy get 3 1 roll 1 add get ne} {true} ifelse
+			1 index ne { {/Left} {/Right} ifelse } {pop} ifelse 
+		]
+	} for  % SheetNum
+	currentdict /SheetNum undef
+] def  % /PageEdgingEdges
+/PageEdgingWidth {Radii SheetNum get 0.1464466 mul} def  % (1-Sqrt[1/2])/2
+/PageEdgingPaintCode {0.8 setgray fill} bind def
+
+/GlassesPageWhiteCirclesBehind {//PageEdgingEdges SheetNum get length 1 ge} bind def
 
 % GhostScript doesn't pickle settransfer; Preview doesn't see non-pickled settransfer. The bug is in Preview. http://groups.google.com/g/comp.lang.postscript/c/NJLAfvN_jwU  "execform, 75% faded", 30 Jul 2012
 /TastingNotes_NumVerticalSections 1 def  % If table likely to be very space-constrained, set to 2.
@@ -803,7 +819,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202502071820) def
+/SoftwareVersionDateTimeAdobeFormat (D:202502152345) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -9027,7 +9043,7 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						XX X sub Radii SheetNum get div dup abs 2 le
 						{
-							//true  FlightSeparationInterestingsTB SheetNum get 0 FSNumDoneTB getinterval {2 index sub abs //Epsilon le {pop pop //false exit} if} forall
+							//true  FlightSeparationInterestingsTB SheetNum get 0 FSNumDoneTB getinterval {2 index sub abs 0.0002 le {pop pop //false exit} if} forall  % Embedded constant slightly bigger than Epsilon
 							{FlightSeparationInterestingsTB SheetNum get exch FSNumDoneTB exch put  /FSNumDoneTB FSNumDoneTB 1 add store} if
 						} {pop} ifelse  % within 2 radii
 					} if  % Circle near top or bottom
@@ -9035,7 +9051,7 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						YY Y sub Radii SheetNum get div dup abs 2 le
 						{
-							//true  FlightSeparationInterestingsLR SheetNum get 0 FSNumDoneLR getinterval {2 index sub abs //Epsilon le {pop pop //false exit} if} forall
+							//true  FlightSeparationInterestingsLR SheetNum get 0 FSNumDoneLR getinterval {2 index sub abs 0.0002 le {pop pop //false exit} if} forall  % Embedded constant slightly bigger than Epsilon
 							{FlightSeparationInterestingsLR SheetNum get exch FSNumDoneLR exch put  /FSNumDoneLR FSNumDoneLR 1 add store} if
 						} {pop} ifelse  % within 2 radii
 					} if  % Circle near left or right
@@ -12541,10 +12557,125 @@ currentdict /GlyphShowKnownAbsences undef
 		13 dict begin
 		/TypeOfPagesBeingRendered /Glasses store
 
+		8 dict begin
+		/L            MgnL     def
+		/B            MgnB     def
+		/R PageWidth  MgnR sub def
+		/T PageHeight MgnT sub def
+		/LL L PageEdgingWidth add def
+		/BB B PageEdgingWidth add def
+		/RR R PageEdgingWidth sub def
+		/TT T PageEdgingWidth sub def
+
+		false  PageEdgingEdges SheetNum get {/Left   eq {pop //true exit} if} forall
+		false  PageEdgingEdges SheetNum get {/Bottom eq {pop //true exit} if} forall
+		false  PageEdgingEdges SheetNum get {/Right  eq {pop //true exit} if} forall
+		false  PageEdgingEdges SheetNum get {/Top    eq {pop //true exit} if} forall
+		{
+			% +T
+			{
+				% +T +R
+				{
+					% +T +R +B
+					{
+						% +T +R +B +L
+						L  T  moveto R  T  lineto R  B  lineto L  B  lineto closepath
+						LL TT moveto LL BB lineto RR BB lineto RR TT lineto closepath PageEdgingPaintCode
+					}{
+						% +T +R +B -L
+						L T moveto  R T lineto  R B lineto  L B lineto  L BB lineto  RR BB lineto  RR TT lineto  L TT lineto  closepath PageEdgingPaintCode
+					} ifelse  % L
+				}{
+					% +T +R -B
+					{
+						% +T +R -B +L
+						L B moveto  L T lineto  R T lineto  R B lineto  RR B lineto  RR TT lineto  LL TT lineto  LL B lineto  closepath PageEdgingPaintCode
+					}{
+						% +T +R -B -L
+						L T moveto  R T lineto  R B lineto  RR B lineto  RR TT lineto  L TT lineto  closepath PageEdgingPaintCode
+					} ifelse  % L
+				} ifelse  % B
+			}{
+				% +T -R
+				{
+					% +T -R +B
+					{
+						% +T -R +B +L
+						R B moveto  L B lineto  L T lineto  R T lineto  R TT lineto  LL TT lineto  LL BB lineto  R BB lineto  closepath PageEdgingPaintCode
+					}{
+						% +T -R +B -L
+						L T moveto  R T lineto  R TT lineto  L TT lineto  closepath
+						R B moveto  L B lineto  L BB lineto  R BB lineto  closepath PageEdgingPaintCode
+					} ifelse  % L
+				}{
+					% +T -R -B
+					{
+						% +T -R -B +L
+						L B moveto  L T lineto  R T lineto  R TT lineto  LL TT lineto  LL B lineto  closepath PageEdgingPaintCode
+					}{
+						% +T -R -B -L
+						L T moveto  R T lineto  R TT lineto  L TT lineto  closepath PageEdgingPaintCode
+					} ifelse  % L
+				} ifelse  % B
+			} ifelse  % R
+		}{
+			% -T
+			{
+				% -T +R
+				{
+					% -T +R +B
+					{
+						% -T +R +B +L
+						R T moveto  R B lineto  L B lineto  L T lineto  LL T lineto  LL BB lineto  RR BB lineto  RR T lineto  closepath PageEdgingPaintCode
+					}{
+						% -T +R +B -L
+						R T moveto  R B lineto  L B lineto  L BB lineto  RR BB lineto  RR T lineto  closepath PageEdgingPaintCode
+					} ifelse  % L
+				}{
+					% -T +R -B
+					{
+						% -T +R -B +L
+						L B moveto  L T lineto  LL T lineto  LL B lineto  closepath
+						R T moveto  R B lineto  RR B lineto  RR T lineto  closepath PageEdgingPaintCode
+					}{
+						% -T +R -B -L
+						R T moveto  R B lineto  RR B lineto  RR T lineto  closepath PageEdgingPaintCode
+					} ifelse  % L
+				} ifelse  % B
+			}{
+				% -T -R
+				{
+					% -T -R +B
+					{
+						% -T -R +B +L
+						R B moveto  L B  lineto  L T lineto  LL T lineto  LL BB lineto  R BB lineto  closepath PageEdgingPaintCode
+					}{
+						% -T -R +B -L
+						R B moveto  L B lineto  L BB lineto  R BB lineto  closepath PageEdgingPaintCode
+					} ifelse  % L
+				}{
+					% -T -R -B
+					{
+						% -T -R -B +L
+						L B moveto  L T lineto  LL T lineto  LL B lineto  closepath PageEdgingPaintCode
+					} if  % L. Observe this is an 'if', not an 'ifelse', because if the else then nothing to do.
+				} ifelse  % B
+			} ifelse  % R
+		} ifelse  % T
+		end
+		% End of PageEdging
+
 		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
-			GlassesPageWhiteCirclesBehind  CircleNonEmpty SheetNum get WithinPage get  and {newpath GlassPositions SheetNum get WithinPage get aload pop Radii SheetNum get 0 360 /m ArcAccurate 1 setgray fill} if
+			GlassesPageWhiteCirclesBehind  CircleNonEmpty SheetNum get WithinPage get  and
+			{
+				newpath
+				GlassPositions SheetNum get WithinPage get aload pop
+				Radii SheetNum get 0.24 add  % embedded constant
+				0 360 /m ArcAccurate
+				1 setgray fill
+			} if  % white behind, and non-empty
 		} for  % WithinPage, WithinTitles
 
 		0  1  SheetNumGlasses SheetNum get 1 sub
