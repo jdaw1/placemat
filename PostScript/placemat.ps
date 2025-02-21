@@ -1,6 +1,6 @@
 %!PS
 
-% This version 17:00 Sunday 16th February 2025
+% This version 20:00 Friday 21st February 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202502161700) def
+/ParametersVersionDateTimeAdobeFormat (D:202502212000) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -820,7 +820,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202502161700) def
+/SoftwareVersionDateTimeAdobeFormat (D:202502212000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -8793,7 +8793,7 @@ currentdict /GlyphShowKnownAbsences undef
 	{
 		Titles NonEmptyCompoundObject
 		{
-			4 dict begin
+			7 dict begin
 			(TitleFontSizes = ) TitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)
 			/TitleFontSizesUnique [ TitleFontSizes { {counttomark 1 sub -1 1 {index 1 index sub abs //PrinterEpsilon le {pop exit} if} for} forall} forall ] dup {le} ShellSort def  % Unique font sizes
 			TitleFontSizesUnique length 1 gt
@@ -8809,7 +8809,27 @@ currentdict /GlyphShowKnownAbsences undef
 					TitleFontSizesUnique exch get exch TitleFontSizesUnique exch get exch
 					dup //PrinterEpsilon gt {div (, )} {pop pop pop pop pop pop pop} ifelse
 				} for
-				pop (.) (\n)
+				pop (.\n)
+				(TitleFontSizes, collated equality classes:)
+				0  1  TitleFontSizesUnique length 1 sub
+				{
+					/i exch def
+					( ) i ( =)
+					0  1  TitleFontSizes length 1 sub
+					{
+						/SheetNum exch def
+						0  1  TitleFontSizes SheetNum get length 1 sub
+						{
+							WithinPage-WithinTitles-def
+							TitleFontSizesUnique i get  TitleFontSizes SheetNum get WithinPage get  sub abs //PrinterEpsilon le
+							{
+								( )  Titles WithinTitles get ASCIIfy
+							} if  % same size
+						} for  % WithinPage, WithinTitles
+					} for  % SheetNum
+					(;)
+				} for  % i
+				pop (.\n)
 			} if  % At least two different values in TitleFontSizes
 			end
 			TitleMaxHeightProportionInnerRadiusRelevantNum 0 gt
