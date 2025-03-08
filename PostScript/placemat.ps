@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Friday 21st February 2025
+% This version 23:45 Saturday 8th March 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -18,7 +18,7 @@
 % % % % % % % %
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202502212000) def
+/ParametersVersionDateTimeAdobeFormat (D:202503082345) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -820,7 +820,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202502212000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202503082345) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -5362,21 +5362,21 @@ currentdict /GlyphShowKnownAbsences undef
 		/DiamondsAndRectangular BaseStyle eq
 		{
 			//DeBugLevel 50 le {( ProcessOnePackingType, /DiamondsAndRectangular) OutputToLog} if
-			RowsNumMin 1 RowsNumMax
+			1  1  NG
 			{
 				/NR exch def
 				/NiLR NG NR div ceiling cvi def  % Num in Longer Rows
 				/NC NiLR 2 mul 1 sub def  % Always odd
 				/NSR  NiLR NR mul NG sub  NR 1 sub 2 idiv  2 copy gt {exch} if pop  def  % Num Short Rows, the upper limit being /Diamonds with an odd number of columns
 
-				NR 3 ge
+				NR 3 ge  NR RowsNumMin ge  NR RowsNumMax le  and and
 				{
 					% /AboveBelow true
 					[
 						NSR W mul dup mul 4 mul  NC 1 sub H mul dup mul add
 						NR 2 NSR mul sub NC 1 sub dup mul mul -4 mul H mul  NSR dup mul 16 mul W mul sub
 						NC 1 sub dup mul NR mul NR NSR 4 mul sub mul NSR dup mul 4 mul add  4 mul
-					] 0  //false  //Infinity  //true  //PrinterEpsilon  PolynomialRoots
+					] 0 //true  H W lt {H} {W} ifelse 2 div //false  //PrinterEpsilon  PolynomialRoots
 					dup length 0 gt
 					{
 						Min   W NiLR 2 mul div 2 copy gt {exch} if pop  NR NSR gt {H NR NSR sub 2 mul div 2 copy gt {exch} if pop} if  /R exch def
@@ -5394,17 +5394,17 @@ currentdict /GlyphShowKnownAbsences undef
 							BestParamsDict /NumShorterRows NSR put
 						} if  % R PriorBestRadius ... gt ...
 					} {pop} ifelse  % any solutions to quadratic
-				} if  % NR 3 ge
+				} if  % NR ...
 
 				% /AboveBelow false
 				% In this section except BestParamsDict, meaning of rows and columns is reversed. Careful!
-				NR 2 mod 1 eq
+				NC 3 ge  NC RowsNumMin ge  NC RowsNumMax le  and and 
 				{
 					[
 						NSR H mul dup mul 4 mul  NC 1 sub W mul dup mul add
 						NR 2 NSR mul sub NC 1 sub dup mul mul -4 mul W mul  NSR dup mul 16 mul H mul sub
 						NC 1 sub dup mul NR mul NR NSR 4 mul sub mul NSR dup mul 4 mul add  4 mul
-					] 0  //true  H W lt {H} {W} ifelse 2 div  //false  //PrinterEpsilon  PolynomialRoots
+					] 0 //true  H W lt {H} {W} ifelse 2 div //false  //PrinterEpsilon  PolynomialRoots
 					dup length 0 gt
 					{
 						Min   H NiLR 2 mul div 2 copy gt {exch} if pop  NR NSR gt {W NR NSR sub 2 mul div 2 copy gt {exch} if pop} if  /R exch def
@@ -5422,7 +5422,7 @@ currentdict /GlyphShowKnownAbsences undef
 							BestParamsDict /NumShorterCols NSR put
 						} if  % R PriorBestRadius ... gt ...
 					} {pop} ifelse  % any solutions to quadratic
-				} if  % NR 2 mod 1 eq
+				} if  % NC ...
 
 			} for  % NR
 			exit
