@@ -1,4 +1,4 @@
-# Non-Glasses Pages
+# Non-Glasses Pages #
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
@@ -20,7 +20,7 @@
 
 <div style="clear: both;"></div>
 
-## Introduction
+## Introduction ##
 
 There are multiple types of printable page. 
 * `/Glasses`: labels glass positions;
@@ -46,14 +46,14 @@ Each of the non-glasses pages has a few controls, but only a few, as described b
 
 <div style="clear: both;"></div>
 
-## TastingNotes
+## TastingNotes ##
 
 <img align="right" width="298" height="421" src="images/NonGlasses_TN.png">
 
 By default there are also tasting-note pages. 
 These have a few parameters which might want changing, and others which are almost never changed. 
 
-### Worthwhile
+### Worthwhile ###
 
 Page size is `TastingNotesPaperType`, which North Americans should change from the default of `/A4` to `/USL`&nbsp;= 8&frac12;&Prime;&times;11&Prime;. 
 
@@ -110,7 +110,7 @@ When so, it is helpful to be able to fold the TN sheets, so they use less physic
 `TastingNotes_NumVerticalSections`&nbsp;&ge;&nbsp;`2` suppresses the column headings, suppresses the column-separating lines, and suppresses the effect of `TastingNotesCirclesBehind`.
 
 
-### Superfluous
+### Superfluous ###
 
 The elements of `TitlesTastingNotes` are shown at a size not exceeding `TastingNotesTitlesFontSizeMax`, and the elements of `SubtitlesTastingNotes` are shown at `TastingNotesSubtitleFontSizeProportionTitles` times the size of the `TitlesTastingNotes`. 
 The vertical separation between the `CirclearraysTastingNotes` and `TitlesTastingNotes`, and between the `TitlesTastingNotes` and `SubtitlesTastingNotes`, is `TastingNotesLineGap`.
@@ -131,13 +131,14 @@ This feature has never been used.
 
 <a name="SideBySideGlassesTastingNotes"></a>
 <img align="right" width="421" height="595" src="images/SideBySideGlassesTastingNotes.png">
-### Side-by-side Glasses
+
+### Side-by-side Glasses  ###
 
 If having a mini tasting of only three wines, one might wish to print everything on one sheet, especially if everything must be squeezed onto a small round bar table. 
 For right handers the three glasses would be on the left of the tasting-notes; for lefties, glasses to the right &mdash; as in the images on the right. 
 This small-tasting layout is enabled by setting the boolean constant `SideBySideGlassesTastingNotes` to true. 
 
-### Superfluous
+### Superfluous ###
 
 Some parameters are almost never changed. 
 
@@ -150,7 +151,7 @@ Ignored parameters include `TastingNotesPaperType` and `TastingNotesOrientation`
 
 <p style="clear: both;">
 
-## Place names
+## Place names ##
 
 <img align="right" width="210" height="149" src="images/NonGlasses_PN.png">
 
@@ -182,7 +183,7 @@ This might be achieved with parameters resembling:
 ] def  % /NamesPlaceNames
 ```
 
-### Superfluous
+### Superfluous ###
 
 There is also the parameter `PlaceNamesShowNameAsFooter`, an array of Booleans the same length as `NamesPlaceNames`, controlling whether the relevant element of `Names` is to be shown as a footer. 
 If the big writing says &ldquo;Low-salt diet salad&rdquo;, it can simplify set-up to have a very small &ldquo;Derek&rdquo; written on the page.
@@ -198,7 +199,7 @@ Distillation over the web will almost certainly time out: use local conversion.
 
 <div style="clear: both;"></div>
 
-## PrePour
+## PrePour ##
 
 If a tasting is attended by six people, decanters can circulate and people help themselves. 
 But at a tasting for fourteen people the portion size is a mere 5cl (75cl bottle, less the angels&rsquo; share, less a little loss during decanting, &divide;&nbsp;14). 
@@ -221,7 +222,7 @@ In a typical vertical tasting, the oldest wines come first in the list, so as to
 `PrePourShowBackgroundTexts` and `PrePourShowDroplets` control whether the [background texts](page_level.md#backgroundtexts) and [droplets](page_level.md#droplets), present on the glasses pages, appear on the pre-pour pages. 
 These parameters are re-used, with same meaning, on the [one-circle](#onecircle) pages.
 
-### Superfluous
+### Superfluous ###
 
 The other parameters are changed rarely. 
 
@@ -241,7 +242,7 @@ If `RotationTitlesAboveBelowOverCirclearray`&nbsp;&ne;&nbsp;0, then small arrows
 
 <div style="clear: both;"></div>
 
-## VoteRecorder
+## VoteRecorder ##
 
 <img align="right" width="397" height="247" src="images/NonGlasses_VR.png">
 
@@ -255,9 +256,15 @@ For WOTN it is the points that should be recorded, rather than the ranks, as doi
 
 Vote recorder sheets can also be used to hold, in a blind tasting, guesstimates of which is what.
 
-### Worthwhile
+### Worthwhile ###
 
 These sheets are enabled by setting `VoteRecorders` to true. 
+
+There are two standard use cases, in practice sufficent for all non-giant tastings. 
+Is this blind? 
+That is, is a guessing page needed? 
+If yes, then <code>/VoteRecorderIncludeGuessing&nbsp;true&nbsp;def</code>, otherwise &hellip;`false`&hellip;.
+
 There are then conceptually two levels of loops. 
 Pages are specified, except the question in the top text. 
 Then each of these pages can be re-used with multiple top texts.
@@ -282,6 +289,8 @@ The appearance of the monkey column is controlled by `VoteRecorderMonkeyWhenShow
 The monkey&rsquo;s guess is `VoteRecorderMonkeyVote` (or can be handwritten at the event).
 
 The array `VoteRecorderShowTotalRow` is of the same length as `VoteRecorderTopTexts`, and holds Booleans, defaulting to `[ false true ]`, which almost always suffices.
+
+Of the same length are `VoteRecorderColTitlesEarly` and `VoteRecorderColTitlesAfter`, each item being an array of extra column titles.
 
 `GlassesClusteredOnVoteRecorders` is a triple-depth array, the same length as `VoteRecorderTopTexts` and `VoteRecorderShowTotalRow`, and can remain at its default value except for the largest tastings.
 The outermost array is one per vote-recorder page: voting on separate days, with different people or wines, or different total-column-row flags, should be recorded on separate sheets. 
@@ -310,7 +319,7 @@ It is elegant for that box to be crossed.
 So `VoteRecorderCrossedBox` is code returning a Boolean, it usually accessing internal variables such as `WithinTitles` and `ThisName`, as well as `VoteRecorderShowTotalRow`. 
 (`VoteRecorderCrossedBox` is not intuitive to use: please suggest improvements in [issue&nbsp;80](http://github.com/jdaw1/placemat/issues/80).)
 
-### Superfluous
+### Superfluous ###
 
 `VoteRecorderNamesOrientation` controls the orientation of the `NamesVoteRecorder`, with allowed values `/Horizontal`, `/Vertical`, or the default value of `/Either`.
 
@@ -323,14 +332,14 @@ The arrays used are `NamesVoteRecorder`, `CirclearraysVoteRecorder`, `TitlesVote
 
 <div style="clear: both;"></div>
 
-## DecantingNotes
+## DecantingNotes ##
 
 <img align="right" width="298" height="146" src="images/NonGlasses_DN.png">
 
 If decanting is done centrally, those decanting should record the time each bottle is decanted, as well as the condition of the cork and perhaps the qualities of the sediment. 
 Pages to hold these notes are activated by setting `DecantingNotesNumCopies` to &ge;&nbsp;1. 
 
-### Superfluous
+### Superfluous ###
 
 There are some further parameters, all of which work as on the other page types. 
 
@@ -345,7 +354,7 @@ And the self-explnatory parameters `DecantingNotesPaperType` and `DecantingNotes
 
 <div style="clear: both;"></div>
 
-## Accounts
+## Accounts ##
 
 Of course, any financial rebalancing will have been computed in advance, audited in accordance with the [1844&nbsp;Companies&nbsp;Act](http://en.wikipedia.org/wiki/Joint_Stock_Companies_Act_1844), and settled using a system designated under the [The Financial Markets and Insolvency (Settlement Finality) Regulations 1999](http://www.legislation.gov.uk/uksi/1999/2979/contents/made). 
 Of course.
@@ -362,7 +371,7 @@ An Accounts page can assist those doing the computations.
 
 The page is activated by setting `AccountsNumCopies` to more than zero.
 
-### Superfluous
+### Superfluous ###
 
 Columns are organised into groups, with titles for the groups and for the individual columns. 
 `AccountsColumnGroupHeadings` contains the groups&rsquo; headings. 
@@ -373,7 +382,7 @@ There are also the obvious parameters `AccountsTopText`, `AccountsColumnHeadings
 
 <div style="clear: both;"></div>
 
-## CorkDisplay
+## CorkDisplay ##
 
 <div align="center">
 
@@ -383,7 +392,7 @@ There are also the obvious parameters `AccountsTopText`, `AccountsColumnHeadings
 
 Bottles having been decanted, corks should be put on display, for which pages are activated by setting `CorkDisplayNumCopies` to be positive. 
 
-### Superfluous
+### Superfluous ###
 
 Each rectangle is at least `CorkDisplayMinWidth` wide, and at least `CorkDisplayMinHeight` high; and the corks shown are in `GlassesClusteredOnCorkDisplay`, a triple-depth array resembling `GlassesClusteredOnVoteRecorders`. 
 
@@ -397,7 +406,7 @@ The `TitlesCorkDisplay` are shown at a font size that is &le;&nbsp;`CorkDisplayT
 
 <div style="clear: both;"></div>
 
-## NeckTags
+## NeckTags ##
 
 <img align="right" width="272" height="361" src="images/NonGlasses_NT.png">
 
@@ -408,7 +417,7 @@ Neck tags are the easiest to prepare, though too small for decanters.
 
 Neck tags are enabled by setting `NeckTagsNumCopies` to positive. 
 
-### Superfluous
+### Superfluous ###
 
 `NeckTagsMinWidth`, `NeckTagsMaxWidth`, `NeckTagsMinHeight`, and `NeckTagsMaxHeight` constrain the size of each tag. 
 The circle to be cut is of radius `NeckTagsHoleRadius`, defaulting to 54pt &rArr; diameter of 108pt =&nbsp;1&frac12;&Prime; &asymp;&nbsp;38mm. 
@@ -425,7 +434,7 @@ The tags are on paper `NeckTagsPaperType`.
 
 <div style="clear: both;"></div>
 
-## DecanterLabels
+## DecanterLabels ##
 
 <img align="right" width="243" height="190" src="images/NonGlasses_DL.png">
 
@@ -434,7 +443,7 @@ Having two sets of decanter labels, pasted to both sides of the business cards, 
 
 Decanter labels are to fit within a rectangle of size `DecanterLabelsMaxSmallerDimension` &times; `DecanterLabelsMaxLargerDimension`, which should be the size of business cards less a small margin. 
 
-### Superfluous
+### Superfluous ###
 
 Orientation, of labels not page, is controlled by DecanterLabelsOrientation, with allowed values `/Landscape`, `/Portrait`, and `/Automatic`. 
 The Boolean parameter `DecanterLabelsGuillotineMarks` controls whether small cut marks are shown: useful if guillotining. 
@@ -452,7 +461,7 @@ The decanter labels are on paper `DecanterLabelsPaperType`.
 
 <img align="right" width="360" height="360" src="images/NonGlasses_1C.gif">
 
-## OneCircle
+## OneCircle ##
 
 Nice to post online can be a GIF animation of all the glass circles.
 (Examples: 
@@ -480,7 +489,7 @@ For this page type there isn&rsquo;t a `PaperType`: the size of each page is det
 
 <div style="clear: both;"></div>
 
-## BottleWrap
+## BottleWrap ##
 
 At a blind tasting, particularly of wines served cold and undecanted, it is natural to bring the wine in its original bottle, wrapped in anonymising paper. 
 
@@ -496,7 +505,7 @@ But these pages need to be printed, and wrapped around bottles, before arriving 
 So if the main control, `BottleWrapNumCopies`, is not `0`, then `BottleWrapSuppressOtherPageTypes` becomes true, and all non-bottle-wrap pages are suppressed. 
 Then this *BottleWrap* PDF should be made available separately, and people encouraged to print their page(s) at home.
 
-### Superfluous
+### Superfluous ###
 
 The parameter `BottleWrapPadding` is the empty space around the graphic that is the bottle centre. 
 And `BottleWrapScalingMin` is the target size of this graphic, as a proportion of that on the Glasses pages, which is used to determine the number of rows.
@@ -504,7 +513,7 @@ And `BottleWrapScalingMin` is the target size of this graphic, as a proportion o
 Most other parameters function as for pre-pour pages: `BottleWrapReverseOrder`, `BottleWrapCollate`, `BottleWrapRemoveDuplicatesByWithinTitles`, `BottleWrapSortByWithinTitles`, `BottleWrapPaperType`, `BottleWrapOrientation`.
 
 
-## StickyLabels
+## StickyLabels ##
 
 <img align="right" width="218" height="587" src="images/NonGlasses_SL1.png">
 
@@ -539,7 +548,7 @@ The other parameters might choose to access the current value of `StickyLabelsTy
 
 Hence `0` or `1` in `StickyLabelsTypes` chooses a label size, or sizes.
 
-### Superfluous
+### Superfluous ###
 
 If the labels are for bottles, there is one per wine; if for glasses, there is one per wine per element of `NamesStickyLabels`, as controlled by `StickyLabelsByNameWhichReplaceCirclearrays`. 
 
