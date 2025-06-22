@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:15 Friday 9th May 2025
+% This version 21:00 Sunday 22nd June 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202505092215) def
+/ParametersVersionDateTimeAdobeFormat (D:202506222100) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -61,7 +61,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 20) {SuperscriptOn} (th) {SuperscriptOff} ( May 2025)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( November 2025)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -821,7 +821,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202505092215) def
+/SoftwareVersionDateTimeAdobeFormat (D:202506222100) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -6149,7 +6149,7 @@ currentdict /GlyphShowKnownAbsences undef
 					dup dup dup   DistSquaredMin lt {/DistSquaredMin exch def} {pop} ifelse   DistSquaredMax gt {/DistSquaredMax exch def} {pop} ifelse
 				} for  % i
 
-				DistSquaredMax DistSquaredMin sub dup mul  //PrinterEpsilon 2 mul dup mul DistSquaredMin mul  le
+				DistSquaredMax DistSquaredMin sub dup mul  //PrinterEpsilonSquared 4 mul DistSquaredMin mul  le
 				DistSquaredMax DistSquaredMin div  //Epsilon 2 mul 1 add lt   DistSquaredMax sqrt DistSquaredMin sqrt sub //PrinterEpsilon le
 				or or {exit} if  % Done position optimisation
 
@@ -7239,7 +7239,25 @@ currentdict /GlyphShowKnownAbsences undef
 		} ifelse  % GlassesOnSheets ... type /arraytype eq
 	} bind for  % SheetNum
 	currentdict /WithinTitles undef  currentdict /SheetNum undef
-	ErrorFlag {stop} if  % If GlassesOnSheets borken, much untestable.
+	ErrorFlag {stop} if  % If GlassesOnSheets broken, much untestable.
+
+	[ /VoteRecorders /PlaceNames ]
+	{
+		dup xcheck {pop} {dup load type /booleantype ne {
+			mark exch (Error!: ) exch ( should be a Boolean, but isn't.)
+			ConcatenateToMark OutputToLog   /ErrorFlag //true store
+		} {pop} ifelse} ifelse
+	} forall  % Must be Booleans
+
+	[ /CorkDisplayNumCopies /NeckTagsNumCopies /PrePourNumCopies /DecanterLabelsNumCopies /GlassesNumCopies /TastingNotePagesNumCopies /DecantingNotesNumCopies /AccountsNumCopies /StickyLabelsNumCopies ]
+	{
+		dup xcheck {pop} {dup load type /integertype ne {
+			mark exch (Error!: ) exch ( should be an integer, but isn't.)
+			ConcatenateToMark OutputToLog   /ErrorFlag //true store
+		} {pop} ifelse} ifelse
+	} forall  % Must be integers
+
+	ErrorFlag {stop} if  % If these wrong type, much untestable.
 
 	% Each sub-array contains names of things that should be the same length
 	/TypeOfPagesBeingRendered /Multiple store
