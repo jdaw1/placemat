@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202506222100) def
+/ParametersVersionDateTimeAdobeFormat (D:202506232140) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -821,7 +821,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202506222100) def
+/SoftwareVersionDateTimeAdobeFormat (D:202506232140) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -7243,19 +7243,22 @@ currentdict /GlyphShowKnownAbsences undef
 
 	[ /VoteRecorders /PlaceNames ]
 	{
-		dup xcheck {pop} {dup load type /booleantype ne {
+		dup load dup xcheck {pop pop} {type /booleantype ne {
 			mark exch (Error!: ) exch ( should be a Boolean, but isn't.)
 			ConcatenateToMark OutputToLog   /ErrorFlag //true store
 		} {pop} ifelse} ifelse
-	} forall  % Must be Booleans
+	} bind forall  % Must be Booleans
 
-	[ /CorkDisplayNumCopies /NeckTagsNumCopies /PrePourNumCopies /DecanterLabelsNumCopies /GlassesNumCopies /TastingNotePagesNumCopies /DecantingNotesNumCopies /AccountsNumCopies /StickyLabelsNumCopies ]
-	{
-		dup xcheck {pop} {dup load type /integertype ne {
+	[
+		/CorkDisplayNumCopies /NeckTagsNumCopies /PrePourNumCopies
+		/GlassesNumCopies /TastingNotePagesNumCopies /StickyLabelsNumCopies
+		/AccountsNumCopies /DecantingNotesNumCopies /DecanterLabelsNumCopies
+	]{
+		dup load dup xcheck {pop pop} {type /integertype ne {
 			mark exch (Error!: ) exch ( should be an integer, but isn't.)
 			ConcatenateToMark OutputToLog   /ErrorFlag //true store
 		} {pop} ifelse} ifelse
-	} forall  % Must be integers
+	} bind forall  % Must be integers
 
 	ErrorFlag {stop} if  % If these wrong type, much untestable.
 
