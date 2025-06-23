@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:40 Monday 23rd June 2025
+% This version 22:00 Monday 23rd June 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202506232140) def
+/ParametersVersionDateTimeAdobeFormat (D:202506232200) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -821,7 +821,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202506232140) def
+/SoftwareVersionDateTimeAdobeFormat (D:202506232200) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -10560,12 +10560,13 @@ currentdict /GlyphShowKnownAbsences undef
 					} ifelse  % FillTextAngle IsNumber
 					RotationTitlesAboveBelowOverCirclearray sub   def  % /ThisFillTextAngle
 
-					/ThisFillFontSize  FillTextMinFontSizeAbsolute
-					FillTitles      Titles      WithinTitles get NonEmptyCompoundObject and {TitleFontSizes    SheetNum get WithinPage get FillTextMinFontSizeProportionLargestTitleAboveBelowOver mul} {0} ifelse
-					FillAbovetitles Abovetitles WithinTitles get NonEmptyCompoundObject and {AbovetitleFontSizes SheetNum get WithinPage get FillTextMinFontSizeProportionLargestTitleAboveBelowOver mul} {0} ifelse
-					FillBelowtitles Belowtitles WithinTitles get NonEmptyCompoundObject and {BelowtitleFontSizes SheetNum get WithinPage get FillTextMinFontSizeProportionLargestTitleAboveBelowOver mul} {0} ifelse
-					FillOvertitles  Overtitles WithinTitles get NonEmptyCompoundObject and { OvertitleFontSizes SheetNum get WithinPage get FillTextMinFontSizeProportionLargestTitleAboveBelowOver mul} {0} ifelse
-					4 {2 copy lt {exch} if pop} repeat   def  % /ThisFillFontSize
+					/ThisFillFontSize [ FillTextMinFontSizeAbsolute [
+						FillTitles           Titles WithinTitles get NonEmptyCompoundObject and {     TitleFontSizes} if
+						FillAbovetitles Abovetitles WithinTitles get NonEmptyCompoundObject and {AbovetitleFontSizes} if
+						FillBelowtitles Belowtitles WithinTitles get NonEmptyCompoundObject and {BelowtitleFontSizes} if
+						FillOvertitles   Overtitles WithinTitles get NonEmptyCompoundObject and { OvertitleFontSizes} if
+					] {SheetNum get WithinPage get FillTextMinFontSizeProportionLargestTitleAboveBelowOver mul} forall
+					] Max def  % /ThisFillFontSize
 				} if  % FillTitles FillAbovetitles FillBelowtitles FillOvertitles or or or
 
 				CrossHatchingTitles CrossHatchingAbovetitles CrossHatchingBelowtitles CrossHatchingOvertitles or or or
