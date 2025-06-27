@@ -72,8 +72,8 @@ Or, **much recommended, distill the file [fonts_illustrated.ps](../PostScript/fo
 
 By default fonts are set as follows.
 ```PostScript
-/TitlesFont          /GothamNarrow-Bold def
-/CircletextFont      /DejaVuSerif def
+/TitlesFont          [ /TrebuchetMS-Bold /Helvetica-Bold ] def
+/CircletextFont      [ /TrebuchetMS      /Helvetica      ] def
 /AbovetitlesFont     {TitlesFont} def
 /BelowtitlesFont     {AbovetitlesFont} def
 /OvertitlesFont      {TitlesFont} def
@@ -88,8 +88,12 @@ By default fonts are set as follows.
 /FooterFont          {HeaderFont} def
 ```
 
-It is mostly self-explanatory, even though the reader will not have been introduced to where all these are used. 
-Two font parameters are set to particular fonts, the other font parameters copying them. 
+A font name can be set to the name of a font: fair enough. 
+Or it can be set to an array of font names, the code choosing the first of these that seems to be available. 
+I like `/TrebuchetMS-Bold` for the `TitlesFont`, but if distilling online it likely won&rsquo;t be available, so the vanilla `/Helvetica-Bold` is substituted.
+
+In the above&mdash;and readers have not have been introduced to where all these are used&mdash;`TitlesFont` and `/CircletextFont` have been set, the the other font parameters copying them. 
+This is quite usual.
 
 <div align="center">
 
