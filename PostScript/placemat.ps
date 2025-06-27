@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:00 Monday 23rd June 2025
+% This version 23:00 Friday 27th June 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202506232200) def
+/ParametersVersionDateTimeAdobeFormat (D:202506272300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -821,7 +821,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202506232200) def
+/SoftwareVersionDateTimeAdobeFormat (D:202506272300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -4007,10 +4007,10 @@ currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 	{
 		dup //FontKnownAbsences exch known not
 		{
-			dup //FontKnownAbsences exch 0 put
-			mark (Error: font /) 3 -1 roll ( not present. Distillation software might substitute. Continuing.) ConcatenateToMark OutputToLog
-		} {pop} ifelse  % In FontKnownAbsences.
-	} if % FontKnown not
+			dup //FontKnownAbsences exch null put  % In dict: key is font name; value irrelevant so null.
+			mark (Error: font /) 2 index ( not present. Distillation software might substitute. Continuing.) ConcatenateToMark OutputToLog
+		} if  % In FontKnownAbsences.
+	} if  % FontKnown not
 	//findfont exec  % findfont not bind'able as not an operator (PLRM3, p592).
 	//DeBugLevel 4 le {(-findfont) OutputToLog} if
 } bind def  % /findfont
