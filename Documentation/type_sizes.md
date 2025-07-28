@@ -34,7 +34,7 @@ In the author&rsquo;s old placemats, the most often changed, in order from most 
 
 * `BelowtitleMaxFontSizeProportionTitles`, to values in the range `0.16666`&ndash;`0.5`. Also, but less often, and to similar values, `OvertitleMaxFontSizeProportionTitles` and `AbovetitleMaxFontSizeProportionTitles`.
 
-* `CircletextFontSize` to values `6`&ndash;`16`.
+* `CirclearraysFontSizeMax` to values `6`&ndash;`16`.
 
 * `FontSizesSetsAboveBelowOver`, from `[ 0 0 0 ]` to `[ 0 0 1 ]`.
 
@@ -58,27 +58,24 @@ These should be tackled in order.
 
 ### Worthwhile
 
-The circle text is initially set to be `CircletextFontSize`. 
-Also relevant is `CircletextsMinNumSpacesBetween`, the gap between the items of `Circlearrays`, measured in space widths.
+The circle text is initially set to be `CirclearraysFontSizeMax`. 
+Also relevant is `CirclearraysMinNumSpacesBetween`, the gap between the items of `Circlearrays`, measured in space widths.
 
 ### Superfluous
 
-Next, the font size can reduced to satisfy `CircletextsMinCopies`.
+Next, the font size can reduced to satisfy `CirclearraysMinCopies`.
 
 Assume that these cause an item of `Circlearrays` to fit around its circle 2.999 times. 
 This would be truncated to 2 times, with white space occupying the &lsquo;0.999&rsquo; remainder. 
-Self-evidently, it would be aesthetically better to reduce the font size slightly, such that the text fits 3+&epsilon; times, making the gaps very close to `CircletextsMinNumSpacesBetween` space widths.
+Self-evidently, it would be aesthetically better to reduce the font size slightly, such that the text fits 3+&epsilon; times, making the gaps very close to `CirclearraysMinNumSpacesBetween` space widths. 
+This optimisation is enable by `CirclearraysFontSizeOptimise`, defaulting to `true`. 
+Unless you really need the font size to equal some exact value, allow this optimisation to do its magic. 
+(This code was improved as a result of [issue&nbsp;165](https://github.com/jdaw1/placemat/issues/165).)
 
-By default, the font size is slightly adjusted for better aesthetics. 
-Unless you need the font size to equal some exact value, allow this optimisation to do its magic.
+The number of copies of the `Circlearrays` is bounded above by `CirclearraysMaxCopies`; when this is invoked the the number of copies that would otherwise appear is on the top of the stack, so `CirclearraysMaxCopies` could be code referring to it, such code usually starting with a &ldquo;`dup`&rdquo;.
 
-This tweaking of the font size is enabled by the Boolean `CircletextsTweakSize`. 
-There would be merit to allowing the first step of the optimusation to be an increase, permitted by the Boolean `CircletextMaxFontSizeMayBeSlightlyExceeded`.
-
-The number of copies of the `Circletexts` is bounded above by `CircletextsMaxCopies`; when this is invoked the the number of copies that would otherwise appear is on the top of the stack, so `CircletextsMaxCopies` could be code referring to it, such code usually starting with a &ldquo;`dup`&rdquo;.
-
-Relevant when glasses spill over multiple pages, `CircletextsSameFontSizeIfRadiiShrunkToBeSame`, constrains the size over pages compelled to have the same radius (see `ShrinkRadii`).
-(Technical note: `CircletextsSameFontSizeIfRadiiShrunkToBeSame` should have the same Boolean value over any such set of pages. 
+Relevant when glasses spill over multiple pages, `CirclearraysSameFontSizeIfRadiiShrunkToBeSame`, constrains the size over pages compelled to have the same radius (see `ShrinkRadii`).
+(Technical note: `CirclearraysSameFontSizeIfRadiiShrunkToBeSame` should have the same Boolean value over any such set of pages. 
 Typically this is most easily achieved by having it depend on `PageOrderingGlasses SheetNum get` or on `ShrinkRadii SheetNum get`, rather than directly on `SheetNum`.)
 
 ## Titles sizing
