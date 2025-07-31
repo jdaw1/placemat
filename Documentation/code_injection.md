@@ -43,10 +43,10 @@ Indeed, that is at least partly true of this software.
 But not with code injection. 
 E.g., assume a tasting is of several vintages of three wines. 
 The makers of the three wines each have their own branding, each in a different font. 
-It would be entirely natural to define something like `/CircletextFont {Circlearrays WithinTitles get 0 get dup (WineA) eq {pop /FontA} {(WineB) eq {/FontB} {/FontC} ifelse} ifelse} def`.
+It would be entirely natural to define something like `/CirclearraysFont {Circlearrays WithinTitles get 0 get dup (WineA) eq {pop /FontA} {(WineB) eq {/FontB} {/FontC} ifelse} ifelse} def`.
 
 
-Except that the default values of `NamesFont` and `HeaderFont` use `{CircletextFont}`. 
+Except that the default values of `NamesFont` and `HeaderFont` use `{CirclearraysFont}`. 
 Typically these are used outside a `WithinTitles` loop, so `WithinTitles` won&rsquo;t be defined, and this fails. 
 Yes, these errors can be located via &#8984;F and trial-and-fail. 
 But the point is that code injection is not always cleanly defined.
@@ -147,7 +147,7 @@ Of course, variation can be purely decorative.
 `FontSizesTitlesNotSmallerIfTitlesNotLonger` causes the font size to be affected by the length of a string, measured in characters. 
 That means it must be known how many deemed characters is something painted by user code. 
 This can be set within the code, as `/EffectiveNumCharacters 1 def` (or other integer &ge;0). 
-This has been used very rarely, indeed, prior to September 2024, exactly once.
+Prior to August 2025 this has been used only once, in [November&nbsp;2011](http://www.jdawiseman.com/port/20111108_star_quality.pdf).
 
 
 ## Variables that parameters may inspect
@@ -194,7 +194,7 @@ Multiple variables can be available for inspection.
 
 	- Within each neck tag, `NeckTagsCopyNum`. If a tasting as many people and hence multiple bottles of each wine, of which each person tastes only one, the tags could be numbered: `/CirclearraysNeckTags [ Circlearrays {[ exch aload pop [(Bottle #) {NeckTagsCopyNum 1 add}] ]} forall ] def`. 
 
-	- `CircletextMaxFontSizes`, an array of reals with `CircletextMaxFontSizes SheetNum get` being that page&rsquo;s usual font size in which the `Circlearrays` are rendered (though the font size of any particular circle text might have been shrunk by `CircletextsMinCopies`, or altered by code within `Circlearrays`).
+	- `CirclearraysFontSizes`, an array of reals, one per `SheetNum` being that page&rsquo;s font size in which the `Circlearrays` are rendered.
 
 	- `TitleFontSizes` and similar variables `AbovetitleFontSizes`, `BelowtitleFontSizes`, and `OvertitleFontSizes`, being nested arrays, the same shape as `GlassesOnSheets`. They contain the sizes of the font at the start of rendering the `Titles` etc.
 
@@ -434,7 +434,7 @@ It has two imperfections.
 I.e. `(Julian) (Julian) eq` returns <samp>true</samp>, but `[(Julian)] [(Julian)] eq` returns <samp>false</samp>. 
 So names that are compound strings, so all those with kerning or accents, should be assigned to a variable and that variable used. E.g., &ldquo;Jo&atilde;o&rdquo; should be organised via `/Joao [(J) {-0.02 Kern} (o) /atilde (o)] def`.
 
-* If `CircletextFont` &ne; `NamesFont`, then presence or quantities of `Kern`ing might need to differ. 
+* If `CirclearraysFont` &ne; `NamesFont`, then presence or quantities of `Kern`ing might need to differ. 
 In this case, `Names` must be set manually.
 
 
