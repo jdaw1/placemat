@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:30 Monday 28th July 2025
+% This version 23:45 Thursday 31st July 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202507282330) def
+/ParametersVersionDateTimeAdobeFormat (D:202507312345) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -820,7 +820,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202507282330) def
+/SoftwareVersionDateTimeAdobeFormat (D:202507312345) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -8138,11 +8138,11 @@ currentdict /GlyphShowKnownAbsences undef
 					CirclearraysUnroundedN SheetNum get WithinPage get ceiling cvi
 					CirclearraysMaxCopies dup type /integertype ne {floor cvi} if  2 copy gt {exch} if pop
 					Circlearrays_NC_to_FS
-					dup /This_FS exch def
-					CirclearraysFontSizes SheetNum get  div
+					CirclearraysFontSizes SheetNum get
+					2 copy lt {/This_FS 2 index def  div} {pop pop -1} ifelse
 				def  % /This_Ratio
 
-				CirclearraysSnugFit SheetNum get not  Best_Ratio 0 lt  and  % Original not good; this made good by this operation.
+				CirclearraysSnugFit SheetNum get not  Best_Ratio 0 lt  This_Ratio 0 gt  and and  % Original not good; this made good by this operation.
 				This_Ratio 0.998 lt  This_Ratio Best_Ratio gt and  or
 				{
 					ContinueOptimisation not
@@ -8230,6 +8230,7 @@ currentdict /GlyphShowKnownAbsences undef
 	% Initialise everything.
 	/Circlearrays_ScoreInitial Circlearrays_PopulateN_ReturnScore def
 	/Circlearrays_ScoreBest -1 def
+	/Circlearrays_NumBest   -1 def
 	CirclearraysFontSizes CirclearraysFontSizesBest copy pop
 
 	% Do the work: call the previous
@@ -8256,6 +8257,7 @@ currentdict /GlyphShowKnownAbsences undef
 			Circlearrays_ScoreThis Circlearrays_ScoreBest gt
 			{
 				/Circlearrays_ScoreBest Circlearrays_ScoreThis store
+				/Circlearrays_NumBest   CircletextOptimNum     store
 				CirclearraysFontSizes CirclearraysFontSizesBest copy pop
 			} if  % new best
 
@@ -8304,9 +8306,15 @@ currentdict /GlyphShowKnownAbsences undef
 	{GlassesNumCopies 1 ge PrePourNumCopies 1 ge or NumSheets 1 ge and} MightBeTrue  or
 	{
 		mark  (CirclearraysFontSizeMax = ) /CirclearraysFontSizeMax load 0 //true ThingToDebugText TrimSpaces (.\n)
-		CirclearraysFontSizeOptimise {(CirclearraysFontSizeOptimise took ) CircletextOptimNum ( steps: )} if
-		(Circlearrays_ScoreInitial = ) Circlearrays_ScoreInitial
-		CirclearraysFontSizeOptimise {(, Circlearrays_ScoreBest = ) Circlearrays_ScoreBest (.)} if
+		CirclearraysFontSizeOptimise
+		{
+			(CirclearraysFontSizeOptimise reached best after ) Circlearrays_NumBest 
+			( steps; terminated after ) CircletextOptimNum ( steps.)
+			(\nCirclearrays_ScoreInitial = ) Circlearrays_ScoreInitial
+			(, Circlearrays_ScoreBest = ) Circlearrays_ScoreBest (.)	
+		}{
+			(Circlearrays_ScoreInitial = ) Circlearrays_ScoreInitial (.)
+		} ifelse  % CirclearraysFontSizeOptimise
 		(\nCirclearraysFontSizes = ) CirclearraysFontSizes SizeArrayOutput TrimSpaces (.\n)
 		(CirclearraysUnroundedN = ) CirclearraysUnroundedN SizeArrayOutput TrimSpaces (.\n)
 		(CirclearraysN = ) CirclearraysN SizeArrayOutput TrimSpaces (.) ConcatenateToMark OutputToLog
