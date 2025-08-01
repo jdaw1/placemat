@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:45 Thursday 31st July 2025
+% This version 20:00 Friday 1st August 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202507312345) def
+/ParametersVersionDateTimeAdobeFormat (D:202508012000) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -820,7 +820,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202507312345) def
+/SoftwareVersionDateTimeAdobeFormat (D:202508012000) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -834,7 +834,7 @@ RandomisationSeed srand
 /IntegerMax      2147483647 def  % 2^31 - 1, PLRM3, Appendix B, table B.1, p739, row 1
 /Pi              3.14159265358979323846 def
 /TwoPi           6.2831853071795864769 def
-/ReciprocalTwoPi 0.15915494309189533576888 def
+/TwoPiReciprocal 0.15915494309189533576888 def
 /HalfPi          1.57079632679489661923 def
 /Sqrt2           1.4142135623730950488 def  % Sqrt2 SqrtHalf mul  not identical to 1.
 /Sqrt3           1.7320508075688772935 def
@@ -7998,7 +7998,7 @@ currentdict /GlyphShowKnownAbsences undef
 	/Circlearrays_NC_to_FS  % Num Copies on stack, replaced with Font Size
 	{
 		//DeBugLevel 20 le {(+Circlearrays_NC_to_FS) OutputToLog} if
-		CirclearraysPaddedW SheetNum get WithinPage get mul //ReciprocalTwoPi mul  CirclearraysBMin SheetNum get sub
+		CirclearraysPaddedW SheetNum get WithinPage get mul //TwoPiReciprocal mul  CirclearraysBMin SheetNum get sub
 		Radii SheetNum get exch div
 
 		% Nudged smaller to definitely fit. If changed, perhaps also chg Circlearrays_NextStepSmallerFS.
@@ -8211,6 +8211,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
+			0  % Sum within this sheet
 			/FS CirclearraysFontSizes SheetNum get def
 			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
@@ -8219,9 +8220,14 @@ currentdict /GlyphShowKnownAbsences undef
 				/RoundedN  UnroundedN floor cvi  CirclearraysMaxCopies dup type /integertype ne {floor cvi} if  2 copy gt {exch} if pop  def
 				CirclearraysUnroundedN SheetNum get  WithinPage  UnroundedN  put
 				CirclearraysN          SheetNum get  WithinPage    RoundedN  put
+
 				CirclearraysW SheetNum get WithinPage get  FS FS mul mul  RoundedN mul  add  % Score
 			} for  % WithinPage, WithinTitles
+			Radii SheetNum get  CirclearraysB SheetNum get Min  CirclearraysFontSizes SheetNum get mul add  dup 0 gt {div} {pop} ifelse  % Same radius for all on the sheet, result being FS * ProportionUsed
+			add
 		} for  % SheetNum
+		//TwoPiReciprocal mul
+		0  SheetNumGlasses {add} forall dup 0 gt {div} {pop} ifelse  % Result is average over glasses of FS * ProportionUsed
 		end
 		//DeBugLevel 40 le {dup mark exch ( Circlearrays_PopulateN_ReturnScore = ) exch ConcatenateToMark OutputToLog} if
 		//DeBugLevel 30 le {(-Circlearrays_PopulateN_ReturnScore) OutputToLog} if
@@ -8235,7 +8241,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 	% Do the work: call the previous
 	/CircletextOptimNum 0 def
-	CirclearraysFontSizeOptimise
+	//false  SheetNumGlasses {1 ge {pop CirclearraysFontSizeOptimise  dup {exit} if} if} forall  % Can CirclearraysFontSizeOptimise vary by SheetNum? Not sure.
 	{
 		//DeBugLevel 40 le {(+CirclearraysFontSizeOptimise) OutputToLog} if
 		2 dict begin
@@ -8252,14 +8258,18 @@ currentdict /GlyphShowKnownAbsences undef
 
 			/Circlearrays_ScoreThis Circlearrays_PopulateN_ReturnScore def
 
-			Circlearrays_ScoreThis  Circlearrays_ScoreBest 2 div lt {exit} if  % N from 1.999 to 2 won't sufficiently improve this.
-
 			Circlearrays_ScoreThis Circlearrays_ScoreBest gt
 			{
 				/Circlearrays_ScoreBest Circlearrays_ScoreThis store
 				/Circlearrays_NumBest   CircletextOptimNum     store
 				CirclearraysFontSizes CirclearraysFontSizesBest copy pop
 			} if  % new best
+
+			% Assume that a tiny nudge in font size fits everything precisely. That score would be the average font size.
+			% If, for font sizes <= current state, that score <= Circlearrays_ScoreBest, then terminate.
+			0   0  1  NumSheets 1 sub {/SheetNum exch def   CirclearraysFontSizes SheetNum get  SheetNumGlasses SheetNum get mul  add} for
+			0   SheetNumGlasses {add} forall  div  % The div is safe because of the outer check that at least one sheet has glasses.
+			Circlearrays_ScoreBest le {exit} if
 
 			CircletextOptimNum 16384 ge
 			{
@@ -8273,7 +8283,7 @@ currentdict /GlyphShowKnownAbsences undef
 		Circlearrays_PopulateN_ReturnScore pop
 		end
 		//DeBugLevel 40 le {(-CirclearraysFontSizeOptimise) OutputToLog} if
-	} if  % CirclearraysFontSizeOptimise
+	} if  % CirclearraysFontSizeOptimise, and any glasses on any sheets
 
 	% Set: RadiiCirclearrayInside, RadiiCirclearrayBaseline, RadiiCirclearrayInsideUsableTAB, RadiiCirclearrayInsideUsableO
 	2 dict begin
@@ -8310,8 +8320,8 @@ currentdict /GlyphShowKnownAbsences undef
 		{
 			(CirclearraysFontSizeOptimise reached best after ) Circlearrays_NumBest 
 			( steps; terminated after ) CircletextOptimNum ( steps.)
-			(\nCirclearrays_ScoreInitial = ) Circlearrays_ScoreInitial
-			(, Circlearrays_ScoreBest = ) Circlearrays_ScoreBest (.)	
+			(\nScoreInitial = ) Circlearrays_ScoreInitial
+			(, ScoreBest = ) Circlearrays_ScoreBest (, both as FontSize * ProportionBaselineUsed.)	
 		}{
 			(Circlearrays_ScoreInitial = ) Circlearrays_ScoreInitial (.)
 		} ifelse  % CirclearraysFontSizeOptimise
