@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:00 Friday 1st August 2025
+% This version 17:15 Sunday 3rd August 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202508012000) def
+/ParametersVersionDateTimeAdobeFormat (D:202508031715) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -820,7 +820,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202508012000) def
+/SoftwareVersionDateTimeAdobeFormat (D:202508031715) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -8012,7 +8012,7 @@ currentdict /GlyphShowKnownAbsences undef
 	% Single-depth array: CirclearraysBMin (then made consistent with ShrinkRadiiSquareArray), CirclearraysFontSizes (in next section).
 	% After population, all except CirclearraysFontSizes are constant so made readonly.
 	/TypeOfPagesBeingRendered /Glasses store
-	5 dict begin
+	3 dict begin
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
@@ -8035,27 +8035,15 @@ currentdict /GlyphShowKnownAbsences undef
 				//DeSizeRounding div  CirclearraysT SheetNum get WithinPage 3 copy get gt {3 -1 roll put} {pop pop pop} ifelse pop
 				//DeSizeRounding div  CirclearraysB SheetNum get WithinPage 3 copy get lt {3 -1 roll put} {pop pop pop} ifelse pop
 			} forall  % Circlearrays WithinTitles get
-			CirclearraysB SheetNum get WithinPage get  CirclearraysBMin SheetNum 3 copy get lt {3 -1 roll put} {pop pop pop} ifelse
+			CirclearraysB SheetNum get WithinPage get  CirclearraysBMin  SheetNum  3 copy get lt {3 -1 roll put} {pop pop pop} ifelse
 		} for  % WithinPage, WithinTitles
 	} bind for  % SheetNum
+	end
 
-	% Populate initial CirclearraysFontSizes. As code uses CirclearraysBMin, cannot be done with previous loops.
-	0  1  NumSheets 1 sub
-	{
-		/SheetNum exch def
-		CirclearraysFontSizes  SheetNum  Radii SheetNum get  put  % Far exceeding maximum sensible
-		0  1  SheetNumGlasses SheetNum get 1 sub
-		{
-			WithinPage-WithinTitles-def
-			CirclearraysMinCopies Circlearrays_NC_to_FS  CirclearraysFontSizeMax  2 copy gt {exch} if pop
-			CirclearraysFontSizes  SheetNum  3 copy get lt {3 -1 roll put} {pop pop pop} ifelse
-		} for  % WithinPage, WithinTitles
-	} bind for  % SheetNum
-
-	% CirclearraysBMin to be made consistent with ShrinkRadiiSquareArray
-	//DeBugLevel 30 le {(+CirclearraysBMin to be made consistent with ShrinkRadiiSquareArray) OutputToLog} if
+	% CirclearraysBMin to be consistent with ShrinkRadiiSquareArray
+	//DeBugLevel 30 le {(+CirclearraysBMin to be consistent with ShrinkRadiiSquareArray) OutputToLog} if
 	3 dict begin
-	NumSheets
+	NumSheets 1 sub
 	{
 		/NoChanges //true def
 		0  1  NumSheets 1 sub {/SheetNum_0 exch def
@@ -8071,20 +8059,32 @@ currentdict /GlyphShowKnownAbsences undef
 			} if  % ShrinkRadiiSquareArray ...
 		} for} for  % SheetNum_1, SheetNum_0
 		NoChanges {exit} if
-	} repeat  % NumSheets
+	} repeat  % NumSheets 1 sub, as that the maximum number of possible laps
 	end
-	//DeBugLevel 30 le {(-CirclearraysBMin to be made consistent with ShrinkRadiiSquareArray) OutputToLog} if
+	//DeBugLevel 30 le {(-CirclearraysBMin to be consistent with ShrinkRadiiSquareArray) OutputToLog} if
 
-	% Set arrays, inner then outer, to readonly.
+	% Populate initial CirclearraysFontSizes. As code uses CirclearraysBMin, cannot be done inside previous loops.
+	3 dict begin
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
-		[ CirclearraysW CirclearraysPaddedW CirclearraysT CirclearraysB ] {SheetNum get readonly pop} forall
-	} for  % SheetNum
-	[ CirclearraysW CirclearraysPaddedW CirclearraysT CirclearraysB CirclearraysBMin ] {readonly pop} forall
+		CirclearraysFontSizes  SheetNum  Radii SheetNum get  put  % Far exceeding maximum sensible
+		0  1  SheetNumGlasses SheetNum get 1 sub
+		{
+			WithinPage-WithinTitles-def
+			CirclearraysMinCopies Circlearrays_NC_to_FS  CirclearraysFontSizeMax  2 copy gt {exch} if pop
+			CirclearraysFontSizes  SheetNum  3 copy get lt {3 -1 roll put} {pop pop pop} ifelse
+		} for  % WithinPage, WithinTitles
+	} bind for  % SheetNum
+	end
 
-	end  % of initilialisations.
+	% Set arrays, inner then outer, to readonly.
+	[ CirclearraysW CirclearraysPaddedW CirclearraysT CirclearraysB                  ] { {readonly pop} forall} forall
+	[ CirclearraysW CirclearraysPaddedW CirclearraysT CirclearraysB CirclearraysBMin ] {  readonly pop        } forall
 
+	% End of initialisations
+
+	% Circlearrays_SnugPopulate populates CirclearraysSnugFit, array of Booleans, reporting whether any circle (in this radius matching) is snugly fitted.
 	/Circlearrays_SnugPopulate
 	{
 		//DeBugLevel 30 le {(+Circlearrays_SnugPopulate) OutputToLog} if
@@ -8097,7 +8097,7 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				WithinPage-WithinTitles-def
 				CirclearraysN          SheetNum get WithinPage get
-				CirclearraysUnroundedN SheetNum get WithinPage get div 0.998 gt  % At 7pt, is one space in a circle. Split over two or three copies wouldn't be noticed.
+				CirclearraysUnroundedN SheetNum get WithinPage get 0.998 mul  gt  % At 7pt, is one space in a circle. Split over two or three copies wouldn't be noticed.
 				{
 					CirclearraysSnugFit SheetNum //true put
 					0  1  NumSheets 1 sub
@@ -8201,36 +8201,33 @@ currentdict /GlyphShowKnownAbsences undef
 	% Reducing font size by 30% will reduce area per instance by 51%. Going from 1.999 copies to 2 would almost offset that.
 	% But the multiplication by 1/0.7 won't get it above 2.85 instances, so the _maximum_ reduction in font size is less than 30%.
 	% Hence optimisation will always terminate with FS no smaller than 0.7 times original.
+	% Actual test used can terminate earlier, because it uses the current N.
 	% Effective input, though a global variable, is CirclearraysFontSizes.
 	% Effective output is updates to double-depth arrays CirclearraysUnroundedN and CirclearraysN.
 	/Circlearrays_PopulateN_ReturnScore
 	{
-		//DeBugLevel 30 le {(+Circlearrays_PopulateN_ReturnScore) OutputToLog} if
-		6 dict begin
+		//DeBugLevel 40 le {(+Circlearrays_PopulateN_ReturnScore) OutputToLog} if
+		5 dict begin
 		0  % Score
 		0  1  NumSheets 1 sub
 		{
 			/SheetNum exch def
 			0  % Sum within this sheet
-			/FS CirclearraysFontSizes SheetNum get def
 			0  1  SheetNumGlasses SheetNum get 1 sub
 			{
 				WithinPage-WithinTitles-def
-				/UnroundedN  FS Circlearrays_FS_to_NC  def
+				/UnroundedN  CirclearraysFontSizes SheetNum get Circlearrays_FS_to_NC  def
 				/RoundedN  UnroundedN floor cvi  CirclearraysMaxCopies dup type /integertype ne {floor cvi} if  2 copy gt {exch} if pop  def
 				CirclearraysUnroundedN SheetNum get  WithinPage  UnroundedN  put
 				CirclearraysN          SheetNum get  WithinPage    RoundedN  put
 
-				CirclearraysW SheetNum get WithinPage get  FS FS mul mul  RoundedN mul  add  % Score
+				RoundedN UnroundedN div  add  % Score
 			} for  % WithinPage, WithinTitles
-			Radii SheetNum get  CirclearraysB SheetNum get Min  CirclearraysFontSizes SheetNum get mul add  dup 0 gt {div} {pop} ifelse  % Same radius for all on the sheet, result being FS * ProportionUsed
-			add
+			CirclearraysFontSizes SheetNum get mul  add
 		} for  % SheetNum
-		//TwoPiReciprocal mul
-		0  SheetNumGlasses {add} forall dup 0 gt {div} {pop} ifelse  % Result is average over glasses of FS * ProportionUsed
+		0  SheetNumGlasses {add} forall  dup 0 gt {div} {pop} ifelse  % Result is average over glasses of FontSize * ProportionUsed
 		end
-		//DeBugLevel 40 le {dup mark exch ( Circlearrays_PopulateN_ReturnScore = ) exch ConcatenateToMark OutputToLog} if
-		//DeBugLevel 30 le {(-Circlearrays_PopulateN_ReturnScore) OutputToLog} if
+		//DeBugLevel 40 le {mark (-Circlearrays_PopulateN_ReturnScore, returning score = ) 2 index ConcatenateToMark OutputToLog} if
 	} bind def  % /Circlearrays_PopulateN_ReturnScore
 
 	% Initialise everything.
@@ -8290,7 +8287,7 @@ currentdict /GlyphShowKnownAbsences undef
 	0  1  NumSheets 1 sub
 	{
 		/SheetNum exch def
-		RadiiCirclearrayBaseline  SheetNum  Radii                    SheetNum get CirclearraysB SheetNum get Min CirclearraysFontSizes SheetNum get mul add  put
+		RadiiCirclearrayBaseline  SheetNum  Radii                    SheetNum get CirclearraysBMin SheetNum get CirclearraysFontSizes SheetNum get mul add  put
 		RadiiCirclearrayInside    SheetNum  RadiiCirclearrayBaseline SheetNum get CirclearraysT SheetNum get Max CirclearraysFontSizes SheetNum get mul sub  put
 		RadiiCirclearrayInsideUsableTAB SheetNum  RadiiCirclearrayInside SheetNum get 1 ExclusionAnnulusProportionInnerRadiusTitlesAboveBelow sub mul  put
 		RadiiCirclearrayInsideUsableO   SheetNum  RadiiCirclearrayInside SheetNum get 1 ExclusionAnnulusProportionInnerRadiusOvertitles       sub mul  put
@@ -8321,11 +8318,13 @@ currentdict /GlyphShowKnownAbsences undef
 			(CirclearraysFontSizeOptimise reached best after ) Circlearrays_NumBest 
 			( steps; terminated after ) CircletextOptimNum ( steps.)
 			(\nScoreInitial = ) Circlearrays_ScoreInitial
-			(, ScoreBest = ) Circlearrays_ScoreBest (, both as FontSize * ProportionBaselineUsed.)	
+			(, ScoreBest = ) Circlearrays_ScoreBest (, both as FontSize * ProportionBaselineUsed.\n)
+			(CirclearraysFontSizes = ) CirclearraysFontSizes SizeArrayOutput TrimSpaces (.\n)
+			(Circlearrays_ScoreBest / FontSize = ) Circlearrays_ScoreBest CirclearraysFontSizes {div} //false TwoArraysFunction SizeArrayOutput TrimSpaces ( ~= ProportionBaselineUsed.\n)
 		}{
-			(Circlearrays_ScoreInitial = ) Circlearrays_ScoreInitial (.)
+			(CirclearraysFontSizes = ) CirclearraysFontSizes SizeArrayOutput TrimSpaces (.\n)
+			(Circlearrays_ScoreInitial = ) Circlearrays_ScoreInitial (.\n)
 		} ifelse  % CirclearraysFontSizeOptimise
-		(\nCirclearraysFontSizes = ) CirclearraysFontSizes SizeArrayOutput TrimSpaces (.\n)
 		(CirclearraysUnroundedN = ) CirclearraysUnroundedN SizeArrayOutput TrimSpaces (.\n)
 		(CirclearraysN = ) CirclearraysN SizeArrayOutput TrimSpaces (.) ConcatenateToMark OutputToLog
 		mark (RadiiCirclearrayBaseline = ) RadiiCirclearrayBaseline SizeArrayOutput TrimSpaces (. RadiiCirclearrayInside = ) RadiiCirclearrayInside SizeArrayOutput TrimSpaces (.) ConcatenateToMark OutputToLog
