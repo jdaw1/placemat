@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:15 Sunday 3rd August 2025
+% This version 22:30 Sunday 3rd August 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202508032015) def
+/ParametersVersionDateTimeAdobeFormat (D:202508032230) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -820,7 +820,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202508032015) def
+/SoftwareVersionDateTimeAdobeFormat (D:202508032230) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -7244,7 +7244,7 @@ currentdict /GlyphShowKnownAbsences undef
 		( ~= ) usertimeInterval dup cvi 2 copy eq {exch} if pop ( seconds)  % Recent Distiller versions seems to report usertime in whole seconds.
 		usertimeInterval       60 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( minutes)} {pop exit} ifelse  % There have been some distillation times of multiple minutes.
 		usertimeInterval     3600 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( hours)  } {pop exit} ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
-		usertimeInterval    86400 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Jan 2025, JDAW's longest distillation time has been ~=22 minutes.
+		usertimeInterval    86400 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of July 2025, JDAW's longest distillation time has been ~=22 minutes.
 		usertimeInterval  2629800 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. PostScript's max integer ~= 0.8 months.
 		usertimeInterval 31557600 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( years)  } {pop exit} ifelse  % Years?! Something is very amiss.
 	} repeat  % 1
@@ -15737,7 +15737,7 @@ currentdict /GlyphShowKnownAbsences undef
 		{OutputLog  0  (:-\)   Execution successfully completed. George Burns: "Happiness is having a large, loving, caring, close-knit family, in another city."   :-\))  put}
 	ifelse  % EndError
 	count 0 ne {(+pstack) = pstack (-pstack) =} if
-} stopped  % From about 8.3k lines above.
+} stopped  % From about 8.5k lines above.
 {
 	/ErrorFlag where {/ErrorFlag get} {//false} ifelse  % Error in parameter(s)
 	{
