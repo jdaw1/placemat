@@ -1,6 +1,6 @@
 %!PS
 
-% This version 17:15 Sunday 3rd August 2025
+% This version 20:15 Sunday 3rd August 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202508031715) def
+/ParametersVersionDateTimeAdobeFormat (D:202508032015) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -820,7 +820,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202508031715) def
+/SoftwareVersionDateTimeAdobeFormat (D:202508032015) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -7983,6 +7983,7 @@ currentdict /GlyphShowKnownAbsences undef
 	/CirclearraysW [ SheetNumGlasses {array} forall ] def
 	/CirclearraysPaddedW [ SheetNumGlasses {array} forall ] def
 	/CirclearraysBMin [ NumSheets {0} repeat ] def
+	/Circlearrays_ScoresStored 32 array def
 
 	% NumCopies * WidthUnitFont * FontSize = TwoPi * (CirclearraysBMin * FontSize + Radius)
 	% <==>  NumCopies = TwoPi * (CirclearraysBMin + Radius/FontSize) / WidthUnitFont
@@ -8231,13 +8232,14 @@ currentdict /GlyphShowKnownAbsences undef
 	} bind def  % /Circlearrays_PopulateN_ReturnScore
 
 	% Initialise everything.
-	/Circlearrays_ScoreInitial Circlearrays_PopulateN_ReturnScore def
+	/Circlearrays_ScoreThis Circlearrays_PopulateN_ReturnScore def
 	/Circlearrays_ScoreBest -1 def
-	/Circlearrays_NumBest   -1 def
+	/Circlearrays_NumBest    0 def
 	CirclearraysFontSizes CirclearraysFontSizesBest copy pop
 
 	% Do the work: call the previous
 	/CircletextOptimNum 0 def
+	Circlearrays_ScoresStored CircletextOptimNum dup 2 index length lt {Circlearrays_ScoreThis put} {pop pop} ifelse
 	//false  SheetNumGlasses {1 ge {pop CirclearraysFontSizeOptimise  dup {exit} if} if} forall  % Can CirclearraysFontSizeOptimise vary by SheetNum? Not sure.
 	{
 		//DeBugLevel 40 le {(+CirclearraysFontSizeOptimise) OutputToLog} if
@@ -8254,6 +8256,8 @@ currentdict /GlyphShowKnownAbsences undef
 			} {exit} ifelse  % Circlearrays_NextStepSmallerFS
 
 			/Circlearrays_ScoreThis Circlearrays_PopulateN_ReturnScore def
+
+			Circlearrays_ScoresStored CircletextOptimNum dup 2 index length lt {Circlearrays_ScoreThis put} {pop pop} ifelse
 
 			Circlearrays_ScoreThis Circlearrays_ScoreBest gt
 			{
@@ -8312,22 +8316,29 @@ currentdict /GlyphShowKnownAbsences undef
 	{GlassesOnTastingNotePages length 1 ge TastingNotePagesNumCopies 1 ge TastingNotesCirclesBehind and and} MightBeTrue
 	{GlassesNumCopies 1 ge PrePourNumCopies 1 ge or NumSheets 1 ge and} MightBeTrue  or
 	{
-		mark  (CirclearraysFontSizeMax = ) /CirclearraysFontSizeMax load 0 //true ThingToDebugText TrimSpaces (.\n)
+		mark  (CirclearraysFontSizeMax = ) /CirclearraysFontSizeMax load 0 //true ThingToDebugText TrimSpaces (; )
+		(CirclearraysFontSizes = ) CirclearraysFontSizes SizeArrayOutput TrimSpaces (.\n)
 		CirclearraysFontSizeOptimise
 		{
-			(CirclearraysFontSizeOptimise reached best after ) Circlearrays_NumBest 
-			( steps; terminated after ) CircletextOptimNum ( steps.)
-			(\nScoreInitial = ) Circlearrays_ScoreInitial
-			(, ScoreBest = ) Circlearrays_ScoreBest (, both as FontSize * ProportionBaselineUsed.\n)
-			(CirclearraysFontSizes = ) CirclearraysFontSizes SizeArrayOutput TrimSpaces (.\n)
-			(Circlearrays_ScoreBest / FontSize = ) Circlearrays_ScoreBest CirclearraysFontSizes {div} //false TwoArraysFunction SizeArrayOutput TrimSpaces ( ~= ProportionBaselineUsed.\n)
+			(Scores progression, as FontSize * ProportionBaselineUsed)
+			Circlearrays_ScoresStored CircletextOptimNum dup 2 index length le {0 exch getinterval ( = )} {pop (, first few = )} ifelse () 3 -1 roll SizeArrayOutput TrimSpaces
+			(; reached ans at step ) Circlearrays_NumBest (, terminated after ) CircletextOptimNum ( trials, )
+			(with ScoreBest = ) Circlearrays_ScoreBest (.\n)
 		}{
-			(CirclearraysFontSizes = ) CirclearraysFontSizes SizeArrayOutput TrimSpaces (.\n)
-			(Circlearrays_ScoreInitial = ) Circlearrays_ScoreInitial (.\n)
+			(No optimisation: score = ) Circlearrays_ScoresStored Circlearrays_NumBest get (.\n)
 		} ifelse  % CirclearraysFontSizeOptimise
-		(CirclearraysUnroundedN = ) CirclearraysUnroundedN SizeArrayOutput TrimSpaces (.\n)
-		(CirclearraysN = ) CirclearraysN SizeArrayOutput TrimSpaces (.) ConcatenateToMark OutputToLog
-		mark (RadiiCirclearrayBaseline = ) RadiiCirclearrayBaseline SizeArrayOutput TrimSpaces (. RadiiCirclearrayInside = ) RadiiCirclearrayInside SizeArrayOutput TrimSpaces (.) ConcatenateToMark OutputToLog
+
+		(CirclearraysUnroundedN = ) CirclearraysUnroundedN SizeArrayOutput TrimSpaces
+		(; CirclearraysN = ) CirclearraysN SizeArrayOutput TrimSpaces (.\n)
+		(ProportionBaselineUsed, avg by sheet = ) [
+			CirclearraysN CirclearraysUnroundedN {dup 0 ge {div} {pop pop 0} ifelse} //false TwoArraysFunction
+				{dup 0 exch {add} forall exch length dup 0 gt {div} {pop pop (-)} ifelse}
+			forall  % CirclearraysN / CirclearraysUnroundedN
+		] SizeArrayOutput TrimSpaces (.)
+		ConcatenateToMark OutputToLog
+		mark (RadiiCirclearrayBaseline = ) RadiiCirclearrayBaseline SizeArrayOutput TrimSpaces
+		(. RadiiCirclearrayInside = ) RadiiCirclearrayInside SizeArrayOutput TrimSpaces (.)
+		ConcatenateToMark OutputToLog
 	} if  % ...NumCopies 1 ge ...
 
 	5 dict begin  % Output the ...Equivalences arrays
