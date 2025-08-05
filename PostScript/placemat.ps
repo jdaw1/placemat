@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:30 Sunday 3rd August 2025
+% This version 21:30 Tuesday 5th August 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202508032230) def
+/ParametersVersionDateTimeAdobeFormat (D:202508052130) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -57,7 +57,7 @@
 /ThePortForumIconPlacement /LowerNonWaterBox def  % /None
 /ThePortForumIconTastingNotePlacement /LowerNonName def  % /None
 
-/PDF_title (Placemats) def  % Names PDF file; appears as tab name in browser, and in search results
+/PDF_title (Placemats) def  % Gives a name to PDF file; appears as tab name in browser, and in search results
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
@@ -98,13 +98,13 @@
 /VoteRecorders true def
 /CorkDisplayNumCopies 1 def
 /NeckTagsNumCopies 0 def
-/PrePourNumCopies  Names length 12 ge {1} {0} ifelse def
 /PlaceNames false def
+/PrePourNumCopies   /Names load length 12 ge {1} {0} ifelse def
+/AccountsNumCopies  /Names load length  8 ge {1} {0} ifelse def
 /DecanterLabelsNumCopies 0 def
 /GlassesNumCopies 1 def
 /TastingNotePagesNumCopies 1 def
 /DecantingNotesNumCopies  Circlearrays length 15 ge {1} {0} ifelse  def
-/AccountsNumCopies  Names length 8 ge {1} {0} ifelse  def
 /StickyLabelsNumCopies 0 def
 /StickyLabelsTypes [ /Avery_2_4 /Avery_5_13 ] def  % /Avery_2_4 = 2x4 on A4; /Avery_5_13 = 5x13 on A4; /Dymo89_36mm 1x1 on 89mm x 36mm
 /BottleWrapNumCopies 0 def  % Activates BottleWrapSuppressOtherPageTypes
@@ -129,11 +129,11 @@
 /CirclearraysBottleWrap CirclearraysDecantingNotes def
 /CirclearraysStickyLabels CirclearraysDecantingNotes def
 
-/NamesTastingNotes Names def
-/NamesVoteRecorder Names def
-/NamesAccounts     Names def
-/NamesStickyLabels Names def
-/NamesPlaceNames [ Names ] def
+/NamesTastingNotes /Names load def
+/NamesVoteRecorder /Names load def
+/NamesAccounts     /Names load def
+/NamesStickyLabels /Names load def
+/NamesPlaceNames [ /Names load ] def
 
 % % % % % % % % % % % % % % % % % % % % % % %
 % Page Organisation and Page-Level Features %
@@ -479,8 +479,8 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /FillTextNumSpaces 2 def
 /FillTextNumOutlines {TypeOfPagesBeingRendered /PlaceName eq {2} {2} ifelse} bind def
-/FillTextMinFontSizeAbsolute 6 def
-/FillTextMinFontSizeProportionLargestTitleAboveBelowOver 0.03333333 def
+/FillTextMinFontSizeAbsolute 8 def
+/FillTextMinFontSizeProportionLargestTitleAboveBelowOver 0 def
 /FillTextAnglePlaceNames 30 def
 /FillPrioritiseSmallFileSizeOverPortability true def
 
@@ -820,7 +820,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202508032230) def
+/SoftwareVersionDateTimeAdobeFormat (D:202508052130) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -2342,95 +2342,29 @@ DesMaxLength 0 ge {ConcatenateToMark OutputToLog} {cleartomark} ifelse   end
 
 /AnyFillTextingAtAll {FillTitles FillAbovetitles or FillBelowtitles or FillOvertitles or FillPlaceNames or} MightBeTrue  def
 
-/NamesIsLeftHander [ Names length {//false} repeat ] def
-/NamesIsLeftHanderTN [ NamesTastingNotes length {//false} repeat ] def
-/NamesIsLeftHanderPN [ NamesPlaceNames { [ exch execU length {//false} repeat ] } forall ] def
-3 dict begin
-0  1  LeftHanders length 1 sub
+% name  IsLeftHander  bool
+/IsLeftHander
 {
-	LeftHanders exch get PDFDocEncodingify /Leftie exch def
-	Names length 1 sub  -1  0  % Glass pages
-	{
-		/NameNum exch def
-		NamesIsLeftHander NameNum get not
-		{
-			Names NameNum get PDFDocEncodingify Leftie eq {NamesIsLeftHander NameNum //true put exit} if
-		} if  % NamesIsLeftHander NameNum get not
-	} for  % NameNum
-	NamesTastingNotes length 1 sub  -1  0   % Tasting-note pages
-	{
-		/NameNum exch def
-		NamesIsLeftHanderTN NameNum get not
-		{
-			NamesTastingNotes NameNum get PDFDocEncodingify Leftie eq {NamesIsLeftHanderTN NameNum //true put exit} if
-		} if  % NamesIsLeftHanderTN NameNum get not
-	} for  % NameNum
-	0  1  NamesPlaceNames length 1 sub   PlaceNames not {pop -1} if % Place names
-	{
-		/PlaceNameSetNum exch def
-		NamesPlaceNames PlaceNameSetNum GetEU length 1 sub  -1  0
-		{
-			/NameNum exch def
-			NamesIsLeftHanderPN PlaceNameSetNum get NameNum get not
-			{
-				NamesPlaceNames PlaceNameSetNum GetEU NameNum get PDFDocEncodingify Leftie eq {NamesIsLeftHanderPN PlaceNameSetNum get NameNum //true put exit} if
-			} if  % NamesIsLeftHanderPN PlaceNameSetNum get NameNum get not
-		} for  % NameNum
-	} for  % PlaceNameSetNum
-} bind for  % Leftie
-//false NamesIsLeftHander {{pop //true exit} if} forall
-{
-	mark  (Left-handers amongst Names:)
-	0  1  NamesIsLeftHander length 1 sub
-	{
-		/NameNum exch def
-		NamesIsLeftHander NameNum get {( NameNum=) NameNum (, ) Names NameNum get ASCIIfy (;)} if
-	} bind for  % NameNum
-	(;) eq {TerminatingFullStopAppend} if  ConcatenateToMark  OutputToLog
-} if  % any lefties
-//false  NamesTastingNotes Names ne {NamesIsLeftHanderTN {{pop //true exit} if} forall} if
-{
-	mark  (Left-handers amongst NamesTastingNotes:)
-	0  1  NamesIsLeftHanderTN length 1 sub
-	{
-		/NameNum exch def
-		NamesIsLeftHanderTN NameNum get {( NameNum=) NameNum (, ) NamesTastingNotes NameNum get ASCIIfy (;)} if
-	} bind for  % NameNum
-	(;) eq {TerminatingFullStopAppend} if  ConcatenateToMark  OutputToLog
-} if  % any lefties
-{PlaceNames} MightBeTrue
-{
-	//false  0 1 NamesPlaceNames length 1 sub {/PlaceNameSetNum exch def NamesPlaceNames PlaceNameSetNum GetEU Names ne {NamesIsLeftHanderPN PlaceNameSetNum get {{pop //true exit} if} forall} if} for
-	{
-		mark  (Left-handers amongst NamesPlaceNames, excluding those amongst Names:)
-		0  1  NamesPlaceNames length 1 sub
-		{
-			/PlaceNameSetNum exch def
-			NamesPlaceNames PlaceNameSetNum GetEU Names ne
-			{
-				0  1  NamesPlaceNames PlaceNameSetNum GetEU length 1 sub
-				NamesIsLeftHanderPN PlaceNameSetNum get NameNum get {( PlaceNameSetNum=) PlaceNameSetNum (, NameNum=) NameNum (, ) NamesPlaceNames PlaceNameSetNum GetEU NameNum get ASCIIfy (;)} if
-			} for  % NameNum
-		} bind for  % PlaceNameSetNum
-		(;) eq {TerminatingFullStopAppend} if  ConcatenateToMark  OutputToLog
-	} if  % any lefties
-} if  % ...PlaceNames...
-end
+	1 dict begin
+	/nm exch PDFDocEncodingify def
+	//false  //LeftHanders {PDFDocEncodingify nm eq {pop //true exit} if} forall
+	end
+} bind def  % /IsLeftHander
 
 4 dict begin
 /FontData [
 [
-	Titles                NonEmptyCompoundObject {/TitlesFont} if
-	Abovetitles           NonEmptyCompoundObject {/AbovetitlesFont} if
-	Belowtitles           NonEmptyCompoundObject {/BelowtitlesFont} if
-	Overtitles            NonEmptyCompoundObject {/OvertitlesFont} if
-	Circlearrays          NonEmptyCompoundObject {/CirclearraysFont} if
-	Names                 NonEmptyCompoundObject {/NamesFont} if
-	SubtitlesTastingNotes NonEmptyCompoundObject {/SubtitlesFont} if
-	AnyFillTextingAtAll                          {/FillTextFont} if
-	/PlaceNames load MightBeTrue                 {/PlaceNamesFont} if
-	HeadersLeft length 0 gt HeadersCenter length 0 gt HeadersRight length 0 gt or or {/HeaderFont} if
-	FootersLeft length 0 gt FootersCenter length 0 gt FootersRight length 0 gt or or {/FooterFont} if
+	/Titles                load NonEmptyCompoundObject {/TitlesFont      } if
+	/Abovetitles           load NonEmptyCompoundObject {/AbovetitlesFont } if
+	/Belowtitles           load NonEmptyCompoundObject {/BelowtitlesFont } if
+	/Overtitles            load NonEmptyCompoundObject {/OvertitlesFont  } if
+	/Circlearrays          load NonEmptyCompoundObject {/CirclearraysFont} if
+	/Names                 load NonEmptyCompoundObject {/NamesFont       } if
+	/SubtitlesTastingNotes load NonEmptyCompoundObject {/SubtitlesFont   } if
+	AnyFillTextingAtAll                                {/FillTextFont    } if
+	/PlaceNames load MightBeTrue                       {/PlaceNamesFont  } if
+	//false [ /HeadersLeft /HeadersCenter /HeadersRight ] {load length 0 gt {pop //true exit} if} forall {/HeaderFont} if
+	//false [ /FootersLeft /FootersCenter /FootersRight ] {load length 0 gt {pop //true exit} if} forall {/FooterFont} if
 	{BackgroundTextsGlasses PrePourShowBackgroundTexts BackgroundTextsTastingNotes or or} MightBeTrue {/BackgroundTextsFont} if
 ]  {[ exch dup /fv exch def fv load ValueIfAscertainable {FontNameFromChoices} {fv load} ifelse ]} forall ] def % FontData
 mark (Fonts: )
@@ -2556,7 +2490,7 @@ DeBugLevel 100 le	 % This logging introduced in May 2011. In December 2021 decid
 } if  % DeBugLevel 100 le
 
 % Prefixed to the page names visible from within Acrobat
-/UnnamedAttendee dup where {pop pop} {Names length 1 le {(Everybody)} {(Extra)} ifelse def} ifelse
+/UnnamedAttendee dup where {pop pop} { {Names length 1 gt} MightBeTrue {(Extra)} {(Everybody)} ifelse def} ifelse
 
 /InitialMatrix matrix currentmatrix def
 
@@ -4664,18 +4598,18 @@ currentdict /GlyphShowKnownAbsences undef
 			def  % /IconSize
 			TypeOfPagesBeingRendered /Glasses eq
 			{
-				param /UpperNonWaterBox eq {/param NamesIsLeftHander NameNum get {/UpperRight} {/UpperLeft} ifelse def} if
-				param /UpperWaterBox    eq {/param NamesIsLeftHander NameNum get {/UpperLeft} {/UpperRight} ifelse def} if
-				param /LowerNonWaterBox eq {/param NamesIsLeftHander NameNum get {/LowerRight} {/LowerLeft} ifelse def} if
-				param /LowerWaterBox    eq {/param NamesIsLeftHander NameNum get {/LowerLeft} {/LowerRight} ifelse def} if
+				param /UpperNonWaterBox eq {/param Names NameNum get IsLeftHander {/UpperRight} {/UpperLeft} ifelse def} if
+				param /UpperWaterBox    eq {/param Names NameNum get IsLeftHander {/UpperLeft} {/UpperRight} ifelse def} if
+				param /LowerNonWaterBox eq {/param Names NameNum get IsLeftHander {/LowerRight} {/LowerLeft} ifelse def} if
+				param /LowerWaterBox    eq {/param Names NameNum get IsLeftHander {/LowerLeft} {/LowerRight} ifelse def} if
 			} if  % ... /Glasses ...
 			TypeOfPagesBeingRendered /TastingNotes eq
 			{
 				/IconSizeTN IconSize store
-				param /UpperNonName eq {/param NamesIsLeftHanderTN NameNum get {/UpperRight} {/UpperLeft} ifelse def} if
-				param /UpperName    eq {/param NamesIsLeftHanderTN NameNum get {/UpperLeft} {/UpperRight} ifelse def} if
-				param /LowerNonName eq {/param NamesIsLeftHanderTN NameNum get {/LowerRight} {/LowerLeft} ifelse def} if
-				param /LowerName    eq {/param NamesIsLeftHanderTN NameNum get {/LowerLeft} {/LowerRight} ifelse def} if
+				param /UpperNonName eq {/param NamesTastingNotes NameNum get IsLeftHander {/UpperRight} {/UpperLeft} ifelse def} if
+				param /UpperName    eq {/param NamesTastingNotes NameNum get IsLeftHander {/UpperLeft} {/UpperRight} ifelse def} if
+				param /LowerNonName eq {/param NamesTastingNotes NameNum get IsLeftHander {/LowerRight} {/LowerLeft} ifelse def} if
+				param /LowerName    eq {/param NamesTastingNotes NameNum get IsLeftHander {/LowerLeft} {/LowerRight} ifelse def} if
 			} if  % TypeOfPagesBeingRendered /TastingNotes eq
 			//true TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressOrnamentsLeft eq {pop //false exit} if} forall} {pop} ifelse} if
 			{
@@ -7522,7 +7456,7 @@ currentdict /GlyphShowKnownAbsences undef
 	]
 	{
 		/BeingChecked exch def
-		0  1  BeingChecked load execU length 1 sub
+		0  1  BeingChecked load dup xcheck {pop -1} {length 1 sub} ifelse
 		{
 			/WithinTitles exch def
 			BeingChecked load execU WithinTitles get /quoteright eq {mark (Warning: in ) BeingChecked (, near item ) WithinTitles (, there might be missing string-compounding square brackets, []. Continuing.) ConcatenateToMark OutputToLog} if
@@ -7539,7 +7473,7 @@ currentdict /GlyphShowKnownAbsences undef
 	]
 	{
 		/BeingChecked exch def
-		0  1  BeingChecked load execU length 1 sub
+		0  1  BeingChecked load dup xcheck {pop -1} {length 1 sub} ifelse
 		{
 			/WithinTitles exch def  % wrong parameter name for NamesPlaceNames
 			0 1 BeingChecked load execU WithinTitles GetEU length 1 sub
@@ -7928,7 +7862,7 @@ currentdict /GlyphShowKnownAbsences undef
 	/ByRearrangementArrayString
 	{
 		11 dict begin  /ShowStringBrackets exch def  /Suffix exch def  /DataArray exch def  /RearrangementArray exch def  /DescriptionString exch def
-		/NameNum Names length def
+		/NameNum /Names load dup xcheck {pop 0} {length} ifelse def
 		[  0  1  RearrangementArray length 1 sub
 		{
 			dup  /SheetNum exch def  /TNSheetNum exch def
@@ -8382,15 +8316,17 @@ currentdict /GlyphShowKnownAbsences undef
 	end
 
 	/TypeOfPagesBeingRendered /Glasses store
-	/NamesFontSizeIndividuallyT [ NumSheets {Names length array} repeat ] def  % If NamesShowTop
-	/NamesFontSizeIndividuallyB [ NumSheets {Names length array} repeat ] def  % If NamesShowBottom
-	22 dict begin
-	0  1  Names length 1 sub
+	/NamesFontSizeIndividuallyT [ 0  1  NumSheets 1 sub {/SheetNum exch def /ThisPageOrdering PageOrderingGlasses SheetNum get def Names length array} for ] def  % If NamesShowTop
+	/NamesFontSizeIndividuallyB [ 0  1  NumSheets 1 sub {/SheetNum exch def /ThisPageOrdering PageOrderingGlasses SheetNum get def Names length array} for ] def  % If NamesShowBottom
+	23 dict begin
+	0  1  NumSheets 1 sub
 	{
-		/NameNum exch def
-		0  1  NumSheets 1 sub
+		/SheetNum exch def
+		/ThisPageOrdering  PageOrderingGlasses SheetNum get  def
+		0  1  Names length 1 sub
 		{
-			/SheetNum exch def
+			/NameNum exch def
+			/ThisPageOrdering PageOrderingGlasses SheetNum get def
 			//false //false //false //false PaperType Orientation SetPaperSize
 			//true DefStoreMgns
 
@@ -8433,9 +8369,9 @@ currentdict /GlyphShowKnownAbsences undef
 				} for  % WithinPage
 				Top {NamesFontSizeIndividuallyT} {NamesFontSizeIndividuallyB} ifelse SheetNum get  NameNum  NameFontSizeThis  put
 			} forall  % Top
-		} for  % SheetNum
-		% Optionally, here there could be SheetNum^2 loops referring to ShrinkRadiiSquareArray. But, May 2022, such behaviour removed.
-	} bind for  % NameNum
+		} for  % NameNum
+	} bind for  % SheetNum
+	% Optionally, here there could be SheetNum^2 loops referring to ShrinkRadiiSquareArray. But, May 2022, such behaviour removed.
 	end
 
 	//DeBugLevel 100 le {( Main: computing TitleProportionFontSize...) OutputToLog} if
@@ -11611,7 +11547,8 @@ currentdict /GlyphShowKnownAbsences undef
 					dup length VoteRecorderNumNames 15 sub gt {VoteRecorderNumNames 15 sub get} {pop VoteRecorderNumNames 5 string cvs} ifelse
 					( non-empty names. )
 					(But one bottle, less angels' share, less decanting loss, fourteen ways, ~= 5cl, which is not more than a small functional taste. )
-					(So there might be an error in NamesVoteRecorder, or carelessly too many people have been invited, or it is an abstemious event, or -- optimal answer -- you're opening magnums+.)
+					(So there might be an error in NamesVoteRecorder, or carelessly too many people have been invited, )
+					(or it is a strangely abstemious event, or -- the much-hoped-for optimal answer -- you're opening >=magnums.)
 					ConcatenateToMark OutputToLog  (\n) OutputToLog
 					/NamesVoteRecorder_SmallPortionRisk_Warned //true store
 				} if  % VoteRecorderNumNames 14 gt
@@ -12977,8 +12914,8 @@ currentdict /GlyphShowKnownAbsences undef
 				NamesFont exch SelectFont  /ThisName load StringPathBBox  pop /ThisNameR exch def pop /ThisNameL exch def
 				NamePlacementBottomX SheetNum get  ThisNameR ThisNameL sub 2 div  2 copy sub 3 1 roll add
 			} {pop //Infinity  //InfinNeg} ifelse  % NamesShowBottom ...
-			NamesIsLeftHander NameNum get not  WaterBoxesOverrideShowEverySheet not {WaterBoxesShowRight SheetNum get execU  and} if
-			NamesIsLeftHander NameNum get      WaterBoxesOverrideShowEverySheet not {WaterBoxesShowLeft  SheetNum get execU  and} if
+			Names NameNum get IsLeftHander not  WaterBoxesOverrideShowEverySheet not {WaterBoxesShowRight SheetNum get execU  and} if
+			Names NameNum get IsLeftHander      WaterBoxesOverrideShowEverySheet not {WaterBoxesShowLeft  SheetNum get execU  and} if
 			//true  WaterBoxesPaintProc
 		} if  % WaterBoxes dup /Glasses eq exch /Both eq or  WaterBoxesNumSideTriangle 1 ge  and
 
@@ -13178,13 +13115,13 @@ currentdict /GlyphShowKnownAbsences undef
 			//DeBugLevel 75 le {( TastingNotesInnerLoop: Water) OutputToLog} if
 			/WaterBoxesSizeTN IconSizeTN WaterBoxesSizeMax 2 copy gt {exch} if pop def
 
-			NamesIsLeftHanderTN NameNum get   ThePortForumIconTastingNotePlacement /LowerNonName eq
+			NamesTastingNotes NameNum get IsLeftHander   ThePortForumIconTastingNotePlacement /LowerNonName eq
 				{WaterBoxesSizeTN WaterBoxesGapProportionSize mul IconSizeTN add   exch {WaterBoxesSizeTN add MgnR add PageWidth exch sub} {MgnL add} ifelse}
 				{ {PageWidth MgnR WaterBoxesSizeTN add sub} {MgnL} ifelse}
 			ifelse   /X exch def  % two booleans
 			0  1  WaterBoxesNum 1 sub
 			{
-				WaterBoxesSizeTN WaterBoxesGapProportionSize 1 add mul mul   NamesIsLeftHanderTN NameNum get {X exch sub} {X add} ifelse   MgnB WaterBoxesSizeTN add moveto
+				WaterBoxesSizeTN WaterBoxesGapProportionSize 1 add mul mul   NamesTastingNotes NameNum get IsLeftHander {X exch sub} {X add} ifelse   MgnB WaterBoxesSizeTN add moveto
 				WaterBoxesSizeTN dup dup  neg 0 exch rlineto  0 rlineto  0 exch rlineto
 				0.24 setlinewidth  0 setgray  0 setlinecap  1 setlinejoin  [] 0 setdash  WaterBoxesFormatStroke newpath
 			} for
@@ -13194,7 +13131,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0 setgray
 		NamesFont  NamesFontSize TastingNotesReplaceNameWithPageNum {TastingNotesPageNumFontSizeFactor mul} if  SelectFont
 		/ThisName load  StringPathBBox  pop  /ThisNameR exch def  /ThisNameB exch def  /ThisNameL exch def
-		NamesIsLeftHanderTN NameNum get {MgnL ThisNameL sub} {PageWidth MgnR sub ThisNameR sub} ifelse  MgnB ThisNameB sub  moveto
+		NamesTastingNotes NameNum get IsLeftHander {MgnL ThisNameL sub} {PageWidth MgnR sub ThisNameR sub} ifelse  MgnB ThisNameB sub  moveto
 		/ThisName load ShowRecursive
 
 		usertime usertimeStartLocal sub 1000 gt
@@ -13246,7 +13183,7 @@ currentdict /GlyphShowKnownAbsences undef
 					{GSave 1 scale ShowRecursive GRestore}
 					{pop ShowRecursive}
 				ifelse  % Folding string too long
-				WaterBoxes dup /Glasses eq exch /Both eq or {NamesIsLeftHanderPN PlaceNameSetNum get NameNum get} {//false} ifelse
+				WaterBoxes dup /Glasses eq exch /Both eq or {NamesPlaceNames PlaceNameSetNum get NameNum get IsLeftHander} {//false} ifelse
 				{
 					[(  ) /bullet dup dup ( Believed left-handed. To prevent elbow-clash lefties should be stacked from the clockwise end of a table edge. ) 1 index dup dup]
 					dup StringWidthRecursive dup  PageWidth MgnL MgnR add sub 2 div  exch div dup  1 lt
@@ -13459,10 +13396,10 @@ currentdict /GlyphShowKnownAbsences undef
 										//true DefStoreMgns
 										/ShowHeadersAndFooters //true store
 										matrix currentmatrix
-										NamesIsLeftHander NameNum get
+										Names NameNum get IsLeftHander
 										{
 											1 SideBySideGlassesTastingNotesProportionPageGlasses sub PageWidth mul  SideBySideGlassesTastingNotesWidthGutter 2 div add  MgnL sub   0  translate
-										} if  % NamesIsLeftHander ...
+										} if  % IsLeftHander
 										//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 										GlassesPageInnerLoop
 										//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
@@ -13475,10 +13412,10 @@ currentdict /GlyphShowKnownAbsences undef
 										//true DefStoreMgns
 										/ShowHeadersAndFooters //false store
 										matrix currentmatrix
-										NamesIsLeftHander NameNum get
+										NamesTastingNotes NameNum get IsLeftHander
 										{
 											MarginL MgnL sub  0  translate
-										} if  % NamesIsLeftHander ...
+										} if  % IsLeftHander
 										//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
 										TastingNotesInnerLoop
 										//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
@@ -15053,7 +14990,7 @@ currentdict /GlyphShowKnownAbsences undef
 	{
 		1 index mark ne {(; )} if
 		(and also ) ShownGlassesCircles
-		/GlassesNumCopies load type /integertype eq {dup 0 SheetNumGlasses {add} forall Names length mul GlassesNumCopies mul eq    NumSheets 1 ge  and
+		/GlassesNumCopies load type /integertype eq /Names load xcheck not and {dup 0 SheetNumGlasses {add} forall Names length mul GlassesNumCopies mul eq    NumSheets 1 ge  and
 		{
 			(=) Names length (*)  //true 1 1 NumSheets 1 sub {dup 1 sub SheetNumGlasses exch get exch SheetNumGlasses exch get eq and} for  {NumSheets (*) SheetNumGlasses 0 get}  {(\() SheetNumGlasses {(+)} forall pop (\))}  ifelse
 			GlassesNumCopies dup 1 gt {(*) exch} {pop} ifelse
@@ -15642,10 +15579,14 @@ currentdict /GlyphShowKnownAbsences undef
 				mark
 					/Action /GoTo /Dest GlassesCircleDestName
 					/Color [0 0 0]  /F 0  /Count  FirstGlasses length 1 add neg  % 1 add because of links to bug report
-					/Title  mark (Zooms of ) /GlassesNumCopies load type /integertype eq Names length 0 gt and {0 SheetNumGlasses {add} forall Names length mul GlassesNumCopies mul ShownGlassesCircles eq
+					/Title  mark (Zooms of ) /GlassesNumCopies load type /integertype eq
+					/Names load xcheck {//false} {Names length 0 gt} ifelse  and
 					{
-						ShownGlassesCircles (=) Names length (\327)  0 SheetNumGlasses {add} forall  GlassesNumCopies dup 1 gt {(\327) exch} {pop} ifelse ( )
-					} if} if  (glass circles) ConcatenateToMark
+						0 SheetNumGlasses {add} forall  Names length mul  GlassesNumCopies mul  ShownGlassesCircles eq
+						{
+							ShownGlassesCircles (=) Names length (\327)  0 SheetNumGlasses {add} forall  GlassesNumCopies dup 1 gt {(\327) exch} {pop} ifelse ( )
+						} if  % Multiplies correctly
+					} if  (glass circles) ConcatenateToMark
 				/OUT pdfmark
 			} if  % First circle. Code must be here because GlassesCircleDestName needed.
 			mark
