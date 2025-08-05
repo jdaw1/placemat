@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:00 Tuesday 5th August 2025
+% This version 22:20 Tuesday 5th August 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202508052200) def
+/ParametersVersionDateTimeAdobeFormat (D:202508052220) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -820,7 +820,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202508052200) def
+/SoftwareVersionDateTimeAdobeFormat (D:202508052220) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -858,6 +858,8 @@ RandomisationSeed srand
 /PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
 /PrinterEpsilonSquared PrinterEpsilon dup mul def
 /AsciiTab (\t) 0 get def   /AsciiNewline (\n) 0 get def   /AsciiSpace ( ) 0 get def
+
+/usertimePostPrev usertime 3600000 sub def  % One hour ago
 
 /DeSizeRounding 64 def  % 1000 just too big. 250 seems OK. This small for safety, and it's good enough for task.
 
@@ -12983,11 +12985,12 @@ currentdict /GlyphShowKnownAbsences undef
 		} for  % WithinPage, WithinTitles
 		currentdict /WithinPage undef
 		currentdict /WithinTitles undef
-		usertime usertimeStartLocal sub 1000 gt
+		usertime dup dup usertimeStartLocal sub 1000 gt exch usertimePostPrev sub 10000 gt  and
 		{
+			/usertimePostPrev exch store
 			mark ( GlassesPageInnerLoop, TitleAboveBelowOverForms: NameNum=) NameNum (; SheetNum=) SheetNum
 			(; execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
-		} if  % usertime usertimeStartLocal sub 1000 gt
+		} {pop} ifelse  % usertime ...
 
 		% Names
 		SideBySideGlassesTastingNotes not
@@ -13134,11 +13137,12 @@ currentdict /GlyphShowKnownAbsences undef
 		NamesTastingNotes NameNum get IsLeftHander {MgnL ThisNameL sub} {PageWidth MgnR sub ThisNameR sub} ifelse  MgnB ThisNameB sub  moveto
 		/ThisName load ShowRecursive
 
-		usertime usertimeStartLocal sub 1000 gt
+		usertime dup dup usertimeStartLocal sub 1000 gt exch usertimePostPrev sub 10000 gt  and
 		{
+			/usertimePostPrev exch store
 			mark ( TastingNotesInnerLoop, TastingNoteForms: NameNum= ) NameNum (; name=") ThisNameASCII ("; TNSheetNum=) TNSheetNum
 			(; execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
-		} if  % usertime usertimeStartLocal sub 1000 gt
+		} {pop} ifelse  % usertime ...
 
 		end
 		//DeBugLevel 100 le {(-TastingNotesInnerLoop) OutputToLog} if
@@ -13243,11 +13247,12 @@ currentdict /GlyphShowKnownAbsences undef
 			HeadersAndFooters PaintHeadersFooters
 		} if  % ShowHeadersAndFooters
 
-		usertime usertimeStartLocal sub 1000 gt
+		usertime dup dup usertimeStartLocal sub 1000 gt exch usertimePostPrev sub 10000 gt  and
 		{
+			/usertimePostPrev exch store
 			mark ( PrePourInnerLoop, PrePourForms: SheetNum=) SheetNum (; WithinPage=) WithinPage (; WithinTitles=) WithinTitles
 			(; title~=") Titles WithinTitles get ASCIIfy ("; execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
-		} if  % usertime usertimeStartLocal sub 1000 gt
+		} {pop} ifelse  % usertime ...
 		//DeBugLevel 100 le {(-PrePourInnerLoop) OutputToLog} if
 	} bind def  % /PrePourInnerLoop
 
@@ -13512,11 +13517,12 @@ currentdict /GlyphShowKnownAbsences undef
 							PlaceNamesInnerLoop
 							//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 							setmatrix   ShowPage
-							usertime usertimeStartLocal sub 1000 gt
+							usertime dup dup usertimeStartLocal sub 1000 gt exch usertimePostPrev sub 10000 gt  and
 							{
+								/usertimePostPrev exch store
 								mark ( Main: -PlaceName: NameNum=) NameNum (; PlaceNameSetNum=) PlaceNameSetNum
 								(; execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
-							} if  % usertime usertimeStartLocal sub 1000 gt
+							} {pop} ifelse  % usertime ...
 						} if  % ... ThisPaperType ... ThisPageOrdering ... and
 					} if  % NameNum  NamesPlaceNames PlaceNameSetNum GetEU length  lt
 				} for  % /PlaceNameSetNum
