@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:15 Wednesday 6th August 2025
+% This version 21:45 Wednesday 6th August 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202508062115) def
+/ParametersVersionDateTimeAdobeFormat (D:202508062145) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -820,7 +820,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202508062115) def
+/SoftwareVersionDateTimeAdobeFormat (D:202508062145) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -14543,7 +14543,6 @@ currentdict /GlyphShowKnownAbsences undef
 				/StickyLabelsTypeThis exch def
 				{StickyLabelsNumCopies 1 ge} MightBeTrue  {//false PageOrderingStickyLabels {execU ThisPageOrdering eq {pop //true exit} if} forall} {//false} ifelse
 				{
-					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+StickyLabels: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 					/TypeOfPagesBeingRendered /StickyLabels store
 
 					//false //false //false //false StickyLabelsPaperType /Portrait SetPaperSize   //true DefStoreMgns
@@ -14923,7 +14922,13 @@ currentdict /GlyphShowKnownAbsences undef
 					} for  % NameNum, or not loop
 					StickyLabelsNumPaintedOnCurrentPage 0 gt {AnnotatePDF ShowPage  /StickyLabelsNumPaintedOnCurrentPage 0 def} if
 					setmatrix
-					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (-StickyLabels: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
+
+					usertime dup usertimePostPrev sub 10000 gt {//DeBugLevel 100 le  AnyFillTextingAtAll  or} {//false} ifelse
+					{
+						/usertimePostPrev exch store
+						mark (StickyLabels: execution time)
+						usertimePostPrev usertimeStart sub TimeIntervalString  ConcatenateToMark OutputToLog
+					} {pop} ifelse
 				} if  % ... StickyLabelsNumCopies 1 ge ...
 				end
 			} forall  % StickyLabelsTypeThis drawn from StickyLabelsTypes
