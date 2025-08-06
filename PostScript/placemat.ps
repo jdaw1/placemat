@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:20 Tuesday 5th August 2025
+% This version 21:15 Wednesday 6th August 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202508052220) def
+/ParametersVersionDateTimeAdobeFormat (D:202508062115) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -820,7 +820,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202508052220) def
+/SoftwareVersionDateTimeAdobeFormat (D:202508062115) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -14229,7 +14229,6 @@ currentdict /GlyphShowKnownAbsences undef
 					PrePourCollate {/PrePourSheetNum 0 def} if
 					{
 						/Finished //true def
-						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: +PrePour: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 						PrePourSheetNumWithinPageWithinTitles
 						{
 							aload pop /WithinTitles exch def  /WithinPage exch def  /SheetNum exch def
@@ -14248,7 +14247,13 @@ currentdict /GlyphShowKnownAbsences undef
 								setmatrix   ShowPage
 							} for  % PrePourSheetNum, if not collating
 						} forall  % PrePourSheetNumWithinPageWithinTitles
-						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: -PrePour: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
+
+						usertime dup usertimePostPrev sub 10000 gt {//DeBugLevel 100 le  AnyFillTextingAtAll  or} {//false} ifelse
+						{
+							/usertimePostPrev exch store
+							mark (PrePour, PrePourSheetNum=) PrePourSheetNum (, WithinTitles=) WithinTitles (; execution time)
+							usertimePostPrev usertimeStart sub TimeIntervalString  ConcatenateToMark OutputToLog
+						} {pop} ifelse
 						Finished  PrePourCollate not  or {exit} if
 						/PrePourSheetNum PrePourSheetNum 1 add def
 					} loop  % PrePourSheetNum, if collating
@@ -14288,7 +14293,6 @@ currentdict /GlyphShowKnownAbsences undef
 					BottleWrapCollate {/BottleWrapSheetNum 0 def} if
 					{
 						/Finished //true def
-						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: +BottleWrap: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 						BottleWrapSheetNumWithinPageWithinTitles
 						{
 							aload pop /WithinTitles exch def  /WithinPage exch def  /SheetNum exch def
@@ -14307,7 +14311,12 @@ currentdict /GlyphShowKnownAbsences undef
 								setmatrix   ShowPage
 							} for  % BottleWrapSheetNum, if not collating
 						} forall  % BottleWrapSheetNumWithinPageWithinTitles
-						AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: -BottleWrap: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
+						usertime dup usertimePostPrev sub 10000 gt {//DeBugLevel 100 le  AnyFillTextingAtAll  or} {//false} ifelse
+						{
+							/usertimePostPrev exch store
+							mark (BottleWrap, SheetNum=) SheetNum (, WithinTitles=) WithinTitles (; execution time)
+							usertimePostPrev usertimeStart sub TimeIntervalString  ConcatenateToMark OutputToLog
+						} {pop} ifelse
 						Finished  BottleWrapCollate not  or {exit} if
 						/BottleWrapSheetNum BottleWrapSheetNum 1 add def
 					} loop  % BottleWrapSheetNum, if collating
