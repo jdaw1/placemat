@@ -1,7 +1,7 @@
 %!PS
 
-% This version 18:00 Saturday 4th February 2023
-% Copyright 2021-2023 Julian D. A. Wiseman of www.jdawiseman.com.
+% This version 21:30 Saturday 9th August 2025
+% Copyright 2021-2025 Julian D. A. Wiseman of www.jdawiseman.com.
 
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
@@ -24,20 +24,30 @@ true  % true => A4; false => US Letter
 
 
 
-	{/PageWidth 595.27559 def   /PageHeight 841.88976 def}  % A4 = 210mm by 297mm
+	{/PageWidth 595.27559 def   /PageHeight 841.88976 def}  % A4 = 210mm by 297mm; 127mm = 360pt.
 	{/PageWidth 612       def   /PageHeight 792       def}  % US Letter = 8.5" by 11"
 ifelse  % Page size: A4 or US Letter?
 
 /FontName exch def
-
-/Margin 36 def   /ColumnsNum 3 def
-/FontSize 12 def   /TabSize FontSize 1.5 mul def   /LineStep FontSize 1.5 mul def
 () = FontName == () =
+
+/FontSize 11 def
+/Margin 30 def
+/ColumnsNum 3 def
+
+/TabSize  FontSize 1.5 mul def
+/LineStep FontSize 1.4 mul def
+
 
 
 /usertimeStart usertime def
 /DeBugLevel 65535 def
+/DeSizeRounding 64 def  % 1000 just too big. 250 seems OK. This small for safety, and it's good enough for task.
+/IntegerMax      2147483647 def  % 2^31 - 1, PLRM3, Appendix B, table B.1, p739, row 1
+/Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, and experimentally 839 times the single-precision minimum increment over 1.
+/OneThird 1 3 div def   /Cbrt {dup dup 0 lt {neg //OneThird exp neg} {//OneThird exp} ifelse  dup abs 1290 le {dup cvi dup dup mul mul 3 -1 roll eq {cvi} if} {exch pop} ifelse} bind def  % 1290^3 < IntegerMax < 1291^3
 
+/OutputToLog {dup type /stringtype eq {=} {==} ifelse flush} bind def
 
 /SuppressANN   % http://groups.google.com/g/comp.lang.postscript/c/8V9XFDwuLPg
 /currentdistillerparams where
@@ -54,6 +64,167 @@ ifelse  % Page size: A4 or US Letter?
 	ifelse  % Use testing routine
 } {/globaldict where {pop globaldict} {userdict} ifelse  /pdfmark /cleartomark load put} ifelse  % /pdfmark where
 
+/Stopped {countdictstack exch /StoppedStackMarker exch stopped
+	{{/StoppedStackMarker eq {exit} if} loop  countdictstack sub neg {end} repeat  //true}
+	{count 1 sub 0 exch 1 exch {dup 1 add index /StoppedStackMarker eq {exit} {pop} ifelse} for  2 add -2 roll pop pop  //false}
+ifelse} bind def  % /Stopped
+
+% string string  Concatenate  string
+/Concatenate
+{
+	2 copy length exch length dup 3 1 roll add
+	dup 65535 le
+		{string dup dup 5 3 roll exch putinterval 3 -1 roll 0 exch putinterval}
+		{pop exch pop dup 65532 le {dup 3 add string dup dup 4 -1 roll (...) putinterval 0 4 -1 roll putinterval} {pop} ifelse}
+	ifelse
+} bind def  % /Concatenate
+
+% Immediate dependencies: ToString.
+% mark string|number|other ... string|number|other  ConcatenateToMark  string
+/ConcatenateToMark
+{
+	4 dict begin
+	counttomark /ctm exch def  /n 0 def
+	ctm {ToString  dup length n add /n exch def  ctm 1 roll} repeat
+	/p 0 def  /s n 65535 2 copy gt {exch} if pop string def
+	ctm  -1  0
+	{
+		dup 0 gt
+		{
+			-1 roll   dup length p add  65532 le
+				{s exch p exch dup length p add /p exch def putinterval}
+				{s exch p exch 0 65532 p sub getinterval putinterval  s 65532 (...) putinterval  cleartomark  s  exit}
+			ifelse  % too long
+		} {pop pop s} ifelse
+	} for
+	end
+} bind def  % /ConcatenateToMark
+
+% thing DepthOverWhichArraysAndDictsSeparatedWithNewlines ShowStringBrackets ThingToDebugText  -
+/ThingToDebugText {12  ThingToDebugTextRecursive} bind def
+
+% Thing DepthOverWhichArraysAndDictsSeparatedWithNewlines ShowStringBrackets DepthMax ThingToDebugTextRecursive  -
+/ThingToDebugTextRecursive
+{
+	6 dict begin
+	/DepthMax exch def
+	/ShowStringBrackets exch def
+	/DepthLines exch def
+	/Thing exch def
+	/Separator ( ) def   DepthLines 0 gt {Separator 0 12 put} if
+
+	DepthMax 0 ge
+	{
+		1 {
+			/Thing load dup xcheck  exch cvlit type /arraytype eq  and
+			{
+				mark ({ ) /Thing load cvlit {DepthLines ShowStringBrackets DepthMax 1 sub  ThingToDebugTextRecursive} forall (} ) ConcatenateToMark % use same DepthLines
+				exit
+			} if  % xcheck and array
+
+			/Thing load type /operatortype eq
+			{
+				/Thing load cvlit 127 string cvs ( ) Concatenate
+				exit
+			} if  % /operatortype
+
+			/Thing load dup xcheck  exch cvlit type /nametype eq  and
+			{
+				/Thing load cvlit 127 string cvs ( ) Concatenate
+				exit
+			} if  % /operatortype
+
+			/Thing load type /nametype eq
+			{
+				/Thing load 127 string cvs ( ) Concatenate dup 0 1 getinterval (/) ne {(/) exch Concatenate} if
+				exit
+			} if  % /nametype
+
+			/Thing load type /stringtype eq
+			{
+				/Thing load rcheck
+				{
+					mark ShowStringBrackets {(\() /Thing load (\) )} {/Thing load ( )} ifelse ConcatenateToMark exit
+				}
+				{(--string--)} ifelse  % /Thing load rcheck
+			} if  % /stringtype
+
+			/Thing load type dup /arraytype eq exch /packedarraytype eq  or
+			{
+				/Thing load rcheck
+				{
+					mark ([) Separator /Thing load {DepthLines 0 gt {DepthLines 1 sub} {0} ifelse ShowStringBrackets DepthMax 1 sub  ThingToDebugTextRecursive  DepthLines 0 gt {Separator} if} forall (]) Separator ConcatenateToMark
+				}{
+					/Thing load type /arraytype eq {(--array--)} {(--packedarray--)} ifelse
+				} ifelse  % /Thing load rcheck
+				exit
+			} if  % /arraytype /packedarraytype
+
+			/Thing load type /dicttype eq
+			{
+				/Thing load rcheck
+				{
+					mark (<) Separator /Thing load {pop DepthLines 0 gt {DepthLines 1 sub} {0} ifelse ShowStringBrackets DepthMax 1 sub  ThingToDebugTextRecursive DepthLines 0 gt {Separator} if} forall (>) Separator ConcatenateToMark
+				}
+				{(--dict-- )} ifelse  % /Thing load rcheck
+				exit
+			} if  % /dicttype
+
+			/Thing load type /booleantype eq {/Thing load {(true )} {(false )} ifelse exit} if
+
+			/Thing load type dup /integertype eq exch /realtype eq  or
+			{
+				/Thing load 16 string cvs ( ) Concatenate
+				exit
+			} if  % /integertype /realtype
+
+			/Thing load type /marktype eq {(mark ) exit} if  % /marktype
+
+			/Thing load type /nulltype eq {(null ) exit} if
+			/Thing load type /filetype eq {(--file-- ) exit} if
+			/Thing load type /fonttype eq {(--font-- ) exit} if
+			/Thing load type /gstatetype eq {(--gstate-- ) exit} if
+			/Thing load type /savetype eq {(--save-- ) exit} if
+
+			% otherwise
+			mark (--) /Thing load type 127 string cvs (-- ) ConcatenateToMark exit
+		} repeat  % 1
+	} {( ... )} ifelse  % DepthMax 0 ge
+	end
+} bind def  % /ThingToDebugTextRecursive
+
+/ToString
+{
+	1 dict begin  dup type cvlit /Type exch def
+	1 {
+		Type /integertype  eq {11 string cvs exit ( ) Concatenate} if
+		Type /realtype     eq {16 string cvs exit ( ) Concatenate} if
+		Type /nametype     eq {dup length string cvs exit} if
+		Type /stringtype   eq {exit} if
+		Type /booleantype  eq {5 string cvs exit} if
+		Type /operatortype eq {127 string cvs exit} if
+		Type /marktype     eq {pop (mark) exit} if
+		Type /nulltype     eq {pop (null) exit} if
+		0 //true ThingToDebugText  % fall-back
+	} repeat  end
+} bind def  % /ToString
+
+% Immediate dependencies: ConcatenateToMark.
+% num int  FormatDecimalPlaces  string
+/FormatDecimalPlaces
+{
+	3 dict begin
+	/dp exch def
+	/num exch def
+	dp 0 gt
+	{
+		10 dp exp dup num mul round exch div  15 string cvs
+		0 1 dp {/i exch def dup dup length 1 sub i sub 1 getinterval (.) eq {exit} if} for  i dp lt {mark exch dp i sub {(0)} repeat ConcatenateToMark} if
+	}{
+		10 dp neg exp cvi dup num exch div round cvi exch mul  15 string cvs
+	} ifelse  % dp 0 gt
+	end
+} bind def  % FormatDecimalPlaces
 
 /ShellSortGaps
 [
@@ -118,15 +289,542 @@ ifelse  % Page size: A4 or US Letter?
 currentdict /ShellSortGaps undef
 currentdict /ShellSortGapsLength1Subs undef
 
+% Immediate dependencies: DeBugLevel; OutputToLog.
+% [ c0 c1 ... ] LowerLimit UpperLimit Tolerance  PolynomialRoot  root true | false
+/PolynomialRoot
+{
+	//DeBugLevel 5 le {(+PolynomialRoot) OutputToLog} if
+	10 dict begin
+	/Tolerance exch def
+	/UpperX exch def
+	/LowerX exch def
+	/Coeffs exch def
+
+	/Alternation //false def
+	1 {
+		0  Coeffs length 1 sub -1 0 {exch LowerX mul exch Coeffs exch get add} for  /LowerY exch def  LowerY 0 eq {LowerX //true exit} if
+		0  Coeffs length 1 sub -1 0 {exch UpperX mul exch Coeffs exch get add} for  /UpperY exch def  UpperY 0 eq {UpperX //true exit} if
+		LowerY 0 le UpperY 0 ge and  LowerY 0 ge UpperY 0 le and  or  % Multiplication before testing would risk an overflow error
+		{
+			/StepsRemaining 120 def  % ln(0.01/32767)/ln(0.857) ~= 97.2, plus spares is 120. Experimentally, 30 would have been more than enough.
+			{
+				StepsRemaining 0 le {UpperX LowerX sub abs Tolerance le {X //true} {//false} ifelse  exit} if
+				/X  LowerY dup UpperY sub div   Alternation {dup 0.143 lt {pop 0.143} {dup 0.857 gt {pop 0.857} if} ifelse} if   UpperX LowerX sub  mul LowerX add  def  % Constant good enough but approximate. Not known whether one/six seventh(s).
+				/Y 0  Coeffs length 1 sub -1 0 {exch X mul exch Coeffs exch get add} for  def
+				Y 0 eq {X //true exit} if
+				Y 0 gt LowerY 0 gt and  Y 0 lt LowerY 0 lt and  or {/LowerX /LowerY} {/UpperX /UpperY} ifelse Y def X def
+				/StepsRemaining   StepsRemaining 1 sub  def
+				UpperX LowerX sub abs Tolerance le
+					{/Alternation //false def   StepsRemaining 2 gt {/StepsRemaining 2 def} if}
+					{/Alternation Alternation not def}
+				ifelse  % ... Tolerance le
+			} loop  % StepsRemaining
+		} {//false exit} ifelse  % LowerY UpperY different sides of 0
+	} repeat  % 1
+	end
+	//DeBugLevel 5 le {(-PolynomialRoot) OutputToLog} if
+} bind def  % PolynomialRoot
+
+% Immediate dependencies: DeBugLevel; OutputToLog; IntegerMax; Epsilon; OneThird; Cbrt; PolynomialRoot; ShellSort; Stopped.
+% [ c0 c1 ... ] LimitLower StrictLower LimitUpper StrictUpper Tolerance  PolynomialRoots  [ in-range values of x ]
+% For polynomials of degree up to cubic, all roots found analytically, and Tolerance ignored.
+% Of higher degree: to within Tolerance; repeated roots can be problematic; out-of-range errors possible as PostScript's maximum float ~= 1.7 * 10^38.
+/PolynomialRoots
+{
+	//DeBugLevel 5 le {(+PolynomialRoots) OutputToLog} if
+	25 dict begin
+	/Tolerance exch def
+	/StrictUpper exch def  /LimitUpper exch def
+	/StrictLower exch def  /LimitLower exch def
+	/Coeffs exch def
+
+	Coeffs length 1 sub  -1  0 {Coeffs exch get 0 eq {/Coeffs Coeffs dup length 1 sub 0 exch getinterval def} {exit} ifelse} for  % Removes top powers with 0 coefficient.
+	Coeffs length 2 ge
+	{
+		/CoeffsScaled   0 Coeffs {abs 2 copy lt {exch} if pop} forall  dup //IntegerMax gt {/MaxAbs exch def  [ Coeffs {MaxAbs div} forall ] } {pop Coeffs} ifelse   def  % Large coeffs risk overflow: rescale; don't add another machine-precision error to small.
+		0  1  CoeffsScaled length 1 sub {/ExtraZeroes exch def  CoeffsScaled ExtraZeroes get 0 ne {exit} if} for  ExtraZeroes 0 gt {/CoeffsScaled CoeffsScaled ExtraZeroes CoeffsScaled length ExtraZeroes sub getinterval def} if  % Counts and remove roots of 0.
+
+		1 {
+			//true  1  2  CoeffsScaled length 1 sub {CoeffsScaled exch get 0 ne {pop //false exit} if} for  % Odd coefficients all zero?
+			{
+				[
+					[ 0  2  CoeffsScaled length 1 sub {CoeffsScaled exch get} for ]
+					LimitLower dup mul LimitUpper dup mul 2 copy gt {exch} if  LimitLower LimitUpper mul 0 le {exch pop 0 exch} if  //false exch //false  % Not strict as later sqrt will introduce machine-precision error. Filtered later.
+					Tolerance 16 div   PolynomialRoots  {sqrt dup neg} forall  % Tolerance not correct here because roots are squares.
+				] exit
+			} if  % Odd coefficients all zero?
+
+			CoeffsScaled length 4 gt
+			{
+				/DerivCoeffs [1 1 CoeffsScaled length 1 sub {dup CoeffsScaled exch get mul} for] def
+				/DerivRoots  DerivCoeffs LimitLower //true LimitUpper //true Tolerance  PolynomialRoots  dup {le} ShellSort  def  % Strict because test bounds anyway.
+				[
+					-1  1  DerivRoots length 1 sub
+					{
+						/i exch def
+						/ThisLower i 0                       ge {DerivRoots i       get} {LimitLower} ifelse def
+						/ThisUpper i DerivRoots length 2 sub le {DerivRoots i 1 add get} {LimitUpper} ifelse def
+						CoeffsScaled ThisLower ThisUpper Tolerance PolynomialRoot
+						i 0 ge  and {dup ThisLower le {pop} if} if
+					} for  % i
+				] exit
+			} if  % CoeffsScaled length 4 gt
+
+			% Otherwise cubic or shorter
+			[
+				/c0 CoeffsScaled length 0 gt {CoeffsScaled 0 get} {0} ifelse def
+				/c1 CoeffsScaled length 1 gt {CoeffsScaled 1 get} {0} ifelse def
+				/c2 CoeffsScaled length 2 gt {CoeffsScaled 2 get} {0} ifelse def
+				/c3 CoeffsScaled length 3 gt {CoeffsScaled 3 get} {0} ifelse def
+				c3 abs 1e15 lt dup {pop c0 abs c1 abs c2 abs 2 {2 copy lt {exch} if pop} repeat  c3 abs 1e15 mul  gt} if  % c3 ~= 0?
+				{
+					% So c3 is 0 or almost 0.
+					c2 0 eq
+					{
+						c1 0 ne {c0 c1 div neg} if
+					}{
+						/determ c1 c1 mul c2 c0 mul 4 mul sub def
+						determ 0 ge
+						{
+							c1 -2 c2 mul div  determ sqrt 2 c2 mul div   2 copy add 3 1 roll sub
+						}{
+							% Single-precision limitations can make determ appear to be negative. So check for roots near '-b/2a'. We know 'a' non-zero.
+							[ c0 c1 c2 ]  c1 -2 div c2 div  dup  c1 dup mul c2 c0 mul abs 4 mul add //Epsilon mul 2 mul sqrt   4 copy
+							sub exch  0  PolynomialRoot {5 1 roll} if
+							add       0  PolynomialRoot pop
+						} ifelse  % determ 0 ge
+					} ifelse  % c2 0 eq
+				}{
+					% So c3 is materially non-zero.
+					/f c1 c3 div  c2 c3 div dup mul 3 div  sub def
+					/g c2 c3 div dup dup mul mul 2 mul  9 c1 c3 div mul c2 c3 div mul  sub 27 div  c0 c3 div add def
+					/h g g mul 4 div  f f f mul mul 27 div  add def
+
+					h 0 ge
+					{
+						f 0 eq  g 0 eq  and
+						{
+							c0 c3 div  Cbrt neg dup dup
+						}{
+							g -2 div  h sqrt  2 copy
+							add Cbrt  3 1 roll   sub Cbrt  add
+							c2 c3 3 mul div sub
+						} ifelse % f 0 eq  g 0 eq  h 0 eq  and and
+					}{
+						/i f -3 div dup sqrt mul def
+						/j i //OneThird exp  def
+						/k  g  i i mul 4 mul g g mul sub sqrt  atan  90 add def
+						/m  k 3 div cos  def
+						/n  1 m m mul sub 3 mul sqrt def
+						j m mul 2 mul  c2 c3 3 mul div  sub
+						m n add j mul neg  c2 c3 3 mul div  sub
+						m n sub j mul neg  c2 c3 3 mul div  sub
+					} ifelse  % h 0 ge
+				} ifelse  % c3 is within a machine precision of zero
+			] exit
+		} repeat  % 1
+
+		[  % Polish with at most a dozen steps of Newton Raphson, then check limits. For precision polish with Coeffs, not CoeffsScaled.
+			exch
+			{
+				/X exch def
+				/Y 0  Coeffs length 1 sub -1 0 {exch X mul exch Coeffs exch get add} for  def
+				Y 0 ne {12} {0} ifelse
+				{
+					/Deriv 0  Coeffs length 1 sub -1 1 {dup 3 -1 roll X mul 3 1 roll Coeffs exch get mul add} for  def
+					Deriv abs 0 gt
+					{
+						/NewX X Y Deriv div sub def   NewX X eq {exit} if
+						/NewY 0  Coeffs length 1 sub -1 0 {exch NewX mul exch Coeffs exch get add} for  def  NewY 0 eq {/X NewX def exit} if
+						NewY abs Y abs lt {/X NewX store /Y NewY store} {exit} ifelse
+					} {exit} ifelse  % Deriv abs 0 gt
+				} repeat
+
+				X LimitUpper StrictUpper {lt} {le} ifelse  X LimitLower StrictLower {gt} {ge} ifelse  and {X} if
+			} forall
+			LimitLower 0 StrictLower {lt} {le} ifelse LimitUpper 0 StrictUpper {gt} {ge} ifelse and {ExtraZeroes {0} repeat} if
+		]
+	} {[]} ifelse  % Coeffs length 1 ge
+	end
+	//DeBugLevel 5 le {(-PolynomialRoots) OutputToLog} if
+} bind def  % /PolynomialRoots
+
+% http://groups.google.com/g/comp.lang.postscript/c/DWky6YmjQQI  "countgraphicsstack", 17 Nov 2006
+/NullDevices where {pop} {/NullDevices 31 array def  NullDevices 0 0 put} ifelse  % 5 would be enough. Done here to allow immediate execution.
+/CountGraphicsStack where {pop} {
+	/CountGraphicsStack 0 def
+	/GSave {/CountGraphicsStack CountGraphicsStack 1 add store  //NullDevices CountGraphicsStack 2 copy 1 sub get put  gsave} bind def
+	/GRestore
+	{
+		CountGraphicsStack 0 le {(Error: number of calls of GRestore exceeds those of GSave.) dup = OutputToLog stop} if  % So low-level that OutputToLog might fail. Hence also =ing.
+		/CountGraphicsStack  CountGraphicsStack 1 sub  store    grestore
+	} bind def  % /GRestore
+	/NullDevice {//NullDevices CountGraphicsStack 2 copy get 1 add put  nulldevice} bind def
+} ifelse  % /CountGraphicsStack where
+/CountClipStack where {pop} {
+	/CountClipStack 0 def
+	/ClipSave {/CountClipStack CountClipStack 1 add store  clipsave} bind def
+	/ClipRestore
+	{
+		CountClipStack 0 le {(Error: number of calls of ClipRestore exceeds those of ClipSave.) dup = OutputToLog stop} if  % So low-level that OutputToLog might fail. Hence also =ing.
+		/CountClipStack  CountClipStack 1 sub  store    cliprestore
+	} bind def  % /ClipRestore
+} ifelse  % /CountClipStack where
+
+% A valid first parameter is a glyph name, a string, or an array of valid parameters.
+% CharPathRecMoveto computes the path, moving the currentpoint as if after a show.
+/CharPathRecMoveto
+{
+	//DeBugLevel 10 le {(+CharPathRecMoveto) OutputToLog} if
+	2 dict begin
+	/bln exch def
+	/param exch def
+	1 {
+		/param load xcheck {[/param load ExecUExceptNotBindedPainting] bln CharPathRecMoveto exit} if
+		param type dup /integertype eq exch /realtype eq or {/param param ToString store} if  % no 'exit'.
+		param type /stringtype eq {currentpoint exch param stringwidth pop add exch  param bln charpath  moveto exit} if
+		param type /nametype eq {param bln GlyphPathMoveto exit} if
+		param type /arraytype eq {param {bln CharPathRecMoveto} forall exit} if
+		mark (Error: CharPathRecMoveto parameter ) /param load 0 //true ThingToDebugText  ( is of type ) /param load type  ( rather than executable, string, name, number or array.)  ConcatenateToMark OutputToLog stop
+	} repeat
+	end
+	//DeBugLevel 10 le {(-CharPathRecMoveto) OutputToLog} if
+} bind def  % /CharPathRecMoveto
+
+% http://groups.google.com/g/comp.lang.postscript/c/hZmiLPonDl8  "Possible bug in Mac Distiller's charpath", 16 Feb 2008
+/CharPathRecursiveMoveto
+{
+	//DeBugLevel 10 le {(+CharPathRecursiveMoveto) OutputToLog} if
+	1 index  XcheckRecursive  3 1 roll
+	CharPathRecMoveto
+	{DeFontPath} if
+	//DeBugLevel 10 le {(-CharPathRecursiveMoveto) OutputToLog} if
+} bind def  % /CharPathRecursiveMoveto
+
+% A valid first parameter is a glyph name, a string, or an array of valid parameters.
+% CharPathRec computes the path, destroying the currentpoint.
+/CharPathRec
+{
+	//DeBugLevel 9 le {(+CharPathRec) OutputToLog} if
+	9 dict begin
+	/bln exch def
+	/param exch def
+	1 {
+		/param load xcheck {[/param load ExecUExceptNotBindedPainting] bln CharPathRec exit} if
+		param type dup /integertype eq exch /realtype eq or {/param param ToString store} if  % no 'exit'.
+		param type /stringtype eq {param bln charpath exit} if
+		param type /nametype eq {param bln GlyphPath exit} if
+		param type /arraytype eq {param length 0 gt {0 1 param length 2 sub {param exch get bln CharPathRecMoveto} for  param  dup length 1 sub  get   bln CharPathRec} if exit} if
+		mark  (Error: CharPathRec parameter )  /param load 0 //true ThingToDebugText  ( is of type ) /param load type  ( rather than executable, string, name, number, or array.) ConcatenateToMark OutputToLog stop
+	} repeat
+	end
+	//DeBugLevel 9 le {(-CharPathRec) OutputToLog} if
+} bind def  % /CharPathRec
+
+% http://groups.google.com/g/comp.lang.postscript/c/hZmiLPonDl8  "Possible bug in Mac Distiller's charpath?", 16 Feb 2008
+/CharPathRecursive
+{
+	//DeBugLevel 10 le {(+CharPathRecursive) OutputToLog} if
+	1 index  XcheckRecursive  3 1 roll
+	CharPathRec
+	{DeFontPath} if
+	//DeBugLevel 10 le {(-CharPathRecursive) OutputToLog} if
+} bind def  % /CharPathRecursive
+
+% nulldevice causes some bad rounding: http://groups.google.com/g/comp.lang.postscript/c/7RQ2cQy_k-Y  "nulldevice & charpath: rounding and other oddities", 15 Feb 2007
+/ExecUExceptNotBindedPainting  % executes the one parameter, without painting
+{
+	//DeBugLevel 5 le {(+ExecUExceptNotBindedPainting) OutputToLog} if
+	<<
+		/fill {}  /eofill 1 index  /stroke 1 index
+		/ufill /uappend load  /ueofill 1 index
+		/rectfill {newpath 4 2 roll moveto exch dup 0 rlineto exch 0 exch rlineto neg 0 rlineto currentpoint closepath moveto} bind  % per PLRM3 p642
+		/rectstroke [2 index aload pop /strokepath load] cvx
+		/shfill {pop GSave clippath //false upath GRestore uappend} bind
+	>> begin execU end
+	//DeBugLevel 5 le {(-ExecUExceptNotBindedPainting) OutputToLog} if
+} bind def  % /ExecUExceptNotBindedPainting
+
+% (compound string)  StringPathBBox  llx lly urx ury
+/StringPathBBox
+{
+	//DeBugLevel 10 le {(+StringPathBBox) OutputToLog} if
+	GSave //DeSizeRounding dup scale newpath 0 0 moveto  //true CharPathRecursive PathBBox GRestore
+	//DeBugLevel 10 le {(-StringPathBBox) OutputToLog} if
+} bind def  % /StringPathBBox
+
+% -  BaseHeight  num, being current font's usual height above baseline
+/BaseHeight
+{
+	//DeBugLevel 10 le {(+BaseHeight) OutputToLog} if
+	(AHTfhi1) StringPathBBox  4 1 roll pop pop pop
+	//DeBugLevel 10 le {(-BaseHeight) OutputToLog} if
+} bind def  % /BaseHeight
+
+% (compound string)  StringHeight  num, being top minus bottom for supplied compound string
+/StringHeight
+{
+	//DeBugLevel 10 le {(+StringHeight) OutputToLog} if
+	StringPathBBox  exch pop sub neg exch pop
+	//DeBugLevel 10 le {(-StringHeight) OutputToLog} if
+} bind def  % /StringHeight
+
+% A valid parameter is a glyph name, a string, or an array of valid parameters.
+% Computes the total width.
+/StringWidthRec
+{
+	//DeBugLevel 9 le {(+StringWidthRec) OutputToLog} if
+	1 {
+		dup xcheck {currentpoint pop exch [exch ExecUExceptNotBindedPainting] StringWidthRec exch currentpoint pop exch sub add exit} if
+		dup type dup /integertype eq exch /realtype eq or {ToString} if  % no 'exit'
+		dup type /stringtype eq {stringwidth pop exit}  if
+		dup type /nametype eq {matrix currentmatrix GSave newpath setmatrix 0 0 moveto //true GlyphPath currentpoint GRestore pop exit} if  % http://groups.google.com/g/comp.lang.postscript/c/gQppSBL-x74  "glyph widths", 21 July 1998
+		dup type /arraytype eq {0 exch {StringWidthRec add} forall exit} if
+		mark exch dup (Error: StringWidthRec parameter ) counttomark -1 roll 0 //true ThingToDebugText ( is of type ) counttomark -1 roll type ToString ( rather than executable, string, name or array.) ConcatenateToMark OutputToLog stop
+	} repeat
+	//DeBugLevel 9 le {(-StringWidthRec) OutputToLog} if
+} bind def  % /StringWidthRec
+/StringWidthRecursive
+{
+	//DeBugLevel 10 le {(+StringWidthRecursive) OutputToLog} if
+	GSave newpath 0 0 moveto  %  NullDevice  //DeSizeRounding dup scale
+	StringWidthRec GRestore
+	//DeBugLevel 10 le {(-StringWidthRecursive) OutputToLog} if
+} bind def  % moveto in case no currentpoint
+
+% Immediate dependencies: DeBugLevel; OutputToLog; ConcatenateToMark; ToString; GlyphShow.
+% A valid parameter is a glyph name, a string, some code, or an array of valid parameters.
+% ShowRecursive shows the sequences of entities in the natural manner.
+/ShowRecursive
+{
+	//DeBugLevel 20 le {(+ShowRecursive) OutputToLog} if
+	1 dict begin
+	/param exch def
+	1 {
+		/param load xcheck {[/param load execU] ShowRecursive exit} if  % in case the executable puts something on the stack
+		param type dup /integertype eq exch /realtype eq or {/param param ToString store} if  % no 'exit'.
+		param type /stringtype eq {param show exit} if
+		param type /nametype eq {param GlyphShow exit} if
+		param type /arraytype eq {param {ShowRecursive} forall exit} if
+		mark  (Error: ShowRecursive parameter ) /param load 0 //true ThingToDebugText  ( is of type ) /param load type  ( rather than executable, string, name or array.)  ConcatenateToMark OutputToLog stop
+	} repeat
+	end
+	//DeBugLevel 20 le {(-ShowRecursive) OutputToLog} if
+} bind def  % /ShowRecursive
+
+% Immediate dependencies: DeBugLevel; OutputToLog; ConcatenateToMark.
+/GlyphShowKnownAbsences << >> def
+/GlyphTestAbsence
+{
+	//DeBugLevel 4 le {(+GlyphTestAbsence) OutputToLog} if
+	currentfont /CharStrings get GlyphNameThis known not
+	{
+		mark currentfont /FontName get (__MissingGlyph__) GlyphNameThis 256 string cvs ConcatenateToMark
+		//GlyphShowKnownAbsences exch 2 copy known {pop pop} {
+			mark (Error: glyph /) GlyphNameThis ( not present in font /) currentfont /FontName get (. Continuing.) ConcatenateToMark OutputToLog
+			0 put
+		} ifelse
+	} if  % ... GlyphNameThis known not
+	//DeBugLevel 4 le {(-GlyphTestAbsence) OutputToLog} if
+} bind def  % /GlyphTestAbsence
+currentdict /GlyphShowKnownAbsences undef
+
+/GlyphShow
+{
+	//DeBugLevel 5 le {(+GlyphShow) OutputToLog} if
+	1 dict begin
+	/GlyphNameThis exch def
+	GlyphTestAbsence
+	GlyphNameThis glyphshow
+	end
+	//DeBugLevel 5 le {(-GlyphShow) OutputToLog} if
+} bind def  % /GlyphShow
+
+% Computes the path of a glyph, with the charpath-style boolean flag, destroying the currentpoint.
+% http://groups.google.com/g/comp.lang.postscript/c/rvAGfbsbLVw  "glyphpath", 26 May 2006
+/GlyphPath
+{
+	//DeBugLevel 10 le {(+GlyphPath) OutputToLog} if
+	2 dict begin
+	/bln exch def
+	/GlyphNameThis exch def
+	GlyphTestAbsence
+	currentfont
+	currentfont length dict begin
+	currentfont {1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding [ 256 {/.notdef} repeat ] def
+	Encoding 97 GlyphNameThis put  % ASCII a = 97
+	currentdict
+	end
+	/TemporaryFont exch definefont pop
+	/TemporaryFont 1 selectfont
+	(a) bln charpath
+	setfont
+	/TemporaryFont undefinefont
+	end
+	//DeBugLevel 10 le {(-GlyphPath) OutputToLog} if
+} bind def  % /GlyphPath
+
+% Computes the path of a glyph, with the charpath-style boolean flag, moving the currentpoint as if after a show.
+/GlyphPathMoveto
+{
+	//DeBugLevel 10 le {(+GlyphPathMoveto) OutputToLog} if
+	2 dict begin
+	/bln exch def
+	/GlyphNameThis exch def
+	GlyphTestAbsence
+	currentfont
+	currentfont length dict begin
+	currentfont {1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding [ 256 {/.notdef} repeat ] def
+	Encoding 97 GlyphNameThis put  % ASCII a = 97
+	currentdict
+	end
+	/TemporaryFont exch definefont pop
+	/TemporaryFont 1 selectfont
+	currentpoint exch (a) stringwidth pop add exch
+	(a) bln charpath % (a) has been redefined
+	moveto
+	setfont
+	/TemporaryFont undefinefont
+	end
+	//DeBugLevel 10 le {(-GlyphPathMoveto) OutputToLog} if
+} bind def  % /GlyphPathMoveto
+
+% Is this, or does this contain, an executable?
+/XcheckRecursive
+{
+	//DeBugLevel 5 le {(+XcheckRecursive) OutputToLog} if
+	dup xcheck
+	{pop //true}
+	{
+		dup type /arraytype eq
+			{//false exch {XcheckRecursive {pop //true exit} if} forall}
+			{pop //false}
+		ifelse  % arraytype
+	} ifelse  % xcheck
+	//DeBugLevel 5 le {(-XcheckRecursive) OutputToLog} if
+} bind def  % XcheckRecursive
+
+% Immediate dependencies: DeBugLevel; OutputToLog; PolynomialRoots; Stopped.
+% -  PathBBox  llx lly urx ury
+% assesses only parts that will show visibly. I.e., proper handling of curves.
+/PathBBox
+{
+	//DeBugLevel 10 le {(+PathBBox) OutputToLog} if
+	22 dict begin
+
+	1 {
+		/MinMaxDefinedX //false def
+		/MinMaxDefinedY //false def
+		/b //false def  % boolean playing two roles
+
+		/SetMinMaxX  % takes one parameter
+		{
+			/z exch def
+			MinMaxDefinedX
+				{MaxX z lt {/MaxX z def} {MinX z gt {/MinX z def} if} ifelse}  % test Max first as charpath typically drawn right-to-left
+				{/MaxX z def    /MinX z def    /MinMaxDefinedX //true def}
+			ifelse
+		} def  % SetMinMaxX
+		/SetMinMaxY  % takes one parameter
+		{
+			/z exch def
+			MinMaxDefinedY
+				{MaxY z lt {/MaxY z def} {MinY z gt {/MinY z def} if} ifelse}
+				{/MaxY z def    /MinY z def    /MinMaxDefinedY //true def}
+			ifelse
+		} def  % SetMinMaxY
+
+		% First rough bounds from a quick run-through, as doing so can save doing needless arithmetic in curve routine.
+		{
+			{ % start move
+				/y0 exch def    /x0 exch def
+				/b //true def
+			}  % end of move
+			{  % start line
+				/y1 exch def    /x1 exch def
+				b {x0 SetMinMaxX  y0 SetMinMaxY  /b //false def} if
+				x1 SetMinMaxX y1 SetMinMaxY
+			}  % end of line
+			{  % start curve
+				/y3 exch def  /x3 exch def  pop pop pop pop
+				b {x0 SetMinMaxX  y0 SetMinMaxY  /b //false def} if
+				x3 SetMinMaxX  y3 SetMinMaxY
+			}  % end of curve
+			{  % start close
+			}  % end of close
+			pathforall
+		} Stopped {(Warning: protected path in PathBBox, position 1) OutputToLog  GSave 0 setflat flattenpath pathbbox GRestore  exit} if
+
+		% Second a slower run-through, not redoing the above, but, where necessary, thinking hard about curves. Different role for b.
+		{
+			{ % start move
+				/y0 exch def    /x0 exch def
+				/b //true def
+			}  % end of move
+			{  % start line
+				/y0 exch def    /x0 exch def
+			}  % end of line
+			{  % start curve
+				/y3 exch def  /x3 exch def    /y2 exch def  /x2 exch def    /y1 exch def  /x1 exch def
+
+				x1 MaxX gt  x1 MinX lt  x2 MaxX gt  x2 MinX lt  or or or
+				{
+					% Cubic: a t^3 + b t^2 + c t + x0
+					/a x0 neg x1 3 mul add x2 3 mul sub x3 add def
+					/b x0 x1 2 mul sub x2 add 3 mul def
+					/c x1 x0 sub 3 mul def
+
+					% Solve first differential for zero
+					[ c  2 b mul  3 a mul ] 0 //true 1 //true //Epsilon PolynomialRoots {dup dup a mul b add mul c add mul x0 add SetMinMaxX} forall
+				} if  % x bounds outside MinX to MaxX
+
+				y1 MaxY gt  y1 MinY lt  y2 MaxY gt  y2 MinY lt  or or or
+				{
+					/a y0 neg y1 3 mul add y2 3 mul sub y3 add def
+					/b y0 y1 2 mul sub y2 add 3 mul def
+					/c y1 y0 sub 3 mul def
+					[ c  2 b mul  3 a mul ] 0 //true 1 //true //Epsilon PolynomialRoots {dup dup a mul b add mul c add mul y0 add SetMinMaxY} forall
+				} if  % y bounds outside MinY to MaxY
+				/y0 y3 def    /x0 x3 def
+			}  % end of curve
+			{  % start close
+			}  % end of close
+			pathforall
+		} Stopped {(Warning: protected path in PathBBox, position 2, which is weird unless a routine such as PolynomialRoots is missing.) OutputToLog  GSave 0 setflat flattenpath pathbbox GRestore  exit} if
+
+		MinMaxDefinedX MinMaxDefinedY and
+		{
+			MinX MinY MaxX MaxY
+		}{
+			b
+			{
+				% No lines, no curves, but some moves
+				{
+					{SetMinMaxY SetMinMaxX} {pop pop} {pop pop pop pop pop pop} {}  % the pop's should be redundant
+					pathforall
+				} Stopped {(Warning: protected path in PathBBox, position 3) OutputToLog  GSave 0 setflat flattenpath pathbbox GRestore  exit} if
+				MinX MinY MaxX MaxY
+			}{
+				% completely empty path
+				emptycurrentpath  % this may well cause execution to cease
+			} ifelse  % b
+		} ifelse  % MinMaxDefinedX MinMaxDefinedY and
+	} repeat  % 1
+
+	end
+	//DeBugLevel 10 le {(-PathBBox) OutputToLog} if
+} bind def  % PathBBox
 
 /AlphaSortDict <<
-	( ) 0  32 0    (0) 1  48 1    (1) 2  49 2    (2) 3  50 3    (3) 4  51 4    (4) 5  52 5    (5) 6  53 6    (6) 7  54 7    (7) 8  55 8    (8) 9  56 9    (9) 10  57 10    (a) 11  97 11    (A) 12  65 12    (b) 13  98 13    (B) 14  66 14
-	(c) 15  99 15    (C) 16  67 16    (d) 17  100 17    (D) 18  68 18    (e) 19  101 19    (E) 20  69 20    (f) 21  102 21    (F) 22  70 22    (g) 23  103 23    (G) 24  71 24    (h) 25  104 25    (H) 26  72 26    (i) 27  105 27    (I) 28  73 28
-	(j) 29  106 29    (J) 30  74 30    (k) 31  107 31    (K) 32  75 32    (l) 33  108 33    (L) 34  76 34    (m) 35  109 35    (M) 36  77 36    (n) 37  110 37    (N) 38  78 38    (o) 39  111 39    (O) 40  79 40
-	(p) 41  112 41    (P) 42  80 42    (q) 43  113 43    (Q) 44  81 44    (r) 45  114 45    (R) 46  82 46    (s) 47  115 47    (S) 48  83 48    (t) 49  116 49    (T) 50  84 50    (u) 51  117 51    (U) 52  85 52    (v) 53  118 53    (V) 54  86 54
-	(w) 55  119 55    (W) 56  87 56    (x) 57  120 57    (X) 58  88 58    (y) 59  121 59    (Y) 60  89 60    (z) 61  122 61    (Z) 62  90 62    (!) 63  33 63    (") 64  34 64    (#) 65  35 65    ($) 66  36 66    (%) 67  37 67    (&) 68  38 68
-	(') 69  39 69    (\() 70  40 70    (\)) 71  41 71    (*) 72  42 72    (+) 73  43 73    (,) 74  44 74    (-) 75  45 75    (.) 76  46 76    (/) 77  47 77    (:) 78  58 78    (;) 79  59 79    (<) 80  60 80    (=) 81  61 81    (>) 82  62 82
-	(?) 83  63 83    (@) 84  64 84    ([) 85  91 85    (\\) 86  92 86    (]) 87  93 87    (^) 88  94 88    (_) 89  95 89    (`) 90  96 90    ({) 91  123 91    (|) 92  124 92    (}) 93  125 93    (~) 94  126 94    127 95
+	( )  0   32  0    (0)   1  48  1    (1)  2    49  2    (2)   3  50  3    (3)  4  51   4    (4)  5  52  5    (5)  6  53  6     (6)  7  54  7    (7)  8   55  8    (8)  9   56  9    (9) 10   57 10    (a) 11   97 11    (A) 12   65 12    (b) 13  98 13    (B) 14  66 14
+	(c) 15   99 15    (C)  16  67 16    (d)  17  100 17    (D)  18  68 18    (e) 19  101 19    (E) 20  69 20    (f) 21  102 21    (F) 22  70 22    (g) 23  103 23    (G) 24   71 24    (h) 25  104 25    (H) 26   72 26    (i) 27  105 27    (I) 28  73 28
+	(j) 29  106 29    (J)  30  74 30    (k)  31  107 31    (K)  32  75 32    (l) 33  108 33    (L) 34  76 34    (m) 35  109 35    (M) 36  77 36    (n) 37  110 37    (N) 38   78 38    (o) 39  111 39    (O) 40   79 40
+	(p) 41  112 41    (P)  42  80 42    (q)  43  113 43    (Q)  44  81 44    (r) 45  114 45    (R) 46  82 46    (s) 47  115 47    (S) 48  83 48    (t) 49  116 49    (T) 50   84 50    (u) 51  117 51    (U) 52   85 52    (v) 53  118 53    (V) 54  86 54
+	(w) 55  119 55    (W)  56  87 56    (x)  57  120 57    (X)  58  88 58    (y) 59  121 59    (Y) 60  89 60    (z) 61  122 61    (Z) 62  90 62    (!) 63   33 63    (") 64   34 64    (#) 65   35 65    ($) 66   36 66    (%) 67   37 67    (&) 68  38 68
+	(') 69   39 69    (\() 70  40 70    (\)) 71   41 71    (*)  72  42 72    (+) 73   43 73    (,) 74  44 74    (-) 75   45 75    (.) 76  46 76    (/) 77   47 77    (:) 78   58 78    (;) 79   59 79    (<) 80   60 80    (=) 81   61 81    (>) 82  62 82
+	(?) 83   63 83    (@)  84  64 84    ([)  85   91 85    (\\) 86  92 86    (]) 87   93 87    (^) 88  94 88    (_) 89   95 89    (`) 90  96 90    ({) 91  123 91    (|) 92  124 92    (}) 93  125 93    (~) 94  126 94    127 95
 >> readonly def  % /AlphaSortDict
 
 /NamesOrdered
@@ -171,33 +869,63 @@ def  % /Fonts
 
 /Yadj 0 def
 0 setgray
-/Y PageHeight Margin sub LineStep 2 mul sub def
-FontName FontSize 3 mul selectfont
-FontName 256 string cvs dup stringwidth pop PageWidth exch sub 2 div Y moveto show
+/TitleFontSize FontSize 4 mul def
+FontName TitleFontSize selectfont
+FontName 256 string cvs  dup
+StringPathBBox  /TitleT exch def  /TitleR exch def  /TitleB exch def  /TitleL exch def
+TitleR TitleL sub  PageWidth Margin 2 mul sub div  dup 1 gt
+{
+	dup dup dup dup  [/TitleFontSize /TitleT /TitleR /TitleB /TitleL] {dup load 3 -1 roll div def} forall
+	FontName TitleFontSize selectfont
+} {pop} ifelse
+PageHeight Margin sub TitleT sub /Y exch def
+PageWidth TitleR TitleL add sub 2 div  Y  moveto  show
+/Y Y TitleB add def
+
 FontName FontSize selectfont
 /Top_D  gsave  0 0 moveto 1024 dup scale (D) true charpath flattenpath pathbbox 4 1 roll pop pop pop  grestore  def
 /Y Y LineStep sub def
-[ Fonts length 10 string cvs  ( characters, shown at ) FontSize 10 string cvs (pt, grey from baseline to top of D) ]
-0  1 index  {stringwidth pop add} forall  PageWidth exch sub 2 div  dup Margin lt {pop Margin} if  Y moveto {show} forall
+[ Fonts length 10 string cvs  ( characters, shown at ) FontSize 10 string cvs (pt. Grey rectangles from baseline to top of ) /quoteleft (D) /quoteright (.)]
+dup StringWidthRecursive  PageWidth exch sub 2 div  dup Margin lt {pop Margin} if  Y moveto  ShowRecursive
 [
-	(THE FIVE BOXING WIZARDS JUMP QUICKLY  !"#$%&'\(\)*+,-./:;<=>?@[\\]^_`{|}~)  % all ASCII characters
-	(the quick brown fox jumps over a lazy dog  0123456789)
-	(S97 K47 D78 Mz96 Ck12 Ni27 Cr45 TSQ47 W55 SW63 G66 D70 F85 T92 RP97 N00 V03 Qv11)
+	[
+		(THE FIVE BOXING WIZARDS JUMP QUICKLY)
+		[(  ) /Atilde /Eacute /Igrave /Ocircumflex /Ccedilla ]
+		(  0123456789)
+		[(  ) /sterling /dollar /Euro /yen]
+		[(  ) /onehalf /threequarters /divide /multiply /minus]
+	]
+	[
+		(the quick brown fox jumps over a lazy dog)
+		[(  ) /atilde /eacute /igrave /ocircumflex /ccedilla ]
+		(  !"#$%&'\(\)*+,-./:;<=>?@[\\]^_`{|}~)  % all of which are ASCII
+		[(  ) /fi /fl]
+		[(  ) /dagger /daggerdbl /section]
+	]
+	[
+		(TH56)  ( S97)  ( Fr15)  ( K47)  ( D78)  ( Mz96)  % 17.., 18..
+		( Ck12)  ( Ni27)  ( Df35)  ( Cr45)  ( TSQ47)  ( W55)  ( O60)  ( SW63)  % Smith Woodhouse 1963 is no longer mythical.
+		( G66)  [( C) /aacute (70)]  ( Ch82)  ( F85)  ( Mg91)  ( T92)  ( RP97)  % 19..
+		( N00)   ( V03)  ( Qv11)  [( P) /ccedilla (17)]  % 20..
+	]  % Do invite the author to this tasting: particularly keen to taste Dow 1878, but also the Kopke 1847.
 	(http://github.com/jdaw1/placemat/blob/main/PostScript/glyph_log.ps)
 	(http://github.com/jdaw1/placemat/blob/main/Documentation/compound_strings_characters.md#readme)
 ]{
 	/Y Y LineStep sub def
-	dup 0 4 getinterval (http) eq
+	dup type /stringtype eq
 	{
 		FontName FontSize 2 div selectfont
 		Xs 0 get Xs 1 get add 2 div  Y Yadj add moveto
 		/Yadj Yadj FontSize 0.7 mul add def
+		show
 	}{
 		0.9 setgray  //Margin  Y  PageWidth Margin 2 mul sub  Top_D  rectfill  0 setgray  % Grey box goes from baseline to top of capital D
-		FontName FontSize selectfont
 		Xs 0 get  Y  moveto
-	} ifelse  % http
-	show
+		{
+			FontName FontSize selectfont
+			dup StringWidthRecursive currentpoint pop add  PageWidth Margin sub le {ShowRecursive} {pop} ifelse
+		} forall
+	} ifelse  % stringtype
 } bind forall
 
 FontName FontSize selectfont

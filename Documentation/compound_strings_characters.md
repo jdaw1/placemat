@@ -80,7 +80,7 @@ The last two rows of the table show the effect of `Kern`ing, code being in curly
 
 Some fonts have thousands of glyphs. 
 Other fonts have fewer: not every glyph is present in every font. 
-E.g.,&nbsp;`/emacron`&nbsp;=&nbsp;&#275; is present in the fonts of the `/TrebuchetMS` family, but not in (my computer&rsquo;s version of) the `/Garamond` family, nor in many other fonts. 
+E.g.,&nbsp;`/emacron`&nbsp;=&nbsp;&#275; is present in the fonts of the `/TrebuchetMS` family, but not in most others. 
 Indeed, `/emacron` is missing from so many fonts that the text on [Croft&rsquo;s website](https://croftport.com/en/products/serikos-vintage/2017/) doesn&rsquo;t use it consistently, even though the &ldquo;&#275;&rdquo; appears on the labels of S&#275;rikos bottles. 
 If a glyph is missing from a font then there should be a warning on the log page, but, anyway, check your output.
 
@@ -268,28 +268,31 @@ So the usual advice applies: carefully check the output.
 Attempts to use a non-existent glyph are logged, but some fonts have the glyph name but not a proper glyph. 
 E.g., several glyphs in Harrington paint as ![Missing glyph in Harrington font](images/Harrington_notdef.png). 
 So, as an assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15, and shows them in a simple PDF. 
-Some examples follow. 
+Some examples follow&mdash;though your version of these fonts might not be the same as my version, so do re-run the [PostScript generator](../PostScript/glyph_log.ps) on your machine. 
 * Sans-serif fonts: 
-    * [`/TrebuchetMS-Bold`](images/TrebuchetMS-Bold.pdf) 
-    * [`/GothamNarrow-Bold`](images/GothamNarrow-Bold.pdf) 
-    * [`/Gotham-Book`](images/Gotham-Book.pdf) 
-    * [`/AvenirNextCondensed-DemiBold`](images/AvenirNextCondensed-DemiBold.pdf) 
-    * [`/DejaVuSans`](images/DejaVuSans.pdf) 
-    * [`/Verdana`](images/Verdana.pdf) 
-    * [`/LucidaSans-Demi`](images/LucidaSans-Demi.pdf) 
-    * [`/Optima-Bold`](images/Optima-Bold.pdf) 
-    * [`/OpenSans-Regular`](images/OpenSans-Regular.pdf) 
-    * [`/FiraSans-Medium`](images/FiraSans-Medium.pdf) 
-    * [`/GillSans-Bold`](images/GillSans-Bold.pdf) 
-    * [`/GillSans-CondensedBold`](images/GillSans-CondensedBold.pdf) 
-    * [`/GillSansMT-ExtCondensedBold`](images/GillSansMT-ExtCondensedBold.pdf) 
+    - [`/TrebuchetMS-Bold`](images/TrebuchetMS-Bold.pdf) 
+    - [`/GothamNarrow-Bold`](images/GothamNarrow-Bold.pdf) 
+    - [`/Gotham-Book`](images/Gotham-Book.pdf) 
+    - [`/AvenirNextCondensed-DemiBold`](images/AvenirNextCondensed-DemiBold.pdf) 
+    - [`/DejaVuSans`](images/DejaVuSans.pdf) 
+    - [`/Verdana`](images/Verdana.pdf) 
+    - [`/Optima-Bold`](images/Optima-Bold.pdf) 
+    - [`/OpenSans-Regular`](images/OpenSans-Regular.pdf) 
+    - [`/FiraSans-Medium`](images/FiraSans-Medium.pdf) 
+    - [`/GillSans-Bold`](images/GillSans-Bold.pdf) 
+    - [`/GillSans-CondensedBold`](images/GillSans-CondensedBold.pdf) 
+    - [`/GillSansMT-ExtCondensedBold`](images/GillSansMT-ExtCondensedBold.pdf) 
+    - [`/HelveticaLTStd-BoldCond`](images/HelveticaLTStd-BoldCond.pdf) 
+    - [`/Asap-Bold`](images/Asap-Bold.pdf) 
+    - [`/Neon80s`](images/Neon80s.pdf) 
 * Serif fonts: 
-    * [`/DejaVuSerif`](images/DejaVuSerif.pdf) 
-    * [`/Garamond`](images/Garamond.pdf) 
-    * [`/TimesNewRomanPSMT`](images/TimesNewRomanPSMT.pdf)
-    * [`/Didot-Bold`](images/Didot-Bold.pdf) 
-    * [`/Cochin`](images/Cochin.pdf) 
-    * [`/Palatino-Roman`](images/Palatino-Roman.pdf) 
-    * [`/RobotoSlab-Regular`](images/RobotoSlab-Regular.pdf) 
+    - [`/DejaVuSerif`](images/DejaVuSerif.pdf) 
+    - [`/TimesNewRomanPSMT`](images/TimesNewRomanPSMT.pdf)
+    - [`/Didot-Bold`](images/Didot-Bold.pdf) 
+    - [`/Cochin`](images/Cochin.pdf) 
+    - [`/Palatino-Roman`](images/Palatino-Roman.pdf) 
+    - [`/RobotoSlab-Regular`](images/RobotoSlab-Regular.pdf) 
+    - [`/CenturySchoolbook`](images/CenturySchoolbook.pdf) 
 * A decorative font: 
-    * [`/Harrington`](images/Harrington.pdf)
+    - [`/Harrington`](images/Harrington.pdf)
+    - [`/DancingScript-Regular`](images/DancingScript-Regular.pdf)
