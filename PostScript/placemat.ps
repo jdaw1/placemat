@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:00 Saturday 9th August 2025
+% This version 17:55 Sunday 10th August 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202508091900) def
+/ParametersVersionDateTimeAdobeFormat (D:202508101755) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -820,7 +820,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202508091900) def
+/SoftwareVersionDateTimeAdobeFormat (D:202508101755) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -7919,7 +7919,7 @@ currentdict /GlyphShowKnownAbsences undef
 	/CirclearraysW [ SheetNumGlasses {array} forall ] def
 	/CirclearraysPaddedW [ SheetNumGlasses {array} forall ] def
 	/CirclearraysBMin [ NumSheets {0} repeat ] def
-	/Circlearrays_ScoresStored 32 array def
+	/Circlearrays_OptimLog 1024 array def  % Should be plenty.
 
 	% NumCopies * WidthUnitFont * FontSize = TwoPi * (CirclearraysBMin * FontSize + Radius)
 	% <==>  NumCopies = TwoPi * (CirclearraysBMin + Radius/FontSize) / WidthUnitFont
@@ -8199,12 +8199,15 @@ currentdict /GlyphShowKnownAbsences undef
 
 	/Circlearrays_ScoreThis  [ SheetNumSets {Circlearrays_PopulateN_ReturnScore} forall ] def
 	/Circlearrays_ScoresBest [ SheetNumSets length {-1} repeat ] def
-	/Circlearrays_NumBest    0 def
 	CirclearraysFontSizes CirclearraysFontSizesBest copy pop
 
 	% Do the work: call the previous
-	/CircletextOptimNum 0 def
-	Circlearrays_ScoresStored CircletextOptimNum dup 2 index length lt {Circlearrays_ScoreThis put} {pop pop} ifelse
+	/CircletextOptimLogNum 0 def
+	Circlearrays_OptimLog CircletextOptimLogNum dup 2 index length lt {(CirclearraysFontSizes optimisation, as FontSize * ProportionBaselineUsed. Initial state:) put} {pop pop} ifelse
+	/CircletextOptimLogNum dup load 1 add store
+	Circlearrays_OptimLog CircletextOptimLogNum dup 2 index length lt {mark Circlearrays_ScoreThis ConcatenateToMark TrimSpaces (.) Concatenate put} {pop pop} ifelse
+	/CircletextOptimLogNum dup load 1 add store
+
 	//false  SheetNumGlasses {1 ge {pop CirclearraysFontSizeOptimise  dup {exit} if} if} forall  % Can CirclearraysFontSizeOptimise vary by SheetNum? Not sure.
 	{
 		//DeBugLevel 40 le {(+CirclearraysFontSizeOptimise) OutputToLog} if
@@ -8214,9 +8217,15 @@ currentdict /GlyphShowKnownAbsences undef
 			/SheetNumSet_Num exch def
 			/SheetNumSet SheetNumSets SheetNumSet_Num get def
 
+			Circlearrays_OptimLog CircletextOptimLogNum dup 2 index length lt
 			{
-				/CircletextOptimNum  CircletextOptimNum 1 add  store
+				mark SheetNumSet_Num 0 gt {(; )} if
+				(SheetNumSet_Num=) SheetNumSet_Num (,) ConcatenateToMark
+				put
+				/CircletextOptimLogNum dup load 1 add store
+			} {pop pop} ifelse
 
+			{
 				Circlearrays_SnugPopulate
 				SheetNumSet  Circlearrays_NextStepSmallerFS
 				{
@@ -8227,12 +8236,15 @@ currentdict /GlyphShowKnownAbsences undef
 
 				/Circlearrays_ScoreThis SheetNumSet Circlearrays_PopulateN_ReturnScore def
 
-				Circlearrays_ScoresStored CircletextOptimNum dup 2 index length lt {Circlearrays_ScoreThis put} {pop pop} ifelse
+				Circlearrays_OptimLog CircletextOptimLogNum dup 2 index length lt
+				{
+					Circlearrays_ScoreThis put
+					/CircletextOptimLogNum  CircletextOptimLogNum 1 add  store
+				} {pop pop} ifelse
 
 				Circlearrays_ScoreThis  Circlearrays_ScoresBest SheetNumSet_Num get  gt
 				{
 					Circlearrays_ScoresBest SheetNumSet_Num Circlearrays_ScoreThis put
-					Circlearrays_NumBest    CircletextOptimNum                     def
 					CirclearraysFontSizes CirclearraysFontSizesBest copy pop
 				} if  % new best
 
@@ -8242,12 +8254,12 @@ currentdict /GlyphShowKnownAbsences undef
 				0   SheetNumSet {SheetNumGlasses exch get add} forall  dup 0 ne {div} {pop} ifelse
 				Circlearrays_ScoresBest SheetNumSet_Num get  le {exit} if
 
-				CircletextOptimNum 16384 ge
+				CircletextOptimLogNum 16384 ge
 				{
 					(Warning: weird failure to complete optimisation of CirclearraysFontSizes. Continuing. Pls post this PS file as an issue.) OutputToLog
 					exit
-				} if  % CircletextOptimNum too big
-			} bind loop  % CircletextOptimNum
+				} if  % CircletextOptimLogNum too big
+			} bind loop  % CircletextOptimLogNum
 		} for  % SheetNumSet_Num, SheetNumSet
 
 		CirclearraysFontSizesBest CirclearraysFontSizes copy pop
@@ -8291,13 +8303,10 @@ currentdict /GlyphShowKnownAbsences undef
 		(CirclearraysFontSizes = ) CirclearraysFontSizes SizeArrayOutput TrimSpaces (.\n)
 		CirclearraysFontSizeOptimise
 		{
-			(Scores progression, as FontSize * ProportionBaselineUsed)
-			Circlearrays_ScoresStored CircletextOptimNum dup 2 index length le {0 exch getinterval ( = )}
-			{pop (, first few = )} ifelse () 3 -1 roll SizeArrayOutput TrimSpaces
-			(; reached ans at step ) Circlearrays_NumBest (, terminated after ) CircletextOptimNum ( trials, )
-			(with ScoresBest = ) Circlearrays_ScoresBest (.\n)
+			mark () Circlearrays_OptimLog 0 CircletextOptimLogNum getinterval {( )} forall ConcatenateToMark TrimSpaces
+			mark exch (. ScoresBest = ) Circlearrays_ScoresBest ConcatenateToMark TrimSpaces (.\n) Concatenate
 		}{
-			(No optimisation: score = ) Circlearrays_ScoresStored Circlearrays_NumBest get (.\n)
+			(No optimisation: score = ) Circlearrays_OptimLog Circlearrays_NumBest get (.\n)
 		} ifelse  % CirclearraysFontSizeOptimise
 
 		(CirclearraysUnroundedN = ) CirclearraysUnroundedN SizeArrayOutput TrimSpaces
