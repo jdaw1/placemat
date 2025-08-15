@@ -474,7 +474,11 @@ Nice to post online can be a GIF animation of all the glass circles.
 [26&nbsp;Mar&nbsp;2024](http://www.jdawiseman.com/2024/20240326_1994s_oc.gif),
 [01&nbsp;July](http://www.jdawiseman.com/2024/20240701_Strawberry_Fields_oc.gif),
 [24&nbsp;Sep](http://www.jdawiseman.com/2024/20240924_Symmetry_oc.gif),
-[08&nbsp;Oct](http://www.jdawiseman.com/2024/20241008_1970s_oc.gif).)
+[08&nbsp;Oct](http://www.jdawiseman.com/2024/20241008_1970s_oc.gif),
+[19&nbsp;Nov](http://www.jdawiseman.com/2024/20241119_PeterboroughPortClub_oc.gif), 
+[10&nbsp;Feb&nbsp;2025](http://www.jdawiseman.com/2025/20250210_2000s_oc.gif), 
+[27&nbsp;May](http://www.jdawiseman.com/2025/20250527_1985s_oc.gif), 
+[02&ndash;03&nbsp;Oct](http://www.jdawiseman.com/2025/20251003_1970s_oc.gif).)
 
 The natural way to proceed is to have the software make single-glass pages. 
 For each page, width = height = 2&nbsp;&times;&nbsp;radius, with the circle centred. 
@@ -486,6 +490,10 @@ By default that activates `OneCircleSuppressOtherPageTypes`, which suppresses al
 The parameters `PrePourShowBackgroundTexts` and `PrePourShowDroplets` also apply to the one-circle pages.
 
 For this page type there isn&rsquo;t a `PaperType`: the size of each page is determined by the size of its circle.
+
+If a tasting has many flights, it might be wanted to colour by flight the background of these `OneCircles` (e.g., [1970s&nbsp;in&nbsp;Oct&nbsp;2025](http://www.jdawiseman.com/2025/20251003_1970s_oc.gif)). 
+The background painting is controlled by the code `OneCircleBackgroundPaintCode` (if it is empty, nothing is done).
+
 
 <div style="clear: both;"></div>
 
