@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:00 Wednesday 13th August 2025
+% This version 19:45 Friday 15th August 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202508132100) def
+/ParametersVersionDateTimeAdobeFormat (D:202508151945) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -714,22 +714,23 @@ if} bind def  % /VoteRecorderCrossedBox
 /TestingMaxNumPagesToShow 2147483647 def
 /TestingShowThesePagesOnly null def   % Either null, in which case having no effect, or an array of integers. If making a PDF for insertion to another doc, perhaps also "/pdfmark {cleartomark} def".
 
-/OneCircleBackgroundColour
+/OneCircleBackgroundPaintCode
 {
 	% As of Aug 2025, largest number of flights in a single file has been five. So nine hopefully enough.
 	[
-		{}  % White
+		{1   setgray}  % White
 		{0.9 setgray}  % Very pale grey
-		{0.9  0.9  1    setrgbcolor}  % Very pale blue
-		{1    0.9  0.9  setrgbcolor}  % Very pale pink
 		{0.9  1    0.9  setrgbcolor}  % Very pale green
+		{1    0.9  0.9  setrgbcolor}  % Very pale pink
+		{0.9  0.9  1    setrgbcolor}  % Very pale blue
 		{0.75 setgray}  % Pale grey
-		{0.75 0.75 1    setrgbcolor}  % Pale blue
-		{1    0.75 0.75 setrgbcolor}  % Pale pink
 		{0.75 1    0.75 setrgbcolor}  % Pale green
+		{1    0.75 0.75 setrgbcolor}  % Pale pink
+		{0.75 0.75 1    setrgbcolor}  % Pale blue
 	]
-	dup length  SheetNum_to_PageOrderingGlassesSequenceNum SheetNum get exch mod get  exec
-} bind def  % /OneCircleBackgroundColour
+	dup length  SheetNum_to_PageOrderingGlassesSequenceNum SheetNum get exch mod get
+	exec fill
+} bind def  % /OneCircleBackgroundPaintCode
 
 /LogThisExtra () def
 /OutputLogToLog true def
@@ -837,7 +838,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202508132100) def
+/SoftwareVersionDateTimeAdobeFormat (D:202508151945) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -13387,10 +13388,10 @@ currentdict /GlyphShowKnownAbsences undef
 						//false  //false //false                //false PaperType                        Orientation SetPaperSize   //true DefStoreMgns  % Defs PageHeight etc.
 						matrix currentmatrix    Radii SheetNum get  dup  translate  newpath    /MatrixGlasses matrix currentmatrix def
 						ClipSave  0 0  Radii SheetNum get 0 360  /m ArcAccurate   clip newpath
-						/OneCircleBackgroundColour load dup length 0 gt
+						/OneCircleBackgroundPaintCode load dup length 0 gt
 						{
-							0 0  Radii SheetNum get 1.005 mul  0 360  arc  % Slightly larger, by twice the inaccuracy of arc, hopefully to lessen bleed-through of lower white.
-							1 setgray  exec  fill
+							0 0  Radii SheetNum get 1.005 mul  0 360  arc  % Slightly larger, by ~= 24* the inaccuracy of arc, hopefully to lessen bleed-through of lower white.
+							1 setgray  exec
 						} {pop} ifelse  % ... length 0 gt
 
 						PrePourShowBackgroundTexts   Droplets {PrePourShowDroplets or} if
