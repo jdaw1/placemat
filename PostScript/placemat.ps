@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:45 Friday 15th August 2025
+% This version 19:00 Saturday 16th August 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202508151945) def
+/ParametersVersionDateTimeAdobeFormat (D:202508161900) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -730,7 +730,7 @@ if} bind def  % /VoteRecorderCrossedBox
 	]
 	dup length  SheetNum_to_PageOrderingGlassesSequenceNum SheetNum get exch mod get
 	exec fill
-} bind def  % /OneCircleBackgroundPaintCode
+} def  % /OneCircleBackgroundPaintCode
 
 /LogThisExtra () def
 /OutputLogToLog true def
@@ -838,7 +838,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202508151945) def
+/SoftwareVersionDateTimeAdobeFormat (D:202508161900) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -13390,7 +13390,7 @@ currentdict /GlyphShowKnownAbsences undef
 						ClipSave  0 0  Radii SheetNum get 0 360  /m ArcAccurate   clip newpath
 						/OneCircleBackgroundPaintCode load dup length 0 gt
 						{
-							0 0  Radii SheetNum get 1.005 mul  0 360  arc  % Slightly larger, by ~= 24* the inaccuracy of arc, hopefully to lessen bleed-through of lower white.
+							0 0  Radii SheetNum get 1.005 mul  0 360  arc  % Slightly larger, by ~= 33* the -151ppm inward inaccuracy of arc, hopefully to lessen bleed-through of lower white.
 							1 setgray  exec
 						} {pop} ifelse  % ... length 0 gt
 
