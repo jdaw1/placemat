@@ -45,11 +45,12 @@ E.g., for 14 glasses on `/A3` see discussion in [issue&nbsp;151](http://github.c
 
 For many possible tastings, `PackingStyles` can be left at its default value. 
 For example, if there are 24 different Madeiras over four `/A4` pages, the defaults work (though, of course, very important, don&rsquo;t forget to invite [me](http://www.jdawiseman.com/author.html)). 
-In such a case the default value of `GlassesOnSheetsMaxPerSheet` would cause `GlassesOnSheets` to be four page-defining arrays each of length six glasses, which would cause the chosen element of `PackingStyles` to be `/RectangularDislocation`.
+In such a case the default value of `GlassesOnSheetsMaxPerSheet` would cause [`GlassesOnSheets`](page_level.md#glassesonsheets-and-glassesontastingnotepages) to be four page-defining arrays each of length six glasses, which would cause the chosen element of `PackingStyles` to be `/RectangularDislocation`.
 
-But if table space were tight, it could be better to have fifteen on an `/A3`, six on an `/A4`, and three on the right side of an `/A4`, so using table space of only 210mm&times;3&frac12; = 735mm per person.
+But if table space were tight, it could be better to have fifteen on an `/A3`, six on an `/A4`, and three on the right side of an `/A4`, so lessening usage of table space from 4&#8239;&times;&#8239;210mm =&nbsp;840mm per person to &asymp;&nbsp;3&frac12;&#8239;&times;&#8239;210mm =&nbsp;735mm. 
+That would require changing [`GlassesOnSheets`](page_level.md#glassesonsheets-and-glassesontastingnotepages), and also changing the subject of this page, `PackingStyles`.
 
-There follow descriptions and pictures of the various allowable styles. 
+There follow descriptions and pictures of the various styles allowable in `PackingStyles`. 
 (The two PDFs ([non-`/Array`](images/PackingStyles.pdf), [`/Array`](images/PackingStyles_Array.pdf)), from which the bitmaps were made, show the element of `PackingStyles` in the header.)
 
 ## Efficient packings
