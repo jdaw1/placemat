@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:00 Saturday 16th August 2025
+% This version 18:30 Sunday 7th September 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202508161900) def
+/ParametersVersionDateTimeAdobeFormat (D:202509071830) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -838,7 +838,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202508161900) def
+/SoftwareVersionDateTimeAdobeFormat (D:202509071830) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -9220,7 +9220,14 @@ currentdict /GlyphShowKnownAbsences undef
 					//true DefStoreMgns
 					CirclearraysFont  CirclearraysFontSizes SheetNum get  SelectFont
 					CirclearraysPrePour WithinTitles get StringPathBBox exch pop exch sub /AD exch def pop
-					PageHeight MgnB MgnT add sub 2 div AD sub  dup   PageWidth  MgnL MgnR add sub 2 div AD sub  dup
+					Abovetitles WithinTitles get NonEmptyCompoundObject  Belowtitles WithinTitles get NonEmptyCompoundObject  or not  % Neither Above nor Below
+					{
+						TitlesFont TitleFontSizes SheetNum get WithinPage get selectfont  % A descender sort-of equivalent to there being a Belowtitle
+						Titles WithinTitles get  StringPathBBox  pop pop exch pop
+						AD add  dup 0 lt {pop 0} if
+					} {0} ifelse
+					PageHeight MgnB MgnT add sub 2 div  exch AD add sub  dup  % If there is Above or Below, be tight. If not, want aesthetic of some space around Titles, but dependent on Titles' descender.
+					PageWidth  MgnL MgnR add sub 2 div       AD     sub  dup
 					[ TitleAboveBelowOverL TitleAboveBelowOverR TitleAboveBelowOverB TitleAboveBelowOverT ] {SheetNum get WithinPage get abs 0.48 add div  4 1 roll} forall  % Half maximum linewidth of /MidGrey edging
 					3 {2 copy gt {exch} if pop} repeat   PrePourScalingFactors SheetNum 3 copy get lt {3 -1 roll put} {pop pop pop} ifelse
 				} if  % ... PrePourNumCopies 1 ge ...
