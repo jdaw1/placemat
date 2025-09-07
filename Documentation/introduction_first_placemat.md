@@ -113,7 +113,7 @@ In the initial state of the code, assuming synchronised documentation, they are 
 	(F70)
 ] def
 ```
-This `def`ines `Titles` to be an array, so delimited with square brackets, `[…]`. 
+This `def`ines `Titles` to be an array, so delimited with square brackets, <code>[&hellip;]</code>. 
 Each of the items of the array &mdash; this configuration having five &mdash; is a string, so delimited with round brackets, `(string)`. 
 Between these strings there can be arbitrary white space: spaces, tabs, newlines. 
 Change the `Titles` to match your tasting. 

@@ -207,7 +207,7 @@ The example selects only the first: `WithinTitles 0 eq`.
 `PaintBackgroundCode` is only slightly different to `PaintBackgroundInsideGlassCircles`.
 * It exists at the page level, so `WithinTitles` and `WithinPage` should not be referenced. 
 * On which sheet numbers should this appear? The demonstration code has a mock condition, `SheetNum -1 gt`, which is always true.
-* Need to `translate` to the desired point on the page. In this example it references `GlassPositions SheetNum get`, which is of the form `[ [x0 y0] [x1 y1] … ]`, but the *x* value could have been `MgnL MgnR sub PageWidth add 2 div`. 
+* Need to `translate` to the desired point on the page. In this example it references `GlassPositions SheetNum get`, which is of the form <code>[&nbsp;[x0&nbsp;y0] [x1 y1]&nbsp;&hellip;&nbsp;]</code>, but the *x* value could have been `MgnL MgnR sub PageWidth add 2 div`. 
 * Colour image, so `/DeviceRGB setcolorspace`.
 * And in this example, the `scale` comes directly as a number, `0.1576991 dup scale`, rather than being computed in the PostScript. 
 As before, trial-and-error suffices (though Mathematica is more precise).

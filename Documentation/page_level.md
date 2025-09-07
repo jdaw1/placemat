@@ -24,7 +24,7 @@ Headers and footers can be added to the page.
 Typically these will hold a date, a location, a title, and perhaps some branding&mdash;the author includes URLs. 
 
 There is a little intricacy, to allow tastings split into multiple sessions to have different headers and footers in each session. 
-The parameters doing most of the work are `HeadersLeft`, `HeadersCenter`, `HeadersRight`, and their `Footer…` equivalents, though using all of six of these text positions would be very cluttered. 
+The parameters doing most of the work are `HeadersLeft`, `HeadersCenter`, `HeadersRight`, and their <code>Footer&hellip;</code> equivalents, though using all of six of these text positions would be very cluttered. 
 Each is an array of even length. 
 
 First, the default simple case: make the first item 0, and the second item the required compound string. 
@@ -149,7 +149,7 @@ Like [`CircletextsMaxCopies`](fonts_glasses_decoration.md#Circlearrays), when ea
 ```
 
 
-`BackgroundTextsGlassesVerticalMiddling` determines whether the vertical alignment is determined jointly or separately, much like the `VerticalMiddling…` parameters. 
+`BackgroundTextsGlassesVerticalMiddling` determines whether the vertical alignment is determined jointly or separately, much like the <code>VerticalMiddling&hellip;</code> parameters. 
 `BackgroundTextsGlassesVerticalMiddling` must be one of `/MatchAll`, `/MatchSamePaperSize`, or `/MatchNone`.
 The bounding path of the text is constructed and then `BackgroundTextsGlassesPaintCode` is executed. 
 The default clips then strokes.
@@ -209,7 +209,7 @@ The array `DropletsCharges` is of a length that is a multiple of four, as follow
 * 0: An integer, a value of `SheetNum` for this charge, or `/All` meaning all sheets.  
 * 1: A location: this can be:
     * an integer, the centre of the `WithinPage` circle on that sheet; or 
-    * an array of integers `[WithinPage0, WithinPage1, …]`, the location being the average of the centres of these `WithinPage` circles; or 
+    * an array of integers <code>[WithinPage0, WithinPage1, &hellip;]</code>, the location being the average of the centres of these `WithinPage` circles; or 
     * an array of length two, `[x y]`, with *x* and *y* both non-integer float, in which `[0.0 0.0]` is bottom-left of the page (but locations at &plusmn;huge can cause overflow: experiments suggest it&rsquo;s safe with both |*x*| and |*y*|&nbsp;&le;&nbsp;10&#8310; &asymp;&nbsp;353&nbsp;metres).  
 * 2: A numeric charge, droplets flowing away from &minus;ve charges and to +ve charges (so signed like the gravitational effect of mass).  
 * 3: A numeric spin; with +ve charge and +ve spin the droplets approach clockwise (at a distance from a lone charge of *spin* points, the angle of the droplets is 45&deg;).
@@ -222,7 +222,7 @@ That proportion is controlled by `DropletsProportionBackwards`, which obviously 
 The default value is 0.0204 &asymp; 1/49.
 
 The gray and width of each path is controlled by `DropletsOuterGrayEnd`, `DropletsOuterGrayStart`, `DropletsOuterWidthEnd`, `DropletsOuterWidthStart`, `DropletsInnerGrayEnd`, `DropletsInnerGrayStart`, `DropletsInnerWidthEnd`, and `DropletsInnerWidthStart`. 
-(But if `DropletsOuterGrayEnd` &ne; `DropletsOuterGrayStart`, or likewise `…Inner…`, the PDF can be multiple megabytes larger.) 
+(But if `DropletsOuterGrayEnd` &ne; `DropletsOuterGrayStart`, or likewise <code>&hellip;Inner&hellip;</code>, the PDF can be multiple megabytes larger.) 
 There are also Boolean parameters `PrePourShowDroplets`, `NeckTagsShowDroplets`, and `StickyLabelsShowDroplets`.
 
 ```PostScript
@@ -290,7 +290,7 @@ Each line description is an array, pieces of which can be as follows.
 So if the circles touch then the line segment touches their joint tangent. Order doesn&rsquo;t matter: `[a b]` and `[b a]` are equivalent. 
 The integer a can be replaced with `[xa ya]` (making `[[xa ya] b]`), and likewise b with `[xb yb]`.
 * Between two pieces the non-array item `/Arc` causes the sharp corner between two straight lines to be replaced with a soft arc having radius `FlightSeparationsArcProportionRadius` &times; the radius of the circles. 
-* The last or first non-`/Closed` piece may be `[/Left …]`. 
+* The last or first non-`/Closed` piece may be <code>[/Left&nbsp;&hellip;]</code>. 
 This goes to the far left of the page, at a *y* specifed by the &lsquo;&hellip;&rsquo;, which is an average of at least one absolute level, perhaps &plusmn; some real number of radii. 
 Absolutes can be `/Bottom` (with obvious meaning); `/Top` (ditto); or an integer, in which case the *y* is that of the centre of that circle number. 
 Or several integers, in which case the *y* is the average of the centres of those circle numbers. 
@@ -298,8 +298,8 @@ Optionally there may also be a real, that number of radii being added to the ave
 So `[/Left 0 3 -0.5]` is a horizontal line to the left of the page, at a *y* value of the average of those of circles 0 and 3, minus half a radius. 
 This can be thought of as Average[Circle 0&rsquo;s bottom, Circle 3&rsquo;s centre]. 
 Hence the integer `1` and the real `1.0` are very different, the former referring to the centre of circle 1, the latter to an offset of +1.0 radii.
-* Likewise `[/Right …]`. 
-* And `[/Top …]` and `[/Bottom …]`, for which the value &lsquo;&hellip;&rsquo; is the *x*, integers referring to that circle&rsquo;s *x* centre; allowed components including `/Left` and `/Right`. 
+* Likewise <code>[/Right&nbsp;&hellip;]</code>. 
+* And <code>[/Top&nbsp;&hellip;]</code> and <code>[/Bottom&nbsp;&hellip;]</code>, for which the value &lsquo;&hellip;&rsquo; is the *x*, integers referring to that circle&rsquo;s *x* centre; allowed components including `/Left` and `/Right`. 
 If there are `/Arc`s, it can be elegant for `/Left` `/Right` `/Bottom` `/Top` pieces to align with the edge of the curves. 
 The distillation log lists offsets, in radii, which might be elegant.
 

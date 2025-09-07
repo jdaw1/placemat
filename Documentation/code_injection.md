@@ -133,7 +133,7 @@ The examples are self explanatory.
 ```
 
 If the string needs kerning, then at the start assign it to a variable with the likes of `
-/TappitHen [(T) {-0.06 Kern} (appit Hen)] def`; use in `/Belowtitles [ … () … TappitHen … ] def`; and test for equality to `TappitHen` rather than to the string `(Tappit Hen)`.
+/TappitHen [(T) {-0.06 Kern} (appit Hen)] def`; use in <code>/Belowtitles&nbsp;[&nbsp;&hellip; ()&nbsp;&hellip; TappitHen&nbsp;&hellip;&nbsp;]&nbsp;def</code>; and test for equality to `TappitHen` rather than to the string `(Tappit Hen)`.
 
 Of course, variation can be purely decorative.
 

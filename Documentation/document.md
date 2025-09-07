@@ -122,7 +122,7 @@ For a multi-session tasting, it is worth the effort of changing these.
 ### MirrorPages&hellip;
 
 If printing a page to the underside of acetate, the page would need to be mirrored. 
-For this there are `MirrorPages…` parameters, arrays of Booleans, of the same length as the similarly named `PageOrdering…` parameters. 
+For this there are <code>MirrorPages&hellip;</code> parameters, arrays of Booleans, of the same length as the similarly named <code>PageOrdering&hellip;</code> parameters. 
 (Added to code in September 2009; as of July 2023 never used live &mdash; so if you are going to use this, do so substantially in advance of the tasting in case subtle bugs are revealed.)
 
 
@@ -255,7 +255,7 @@ And if links are missing or rotted, please post that in [issue&nbsp;157](http://
 
 The first boolean must be `false`; subsequent booleans are `true` if the link is a &lsquo;child&rsquo; of the previous `false` link, and are `false` if a &lsquo;parent&rsquo; link. 
 (If the PDF viewer is showing the table of contents there is a small triangle beside the &lsquo;parent&rsquo; link: pointing right if the children are hidden (&ldquo;&#9656;&rdquo;); pointing down if the children are visible (&ldquo;&#9662;&rdquo;); rotated between the two by being clicked on.) 
-The descriptions can be compound strings, `[…]`. 
+The descriptions can be compound strings, <code>[&hellip;]</code>. 
 The URLs must be plain simple strings, `(...)`, not arrays nor compound strings, and must start with a protocol such as &ldquo;http://&rdquo;. 
 
 

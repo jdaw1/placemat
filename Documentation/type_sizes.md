@@ -128,7 +128,7 @@ As a guide, if fonts from different families &hArr; not together (i.e., work `/G
 
 ### Superfluous
 
-Analagous to the `…Titles…` are:
+Analogous to the <code>Titles&hellip;</code> are:
 
 * `ExclusionAnnulusProportionInnerRadiusTitlesAboveBelow`, `ExclusionAnnulusProportionInnerRadiusOvertitles`, and `FontSizesRatioAboveBelowOverMin`, the last of which defaults to 999, so forcing all to be the same size;
 
