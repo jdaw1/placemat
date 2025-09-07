@@ -79,7 +79,7 @@ There are several possible means by which the PostScript can be &lsquo;distilled
 * If you have [Adobe Distiller](https://en.wikipedia.org/wiki/Adobe_Distiller), usually as part of a larger Adobe package, use it.  
 * On macOS &le;12.7.4 = Monterey, right-click the file, and &lsquo;Open With&rsquo; Preview: it should convert to a PDF. (Alas, this functionality was [discontinued from Ventura](https://support.apple.com/en-gb/108775) onwards.)  
 * On macOS 13.* = Ventura, and on Unix, use `ps2pdf` which comes as part of [GhostScript](http://en.wikipedia.org/wiki/Ghostscript).
-* On a PC, in your preferred web browser, open 
+* In your preferred web browser, open 
 [ps2pdf.org](http://www.ps2pdf.org/convert.htm), 
 &lsquo;Choose&rsquo; or &lsquo;Add&rsquo; the file, and &lsquo;Convert&rsquo; it.  
 
