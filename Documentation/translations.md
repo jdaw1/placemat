@@ -26,7 +26,7 @@ But others could have a more fixed translation, as suggested below.
 
 Many languages are missing; most are incomplete; some are improvable. 
 If you have the skills and enthusiasm to repair, please provide translations in [an issue](http://github.com/jdaw1/placemat/issues). 
-For translators, at the end of this document is the English, in non-PastScript plain text. 
+For translators, at the end of this document is the English, in non-PostScript plain text. 
 (Obviously the `/ParameterName` do not need translating.)
 
 The only languages eligible for this page are those written in (extended) Latin. 

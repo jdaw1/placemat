@@ -1,6 +1,6 @@
 %!PS
 
-% This version 18:30 Sunday 7th September 2025
+% This version 18:30 Monday 8th September 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202509071830) def
+/ParametersVersionDateTimeAdobeFormat (D:202509081830) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -838,7 +838,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202509071830) def
+/SoftwareVersionDateTimeAdobeFormat (D:202509081830) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -2328,7 +2328,7 @@ mark (Used paper types: ) UsedPaperTypes {PaperTypeString (; )} forall pop (.) C
 	0  3  A length 3 sub
 	{
 		/i exch def
-		/Des  A i 1 add get ASCIIfy TrimSpaces length  A i get execU {4 add} if  def
+		/Des  A i 1 add get ASCIIfy TrimSpaces length  A i GetEU {4 add} if  def
 		/URL  A i 2 add get ASCIIfy TrimSpaces length def
 		Des URL add 123 gt URL 0 eq or {0} {Des} ifelse dup DesMaxLength gt {/DesMaxLength exch def} {pop} ifelse
 	} for  % i = position in array A
@@ -2353,7 +2353,7 @@ mark (Used paper types: ) UsedPaperTypes {PaperTypeString (; )} forall pop (.) C
 				(  =  )  URL
 			} if  % URL length 0 gt
 		}{
-			URL length 0 gt {(\n)  A i get execU {(    )} if  URL} if
+			URL length 0 gt {(\n)  A i GetEU {(    )} if  URL} if
 		} ifelse  % Descriptor non-zero length
 		/RowNum RowNum 1 add def
 	} for  % i = position in array A
@@ -4217,13 +4217,13 @@ currentdict /GlyphShowKnownAbsences undef
 						ShapesIntX ShapesAverageSeparation mul   ShapesAverageMaxTweakPlusMinus dup 0 ne {rand //HalfRandMax div 1 sub mul add} {pop} ifelse
 						ShapesIntY ShapesAverageSeparation mul   ShapesAverageMaxTweakPlusMinus dup 0 ne {rand //HalfRandMax div 1 sub mul add} {pop} ifelse
 						rand //RandMax div ShapesEnclosingCircleRadiusMax ShapesEnclosingCircleRadiusMin sub mul ShapesEnclosingCircleRadiusMin add
-						ShapesToUse  dup length dup 1 le {1 sub} {rand exch mod} ifelse  get
+						ShapesToUse  dup length dup 1 le {1 sub} {rand exch mod} ifelse  GetEU
 					]
 					counttomark rand exch mod 1 add 1 roll  % The shuffling removes the apparent direction caused by overlapping
 				} if  % Not 0,0
 			} for  % /ShapesIntX
 			} for  % /ShapesIntY
-			[ 0 0   0 0   ShapesEnclosingCircleRadiusMax  ShapesToUse 0 get ]  % Last, so on top.
+			[ 0 0   0 0   ShapesEnclosingCircleRadiusMax  ShapesToUse 0 GetEU ]  % Last, so on top.
 		}{
 			% SpecialPlace is /Centre or /None
 			OuterRegionUry OuterRegionLly sub ShapesAverageSeparation div -2 div floor cvi   1   1 index neg {/ShapesIntY exch def
@@ -4235,7 +4235,7 @@ currentdict /GlyphShowKnownAbsences undef
 						OuterRegionUrx OuterRegionLlx add 2 div   ShapesIntX ShapesAverageSeparation mul add   ShapesAverageMaxTweakPlusMinus dup 0 ne {rand //HalfRandMax div 1 sub mul add} {pop} ifelse
 						OuterRegionUry OuterRegionLly add 2 div   ShapesIntY ShapesAverageSeparation mul add   ShapesAverageMaxTweakPlusMinus dup 0 ne {rand //HalfRandMax div 1 sub mul add} {pop} ifelse
 						rand //RandMax div ShapesEnclosingCircleRadiusMax ShapesEnclosingCircleRadiusMin sub mul ShapesEnclosingCircleRadiusMin add
-						ShapesToUse  dup length dup 1 le {1 sub} {rand exch mod} ifelse  get
+						ShapesToUse  dup length dup 1 le {1 sub} {rand exch mod} ifelse  GetEU
 					]
 					counttomark rand exch mod 1 add 1 roll  % The shuffling removes the apparent direction caused by overlapping
 				} if  % Not 0,0
@@ -4251,7 +4251,7 @@ currentdict /GlyphShowKnownAbsences undef
 		} ifelse  % Contains (0,0)
 	]  % Double-depth array [ ... [ShapesIntX ShapesIntY X Y ThisShapeRadius ThisShape] ... ]
 	{
-		aload pop  /ThisShape exch def   /ThisShapeRadius exch def  /Y exch def  /X exch def  /ShapesIntY exch def /ShapesIntX exch def
+		aload pop  /ThisShape exch execU def   /ThisShapeRadius exch def  /Y exch def  /X exch def  /ShapesIntY exch def /ShapesIntX exch def
 		/Rand1 rand def  /Rand2 rand def  % Sometimes, by rounding, a transformed TABO can select differently, which should't desynchronise rand usage; hence rands always done.
 		0 setgray  0.48 setlinewidth  0 setlinejoin  1 setlinecap  [] 0 setdash
 		X 0.8 ThisShapeRadius mul add  llx  gt       X 0.8 ThisShapeRadius mul sub  urx  lt  and  % Can't compare to RadiiCirclearrayInsideUsableTAB because might be a PlaceName page.
@@ -12994,8 +12994,8 @@ currentdict /GlyphShowKnownAbsences undef
 				NamesFont exch SelectFont  /ThisName load StringPathBBox  pop /ThisNameR exch def pop /ThisNameL exch def
 				NamePlacementBottomX SheetNum get  ThisNameR ThisNameL sub 2 div  2 copy sub 3 1 roll add
 			} {pop //Infinity  //InfinNeg} ifelse  % NamesShowBottom ...
-			Names NameNum get IsLeftHander not  WaterBoxesOverrideShowEverySheet not {WaterBoxesShowRight SheetNum get execU  and} if
-			Names NameNum get IsLeftHander      WaterBoxesOverrideShowEverySheet not {WaterBoxesShowLeft  SheetNum get execU  and} if
+			Names NameNum get IsLeftHander not  WaterBoxesOverrideShowEverySheet not {WaterBoxesShowRight SheetNum GetEU  and} if
+			Names NameNum get IsLeftHander      WaterBoxesOverrideShowEverySheet not {WaterBoxesShowLeft  SheetNum GetEU  and} if
 			//true  WaterBoxesPaintProc
 		} if  % WaterBoxes dup /Glasses eq exch /Both eq or  WaterBoxesNumSideTriangle 1 ge  and
 
