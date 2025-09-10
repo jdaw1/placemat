@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Wednesday 10th September 2025
+% This version 23:40 Wednesday 10th September 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202509102300) def
+/ParametersVersionDateTimeAdobeFormat (D:202509102340) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -839,7 +839,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202509102300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202509102340) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -13426,23 +13426,28 @@ currentdict /GlyphShowKnownAbsences undef
 						CirclearrayForms SheetNum get WithinPage get   execform
 						/TypeOfPagesBeingRendered /OneCircle store
 
-						mark
-							/Rect [ Radii SheetNum get neg  dup neg   2 copy ]  % Page zero-centred, and half page size is radius. So not PageWidth nor PageHeight.
-							/Subtype /Text
-							/Contents
-								mark  (One circle, intended for the generation of bitmap images, perhaps a GIF animation of all the circles.\r\n\r\n) ()
-								[ Titles  Belowtitles  Abovetitles  Overtitles  FillTitles {FillTexts} if ]
-									{WithinTitles get PDFDocEncodingify TrimSpaces dup length 0 gt {(; )} {pop} ifelse}
-								forall  ()  Circlearrays WithinTitles get {PDFDocEncodingify TrimSpaces dup length 0 gt {CirclearraysMinNumSpacesBetween ceiling cvi dup 2 lt {pop 2} if {( )} repeat} {pop} ifelse} forall pop
-								HeadersAndFooters 6 3 roll
-								3 copy [ 4 1 roll ] NonEmptyCompoundObject {[(\r\n\r\nHeader: ) 5 2 roll (     ) 3 1 roll 2 index exch] PDFDocEncodingify 4 1 roll} {pop pop pop} ifelse
-								3 copy [ 4 1 roll ] NonEmptyCompoundObject {[(\r\n\r\nFooter: ) 5 2 roll (     ) 3 1 roll 2 index exch] PDFDocEncodingify         } {pop pop pop} ifelse
-								ConcatenateToMark
-							/Open //false
-							/Title [ (One circle: ) Titles WithinTitles get ] PDFDocEncodingify
-							/ModDate ParametersVersionDateTimeAdobeFormat
-							/F 64 128 add  % ReadOnly + Locked. PDFReference16.pdf page 574
-						/ANN pdfmark
+						OneCircleSuppressOtherPageTypes
+						{
+							mark
+								/Rect [ Radii SheetNum get neg  dup neg   2 copy ]  % Page zero-centred, and radius is half page size. So not PageWidth nor PageHeight.
+								/Subtype /Text
+								/Contents
+									mark  (One circle, intended for the generation of bitmap images, perhaps a GIF animation of all the circles. )
+									(Convert possible with GraphicConverter's Effect > Animation/ Frames > Convert Pages to Animation; )
+									(or File > New > Animation using all Pages of the multipage Document \(TIFF,PDF\).\r\n\r\n)   ()
+									[ Titles  Belowtitles  Abovetitles  Overtitles  FillTitles {FillTexts} if ]
+										{WithinTitles get PDFDocEncodingify TrimSpaces dup length 0 gt {(; )} {pop} ifelse}
+									forall  ()  Circlearrays WithinTitles get {PDFDocEncodingify TrimSpaces dup length 0 gt {CirclearraysMinNumSpacesBetween ceiling cvi dup 2 lt {pop 2} if {( )} repeat} {pop} ifelse} forall pop
+									HeadersAndFooters 6 3 roll
+									3 copy [ 4 1 roll ] NonEmptyCompoundObject {[(\r\n\r\nHeader: ) 5 2 roll (     ) 3 1 roll 2 index exch] PDFDocEncodingify 4 1 roll} {pop pop pop} ifelse
+									3 copy [ 4 1 roll ] NonEmptyCompoundObject {[(\r\n\r\nFooter: ) 5 2 roll (     ) 3 1 roll 2 index exch] PDFDocEncodingify         } {pop pop pop} ifelse
+									ConcatenateToMark
+								/Open //false
+								/Title [ (One circle: ) Titles WithinTitles get ] PDFDocEncodingify
+								/ModDate ParametersVersionDateTimeAdobeFormat
+								/F 64 128 add  % ReadOnly + Locked. PDFReference16.pdf page 574
+							/ANN pdfmark
+						} if  % OneCircleSuppressOtherPageTypes
 
 						setmatrix ShowPage
 					} if  % OneCircles ... PageSuppressed not ... CircleNonEmpty ...
