@@ -1,35 +1,62 @@
-# Document-level controls
+<a name="top"></a>
+# Document-level controls #
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
-&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
-&#9655;&#xFE0E;&nbsp;*Document&#8209;level&nbsp;controls*&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md#readme)
+&#9654;&#xFE0E;&#8239;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
+&#9655;&#xFE0E;&#8239;*Document&#8209;level&nbsp;controls*&nbsp; 
+&#9654;&#xFE0E;&#8239;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Translations](translations.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Debugging](debugging.md#readme)
+
+**Links, internal this page**:&nbsp; 
+&starf;&#8239;[Top](#top)&nbsp; 
+&starf;&#8239;[Introduction](#Introduction)&nbsp; 
+&starf;&#8239;[Printable](#Printable)&nbsp; 
+&star;&#8239;[Num&nbsp;copies](#Num_copies)&nbsp; 
+&star;&#8239;[Margins](#Margins)&nbsp; 
+&star;&#8239;[`Rotate180AlternateNames`](#Rotate180AlternateNames)&nbsp; 
+&star;&#8239;[<code>PageOrdering&hellip;</code>](#PageOrdering)&nbsp; 
+&star;&#8239;[<code>MirrorPages&hellip;</code>](#MirrorPages)&nbsp; 
+&star;&#8239;[Suppressing&nbsp;pages](#Suppressing_pages)&nbsp; 
+&star;&#8239;[CMYK&nbsp;black](#CMYK_black)&nbsp; 
+&starf;&#8239;[High-level&nbsp;code&nbsp;insertion](#High_level_code_insertion)&nbsp; 
+&star;&#8239;[An&nbsp;empty&nbsp;page](#Empty_page)&nbsp; 
+&starf;&#8239;[PDF&nbsp;properties](#PDF_properties)&nbsp; 
+&star;&#8239;[`PDF_title`](#PDF_title)&nbsp; 
+&starf;&#8239;[`ExternalLinks`](#ExternalLinks)&nbsp; 
+&star;&#8239;[`PageOrdering`, sections](#PageOrdering_sections)&nbsp; 
+&star;&#8239;[`PagesToBeInserted`](#PagesToBeInserted)&nbsp; 
+&star;&#8239;[Copyright&nbsp;and&nbsp;`LicensingAgreement`](#Copyright_LicensingAgreement)&nbsp; 
+&starf;&#8239;[Debugging&nbsp;and&nbsp;doc&nbsp;generation](#Debugging_doc_generation)&nbsp; 
+&star;&#8239;[Distillation&nbsp;log](#Distillation_log)&nbsp; 
+&star;&#8239;[`PageLabelOverride`&nbsp;and&nbsp;`PageLabelOverrideWith`](#PageLabelOverride)
 
 ----
 
 <div style="clear: both;"></div>
 
-## Introduction
+<a name="Introduction"></a>
+## Introduction ##
 
 There are some controls that effect most or all of the document. 
 * Some affect the printed ouput.
 * Some affect non-printable qualities of the PDF. 
 * Others are for debugging, or for documentation generation. 
 
-## Printable
+<a name="Printable"></a>
+## Printable ##
 
-### Numbers of copies
+<a name="Num_copies"></a>
+### Numbers of copies ###
 
 Some page types are controlled by Booleans, others by integer numbers of copies.
 
@@ -61,7 +88,8 @@ It is possible to make these pages without the glasses page by making the glasse
 This happens automatically for the last two, via `BottleWrapSuppressOtherPageTypes` and `OneCircleSuppressOtherPageTypes`.
 
 
-### Margins
+<a name="Margins"></a>
+### Margins ###
 
 There is a margin between the left edge of painted ink, and the physical edge of the page. 
 These are `MarginL` (left), `MarginR` (right), `MarginB` (bottom), and `MarginT` (top), defaulting to 24pt =&nbsp;&#8531;&Prime; &asymp;&nbsp;8.5mm. 
@@ -72,13 +100,15 @@ This can be done for just the glasses page (the only page type for which the aut
 There is also the Boolean setting `OuterGlassesCropMarks`.
 
 
-### Rotate180AlternateNames
+<a name="Rotate180AlternateNames"></a>
+### Rotate180AlternateNames ###
 
 At a large tasting there can be three or four glasses pages each, and a similar number of tasting-note pages. 
 Setup can be slightly swifter if the boundary between sets of papers is sharper, done by rotating 180&deg; the papers of alternate people. 
 For this, `/Rotate180AlternateNames true def`.
 
-### PageOrdering&hellip;
+<a name="PageOrdering"></a>
+### PageOrdering&hellip; ###
 
 On the day of a multi-session tasting, there is a lot of work: table setup, decanting etc. 
 Shuffling several sessions of paper would be needless work: pages can be ordered to match the sessions. 
@@ -119,14 +149,16 @@ For a single-session this default works.
 For a multi-session tasting, it is worth the effort of changing these. 
 
 
-### MirrorPages&hellip;
+<a name="MirrorPages"></a>
+### MirrorPages&hellip; ###
 
 If printing a page to the underside of acetate, the page would need to be mirrored. 
 For this there are <code>MirrorPages&hellip;</code> parameters, arrays of Booleans, of the same length as the similarly named <code>PageOrdering&hellip;</code> parameters. 
 (Added to code in September 2009; as of July 2023 never used live &mdash; so if you are going to use this, do so substantially in advance of the tasting in case subtle bugs are revealed.)
 
 
-### Suppressing pages
+<a name="Suppressing_pages"></a>
+### Suppressing pages ###
 
 Consider making placemats for somebody else. 
 Sometimes, a question of style or design for the commissioner might be answerable by inspection of a small number of pages. 
@@ -165,12 +197,14 @@ If using these, put them at the very top of the changed parameters, to help not 
 
 Sometimes page suppression can produce one extra blank page, as discussed in [issue 109](http://github.com/jdaw1/placemat/issues/109).
 
-### CMYK black
+<a name="CMYK_black"></a>
+### CMYK black ###
 
 `/CMYK0001replacesRGB000 true def` replaces RGB black =&nbsp;`0 setgray` with printers&rsquo; CMYK black =&nbsp;`0 0 0 1 setcmykcolor`.
 
 
-## High-level code insertion
+<a name="High_level_code_insertion"></a>
+## High-level code insertion ##
 
 The software allows, perhaps even encourages, [code injection](code_injection.md#readme). 
 No, this isn&rsquo;t the modern idiom for software. 
@@ -198,7 +232,8 @@ But really, modern software isn&rsquo;t written in PostScript.
 * `PaintBackgroundInsideGlassCircles` is called once per circle on the glasses page. Called with centre of circle translated to 0,0; and clipped to a radius of `Radii SheetNum get`.
 
 
-### An empty page
+<a name="Empty_page"></a>
+### An empty page ###
 
 <img align="right" width="248" height="351" src="images/NonGlasses_E.png">
 
@@ -221,18 +256,21 @@ Convert to PNG and upload, and then reset to `/EmptyGlassesPageAtStart false def
 It uses `EmptyGlassesPageOrientation` and `EmptyPageString`, and re-uses `TastingNotesPaperType` and `HeaderFont`. 
 
 
-## PDF properties
+<a name="PDF_properties"></a>
+## PDF properties ##
 
 Some non-printable properties of the PDF can be controlled or affected by parameters.
 
-### PDF_title
+<a name="PDF_title"></a>
+### PDF_title ###
 
 PDFs can have a title, embedded within its DocInfo. 
 If viewing a PDF in a web browser, the tab will typically show that title, and it is also seen and shown by search engines. 
 `PDF_title` holds that string.
 
 
-## External Links
+<a name="ExternalLinks"></a>
+## ExternalLinks ##
 
 It might be that in the future somebody finds, somewhere on the web, a copy of the placemat PDF. 
 There should be a route home. 
@@ -259,7 +297,8 @@ The descriptions can be compound strings, <code>[&hellip;]</code>.
 The URLs must be plain simple strings, `(...)`, not arrays nor compound strings, and must start with a protocol such as &ldquo;http://&rdquo;. 
 
 
-### PageOrdering, sections
+<a name="PageOrdering_sections"></a>
+### PageOrdering, sections ###
 
 PageOrdering sections can be lightly titled. 
 If the PageOrdering parameters have split the paperwork into a few sessions, there is a functional elegance in having, within the table of contents, titling. 
@@ -282,7 +321,8 @@ The compound strings appear immediately before the page orderings with which the
 ```
 
 
-### PagesToBeInserted
+<a name="PagesToBeInserted"></a>
+### PagesToBeInserted ###
 
 
 Rarely, PDF pages from a different source are to be inserted into the document made from PostScript. 
@@ -312,7 +352,8 @@ So the following makes space for `1` inserted page before the first instance (in
 ```
 
 
-### #Linking to specific pages within the PDF
+<a name="Linking_within_PDF"></a>
+### #Linking to specific pages within the PDF ###
 
 This is a feature of the PDF, but one not controlled by the parameters. 
 
@@ -351,16 +392,20 @@ So `GlassesDestForEachCircle`&rsquo;s default value is `{NameNum 0 eq}`, which
 
 </div>
 
-### Copyright and LicensingAgreement
+<a name="Copyright_LicensingAgreement"></a>
+### Copyright and LicensingAgreement ###
 
 The `CopyrightStatementPlacemats`, `LicensingAgreementTextPlacemats`, and `LicensingAgreementLinkPlacemats` are all output to the log. 
 
 It is intended that the latter two, or at least the last, will be embedded in the PDF in a machine-readable searchable filterable manner, per [issue 16](http://github.com/jdaw1/placemat/issues/16). 
 (Expert help wanted: be not shy about replying to an issue.)
 
-## Debugging and documentation generation
 
-### Distillation log
+<a name="Debugging_doc_generation"></a>
+## Debugging and documentation generation ##
+
+<a name="Distillation_log"></a>
+### Distillation log ###
 
 Various log outputs are produced by the software. 
 Some might help bebugging. 
@@ -372,7 +417,8 @@ The log can go to three places, controlled by three Booleans.
 
 `LogThisExtra` contains a string, perhaps a multi-line string, which is output to the log file. 
 
-### PageLabelOverride and PageLabelOverrideWith
+<a name="PageLabelOverride"></a>
+### PageLabelOverride and PageLabelOverrideWith ###
 
 `PageLabelOverride` and `PageLabelOverrideWith` are used extremely rarely. 
 Indeed, perhaps only for making documentation.

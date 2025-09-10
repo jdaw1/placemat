@@ -1,24 +1,46 @@
-# Arrangement of glasses on the page
+<a name="top"></a>
+# Arrangement of glasses on the page #
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
-&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
-&#9655;&#xFE0E;&nbsp;*Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page*&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md#readme)
+&#9654;&#xFE0E;&#8239;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
+&#9655;&#xFE0E;&#8239;*Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page*&nbsp; 
+&#9654;&#xFE0E;&#8239;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Translations](translations.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Debugging](debugging.md#readme)
+
+**Links, internal this page**:&nbsp; 
+&starf;&#8239;[Top](#top)&nbsp; 
+&starf;&#8239;[Introduction](#Introduction)&nbsp; 
+&starf;&#8239;[Efficient&nbsp;packings](#Efficient):&nbsp; 
+&star;&#8239;[`Diamonds`](#Diamonds)&nbsp; 
+&star;&#8239;[`RectangularDislocation`](#RectangularDislocation)&nbsp; 
+&star;&#8239;[`SquareGrid`](#SquareGrid)&nbsp; 
+&star;&#8239;[`DiamondsAndRectangular`](#DiamondsAndRectangular)&nbsp; 
+&star;&#8239;[`DiamondsPlus`](#DiamondsPlus)&nbsp; 
+&star;&#8239;[`RectangularAlternateNudge`](#RectangularAlternateNudge)&nbsp; 
+&star;&#8239;[`RectangularAlternateSplitNudge`](#RectangularAlternateSplitNudge)&nbsp; 
+&star;&#8239;[`Bespoke5`&nbsp;and&nbsp;&hellip;7](#Bespoke)&nbsp; 
+&star;&#8239;[`Temple`](#Temple)&nbsp; 
+&starf;&#8239;[Inefficient packings](#Inefficient):&nbsp; 
+&star;&#8239;[`PostsAndLintel`,&nbsp;`Arch`](#PostsAndLintel_Arch)&nbsp; 
+&star;&#8239;[Columns&nbsp;and&nbsp;rows](#Sides_Rows)&nbsp; 
+&starf;&#8239;[`Array`](#Array)&nbsp; 
+&starf;&#8239;[Related&nbsp;parameters](#Related_parameters)&nbsp; 
+&starf;&#8239;[Code&nbsp;extracts](#Code_extracts)
 
 ----
 
-## Introduction
+<a name="Introduction"></a>
+## Introduction ##
 
 The core purpose of the software is to have a place to put glasses. 
 Already known are the `PaperType` (e.g., `/A3`), the margins, and how many glasses are to go on the page. 
@@ -34,9 +56,19 @@ Broadly, if a later-tested style allows a larger radius than the current best, t
 If the element of `PackingStyles` is just the style, it doesn&rsquo;t need to be in an array. 
 But the elements of `PackingStyles` can have constraints and variations. 
 If an element of `PackingStyles` is to have such extra detail, then that element must be an array, starting with the style name. 
-E.g. (which is unrealistically verbose to show some of the possibilities): 
+E.g. (which is unrealistically verbose to show some of the possibilities, and which would usually be written as a single line): 
 ```PostScript
-[ /Diamonds  /OnlyIfSheetNumMin 1  /OnlyIfSheetNumMax 1  /GlassesNumMin 3  /GlassesNumMax 3  /OnlyIfOrientation /Landscape  /RowsNumMin 3  /RowsNumMax 4  /Mirror ]
+[
+	/Diamonds                       % Pattern name
+	/OnlyIfSheetNumMin 1            % This pattern ignored if not satisfied
+	/OnlyIfSheetNumMax 1            % This pattern ignored if not satisfied
+	/GlassesNumMin 3                % This pattern ignored if not satisfied
+	/GlassesNumMax 3                % This pattern ignored if not satisfied
+	/OnlyIfOrientation /Landscape   % This pattern ignored if not satisfied
+	/RowsNumMin 3                   % Applied within pattern's possibilities
+	/RowsNumMax 4                   % Applied within pattern's possibilities
+	/Mirror                         % Pattern variant
+]
 ``` 
 
 The general mathematical problem, largest possible radius for *n* non-overlapping circles in a particular rectangle, is difficult (see [PackoMania](http://www.packomania.com/) for solutions to many special cases). 
@@ -53,10 +85,12 @@ That would require changing [`GlassesOnSheets`](page_level.md#glassesonsheets-an
 There follow descriptions and pictures of the various styles allowable in `PackingStyles`. 
 (The two PDFs ([non-`/Array`](images/PackingStyles.pdf), [`/Array`](images/PackingStyles_Array.pdf)), from which the bitmaps were made, show the element of `PackingStyles` in the header.)
 
+<a name="Efficient"></a>
 ## Efficient packings
 
 There are several classes of packing which might use space quite efficiently.
 
+<a name="Diamonds"></a>
 ### Diamonds
 
 `/Diamonds`: circles in each row and column lie midway between those in neighbouring rows and columns.
@@ -78,6 +112,7 @@ If some of these are not wanted, for whatever reason, control is possible by the
 
 The `/Mirror` flag chooses the alternate chirality, if that has a sensible meaning.
 
+<a name="RectangularDislocation"></a>
 ### RectangularDislocation
 
 `/RectangularDislocation`: The next four examples are rectangular, optionally with a horizontal &lsquo;dislocation&rsquo; in the middle, that having, `/Diamonds`-style, circles lying between the circles in the adjacent row.
@@ -93,6 +128,7 @@ The `/Mirror` flag chooses the alternate chirality, if that has a sensible meani
 
 </div>
 
+<a name="SquareGrid"></a>
 ### SquareGrid
 
 `/SquareGrid` can be similar to `/RectangularDislocation`. 
@@ -109,6 +145,7 @@ Obviously either `/Justify` can allow distances to differ.
 
 </div>
 
+<a name="DiamondsAndRectangular"></a>
 ### DiamondsAndRectangular
 
 `/DiamondsAndRectangular`: for some numbers of glasses and aspect ratios, the best fit can come from a pattern that is a combination of `/Diamonds` and a rectangular pattern. 
@@ -126,6 +163,7 @@ The diamonds can be offset from the diamonds either vertically or horizontally.
 
 </div>
 
+<a name="DiamondsPlus"></a>
 ### DiamondsPlus
 
 `/DiamondsPlus` is mostly three-row diamonds (or, if `/Portrait`, three-column), with two extras set between the three rows (columns). 
@@ -141,6 +179,7 @@ There is a generalisation of `/DiamondsPlus` over any number of rows (columns), 
 
 </div>
 
+<a name="RectangularAlternateNudge"></a>
 ### RectangularAlternateNudge
 
 `/RectangularAlternateNudge`: in this rectangular variant, alternate rows (or columns) are slightly nudged, better to fill the space.
@@ -168,6 +207,7 @@ But on `/A4` the improvement in the radius is much less: only &asymp; 0.28pt &as
 </div>
 
 
+<a name="RectangularAlternateSplitNudge"></a>
 ### RectangularAlternateSplitNudge
 
 `RectangularAlternateSplitNudge`, by making the nudged rows go in both directions, lessens the aesthetic damage of the non-`Split` nudge, but makes an even smaller gain in the radius. 
@@ -186,6 +226,7 @@ Both `/RectangularAlternateSplitNudge` and `/RectangularAlternateNudge` admit us
 Obviously using both would be strange.
 
 
+<a name="Bespoke"></a>
 ### Bespoke5 and Bespoke7
 
 `/Bespoke5` and `/Bespoke7` are ignored for more than five and seven glasses, respectively.
@@ -201,6 +242,7 @@ Obviously using both would be strange.
 
 </div>
 
+<a name="Temple"></a>
 ### Temple
 
 `/Temple` is an intricate pattern, that has the largest radius for 10 glasses on `/USL`, and for 13 glasses on either `/USLegal` or `/Tabloid`. 
@@ -216,10 +258,12 @@ The sub-parameter `/TempleExtraColsToLeftOrRowsBelow` is followed by one integer
 
 </div>
 
+<a name="Inefficient"></a>
 ## Inefficient packings
 
 There are classes of packing which, though they can have decorative or other advantages, are not space efficient.
 
+<a name="PostsAndLintel_Arch"></a>
 ### PostsAndLintel, and Arch
 
 `/PostsAndLintel` arranges the circles around the left, top and right edges of the page, optionally with some circles at the bottom centre. 
@@ -236,6 +280,7 @@ This design might be particularly appropriate if the central circles held the ca
 
 </div>
 
+<a name="Sides_Rows"></a>
 ### Sides, LeftSide, RightSide, TopRow, MiddleRow, BottomRow
 
 `/Sides`, `/LeftSide`, `/RightSide`, `/TopRow`, `/MiddleRow`, and `/BottomRow` are mostly self-explanatory. 
@@ -265,6 +310,7 @@ Example item of PackingStyles:
 
 </div>
 
+<a name="Array"></a>
 ## Array: custom arrangements
 
 It is possible to specify an arrangement with an array, thus:
@@ -401,6 +447,7 @@ The images show the packings for the diameters &le;&nbsp;4&frac12;&Prime; &asymp
 </div>
 
 
+<a name="Related_parameters"></a>
 ## Related parameters
 
 The `Names` are shown on each Glasses page. 
@@ -409,6 +456,7 @@ And likewise at the top of the page, `NamesShowTop`, with default elements of `f
 Each is shown in the font `NamesFont`, at size not exceeding and usually equalling`NamesFontSize`, but wiggled smaller if neccessary to avoid the circles.
 
 
+<a name="Code_extracts"></a>
 ## Code extracts
 
 Some extracts from the code used to make some of examples on this page.

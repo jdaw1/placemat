@@ -1,25 +1,45 @@
+<a name="top"></a>
 # Non-Glasses Pages #
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
-&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
-&#9655;&#xFE0E;&nbsp;*Non&#8209;Glasses&nbsp;Pages*&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md#readme)
+&#9654;&#xFE0E;&#8239;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
+&#9655;&#xFE0E;&#8239;*Non&#8209;Glasses&nbsp;Pages*&nbsp; 
+&#9654;&#xFE0E;&#8239;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Translations](translations.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Debugging](debugging.md#readme)
+
+**Links, internal this page**:&nbsp; 
+&starf;&#8239;[Top](#top)&nbsp; 
+&starf;&#8239;[Introduction](#Introduction)&nbsp; 
+&starf;&#8239;[`TastingNotes`](#TastingNotes)&nbsp; 
+&star;&#8239;[`TastingNotes_NumVerticalSections`](#TastingNotes_NumVerticalSections)&nbsp; 
+&star;&#8239;[`SideBySideGlassesTastingNotes`](#SideBySideGlassesTastingNotes)&nbsp; 
+&starf;&#8239;[`PlaceNames`](#PlaceNames)&nbsp; 
+&starf;&#8239;[`PrePour`](#PrePour)&nbsp; 
+&starf;&#8239;[`VoteRecorder`](#VoteRecorder)&nbsp; 
+&starf;&#8239;[`DecantingNotes`](#DecantingNotes)&nbsp; 
+&starf;&#8239;[`Accounts`](#Accounts)&nbsp; 
+&starf;&#8239;[`CorkDisplay`](#CorkDisplay)&nbsp; 
+&starf;&#8239;[`NeckTags`](#NeckTags)&nbsp; 
+&starf;&#8239;[`DecanterLabels`](#DecanterLabels)&nbsp; 
+&starf;&#8239;[`OneCircle`](#OneCircle)&nbsp; 
+&starf;&#8239;[`BottleWrap`](#BottleWrap)&nbsp; 
+&starf;&#8239;[`StickyLabels`](#StickyLabels)
 
 ----
 
 <div style="clear: both;"></div>
 
+<a name="Introduction"></a>
 ## Introduction ##
 
 There are multiple types of printable page. 
@@ -46,6 +66,7 @@ Each of the non-glasses pages has a few controls, but only a few, as described b
 
 <div style="clear: both;"></div>
 
+<a name="TastingNotes"></a>
 ## TastingNotes ##
 
 <img align="right" width="298" height="421" src="images/NonGlasses_TN.png">
@@ -151,7 +172,8 @@ Ignored parameters include `TastingNotesPaperType` and `TastingNotesOrientation`
 
 <p style="clear: both;">
 
-## Place names ##
+<a name="PlaceNames"></a>
+## PlaceNames ##
 
 <img align="right" width="210" height="149" src="images/NonGlasses_PN.png">
 
@@ -199,6 +221,7 @@ Distillation over the web will almost certainly time out: use local conversion.
 
 <div style="clear: both;"></div>
 
+<a name="PrePour"></a>
 ## PrePour ##
 
 If a tasting is attended by six people, decanters can circulate and people help themselves. 
@@ -242,6 +265,7 @@ If `RotationTitlesAboveBelowOverCirclearray`&nbsp;&ne;&nbsp;0, then small arrows
 
 <div style="clear: both;"></div>
 
+<a name="VoteRecorder"></a>
 ## VoteRecorder ##
 
 <img align="right" width="397" height="247" src="images/NonGlasses_VR.png">
@@ -309,10 +333,6 @@ The most [complicated definition of `/GlassesClusteredOnVoteRecorders`](http://w
 	GlassesOnTastingNotePages
 ] def
 ```
-
-
-
-
 Then there is the complicated `VoteRecorderCrossedBox`. 
 Obviously, I am not to guess the wine I know. 
 It is elegant for that box to be crossed. 
@@ -332,6 +352,7 @@ The arrays used are `NamesVoteRecorder`, `CirclearraysVoteRecorder`, `TitlesVote
 
 <div style="clear: both;"></div>
 
+<a name="DecantingNotes"></a>
 ## DecantingNotes ##
 
 <img align="right" width="298" height="146" src="images/NonGlasses_DN.png">
@@ -354,6 +375,7 @@ And the self-explnatory parameters `DecantingNotesPaperType` and `DecantingNotes
 
 <div style="clear: both;"></div>
 
+<a name="Accounts"></a>
 ## Accounts ##
 
 Of course, any financial rebalancing will have been computed in advance, audited in accordance with the [1844&nbsp;Companies&nbsp;Act](http://en.wikipedia.org/wiki/Joint_Stock_Companies_Act_1844), and settled using a system designated under the [The Financial Markets and Insolvency (Settlement Finality) Regulations 1999](http://www.legislation.gov.uk/uksi/1999/2979/contents/made). 
@@ -382,6 +404,7 @@ There are also the obvious parameters `AccountsTopText`, `AccountsColumnHeadings
 
 <div style="clear: both;"></div>
 
+<a name="CorkDisplay"></a>
 ## CorkDisplay ##
 
 <div align="center">
@@ -406,6 +429,7 @@ The `TitlesCorkDisplay` are shown at a font size that is &le;&nbsp;`CorkDisplayT
 
 <div style="clear: both;"></div>
 
+<a name="NeckTags"></a>
 ## NeckTags ##
 
 <img align="right" width="272" height="361" src="images/NonGlasses_NT.png">
@@ -434,6 +458,7 @@ The tags are on paper `NeckTagsPaperType`.
 
 <div style="clear: both;"></div>
 
+<a name="DecanterLabels"></a>
 ## DecanterLabels ##
 
 <img align="right" width="243" height="190" src="images/NonGlasses_DL.png">
@@ -461,6 +486,7 @@ The decanter labels are on paper `DecanterLabelsPaperType`.
 
 <img align="right" width="360" height="360" src="images/NonGlasses_1C.gif">
 
+<a name="OneCircle"></a>
 ## OneCircle ##
 
 Nice to post online can be a GIF animation of all the glass circles.
@@ -482,9 +508,11 @@ Nice to post online can be a GIF animation of all the glass circles.
 
 The natural way to proceed is to have the software make single-glass pages. 
 For each page, width = height = 2&nbsp;&times;&nbsp;radius, with the circle centred. 
-GIFing is then easy, such as via [GraphicConverter](https://www.lemkesoft.de/en/products/graphicconverter/)&rsquo;s *File* > *New* > *Animation using all Pages of the multipage Document (TIFF,PDF)*.
+GIFing is then easy, such as via [GraphicConverter](https://www.lemkesoft.de/en/products/graphicconverter/)&rsquo;s 
+*Effect* > *Animation/&nbsp;Frames* > *Convert&nbsp;Pages&nbsp;to&nbsp;Animation*; or 
+*File* > *New* > *Animation using all Pages of the multipage Document (TIFF,PDF)*.
 
-This is done by setting `OneCircles` to `true`. 
+In the PostScript set `OneCircles` to `true`. 
 By default that activates `OneCircleSuppressOtherPageTypes`, which suppresses all other pages.
 
 The parameters `PrePourShowBackgroundTexts` and `PrePourShowDroplets` also apply to the one-circle pages.
@@ -497,6 +525,7 @@ The background painting is controlled by the code `OneCircleBackgroundPaintCode`
 
 <div style="clear: both;"></div>
 
+<a name="BottleWrap"></a>
 ## BottleWrap ##
 
 At a blind tasting, particularly of wines served cold and undecanted, it is natural to bring the wine in its original bottle, wrapped in anonymising paper. 
@@ -521,6 +550,7 @@ And `BottleWrapScalingMin` is the target size of this graphic, as a proportion o
 Most other parameters function as for pre-pour pages: `BottleWrapReverseOrder`, `BottleWrapCollate`, `BottleWrapRemoveDuplicatesByWithinTitles`, `BottleWrapSortByWithinTitles`, `BottleWrapPaperType`, `BottleWrapOrientation`.
 
 
+<a name="StickyLabels"></a>
 ## StickyLabels ##
 
 <img align="right" width="218" height="587" src="images/NonGlasses_SL1.png">

@@ -1,22 +1,40 @@
-# Introduction, and a first placemat
+<a name="top"></a>
+# Introduction, and a first placemat #
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
-&#9655;&#xFE0E;&nbsp;*Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat*&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md#readme)
+&#9655;&#xFE0E;&#8239;*Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat*&nbsp; 
+&#9654;&#xFE0E;&#8239;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Translations](translations.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Debugging](debugging.md#readme)
+
+**Links, internal this page**:&nbsp; 
+&starf;&#8239;[Top](#top)&nbsp; 
+&starf;&#8239;[Introduction](#Introduction)&nbsp; 
+&starf;&#8239;[First&nbsp;placemat:&nbsp;advice&nbsp;for&nbsp;beginners](#First_placemat)&nbsp; 
+&star;&#8239;[A&nbsp;week&nbsp;in&nbsp;advance](#week_ahead_)&nbsp; 
+&star;&#8239;[Editing&nbsp;a&nbsp;file](#Editing)&nbsp; 
+&star;&#8239;[Download&nbsp;the&nbsp;.ps&nbsp;file](#Download_ps)&nbsp; 
+&star;&#8239;[Converting&nbsp;the&nbsp;.ps&nbsp;to&nbsp;.pdf](#ps_to_pdf)&nbsp; 
+&star;&#8239;[`Titles`&nbsp;`Belowtitles`&nbsp;`Circlearrays`](#Titles_Belowtitles_Circlearrays)&nbsp; 
+&star;&#8239;[Good&nbsp;practice](#Good_practice)&nbsp; 
+&star;&#8239;[More&nbsp;settings](#More_settings)&nbsp; 
+&star;&#8239;[PDF&nbsp;output](#PDF_output)&nbsp; 
+&starf;&#8239;[Many&nbsp;parameters](#Many_parameters)
 
 ----
+
+<a name="Introduction"></a>
+## Introduction ##
 
 You and your lucky guests are to enjoy a tasting of a fine beverage &mdash; perhaps Port, perhaps whisky, perhaps something else. 
 Of course, there will be many glasses, each person having one for each drink to taste. 
@@ -41,15 +59,18 @@ Those user-chosen parameters are written in Postscript, in PostScript syntax, op
 Nonetheless, placemats can be and have been made by those with no programming expertise. 
 You can too.
 
-## First placemat: advice for beginners
+<a name="First_placemat"></a>
+## First placemat: advice for beginners ##
 
-### A week in advance
+<a name="week_ahead_"></a>
+### A week in advance ###
 
 Don&rsquo;t try to make your first placemats with little time to spare. 
 Start at least a week in advance, to allow time for learning and improvements, and to avoid the other things that need doing just before a tasting. 
 Yes, it can be done quickly &mdash; but not your first placemats.
 
-### Editing a file
+<a name="Editing"></a>
+### Editing a file ###
 
 You will be directly editing a long text file written in PostScript. 
 A code editor, a good text editor, is a boon, and it should be one that understands PostScript. 
@@ -64,13 +85,15 @@ import shutil;import urllib.request;import os;import tempfile;l='https://raw.git
 Also good on Windows is [Notepad++](https://notepad-plus-plus.org/).
 
 
-### Download the .ps file
+<a name="Download_ps"></a>
+### Download the .ps file ###
 
 Bookmark this manual, and download to your machine a copy of [the PostScript code](../PostScript/placemat.ps?raw=1) (update this copy every time: new versions fix bugs; add features; improve default settings). 
 Store it in a directory named something like &ldquo;placemats&rdquo;. 
 Give the PostScript file a name which will make sense in aeons to come, perhaps <kbd>YYYYMMDD.ps</kbd>, or <kbd>YYYYMMDD_TastingName.ps</kbd>, as if it will become the first item in your placemat archive.
 
-### Converting the .ps to PDF
+<a name="ps_to_pdf"></a>
+### Converting the .ps to .pdf ###
 
 You have saved a .ps file. 
 This file is to be opened in two different ways: with the code editor; and with a program to convert it from .ps to .pdf. 
@@ -92,7 +115,8 @@ If it that has made a PDF resembling [this](images/placemat.pdf), then you can s
 
 </div>
 
-### Titles, Belowtitles, and Circlearrays
+<a name="Titles_Belowtitles_Circlearrays"></a>
+### Titles, Belowtitles, and Circlearrays ###
 
 Open the file with the code editor, perhaps by right-clicking and choosing from the &lsquo;Open With&hellip;&rsquo; applications (Sublime Text, NotePad++, whatever). 
 For a sense of which of the many features might be wanted look at the [list of old placemats](http://www.jdawiseman.com/placemats_list.html), some of which have helpful comments and advice.
@@ -161,7 +185,8 @@ Each person&rsquo;s paperwork is named, and `Names` also appear on some of [the 
 
 Including a blank name, `()`, is very strongly recommended: last-minute changes to the guest list do happen.
 
-### Good practice
+<a name="Good_practice"></a>
+### Good practice ###
 
 Before changing more parameters, set a good habit. 
 There is a comment line (comments begin with a &lsquo;`%`&rsquo;). 
@@ -171,7 +196,8 @@ There is a comment line (comments begin with a &lsquo;`%`&rsquo;).
 By cut-and-paste move the changed parameters to above that line. 
 And then move and update `ParametersVersionDateTimeAdobeFormat`, which is the time-stamp of the changing of the parameters in the form D:YYYYMMDDhhmm. 
 
-### More settings
+<a name="More_settings"></a>
+### More settings ###
 
 Those in North America might wish to change `PaperType` and `TastingNotesPaperType` from `/A4` to `/USL`&nbsp;= US&nbsp;Letter&nbsp;= 8&frac12;&Prime;&times;11&Prime;. 
 Observe that these parameters have a value that is a PostScript name, so beginning with a `/`. 
@@ -204,7 +230,8 @@ Some PDF viewers can show a sidebar, typically containing bookmarks to places wi
 These are configured in the array [`ExternalLinks`](document.md#external-links), which is of length a multiple of three: Boolean (*pro tem*, set all to `false`), then text description, then URL (e.g., `http://www.jdawiseman.com/`); then the next Boolean/description/URL; etc. 
 Populate `ExternalLinks`.
 
-### Output
+<a name="PDF_output"></a>
+### PDF output ###
 
 Convert to PDF. 
 Check carefully for errors that might have furtively appeared, and fix those found, reconverting to PDF as neccessary. 
@@ -221,7 +248,8 @@ Y&#7437;&#7437;&#7456;.)
 
 Enjoy the tasting. 
 
-### Many parameters
+<a name="Many_parameters"></a>
+## Many parameters ##
 
 There are hundreds more parameters, which: 
 * [choose fonts](fonts_glasses_decoration.md#fonts) and constrain [their sizes](type_sizes.md#readme);

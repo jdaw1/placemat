@@ -1,29 +1,44 @@
-# Compound Strings and non-ASCII characters
+<a name="top"></a>
+# Compound Strings and non-ASCII characters #
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1). And link to the [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15.
 
 **Links to documentation**: 
-&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
-&#9655;&#xFE0E;&nbsp;*Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters*&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md#readme)
+&#9654;&#xFE0E;&#8239;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
+&#9655;&#xFE0E;&#8239;*Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters*&nbsp; 
+&#9654;&#xFE0E;&#8239;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Translations](translations.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Debugging](debugging.md#readme)
+
+**Links, internal this page**:&nbsp; 
+&starf;&#8239;[Top](#top)&nbsp; 
+&starf;&#8239;[Introduction](#Introduction)&nbsp; 
+&starf;&#8239;[Strings,&nbsp;and&nbsp;compound&nbsp;strings](#compound_strings)&nbsp; 
+&starf;&#8239;[Glyph&nbsp;names](#Glyphs)&nbsp; 
+&starf;&#8239;[Accents&nbsp;and&nbsp;diacritics](#Accents_diacritics)&nbsp; 
+&starf;&#8239;[Unicode](#Unicode)&nbsp; 
+&starf;&#8239;[Lists&nbsp;and&nbsp;errors](#Lists_and_errors)
+
 
 ----
+
+<a name="Introduction"></a>
+## Introduction ##
 
 Some wanted text is more complicated than a plain [ASCII](http://en.wikipedia.org/wiki/ASCII) string. 
 [PostScript](http://en.wikipedia.org/wiki/PostScript) is an early-1980s language, and one of the ways in which it shows its age is its incompatibility with Unicode. 
 This document shows how to access non-ASCII characters, and the more general concept of a compound string.
 
 
-## Strings, and compound strings
+<a name="compound_strings"></a>
+## Strings, and compound strings ##
 
 The basic unit of Postscript text is the string, which are delimited with round brackets.
 ```PostScript
@@ -86,7 +101,8 @@ If a glyph is missing from a font then there should be a warning on the log page
 
 There follow a selection of other glyphs that might be useful to users of the placemat software.
 
-## Glyph names
+<a name="Glyphs"></a>
+## Glyph names ##
 
 **Punctuation**:&nbsp;&nbsp;&nbsp;&nbsp; 
 &lsquo;&nbsp;`/quoteleft`&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -190,7 +206,8 @@ There follow a selection of other glyphs that might be useful to users of the pl
 
 
 
-## Accents and diacritics
+<a name="Accents_diacritics"></a>
+## Accents and diacritics ##
 
 Some wines, and some people, have accents in their names.
 
@@ -251,7 +268,8 @@ The table shows the names of the diacritics, and with which base characters whic
 &#312;&nbsp;`/kgreenlandic`
 
 
-## Unicode
+<a name="Unicode"></a>
+## Unicode ##
 
 Some fonts allow access to some characters by their unicode hexadecimal number. 
 Typically four hex digits are prefixed with &ldquo;`/uni`&rdquo;; five hex digits are prefixed with &ldquo;`/u`&rdquo;. 
@@ -259,7 +277,8 @@ E.g.,&nbsp;`/uni1D00` =&nbsp;&ldquo;&#x1D00;&rdquo; =&nbsp;[small&#8209;caps&nbs
 `/u1D538` =&nbsp;&ldquo;&#x1D538;&rdquo; =&nbsp;[double&#8209;struck&nbsp;A](http://www.fileformat.info/info/unicode/char/1d538/index.htm).
 
 
-## Lists and errors
+<a name="Lists_and_errors"></a>
+## Lists and errors ##
 
 Not all fonts have all glyphs, and not all fonts allow Unicode-style naming. 
 Indeed, more strongly, few fonts have most glyphs. 
@@ -267,7 +286,7 @@ So the usual advice applies: carefully check the output.
 
 Attempts to use a non-existent glyph are logged, but some fonts have the glyph name but not a proper glyph. 
 E.g., several glyphs in Harrington paint as ![Missing glyph in Harrington font](images/Harrington_notdef.png). 
-So, as an assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15, and shows them in a simple PDF. 
+So, as an assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15, and shows them in an elegant PDF. 
 Some examples follow&mdash;though your version of these fonts might not be the same as my version, so do re-run the [PostScript generator](../PostScript/glyph_log.ps) on your machine. 
 * Sans-serif fonts: 
     - [`/TrebuchetMS-Bold`](images/TrebuchetMS-Bold.pdf) 

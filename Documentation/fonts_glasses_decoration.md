@@ -1,24 +1,44 @@
-# Fonts and glass decoration
+<a name="top"></a>
+# Fonts and glass decoration #
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
-&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
-&#9655;&#xFE0E;&nbsp;*Fonts&nbsp;and&nbsp;glass&nbsp;decoration*&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md#readme)
+&#9654;&#xFE0E;&#8239;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
+&#9655;&#xFE0E;&#8239;*Fonts&nbsp;and&nbsp;glass&nbsp;decoration*&nbsp; 
+&#9654;&#xFE0E;&#8239;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Translations](translations.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Debugging](debugging.md#readme)
+
+**Links, internal this page**:&nbsp; 
+&starf;&#8239;[Top](#top)&nbsp; 
+&starf;&#8239;[Abovetitles, Overtitles, and FillTexts](#Abovetitles_Overtitles_FillTexts)&nbsp; 
+&starf;&#8239;[Circlearrays](#Circlearrays)&nbsp; 
+&starf;&#8239;[Colours](#Colours)&nbsp; 
+&starf;&#8239;[Fonts](#Fonts)&nbsp; 
+&starf;&#8239;[CrossHatching](#CrossHatching)&nbsp; 
+&starf;&#8239;[Shapes: stars and flowers and hearts](#Shapes)&nbsp; 
+&starf;&#8239;[Spirals](#Spirals)&nbsp; 
+&starf;&#8239;[OutlineTitles](#OutlineTitles)&nbsp; 
+&starf;&#8239;[Rotation](#Rotation)&nbsp; 
+&starf;&#8239;[InlineTitles](#InlineTitles)&nbsp; 
+&starf;&#8239;[FillTexts](#FillTexts)&nbsp; 
+&star;&#8239;[Problems with FillTexts](#FillTexts_problems)&nbsp; 
+&starf;&#8239;[GlassesCirclesFadingFactor and GlassesCrossedOut](#GlassesCirclesFadingFactor)&nbsp; 
+&starf;&#8239;[GlassesPageWhiteCirclesBehind and CirclearraysFillBehind](#GlassesPageWhiteCirclesBehind)&nbsp; 
+&starf;&#8239;[GlassesAnnotations](#GlassesAnnotations)
 
 ----
 
-## Abovetitles, Overtitles, and FillTexts
+<a name="Abovetitles_Overtitles_FillTexts"></a>
+## Abovetitles, Overtitles, and FillTexts ##
 
 <img align="right" width="476" height="477" src="images/Circlearrays_Titles_Abovetitles_Belowtitles_Overtitles_FillTexts.png">
 
@@ -42,7 +62,8 @@ Extracts of code that made the image, for later explanation:
 /CircletextFontSize 12 def
 ```
 
-## Circlearrays
+<a name="Circlearrays"></a>
+## Circlearrays ##
 
 The number of copies of each instance of `Circlearrays` is constrained by `CircletextsMinCopies` and `CircletextsMaxCopies`. 
 When the latter is used, the &lsquo;current number&rsquo; of copies is on the stack. 
@@ -51,8 +72,8 @@ This allows a default value of `/CircletextsMaxCopies {dup 32 gt {dup dup 4 mod 
 Very rarely used, there are also the self-explanatory `CirclearraysFillBehind` and `CirclearraysFillBehindCode`.
 
 
-
-## Colours
+<a name="Colours"></a>
+## Colours ##
 
 In the previous image the `Titles` are grey, but the `Overtitles` and others are black. 
 There are four relevant parameters, which can take the values `/MidGrey` or `/Black`.
@@ -62,7 +83,8 @@ There are four relevant parameters, which can take the values `/MidGrey` or `/Bl
 /ColourSchemeBelowtitles /Black   def
 /ColourSchemeOvertitles  /Black   def
 ```
-## Fonts
+<a name="Fonts"></a>
+## Fonts ##
 
 The code may access any fonts appropriately installed on the machine doing the PS&nbsp;&rarr;&nbsp;PDF conversion. 
 Fonts are accessed by their PostScript name. 
@@ -123,7 +145,8 @@ As of the third millennium, most programming environments frown on code injectio
 But in this PostScript program [code injection](code_injection.md#readme) is allowed, often encouraged, and occasionally necessary. 
 Those not comfortable with that may safely leave such parameters at their default values. 
 
-## CrossHatching
+<a name="CrossHatching"></a>
+## CrossHatching ##
 
 <img align="right" width="485" height="266" src="images/CrossHatching.png">
 
@@ -184,7 +207,8 @@ Extracts of code that made the image:
 /OvertitleMaxFontSizeProportionTitles  0.333333 def
 ```
 
-## Shapes: stars and flowers and hearts
+<a name="Shapes"></a>
+## Shapes: stars and flowers and hearts ##
 
 <img align="right" width="504" height="222" src="images/Shapes.png">
 
@@ -222,8 +246,8 @@ Extracts of code that made the image for the Dow &rsquo;78:
 /ShapesInTitles true def
 ```
 
-
-## Spirals
+<a name="Spirals"></a>
+## Spirals ##
 
 Another playful decoration, a background spiral, is engaged by the Boolean `Spirals`. 
 
@@ -251,7 +275,8 @@ Extracts of code that made the image:
 Spirals are mentioned in [issue&nbsp;17](http://github.com/jdaw1/placemat/issues/17).
 
 
-## OutlineTitles
+<a name="OutlineTitles"></a>
+## OutlineTitles ##
 
 <img align="right" width="476" height="478" src="images/Outline_Rotation.png">
 
@@ -281,12 +306,14 @@ Extracts of code that made the image:
 
 The outlining code would be improved by the routine requested in [issue&nbsp;18](http://github.com/jdaw1/placemat/issues/18).
 
-## Rotation
+<a name="Rotation"></a>
+## Rotation ##
 
 The numeric parameter `RotationTitlesAboveBelowOverCirclearray` rotates the whole circle by that many degrees, in the QvA08  example by `30`. 
 
 
-## InlineTitles
+<a name="InlineTitles"></a>
+## InlineTitles ##
 
 This decoration is engaged by default, the relevant Booleans being `InlineTitles`, `InlineAbovetitles`, `InlineBelowtitles`, `InlineOvertitles`, and `InlinePlaceNames`. 
 
@@ -309,7 +336,8 @@ This is good if there is CrossHatchingInside, but less good with BackgroundTexts
 Again, the routine requested in [issue&nbsp;18](http://github.com/jdaw1/placemat/issues/18) would be a blessing.
 
 
-## FillTexts
+<a name="FillTexts"></a>
+## FillTexts ##
 
 The `FillTexts`, shown in the top image, were enabled by
 ```PostScript
@@ -328,7 +356,8 @@ The `FillTexts` are set in the font `FillTextFont`, at a size of at least `FillT
 
 The formatting of the `PlaceNames` generally matches that of the Titles, except that the filling text is `FillTextPlaceNames`, and the angle is `FillTextAnglePlaceNames`
 
-### Problems with FillTexts
+<a name="FillTexts_problems"></a>
+### Problems with FillTexts ###
 
 `FillTexts` makes complicated painting paths inside complicated clipping paths. 
 This can cause difficulties for some software; this can cause difficulties for some printers.
@@ -353,7 +382,8 @@ The relevant constraint is on the complexity of the path of the item of FillText
 As `Names` are typically longer than `Titles`, the problem can typically be remedied by setting `FillPlaceNames` to `false`.
 
 
-## GlassesCirclesFadingFactor and GlassesCrossedOut
+<a name="GlassesCirclesFadingFactor"></a>
+## GlassesCirclesFadingFactor and GlassesCrossedOut ##
 
 A few wines are not being drunk by a few people. 
 Perhaps they don&rsquo;t like wine of that type; perhaps allergic; perhaps something else. 
@@ -375,7 +405,8 @@ E.g.:
 } def  % /GlassesCirclesFadingFactor
 ```
 
-## GlassesPageWhiteCirclesBehind and CirclearraysFillBehind
+<a name="GlassesPageWhiteCirclesBehind"></a>
+## GlassesPageWhiteCirclesBehind and CirclearraysFillBehind ##
 
 Sometimes part of the output is converted to a bitmap, for inclusion in a web page or a phpBB post. 
 If the bitmap is to have transparency, it might be that a white background is wanted behind each of the circles. 
@@ -384,7 +415,8 @@ The Boolean `GlassesPageWhiteCirclesBehind` does what it says.
 There can also be paint behind the Circlearrays, activated by the Boolean `CirclearraysFillBehind`. 
 The painting is done with `CirclearraysFillBehindCode`.
 
-## GlassesAnnotations
+<a name="GlassesAnnotations"></a>
+## GlassesAnnotations ##
 
 Placemats have been made and printed and used. 
 During the tasting, an error is noticed. 

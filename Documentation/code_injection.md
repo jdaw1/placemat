@@ -1,26 +1,46 @@
-# Code injection
+<a name="top"></a>
+# Code injection #
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
-&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme)&nbsp; 
-&#9655;&#xFE0E;&nbsp;*Code&nbsp;injection*&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md#readme)
+&#9654;&#xFE0E;&#8239;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Translations](translations.md#readme)&nbsp; 
+&#9655;&#xFE0E;&#8239;*Code&nbsp;injection*&nbsp; 
+&#9654;&#xFE0E;&#8239;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Debugging](debugging.md#readme)
+
+**Links, internal this page**:&nbsp; 
+&starf;&#8239;[Top](#top)&nbsp; 
+&starf;&#8239;[Introduction](#Introduction)&nbsp; 
+&starf;&#8239;[Difficulties](#Difficulties)&nbsp; 
+&starf;&#8239;[Code&nbsp;inside&nbsp;compound&nbsp;strings](#inside_strings)&nbsp; 
+&star;&#8239;[Kerning](#Kerning)&nbsp; 
+&star;&#8239;[Superscript](#Superscript)&nbsp; 
+&star;&#8239;[Typeface&nbsp;changing](#Typeface_changing)&nbsp; 
+&star;&#8239;[Wine&nbsp;dependence](#Wine_dependence)&nbsp; 
+&star;&#8239;[`EffectiveNumCharacters`](#EffectiveNumCharacters)&nbsp; 
+&starf;&#8239;[Variables&nbsp;that&nbsp;parameters&nbsp;may&nbsp;inspect](#inspectables)&nbsp; 
+&star;&#8239;[Berry&nbsp;Bros&nbsp;&&nbsp;Rudd&nbsp;Selection](#BBR)&nbsp; 
+&star;&#8239;[Two&#8209;line&nbsp;text](#Two_line_text)&nbsp; 
+&star;&#8239;[Coloured&nbsp;hearts](#Coloured_hearts)&nbsp; 
+&star;&#8239;[Postponed](#Postponed)&nbsp; 
+&starf;&#8239;[Code,&nbsp;not&nbsp;injected](#not_injected)&nbsp; 
+&star;&#8239;[Auto&#8209;populating&nbsp;Names](#Auto_populating_Names)&nbsp; 
 
 ----
 
 <div style="clear: both;"></div>
 
-## Introduction
+<a name="Introduction"></a>
+## Introduction ##
 
 The software allows, even encourages, code injection, of which this document gives some examples.
 
@@ -33,7 +53,8 @@ However, other parameters are intended to hold code:
 
 Further, the majority of the several hundred parameters may hold code.
 
-## Difficulties
+<a name="Difficulties"></a>
+## Difficulties ##
 
 Much software has a clear specification. 
 If the input meets the specification, the output will behave as promised.
@@ -54,9 +75,8 @@ But the point is that code injection is not always cleanly defined.
 It might also be that, occasionally in the software, work is done with a usually-constant parameter outside a loop, when it could be done inside. 
 Multiple instances of this &lsquo;bug&rsquo; have been discovered in the past.
 
-## Code inside compound strings
-
-### Summary
+<a name="inside_strings"></a>
+## Code inside compound strings ##
 
 Almost any &lsquo;string&rsquo; parameter may be a &lsquo;[compound string](compound_strings_characters.md#readme)&rsquo;. 
 The exception are URLs, as appear in `ExternalLinks` and `LicensingAgreementLinkPlacemats`.
@@ -76,9 +96,8 @@ Code inside compound strings may assume that there is a `currentpoint` and a cur
 Any changes made by the code to the current path should be made by `rmoveto`, `rlineto`, and `rcurveto`; code should not alter the dictionary stack; nor alter anything that was on the stack at the start of code execution; nor leave changed the `currentmatrix`; nor change any of the many code variables.
 But the software does not prevent the user doing any of this: if you don&rsquo;t want to do these terrible things, just don&rsquo;t.
 
-## Examples
-
-### Kerning
+<a name="Kerning"></a>
+### Kerning ###
 
 Some pairs of letters look better if nudged closer together. This is particularly true with an x-height letter either side of a &lsquo;W&rsquo; or a &lsquo;V&rsquo;, and even more if either of the neighbouring characters is an &lsquo;A&rsquo;. 
 E.g.:
@@ -89,12 +108,14 @@ E.g.:
 
 Obviously, the optically best kern amount varies by font.
 
-### Superscript
+<a name="Superscript"></a>
+### Superscript ###
 
 To help with superscripting there are routines `SuperscriptOn` and `SuperscriptOff`:
 * `[(T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( May 2021)]` =<br>![Tue_18_May_2021](images/Tue_18_May_2021.png)
 
-### Typeface changing
+<a name="Typeface_changing"></a>
+### Typeface changing ###
 
 A compund string may change the current font:
 ```PostScript
@@ -105,7 +126,8 @@ A compund string may change the current font:
 ]
 ```
 
-### Wine dependence
+<a name="Wine_dependence"></a>
+### Wine dependence ###
 
 If a tasting comprises two or three different types of wine, a subtle formatting variation between them can be elegant. 
 However, the variation should not more than slightly change the lightness or darkness, because doing so would impede comparison of wines.
@@ -142,7 +164,8 @@ Of course, variation can be purely decorative.
 /SpiralCentreFromCentreAngle {360 WithinTitles 1 add mul Circlearrays length div} def
 ```
 
-### EffectiveNumCharacters
+<a name="EffectiveNumCharacters"></a>
+### EffectiveNumCharacters ###
 
 `FontSizesTitlesNotSmallerIfTitlesNotLonger` causes the font size to be affected by the length of a string, measured in characters. 
 That means it must be known how many deemed characters is something painted by user code. 
@@ -150,7 +173,8 @@ This can be set within the code, as `/EffectiveNumCharacters 1 def` (or other in
 Prior to August 2025 this has been used only once, in [November&nbsp;2011](http://www.jdawiseman.com/port/20111108_star_quality.pdf).
 
 
-## Variables that parameters may inspect
+<a name="inspectables"></a>
+## Variables that parameters may inspect ##
 
 Many parameters may be set to code, and this code may access internal variables. 
 Multiple variables can be available for inspection.
@@ -209,9 +233,8 @@ Multiple variables can be available for inspection.
 * Special case: if `FlightSeparationPaintSeparately` then `FlightSeparationPaintCode` may read `FlightSeparationLineNum`.
 
 
-## More examples
-
-### Berry Bros & Rudd Selection
+<a name="BBR"></a>
+### Berry Bros & Rudd Selection ###
 
 Berry Brothers&rsquo; name contains an abbreviation, shown as a small &lsquo;s&rsquo; above a dot. 
 This entails some PostScript.
@@ -270,7 +293,8 @@ Maybe, the [first time](https://www.theportforum.com/viewtopic.php?t=1127), it w
 But the code having been written, the effort of a copy-paste is justified by the elegance.
 
 
-### Two-line text
+<a name="Two_line_text"></a>
+### Two-line text ###
 
 
 Code can be complicated, especially if fighting against the general flow of the software&rsquo;s parameters. 
@@ -317,7 +341,8 @@ Aesthetically, this can look acceptable if the two words are of similar length a
 This is fighting against the software&rsquo;s *programgeist*, so maybe just don&rsquo;t at all.
 
 
-### Coloured hearts
+<a name="Coloured_hearts"></a>
+### Coloured hearts ###
 
 More flamboyant than the usual style, but this was for a [tasting on the day of a royal wedding](http://www.theportforum.com/viewtopic.php?t=12440). 
 Of course, if precise hue of colour is important, do not assume that screen and print colours will match: test on the actual printer. 
@@ -361,7 +386,8 @@ Of course, if precise hue of colour is important, do not assume that screen and 
 ```
 
 
-### Postponed
+<a name="Postponed"></a>
+### Postponed ###
 
 Tasting postponed by an extension of covid lockdowns? 
 Multiple links to placemats, so reluctant to remove placemats from web? 
@@ -398,9 +424,13 @@ It can be done.
 Fancier would be a pale background in the `PaintBackgroundCode`, and a darker edge in the `PaintForegroundCode`.
 
 
-## Code, not injected
+<a name="not_injected"></a>
+## Code, not injected ###
 
-### Auto-populating Names
+Code can be used uninjected, that is, executed at the time of parameter construction. 
+
+<a name="Auto_populating_Names"></a>
+### Auto-populating Names ###
 
 There are tastings to which everybody brings something, and sometimes some people bring more than one thing. 
 A standard presentation is to have the name of the person bringing the wine as the last item of the sub-arrays of `Circlearrays`. 
@@ -436,5 +466,3 @@ So names that are compound strings, so all those with kerning or accents, should
 
 * If `CirclearraysFont` &ne; `NamesFont`, then presence or quantities of `Kern`ing might need to differ. 
 In this case, `Names` must be set manually.
-
-

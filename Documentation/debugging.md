@@ -1,26 +1,38 @@
-# Debugging
+<a name="top"></a>
+# Debugging #
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
-&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
-&#9655;&#xFE0E;&nbsp;*Debugging*
+&#9654;&#xFE0E;&#8239;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Translations](translations.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
+&#9655;&#xFE0E;&#8239;*Debugging*
+
+**Links, internal this page**:&nbsp; 
+&starf;&#8239;[Top](#top)&nbsp; 
+&starf;&#8239;[Introduction](#Introduction)&nbsp; 
+&starf;&#8239;[Error&nbsp;reporting&nbsp;in&nbsp;PostScript](#Error_reporting)&nbsp; 
+&starf;&#8239;[Diagnostic&nbsp;assistance](#Diagnostics)&nbsp; 
+&star;&#8239;[Diagnostic&nbsp;basics](#Diagnostic_basics)&nbsp; 
+&star;&#8239;[`DeBugLevel`](#DeBugLevel)&nbsp; 
+&starf;&#8239;[`WatchExpression`](#WatchExpression)&nbsp; 
+&starf;&#8239;[Bugs](#Bugs)
 
 ----
 
 <div style="clear: both;"></div>
 
-## Introduction
+<a name="Introduction"></a>
+## Introduction ##
 
 PostScript is a language with much beauty and power, but it is painful to debug. 
 Consider the following near-minimal program.
@@ -40,7 +52,7 @@ Stack:
 ```
 
 Observe: no line number. 
-The placemat code has &asymp;3k instances of `sub`, and the programmer is told only that an unspecified one of them has failed. 
+The placemat code has &asymp;&#8239;3k instances of `sub`, and the programmer is told only that an unspecified one of them has failed. 
 As written in the first edition of [*Port Vintages* (2018)](https://academieduvinlibrary.com/product/port-vintages/), J.&#8239;D.&#8239;A.&#8239;Wiseman:
 
 > &ldquo;If you don&rsquo;t find it in the index, look very carefully through the entire catalogue&rdquo;, *Sears Roebuck and Co., Consumers Guide* (1897), as quoted in *The Art of Computer Programming: Volume 3, Sorting and Searching* (1973), Donald E. Knuth. 
@@ -51,7 +63,8 @@ Built-in to the software is some diagnostic assistance.
 However, if the failure is in the parameters, before the diagnostics are enabled, then this assistance will be absent.
 
 
-## Error reporting in PostScript
+<a name="Error_reporting"></a>
+## Error reporting in PostScript ##
 
 If the code fails while parameters are being set, then PostScript&rsquo;s error reporting is what you have. 
 Consider `/Titles [ ThisNotDefined ] def`. 
@@ -73,12 +86,28 @@ Reading from the bottom, the stack starts with `/Titles`: the problem may well h
 (The `-mark-` in the stack is `[` or `<<` or `mark`, usually the first of them.) 
 
 Often, but not always, these suffice. 
-But sometimes errors are fiddlier, especially with [injected code](code_injection.md#readme). 
+
+But this doesn&rsquo;t always work. Consider <code>/Titles&nbsp;[&nbsp(stuff)&nbsp]</code>, with no `def`; and, much later, <code>/VoteRecorderTopTexts&nbsp;ThisNotDefined&nbsp;def</code>. 
+Then:
+```
+%%[ Error: undefined; OffendingCommand: ThisNotDefined ]%%
+
+Stack:
+/VoteRecorderTopTexts
+[(stuff)]
+/Titles
+```
+The error is in the definition of `/VoteRecorderTopTexts`, but the earliest item on the stack is `/Titles`. 
+Careful!
+
+So sometimes errors are fiddlier, especially with [injected code](code_injection.md#readme). 
 
 
-## Diagnostic assistance
+<a name="Diagnostics"></a>
+## Diagnostic assistance ##
 
-### Basics
+<a name="Diagnostic_basics"></a>
+### Diagnostic basics ###
 
 Failures can happen in the software because of bugs in the software itself, or because of a type error in a parameter, or because of a bug in [injected code](code_injection.md#readme). 
 
@@ -89,7 +118,8 @@ Next in the log will be the contents of the top three dictionaries on the dictio
 Distinctive variables in these can be a great help in locating the place of failure. 
 Values of these variables can help more.
 
-### DeBugLevel
+<a name="DeBugLevel"></a>
+### DeBugLevel ###
 
 One of the first names defined within the code, so shortly below the parameters, is `DeBugLevel`. 
 `DeBugLevel` defaults to 65535, and all values larger than 100 are equivalent do-nothing values.
@@ -114,7 +144,8 @@ If I&rsquo;m having difficulty, standard practice is:
 ```
 
 
-## WatchExpression
+<a name="WatchExpression"></a>
+## WatchExpression ##
 
 Two small routines can help debug injected code. 
 
@@ -128,7 +159,8 @@ Two small routines can help debug injected code.
 A few `WatchExpressions` can ease the debugging of injected code.
 
 
-## Bugs
+<a name="Bugs"></a>
+## Bugs ##
 
 If the bug is in the software, please raise an [issue](http://github.com/jdaw1/placemat/issues). 
 Take an expansive view of a bug: call it a bug if the failure was within your injected code, but that might have succeeded if the software had been more generous.

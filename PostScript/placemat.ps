@@ -1,6 +1,6 @@
 %!PS
 
-% This version 18:30 Monday 8th September 2025
+% This version 23:00 Wednesday 10th September 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202509081830) def
+/ParametersVersionDateTimeAdobeFormat (D:202509102300) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -588,6 +588,8 @@ if} bind def  % /VoteRecorderCrossedBox
 /BottleWrapShowCrossHatchingInside true def  % ignored if CrossHatchingInside is false
 
 /GlassesClusteredOnVoteRecorders [ GlassesOnTastingNotePages  VoteRecorderIncludeGuessing {dup} if ] def  % triple-depth array, same length as VoteRecorderTopTexts and VoteRecorderShowTotalRow
+/VoteRecorderMonkeyAppend  {/VoteRecorderColTitlesEarly load length 1 ge  VoteRecorderSheetNum 1 eq  and}  def
+/VoteRecorderMonkeyVote (D70) def  % Can refer to WithinTitles
 /VoteRecorderShowTotalRow [ false  VoteRecorderIncludeGuessing {true} if ] def  % Must be same length as VoteRecorderTopTexts and GlassesClusteredOnVoteRecorders
 /VoteRecorderPaperType {<< /TNSheetNum 0 >> begin TastingNotesPaperType end} bind def
 /VoteRecorderOrientation /Either def  % /Portrait /Landscape /Either
@@ -757,9 +759,6 @@ if} bind def  % /VoteRecorderCrossedBox
 % Please submit others to http://github.com/jdaw1/placemat/issues                               %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-/VoteRecorderColTitlesEarly [  [ ]  VoteRecorderIncludeGuessing {[ (Reveal) [(T) {-0.06 Kern} (otal)] ]} if  ] def
-/VoteRecorderColTitlesAfter [  [ [(T) {-0.06 Kern} (otal)] ]   VoteRecorderIncludeGuessing {[ ]} if  ] def
-
 /VoteRecorderTopTexts  % Each sub-array contains some TopTexts. Must be same length as GlassesClusteredOnVoteRecorders and as VoteRecorderShowTotalRow
 [
 	[ % This block's element of VoteRecorderShowTotalRow defaults to false
@@ -770,13 +769,11 @@ if} bind def  % /VoteRecorderCrossedBox
 		(What is it?)  % (Vintage?)   [(Y) {-0.12 Kern} (ear?)]  (Age?)  (Shipper?)  (Quinta?)  (Distillery?)  (Vineyard?)  [(Ch) /acircumflex (teau?)]
 	]} if  % VoteRecorderIncludeGuessing
 ] def  % /VoteRecorderTopTexts, Must be same length as GlassesClusteredOnVoteRecorders and VoteRecorderShowTotalRow
-
-
-/VoteRecorderMonkeyAppend  {/VoteRecorderColTitlesEarly load length 1 ge  VoteRecorderSheetNum 1 eq  and}  def
-/VoteRecorderMonkeyVote (D70) def  % Can refer to WithinTitles
 /VoteRecorderMonkeyName (Monkey) def
 /VoteRecorderInstruction {VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU {()} {(Record points, not rank.)} ifelse} bind def
 /VoteRecorderTotalRowTitle [(T) {-0.09 Kern} (otal)] def
+/VoteRecorderColTitlesEarly [  [ ]  VoteRecorderIncludeGuessing {[ (Reveal) [(T) {-0.06 Kern} (otal)] ]} if  ] def
+/VoteRecorderColTitlesAfter [  [ [(T) {-0.06 Kern} (otal)] ]   VoteRecorderIncludeGuessing {[ ]} if  ] def
 
 /TastingNotesColumnHeadings [  (Times)  (Eye)  (Nose)  (Mouth)  (Score)  ] def
 /TastingNotesPageNumCompoundString [(Page ) {TNSheetNum 1 add 5 string cvs}] def
@@ -799,7 +796,11 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /CorkDisplayTopText (The Corks) def
 
-/DecanterLabelsTopText (Decanter labels: cut; paste to business cards; allow to dry; punch holes; hang on clean decanters; fill decanters; wait; pour; drink; enjoy. Also drink plenty of water.) def
+/DecanterLabelsTopText [
+	(Decanter labels: cut; paste to business cards; allow to dry; )
+	(punch holes; hang on clean decanters; fill decanters; )
+	(wait; pour; drink; enjoy. Also drink plenty of water.)
+] def  % /DecanterLabelsTopText
 
 /EmptyPageString (Fewer pages than before, so this page now omitted.) def
 
@@ -838,7 +839,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202509081830) def
+/SoftwareVersionDateTimeAdobeFormat (D:202509102300) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -847,9 +848,10 @@ RandomisationSeed srand
 % /dict {dup 1 add dict dup 3 -1 roll /DictionaryOriginalSize exch put} bind def
 % /end {currentdict /DictionaryOriginalSize known {DictionaryOriginalSize currentdict length 1 sub lt {() = TypeOfPagesBeingRendered = DictionaryOriginalSize = currentdict length 1 sub = (###) =} if} if end} bind def
 
-/RandMax 2147483647 def  % 2^31 - 1, PLRM3 p637
-/HalfRandMax RandMax 2 div def
-/IntegerMax      2147483647 def  % 2^31 - 1, PLRM3, Appendix B, table B.1, p739, row 1
+/IntegerMin      -2147483648 def  % -(2^31),  PLRM3, Appendix B, table B.1, p739, row 1
+/IntegerMax      +2147483647 def  % 2^31 - 1, PLRM3, Appendix B, table B.1, p739, row 1
+/RandMax         +2147483647 def  % 2^31 - 1, PLRM3, p637. Seemingly not linked to IntegerMax.
+/HalfRandMax     RandMax 2 div  def
 /Pi              3.14159265358979323846 def
 /TwoPi           6.2831853071795864769 def
 /TwoPiReciprocal 0.15915494309189533576888 def
@@ -877,7 +879,7 @@ RandomisationSeed srand
 /PrinterEpsilonSquared PrinterEpsilon dup mul def
 /AsciiTab (\t) 0 get def   /AsciiNewline (\n) 0 get def   /AsciiSpace ( ) 0 get def
 
-/usertimePostPrev usertime 3600000 sub def  % One hour ago
+/usertimePostPrev IntegerMin def
 
 /DeSizeRounding 64 def  % 1000 just too big. 250 seems OK. This small for safety, and it's good enough for task.
 
@@ -13425,7 +13427,7 @@ currentdict /GlyphShowKnownAbsences undef
 						/TypeOfPagesBeingRendered /OneCircle store
 
 						mark
-							/Rect [ PageWidth -2 div  PageHeight 2 div  2 copy ]
+							/Rect [ Radii SheetNum get neg  dup neg   2 copy ]  % Page zero-centred, and half page size is radius. So not PageWidth nor PageHeight.
 							/Subtype /Text
 							/Contents
 								mark  (One circle, intended for the generation of bitmap images, perhaps a GIF animation of all the circles.\r\n\r\n) ()
@@ -15130,7 +15132,7 @@ currentdict /GlyphShowKnownAbsences undef
 		/Title (\247 In Print Order)   ShownPages 0 gt  ShownPagesData 0 ShownPages getinterval {/ThisPaperType get dup //null eq {pop pop //false exit} if ShownPagesData 0 get /ThisPaperType get ne {pop //false exit} if} forall
 			{mark exch ( \() ShownPagesData 0 get begin PaperTypeStringShortPDF end (\)) ConcatenateToMark} if
 	/OUT pdfmark
-	/PrevPageOrdering -2147483648 def  % PLRM3, Appendix B, table B.1, p739, row 1, "Smallest integer value"
+	/PrevPageOrdering IntegerMin def
 	/ShownPageThis 0 def
 	{
 		ShownPageThis ShownPages ge {exit} if

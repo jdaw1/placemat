@@ -1,24 +1,33 @@
-# Type sizes
+<a name="top"></a>
+# Type sizes #
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
-&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
-&#9655;&#xFE0E;&nbsp;*Type&nbsp;sizes*&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md#readme)
+&#9654;&#xFE0E;&#8239;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
+&#9655;&#xFE0E;&#8239;*Type&nbsp;sizes*&nbsp; 
+&#9654;&#xFE0E;&#8239;[Translations](translations.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Debugging](debugging.md#readme)
+
+**Links, internal this page**:&nbsp; 
+&starf;&#8239;[Top](#top)&nbsp; 
+&starf;&#8239;[Introduction](#Introduction)&nbsp; 
+&starf;&#8239;[Circlearrays sizing](#Circlearrays_sizing)&nbsp; 
+&starf;&#8239;[Titles sizing](#Titles_sizing)&nbsp; 
+&starf;&#8239;[VerticalMiddling](#VerticalMiddling)
 
 ----
 
-## Introduction
+<a name="Introduction"></a>
+## Introduction ##
 
 There are lots of fussy controls over the sizing of fonts. 
 A few of these controls are, or are sometimes, *worthwhile*. 
@@ -54,14 +63,15 @@ Again there are one-at-a-time constraints, and equality constraints.
 
 These should be tackled in order.
 
-## Circlearrays sizing
+<a name="Circlearrays_sizing"></a>
+## Circlearrays sizing ##
 
-### Worthwhile
+### Worthwhile ###
 
 The circle text is initially set to be `CirclearraysFontSizeMax`. 
 Also relevant is `CirclearraysMinNumSpacesBetween`, the gap between the items of `Circlearrays`, measured in space widths.
 
-### Superfluous
+### Superfluous ###
 
 Next, the font size can reduced to satisfy `CirclearraysMinCopies`.
 
@@ -78,11 +88,12 @@ Relevant when glasses spill over multiple pages, `CirclearraysSameFontSizeIfRadi
 (Technical note: `CirclearraysSameFontSizeIfRadiiShrunkToBeSame` should have the same Boolean value over any such set of pages. 
 Typically this is most easily achieved by having it depend on `PageOrderingGlasses SheetNum get` or on `ShrinkRadii SheetNum get`, rather than directly on `SheetNum`.)
 
-## Titles sizing
+<a name="Titles_sizing"></a>
+## Titles sizing ##
 
 Broadly, the `Titles` etc fit inside the `Circlearrays`. 
 
-### Superfluous
+### Superfluous ###
 
 If a circle has a non-empty element of `Abovetitles`, there should be space above the Title to hold that element. This is a constraint on the size of the `Titles`, which are chosen such that the space above is at least `TitleMinHeightForAbovetitleProportionInnerRadius` inner radii. 
 Likewise, `Belowtitles`, below, `TitleMinHeightForBelowtitleProportionInnerRadius`. 
@@ -95,7 +106,7 @@ Inside the `Circlearrays` there is a `ExclusionAnnulusProportionInnerRadiusTitle
 It would be ugly for there to be font sizes marginally different: 100pt, 104pt, 108pt, 108pt. 
 The next few controls define sets, the font size of all of which are reduced to the smallest in the set.
 
-### Worthwhile
+### Worthwhile ###
 
 * If larger&divide;smaller &le;`FontSizesRatioTitlesMin` , then the larger is collapsed to the smaller. 
 Setting this to a large value causes all to be the same size. 
@@ -103,7 +114,7 @@ Setting this to any value &le;1 causes this to be ignored.
 Default is 1.1892 &asymp;&nbsp;&#8732;2. 
 It is one of the few sizing parameters which I do change.
 
-### Superfluous
+### Superfluous ###
 
 * `FontSizesTitlesNotSmallerIfTitlesNotLonger` is a Boolean, which can constrains the size of a &lsquo;W&rsquo; to be no smaller than that of a &lsquo;ii&rsquo;, and ensures that the latter&rsquo;s font size equals that of a &lsquo;SW&rsquo;. Observe that this being true compels `Titles` of the same character count to be the same size.
 
@@ -117,7 +128,7 @@ These four bullets are repeatedly applied until there are no more changes.
 
 With the size of the Titles set, the space above and below can be used for the `Abovetitles` and `Belowtitles`, which are done jointly with the `Overtitles` (henceforth, **A**, **B**, **O**).
 
-### Worthwhile
+### Worthwhile ###
 
 * Sizes are one-at-a-time constrained by `AbovetitleMaxFontSizeProportionTitles`, `BelowtitleMaxFontSizeProportionTitles`, and `OvertitleMaxFontSizeProportionTitles`.
 
@@ -126,7 +137,7 @@ With the size of the Titles set, the space above and below can be used for the `
 Equal elements &rArr; considered together. 
 As a guide, if fonts from different families &hArr; not together (i.e., work `/Gotham-Book` with `/GothamNarrow-Bold`, but neither with `/Garamond`).
 
-### Superfluous
+### Superfluous ###
 
 Analogous to the <code>Titles&hellip;</code> are:
 
@@ -136,9 +147,10 @@ Analogous to the <code>Titles&hellip;</code> are:
 
 * and `FontSizesAboveBelowOverNotSmallerIfTitlesNotLonger`.
 
-## VerticalMiddling
+<a name="VerticalMiddling"></a>
+## VerticalMiddling ##
 
-### Superfluous
+### Superfluous ###
 
 The VerticalMiddling parameters are for the fussy. 
 The default values will almost always suffice.

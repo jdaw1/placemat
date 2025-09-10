@@ -1,24 +1,36 @@
-# Page-Level Controls
+<a name="top"></a>
+# Page-Level Controls #
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
-&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
-&#9655;&#xFE0E;&nbsp;*Page&#8209;level&nbsp;controls*&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md#readme)
+&#9654;&#xFE0E;&#8239;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
+&#9655;&#xFE0E;&#8239;*Page&#8209;level&nbsp;controls*&nbsp; 
+&#9654;&#xFE0E;&#8239;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Translations](translations.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Bitmap&nbsp;images](bitmap_images.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Debugging](debugging.md#readme)
+
+**Links, internal this page**:&nbsp; 
+&starf;&#8239;[Top](#top)&nbsp; 
+&starf;&#8239;[Introduction](#Introduction)&nbsp; 
+&starf;&#8239;[`GlassesOnSheets`&nbsp;and&nbsp;`GlassesOnTastingNotePages`](#GlassesOnSheets)&nbsp; 
+&starf;&#8239;[`BackgroundTexts`](#BackgroundTexts)&nbsp; 
+&starf;&#8239;[Water&nbsp;boxes](#Water_boxes)&nbsp; 
+&starf;&#8239;[Droplets](#Droplets)&nbsp; 
+&starf;&#8239;[Flights&nbsp;within&nbsp;a&nbsp;page](#Flights)&nbsp; 
+&starf;&#8239;[ThePortForum&nbsp;Icon](#ThePortForum_Icon)
 
 ----
 
-## Headers and Footers
+<a name="Introduction"></a>
+## Introduction ##
 
 Headers and footers can be added to the page. 
 Typically these will hold a date, a location, a title, and perhaps some branding&mdash;the author includes URLs. 
@@ -48,7 +60,8 @@ This can be controlled with `HeaderFooterCenterX`, which is the *x* position of 
 Also see [`/SuppressNonRightOrnaments`](PackingStyles.md#sides-leftside-rightside-toprow-middlerow-bottomrow) and `/SuppressNonLeftOrnaments`, being flags usable within `PackingStyles`.
 
 
-## GlassesOnSheets and GlassesOnTastingNotePages
+<a name="GlassesOnSheets"></a>
+## GlassesOnSheets and GlassesOnTastingNotePages ##
 
 More than six or seven glasses would be too many for one sheet of `/A4` or `/USL`. 
 If the PaperType is one of these, there must be &ge;2 sheets.
@@ -100,7 +113,8 @@ The PostScript loops save the small effort of typing and checking consecutive in
 Tasting-note pages are configured similarly, with the integer `GlassesOnSheetsMaxPerTNSheet` helping make a default value for `GlassesOnTastingNotePages`.
 
 
-## BackgroundTexts
+<a name="BackgroundTexts"></a>
+## BackgroundTexts ##
 
 Tastings typically have a theme, something shared by most of the wines. 
 It is possible to add a background text, scaled to fit the whole page, such as &ldquo;S&rdquo;, &ldquo;RV&rdquo;, or &ldquo;85&rdquo;. 
@@ -122,7 +136,7 @@ The default of `/CirclesEdges` copes well if the used element of [`PackingStyles
 
 </div>
 
-### Superfluous
+### Superfluous ###
 
 The code chooses separate *x* and *y* sizes, each as large as possible, subject to the following.
 The ratio of the vertical and horizontal font sizes, *y*&divide;*x*, must lie between `BackgroundTextsSquooshMin` and `BackgroundTextsSquooshMax`. 
@@ -169,7 +183,8 @@ Extracts from code that made the example:
 /BackgroundTextsGlassesPaintCode {clip 6 setlinewidth 0.9 setgray stroke} def
 ```
 
-## H&#8322;O boxes
+<a name="Water_boxes"></a>
+## Water boxes ##
 
 
 Particularly at a tasting of a sweet fortified wine, drinking water is important. 
@@ -183,7 +198,7 @@ On glasses pages boxes should appear on the lower-right of the page for right-ha
 Tasters&rsquo; handedness is set by `LeftHanders`, an array of the text of the name of known left-handers, whether or not at this tasting. 
 If a name within `Names` is duplicated, and both are to be left-handed, that name must appear twice within `LeftHanders`.
 
-### Superfluous
+### Superfluous ###
 
 If there are multiple pages of glasses, by `GlassesOnSheets`, then on which of these pages should water boxes they appear? 
 For simplicity, `WaterBoxesOverrideShowEverySheet` being true overrides the complexity in the next paragraph, putting water boxes on every sheet (of glasses or of tasting notes, per `WaterBoxes`). 
@@ -194,7 +209,8 @@ The default values of `WaterBoxesShowRight` and `WaterBoxesShowLeft` refer to `P
 There is an analgous parameter `WaterBoxesShowTN`, used for water boxes on the tasting-note sheets.
 
 
-## Droplets
+<a name="Droplets"></a>
+## Droplets ##
 
 <div align="center">
 
@@ -237,7 +253,8 @@ There are also Boolean parameters `PrePourShowDroplets`, `NeckTagsShowDroplets`,
 If [`SideBySideGlassesTastingNotes`](not_glasses.md#SideBySideGlassesTastingNotes) is `true`, the Boolean `Droplets_SideBySide_UnderTNs` controls whether the Droplets span just the glasses, or also the TNs.
 
 
-## Separating flights within a page
+<a name="Flights"></a>
+## Separating flights within a page ##
 
 It is often natural to split a tasting into &lsquo;flights&rsquo; of a few wines. 
 If there is lots of table space, and five wines per flight, then this can be arranged as one flight per `/A4` or `/USL` page. 
@@ -318,7 +335,8 @@ The problem can be avoided if no line begins where the previous one ended, achie
 
 
 
-## The Port Forum Icon ![The Port Forum Icon](images/TPF_clr_16.png) ![The Port Forum Icon](images/TPF_bw_16.png)
+<a name="ThePortForum_Icon"></a>
+## The Port Forum Icon ![The Port Forum Icon](images/TPF_clr_16.png) ![The Port Forum Icon](images/TPF_bw_16.png) ##
 
 The majority of the placemats created by the author are for tastings arranged via [www.ThePortForum.com](http://www.theportforum.com/). 
 To control the placement of a ThePortForum icon the parameter `ThePortForumIconPlacement` is set to one of `/None`, `/LowerLeft`, `/LowerRight`, `/UpperLeft`, `/UpperRight`, `/LowerNonWaterBox`, `/UpperNonWaterBox` or `/UpperNonWaterBox`, the last three evaluating to left or right according to the side on which the WaterBoxes are placed. 

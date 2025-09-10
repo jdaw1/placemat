@@ -1,26 +1,40 @@
-# Bitmap images
+<a name="top"></a>
+# Bitmap images #
 
 **Link to the main program**: [placemat.ps](../PostScript/placemat.ps?raw=1)
 
 **Links to documentation**: 
-&#9654;&#xFE0E;&nbsp;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Translations](translations.md#readme)&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
-&#9655;&#xFE0E;&nbsp;*Bitmap&nbsp;images*&nbsp; 
-&#9654;&#xFE0E;&nbsp;[Debugging](debugging.md#readme)
+&#9654;&#xFE0E;&#8239;[Introduction,&nbsp;and&nbsp;a&nbsp;first&nbsp;placemat](introduction_first_placemat.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Fonts&nbsp;and&nbsp;glass&nbsp;decoration](fonts_glasses_decoration.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Compound&nbsp;Strings&nbsp;and&nbsp;non&#8209;ASCII&nbsp;characters](compound_strings_characters.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Page&#8209;level&nbsp;controls](page_level.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Arrangement&nbsp;of&nbsp;glasses&nbsp;on&nbsp;the&nbsp;page](PackingStyles.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Non&#8209;Glasses&nbsp;Pages](not_glasses.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Document&#8209;level&nbsp;controls](document.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Type&nbsp;sizes](type_sizes.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Translations](translations.md#readme)&nbsp; 
+&#9654;&#xFE0E;&#8239;[Code&nbsp;injection](code_injection.md#readme)&nbsp; 
+&#9655;&#xFE0E;&#8239;*Bitmap&nbsp;images*&nbsp; 
+&#9654;&#xFE0E;&#8239;[Debugging](debugging.md#readme)
+
+**Links, internal this page**:&nbsp; 
+&starf;&#8239;[Top](#top)&nbsp; 
+&starf;&#8239;[Introduction](#Introduction)&nbsp; 
+&starf;&#8239;[Make&nbsp;an&nbsp;EPS](Make_EPS)&nbsp; 
+&starf;&#8239;[PostScript](PostScript)&nbsp; 
+&star;&#8239;[Image&nbsp;data&nbsp;blocks](Image_data_blocks)&nbsp; 
+&star;&#8239;[`PaintBackgroundInsideGlassCircles`&nbsp;and&nbsp;`PaintBackgroundCode`](PaintBackgroundCode)&nbsp; 
+&star;&#8239;[`PaintBackgroundInsideGlassCircles`](PaintBackgroundInsideGlassCircles)&nbsp; 
+&star;&#8239;[`PaintBackgroundCode`](PaintBackgroundCode)&nbsp; 
+&starf;&#8239;[Conclusion](Conclusion)
+
 
 ----
 
 <div style="clear: both;"></div>
 
-## Introduction
+<a name="Introduction"></a>
+## Introduction ##
 
 Adding bitmap images is difficult. 
 It is painful. 
@@ -28,7 +42,8 @@ Unless you absolutely must, don&rsquo;t.
 
 This document is for those who must.
 
-## Make an EPS
+<a name="Make_EPS"></a>
+## Make an EPS ##
 
 The image needs to be in PostScript. 
 Start with an image, appropriately cropped. 
@@ -50,7 +65,8 @@ Resulting EPS files:
 [colour](images/ImageColour_example.eps); 
 [gray](images/ImageGray_example.eps). 
 
-## PostScript
+<a name="PostScript"></a>
+## PostScript ##
 
 Let&rsquo;s show the code:
 ```PostScript
@@ -158,7 +174,8 @@ It is intended that much of this can be copy-pasted, with small alterations, int
 There are four blocks of action: `PaintBackgroundCode`, `PaintBackgroundInsideGlassCircles`, `ImageGray_data`, `ImageColour_data`. 
 These are tackled in reverse order. 
   
-### Image data blocks
+<a name="Image_data_blocks"></a>
+### Image data blocks ###
 
 There are two blocks of image data.
 * They start with the name of the variable that will hold this data. In this example the unimaginative names are `/ImageGray_data` and `/ImageColour_data`.
@@ -167,7 +184,8 @@ There are two blocks of image data.
 * The image data is terminated with a &ldquo;>&rdquo;. My preference has been that this starts a new line, but that newline is optional. 
 * And then a `def`, which attaches that block of data to the variable name, 
 
-### PaintBackgroundInsideGlassCircles and PaintBackgroundCode
+<a name="PaintBackgroundCode"></a>
+### PaintBackgroundInsideGlassCircles and PaintBackgroundCode ###
 
 `PaintBackgroundInsideGlassCircles` and `PaintBackgroundCode` are code-injection parameters, with a default do-nothing value of `{}`. 
 As with any other parameter, if giving them new values, don&rsquo;t forget to remove the lines setting their default values. 
@@ -179,7 +197,8 @@ These two parameters are to hold code, which may do arbitrary computation, and w
 
 </div>
 
-### PaintBackgroundInsideGlassCircles
+<a name="PaintBackgroundInsideGlassCircles"></a>
+### PaintBackgroundInsideGlassCircles ###
 
 `PaintBackgroundInsideGlassCircles` is executed each time a glass circle is painted. 
 On execution, the graphic matrix will have already been translated such that the centre of the circle is at (0,0).
@@ -202,7 +221,8 @@ The example selects only the first: `WithinTitles 0 eq`.
 * We want the point (0,0) to be the centre of the image, not its lower-left, which is done with `width -2 div height -2 div translate`. 
 * Finally, ensure that the chosen image data variable (`ImageGray_data`) is the correct variable.
 
-### PaintBackgroundCode
+<a name="PaintBackgroundCode"></a>
+### PaintBackgroundCode ###
 
 `PaintBackgroundCode` is only slightly different to `PaintBackgroundInsideGlassCircles`.
 * It exists at the page level, so `WithinTitles` and `WithinPage` should not be referenced. 
@@ -212,7 +232,8 @@ The example selects only the first: `WithinTitles 0 eq`.
 * And in this example, the `scale` comes directly as a number, `0.1576991 dup scale`, rather than being computed in the PostScript. 
 As before, trial-and-error suffices (though Mathematica is more precise).
 
-## Conclusion
+<a name="Conclusion"></a>
+## Conclusion ##
 
 Adding bitmap images is difficult. 
 Unless you absolutely must, don&rsquo;t. 
