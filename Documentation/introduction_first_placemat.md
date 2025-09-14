@@ -252,12 +252,12 @@ Enjoy the tasting.
 ## Many parameters ##
 
 There are hundreds more parameters, which: 
-* [choose fonts](fonts_glasses_decoration.md#fonts) and constrain [their sizes](type_sizes.md#readme);
+* [choose fonts](fonts_glasses_decoration.md#Fonts) and constrain [their sizes](type_sizes.md#readme);
 * [control the placement of the glass circles](PackingStyles.md#readme); 
 * [decorate](fonts_glasses_decoration.md#readme);
 * enable and control [non-glass page types](not_glasses.md#readme); 
-* [organise the document](document.md#pageordering), useful for tastings over several sessions; 
-* embed [&copy;&nbsp;copyright information](document.md#copyright-and-licensingagreement); 
+* [organise the document](document.md#PageOrdering), useful for tastings over several sessions; 
+* embed [&copy;&nbsp;copyright information](document.md#Copyright_LicensingAgreement); 
 * are [code to be executed at specified times](code_injection.md#readme) (code injection being explicitly allowed); 
 * do other things, whether between these categories or wholly outside them.
 

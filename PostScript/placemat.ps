@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:40 Wednesday 10th September 2025
+% This version 14:00 Sunday 14th September 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202509102340) def
+/ParametersVersionDateTimeAdobeFormat (D:202509141400) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -679,7 +679,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /PageOrderingDecanterLabels [ PageOrderingGlasses {200 add} forall ] def  % By default decanter-label pages appear together at the end, to facilitate advance manufacture
 /PageOrderingBottleWrap PageOrderingGlasses def  % Of length the same as GlassesOnSheets, not necessarily being of length PrePourNumCopies
 /PageOrderingStickyLabels [ GlassesOnSheets length {300} repeat ] def  % Of length the same as GlassesOnSheets, not necessarily being of length StickyLabelsNumCopies
-/PageOrderingOneCircle 1 def  % Single value
+/PageOrderingOneCircle -999 def  % Single value
 /PageOrderingSections [] def  % Array of even length, alternately elements of the PageOrder...s, and compound strings
 
 /MirrorPagesGlasses [ PageOrderingGlasses length {false} repeat ] def  % If printing to the reverse side of acetate, so that wine never causes ink to run
@@ -839,7 +839,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202509102340) def
+/SoftwareVersionDateTimeAdobeFormat (D:202509141400) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
