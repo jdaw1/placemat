@@ -1,6 +1,6 @@
 %!PS
 
-% This version 14:00 Sunday 14th September 2025
+% This version 15:30 Sunday 14th September 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202509141400) def
+/ParametersVersionDateTimeAdobeFormat (D:202509141530) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -839,7 +839,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202509141400) def
+/SoftwareVersionDateTimeAdobeFormat (D:202509141530) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -11621,19 +11621,24 @@ currentdict /GlyphShowKnownAbsences undef
 
 				/TypeOfPagesBeingRendered /TastingNotes store  % only those elements of names with non-zero TN pages
 				/VoteRecorderNumNames  0  NamesVoteRecorder {length 0 gt {1 add} if} forall  def  % Temporary use of variable. Soon to be reassigned.
-				VoteRecorderNumNames 14 gt  % One bottle, less angels' share, less decanting loss, fourteen ways, is 5cl: a small functional taste.
-				NamesVoteRecorder_SmallPortionRisk_Warned not   and
+				VoteRecorderNumNames 14 gt   NamesVoteRecorder_SmallPortionRisk_Warned not   and
 				{
 					mark  (\nWarning: NamesVoteRecorder has )
-					[ (fifteen) (sixteen) (seventeen) (eighteen) (nineteen) (twenty) (twenty-one) ]
+					[
+						(fifteen) (sixteen) (seventeen) (eighteen) (nineteen)
+						(twenty) (twenty-one) (twenty-two) (twenty-three) (twenty-four) (twenty-five) (twenty-six) (twenty-seven) (twenty-eight) (twenty-nine)
+						(thirty) (thirty-one) (thirty-two) (thirty-three) (thirty-four) (thirty-five) (thirty-six) (thirty-seven) (thirty-eight) (thirty-nine)
+						(forty) (forty-one) (forty-two) (forty-three) (forty-four) (forty-five) (forty-six) (forty-seven) (forty-eight) (forty-nine)
+					]
 					dup length VoteRecorderNumNames 15 sub gt {VoteRecorderNumNames 15 sub get} {pop VoteRecorderNumNames 5 string cvs} ifelse
 					( non-empty names. )
-					(But one bottle, less angels' share, less decanting loss, fourteen ways, ~= 5cl, which is not more than a small functional taste. )
-					(So there might be an error in NamesVoteRecorder, or carelessly too many people have been invited, )
-					(or it is a strangely abstemious event, or -- the much-hoped-for optimal answer -- you're opening >=magnums.)
+					(But one bottle, less angels' share, less decanting loss, ) VoteRecorderNumNames ( ways, ~= )
+					70.699 VoteRecorderNumNames div 1 FormatDecimalPlaces  % Constant chosen so that 14 people ---> 5.0
+					(cl, which is less than a small functional taste of 5cl. So there might be an error in NamesVoteRecorder, or carelessly too many people )
+					(have been invited, or everybody is strangely abstemious, or -- the much-hoped-for optimal answer -- you're opening adult-sized bottles.)
 					ConcatenateToMark OutputToLog  (\n) OutputToLog
 					/NamesVoteRecorder_SmallPortionRisk_Warned //true store
-				} if  % VoteRecorderNumNames 14 gt
+				} if  % VoteRecorderNumNames 14 gt ...
 				/VoteRecorderNames [
 					VoteRecorderColTitlesEarly VoteRecorderSheetNum get aload pop  counttomark /VoteRecorderNumEndEarly  exch def
 					NamesVoteRecorder          aload pop                           counttomark /VoteRecorderNumEndNames  exch def
