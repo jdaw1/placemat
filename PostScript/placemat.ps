@@ -1,6 +1,6 @@
 %!PS
 
-% This version 15:30 Sunday 14th September 2025
+% This version 14:15 Saturday 20th September 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202509141530) def
+/ParametersVersionDateTimeAdobeFormat (D:202509201415) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -839,7 +839,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202509141530) def
+/SoftwareVersionDateTimeAdobeFormat (D:202509201415) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -12002,7 +12002,7 @@ currentdict /GlyphShowKnownAbsences undef
 					VRTTR VRTTL sub VoteRecorderHeightFirstRow gt {VoteRecorderHeightFirstRow VRTTR VRTTL sub div 1 scale} {VoteRecorderHeightFirstRow VRTTR VRTTL sub sub 2 div 0 rmoveto} ifelse
 				} ifelse  VoteRecorderInstruction ShowRecursive   setmatrix  % Show horizontally
 
-				VoteRecorderNamesWidthsLogged not  NamesVoteRecorder length 4 ge  and  VoteRecorderNamesOrientationIsHorizontal not  and
+				VoteRecorderNamesOrientationIsHorizontal {//false} {VoteRecorderNamesWidthsLogged {/NamesVoteRecorder load xcheck} {//true} ifelse} ifelse
 				{
 					/NamesVoteRecorderWidths VoteRecorderNameR VoteRecorderNameL  {sub} //false TwoArraysFunction 0 NamesVoteRecorder length getinterval def
 					0 NamesVoteRecorderWidths {0 ne {1 add} if} forall  3 gt
