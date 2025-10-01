@@ -1,6 +1,6 @@
 %!PS
 
-% This version 14:15 Saturday 20th September 2025
+% This version 23:40 Wednesday 1st October 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202509201415) def
+/ParametersVersionDateTimeAdobeFormat (D:202510012340) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -839,7 +839,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202509201415) def
+/SoftwareVersionDateTimeAdobeFormat (D:202510012340) def
 /DeBugLevel 65535 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -1564,7 +1564,8 @@ currentdict /ArrowCircleToCircle_CanWarn undef
 		dup //FontKnownAbsences exch known not
 		{
 			dup //FontKnownAbsences exch null put  % In dict: key is font name; value irrelevant so null.
-			mark (Error: font /) 2 index ( not present. Distillation software might substitute. Continuing.) ConcatenateToMark OutputToLog
+			mark (Error: font /) 2 index ( not present, with TypeOfPagesBeingRendered = ) TypeOfPagesBeingRendered
+			(. Distillation software might substitute. Continuing.) ConcatenateToMark OutputToLog
 		} if  % In FontKnownAbsences.
 	} if  % FontKnown not
 	//findfont exec  % findfont not bind'able as not an operator (PLRM3, p592).
@@ -9224,7 +9225,7 @@ currentdict /GlyphShowKnownAbsences undef
 					CirclearraysPrePour WithinTitles get StringPathBBox exch pop exch sub /AD exch def pop
 					Abovetitles WithinTitles get NonEmptyCompoundObject  Belowtitles WithinTitles get NonEmptyCompoundObject  or not  % Neither Above nor Below
 					{
-						TitlesFont TitleFontSizes SheetNum get WithinPage get selectfont  % A descender sort-of equivalent to there being a Belowtitle
+						TitlesFont TitleFontSizes SheetNum get WithinPage get SelectFont  % A descender sort-of equivalent to there being a Belowtitle
 						Titles WithinTitles get  StringPathBBox  pop pop exch pop
 						AD add  dup 0 lt {pop 0} if
 					} {0} ifelse
