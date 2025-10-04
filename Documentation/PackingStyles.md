@@ -368,21 +368,21 @@ Adding `/PackingNestingColumnMajor true` fixes this.
 
 * `/CentralGlasses int`: both `/PostsAndLintel` and `/Arch` packings can have 0, 1, 2, or 3 glasses in the centre, the remainder running round the edge or semi-ellipse.
 
-* `/RowsNumMin int` and `/RowsNumMax int`: minimum and maximum number of rows permitted. 
+* `/RowsNumMin int`, `/RowsNumMax int`: minimum or maximum number of rows permitted. 
 Relevant in the `/Diamonds`, `/RectangularDislocation`, `/SquareGrid`, `/RectangularAlternateNudge`, and `/PostsAndLintel` packing styles.
 
 * `/GlassesDeemedAtLeast int`: the number of glasses is deemed to be the greater of this and <code>GlassesOnSheets&nbsp;<i>SheetNum</i>&nbsp;get&nbsp;length</code>. Say there are 17 glasses, to be spread over three `/A4` sheets 6:6:5. 
 One might want all three to have the same design, achievable with sub-parameter <code>/GlassesDeemedAtLeast&nbsp;6</code>.
 
-* `/OnlyIfGlassesNumMin int` and `/OnlyIfGlassesNumMax int`: permitted number of glasses. 
-If outside range, this packing specification not used.
+* `/OnlyIfGlassesNumMin int`, `/OnlyIfGlassesNumMax int`: permitted number of glasses. 
+If breaching constraint, this packing specification not used.
 
-* `/OnlyIfSheetNumMin int` and `/OnlyIfSheetNumMax int`: specifying permitted values for the internal variable SheetNum, which is 0 on the first sheet, 1 on the second, etc.
+* `/OnlyIfSheetNumMin int`, `/OnlyIfSheetNumMax int`: specifying permitted values for the internal variable `SheetNum`, which is `0` on the first sheet, `1` on the second, etc.
 
 * `/OnlyIfOrientation name`, the sub-parameter being one of `/Landscape`, `/Portrait`, or `/Either`, the last being the default if this sub-parameter absent. 
-If `Orientation` not matching, this packing specification not used.
+If `Orientation` not agreeing, this packing specification not used.
 
-* `/ImprovementPointsMin num` and `/ImprovementProportionMin num`: this specification used only if beating previous best radius by the required amount, either absolute (e.g., `2`&nbsp;points) or as a proportion (e.g., `0.01`&nbsp;=&nbsp;1%).
+* `/ImprovementPointsMin num`, `/ImprovementProportionMin num`: this specification used only if beating previous best radius by the required amount, either absolute (e.g., `2`&nbsp;points) or as a proportion (e.g., `0.01`&nbsp;=&nbsp;1%).
 
 If `PackingStyles` is empty, or contains only invalid/impossible layouts, then instead several of the regular layouts are tried.
 
