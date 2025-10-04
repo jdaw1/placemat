@@ -371,10 +371,13 @@ Adding `/PackingNestingColumnMajor true` fixes this.
 * `/RowsNumMin int` and `/RowsNumMax int`: minimum and maximum number of rows permitted. 
 Relevant in the `/Diamonds`, `/RectangularDislocation`, `/SquareGrid`, `/RectangularAlternateNudge`, and `/PostsAndLintel` packing styles.
 
-* `/OnlyIfSheetNumMin int` and `/OnlyIfSheetNumMax int`: specifying permitted values for the internal variable SheetNum, which is 0 on the first sheet, 1 on the second, etc.
+* `/GlassesDeemedAtLeast int`: the number of glasses is deemed to be the greater of this and <code>GlassesOnSheets&nbsp;<i>SheetNum</i>&nbsp;get&nbsp;length</code>. Say there are 17 glasses, to be spread over three `/A4` sheets 6:6:5. 
+One might want all three to have the same design, achievable with sub-parameter <code>/GlassesDeemedAtLeast&nbsp;6</code>.
 
 * `/OnlyIfGlassesNumMin int` and `/OnlyIfGlassesNumMax int`: permitted number of glasses. 
 If outside range, this packing specification not used.
+
+* `/OnlyIfSheetNumMin int` and `/OnlyIfSheetNumMax int`: specifying permitted values for the internal variable SheetNum, which is 0 on the first sheet, 1 on the second, etc.
 
 * `/OnlyIfOrientation name`, the sub-parameter being one of `/Landscape`, `/Portrait`, or `/Either`, the last being the default if this sub-parameter absent. 
 If `Orientation` not matching, this packing specification not used.
