@@ -84,7 +84,7 @@ The exception are URLs, as appear in `ExternalLinks` and `LicensingAgreementLink
 The code in a compound string may do any of the following.
 * Put on the stack &ge;0 further compound strings to be painted.
 * `rmoveto` the currentpoint, probably by an amount proportional to `CurrentFontSize` (for the horizontal direction of which there is a shortcut: `{-0.09 Kern}` being equivalent to `{-0.09 CurrentFontSizeX mul 0 rmoveto}`, and for vertical direction an equivalent `VKern`).
-* Change the current font or size, probably by `selectfont`, and to a size proportional to `CurrentFontSize`, and after storing the original status to permit reversion.
+* Change the current font or size, probably by `SelectFont` (or, if the font name is known to be a name rather than an array of possibilities, `selectfont`), and to a size proportional to `CurrentFontSize`, and after storing the original status to permit reversion.
 * Draw a shape, of a size proportional to `CurrentFontSize`, at the current point, and leaving an extant current point at its lower-right. 
 Such a shape should be `fill`ed, but non-`bind`edly, so that `fill` can be redefined to allow the software to establish the size of the shape.
 
@@ -399,7 +399,7 @@ It can be done.
 	5 dict begin
 	/BackgroundText (POSTPONED) def
 	gsave  0 0.6 0 setrgbcolor
-	TitlesFont 48 selectfont
+	TitlesFont 48 SelectFont
 
 	BackgroundText StringPathBBox  /T exch def  /R exch def  /B exch def  /L exch def
 

@@ -62,8 +62,8 @@ E.g. (which is unrealistically verbose to show some of the possibilities, and wh
 	/Diamonds                       % Pattern name
 	/OnlyIfSheetNumMin 1            % This pattern ignored if not satisfied
 	/OnlyIfSheetNumMax 1            % This pattern ignored if not satisfied
-	/GlassesNumMin 3                % This pattern ignored if not satisfied
-	/GlassesNumMax 3                % This pattern ignored if not satisfied
+	/OnlyIfGlassesNumMin 3          % This pattern ignored if not satisfied
+	/OnlyIfGlassesNumMax 3          % This pattern ignored if not satisfied
 	/OnlyIfOrientation /Landscape   % This pattern ignored if not satisfied
 	/RowsNumMin 3                   % Applied within pattern's possibilities
 	/RowsNumMax 4                   % Applied within pattern's possibilities
@@ -294,7 +294,7 @@ This can be done by adding to the array an extra flag or flags, `/SuppressOrname
 It also accepts the `/VerticalAlignment` parameter. 
 Example item of PackingStyles:
 ```PostScript
-[ /RightSide  /GlassesNumMax 3  /OnlyIfOrientation /Portrait  /VerticalAlignment /Justify  /SuppressNonRightOrnaments ]
+[ /RightSide  /OnlyIfGlassesNumMax 3  /OnlyIfOrientation /Portrait  /VerticalAlignment /Justify  /SuppressNonRightOrnaments ]
 ```
 
 <div align="center">
@@ -373,7 +373,7 @@ Relevant in the `/Diamonds`, `/RectangularDislocation`, `/SquareGrid`, `/Rectang
 
 * `/OnlyIfSheetNumMin int` and `/OnlyIfSheetNumMax int`: specifying permitted values for the internal variable SheetNum, which is 0 on the first sheet, 1 on the second, etc.
 
-* `/GlassesNumMin int` and `/GlassesNumMax int`: permitted number of glasses. 
+* `/OnlyIfGlassesNumMin int` and `/OnlyIfGlassesNumMax int`: permitted number of glasses. 
 If outside range, this packing specification not used.
 
 * `/OnlyIfOrientation name`, the sub-parameter being one of `/Landscape`, `/Portrait`, or `/Either`, the last being the default if this sub-parameter absent. 
