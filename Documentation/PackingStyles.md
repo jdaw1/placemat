@@ -34,6 +34,7 @@
 &star;&#8239;[`PostsAndLintel`,&nbsp;`Arch`](#PostsAndLintel_Arch)&nbsp; 
 &star;&#8239;[Columns&nbsp;and&nbsp;rows](#Sides_Rows)&nbsp; 
 &starf;&#8239;[`Array`](#Array)&nbsp; 
+&starf;&#8239;[Other&nbsp;flags, constraints, and sub&#8209;parameters](#other_flags_etc)&nbsp; 
 &starf;&#8239;[Related&nbsp;parameters](#Related_parameters)&nbsp; 
 &starf;&#8239;[Code&nbsp;extracts](#Code_extracts)
 
@@ -51,7 +52,7 @@ Unless there is a compelling need to change things, users are encouraged to take
 
 The user specifies an array, `PackingStyles`, which is a list of generic packing styles. 
 In turn each style from the list is taken, and each allowed variation is tested. 
-Broadly, if a later-tested style allows a larger radius than the current best, then the old best is replaced by this better style.
+Broadly, if a later&#8209;tested style allows a larger radius than the current best, then the old best is replaced by this better style.
 
 If the element of `PackingStyles` is just the style, it doesn&rsquo;t need to be in an array. 
 But the elements of `PackingStyles` can have constraints and variations. 
@@ -71,19 +72,19 @@ E.g. (which is unrealistically verbose to show some of the possibilities, and wh
 ]
 ``` 
 
-The general mathematical problem, largest possible radius for *n* non-overlapping circles in a particular rectangle, is difficult (see [PackoMania](http://www.packomania.com/) for solutions to many special cases). 
+The general mathematical problem, largest possible radius for *n* non&#8209;overlapping circles in a particular rectangle, is difficult (see [PackoMania](http://www.packomania.com/) for solutions to many special cases). 
 This code has enough generality that it often finds the best, and when it can&rsquo;t, its radius is not much smaller than the mathematical optimum. 
 E.g., for 14 glasses on `/A3` see discussion in [issue&nbsp;151](http://github.com/jdaw1/placemat/issues/151).
 
 For many possible tastings, `PackingStyles` can be left at its default value. 
 For example, if there are 24 different Madeiras over four `/A4` pages, the defaults work (though, of course, very important, don&rsquo;t forget to invite [me](http://www.jdawiseman.com/author.html)). 
-In such a case the default value of `GlassesOnSheetsMaxPerSheet` would cause [`GlassesOnSheets`](page_level.md#glassesonsheets-and-glassesontastingnotepages) to be four page-defining arrays each of length six glasses, which would cause the chosen element of `PackingStyles` to be `/RectangularDislocation`.
+In such a case the default value of `GlassesOnSheetsMaxPerSheet` would cause [`GlassesOnSheets`](page_level.md#glassesonsheets-and-glassesontastingnotepages) to be four page&#8209;defining arrays each of length six glasses, which would cause the chosen element of `PackingStyles` to be `/RectangularDislocation`.
 
 But if table space were tight, it could be better to have fifteen on an `/A3`, six on an `/A4`, and three on the right side of an `/A4`, so lessening usage of table space from 4&#8239;&times;&#8239;210mm =&nbsp;840mm per person to &asymp;&nbsp;3&frac12;&#8239;&times;&#8239;210mm =&nbsp;735mm. 
 That would require changing [`GlassesOnSheets`](page_level.md#glassesonsheets-and-glassesontastingnotepages), and also changing the subject of this page, `PackingStyles`.
 
 There follow descriptions and pictures of the various styles allowable in `PackingStyles`. 
-(The two PDFs ([non-`/Array`](images/PackingStyles.pdf), [`/Array`](images/PackingStyles_Array.pdf)), from which the bitmaps were made, show the element of `PackingStyles` in the header.)
+(The two PDFs ([non&#8209;`/Array`](images/PackingStyles.pdf), [`/Array`](images/PackingStyles_Array.pdf)), from which the bitmaps were made, show the element of `PackingStyles` in the header.)
 
 <a name="Efficient"></a>
 ## Efficient packings
@@ -115,7 +116,7 @@ The `/Mirror` flag chooses the alternate chirality, if that has a sensible meani
 <a name="RectangularDislocation"></a>
 ### RectangularDislocation
 
-`/RectangularDislocation`: The next four examples are rectangular, optionally with a horizontal &lsquo;dislocation&rsquo; in the middle, that having, `/Diamonds`-style, circles lying between the circles in the adjacent row.
+`/RectangularDislocation`: The next four examples are rectangular, optionally with a horizontal &lsquo;dislocation&rsquo; in the middle, that having, `/Diamonds`&#8209;style, circles lying between the circles in the adjacent row.
 
 <div align="center">
 
@@ -132,9 +133,9 @@ The `/Mirror` flag chooses the alternate chirality, if that has a sensible meani
 ### SquareGrid
 
 `/SquareGrid` can be similar to `/RectangularDislocation`. 
-In the latter the glasses fill the page: observe the six-glass example above, in which the circles touch their vertical neighbours, but have a slight gap from the horizontal neighbour. 
+In the latter the glasses fill the page: observe the six&#8209;glass example above, in which the circles touch their vertical neighbours, but have a slight gap from the horizontal neighbour. 
 In `/SquareGrid` there is no dislocation, and by default the vertical and horizontal distances are the same and equal to the diameter. 
-`/SquareGrid` has two optional one-parameter flags: `/HorizontalAlignment` (which must have a value of one of `/Left`, `/Right`, `/Centre`, or `/Justify`); and `/VerticalAlignment` (one of `/Top`, `/Bottom`, `/Middle`, or `/Justify`). 
+`/SquareGrid` has two optional one&#8209;parameter flags: `/HorizontalAlignment` (which must have a value of one of `/Left`, `/Right`, `/Centre`, or `/Justify`); and `/VerticalAlignment` (one of `/Top`, `/Bottom`, `/Middle`, or `/Justify`). 
 Obviously either `/Justify` can allow distances to differ.
 
 <div align="center">
@@ -166,7 +167,7 @@ The diamonds can be offset from the diamonds either vertically or horizontally.
 <a name="DiamondsPlus"></a>
 ### DiamondsPlus
 
-`/DiamondsPlus` is mostly three-row diamonds (or, if `/Portrait`, three-column), with two extras set between the three rows (columns). 
+`/DiamondsPlus` is mostly three&#8209;row diamonds (or, if `/Portrait`, three&#8209;column), with two extras set between the three rows (columns). 
 It is the best packing of seven or ten glasses on several paper sizes.
 
 There is a generalisation of `/DiamondsPlus` over any number of rows (columns), [not yet coded](http://github.com/jdaw1/placemat/issues/38).
@@ -185,7 +186,7 @@ There is a generalisation of `/DiamondsPlus` over any number of rows (columns), 
 `/RectangularAlternateNudge`: in this rectangular variant, alternate rows (or columns) are slightly nudged, better to fill the space.
 
 Thus `/RectangularAlternateNudge` is a small deviation away from greater symmetry, about which the the author is unenthusiastic. 
-Because of this non-enthusiasm, by default, `/RectangularAlternateNudge` comes with a sub-parameter: `[ /RectangularAlternateNudge /ImprovementPointsMin 2 ]`. 
+Because of this non&#8209;enthusiasm, by default, `/RectangularAlternateNudge` comes with a sub&#8209;parameter: `[ /RectangularAlternateNudge /ImprovementPointsMin 2 ]`. 
 This imposes an additional requirement: this packing style is chosen only if it is an improvement on the previous best radius of &ge;&nbsp;2pt &asymp;&nbsp;0.7mm &asymp;&nbsp;0.028&Prime;. 
 
 The next table of examples shows six glasses on `/USL` = 8&frac12;&Prime;&times;11&Prime; and on `/A4` = 210mm&times;297mm, in all cases with margins of 24pt = &#8531;&Prime; &asymp; 8.5mm, and space of 6pt &asymp; 2.1mm for the header. 
@@ -210,7 +211,7 @@ But on `/A4` the improvement in the radius is much less: only &asymp; 0.28pt &as
 <a name="RectangularAlternateSplitNudge"></a>
 ### RectangularAlternateSplitNudge
 
-`RectangularAlternateSplitNudge`, by making the nudged rows go in both directions, lessens the aesthetic damage of the non-`Split` nudge, but makes an even smaller gain in the radius. 
+`RectangularAlternateSplitNudge`, by making the nudged rows go in both directions, lessens the aesthetic damage of the non&#8209;`Split` nudge, but makes an even smaller gain in the radius. 
 
 <div align="center">
 
@@ -246,7 +247,7 @@ Obviously using both would be strange.
 ### Temple
 
 `/Temple` is an intricate pattern, that has the largest radius for 10 glasses on `/USL`, and for 13 glasses on either `/USLegal` or `/Tabloid`. 
-The sub-parameter `/TempleExtraColsToLeftOrRowsBelow` is followed by one integer, and is to `/Temple` as `/RectColsToLeftOrRowsBelow` is to `/DiamondsAndRectangular`.
+The sub&#8209;parameter `/TempleExtraColsToLeftOrRowsBelow` is followed by one integer, and is to `/Temple` as `/RectColsToLeftOrRowsBelow` is to `/DiamondsAndRectangular`.
 
 <div align="center">
 
@@ -283,7 +284,7 @@ This design might be particularly appropriate if the central circles held the ca
 <a name="Sides_Rows"></a>
 ### Sides, LeftSide, RightSide, TopRow, MiddleRow, BottomRow
 
-`/Sides`, `/LeftSide`, `/RightSide`, `/TopRow`, `/MiddleRow`, and `/BottomRow` are mostly self-explanatory. 
+`/Sides`, `/LeftSide`, `/RightSide`, `/TopRow`, `/MiddleRow`, and `/BottomRow` are mostly self&#8209;explanatory. 
 
 `/RightSide` (and, *mutatis mutandis*, `/LeftSide`) have a particular use. 
 Consider a tasting with 17 glasses. 
@@ -324,7 +325,7 @@ After the `/Positions` marker is a list of points, typically of the form `[x y]`
 The code then chooses the radius and separately scales the *x* and *y* directions such that things fit as snugly as possible, obviously subject to the other upper bounds on the radius. 
 The glass ordering is that given in the array: there is no subsequent sorting or ordering.
 
-There is a more complicated variant, in which some of the sub-arrays are of the form `[x y x' y']`. 
+There is a more complicated variant, in which some of the sub&#8209;arrays are of the form `[x y x' y']`. 
 The first two elements are used, as before, and fix the radius and the canvas. 
 The circle at (*x*,*y*) is then moved in a straight line towards (*x'*,*y'*). 
 A circle stops moving if it collides with another circle (a tangential touch not being a collision); if it collides with the edge of the page; or it arrives at (*x'*,*y'*).
@@ -343,9 +344,10 @@ The example image shows, on `/A3`, an alternation of the previous code extract t
 The difference is the movement of the circles at (2,2) and (4,2), both towards (3,2). 
 For the author&rsquo;s taste, the closer relationship of the two B0 circles (same wine in single and magnum) means they should be touching, rather than equally spaced between A0 and C0.
 
-## Other flags, constraints, and sub-parameters
+<a name="other_flags_etc"></a>
+## Other flags, constraints, and sub&#8209;parameters
 
-There are other flags and constraints and sub-parameters, as follows.
+There are other flags and constraints and sub&#8209;parameters, as follows.
 
 * `/Mirror`: the alternate chirality. 
 If there isn&rsquo;t a sensible meaning to this, ignored.
@@ -353,33 +355,33 @@ If there isn&rsquo;t a sensible meaning to this, ignored.
 * `/ShoveLeft` and `/ShoveRight`: if there is spare space between the circles, probably because the radius has been shrunk to that on another sheet, the circles are shoved leftwards (or rightwards) against that margin. 
 But not heeded in every base style.
 
-* `/PackingDirectionTopToBottom bool` and `/PackingDirectionLeftToRight bool` and `/PackingNestingColumnMajor bool`: by default most layouts start at the top-left, work across to the top-right, then start the second row slightly further down on the left. 
-This can be changed: glasses can run right-to-left, bottom-to-top, and the nesting order of columns and rows can be exchanged. 
-For large pre-poured tastings on `/A3` or `/Tabloid`, generally one pre-pours the youngest first. 
+* `/PackingDirectionTopToBottom bool` and `/PackingDirectionLeftToRight bool` and `/PackingNestingColumnMajor bool`: by default most layouts start at the top&#8209;left, work across to the top&#8209;right, then start the second row slightly further down on the left. 
+This can be changed: glasses can run right&#8209;to&#8209;left, bottom&#8209;to&#8209;top, and the nesting order of columns and rows can be exchanged. 
+For large pre&#8209;poured tastings on `/A3` or `/Tabloid`, generally one pre&#8209;pours the youngest first. 
 If these are in the front row, it is more fiddly to lower subsequent older vintages into place. 
 Adding `/PackingNestingColumnMajor true` fixes this. 
-(The global value of `PackingNestingColumnMajor` is the default value within PackingStyles, and also affects the ordering in Cork-Display pages.)
+(The global value of `PackingNestingColumnMajor` is the default value within PackingStyles, and also affects the ordering in [Cork&#8209;Display pages](not_glasses.md#CorkDisplay).)
 
 * `/ProhibitVerticalNudging` or `/ProhibitHorizontalNudging`: have the obvious effect in base styles `/RectangularAlternateNudge` and `/RectangularAlternateSplitNudge`.
 
-* `/RectColsToLeftOrRowsBelow int` chooses the position of the diamonds-style block in `/DiamondsAndRectangular`.
+* `/RectColsToLeftOrRowsBelow int` chooses the position of the diamonds&#8209;style block in `/DiamondsAndRectangular`.
 
 * `/TempleExtraColsToLeftOrRowsBelow int` chooses the position of the &lsquo;hole&rsquo; in `/Temple`.
 
-* `/CentralGlasses int`: both `/PostsAndLintel` and `/Arch` packings can have 0, 1, 2, or 3 glasses in the centre, the remainder running round the edge or semi-ellipse.
+* `/CentralGlasses int`: both `/PostsAndLintel` and `/Arch` packings can have 0, 1, 2, or 3 glasses in the centre, the remainder running round the edge or semi&#8209;ellipse.
 
 * `/RowsNumMin int`, `/RowsNumMax int`: minimum or maximum number of rows permitted. 
 Relevant in the `/Diamonds`, `/RectangularDislocation`, `/SquareGrid`, `/RectangularAlternateNudge`, and `/PostsAndLintel` packing styles.
 
 * `/GlassesDeemedAtLeast int`: the number of glasses is deemed to be the greater of this and <code>GlassesOnSheets&nbsp;<i>SheetNum</i>&nbsp;get&nbsp;length</code>. Say there are 17 glasses, to be spread over three `/A4` sheets 6:6:5. 
-One might want all three to have the same design, achievable with sub-parameter <code>/GlassesDeemedAtLeast&nbsp;6</code>.
+One might want all three to have the same design, achievable with sub&#8209;parameter <code>/GlassesDeemedAtLeast&nbsp;6</code>.
 
 * `/OnlyIfGlassesNumMin int`, `/OnlyIfGlassesNumMax int`: permitted number of glasses. 
 If breaching constraint, this packing specification not used.
 
 * `/OnlyIfSheetNumMin int`, `/OnlyIfSheetNumMax int`: specifying permitted values for the internal variable `SheetNum`, which is `0` on the first sheet, `1` on the second, etc.
 
-* `/OnlyIfOrientation name`, the sub-parameter being one of `/Landscape`, `/Portrait`, or `/Either`, the last being the default if this sub-parameter absent. 
+* `/OnlyIfOrientation name`, the sub&#8209;parameter being one of `/Landscape`, `/Portrait`, or `/Either`, the last being the default if this sub&#8209;parameter absent. 
 If `Orientation` not agreeing, this packing specification not used.
 
 * `/ImprovementPointsMin num`, `/ImprovementProportionMin num`: this specification used only if beating previous best radius by the required amount, either absolute (e.g., `2`&nbsp;points) or as a proportion (e.g., `0.01`&nbsp;=&nbsp;1%).
