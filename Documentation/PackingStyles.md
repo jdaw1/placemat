@@ -436,7 +436,7 @@ but that value could have been as low as (45446 &minus; 3&radic;182333347)&times
 Measure the diameter of your glasses. 
 Add something for two fingers. 
 Add something for the inebriation of the owner of the fingers. 
-Suggestion: &le;6 on `/A4`; &le;14 on `/A3`; &le;9 on `/USLegal`; &le;6 on `/USL`; &le;14 on `/Tabloid`. 
+Suggestion: &le;6 on `/A4`; &le;15 on `/A3`; &le;9 on `/USLegal`; &le;6 on `/USL`; &le;15 on `/Tabloid`. 
 But sometimes table space is a binding constraint, in which case there must be less paper area, hence smaller circles.
 
 The images show the packings for the diameters &le;&nbsp;4&frac12;&Prime; &asymp;&nbsp;114mm, down to slightly below 3&Prime; &asymp;&nbsp;76mm.
