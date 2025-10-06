@@ -1,6 +1,6 @@
 %!PS
 
-% This version 11:00 Saturday 4th October 2025
+% This version 22:00 Monday 6th October 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202510041100) def
+/ParametersVersionDateTimeAdobeFormat (D:202510062200) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -71,25 +71,25 @@
 	[
 		(www) {-0.12 Kern} (.) {-0.12 Kern} (ThePortForum.com, )
 		% (www) {-0.08 Kern} (.) {-0.12 Kern} (W) {-0.08 Kern} (orldOf) {+0.12 Kern} (Port.de, )
-		(www) {-0.12 Kern} (.jdawiseman.com)
+		(www) {-0.12 Kern} (.JDAWiseman.com)
 	]
 ] def  % /HeadersRight
 
 % Array, length a multiple of three:  indented0-boolean, (Descriptor0), (http://URL0);  indented1-boolean, (Descriptor1), (http://URL1);  ...
-% Links for some restaurants and many Port houses at http://github.com/jdaw1/placemat/blob/main/PostScript/ExternalLinks_data.ps
+% Links for some restaurants and many Port houses at http://GitHub.com/jdaw1/placemat/blob/main/PostScript/ExternalLinks_data.ps
 /ExternalLinks [
-	false   (Thread on ThePortForum.com)                 (http://www.theportforum.com/viewtopic.php?t=00175&view=unread#unread)
-%	false   (Latest version this placemat)               (http://www.jdawiseman.com/2025/    .pdf)
-%	true    (in list of placemats)                       (http://www.jdawiseman.com/papers/placemat/placemats_list.html#a2025MMDD)
+	false   (Thread on ThePortForum.com)                 (http://www.ThePortForum.com/viewtopic.php?t=00175&view=unread#unread)
+%	false   (Latest version this placemat)               (http://www.JDAWiseman.com/2025/    .pdf)
+%	true    (in list of placemats)                       (http://www.JDAWiseman.com/papers/placemat/placemats_list.html#a2025MMDD)
 	false   (Boot & Flogger)                             (http://www.davy.co.uk/wine-bar/boot-and-flogger/)
-	true    [/ellipsis (OpenStreetMap)]                  (http://www.openstreetmap.org/node/534961998)
+	true    [/ellipsis (OpenStreetMap)]                  (http://www.OpenStreetMap.org/node/534961998)
 	true    [/ellipsis (google.co.uk)]                   (http://goo.gl/maps/7NEiwAMEZpG2)
 	true    [/ellipsis (What3Words: cafe.humid.palace)]  (http://map.what3words.com/cafe.humid.palace)
-	true    [/ellipsis (StreetMap.co.uk)]                (http://www.streetmap.co.uk/map.srf?x=532409&y=180083&z=106&pc=SE1+1TA)
+	true    [/ellipsis (StreetMap.co.uk)]                (http://www.StreetMap.co.uk/map.srf?x=532409&y=180083&z=106&pc=SE1+1TA)
 	true    [/ellipsis (bing.com)]                       (http://www.bing.com/maps?where1=SE1+1TA)
 ] def  % /ExternalLinks
 
-/CopyrightStatementPlacemats (Copyright 2025 Julian D. A. Wiseman of www.jdawiseman.com) def
+/CopyrightStatementPlacemats (Copyright 2025 Julian D. A. Wiseman of www.JDAWiseman.com) def
 
 % % % % % % % % % % %
 % Non-Glasses Pages %
@@ -338,9 +338,9 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /Droplets false def
 /DropletsCharges [  % Length a multiple of 4
-	/All  [297.638 777.685]  -1    0  % SheetNum Location Charge Spin. SheetNum can be /All; location is WithinPage, or reals [x y], or integers [WithinPage0, WithinPag1, ...].
-	/All  [160.819 538.760]   4  300  % Default settings look best for A4, 5 glasses, RectangularDislocation.
-	/All  [365.625 298.482]  -1    0
+	/All  [297.638 777.685]  -1     0  % SheetNum Location Charge Spin. SheetNum can be /All; location is WithinPage, or reals [x y], or integers [WithinPage0, WithinPag1, ...].
+	/All  [160.819 538.760]   4  -300  % Default settings chosen for A4, 5 glasses, RectangularDislocation. Anticlockwise for northern-hemisphere Coriolis effect.
+	/All  [365.625 298.482]  -1     0
 ] def  % DropletsCharges
 /DropletsProportionBackwards 0.0204 def  % Keeping this small adds humour to their discovery. ("Naughty creatures being rebellious. It's like herding cats!")
 
@@ -366,7 +366,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % Obscure and Little-Used Parameters  %
 % % % % % % % % % % % % % % % % % % % %
 
-/CMYK0001replacesRGB000 false def  % True printers' CMYK black, rather than screen-optimal RGB black? Default = false because of HP Officejet Pro 8600 Plus: www.theportforum.com/viewtopic.php?t=175&start=1094
+/CMYK0001replacesRGB000 false def  % True printers' CMYK black, rather than screen-optimal RGB black? Default = false because of HP Officejet Pro 8600 Plus: www.ThePortForum.com/viewtopic.php?t=175&start=1094
 
 % Add annotations, perhaps a correction of a wine's information, without changing the printed PDF.
 % Array of length a multiple of two, alternately elements of WithinTitles, and compound strings.
@@ -755,8 +755,8 @@ if} bind def  % /VoteRecorderCrossedBox
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % These parameters, and VoteRecorderTopTexts etc above, might need to be translated.            %
-% Some translations at http://github.com/jdaw1/placemat/blob/main/Documentation/translations.md %
-% Please submit others to http://github.com/jdaw1/placemat/issues                               %
+% Some translations at http://GitHub.com/jdaw1/placemat/blob/main/Documentation/translations.md %
+% Please submit others to http://GitHub.com/jdaw1/placemat/issues                               %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 /VoteRecorderTopTexts  % Each sub-array contains some TopTexts. Must be same length as GlassesClusteredOnVoteRecorders and as VoteRecorderShowTotalRow
@@ -823,7 +823,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % 1. Innermost are various routines, some dedicated to this purpose, others more general in nature.
 % Those of a general nature work with compound strings (being a string, a glyph, an array of compound strings,
 % or within some limitations, code). Most of the re-usable code is described in
-% www.jdawiseman.com/papers/placemat/postscript_routines.html
+% www.JDAWiseman.com/papers/placemat/postscript_routines.html
 
 % 2. These are routines and linking code are bundled togther in various forms. A good PS->PDF converter
 % uses forms to re-use various picture fragments, reducing distil time and the size of the resultant PDF.
@@ -839,7 +839,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202510041100) def
+/SoftwareVersionDateTimeAdobeFormat (D:202510062200) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -1848,7 +1848,7 @@ TestingMaxNumPagesToShow 2147483647 lt  TestingShowThesePagesOnly //null ne  Tes
 {
 	mark  (Nota bene: some pages might be suppressed = not shown, perhaps because this is an example or a test.)
 	(\nAt the end there might be an extra page, blank, caused by a bug in erasepage.)
-	(\nhttp://github.com/jdaw1/placemat/issues/109)
+	(\nhttp://GitHub.com/jdaw1/placemat/issues/109)
 	(\nhttp://groups.google.com/g/comp.lang.postscript/c/HVZVz0eBwrw)  % "Adobe Distiller: erasepage erroneously transmits a page", 10 Sept 2017
 	TestingMaxNumPagesToShow 2147483647 lt {(\nTestingMaxNumPagesToShow = ) TestingMaxNumPagesToShow} if
 	TestingShowThesePagesOnly   //null    ne {(\nTestingShowThesePagesOnly = ) TestingShowThesePagesOnly} if
@@ -2030,18 +2030,38 @@ currentdict /ForReverseBinaryDict undef
 
 % These links constitute the signature of the author of the code. Yes, the code is open source, so you have the power to remove them.
 % Please don't. If you want code to be open source, respect this wish of an author who has released code for free. Thank you.
-/ExternalLinksExtras [
-	false   (GitHub)              (http://github.com/jdaw1/placemat/#readme)
-	false   (PostScript)          (http://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps)
-	false   (Documentation start) (http://github.com/jdaw1/placemat/blob/main/Documentation/introduction_first_placemat.md#readme)
-	false   (Placemats, list)     (http://www.jdawiseman.com/papers/placemat/placemats_list.html)
-	false   (Author)              (http://www.jdawiseman.com/author.html)
+/ExternalLinksExtras
+[
+	false   (GitHub)              (http://GitHub.com/jdaw1/placemat/#readme)
+	false   (PostScript)          (http://GitHub.com/jdaw1/placemat/blob/main/PostScript/placemat.ps)
+	false   (Documentation start) (http://GitHub.com/jdaw1/placemat/blob/main/Documentation/introduction_first_placemat.md#readme)
+	false   (Placemats, list)     (http://www.JDAWiseman.com/papers/placemat/placemats_list.html)
+	false   (Author)              (http://www.JDAWiseman.com/author.html)
 ] def % /ExternalLinksExtras
+% Remove those already effectively in ExternalLinks
+/ExternalLinksExtras
+[
+	2 dict begin
+	0  3  ExternalLinksExtras length 1 sub
+	{
+		/i exch def
+		ExternalLinksExtras i 3 getinterval aload pop  % The three items
+		2  3  ExternalLinks length 1 sub  % looping over URLs
+		{
+			/j exch def
+			dup length   ExternalLinks j get length  le
+			{
+				dup   dup length ExternalLinks j get exch 0 exch getinterval  eq {pop pop pop exit} if
+			} if  % ExternalLinksExtras URL not longer than than in ExternalLinks, as if same or missing "#..."
+		} for  % j
+	} for  % i
+	end
+] def  % /ExternalLinksExtras
 
 % Returns true if sole parameter is one of /USL, /USLegal, /Tabloid, /USL2
 /NorthAmericanPaperSize {//false [/USL /USLegal /Tabloid /USL2] {2 index eq {pop pop //null //true exit} if} forall exch pop} bind def
 
-/mm {2.83464566929 mul} bind def  % 360 127 div
+/mm [360 127 div  /mul load] cvx def
 
 % PaperType Orientation  Dimensions  PageWidth PageHeight
 % http://groups.google.com/g/comp.lang.postscript/c/vlfF8eGOCMA  "Change paper size", 21 Oct 2015
@@ -2056,7 +2076,7 @@ currentdict /ForReverseBinaryDict undef
 		/A2       PaperType eq {1190.55118  1683.77953 exit} if  % 420mm by 594mm
 		/USL      PaperType eq { 612         792       exit} if  % 8.5" by 11"
 		/USLegal  PaperType eq { 612        1008       exit} if  % 8.5" by 14"
-		/Tabloid  PaperType eq { 792        1224       exit} if  % 11"  by 17", http://github.com/jdaw1/placemat/issues/159
+		/Tabloid  PaperType eq { 792        1224       exit} if  % 11"  by 17", http://GitHub.com/jdaw1/placemat/issues/159
 		/Ledger   PaperType eq { 792        1224       exit} if  % 11"  by 17"
 		/USL2     PaperType eq { 792        1224       exit} if  % 11"  by 17"
 		PaperType type /arraytype eq {PaperType dup 0 get exch 1 get exit} if  % [SmallerPts LargerPts], ignoring anything after first two elements
@@ -2627,7 +2647,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 		} ifelse  % PageLabelOverride
 
 		% http://groups.google.com/g/comp.lang.postscript/c/xqXz9g44ATs  "Adobe Distiller bug report: pdfmark and the PDF encoding", 13 Nov 2015
-		% http://www.jdawiseman.com/papers/bugs/20151113_PDFDocEncodingify.txt
+		% http://www.JDAWiseman.com/papers/bugs/20151113_PDFDocEncodingify.txt
 		% http://acrobat.uservoice.com/forums/590923-acrobat-for-windows-and-mac/suggestions/19268545--pagelabel-pdfmark-does-not-allow-pdf-encoding
 		IsDistiller {version {cvr} stopped {pop //true} {3018.1009999 gt} ifelse} {//true} ifelse {PDFDocEncodingify} {ASCIIfy} ifelse
 		dup length 255 gt {0 255 getinterval} if
@@ -3086,7 +3106,7 @@ currentdict /SmallCapsDict undef
 % So, on a 3600 dpi printer, accurate to half a pixel if radius <= 9.46 metres ~= 31 foot.
 % (Ignoring machine precision; ignoring De Casteljau's approximation; ignoring paper roller speed.)
 % https://stackoverflow.com/questions/77855798/postscript-circles-how-accurate-how-improve/
-% http://github.com/jdaw1/placemat/issues/164
+% http://GitHub.com/jdaw1/placemat/issues/164
 % http://groups.google.com/g/comp.lang.postscript/c/B23RW2QpIjU  "ArcPrecise, an accurate arc", 19 July 2022
 /ArcAccurateBoth
 {
@@ -4505,7 +4525,7 @@ currentdict /GlyphShowKnownAbsences undef
 	yyMeaning /Bottom eq {/y yy FromCenterMinY r mul sub def} if
 	yyMeaning /Top    eq {/y yy FromCenterMaxY r mul sub def} if
 
-	% See http://www.jdawiseman.com/papers/easymath/surds_star_inner_radius.html
+	% See http://www.JDAWiseman.com/papers/easymath/surds_star_inner_radius.html
 	/InnerRadius  m 180 mul n div cos  m 1 sub 180 mul n div cos  div  r mul def
 	DrawLinesInside
 	{
@@ -4904,11 +4924,11 @@ currentdict /GlyphShowKnownAbsences undef
 				dup  /SuppressOrnamentsLeft            eq {pop  /i i 1 add store  exit} if
 				dup  /SuppressOrnamentsRight           eq {pop  /i i 1 add store  exit} if
 				dup  /SuppressOrnamentsCentre          eq {pop  /i i 1 add store  exit} if
-				dup  /VerticalAlignment                eq {pop  /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=79314#p79314
+				dup  /VerticalAlignment                eq {pop  /i i 2 add store  exit} if  % Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=79314#p79314
 				dup  /HorizontalAlignment              eq {pop  /i i 2 add store  exit} if
 				dup  /RectColsToLeftOrRowsBelow        eq {pop  /i i 2 add store  exit} if
 				dup  /PackingNestingColumnMajor        eq {pop  /i i 2 add store  exit} if
-				dup  /PackingDirectionTopToBottom      eq {pop  /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=73641#p73641
+				dup  /PackingDirectionTopToBottom      eq {pop  /i i 2 add store  exit} if  % Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=73641#p73641
 				dup  /PackingDirectionLeftToRight      eq {pop  /i i 2 add store  exit} if
 				dup  /TempleExtraColsToLeftOrRowsBelow eq {pop  /i i 2 add store  exit} if
 				mark exch (Warning: an item of PackingStyles contains the non-recognised sub-parameter ) exch ToString ConcatenateToMark OutputToLog
@@ -5034,7 +5054,7 @@ currentdict /GlyphShowKnownAbsences undef
 		/Temple BaseStyle eq
 		{
 			//DeBugLevel 50 le {( ProcessOnePackingType, /Temple) OutputToLog} if
-			% http://github.com/jdaw1/placemat/blob/main/Supporting_code/PackingStyles_formulae.nb
+			% http://GitHub.com/jdaw1/placemat/blob/main/Supporting_code/PackingStyles_formulae.nb
 			% The constraint on the aspect ratio might be <= (Sqrt3-1)*5/2 ~= 1.8301 and also >= (27+11*Sqrt3)*(4-SqrtSqrt12)/61 ~= 1.6147
 			/N NG 1 sub 3 div ceiling cvi dup 2 lt {pop 2} if def
 			0 1 1  % 0 = Landscape-style, N=NumCols and NumRows~=3; 1 = Portrait-style, N=NumRows and NumCols~=3;
@@ -5173,7 +5193,7 @@ currentdict /GlyphShowKnownAbsences undef
 		} if  % /RectangularDislocation
 
 
-		% Discussion of name: http://www.theportforum.com/viewtopic.php?t=175&p=57297#p57297
+		% Discussion of name: http://www.ThePortForum.com/viewtopic.php?t=175&p=57297#p57297
 		/PostsAndLintel BaseStyle eq
 		{
 			//DeBugLevel 50 le {( ProcessOnePackingType, /PostsAndLintel) OutputToLog} if
@@ -5221,7 +5241,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 		/Arch BaseStyle eq
 		{
-			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=56857#p56857
+			% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=56857#p56857
 			//DeBugLevel 50 le {( ProcessOnePackingType, /Arch) OutputToLog} if
 			/NGiA  NG CentralGlasses sub  def  % Number Glasses in Arch
 			NGiA 3 ge
@@ -5267,7 +5287,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 					NGiA 2 add dup mul  -1  0
 					{
-						0 le {/UpperR R def (Error: ProcessOnePackingType, Arch, extremely slow convergence. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog exit} if
+						0 le {/UpperR R def (Error: ProcessOnePackingType, Arch, extremely slow convergence. Please submit an issue to http://GitHub.com/jdaw1/placemat/issues/) OutputToLog exit} if
 						/DistSquaredMax 0 def
 						/DistSquaredMin H W add dup mul def
 						% Test for exit of jiggling of PositionsX & PositionsY
@@ -5522,7 +5542,7 @@ currentdict /GlyphShowKnownAbsences undef
 		/RectangularAlternateNudge BaseStyle eq
 		{
 			//DeBugLevel 50 le {( ProcessOnePackingType, /RectangularAlternateNudge) OutputToLog} if
-			% Not entirely happy with this code. If there isn't a solution to the quadratic, there should still be something sensible to do. But what? Answers to the author, www.jdawiseman.com/author.html
+			% Not entirely happy with this code. If there isn't a solution to the quadratic, there should still be something sensible to do. But what? Answers to the author, www.JDAWiseman.com/author.html
 			RowsNumMin 1 RowsNumMax
 			{
 				/NR exch def
@@ -5710,11 +5730,11 @@ currentdict /GlyphShowKnownAbsences undef
 				dup  /ShoveLeft                         eq {pop  /ShoveLeft  //true store  /i i 1 add store  exit} if
 				dup  /ShoveRight                        eq {pop  /ShoveRight //true store  /i i 1 add store  exit} if
 				dup  /CentralGlasses                    eq {pop  /CentralGlasses                    PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
-				dup  /VerticalAlignment                 eq {pop  /VerticalAlignment                 PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=79314#p79314
+				dup  /VerticalAlignment                 eq {pop  /VerticalAlignment                 PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if  % Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=79314#p79314
 				dup  /HorizontalAlignment               eq {pop  /HorizontalAlignment               PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /RectColsToLeftOrRowsBelow         eq {pop  /RectColsToLeftOrRowsBelow         PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /PackingNestingColumnMajor         eq {pop  /PackingNestingColumnMajor         PackingDescriptor i 1 add GetEU def    /i i 2 add store  exit} if
-				dup  /PackingDirectionTopToBottom       eq {pop  /PackingDirectionTopToBottom       PackingDescriptor i 1 add GetEU def    /i i 2 add store  exit} if  % Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=73641#p73641
+				dup  /PackingDirectionTopToBottom       eq {pop  /PackingDirectionTopToBottom       PackingDescriptor i 1 add GetEU def    /i i 2 add store  exit} if  % Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=73641#p73641
 				dup  /PackingDirectionLeftToRight       eq {pop  /PackingDirectionLeftToRight       PackingDescriptor i 1 add GetEU def    /i i 2 add store  exit} if
 				dup  /TempleExtraColsToLeftOrRowsBelow  eq {pop  /TempleExtraColsToLeftOrRowsBelow  PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /Positions                         eq {pop  /i PackingDescriptor length store  exit} if
@@ -5927,7 +5947,7 @@ currentdict /GlyphShowKnownAbsences undef
 			[
 				% http://groups.google.com/g/comp.lang.postscript/c/5pJw5Gvf_YI  "Mathematica PostScriptForm[] function for Mathematica --> PostScript translation", 18 Dec 2015
 				% http://mathematica.stackexchange.com/questions/101954/looking-for-postscriptform-or-forthform-to-print-expressions-as-rpn-code
-				% http://github.com/jdaw1/placemat/blob/main/Supporting_code/PackingStyles_formulae.nb
+				% http://GitHub.com/jdaw1/placemat/blob/main/Supporting_code/PackingStyles_formulae.nb
 				L 8 R mul sub L mul 4 2 R mul 4 S mul add R mul S dup mul sub mul add L mul 16 R mul 2 R mul 4 S mul sub R mul S dup mul add mul add L mul 16 13 R mul 28 S mul sub R mul 23 S dup mul
 				mul add R mul 8 S dup dup mul mul mul sub R mul S dup mul dup mul add mul add 9 L mul 72 R mul sub L mul 12 22 R mul 4 S mul sub R mul S dup mul add mul add L mul 48 R mul 10 R mul 4
 				S mul sub R mul S dup mul add mul sub L mul 16 37 R mul 44 S mul sub R mul 27 S dup mul mul add R mul 8 S dup dup mul mul mul sub R mul S dup mul dup mul add mul add mul  % Coeff 0
@@ -6159,7 +6179,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 			NGiA 2 add dup mul  -1  0
 			{
-				0 le {/UpperR R def (Error: CirclePacking, Arch, extremely slow convergence. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog exit} if
+				0 le {/UpperR R def (Error: CirclePacking, Arch, extremely slow convergence. Please submit an issue to http://GitHub.com/jdaw1/placemat/issues/) OutputToLog exit} if
 				/DistSquaredMax 0 def
 				/DistSquaredMin H W add dup mul def
 				% Test for exit of jiggling of PositionsX & PositionsY
@@ -6547,7 +6567,7 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				[ 4 R mul S sub S mul NC 4 add NC mul 5 add 4 mul R R mul mul sub NC 2 add 8 mul R L mul mul add 4 L L mul mul sub  S 2 R mul sub 2 mul  3 ]
 				2 R mul //PrinterEpsilon sub  //false   L R 2 mul sub //PrinterEpsilon add  //false  //PrinterEpsilon  PolynomialRoots
-				dup length 0 eq {pop () (Error: CirclePacking, DiamondsPlus, failed to compute dist. Please submit an issue to http://github.com/jdaw1/placemat/issues/) () OutputToLog OutputToLog OutputToLog /dist R 2 mul def} {Min /dist exch def} ifelse
+				dup length 0 eq {pop () (Error: CirclePacking, DiamondsPlus, failed to compute dist. Please submit an issue to http://GitHub.com/jdaw1/placemat/issues/) () OutputToLog OutputToLog OutputToLog /dist R 2 mul def} {Min /dist exch def} ifelse
 				/xstep R def
 			}{
 				/QuarticCoeffs
@@ -7087,7 +7107,7 @@ currentdict /GlyphShowKnownAbsences undef
 			/Ang  DistCurrent CW 2 div add  Dists PartMiddle 1 sub get sub  Dists PartMiddle get Dists PartMiddle 1 sub get sub  div 90 mul  def
 			GRestore  matrix currentmatrix
 			[
-				{(Error: CirclearrayInSemiRoundedRectangleRec, impossible PartMiddle. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog stop}
+				{(Error: CirclearrayInSemiRoundedRectangleRec, impossible PartMiddle. Please submit an issue to http://GitHub.com/jdaw1/placemat/issues/) OutputToLog stop}
 				{X W D add add  Y AD DistCurrent add add  moveto 90 rotate  0 VerticalOffset rmoveto}
 				{W R sub X add Ang cos R D add mul add   H R sub Y add Ang sin R D add mul add moveto  90  Ang add rotate  CW -2 div VerticalOffset rmoveto}
 				{X W R DistCurrent Dists 2 get sub add sub add   Y H D add add  moveto 180 rotate  0 VerticalOffset rmoveto}
@@ -7814,7 +7834,7 @@ currentdict /GlyphShowKnownAbsences undef
 				} {pop} ifelse  % too close
 			} for  % WP
 		} for  % WithinPage
-		GlassPositionsBug {mark (Error in the computation of GlassPositions ) SheetNum ( get. Please submit an issue to http://github.com/jdaw1/placemat/issues/ . Execution continuing.) ConcatenateToMark OutputToLog} if
+		GlassPositionsBug {mark (Error in the computation of GlassPositions ) SheetNum ( get. Please submit an issue to http://GitHub.com/jdaw1/placemat/issues/ . Execution continuing.) ConcatenateToMark OutputToLog} if
 		UndefMgns
 		end
 	} bind def  % CodeCallCirclePacking
@@ -7951,7 +7971,7 @@ currentdict /GlyphShowKnownAbsences undef
 	ConcatenateToMark OutputToLog  % Matching 'mark' about 14 lines up
 
 
-	% Circlearrays: optimisation of font size. https://github.com/jdaw1/placemat/issues/165
+	% Circlearrays: optimisation of font size. https://GitHub.com/jdaw1/placemat/issues/165
 	//DeBugLevel 100 le {( Main: computing CirclearraysFontSizes, etc) OutputToLog} if
 	/CirclearraysFontSizes     NumSheets array def
 	/CirclearraysFontSizesBest NumSheets array def
@@ -8975,8 +8995,8 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				mark FirstError {(\n)} if   (Error. With SheetNum=) SheetNum (, WithinPage=) WithinPage (, WithinTitles=) WithinTitles (, title=) Titles WithinTitles get ASCIIfy (: )
 				/FirstError //false def
-				a {(insufficient room for Abovetitles, which is weird. Please submit an issue to http://github.com/jdaw1/placemat/issues/ ) (; )} if
-				b {(insufficient room for Belowtitles, which is weird. Please submit an issue to http://github.com/jdaw1/placemat/issues/ ) (; )} if
+				a {(insufficient room for Abovetitles, which is weird. Please submit an issue to http://GitHub.com/jdaw1/placemat/issues/ ) (; )} if
+				b {(insufficient room for Belowtitles, which is weird. Please submit an issue to http://GitHub.com/jdaw1/placemat/issues/ ) (; )} if
 				pop (.) ConcatenateToMark OutputToLog
 			} if  % a b or
 
@@ -9285,7 +9305,7 @@ currentdict /GlyphShowKnownAbsences undef
 	} bind def  % /FindWithinGlassesOnSheets
 
 	% FlightSeparationPath takes a single array parameter and appends a segment to the current path.
-	% The range of permitted parameters is described at http://github.com/jdaw1/placemat/blob/main/Documentation/page_level.md#separating-flights-within-a-page
+	% The range of permitted parameters is described at http://GitHub.com/jdaw1/placemat/blob/main/Documentation/page_level.md#separating-flights-within-a-page
 	/FlightSeparationDone [ NumSheets {//false} repeat ] def
 	/FlightSeparationInterestingsTB [ SheetNumGlasses {4 mul array} forall ] def
 	/FlightSeparationInterestingsLR [ SheetNumGlasses {4 mul array} forall ] def
@@ -9985,7 +10005,7 @@ currentdict /GlyphShowKnownAbsences undef
 		//DeBugLevel 25 le {(-DropletPath) OutputToLog} if
 	} bind def  % /DropletPath
 
-	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=112214#p112214
+	% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=112214#p112214
 	{Droplets} MightBeTrue
 	{
 		//DeBugLevel 50 le {(+DropletPaths computation) OutputToLog} if
@@ -10232,7 +10252,11 @@ currentdict /GlyphShowKnownAbsences undef
 		} Stopped pop  % Stopped in case any of these parameters are code referring to something presently undefined.
 		(DropletsCharges is equivalent to [) DropletsChargesText aload pop (  ]  % Reminder: SheetNum [X Y] Charge Spin ...\n)
 		(DropletsProportionBackwards = )  /DropletsProportionBackwards load
-		DropletsProportionBackwards dup 0.0001 gt exch 0.5 lt and {( ~= 1/) 1 DropletsProportionBackwards div} if   (.)
+		DropletsProportionBackwards dup 0.000015258789 gt  % Near 2^-16 limit
+		{
+			dup 0.5 le {( ~= 1/)  1  2 index  div} {pop} ifelse
+			(. By SheetNum, num reversed = ) [ DropletsWhichReversed {length} forall ] ToString TrimSpaces
+		} {pop} ifelse   (.)
 		(\nDropletPaths, number on each SheetNum = ) [ DropletPaths {length} forall ] ToString TrimSpaces
 		(. Frequencies of the number of points in individual droplets: )
 		11 dict begin  /FrequencyDict << >> def
@@ -10516,7 +10540,7 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						DropletPaths SheetNum get exch get /ThisDroplet exch def
 						0  4  ThisDroplet length 1 sub {ThisDroplet 1 index 2 getinterval aload pop   3 -1 roll 0 eq {moveto} {lineto} ifelse} for
-						mark DropletsOuterWidthEnd DropletsOuterWidthStart 0.96 MaxToMark dup  2.5 mul setlinewidth 1 0 0 setrgbcolor GSave stroke GRestore 1.75 mul setlinewidth 1 setgray stroke
+						mark DropletsOuterWidthEnd DropletsOuterWidthStart 0.96 MaxToMark dup  3 mul setlinewidth 1 0 0 setrgbcolor GSave stroke GRestore 2 mul setlinewidth 1 setgray stroke
 					} {pop exit} ifelse  % /integertype
 				} forall  % DropletsWhichReversed ...
 				ClipRestore
@@ -10678,7 +10702,7 @@ currentdict /GlyphShowKnownAbsences undef
 	/TitlesAboveBelowOverInlinePaleStrokeCode {InlineStrokePreformatting  1 setgray stroke} bind def
 	/TitlesAboveBelowOverInlineDarkStrokeCode {InlineStrokePreformatting  ColourSchemeCurrent /MidGrey eq {0.4} {0} ifelse setgray stroke} bind def
 
-	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=90575#p90575
+	% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=90575#p90575
 	/AnnotateGlass
 	{
 		3 dict begin
@@ -11223,7 +11247,7 @@ currentdict /GlyphShowKnownAbsences undef
 					/ThisName load  //true  CharPathRecursive
 				} dup exec ClipSave clip newpath exec  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
 				/InlineBlackPlusWhite  InlineTitlesBlackWidth InlineTitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
-				% Discussion: http://www.theportforum.com/viewtopic.php?t=175&start=913
+				% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&start=913
 				InlinePlaceNamesAttemptMinimiseNumContours {InlineBlackPlusWhite LineWidthThatCoversPath pop InlineBlackPlusWhite div ceiling cvi} {//IntegerMax} ifelse
 				PlaceNamesFontSize InlineBlackPlusWhite div PlaceNamesDetailsScalingFactor div ceiling cvi  InlineTitlesMaxNumberContours  2 {2 copy gt {exch} if pop} repeat
 				-1  1
@@ -11799,7 +11823,7 @@ currentdict /GlyphShowKnownAbsences undef
 					def  % /VoteRecorderWidthColFirst
 					/VoteRecorderColWidth  PageWidth MgnL MgnR add sub VoteRecorderWidthColFirst sub VoteRecorderNumNames div  def
 
-					% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=80997#p80997
+					% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=80997#p80997
 					/VoteRecorderNamesOrientationIsHorizontal VoteRecorderNamesOrientation dup /Horizontal eq  exch /Vertical ne VoteRecorderColWidth VoteRecorderHeightFirstRow 0.9375 mul ge and  or def
 					VoteRecorderNamesOrientationIsHorizontal
 					{
@@ -11860,7 +11884,7 @@ currentdict /GlyphShowKnownAbsences undef
 								TitlesFont VoteRecorderTitlesFontSize SelectFont
 								VoteRecorderTitleT VoteRecorderTitleB sub //PrinterEpsilon gt  VoteRecorderTitleR VoteRecorderTitleL sub //PrinterEpsilon gt  and
 								{
-									% http://www.theportforum.com/viewtopic.php?t=175&start=852
+									% http://www.ThePortForum.com/viewtopic.php?t=175&start=852
 									matrix currentmatrix
 									% Size factor if rotated
 									VoteRecorderWidthColFirst VoteRecorderWideLineWidth 2 div sub  VoteRecorderTitleT VoteRecorderTitleB sub div
@@ -11970,7 +11994,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 					NamesFont VoteRecorderNamesFontSize SelectFont
 					0 setgray
-					% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=80997#p80997
+					% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=80997#p80997
 					VoteRecorderNamesOrientationIsHorizontal
 					{
 						% Horizontal
@@ -12067,7 +12091,7 @@ currentdict /GlyphShowKnownAbsences undef
 	} if  % ... VoteRecorders ...
 
 
-	% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=42615#p42615
+	% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=42615#p42615
 	{DecantingNotesNumCopies 1 ge} MightBeTrue
 	{
 		//DeBugLevel 100 le {( Main: DecantingNotesForms) OutputToLog} if
@@ -12536,7 +12560,7 @@ currentdict /GlyphShowKnownAbsences undef
 							abs RadiiCirclearrayInside SheetNum get add  2 add  % Embedded constant. Will be enough if linewidth <= 4.
 							SpiralNumArms SpiralRadiusBetweenArms SpiralAngleOffset SpiralClockwise //true /m ArchimedeanSpiralPath
 						} ifelse  % SpiralRadiusBetweenArms abs //Infinity ge
-						0.18 setlinewidth  0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash  SpiralStrokeCode  % Too thin was 0.12 setlinewidth as used http://www.jdawiseman.com/2022/20220120_blind.pdf
+						0.18 setlinewidth  0 setgray  1 setlinejoin  1 setlinecap  [] 0 setdash  SpiralStrokeCode  % Too thin was 0.12 setlinewidth as used http://www.JDAWiseman.com/2022/20220120_blind.pdf
 						ClipRestore
 					} if  % RadiiCirclearrayInside SheetNum get  0 gt  Spirals and
 					//DeBugLevel 100 le {(-SpiralForms: PaintProc) OutputToLog} if
@@ -12975,7 +12999,7 @@ currentdict /GlyphShowKnownAbsences undef
 		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
-			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=94014#p94014
+			% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=94014#p94014
 			GlassesCirclesFadingFactor dup //Epsilon ge  CirclearraysFillBehind  and
 			{
 				newpath   GSave
@@ -13074,7 +13098,7 @@ currentdict /GlyphShowKnownAbsences undef
 				ifelse  % PaintBackgroundInsideGlassCircles ... length 0 gt
 				TitleAboveBelowOverForms SheetNum get WithinPage get  execform  AnnotateGlass
 				GRestore
-				% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=94014#p94014
+				% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=94014#p94014
 				GlassesCrossedOut
 				{
 					2 dict begin
@@ -13182,7 +13206,7 @@ currentdict /GlyphShowKnownAbsences undef
 			0  4  TastingNotesStarsNameColsRowsArrangement length 4 sub
 			{
 				/i exch def
-				% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=69275#p69275
+				% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=69275#p69275
 				ThisNameASCII TastingNotesStarsNameColsRowsArrangement i get ASCIIfy eq
 				{
 					/TNcols TastingNotesStarsNameColsRowsArrangement i 1 add GetEU def
@@ -13218,7 +13242,7 @@ currentdict /GlyphShowKnownAbsences undef
 		} for  % WithinPage, WithinTitles
 		end
 
-		% Discussion: http://www.theportforum.com/viewtopic.php?t=175&start=929
+		% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&start=929
 		WaterBoxes dup /TastingNotes eq exch /Both eq or  WaterBoxesNum 0 gt and  WaterBoxesShowTN TNSheetNum get WaterBoxesOverrideShowEverySheet or  and
 		{
 			//DeBugLevel 75 le {( TastingNotesInnerLoop: Water) OutputToLog} if
@@ -13650,7 +13674,7 @@ currentdict /GlyphShowKnownAbsences undef
 			currentdict /NameNum undef
 
 
-			% See http://www.theportforum.com/viewtopic.php?t=175&start=166
+			% See http://www.ThePortForum.com/viewtopic.php?t=175&start=166
 			/VoteRecorders load MightBeTrue
 			{
 				17 dict begin
@@ -13676,7 +13700,7 @@ currentdict /GlyphShowKnownAbsences undef
 							SetPaperSize
 							//true DefStoreMgns
 							//DeBugLevel 40 le {(+PaintBackgroundCode) OutputToLog} if   GSave newpath /PaintBackgroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintBackgroundCode) OutputToLog} if
-							/VoteRecorderTopTextHeight PageHeight MgnB MgnT add sub 50 div  def  % Embedded constant. Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=56967#p56967
+							/VoteRecorderTopTextHeight PageHeight MgnB MgnT add sub 50 div  def  % Embedded constant. Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=56967#p56967
 							VoteRecorderTopTextHeight 0 gt
 							{
 								HeaderFont VoteRecorderTopTextHeight SelectFont
@@ -13733,7 +13757,7 @@ currentdict /GlyphShowKnownAbsences undef
 			} if  % ... DecantingNotesNumCopies 1 ge ...
 
 
-			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=96950#p96950
+			% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=96950#p96950
 
 			AccountsNumCopies 1 ge
 			{
@@ -13856,7 +13880,7 @@ currentdict /GlyphShowKnownAbsences undef
 			} if   % AccountsNumCopies 1 ge
 
 
-			% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=45400#p45400
+			% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=45400#p45400
 			{CorkDisplayNumCopies 1 ge} MightBeTrue
 			{
 				//DeBugLevel 100 le {(+CorkDisplay) OutputToLog} if
@@ -14307,7 +14331,7 @@ currentdict /GlyphShowKnownAbsences undef
 							} for  % WithinPage, WithinTitles
 						} for  % SheetNum
 						NTNumPaintedThisPage 0 gt {AnnotatePDF ShowPage} if
-					} {(Error: NeckTags, NTBestRotatedness is null. No neck tags pages; otherwise continuing. Please submit an issue to http://github.com/jdaw1/placemat/issues/) OutputToLog} ifelse  % NTBestRotatedness //null ne
+					} {(Error: NeckTags, NTBestRotatedness is null. No neck tags pages; otherwise continuing. Please submit an issue to http://GitHub.com/jdaw1/placemat/issues/) OutputToLog} ifelse  % NTBestRotatedness //null ne
 				} if  % NTNumGlasses 1 ge ...
 				end
 				//DeBugLevel 100 le {(-NeckTags) OutputToLog} if
@@ -14899,7 +14923,7 @@ currentdict /GlyphShowKnownAbsences undef
 										0  1  1
 										{
 											/Top0Bottom1 exch def
-											% Discussion: http://www.theportforum.com/viewtopic.php?t=175&p=91779#p91779
+											% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=91779#p91779
 											StickyLabelsByNameWhichReplaceCirclearrays Top0Bottom1 1 eq and
 												{/ThisFont NamesFont      def  /ThisCirclearray  [/ThisName load]              def}
 												{/ThisFont CirclearraysFont def  /ThisCirclearray  CirclearraysStickyLabels WithinTitles get def}
@@ -15145,7 +15169,7 @@ currentdict /GlyphShowKnownAbsences undef
 	mark
 		/CreationDate ParametersVersionDateTimeAdobeFormat   /Title PDF_title ASCIIfy
 		/Author (Julian D. A. Wiseman)
-		/Creator (www.jdawiseman.com/author.html)
+		/Creator (www.JDAWiseman.com/author.html)
 		/Subject mark
 			(PostScript code by Julian D. A. Wiseman; software version ) SoftwareVersionDateTimeAdobeFormat dup length 2 sub 2 exch getinterval
 			(; parameters as of ) ParametersVersionDateTimeAdobeFormat dup length 2 sub 2 exch getinterval
@@ -15773,7 +15797,7 @@ currentdict /GlyphShowKnownAbsences undef
 		} for  % i
 	} if  % ExternalLinks length 3 ge
 	mark  /Action << >>  /Color [0 0 0]  /Title ()  /F 0  /OUT  pdfmark
-	mark  /Action << /Subtype /URI /URI (http://github.com/jdaw1/placemat/) >>  /Color [0 0 0]  /Title (\247 Placemat software)  /F 2  /OUT  pdfmark
+	mark  /Action << /Subtype /URI /URI (http://GitHub.com/jdaw1/placemat/) >>  /Color [0 0 0]  /Title (\247 Placemat software)  /F 2  /OUT  pdfmark
 	mark  /Action << >>  /Color [0.4 0.4 0.4]  /Title mark (\(ver: ) SoftwareVersionDateTimeAdobeFormat (\)) ConcatenateToMark  /F 1  /OUT  pdfmark
 	0  3  ExternalLinksExtras length 3 sub
 	{
@@ -15843,7 +15867,7 @@ OutputLogToAnnotation  ShownPages 0 gt  and
 		/Title   (Distillation log)
 		/Subject (The log output from the progam that converted the PostScript to PDF. Mostly human-readable.)
 		/Contents  mark
-			(Placemat software:\nhttp://github.com/jdaw1/placemat/)
+			(Placemat software:\nhttp://GitHub.com/jdaw1/placemat/)
 			OutputLog {dup type /stringtype eq {(\n\n) exch} {pop exit} ifelse} forall
 		ConcatenateToMark
 		/NM      (DistillationLog)
@@ -15873,7 +15897,7 @@ OutputLogToPage {false PageSuppressed not} {false} ifelse
 	/ForcedLineBreak //false def
 
 	/Courier-Bold FontSize selectfont   27 Y moveto  0 0 0.93333333 setrgbcolor  % #0000EE  http://www.w3.org/TR/html5/rendering.html  http://stackoverflow.com/questions/4774022/
-	/LogHeaders [ (https://github.com/jdaw1/placemat/#readme)  (http://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps?raw=1) ] def
+	/LogHeaders [ (https://GitHub.com/jdaw1/placemat/#readme)  (http://GitHub.com/jdaw1/placemat/blob/main/PostScript/placemat.ps?raw=1) ] def
 	/LogHeaderGap PageWidth 54 sub LogHeaders {stringwidth pop sub} forall LogHeaders length dup 3 ge {1 sub div} {pop} ifelse def
 	LogHeaders {show LogHeaderGap 0 rmoveto   /AnythingOnPage //true def} forall
 	/Y Y YlineStep sub YparaExtra sub def
