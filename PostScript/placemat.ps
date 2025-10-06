@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:30 Monday 6th October 2025
+% This version 22:50 Monday 6th October 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202510062230) def
+/ParametersVersionDateTimeAdobeFormat (D:202510062250) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -839,7 +839,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202510062230) def
+/SoftwareVersionDateTimeAdobeFormat (D:202510062250) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -10257,7 +10257,7 @@ currentdict /GlyphShowKnownAbsences undef
 			dup //ArrayLengthMax mul 0.5 gt
 			{
 				dup 0.5 le {( ~= 1/)  1  2 index  div} {pop} ifelse
-				(. By SheetNum, num reversed = [) () DropletsWhichReversed {length ( )} forall pop (].)
+				(. By SheetNum, num backwards = [) () DropletsWhichReversed {length ( )} forall pop (].)
 			} {(.)} ifelse  % strictly positive
 		} {(.)} ifelse  % IsNumber
 		(\nDropletPaths, number on each SheetNum = [) () DropletPaths {length ( )} forall pop (]. )
