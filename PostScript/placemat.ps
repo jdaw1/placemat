@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:00 Monday 6th October 2025
+% This version 22:30 Monday 6th October 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202510062200) def
+/ParametersVersionDateTimeAdobeFormat (D:202510062230) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -839,7 +839,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202510062200) def
+/SoftwareVersionDateTimeAdobeFormat (D:202510062230) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -10250,15 +10250,18 @@ currentdict /GlyphShowKnownAbsences undef
 			100 mul  dup 1 gt {1} {dup 0.2 gt {2} {4} ifelse} ifelse FormatDecimalPlaces
 			(% of non-margin bare page \(ignoring overlaps and hollow inners, assuming no sharp turns, etc\).\n)
 		} Stopped pop  % Stopped in case any of these parameters are code referring to something presently undefined.
-		(DropletsCharges is equivalent to [) DropletsChargesText aload pop (  ]  % Reminder: SheetNum [X Y] Charge Spin ...\n)
-		(DropletsProportionBackwards = )  /DropletsProportionBackwards load
-		DropletsProportionBackwards dup 0.000015258789 gt  % Near 2^-16 limit
+		(DropletsCharges is equivalent to [) DropletsChargesText aload pop (  ]  % Reminder: SheetNum [X Y] Charge Spin ...)
+		(\nDropletsProportionBackwards = )  /DropletsProportionBackwards load
+		dup IsNumber
 		{
-			dup 0.5 le {( ~= 1/)  1  2 index  div} {pop} ifelse
-			(. By SheetNum, num reversed = ) [ DropletsWhichReversed {length} forall ] ToString TrimSpaces
-		} {pop} ifelse   (.)
-		(\nDropletPaths, number on each SheetNum = ) [ DropletPaths {length} forall ] ToString TrimSpaces
-		(. Frequencies of the number of points in individual droplets: )
+			dup //ArrayLengthMax mul 0.5 gt
+			{
+				dup 0.5 le {( ~= 1/)  1  2 index  div} {pop} ifelse
+				(. By SheetNum, num reversed = [) () DropletsWhichReversed {length ( )} forall pop (].)
+			} {(.)} ifelse  % strictly positive
+		} {(.)} ifelse  % IsNumber
+		(\nDropletPaths, number on each SheetNum = [) () DropletPaths {length ( )} forall pop (]. )
+		(Frequencies of the number of points in individual droplets: )
 		11 dict begin  /FrequencyDict << >> def
 		/LengthsNum 0 def  /LengthsSum 0 def
 		DropletPaths { {
