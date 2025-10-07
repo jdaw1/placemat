@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:50 Monday 6th October 2025
+% This version 20:55 Tuesday 7th October 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202510062250) def
+/ParametersVersionDateTimeAdobeFormat (D:202510072055) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -839,7 +839,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202510062250) def
+/SoftwareVersionDateTimeAdobeFormat (D:202510072055) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -12050,22 +12050,28 @@ currentdict /GlyphShowKnownAbsences undef
 					VRTTR VRTTL sub VoteRecorderHeightFirstRow gt {VoteRecorderHeightFirstRow VRTTR VRTTL sub div 1 scale} {VoteRecorderHeightFirstRow VRTTR VRTTL sub sub 2 div 0 rmoveto} ifelse
 				} ifelse  VoteRecorderInstruction ShowRecursive   setmatrix  % Show horizontally
 
+				% VoteRecorder slightly neater if names sorted by length. Usual practice to begin with honoured guest, then organiser, then the others sorted by length. These logs help sorting.
 				VoteRecorderNamesOrientationIsHorizontal {//false} {VoteRecorderNamesWidthsLogged {/NamesVoteRecorder load xcheck} {//true} ifelse} ifelse
 				{
-					/NamesVoteRecorderWidths VoteRecorderNameR VoteRecorderNameL  {sub} //false TwoArraysFunction 0 NamesVoteRecorder length getinterval def
+					/NamesVoteRecorderWidths
+						VoteRecorderNameR VoteRecorderNameL {sub} //false TwoArraysFunction
+						VoteRecorderColTitlesEarly VoteRecorderSheetNum get length  NamesVoteRecorder length  getinterval
+					def  % /NamesVoteRecorderWidths
 					0 NamesVoteRecorderWidths {0 ne {1 add} if} forall  3 gt
 					{
-						/SortIncreasingVR
-						0   NamesVoteRecorderWidths  NamesVoteRecorder length 2 idiv 1 sub  dup NamesVoteRecorder length 1 sub exch sub exch  getinterval {add} forall
-						0   NamesVoteRecorderWidths  1                  NamesVoteRecorder length 2 idiv 1 sub                                 getinterval {add} forall
-						ge   def  % /SortIncreasingVR
+						/SortIncreasingVR   0
+						NamesVoteRecorderWidths length dup 7 ge  {3 sub  -1  2}  {2 sub  -1  1}  ifelse
+						{
+							% Sign of linear regression, excluding first and last 1 or 2.
+							dup  NamesVoteRecorderWidths length 1 sub 2 div  sub
+							exch NamesVoteRecorderWidths exch get  mul  add
+						} for  0 ge   def  % /SortIncreasingVR
 
-						% VoteRecorder slightly neater if names sorted by length. Usual practice to begin with honoured guest, then organiser, then the others sorted by length. These logs help sorting.
 						mark () (NamesVoteRecorder, sorted ) (longer) (shorter) SortIncreasingVR {exch} if (-to-) exch (: )
 						[ 0  1  NamesVoteRecorder length 1 sub {[exch dup NamesVoteRecorder exch get ASCIIfy exch NamesVoteRecorderWidths exch get]  dup 1 get 0 eq {pop} if} for ]
 						dup {1 get exch 1 get SortIncreasingVR {gt} {lt} ifelse} ShellSort  {0 get  dup length 0 gt {(; )} {pop} ifelse} forall pop  TerminatingFullStopAppend
 						(  Names with lengths locally non-monotonic: )
-						1  1  NamesVoteRecorderWidths length 2 sub
+						1  1  NamesVoteRecorderWidths length 2 sub % Deliberately 1 away from ends
 						{
 							/NameNum exch def
 							//true  -1 1 1 {NameNum add NamesVoteRecorderWidths exch get 0 le {pop //false exit} if} for
@@ -12081,7 +12087,7 @@ currentdict /GlyphShowKnownAbsences undef
 						/VoteRecorderNamesWidthsLogged //true store
 					} if  % at least four non-0 widths
 					currentdict /NamesVoteRecorderWidths undef
-				} if  % VoteRecorderNamesWidthsLogged not  NamesVoteRecorder length 4 ge  and  VoteRecorderNamesOrientationIsHorizontal not  and
+				} if  % VoteRecorderNamesOrientationIsHorizontal not ...
 
 				end
 				end
