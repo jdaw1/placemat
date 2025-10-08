@@ -421,7 +421,7 @@ The log can go to three places, controlled by three Booleans.
 ### PageLabelOverride and PageLabelOverrideWith ###
 
 `PageLabelOverride` and `PageLabelOverrideWith` are used extremely rarely. 
-Indeed, perhaps only for making documentation.
+So far, mostly only for making documentation, and for making the images used in the tasting-note threads of one serious vertical ([e.g.](http://www.theportforum.com/viewtopic.php?t=16425&p=140057#p140057)).
 
 PDFs allow page labels. 
 In some PDF viewers the page labels appear beneath the thumbnails in the sidebar. 
