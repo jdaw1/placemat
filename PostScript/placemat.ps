@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:55 Tuesday 7th October 2025
+% This version 20:30 Friday 17th October 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202510072055) def
+/ParametersVersionDateTimeAdobeFormat (D:202510172030) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -338,9 +338,9 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /Droplets false def
 /DropletsCharges [  % Length a multiple of 4
-	/All  [297.638 777.685]  -1     0  % SheetNum Location Charge Spin. SheetNum can be /All; location is WithinPage, or reals [x y], or integers [WithinPage0, WithinPag1, ...].
-	/All  [160.819 538.760]   4  -300  % Default settings chosen for A4, 5 glasses, RectangularDislocation. Anticlockwise for northern-hemisphere Coriolis effect.
-	/All  [365.625 298.482]  -1     0
+	/All  [ 92.409 675.071]  -1     0  % SheetNum Location Charge Spin. SheetNum can be /All; location is reals [x y], or integer WithinPage, or integers [WithinPage0, WithinPag1, ...].
+	/All  [502.866 675.071]  -1     0  % SheetNum Location Charge Spin. SheetNum can be /All; location is reals [x y], or integer WithinPage, or integers [WithinPage0, WithinPag1, ...].
+	/All  [1 4]               4  -430  % Default settings chosen for A4, 5 glasses, RectangularDislocation. Anticlockwise for northern-hemisphere Coriolis effect.
 ] def  % DropletsCharges
 /DropletsProportionBackwards 0.0204 def  % Keeping this small adds humour to their discovery. ("Naughty creatures being rebellious. It's like herding cats!")
 
@@ -486,16 +486,14 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /DropletsReversedHighlight {-1 NameNum eq} def  % Default always false. Typical use case is testing for being 0.
 /DropletsPathLength 9 def
-/DropletsAverageSeparation DropletsPathLength 3 mul def  % If <10pt then too crowded. And <4pt might cause >65k droplets so stack overflow.
+/DropletsAverageSeparation 24 def  % If <10pt then too crowded. And <4pt might cause >65k droplets so stack overflow.
 /DropletsAverageMaxTweakPlusMinus {DropletsAverageSeparation 0.25 mul} bind def
-/DropletsOuterWidthEnd   4   def
-/DropletsOuterWidthStart 0.5 def
-/DropletsInnerWidthEnd   DropletsOuterWidthEnd 4 div def
-/DropletsInnerWidthStart {DropletsInnerWidthEnd DropletsOuterWidthEnd sub DropletsOuterWidthStart add} bind def
-/DropletsOuterGrayEnd    {DropletNum 4 mod 12 add 16 div} def
-/DropletsOuterGrayStart  {DropletsOuterGrayEnd} def
-/DropletsInnerGrayEnd    1 def
-/DropletsInnerGrayStart  1 def
+/DropletsOuterWidthEnd   4 def
+/DropletsOuterWidthStart 1 def
+/DropletsInnerWidthEnd   DropletsOuterWidthEnd 3 div def
+/DropletsInnerWidthStart {DropletsInnerWidthEnd DropletsOuterWidthStart add DropletsOuterWidthEnd sub} bind def
+/DropletsOuterFillCode {DropletNum 4 mod 12 add 16 div setgray} bind def
+/DropletsInnerFillCode {1 setgray} bind def
 /DropletsPaintAtEnd {} def
 /DropletsPaintAtEndRotate true def  % Relevant only if DropletsPaintAtEnd used. If true then 'up' points away from end.
 /Droplets_SideBySide_UnderTNs false def  % Relevant only if SideBySideGlassesTastingNotes is true
@@ -839,7 +837,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202510072055) def
+/SoftwareVersionDateTimeAdobeFormat (D:202510172030) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -10092,9 +10090,9 @@ currentdict /GlyphShowKnownAbsences undef
 				rrand
 				srand
 				/DropMinProximitySqd  0
-					0 1 15  % This a kludge. Copes if width dependent on DropletNum mod something modest.
+					0  1  15  % This a kludge, coping if width cycling no slower than every 16.
 					{
-						<< exch /DropletNum exch >> begin [ DropletsInnerWidthStart DropletsInnerWidthEnd DropletsInnerGrayStart DropletsInnerGrayEnd DropletsOuterWidthStart DropletsOuterWidthEnd DropletsOuterGrayStart DropletsOuterGrayEnd ] end
+						<< exch /DropletNum exch >> begin [ DropletsInnerWidthStart DropletsInnerWidthEnd DropletsOuterWidthStart DropletsOuterWidthEnd ] end
 							{1.2 mul 2 copy lt {exch} if pop}
 						forall  % the various widths
 					} for  % various kludged modulos
@@ -10309,17 +10307,13 @@ currentdict /GlyphShowKnownAbsences undef
 										{
 											/DpWS DropletsInnerWidthStart def  % These might be code doing randomisation. Even if so, fixed per droplet, so independent of i.
 											/DpWE DropletsInnerWidthEnd   def
-											/DpGS DropletsInnerGrayStart  def
-											/DpGE DropletsInnerGrayEnd    def
 										}{
 											/DpWS DropletsOuterWidthStart def  % These might be code doing randomisation. Even if so, fixed per droplet, so independent of i.
 											/DpWE DropletsOuterWidthEnd   def
-											/DpGS DropletsOuterGrayStart  def
-											/DpGE DropletsOuterGrayEnd    def
 										} ifelse  % IsInner
 										DpWS 0 gt  DpWE 0 gt  or
 										{
-											% Testing whether droplet is paintable. Testing it in this inner loop after assignment of (the likes of) DpGS, in case (ditto) DropletsInnerGrayStart invoke rand.
+											% Testing whether droplet is paintable. Testing it in this inner loop after assignment of (the likes of) DpWS, in case (ditto) DropletsInnerGrayStart invoke rand.
 											4  4  ThisDroplet length 1 sub  % The third of these for parameters replaced by sensible value if any line crosses the inside. Used 38 lines below; perhaps modified before.
 											//true  % All points outside box
 											4 copy pop
@@ -10368,66 +10362,36 @@ currentdict /GlyphShowKnownAbsences undef
 												/X1  ThisDroplet i       get  def
 												/Y1  ThisDroplet i 1 add get  def
 												/F1  ThisDroplet i 2 add get  DistStart sub  DistTotal div def
-												/LW0  1 F0 sub DpWS mul  F0 DpWE mul  add  def  % /LW0
-												/LW1  1 F1 sub DpWS mul  F1 DpWE mul  add  def  % /LW1
-												LW0 LW1 mul 0 le
+												/LW0  1 F0 sub DpWS mul  F0 DpWE mul  add  def
+												/LW1  1 F1 sub DpWS mul  F1 DpWE mul  add  def
+												LW0 LW1 mul  0  lt
 												{
 													F0 LW1 mul F1 LW0 mul sub  LW1 LW0 sub div
 													X0 LW1 mul X1 LW0 mul sub  LW1 LW0 sub div
 													Y0 LW1 mul Y1 LW0 mul sub  LW1 LW0 sub div
-													LW0 0 le
+													LW0 0 lt
 														{/Y0 exch def  /X0 exch def  /F0 exch def  /LW0 0 def  /EndAtStart //true  def}
 														{/Y1 exch def  /X1 exch def  /F1 exch def  /LW1 0 def  /EndAtStart //false def}
 													ifelse  % LW0 0 lt
 												} {/EndAtStart //false def} ifelse  % Different sides of zero
-												LW0 0 gt LW1 0 ge and  LW1 0 gt LW0 0 ge and  or
+												LW0 0 gt LW1 0 ge and  LW0 0 ge LW1 0 gt and  or
 												{
-													/Gr0  1 F0 sub DpGS mul  F0 DpGE mul  add  def  % /Gr0
-													/Gr1  1 F1 sub DpGS mul  F1 DpGE mul  add  def  % /Gr1
-													/Dist X0 X1 sub dup mul Y0 Y1 sub dup mul add sqrt def
-													LW1 LW0 sub abs //PrinterEpsilon le  Gr1 Gr0 sub abs 0.017 lt  and  % The 0.017 is a judgement. Too large and there can be apparent jumps in grey level. Too small overburdens PDF and printer with many shfill's.
-													{
-														/DeviceGray currentcolorspace 0 get ne  Gr1 currentgray sub abs 0.017 ge  or {Gr1 setgray} if
-														LW1 currentlinewidth sub abs //PrinterEpsilon gt {LW1 setlinewidth} if
-														1 setlinecap
-														X0 Y0 moveto X1 Y1 lineto stroke
-													}{
-														1 {
-															/AngMain Y1 Y0 sub X1 X0 sub atan def  % /AngMain
-															/AngSub  LW1 LW0 sub abs //PrinterEpsilon gt
-															{
-																LW1 2 div   Dist LW1 mul LW1 LW0 sub div dup mul  LW1 2 div dup mul sub
-																	dup 0 lt {mark (Error in DropletsPaint) 0 4 ThisDroplet length 1 sub {(\n) exch ThisDroplet exch 4 getinterval {(\t)} forall} for  ConcatenateToMark OutputToLog pop pop pop exit} if
-																2 copy 0 ne exch 0 ne or {sqrt atan} {pop pop 0} ifelse  LW1 LW0 lt {neg} if
-															} {0} ifelse def  % /AngSub
-															LW0 2 div  AngMain  90 AngSub add sub  2 copy cos mul X0 add  3 1 roll sin mul Y0 add moveto
-															X1  Y1  LW1 2 div  AngMain -90 AngSub sub add  AngMain  90 AngSub add add  arc
-															EndAtStart {closepath} {LW0 2 div  AngMain  90 AngSub add add  2 copy cos mul X0 add  3 1 roll sin mul Y0 add lineto} ifelse  % closepath done implicitly by fill; but fewer PDF bytes than lineto
-															Gr1 Gr0 sub abs 0.017 lt
-															{
-																% i IsInner {2 mod 0.75 mul setgray} {3 mod 3 div 1 1 sethsbcolor} ifelse 0.017 setlinewidth stroke
-																% X1 Y1 0.12 IsInner {2 div} if 0 360 arc  fill
-																/DeviceGray currentcolorspace 0 get ne  Gr1 currentgray sub abs 0.017 ge  or {Gr1 setgray} if  fill
-															}{
-																clipsave clip
-																<<
-																	/ShadingType 2  % Axial shading
-																	/ColorSpace /DeviceGray
-																	/Coords [ X0 Y0 X1 Y1 ]
-																	/Domain [ 0 1 ]
-																	/Function <<
-																		/FunctionType 2  % C0 + t ** N * (C1 - C0)
-																		/Domain [ 0 1 ]
-																		/C0 Gr0
-																		/C1 Gr1
-																		/N 1
-																	>>  % /Function
-																	/Extend [ //true //true ]
-																>> shfill cliprestore newpath
-															} ifelse  % Greys close
-														} repeat  % 1
-													} ifelse  % Greys close and widths the same
-												} if  % Widths non-negative and at least 1 positive
+													/Dist  X0 X1 sub dup mul  Y0 Y1 sub dup mul  add sqrt  def
+													1 {
+														Dist 0 le {exit} if  % Usually when IsInner, at zero-width start of point. Don't want to omit several consecutive very very small lines, so threshold is 0.
+														/AngMain Y1 Y0 sub X1 X0 sub atan def  % /AngMain
+														/AngSub  LW1 LW0 sub abs //PrinterEpsilon gt
+														{
+															LW1 2 div   Dist LW1 mul LW1 LW0 sub div dup mul  LW1 2 div dup mul sub
+																dup 0 lt {mark (Error in DropletsPaint: ) 0 4 ThisDroplet length 1 sub {(\n) exch ThisDroplet exch 4 getinterval {(\t)} forall} for  ConcatenateToMark OutputToLog pop pop pop exit} if
+															2 copy 0 ne exch 0 ne or {sqrt atan} {pop pop 0} ifelse  LW1 LW0 lt {neg} if
+														} {0} ifelse def  % /AngSub
+														LW0 2 div  AngMain  90 AngSub add sub  2 copy cos mul X0 add  3 1 roll sin mul Y0 add moveto
+														X1  Y1  LW1 2 div  AngMain -90 AngSub sub add  AngMain  90 AngSub add add  arc
+														EndAtStart {closepath} {LW0 2 div  AngMain  90 AngSub add add  2 copy cos mul X0 add  3 1 roll sin mul Y0 add lineto} ifelse  % closepath done implicitly by fill; but fewer PDF bytes than lineto
+														IsInner {1 setgray  DropletsInnerFillCode} {0.85 setgray  DropletsOuterFillCode} ifelse  fill
+													} repeat  % 1
+												} if  % Widths non-negative and at least one positive
 											} for  % i, loop not happening unless any point of droplet inside Llx Lly Urx Ury
 											/DropletsPaintAtEnd load dup length 0 gt
 											{

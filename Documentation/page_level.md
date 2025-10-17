@@ -237,8 +237,8 @@ There is a little humour in having a small proportion of the droplets going back
 That proportion is controlled by `DropletsProportionBackwards`, which obviously should be &ge;0 and &le;1. 
 The default value is 0.0204 &asymp; 1/49.
 
-The gray and width of each path is controlled by `DropletsOuterGrayEnd`, `DropletsOuterGrayStart`, `DropletsOuterWidthEnd`, `DropletsOuterWidthStart`, `DropletsInnerGrayEnd`, `DropletsInnerGrayStart`, `DropletsInnerWidthEnd`, and `DropletsInnerWidthStart`. 
-(But if `DropletsOuterGrayEnd` &ne; `DropletsOuterGrayStart`, or likewise <code>&hellip;Inner&hellip;</code>, the PDF can be multiple megabytes larger.) 
+The width of each path is controlled by `DropletsOuterWidthEnd`, `DropletsOuterWidthStart`, `DropletsInnerWidthEnd`, and `DropletsInnerWidthStart`; non-positive widths not being painted. 
+The colouring is chosen by `DropletsOuterFillCode` (the default being a variation of pale greys) and `DropletsInnerFillCode` (white). 
 There are also Boolean parameters `PrePourShowDroplets`, `NeckTagsShowDroplets`, and `StickyLabelsShowDroplets`.
 
 ```PostScript
