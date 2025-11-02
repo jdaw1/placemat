@@ -1,6 +1,6 @@
 %!PS
 
-% This version 15:45 Sunday 2nd November 2025
+% This version 15:50 Sunday 2nd November 2025
 
 % https://github.com/jdaw1/placemat/blob/main/PostScript/placemat_typewriter.ps
 % is, in effect, a self-mocking parody of
@@ -16,7 +16,7 @@
 % not PDF; nor images of such a document. But it does include re-usable improvements to the body of the code.
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202511021545) def
+/ParametersVersionDateTimeAdobeFormat (D:202511021550) def
 
 /TitlesLong [
 	(Graham 1985)
@@ -54,7 +54,7 @@
 /FontSize 11 def  % There is only one font size. Pica = 10 c.p.i. ~= 12pt; Elite = 12 c.p.i. ~= 10pt.
 /FontSizeTweak true def  % Small efficient increase in font size.
 /SpacerCharsMinNum 2 def
-/LineGap FontSize def
+/LineGap {FontSize} def  % Executable so that, if tweaked, uses new size.
 
 /PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]; good value is   {SheetNumGlasses SheetNum get 7 le {/A4} {/A3} ifelse} bind
 /Orientation /Portrait def  % /Landscape /Portrait
