@@ -1,6 +1,6 @@
 %!PS
 
-% This version 12:45 Sunday 2nd November 2025
+% This version 15:45 Sunday 2nd November 2025
 
 % https://github.com/jdaw1/placemat/blob/main/PostScript/placemat_typewriter.ps
 % is, in effect, a self-mocking parody of
@@ -16,7 +16,7 @@
 % not PDF; nor images of such a document. But it does include re-usable improvements to the body of the code.
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202511021245) def
+/ParametersVersionDateTimeAdobeFormat (D:202511021545) def
 
 /TitlesLong [
 	(Graham 1985)
@@ -52,6 +52,7 @@
 
 /FontName /Courier def  % There is only one font, and it must be monospace: /Courier /FiraMono-Regular /RobotoMono-Regular /DejaVuSansMono
 /FontSize 11 def  % There is only one font size. Pica = 10 c.p.i. ~= 12pt; Elite = 12 c.p.i. ~= 10pt.
+/FontSizeTweak true def  % Small efficient increase in font size.
 /SpacerCharsMinNum 2 def
 /LineGap FontSize def
 
@@ -86,7 +87,11 @@
 % Much of the following are, some simplified, from
 % https://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps
 
+/IntegerMin      -2147483648 def  % -(2^31),  PLRM3, Appendix B, table B.1, p739 (PDF p753), row 1
+/IntegerMax      +2147483647 def  % 2^31 - 1, PLRM3, Appendix B, table B.1, p739 (PDF p753), row 1
 /ArrayLengthMax  65535 def        % 2^16 - 1, PLRM3, Appendix B, table B.1, p739 (PDF p753), row 3. Also max string length, etc.
+/Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, and experimentally 839 times the single-precision minimum increment over 1.
+/PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
 /AsciiTab (\t) 0 get def   /AsciiNewline (\n) 0 get def   /AsciiSpace ( ) 0 get def
 
 /OutputToLog {dup type /stringtype eq {=} {==} ifelse flush} bind def
@@ -479,9 +484,21 @@ TitlesLong length  TitlesShort length  ne
 false false true PaperType Orientation  SetPaperSize
 
 FontName FontSize selectfont  % Same font everywhere.
+/CharWidth (-) stringwidth pop def
+
+FontSizeTweak
+{
+	mark (\nFontSize improved from ) FontSize ( to )
+	PageWidth MarginL MarginR add sub PrinterEpsilon sub  CharWidth div
+	dup floor div FontSize mul /FontSize exch def
+	FontSize (.)  ConcatenateToMark OutputToLog
+
+	FontName FontSize selectfont  % Same font everywhere.
+	/CharWidth (-) stringwidth pop def
+} if  % FontSizeTweak
+
 0 setgray  % Except debugging, same colour everywhere.
 
-/CharWidth (-) stringwidth pop def
 /GapBetweenGlasses  CharWidth 2 mul  LineGap  2 copy lt {exch} if pop  def  % User alterable.
 
 /GlassesNumCols PageWidth  MarginL sub MarginR sub 250 div floor cvi def
