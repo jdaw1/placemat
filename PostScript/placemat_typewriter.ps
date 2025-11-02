@@ -1,0 +1,661 @@
+%!PS
+
+/ParametersVersionDateTimeAdobeFormat (D:202511012355) def
+
+/TitlesLong [
+	(Graham 1985)
+	(Taylor 1985)
+	(Fonseca 1985)
+	(Sandeman 1985)
+	(Ramos Pinto 1985)
+	(Sainsbury's Taste The Difference 1985)
+] def  % /TitlesLong
+
+/TitlesShort [
+	(G85)
+	(T85)
+	(F85)
+	(S85)
+	(RP85)
+	(TTD85)
+] def  % /TitlesShort
+
+/HeaderLeft   (Tuesday 25th November 2025) def
+/HeaderCenter (1985s) def
+/HeaderRight  (At the Boot & Flogger) def
+
+/PDF_title (1985s, 18Nov2025) def
+
+/FontName /RobotoMono-Regular def  % There is only one font, and it must be monospace: /Courier /FiraMono-Regular /RobotoMono-Regular /DejaVuSansMono
+/FontSize 10 def  % There is only one font size. Pica = 10 c.p.i. ~= 12pt; Elite = 12 c.p.i. ~= 10pt.
+
+/PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]; good value is   {SheetNumGlasses SheetNum get 7 le {/A4} {/A3} ifelse} bind
+/Orientation /Portrait def  % /Landscape /Portrait
+
+/MarginL 24 def
+/MarginR MarginL def
+/MarginB MarginL def
+/MarginT MarginL FontSize add def
+
+% Array, length a multiple of three:  indented0-boolean, (Descriptor0), (http://URL0);  indented1-boolean, (Descriptor1), (http://URL1);  ...
+% Links for some restaurants and many Port houses at http://GitHub.com/jdaw1/placemat/blob/main/PostScript/ExternalLinks_data.ps
+/ExternalLinks [
+	false   (Thread on ThePortForum.com)                 (http://www.ThePortForum.com/viewtopic.php?t=00175&view=unread#unread)
+%	false   (Latest version this placemat)               (http://www.JDAWiseman.com/2025/    .pdf)
+%	true    (in list of placemats)                       (http://www.JDAWiseman.com/papers/placemat/placemats_list.html#a2025MMDD)
+	false   (Boot & Flogger)                             (http://www.davy.co.uk/wine-bar/boot-and-flogger/)
+	true    [/ellipsis (OpenStreetMap)]                  (http://www.OpenStreetMap.org/node/534961998)
+	true    [/ellipsis (google.co.uk)]                   (http://goo.gl/maps/7NEiwAMEZpG2)
+	true    [/ellipsis (What3Words: cafe.humid.palace)]  (http://map.what3words.com/cafe.humid.palace)
+	true    [/ellipsis (StreetMap.co.uk)]                (http://www.StreetMap.co.uk/map.srf?x=532409&y=180083&z=106&pc=SE1+1TA)
+	true    [/ellipsis (bing.com)]                       (http://www.bing.com/maps?where1=SE1+1TA)
+] def  % /ExternalLinks
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/DeBugLevel 65535 def
+
+/ArrayLengthMax  65535 def        % 2^16 - 1, PLRM3, Appendix B, table B.1, p739 (PDF p753), row 3. Also max string length, etc.
+/AsciiTab (\t) 0 get def   /AsciiNewline (\n) 0 get def   /AsciiSpace ( ) 0 get def
+
+/OutputToLog {dup type /stringtype eq {=} {==} ifelse flush} bind def
+
+/UserScratchDict << >> def  % Not 0 dict, to avoid addition of /DictionaryOriginalSize
+/execU {    //UserScratchDict begin exec end} bind def
+/GetEU {get //UserScratchDict begin exec end} bind def
+
+% PaperType Orientation  Dimensions  PageWidth PageHeight
+% http://groups.google.com/g/comp.lang.postscript/c/vlfF8eGOCMA  "Change paper size", 21 Oct 2015
+/Dimensions
+{
+	//DeBugLevel 10 le {(+Dimensions) OutputToLog} if
+	1 dict begin
+	exch /PaperType exch def
+	1 {
+		/A4       PaperType eq { 595.27559   841.88976 exit} if  % 210mm by 297mm. For speed start with the values most often used.
+		/A3       PaperType eq { 841.88976  1190.55118 exit} if  % 297mm by 420mm
+		/A2       PaperType eq {1190.55118  1683.77953 exit} if  % 420mm by 594mm
+		/USL      PaperType eq { 612         792       exit} if  % 8.5" by 11"
+		/USLegal  PaperType eq { 612        1008       exit} if  % 8.5" by 14"
+		/Tabloid  PaperType eq { 792        1224       exit} if  % 11"  by 17", http://GitHub.com/jdaw1/placemat/issues/159
+		/Ledger   PaperType eq { 792        1224       exit} if  % 11"  by 17"
+		/USL2     PaperType eq { 792        1224       exit} if  % 11"  by 17"
+		PaperType type /arraytype eq {PaperType dup 0 get exch 1 get exit} if  % [SmallerPts LargerPts], ignoring anything after first two elements
+		/Dymo_36_89 PaperType type eq {36 mm 89 mm exit} if
+		/Berliner PaperType eq {315 mm      470 mm    exit} if  % http://www.theguardian.com/gpc/berliner-format
+		/A4_USL PaperType eq {210 mm 792 exit} if  % Smaller of the A4/USL widths; smaller of the heights
+		/A0  PaperType eq { 841 mm 1189 mm  exit} if  % A0 can hold 106 glasses slightly larger than five on A4. Which is a large enough page size.
+		/A1  PaperType eq { 594 mm  841 mm  exit} if
+		/A5  PaperType eq { 148 mm  210 mm  exit} if
+		/A6  PaperType eq { 105 mm  148 mm  exit} if
+		/A7  PaperType eq {  74 mm  105 mm  exit} if
+		/A8  PaperType eq {  52 mm   74 mm  exit} if
+		/A9  PaperType eq {  37 mm   52 mm  exit} if
+		/A10 PaperType eq {  26 mm   37 mm  exit} if  % Much much smaller than useful. Included for completeness.
+		/B0  PaperType eq {1000 mm 1414 mm  exit} if  % B0 can hold 152 glasses slightly larger than five on A4. Which is a large enough page size.
+		/B1  PaperType eq { 707 mm 1000 mm  exit} if
+		/B2  PaperType eq { 500 mm  707 mm  exit} if
+		/B3  PaperType eq { 353 mm  500 mm  exit} if
+		/B4  PaperType eq { 250 mm  353 mm  exit} if
+		/B5  PaperType eq { 176 mm  250 mm  exit} if
+		/B6  PaperType eq { 125 mm  176 mm  exit} if
+		/B7  PaperType eq {  88 mm  125 mm  exit} if
+		/B8  PaperType eq {  62 mm   88 mm  exit} if
+		/B9  PaperType eq {  44 mm   62 mm  exit} if
+		/B10 PaperType eq {  31 mm   44 mm  exit} if
+		/C0  PaperType eq { 917 mm 1297 mm  exit} if  % C0 can hold 129 glasses slightly larger than five on A4. Which is a large enough page size.
+		/C1  PaperType eq { 648 mm  917 mm  exit} if
+		/C2  PaperType eq { 458 mm  648 mm  exit} if
+		/C3  PaperType eq { 324 mm  458 mm  exit} if
+		/C4  PaperType eq { 229 mm  324 mm  exit} if
+		/C5  PaperType eq { 162 mm  229 mm  exit} if
+		/C6  PaperType eq { 114 mm  162 mm  exit} if
+		/C7  PaperType eq {  81 mm  114 mm  exit} if
+		/C8  PaperType eq {  57 mm   81 mm  exit} if
+		/C9  PaperType eq {  40 mm   57 mm  exit} if
+		/C10 PaperType eq {  28 mm   40 mm  exit} if
+		(Error: unknown paper type in Dimensions) OutputToLog
+		stop
+	} repeat  end  % 1
+	3 -1 roll /Landscape eq {exch} if
+	//DeBugLevel 10 le {(-Dimensions) OutputToLog} if
+} bind def  % /Dimensions
+
+
+/DefaultOutputFaceUp currentpagedevice /OutputFaceUp 2 copy known {get} {pop pop //false} ifelse def
+
+% Rotate180 Mirror Callsetpagedevice PaperType Orientation  SetPaperSize  -
+% First param ignored if Callsetpagedevice is false
+/SetPaperSize
+{
+	//DeBugLevel 16 le {(+SetPaperSize) OutputToLog} if
+	2 copy Dimensions /PageHeight exch def  /PageWidth exch def
+	15 dict begin
+	pop  /PaperType exch def  /Callsetpagedevice exch def  /Mirror exch def  /Rotate180 exch def
+
+	Callsetpagedevice  % Sets the page size; and attempts to disable duplex; draws crop marks
+	{
+		[PageWidth PageHeight] {14400 gt {(Warning: with a paper side > 14400pt = 16'8" = 5.08 metres, about to call setpagedevice, which might fail.) OutputToLog} if} forall
+		<<
+			/OutputFaceUp DefaultOutputFaceUp Mirror {not} if   /PageSize [PageWidth PageHeight]   /ImagingBBox //null
+			/Duplex //false
+		>> setpagedevice
+		/InitialMatrix matrix currentmatrix store
+		Mirror
+			{Rotate180  {[1 0 0 -1 0 PageHeight] concat}  {[-1 0 0 1 PageWidth 0] concat}  ifelse}
+			{Rotate180  {[-1 0 0 -1 PageWidth PageHeight] concat}  if}
+		ifelse  % Mirror
+		/InitialMatrix matrix currentmatrix store
+	} if  % Callsetpagedevice
+	end
+	//DeBugLevel 15 le {(-SetPaperSize) OutputToLog} if
+} bind def  % /SetPaperSize
+
+/ToString
+{
+	1 dict begin  dup type cvlit /Type exch def
+	1 {
+		Type /integertype  eq {11 string cvs exit ( ) Concatenate} if
+		Type /realtype     eq {16 string cvs exit ( ) Concatenate} if
+		Type /nametype     eq {dup length string cvs exit} if
+		Type /stringtype   eq {exit} if
+		Type /booleantype  eq {5 string cvs exit} if
+		Type /operatortype eq {127 string cvs exit} if
+		Type /marktype     eq {pop (mark) exit} if
+		Type /nulltype     eq {pop (null) exit} if
+		0 //true ThingToDebugText  % fall-back
+	} repeat  end
+} bind def  % /ToString
+
+% Immediate dependencies: ConcatenateToMark.
+% num int  FormatDecimalPlaces  string
+/FormatDecimalPlaces
+{
+	3 dict begin
+	/dp exch def
+	/num exch def
+	dp 0 gt
+	{
+		10 dp exp dup num mul round exch div  15 string cvs
+		0 1 dp {/i exch def dup dup length 1 sub i sub 1 getinterval (.) eq {exit} if} for  i dp lt {mark exch dp i sub {(0)} repeat ConcatenateToMark} if
+	}{
+		10 dp neg exp cvi dup num exch div round cvi exch mul  15 string cvs
+	} ifelse  % dp 0 gt
+	end
+} bind def  % FormatDecimalPlaces
+
+% string string  Concatenate  string
+/Concatenate
+{
+	2 copy length exch length dup 3 1 roll add
+	dup //ArrayLengthMax le
+		{string dup dup 5 3 roll exch putinterval 3 -1 roll 0 exch putinterval}
+		{pop exch pop dup 65532 le {dup 3 add string dup dup 4 -1 roll (...) putinterval 0 4 -1 roll putinterval} {pop} ifelse}
+	ifelse
+} bind def  % /Concatenate
+
+% Immediate dependencies: ToString.
+% mark string|number|other ... string|number|other  ConcatenateToMark  string
+/ConcatenateToMark
+{
+	4 dict begin
+	counttomark /ctm exch def  /n 0 def
+	ctm {ToString  dup length n add /n exch def  ctm 1 roll} repeat
+	/p 0 def  /s n //ArrayLengthMax 2 copy gt {exch} if pop string def
+	ctm  -1  0
+	{
+		dup 0 gt
+		{
+			-1 roll   dup length p add  65532 le
+				{s exch p exch dup length p add /p exch def putinterval}
+				{s exch p exch 0 65532 p sub getinterval putinterval  s 65532 (...) putinterval  cleartomark  s  exit}
+			ifelse  % too long
+		} {pop pop s} ifelse
+	} for
+	end
+} bind def  % /ConcatenateToMark
+
+% name|code  WatchExpression_MakeString  (string)
+/WatchExpression_MakeString
+{
+	1 dict begin   /param exch def  mark  /param load ToString
+	/param load dup type /nametype eq exch xcheck or
+		{(   =   )  param /param load type /nametype eq {dup where {pop cvx exec} {pop (--Undefined--)} ifelse} if}
+		{(WatchExpression: ) exch}
+	ifelse  end   ConcatenateToMark
+} bind def  % /WatchExpression_MakeString
+
+% name|code  WatchExpression  -
+/WatchExpression {WatchExpression_MakeString OutputToLog} def
+
+% [ name|code  ... ]  WatchExpressions  -
+/WatchExpressions {mark exch ()  exch {WatchExpression_MakeString (\n)} forall	pop ConcatenateToMark OutputToLog} bind def  % WatchExpressions, plural
+
+
+/GlyphToASCII <<
+	/adieresis (ae)  /Adieresis (Ae)  /odieresis (oe)  /Odieresis (Oe)  /udieresis (ue)  /Udieresis (Ue)
+	/aring (aa)  /Aring (Aa)  /oslash (oe)  /Oslash (Oe) /scaron (sh)  /Scaron (Sh) /zcaron (zh)  /Zcaron (Zh)
+	/quotedbl    (")  /quotedblleft 1 index  /quotedblright 1 index  /second 1 index
+	/quotesingle (')  /quoteleft    1 index  /quoteright    1 index  /minute 1 index
+	/question (?)  /questiondown (?)  /exclam (!)  /exclamdown (!)
+	/less (<)  /greater (>)  /lessequal (<=)  /greaterequal (>=)  /approxequal (~=)  /multiply (*)  /divide (/)  /plus (+)  /fraction (/)
+	/dagger (+)  /daggerdbl (++)  /lozenge (<>)  /bullet (O)
+	/bar (|)  /verticalbar (|)  /brokenbar (|)  /periodcentered (.)
+	/club (Club)  /diamond (Diamond)  /heart (Heart)  /spade (Spade)
+	/sterling (GBP)  /dollar ($)  /Euro (EUR)  /euro 1 index  /yen (Y)  % yen can be JPY or CNY
+	/ellipsis (...)  /emdash (--)  /endash (-)  /minus (-)
+	/eth (d)  /Eth (D)  /dotlessi (i)
+	/oneeighth ( 1/8 )  /onequarter ( 1/4 )  /onethird ( 1/3 )  /threeeighths ( 3/8 )  /onehalf  ( 1/2 )  /fiveeighths ( 5/8 )  /twothirds ( 2/3 )  /threequarters ( 3/4 )  /seveneighths ( 7/8 )
+	/registered (\(R\))  /trademark  (\(TM\))
+	/arrowup (^)  /arrowdown (\\/)  /arrowleft (<--)  /arrowright (-->)  /arrowboth (<-->)
+	/zerosuperior (^0)  /onesuperior (^1)  /twosuperior (^2)  /threesuperior (^3)  /foursuperior (^4)  /fivesuperior (^5)  /sixsuperior (^6)  /sevensuperior (^7)  /eightsuperior (^8)  /ninesuperior (^9)
+	/zeroinferior (_0)  /oneinferior (_1)  /twoinferior (_2)  /threeinferior (_3)  /fourinferior (_4)  /fiveinferior (_5)  /sixinferior (_6)  /seveninferior (_7)  /eightinferior (_8)  /nineinferior (_9)
+	/a (a)  /b (b)  /c (c)  /d (d)  /e (e)  /f (f)  /g (g)  /h (h)  /i (i)  /j (j)  /k (k)  /l (l)  /m (m)  /n (n)  /o (o)  /p (p)  /q (q)  /r (r)  /s (s)  /t (t)  /u (u)  /v (v)  /w (w)  /x (x)  /y (y)  /z (z)
+	/A (A)  /B (B)  /C (C)  /D (D)  /E (E)  /F (F)  /G (G)  /H (H)  /I (I)  /J (J)  /K (K)  /L (L)  /M (M)  /N (N)  /O (O)  /P (P)  /Q (Q)  /R (R)  /S (S)  /T (T)  /U (U)  /V (V)  /W (W)  /X (X)  /Y (Y)  /Z (Z)
+	/zero (0)  /one (1)  /two (2)  /three (3)  /four (4)  /five (5)  /six (6)  /seven (7)  /eight (8)  /nine (9)
+	/parenleft (\()  /parenright (\))  /bracketleft ([)  /bracketright (])   /braceleft ({)  /braceright (})  /comma (,)  /semicolon (;)  /colon (:)  /period (.)
+	/equal (=)  /asterisk (*)  /hyphen (-)  /percent (%)  /asciicircum (^)  /ampersand (&)  /slash (/)  /backslash (\\)  /grave (`)  /numbersign (#)  /at (@)
+	/uni1D00 (A)  /uni0299 (B)  /uni1D04 (C)  /uni1D05 (D)  /uni1D07 (E)  /uniA730 (F)  /uni0262 (G)  /uni029C (H)  /uni026A (I)  /uni1D0A (J)  /uni1D0B (K)  /uni029F (L)  /uni1D0D (M)
+	/uni0274 (N)  /uni1D0F (O)  /uni1D18 (P)  /uni0280 (R)  /uniA731 (S)  /uni1D1B (T)  /uni1D1C (U)  /uni1D20 (V)  /uni1D21 (W)  /uni028F (Y)  /uni1D22 (Z)  /uni1D01  (AE)  /uni0276  (OE)
+	/uni2626 (Orthodox cross)  /uni2628 (Lorraine cross)  /uni2629 (Jerusalem cross)  /uni2670 (West Syriac cross)  /uni2671 (East Syriac cross)  /uni2720 (Maltese cross)  % These few lines best in font /Menlo-Regular or /Menlo-Bold
+	/uni263F (Mercury)  /uni2640 (Venus)  /uni2641 (Earth)  /uni2642 (Mars)  /uni2643 (Jupiter)  /uni2644 (Saturn)  /uni2645 (Uranus)  /uni2646 (Neptune)  /uni2647 (Pluto)
+	/uni2648 (Aries)  /uni2649 (Taurus)    /uni264A (Gemini)       /uni264B (Cancer)     /uni264C (Leo)       /uni264D (Virgo)
+	/uni264E (Libra)  /uni264F (Scorpius)  /uni2650 (Sagittarius)  /uni2651 (Capricorn)  /uni2652 (Aquarius)  /uni2653 (Pisces)
+	/uni2654 (King white)  /uni2655 (Queen white)  /uni2656 (Rook white)  /uni2657 (Bishop white)  /uni2658 (Knight white)  /uni2659 (Pawn white)
+	/uni265A (King black)  /uni265B (Queen black)  /uni265C (Rook black)  /uni265D (Bishop black)  /uni265E (Knight black)  /uni265F (Pawn black)
+>>  dup {readonly pop pop} bind forall  readonly def  % /GlyphToASCII
+/GlyphToPDFDocEncoding <<  % Appendix D of PDF 32000-1:2008
+	/breve         (\030)   /caron          (\031)   /circumflex   (\032)   /dotaccent      (\033)   /hungarumlaut (\034)   /ogonek       (\035)   /ring          (\036)   /tilde          (\037)
+
+	                                                                        /braceleft      (\173)   /bar          (\174)   /braceright   (\175)   /asciitilde    (\176)
+	/bullet        (\200)   /dagger         (\201)   /daggerdbl    (\202)   /ellipsis       (\203)   /emdash       (\204)   /endash       (\205)   /florin        (\206)   /fraction       (\207)
+	/guilsinglleft (\210)   /guilsinglright (\211)   /minus        (\212)   /perthousand    (\213)   /quotedblbase (\214)   /quotedblleft (\215)   /quotedblright (\216)   /quoteleft      (\217)
+	/quoteright    (\220)   /quotesinglbase (\221)   /trademark    (\222)   /fi             (\223)   /fl           (\224)   /Lslash       (\225)   /OE            (\226)   /Scaron         (\227)
+	/Ydieresis     (\230)   /Zcaron         (\231)   /dotlessi     (\232)   /lslash         (\233)   /oe           (\234)   /scaron       (\235)   /zcaron        (\236)
+	/Euro          (\240)   /exclamdown     (\241)   /cent         (\242)   /sterling       (\243)   /currency     (\244)   /yen          (\245)   /brokenbar     (\246)   /section        (\247)
+	/dieresis      (\250)   /copyright      (\251)   /ordfeminine  (\252)   /guillemotleft  (\253)   /logicalnot   (\254)                          /registered    (\256)   /macron         (\257)
+	/degree        (\260)   /plusminus      (\261)   /twosuperior  (\262)   /threesuperior  (\263)   /acute        (\264)   /mu           (\265)   /paragraph     (\266)   /periodcentered (\267)
+	/cedilla       (\270)   /onesuperior    (\271)   /ordmasculine (\272)   /guillemotright (\273)   /onequarter   (\274)   /onehalf      (\275)   /threequarters (\276)   /questiondown   (\277)
+	/Agrave        (\300)   /Aacute         (\301)   /Acircumflex  (\302)   /Atilde         (\303)   /Adieresis    (\304)   /Aring        (\305)   /AE            (\306)   /Ccedilla       (\307)
+	/Egrave        (\310)   /Eacute         (\311)   /Ecircumflex  (\312)   /Edieresis      (\313)   /Igrave       (\314)   /Iacute       (\315)   /Icircumflex   (\316)   /Idieresis      (\317)
+	/Eth           (\320)   /Ntilde         (\321)   /Ograve       (\322)   /Oacute         (\323)   /Ocircumflex  (\324)   /Otilde       (\325)   /Odieresis     (\326)   /multiply       (\327)
+	/Oslash        (\330)   /Ugrave         (\331)   /Uacute       (\332)   /Ucircumflex    (\333)   /Udieresis    (\334)   /Yacute       (\335)   /Thorn         (\336)   /germandbls     (\337)
+	/agrave        (\340)   /aacute         (\341)   /acircumflex  (\342)   /atilde         (\343)   /adieresis    (\344)   /aring        (\345)   /ae            (\346)   /ccedilla       (\347)
+	/egrave        (\350)   /eacute         (\351)   /ecircumflex  (\352)   /edieresis      (\353)   /igrave       (\354)   /iacute       (\355)   /icircumflex   (\356)   /idieresis      (\357)
+	/eth           (\360)   /ntilde         (\361)   /ograve       (\362)   /oacute         (\363)   /ocircumflex  (\364)   /otilde       (\365)   /odieresis     (\366)   /divide         (\367)
+	/oslash        (\370)   /ugrave         (\371)   /uacute       (\372)   /ucircumflex    (\373)   /udieresis    (\374)   /yacute       (\375)   /thorn         (\376)   /ydieresis      (\377)
+>>  dup {readonly pop pop} bind forall  readonly def % /GlyphToPDFDocEncoding
+
+% CompoundString  ASCIIfy  string, the string being an all-ASCII approximation to the CompoundString
+/ASCIIfy
+{
+	//DeBugLevel 15 le {(+ASCIIfy) OutputToLog} if
+	3 dict begin
+	/param exch def
+	/param load xcheck
+	{
+		UserScratchDict /AsciiEquivalent undef  GSave NullDevice /Courier 10 selectfont 0 0 moveto [ [/param load /execU cvx] cvx Stopped pop] GRestore
+		UserScratchDict /AsciiEquivalent 2 copy known {2 copy get 4 1 roll undef ASCIIfy Concatenate} {pop pop ASCIIfy} ifelse
+	}
+	{1 {
+		param type /stringtype eq {param exit} if
+		param type /arraytype eq {mark param {ASCIIfy} forall ConcatenateToMark exit} if
+		param type /integertype eq {param ToString exit} if
+		param type /realtype eq {param ToString exit} if
+		param type /nametype eq
+		{
+			GlyphToASCII param known {GlyphToASCII param get}
+			{
+				/paramlength param length def
+				param ToString % default
+				[ (acute) (circumflex) (grave) (dieresis) (tilde) (cedilla) (slash) (ring) (ringacute) (breve) (macron) (ogonek) (caron) (dot) (dotaccent) (hungarumlaut) (bar) (commaaccent) (croat) ]
+				{
+					/diacritic exch def
+					paramlength diacritic length sub dup 1 ge exch 2 le and
+					{
+						dup  paramlength diacritic length sub  diacritic length  getinterval   diacritic   eq
+							{0  paramlength diacritic length sub  getinterval   exit}
+						if  % ... diacritic eq
+					} if  % param 1 or 2 longer than diacritic
+				} forall
+			} ifelse  % GlyphToASCII param known
+			exit
+		} if % nametype
+		param type /booleantype eq {param {(true)} {(false)} ifelse exit} if
+
+		mark  (Warning: ASCIIfy parameter )  /param load 0 //true ThingToDebugText
+		( is of type )  /param load type
+		( rather than executable, string, name, array, number, or boolean.) ConcatenateToMark OutputToLog
+		()
+	} repeat} ifelse  % xcheck
+	end
+	//DeBugLevel 15 le {(-ASCIIfy) OutputToLog} if
+} bind def  % /ASCIIfy
+
+/PDFDocEncodingify
+{
+	//DeBugLevel 15 le {(+PDFDocEncodingify) OutputToLog} if
+	3 dict begin
+	/param exch def
+	/param load xcheck
+	{
+		UserScratchDict /AsciiEquivalent undef  GSave NullDevice /Courier 10 selectfont 0 0 moveto [ [/param load /execU cvx] cvx Stopped pop] GRestore
+		UserScratchDict /AsciiEquivalent 2 copy known {2 copy get 4 1 roll undef PDFDocEncodingify Concatenate} {pop pop PDFDocEncodingify} ifelse
+	}
+	{1 {
+		param type /stringtype eq {param exit} if
+		param type /arraytype eq {mark param {PDFDocEncodingify} forall ConcatenateToMark exit} if
+		param type /integertype eq {param ToString exit} if
+		param type /realtype eq {param ToString exit} if
+		param type /nametype eq {GlyphToPDFDocEncoding param 2 copy known {get} {exch pop ASCIIfy} ifelse exit} if
+		mark  (Warning: PDFDocEncodingify parameter )  /param load 0 //true ThingToDebugText
+		( is of type )  /param load type ToString
+		( rather than executable, string, name or array.) ConcatenateToMark OutputToLog
+		()
+	} repeat} ifelse  % xcheck
+	end
+	//DeBugLevel 15 le {(-PDFDocEncodingify) OutputToLog} if
+} bind def  % /PDFDocEncodingify
+
+% String  Trim  StringNeitherStartingNorEndingInASpace
+/TrimSpaces
+{
+	3 dict begin
+	/param exch def
+	/LastNonSpace param length 1 sub def
+	{
+		LastNonSpace 0 lt {exit} if
+		param LastNonSpace get //AsciiSpace ne {exit} if
+		/LastNonSpace LastNonSpace 1 sub def
+	} loop
+	/FirstNonSpace 0 def
+	{
+		FirstNonSpace LastNonSpace ge {exit} if
+		param FirstNonSpace get //AsciiSpace ne {exit} if
+		/FirstNonSpace FirstNonSpace 1 add def
+	} loop
+	param  FirstNonSpace  LastNonSpace FirstNonSpace sub 1 add  getinterval
+	end
+} bind def  % /TrimSpaces
+
+
+% These links constitute the signature of the author of the code. Yes, the code is open source, so you have the power to remove them.
+% Please don't. If you want code to be open source, respect this wish of an author who has released code for free. Thank you.
+/ExternalLinksExtras
+[
+	false   (GitHub)              (http://GitHub.com/jdaw1/placemat/#readme)
+	false   (PostScript)          (http://GitHub.com/jdaw1/placemat/blob/main/PostScript/placemat_typewriter.ps)
+	false   (Placemats, list)     (http://www.JDAWiseman.com/papers/placemat/placemats_list.html)
+	false   (Author)              (http://www.JDAWiseman.com/author.html)
+] def % /ExternalLinksExtras
+% Remove those already effectively in ExternalLinks
+/ExternalLinksExtras
+[
+	2 dict begin
+	0  3  ExternalLinksExtras length 1 sub
+	{
+		/i exch def
+		ExternalLinksExtras i 3 getinterval aload pop  % The three items
+		2  3  ExternalLinks length 1 sub  % looping over URLs
+		{
+			/j exch def
+			dup length   ExternalLinks j get length  le
+			{
+				dup   dup length ExternalLinks j get exch 0 exch getinterval  eq {pop pop pop exit} if
+			} if  % ExternalLinksExtras URL not longer than than in ExternalLinks, as if same or missing "#..."
+		} for  % j
+	} for  % i
+	end
+] def  % /ExternalLinksExtras
+
+
+mark
+	/CreationDate ParametersVersionDateTimeAdobeFormat   /Title PDF_title ASCIIfy
+	/Author (Julian D. A. Wiseman)
+	/Creator (www.JDAWiseman.com/author.html)
+	/Subject (PostScript code by Julian D. A. Wiseman.)
+	/Keywords (placemat, tasting, glasses, Port, wine, Madeira, whisky)
+/DOCINFO pdfmark
+
+
+mark  /Action << >>  /Color [0 0 0]  /Title ExternalLinks length 3 gt {(\247 External Links)} {(\247 External Link)} ifelse  /F 2  /OUT  pdfmark
+/NextF 0 def
+
+0 1 1
+{
+	0 eq {ExternalLinks} {ExternalLinksExtras} ifelse /A exch def
+	0  3  A length 3 sub
+	{
+		/i exch def
+		/IndentationCount  0   A i GetEU not {i 3 add 3 A length 3 sub {A exch GetEU {1 add} {exit} ifelse} for} if  def
+		mark  A i 2 add GetEU length 0 gt
+			{/Color [0 0 0  ]  /Action << /Subtype /URI /URI A i 2 add GetEU >>}
+			{/Color [0 0 0.6]  /Action << >>}
+		ifelse  /Title A i 1 add get PDFDocEncodingify  /Count IndentationCount neg  /F NextF 0 eq {A i 2 add GetEU length 0 gt {0} {1} ifelse} {NextF} ifelse  /OUT  pdfmark
+		/NextF  A i 1 add GetEU length 0 gt {0} {2} ifelse  store
+	} for  % i
+} bind for  % ExternalLinks | ExternalLinksExtras
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+
+false false true PaperType Orientation  SetPaperSize
+
+FontName FontSize selectfont
+0 setgray
+/CharWidth (-) stringwidth pop def
+/GapBetweenGlasses  CharWidth 2 mul  FontSize  2 copy lt {exch} if pop  def
+
+TitlesLong length  TitlesShort length  ne
+{
+	 (\nTitlesLong and TitlesShort must be of the same length. Aborting.\n) =
+	 quit
+} if
+
+/GlassesNumCols PageWidth  MarginL sub MarginR sub 250 div floor cvi def
+/GlassesNumRows PageHeight MarginB sub MarginT sub 250 div floor cvi def
+
+TitlesLong length  GlassesNumRows GlassesNumCols mul  gt
+{
+	(\nToo many glasses for page; does not fit. Aborting.\n) =
+	quit
+} if
+
+/Diameter
+	PageWidth  MarginL MarginR add sub  GlassesNumCols 1 sub GapBetweenGlasses mul sub  GlassesNumCols div
+	PageHeight MarginB MarginT add sub  GlassesNumRows 1 sub GapBetweenGlasses mul sub  GlassesNumRows div
+	2 copy gt {exch} if pop
+def  % /Diameter
+
+/Radius Diameter 2 div def
+
+Diameter FontSize div floor cvi
+dup 3 mod
+[
+	{3 idiv       /NumDiagonals exch def   /NumVerticals NumDiagonals       def}
+	{3 idiv       /NumDiagonals exch def   /NumVerticals NumDiagonals 1 add def}
+	{3 idiv 1 add /NumDiagonals exch def   /NumVerticals NumDiagonals 1 sub def}
+] exch get exec
+/NumHorizontals  Diameter CharWidth div floor cvi  NumDiagonals 2 mul sub  def
+
+/SpacerCharsMinNum 2 def
+
+/PageWidthChars  PageWidth MarginL MarginR add sub  CharWidth  div floor cvi  def
+
+% ThisCharNum TotalNumChars SpacerChar ShortString NextChar  char
+/NextChar
+{
+	7 dict begin
+	/ShortString exch def
+	/SpacerChar exch def
+	/TotalNumChars exch def
+	/ThisCharNum exch def
+	/Step  ShortString length SpacerCharsMinNum add  def
+	/InitialSpacersNum  TotalNumChars SpacerCharsMinNum sub  Step  mod 2 idiv  SpacerCharsMinNum add def
+	/LastNonSpacer
+		TotalNumChars InitialSpacersNum sub  Step idiv
+		Step mul  InitialSpacersNum add
+		SpacerCharsMinNum sub
+	def  % /LastNonSpacer
+	1 {
+		ThisCharNum InitialSpacersNum lt {SpacerChar exit} if
+		ThisCharNum InitialSpacersNum sub  Step  mod  ShortString length ge {SpacerChar exit} if
+		ThisCharNum LastNonSpacer gt {SpacerChar exit} if
+		ShortString  ThisCharNum InitialSpacersNum sub  Step  mod  1  getinterval
+	} repeat  % 1
+	end
+} bind def  % /NextChar
+
+/PaintHeaders
+{
+	3 dict begin
+	/CharAlign exch def
+	/PosnR CharAlign
+		{MarginL PageWidthChars HeaderRight length sub CharWidth mul add}
+		{PageWidth MarginR sub  HeaderRight length     CharWidth mul sub}
+	ifelse def  % /PosnR
+	/PosnC CharAlign
+		{MarginL PageWidthChars 2 idiv CharWidth mul add  HeaderCenter length 2 idiv CharWidth mul sub}
+		{PageWidth MarginL MarginR sub add 2 div  HeaderCenter stringwidth pop 2 div sub}
+	ifelse def  % /PosnC
+	MarginL  PageHeight MarginT sub  moveto  HeaderLeft   show
+	PosnC    PageHeight MarginT sub  moveto  HeaderCenter show
+	PosnR    PageHeight MarginT sub  moveto  HeaderRight  show
+	end
+} bind def  % /PaintHeaders
+
+
+
+false PaintHeaders
+
+0  1  TitlesLong length 1 sub
+{
+	/WithinPage exch def
+
+	/CentreX
+	GlassesNumCols 1 gt
+	{
+		Radius  MarginL  add
+		GlassesNumCols 1 sub  WithinPage GlassesNumCols mod sub  mul
+
+		PageWidth  Radius MarginR add  sub
+		WithinPage GlassesNumCols mod  mul
+
+		add   GlassesNumCols 1 sub  div
+	} {PageWidth MarginL MarginR sub add 2 div} ifelse  % GlassesNumCols 1 gt
+	def  % /CentreX
+
+	/CentreY
+	GlassesNumRows 1 gt
+	{
+		Radius  MarginB  add
+		WithinPage GlassesNumCols idiv  mul
+
+		PageHeight  Radius MarginT add  sub
+		GlassesNumRows 1 sub  WithinPage GlassesNumCols idiv sub  mul
+
+		add   GlassesNumRows 1 sub  div
+	} {PageHeight MarginB MarginT sub add 2 div} ifelse  % GlassesNumRows 1 gt
+	def  % /CentreY
+
+	% Debugging assist
+	false
+	{
+		gsave
+		CentreX CentreY Radius               3 copy add moveto  90 450 arc
+		CentreX CentreY Radius FontSize sub  3 copy add moveto  450 90 arcn
+		0.85 setgray  fill
+		grestore
+	} if  % Debugging assist
+
+	% Paint horizontals
+	0  1  1 {/NumY exch def
+		CentreX NumHorizontals 2 div CharWidth mul sub
+		CentreY NumVerticals 2 div NumDiagonals add  NumY 0 eq {neg} {1 sub} ifelse FontSize mul add
+		moveto
+		0  1  NumHorizontals 1 sub {NumHorizontals (-) TitlesShort WithinPage get NextChar show} for
+	} for  % /NumY
+
+	% Paint verticals
+	0  1  1 {/NumX exch def
+		0  1  NumVerticals 1 sub
+		{
+			/ThisCharNum exch def
+			CentreX NumHorizontals 2 div NumDiagonals add  NumX 0 eq {neg} {1 sub} ifelse  CharWidth mul add
+			CentreY NumVerticals 2 div ThisCharNum sub 1 sub FontSize mul add
+			moveto
+			ThisCharNum NumVerticals (|) TitlesShort WithinPage get NextChar show
+		} for  % verticals
+	} for  % /NumX
+
+	% Paint diagonals
+	0  1  1 {/NumY exch def
+	0  1  1 {/NumX exch def
+		0  1  NumDiagonals 1 sub
+		{
+			/ThisCharNum exch def
+			NumX 0 eq
+			{
+				CentreX NumHorizontals -2 div NumDiagonals sub ThisCharNum add CharWidth mul add
+				NumY 0 eq
+					{CentreY NumVerticals -2 div 1 sub ThisCharNum sub FontSize mul add}
+					{CentreY NumVerticals 2 div ThisCharNum add FontSize mul add}
+				ifelse  % NumY 0 eq 
+			}{
+				CentreX NumHorizontals 2 div ThisCharNum add CharWidth mul add
+				NumY 0 eq
+					{CentreY NumVerticals -2 div NumDiagonals sub ThisCharNum add FontSize mul add}
+					{CentreY NumVerticals 2 div NumDiagonals 1 sub add ThisCharNum sub FontSize mul add}
+				ifelse  % NumY 0 eq 
+			} ifelse  % NumX 0 eq 
+			moveto
+			ThisCharNum NumDiagonals NumX NumY eq {(\\)} {(/)} ifelse TitlesShort WithinPage get NextChar show
+		} for  % diagonals
+	} for  % /NumX
+	} for  % /NumY
+
+	TitlesLong WithinPage get
+	dup length  dup 2 mod sub NumHorizontals 2 mod add  -2 div CharWidth mul  CentreX add
+	CentreY  NumVerticals 2 mod 1 eq {FontSize 2 div sub} if
+	moveto  show
+
+} for  % WithinPage
+
+showpage
+
+
+
+true PaintHeaders
+
+0  1  TitlesLong length 1 sub
+{
+	/WithinPage exch def
+
+	/Y
+		MarginB FontSize sub
+		WithinPage mul
+
+		PageHeight MarginT sub FontSize sub
+		TitlesLong length WithinPage sub  mul
+
+		add   TitlesLong length  div
+	def  % /CentreY
+
+	MarginL Y moveto
+	0  1  PageWidthChars 1 sub {PageWidthChars (-) TitlesShort WithinPage get NextChar show} for
+	MarginL Y FontSize sub moveto
+	TitlesLong WithinPage get show
+
+} for  % WithinPage
+
+showpage
+
+
+
+
+(\n\n) =
+count              (      = count: this really should be 0\n)   dup 0  4 -1 roll  6 string cvs  putinterval
+countdictstack     (      = countdictstack: this should be 3\n) dup 0  4 -1 roll  6 string cvs  putinterval  Concatenate =
+count 0 gt {(+pstack) = pstack (-pstack) =} if
+
+{countdictstack 3 gt {8 {() =} repeat currentdict {exch == =} forall end} {exit} ifelse} bind loop  % Final debugging
