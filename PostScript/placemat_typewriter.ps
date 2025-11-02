@@ -1,6 +1,6 @@
 %!PS
 
-% This version 18:25 Sunday 2nd November 2025
+% This version 19:55 Sunday 2nd November 2025
 
 % https://github.com/jdaw1/placemat/blob/main/PostScript/placemat_typewriter.ps
 % is, in effect, a self-mocking parody of
@@ -16,7 +16,7 @@
 % not PDF; nor images of such a document. But it does include re-usable improvements to the body of the code.
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202511021825) def
+/ParametersVersionDateTimeAdobeFormat (D:202511021955) def
 
 /TitlesLong [
 	(Warre 1970)
@@ -65,8 +65,8 @@
 /FontName /Courier def  % There is only one font, and it must be monospace: /Courier /FiraMono-Regular /RobotoMono-Regular /DejaVuSansMono
 /FontSize 11 def  % There is only one font size. Pica = 10 c.p.i. ~= 12pt; Elite = 12 c.p.i. ~= 10pt.
 /FontSizeTweak true def  % Small efficient increase in font size.
+/LineGapProportionFontSize 0.94 def
 /SpacerCharsMinNum 2 def
-/LineGap {FontSize} def  % Executable so that, if tweaked, uses new size.
 
 /PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]; good value is   {SheetNumGlasses SheetNum get 7 le {/A4} {/A3} ifelse} bind
 /Orientation /Portrait def  % /Landscape /Portrait
@@ -74,7 +74,7 @@
 /MarginL 24 def
 /MarginR MarginL def
 /MarginB MarginL def
-/MarginT MarginL LineGap add def
+/MarginT MarginL FontSize add def
 
 % Array, length a multiple of three:  indented0-boolean, (Descriptor0), (http://URL0);  indented1-boolean, (Descriptor1), (http://URL1);  ...
 % Links for some restaurants and many Port houses at http://GitHub.com/jdaw1/placemat/blob/main/PostScript/ExternalLinks_data.ps
@@ -458,7 +458,8 @@
 
 
 mark
-	/CreationDate ParametersVersionDateTimeAdobeFormat   /Title PDF_title ASCIIfy
+	/CreationDate ParametersVersionDateTimeAdobeFormat
+	/Title PDF_title ASCIIfy
 	/Author (Julian D. A. Wiseman)
 	/Creator (www.JDAWiseman.com/author.html)
 	/Subject (PostScript code by Julian D. A. Wiseman.)
@@ -508,6 +509,8 @@ FontSizeTweak
 	FontName FontSize selectfont  % Same font everywhere.
 	/CharWidth (-) stringwidth pop def
 } if  % FontSizeTweak
+
+/LineGap LineGapProportionFontSize FontSize mul def
 
 0 setgray  % Except debugging, same colour everywhere.
 
@@ -674,14 +677,14 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 						NumY 0 eq
 							{CentreY NumVerticals -2 div 1 sub ThisCharNum sub LineGap mul add}
 							{CentreY NumVerticals 2 div ThisCharNum add LineGap mul add}
-						ifelse  % NumY 0 eq 
+						ifelse  % NumY 0 eq
 					}{
 						CentreX NumHorizontals 2 div ThisCharNum add CharWidth mul add
 						NumY 0 eq
 							{CentreY NumVerticals -2 div NumDiagonals sub ThisCharNum add LineGap mul add}
 							{CentreY NumVerticals 2 div NumDiagonals 1 sub add ThisCharNum sub LineGap mul add}
-						ifelse  % NumY 0 eq 
-					} ifelse  % NumX 0 eq 
+						ifelse  % NumY 0 eq
+					} ifelse  % NumX 0 eq
 					moveto
 					ThisCharNum NumDiagonals NumX NumY eq {(\\)} {(/)} ifelse TitlesShort WithinPage get NextChar show
 				} for  % diagonals
