@@ -1,6 +1,6 @@
 %!PS
 
-/ParametersVersionDateTimeAdobeFormat (D:202511012355) def
+/ParametersVersionDateTimeAdobeFormat (D:202511020035) def
 
 /TitlesLong [
 	(Graham 1985)
@@ -26,7 +26,7 @@
 
 /PDF_title (1985s, 18Nov2025) def
 
-/FontName /RobotoMono-Regular def  % There is only one font, and it must be monospace: /Courier /FiraMono-Regular /RobotoMono-Regular /DejaVuSansMono
+/FontName /FiraMono-Regular def  % There is only one font, and it must be monospace: /Courier /FiraMono-Regular /RobotoMono-Regular /DejaVuSansMono
 /FontSize 10 def  % There is only one font size. Pica = 10 c.p.i. ~= 12pt; Elite = 12 c.p.i. ~= 10pt.
 
 /PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]; good value is   {SheetNumGlasses SheetNum get 7 le {/A4} {/A3} ifelse} bind
@@ -515,7 +515,7 @@ dup 3 mod
 		{PageWidth MarginR sub  HeaderRight length     CharWidth mul sub}
 	ifelse def  % /PosnR
 	/PosnC CharAlign
-		{MarginL PageWidthChars 2 idiv CharWidth mul add  HeaderCenter length 2 idiv CharWidth mul sub}
+		{PageWidthChars HeaderCenter length sub 2 idiv  CharWidth mul  MarginL add}
 		{PageWidth MarginL MarginR sub add 2 div  HeaderCenter stringwidth pop 2 div sub}
 	ifelse def  % /PosnC
 	MarginL  PageHeight MarginT sub  moveto  HeaderLeft   show
