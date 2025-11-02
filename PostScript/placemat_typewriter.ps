@@ -1,6 +1,22 @@
 %!PS
 
-/ParametersVersionDateTimeAdobeFormat (D:202511020035) def
+% This version 12:45 Sunday 2nd November 2025
+
+% https://github.com/jdaw1/placemat/blob/main/PostScript/placemat_typewriter.ps
+% is, in effect, a self-mocking parody of
+% https://github.com/jdaw1/placemat/tree/main#readme
+% There might be examples of usage at
+% http://www.jdawiseman.com/papers/placemat/placemats_list.html
+
+% This sofware is licensed under the GNU General Public License v3.0.
+% Permissions of this strong copyleft license are conditioned on making available complete source code of
+% licensed works and modifications, which include larger works using a licensed work, under the same license.
+% Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
+% For these purposes a change in the parameters of the code does not need to be released. Nor does any output:
+% not PDF; nor images of such a document. But it does include re-usable improvements to the body of the code.
+
+
+/ParametersVersionDateTimeAdobeFormat (D:202511021245) def
 
 /TitlesLong [
 	(Graham 1985)
@@ -8,7 +24,7 @@
 	(Fonseca 1985)
 	(Sandeman 1985)
 	(Ramos Pinto 1985)
-	(Sainsbury's Taste The Difference 1985)
+	(Offley Boa Vista)
 ] def  % /TitlesLong
 
 /TitlesShort [
@@ -17,8 +33,16 @@
 	(F85)
 	(S85)
 	(RP85)
-	(TTD85)
+	(OBV85)
 ] def  % /TitlesShort
+
+/Names [
+	(JDAW)
+	(Somebody)
+	(Whoever)
+	(Other)
+	()
+] def  % /Names
 
 /HeaderLeft   (Tuesday 25th November 2025) def
 /HeaderCenter (1985s) def
@@ -26,8 +50,10 @@
 
 /PDF_title (1985s, 18Nov2025) def
 
-/FontName /FiraMono-Regular def  % There is only one font, and it must be monospace: /Courier /FiraMono-Regular /RobotoMono-Regular /DejaVuSansMono
-/FontSize 10 def  % There is only one font size. Pica = 10 c.p.i. ~= 12pt; Elite = 12 c.p.i. ~= 10pt.
+/FontName /Courier def  % There is only one font, and it must be monospace: /Courier /FiraMono-Regular /RobotoMono-Regular /DejaVuSansMono
+/FontSize 11 def  % There is only one font size. Pica = 10 c.p.i. ~= 12pt; Elite = 12 c.p.i. ~= 10pt.
+/SpacerCharsMinNum 2 def
+/LineGap FontSize def
 
 /PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]; good value is   {SheetNumGlasses SheetNum get 7 le {/A4} {/A3} ifelse} bind
 /Orientation /Portrait def  % /Landscape /Portrait
@@ -35,7 +61,7 @@
 /MarginL 24 def
 /MarginR MarginL def
 /MarginB MarginL def
-/MarginT MarginL FontSize add def
+/MarginT MarginL LineGap add def
 
 % Array, length a multiple of three:  indented0-boolean, (Descriptor0), (http://URL0);  indented1-boolean, (Descriptor1), (http://URL1);  ...
 % Links for some restaurants and many Port houses at http://GitHub.com/jdaw1/placemat/blob/main/PostScript/ExternalLinks_data.ps
@@ -54,6 +80,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 /DeBugLevel 65535 def
+
+/DeBugPaintExtras false def
+
+% Much of the following are, some simplified, from
+% https://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps
 
 /ArrayLengthMax  65535 def        % 2^16 - 1, PLRM3, Appendix B, table B.1, p739 (PDF p753), row 3. Also max string length, etc.
 /AsciiTab (\t) 0 get def   /AsciiNewline (\n) 0 get def   /AsciiSpace ( ) 0 get def
@@ -439,18 +470,19 @@ mark  /Action << >>  /Color [0 0 0]  /Title ExternalLinks length 3 gt {(\247 Ext
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 
-false false true PaperType Orientation  SetPaperSize
-
-FontName FontSize selectfont
-0 setgray
-/CharWidth (-) stringwidth pop def
-/GapBetweenGlasses  CharWidth 2 mul  FontSize  2 copy lt {exch} if pop  def
-
 TitlesLong length  TitlesShort length  ne
 {
 	 (\nTitlesLong and TitlesShort must be of the same length. Aborting.\n) =
 	 quit
 } if
+
+false false true PaperType Orientation  SetPaperSize
+
+FontName FontSize selectfont  % Same font everywhere.
+0 setgray  % Except debugging, same colour everywhere.
+
+/CharWidth (-) stringwidth pop def
+/GapBetweenGlasses  CharWidth 2 mul  LineGap  2 copy lt {exch} if pop  def  % User alterable.
 
 /GlassesNumCols PageWidth  MarginL sub MarginR sub 250 div floor cvi def
 /GlassesNumRows PageHeight MarginB sub MarginT sub 250 div floor cvi def
@@ -469,7 +501,7 @@ def  % /Diameter
 
 /Radius Diameter 2 div def
 
-Diameter FontSize div floor cvi
+Diameter LineGap div floor cvi
 dup 3 mod
 [
 	{3 idiv       /NumDiagonals exch def   /NumVerticals NumDiagonals       def}
@@ -478,7 +510,8 @@ dup 3 mod
 ] exch get exec
 /NumHorizontals  Diameter CharWidth div floor cvi  NumDiagonals 2 mul sub  def
 
-/SpacerCharsMinNum 2 def
+/RadiusVertical    NumDiagonals NumVerticals   2 div add  LineGap   mul  def
+/RadiusHorizontal  NumDiagonals NumHorizontals 2 div add  CharWidth mul  def
 
 /PageWidthChars  PageWidth MarginL MarginR add sub  CharWidth  div floor cvi  def
 
@@ -525,130 +558,165 @@ dup 3 mod
 } bind def  % /PaintHeaders
 
 
-
-false PaintHeaders
-
-0  1  TitlesLong length 1 sub
+0  1  Names length 1 sub
 {
-	/WithinPage exch def
+	/NameNum exch def
+	/ThisName Names NameNum get def
 
-	/CentreX
-	GlassesNumCols 1 gt
-	{
-		Radius  MarginL  add
-		GlassesNumCols 1 sub  WithinPage GlassesNumCols mod sub  mul
-
-		PageWidth  Radius MarginR add  sub
-		WithinPage GlassesNumCols mod  mul
-
-		add   GlassesNumCols 1 sub  div
-	} {PageWidth MarginL MarginR sub add 2 div} ifelse  % GlassesNumCols 1 gt
-	def  % /CentreX
-
-	/CentreY
-	GlassesNumRows 1 gt
-	{
-		Radius  MarginB  add
-		WithinPage GlassesNumCols idiv  mul
-
-		PageHeight  Radius MarginT add  sub
-		GlassesNumRows 1 sub  WithinPage GlassesNumCols idiv sub  mul
-
-		add   GlassesNumRows 1 sub  div
-	} {PageHeight MarginB MarginT sub add 2 div} ifelse  % GlassesNumRows 1 gt
-	def  % /CentreY
-
-	% Debugging assist
-	false
+	DeBugPaintExtras  0 NameNum eq  and
 	{
 		gsave
-		CentreX CentreY Radius               3 copy add moveto  90 450 arc
-		CentreX CentreY Radius FontSize sub  3 copy add moveto  450 90 arcn
-		0.85 setgray  fill
+		1 0 0 setrgbcolor  0.48 setlinewidth  0 setlinejoin  [] 0 setdash
+		MarginL  MarginB  PageWidth MarginL MarginR add sub  PageHeight MarginB MarginT add sub  rectstroke
 		grestore
-	} if  % Debugging assist
+	} if  % DeBugPaintExtras  0 NameNum eq  and
 
-	% Paint horizontals
-	0  1  1 {/NumY exch def
-		CentreX NumHorizontals 2 div CharWidth mul sub
-		CentreY NumVerticals 2 div NumDiagonals add  NumY 0 eq {neg} {1 sub} ifelse FontSize mul add
-		moveto
-		0  1  NumHorizontals 1 sub {NumHorizontals (-) TitlesShort WithinPage get NextChar show} for
-	} for  % /NumY
+	false PaintHeaders
 
-	% Paint verticals
-	0  1  1 {/NumX exch def
-		0  1  NumVerticals 1 sub
+	0  1  TitlesLong length 1 sub
+	{
+		/WithinPage exch def
+
+		/CentreX
+		GlassesNumCols 1 gt
 		{
-			/ThisCharNum exch def
-			CentreX NumHorizontals 2 div NumDiagonals add  NumX 0 eq {neg} {1 sub} ifelse  CharWidth mul add
-			CentreY NumVerticals 2 div ThisCharNum sub 1 sub FontSize mul add
+			RadiusHorizontal  MarginL  add
+			GlassesNumCols 1 sub  WithinPage GlassesNumCols mod sub  mul
+
+			PageWidth  RadiusHorizontal MarginR add  sub
+			WithinPage GlassesNumCols mod  mul
+
+			add   GlassesNumCols 1 sub  div
+		} {PageWidth MarginL MarginR sub add 2 div} ifelse  % GlassesNumCols 1 gt
+		def  % /CentreX
+
+		/CentreY
+		GlassesNumRows 1 gt
+		{
+			RadiusVertical  MarginB  add
+			WithinPage GlassesNumCols idiv  mul
+
+			PageHeight  RadiusVertical MarginT add  sub
+			GlassesNumRows 1 sub  WithinPage GlassesNumCols idiv sub  mul
+
+			add   GlassesNumRows 1 sub  div
+		} {PageHeight MarginB MarginT sub add 2 div} ifelse  % GlassesNumRows 1 gt
+		def  % /CentreY
+
+		DeBugPaintExtras  1 NameNum ge  and
+		{
+			gsave
+			CentreX CentreY Radius              3 copy add moveto  90 450 arc   closepath
+			CentreX CentreY Radius LineGap sub  3 copy add moveto  450 90 arcn  closepath
+			0 1 0 setrgbcolor  0.48 setlinewidth  0 setlinejoin  [] 0 setdash  stroke
+			grestore
+		} if  % DeBugPaintExtras  1 NameNum ge  and
+
+		% Paint horizontals
+		0  1  1 {/NumY exch def
+			CentreX NumHorizontals 2 div CharWidth mul sub
+			CentreY NumVerticals 2 div NumDiagonals add  NumY 0 eq {neg} {1 sub} ifelse LineGap mul add
 			moveto
-			ThisCharNum NumVerticals (|) TitlesShort WithinPage get NextChar show
-		} for  % verticals
-	} for  % /NumX
+			0  1  NumHorizontals 1 sub {NumHorizontals (-) TitlesShort WithinPage get NextChar show} for
+		} for  % /NumY
 
-	% Paint diagonals
-	0  1  1 {/NumY exch def
-	0  1  1 {/NumX exch def
-		0  1  NumDiagonals 1 sub
-		{
-			/ThisCharNum exch def
-			NumX 0 eq
+		% Paint verticals
+		0  1  1 {/NumX exch def
+			0  1  NumVerticals 1 sub
 			{
-				CentreX NumHorizontals -2 div NumDiagonals sub ThisCharNum add CharWidth mul add
-				NumY 0 eq
-					{CentreY NumVerticals -2 div 1 sub ThisCharNum sub FontSize mul add}
-					{CentreY NumVerticals 2 div ThisCharNum add FontSize mul add}
-				ifelse  % NumY 0 eq 
-			}{
-				CentreX NumHorizontals 2 div ThisCharNum add CharWidth mul add
-				NumY 0 eq
-					{CentreY NumVerticals -2 div NumDiagonals sub ThisCharNum add FontSize mul add}
-					{CentreY NumVerticals 2 div NumDiagonals 1 sub add ThisCharNum sub FontSize mul add}
-				ifelse  % NumY 0 eq 
-			} ifelse  % NumX 0 eq 
-			moveto
-			ThisCharNum NumDiagonals NumX NumY eq {(\\)} {(/)} ifelse TitlesShort WithinPage get NextChar show
-		} for  % diagonals
-	} for  % /NumX
-	} for  % /NumY
+				/ThisCharNum exch def
+				CentreX NumHorizontals 2 div NumDiagonals add  NumX 0 eq {neg} {1 sub} ifelse  CharWidth mul add
+				CentreY NumVerticals 2 div ThisCharNum sub 1 sub LineGap mul add
+				moveto
+				ThisCharNum NumVerticals (|) TitlesShort WithinPage get NextChar show
+			} for  % verticals
+		} for  % /NumX
 
-	TitlesLong WithinPage get
-	dup length  dup 2 mod sub NumHorizontals 2 mod add  -2 div CharWidth mul  CentreX add
-	CentreY  NumVerticals 2 mod 1 eq {FontSize 2 div sub} if
-	moveto  show
+		% Paint diagonals
+		0  1  1 {/NumY exch def
+		0  1  1 {/NumX exch def
+			0  1  NumDiagonals 1 sub
+			{
+				/ThisCharNum exch def
+				NumX 0 eq
+				{
+					CentreX NumHorizontals -2 div NumDiagonals sub ThisCharNum add CharWidth mul add
+					NumY 0 eq
+						{CentreY NumVerticals -2 div 1 sub ThisCharNum sub LineGap mul add}
+						{CentreY NumVerticals 2 div ThisCharNum add LineGap mul add}
+					ifelse  % NumY 0 eq 
+				}{
+					CentreX NumHorizontals 2 div ThisCharNum add CharWidth mul add
+					NumY 0 eq
+						{CentreY NumVerticals -2 div NumDiagonals sub ThisCharNum add LineGap mul add}
+						{CentreY NumVerticals 2 div NumDiagonals 1 sub add ThisCharNum sub LineGap mul add}
+					ifelse  % NumY 0 eq 
+				} ifelse  % NumX 0 eq 
+				moveto
+				ThisCharNum NumDiagonals NumX NumY eq {(\\)} {(/)} ifelse TitlesShort WithinPage get NextChar show
+			} for  % diagonals
+		} for  % /NumX
+		} for  % /NumY
 
-} for  % WithinPage
+		TitlesLong WithinPage get
+		dup length  dup 2 mod sub NumHorizontals 2 mod add  -2 div CharWidth mul  CentreX add
+		CentreY  NumVerticals 2 mod 1 eq {LineGap 2 div sub} if
+		moveto  show
+	} for  % WithinPage
 
-showpage
+	/i  GlassesNumCols 1 gt {GlassesNumCols dup 2 mod sub 2 div 0.5 sub} {0.25} ifelse  def
+	/X
+		Radius  MarginL  add
+		GlassesNumCols 1 sub  i sub  mul
+
+		PageWidth  Radius MarginR add  sub
+		i  mul
+
+		add   GlassesNumCols 1 sub  div
+	def  % /X
+	/Y  MarginB RadiusVertical add  NumVerticals 2 div NumDiagonals add LineGap mul  sub  def  % Should be MarginB
+	X Y moveto   ThisName dup stringwidth pop -2 div 0 rmoveto  show
+
+	showpage
 
 
 
-true PaintHeaders
 
-0  1  TitlesLong length 1 sub
-{
-	/WithinPage exch def
+	DeBugPaintExtras  0 NameNum eq  and
+	{
+		gsave
+		1 0 0 setrgbcolor  0.48 setlinewidth  0 setlinejoin  [] 0 setdash
+		MarginL  MarginB  PageWidth MarginL MarginR add sub  PageHeight MarginB MarginT add sub  rectstroke
+		grestore
+	} if  % DeBugPaintExtras  0 NameNum eq  and
 
-	/Y
-		MarginB FontSize sub
-		WithinPage mul
+	true PaintHeaders
 
-		PageHeight MarginT sub FontSize sub
-		TitlesLong length WithinPage sub  mul
+	0  1  TitlesLong length 1 sub
+	{
+		/WithinPage exch def
 
-		add   TitlesLong length  div
-	def  % /CentreY
+		/Y
+			MarginB LineGap sub
+			WithinPage mul
 
-	MarginL Y moveto
-	0  1  PageWidthChars 1 sub {PageWidthChars (-) TitlesShort WithinPage get NextChar show} for
-	MarginL Y FontSize sub moveto
-	TitlesLong WithinPage get show
+			PageHeight MarginT sub LineGap sub
+			TitlesLong length WithinPage sub  mul
 
-} for  % WithinPage
+			add   TitlesLong length  div
+		def  % /CentreY
 
-showpage
+		MarginL Y moveto
+		0  1  PageWidthChars 1 sub {PageWidthChars (-) TitlesShort WithinPage get NextChar show} for
+		MarginL Y LineGap sub moveto
+		TitlesLong WithinPage get show
+	} for  % WithinPage
+
+	PageWidthChars ThisName length sub CharWidth mul MarginL add  MarginB  moveto
+	ThisName show
+
+	showpage
+} for  % NameNum
 
 
 
