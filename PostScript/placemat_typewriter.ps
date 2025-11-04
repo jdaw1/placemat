@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:55 Sunday 2nd November 2025
+% This version 22:00 Tuesday 4th November 2025
 
 % https://github.com/jdaw1/placemat/blob/main/PostScript/placemat_typewriter.ps
 % is, in effect, a self-mocking parody of
@@ -16,22 +16,37 @@
 % not PDF; nor images of such a document. But it does include re-usable improvements to the body of the code.
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202511021955) def
+/ParametersVersionDateTimeAdobeFormat (D:202511042200) def
 
 /TitlesLong [
-	(Warre 1970)
-	(Graham 1970)
-	(Quarles Harris 1970)
-	(Gould Campbell 1970)
-	(Smith Woodhouse 1970)
-	(Ramos Pinto 1970)
+	(Warre)
+	(Graham)
+	(Quarles Harris)
+	(Gould Campbell)
+	(Smith Woodhouse)
+	(Ramos Pinto)
 
-	(Taylor 1970)
-	(Fonseca 1970)
-	(Sandeman 1970)
-	(Offley Boa Vista 1970)
-	(Quinta do Noval 1970)
+	(Taylor)
+	(Fonseca)
+	(Sandeman)
+	(Offley Boa Vista)
+	(Quinta do Noval)
 ] def  % /TitlesLong
+
+/TitlesBelow [
+	(1970)
+	(1970)
+	(1970)
+	(1970)
+	(1970)
+	(1970)
+
+	(1970)
+	(1970)
+	(1970)
+	(1970)
+	(1970)
+] def  % /TitlesBelow
 
 /TitlesShort [
 	(W70)
@@ -94,7 +109,7 @@
 
 /DeBugLevel 65535 def
 
-/DeBugPaintExtras false def
+/DeBugAssist false def
 
 % Much of the following are, some simplified, from
 % https://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps
@@ -199,6 +214,130 @@
 	//DeBugLevel 15 le {(-SetPaperSize) OutputToLog} if
 } bind def  % /SetPaperSize
 
+% string string  Concatenate  string
+/Concatenate
+{
+	2 copy length exch length dup 3 1 roll add
+	dup //ArrayLengthMax le
+		{string dup dup 5 3 roll exch putinterval 3 -1 roll 0 exch putinterval}
+		{pop exch pop dup 65532 le {dup 3 add string dup dup 4 -1 roll (...) putinterval 0 4 -1 roll putinterval} {pop} ifelse}
+	ifelse
+} bind def  % /Concatenate
+
+% Immediate dependencies: ToString.
+% mark string|number|other ... string|number|other  ConcatenateToMark  string
+/ConcatenateToMark
+{
+	4 dict begin
+	counttomark /ctm exch def  /n 0 def
+	ctm {ToString  dup length n add /n exch def  ctm 1 roll} repeat
+	/p 0 def  /s n //ArrayLengthMax 2 copy gt {exch} if pop string def
+	ctm  -1  0
+	{
+		dup 0 gt
+		{
+			-1 roll   dup length p add  65532 le
+				{s exch p exch dup length p add /p exch def putinterval}
+				{s exch p exch 0 65532 p sub getinterval putinterval  s 65532 (...) putinterval  cleartomark  s  exit}
+			ifelse  % too long
+		} {pop pop s} ifelse
+	} for
+	end
+} bind def  % /ConcatenateToMark
+
+% thing DepthOverWhichArraysAndDictsSeparatedWithNewlines ShowStringBrackets ThingToDebugText  -
+/ThingToDebugText {12  ThingToDebugTextRecursive} bind def
+
+% Thing DepthOverWhichArraysAndDictsSeparatedWithNewlines ShowStringBrackets DepthMax ThingToDebugTextRecursive  -
+/ThingToDebugTextRecursive
+{
+	6 dict begin
+	/DepthMax exch def
+	/ShowStringBrackets exch def
+	/DepthLines exch def
+	/Thing exch def
+	/Separator ( ) def   DepthLines 0 gt {Separator 0 12 put} if
+
+	DepthMax 0 ge
+	{
+		1 {
+			/Thing load dup xcheck  exch cvlit type /arraytype eq  and
+			{
+				mark ({ ) /Thing load cvlit {DepthLines ShowStringBrackets DepthMax 1 sub  ThingToDebugTextRecursive} forall (} ) ConcatenateToMark % use same DepthLines
+				exit
+			} if  % xcheck and array
+
+			/Thing load type /operatortype eq
+			{
+				/Thing load cvlit 127 string cvs ( ) Concatenate
+				exit
+			} if  % /operatortype
+
+			/Thing load dup xcheck  exch cvlit type /nametype eq  and
+			{
+				/Thing load cvlit 127 string cvs ( ) Concatenate
+				exit
+			} if  % /operatortype
+
+			/Thing load type /nametype eq
+			{
+				/Thing load 127 string cvs ( ) Concatenate dup 0 1 getinterval (/) ne {(/) exch Concatenate} if
+				exit
+			} if  % /nametype
+
+			/Thing load type /stringtype eq
+			{
+				/Thing load rcheck
+				{
+					mark ShowStringBrackets {(\() /Thing load (\) )} {/Thing load ( )} ifelse ConcatenateToMark exit
+				}
+				{(--string--)} ifelse  % /Thing load rcheck
+			} if  % /stringtype
+
+			/Thing load type dup /arraytype eq exch /packedarraytype eq  or
+			{
+				/Thing load rcheck
+				{
+					mark ([) Separator /Thing load {DepthLines 0 gt {DepthLines 1 sub} {0} ifelse ShowStringBrackets DepthMax 1 sub  ThingToDebugTextRecursive  DepthLines 0 gt {Separator} if} forall (]) Separator ConcatenateToMark
+				}{
+					/Thing load type /arraytype eq {(--array--)} {(--packedarray--)} ifelse
+				} ifelse  % /Thing load rcheck
+				exit
+			} if  % /arraytype /packedarraytype
+
+			/Thing load type /dicttype eq
+			{
+				/Thing load rcheck
+				{
+					mark (<) Separator /Thing load {pop DepthLines 0 gt {DepthLines 1 sub} {0} ifelse ShowStringBrackets DepthMax 1 sub  ThingToDebugTextRecursive DepthLines 0 gt {Separator} if} forall (>) Separator ConcatenateToMark
+				}
+				{(--dict-- )} ifelse  % /Thing load rcheck
+				exit
+			} if  % /dicttype
+
+			/Thing load type /booleantype eq {/Thing load {(true )} {(false )} ifelse exit} if
+
+			/Thing load type dup /integertype eq exch /realtype eq  or
+			{
+				/Thing load 16 string cvs ( ) Concatenate
+				exit
+			} if  % /integertype /realtype
+
+			/Thing load type /marktype eq {(mark ) exit} if  % /marktype
+
+			/Thing load type /nulltype eq {(null ) exit} if
+			/Thing load type /filetype eq {(--file-- ) exit} if
+			/Thing load type /fonttype eq {(--font-- ) exit} if
+			/Thing load type /gstatetype eq {(--gstate-- ) exit} if
+			/Thing load type /savetype eq {(--save-- ) exit} if
+
+			% otherwise
+			mark (--) /Thing load type 127 string cvs (-- ) ConcatenateToMark exit
+		} repeat  % 1
+	} {( ... )} ifelse  % DepthMax 0 ge
+	end
+} bind def  % /ThingToDebugTextRecursive
+
 /ToString
 {
 	1 dict begin  dup type cvlit /Type exch def
@@ -231,37 +370,6 @@
 	} ifelse  % dp 0 gt
 	end
 } bind def  % FormatDecimalPlaces
-
-% string string  Concatenate  string
-/Concatenate
-{
-	2 copy length exch length dup 3 1 roll add
-	dup //ArrayLengthMax le
-		{string dup dup 5 3 roll exch putinterval 3 -1 roll 0 exch putinterval}
-		{pop exch pop dup 65532 le {dup 3 add string dup dup 4 -1 roll (...) putinterval 0 4 -1 roll putinterval} {pop} ifelse}
-	ifelse
-} bind def  % /Concatenate
-
-% Immediate dependencies: ToString.
-% mark string|number|other ... string|number|other  ConcatenateToMark  string
-/ConcatenateToMark
-{
-	4 dict begin
-	counttomark /ctm exch def  /n 0 def
-	ctm {ToString  dup length n add /n exch def  ctm 1 roll} repeat
-	/p 0 def  /s n //ArrayLengthMax 2 copy gt {exch} if pop string def
-	ctm  -1  0
-	{
-		dup 0 gt
-		{
-			-1 roll   dup length p add  65532 le
-				{s exch p exch dup length p add /p exch def putinterval}
-				{s exch p exch 0 65532 p sub getinterval putinterval  s 65532 (...) putinterval  cleartomark  s  exit}
-			ifelse  % too long
-		} {pop pop s} ifelse
-	} for
-	end
-} bind def  % /ConcatenateToMark
 
 % name|code  WatchExpression_MakeString  (string)
 /WatchExpression_MakeString
@@ -488,11 +596,8 @@ mark  /Action << >>  /Color [0 0 0]  /Title ExternalLinks length 3 gt {(\247 Ext
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 
-TitlesLong length  TitlesShort length  ne
-{
-	 (\nTitlesLong and TitlesShort must be of the same length. Aborting.\n) =
-	 quit
-} if
+TitlesLong length  TitlesShort length  ne {(\nTitlesLong and TitlesShort must be of the same length. Aborting.\n) =  quit} if
+TitlesLong length  TitlesBelow length  lt {(\nTitlesLong and TitlesBelow must be of the same length. Aborting.\n) =  quit} if
 
 false false true PaperType Orientation  SetPaperSize
 
@@ -535,7 +640,8 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 /RadiusVertical    NumDiagonals NumVerticals   2 div add  LineGap   mul  def
 /RadiusHorizontal  NumDiagonals NumHorizontals 2 div add  CharWidth mul  def
 
-/PageWidthChars  PageWidth MarginL MarginR add sub  CharWidth  div floor cvi  def
+/PageWidthChars   PageWidth  MarginL MarginR add sub  CharWidth  div floor cvi  def
+/PageHeightLines  PageHeight MarginB MarginT add sub  LineGap    div floor cvi  def
 
 % ThisCharNum TotalNumChars SpacerChar ShortString NextChar  char
 /NextChar
@@ -593,13 +699,13 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 		/WithinPageStart  GlassesNumRows GlassesNumCols mul PageNum mul  def
 		/WithinPageEnd    GlassesNumRows GlassesNumCols mul PageNum 1 add mul  TitlesLong length  2 copy gt {exch} if pop   1 sub  def
 
-		DeBugPaintExtras  0 NameNum eq  and
+		DeBugAssist  0 NameNum eq  and
 		{
 			gsave
 			1 0 0 setrgbcolor  0.48 setlinewidth  0 setlinejoin  [] 0 setdash
 			MarginL  MarginB  PageWidth MarginL MarginR add sub  PageHeight MarginB MarginT add sub  rectstroke
 			grestore
-		} if  % DeBugPaintExtras  0 NameNum eq  and
+		} if  % DeBugAssist  0 NameNum eq  and
 
 
 		% Glasses pages
@@ -636,14 +742,14 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 			} {PageHeight MarginB MarginT sub add 2 div} ifelse  % GlassesNumRows 1 gt
 			def  % /CentreY
 
-			DeBugPaintExtras  1 NameNum ge  and
+			DeBugAssist  1 NameNum ge  and
 			{
 				gsave
 				CentreX CentreY Radius              3 copy add moveto  90 450 arc   closepath
 				CentreX CentreY Radius LineGap sub  3 copy add moveto  450 90 arcn  closepath
 				0 1 0 setrgbcolor  0.48 setlinewidth  0 setlinejoin  [] 0 setdash  stroke
 				grestore
-			} if  % DeBugPaintExtras  1 NameNum ge  and
+			} if  % DeBugAssist  1 NameNum ge  and
 
 			% Paint horizontals
 			0  1  1 {/NumY exch def
@@ -691,10 +797,17 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 			} for  % /NumX
 			} for  % /NumY
 
-			TitlesLong WithinPage get
-			dup length  dup 2 mod sub NumHorizontals 2 mod add  -2 div CharWidth mul  CentreX add
+			TitlesLong WithinPage get  dup length
+			dup 2 mod sub NumHorizontals 2 mod add  -2 div CharWidth mul  CentreX add
 			CentreY  NumVerticals 2 mod 1 eq {LineGap 2 div sub} if
 			moveto  show
+			TitlesBelow length WithinPage gt
+			{
+				TitlesBelow WithinPage get  dup length
+				dup 2 mod sub NumHorizontals 2 mod add  -2 div CharWidth mul  CentreX add
+				CentreY  NumVerticals 2 mod 1 eq {LineGap 2 div sub} if  LineGap sub
+				moveto  show
+			} if  % TitlesBelow exists
 		} for  % WithinPage
 
 		/i  GlassesNumCols 1 gt {GlassesNumCols dup 2 mod sub 2 div 0.5 sub} {0.25} ifelse  def
@@ -724,13 +837,13 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 		/WithinPageStart  GlassesNumRows GlassesNumCols mul PageNum mul  def
 		/WithinPageEnd    GlassesNumRows GlassesNumCols mul PageNum 1 add mul  TitlesLong length  2 copy gt {exch} if pop   1 sub  def
 
-		DeBugPaintExtras  0 NameNum eq  and
+		DeBugAssist  0 NameNum eq  and
 		{
 			gsave
 			1 0 0 setrgbcolor  0.48 setlinewidth  0 setlinejoin  [] 0 setdash
 			MarginL  MarginB  PageWidth MarginL MarginR add sub  PageHeight MarginB MarginT add sub  rectstroke
 			grestore
-		} if  % DeBugPaintExtras  0 NameNum eq  and
+		} if  % DeBugAssist  0 NameNum eq  and
 
 		true PaintHeaders
 
@@ -750,8 +863,10 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 
 			MarginL Y moveto
 			0  1  PageWidthChars 1 sub {PageWidthChars (-) TitlesShort WithinPage get NextChar show} for
+
 			MarginL Y LineGap sub moveto
 			TitlesLong WithinPage get show
+			TitlesBelow length WithinPage gt {TitlesBelow WithinPage get dup length 0 gt {(   ) show show} {pop} ifelse} if
 		} for  % WithinPage
 
 		PageWidthChars ThisName length sub CharWidth mul MarginL add  MarginB  moveto
@@ -762,6 +877,164 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 	} for  % PageNum
 } for  % NameNum
 
+
+% Vote recorders
+
+[ false true ]
+{
+	/IsGuessing exch def
+
+	/VotingColumnHeaders [
+		IsGuessing {(Guess)} {(WOTN)} ifelse
+		IsGuessing {(Reveal)} if
+		Names aload pop
+		IsGuessing not {(Total)} if
+	] def  % /VotingColumnHeadersVotingRowLongStringslength
+
+	/VotingColHeadersLengthMax  0  VotingColumnHeaders {length 2 copy lt {exch} if pop} forall  def
+
+	/VotingRowHeaders [
+		TitlesShort aload pop
+		IsGuessing {(Total)} if
+	] def  % /VotingColumnHeaders
+
+	/VotingRowHeadersLengthMax
+		VotingColumnHeaders 0 get length
+		VotingRowHeaders {length 2 copy lt {exch} if pop} forall
+	def  % /VotingRowHeadersLengthMax
+
+	/VotingRowLongStrings [
+		0  1  TitlesLong length 1 sub
+		{
+			/WithinPage exch def
+			TitlesLong WithinPage get
+			TitlesBelow length WithinPage gt {TitlesBelow WithinPage get dup length 0 gt {mark 3 1 roll ( ) exch ConcatenateToMark} {pop} ifelse} if
+		} for  % WithinPage
+		IsGuessing {()} if
+	] def  % /VotingColumnHeaders
+
+	/VotingNumCols  VotingColumnHeaders length  def
+	/VotingNumRows  VotingRowLongStrings length  1 add  def
+
+	/VotingWidthNonFirstCols
+		PageWidthChars
+		VotingRowHeadersLengthMax sub
+		VotingNumCols 1 sub  sub
+		VotingNumCols 1 sub  div floor cvi
+	def  % /VotingWidthNonFirstCols
+
+	/VotingWidthFirstCol
+		PageWidthChars
+		VotingNumCols 1 sub  sub
+		VotingNumCols 1 sub  VotingWidthNonFirstCols mul  sub
+		VotingRowHeadersLengthMax 1 add  2 copy gt {exch} if pop
+	def  % /VotingWidthFirstCol
+
+	/VotingHeightNamesRow  VotingColHeadersLengthMax VotingWidthNonFirstCols div ceiling cvi  def
+	/VotingHeightWineRows  PageHeightLines  VotingHeightNamesRow sub  VotingRowLongStrings length div 1 sub floor cvi  def
+
+	DeBugAssist
+	{
+		[
+			/VotingColumnHeaders  /VotingRowHeaders  /VotingRowLongStrings
+			/PageWidthChars /PageHeightLines
+			/VotingNumCols /VotingNumRows
+			/VotingWidthNonFirstCols /VotingWidthFirstCol
+			/VotingHeightNamesRow /VotingHeightWineRows
+		] WatchExpressions
+		() =
+	} if  % DeBugAssist
+
+	true PaintHeaders
+
+	% Vertical lines
+	0  1  VotingNumCols 2 sub
+	{
+		/ColumnNum exch def
+		/SeparatorChar
+			1 {
+				ColumnNum IsGuessing {1} {0} ifelse le {true exit} if
+				ColumnNum IsGuessing {1} {0} ifelse sub 3 mod 0 eq {true exit} if
+				IsGuessing not  ColumnNum VotingNumCols 2 sub eq  and {true exit} if
+				false 
+			} repeat  % 1
+		{(|)} {(:)} ifelse def  % /SeparatorChar
+
+		/CharNum  VotingWidthFirstCol  VotingWidthNonFirstCols 1 add ColumnNum mul  add  def
+		0  1  VotingHeightWineRows 1 add VotingRowHeaders length mul VotingHeightNamesRow add
+		{
+			/LineNum exch def
+			LineNum VotingHeightNamesRow lt {//true} {LineNum VotingHeightNamesRow sub VotingHeightWineRows 1 add mod 0 ne} ifelse
+			{
+				/Y  PageHeight MarginT sub  LineNum 1 add LineGap mul sub  def
+				MarginL CharNum CharWidth mul add  Y moveto  SeparatorChar show
+			} if
+		} for  % LineNum
+	} for  % Voting columns
+
+	% Column headings, mostly Names
+	/Y  PageHeight MarginT sub  LineGap sub  def
+	0  1  VotingNumCols 1 sub
+	{
+		/ColumnNum exch def
+		/CharNum
+			ColumnNum 0 gt
+			{
+				VotingWidthNonFirstCols 1 add  ColumnNum 1 sub mul
+				VotingWidthFirstCol  1  add add
+			} {0} ifelse
+		def  % /CharNum
+		/X  CharNum CharWidth mul MarginL add  def
+		/Y  PageHeight MarginT sub  LineGap sub  def
+		ColumnNum 0 gt {VotingColumnHeaders ColumnNum get length VotingWidthNonFirstCols 2 sub  gt} {//false} ifelse
+		{
+			/VCH_NumRows  VotingColumnHeaders ColumnNum get length  VotingWidthNonFirstCols div ceiling cvi  def
+			0  1  VCH_NumRows 1 sub
+			{
+				/VCH_RowNum exch def
+				X  Y VCH_RowNum LineGap mul sub  moveto
+				VotingColumnHeaders ColumnNum get
+				VotingWidthNonFirstCols VCH_RowNum mul
+				2 copy exch length exch sub  VotingWidthNonFirstCols  2 copy gt {exch} if pop
+				getinterval show
+			} for  % VCH_Numrows
+			X  Y VCH_RowNum LineGap mul sub  moveto
+			VotingWidthNonFirstCols {(_) show} repeat
+		}{
+			VotingColumnHeaders ColumnNum get  X ColumnNum 0 gt {CharWidth add} if  Y  3 copy
+			moveto show
+			moveto length {(_) show} repeat
+		} ifelse
+	} for  % Voting columns
+
+
+%	% Underscores at top
+%	MarginL VotingWidthFirstCol CharWidth mul add  Y  moveto
+%	VotingWidthNonFirstCols 1 add VotingColumnHeaders length mul {(_) show} repeat
+
+
+	% Wine names
+	0  1  VotingRowHeaders length 1 sub
+	{
+		/WithinPage exch def
+
+		/RowNum  WithinPage VotingHeightWineRows 1 add mul VotingHeightNamesRow add 1 add def
+
+		% --TitlesLong--
+		/Y  PageHeight MarginT sub  LineGap RowNum mul sub  def
+		MarginL Y moveto
+		0 1 PageWidthChars 1 sub {PageWidthChars (-) VotingRowLongStrings WithinPage get  NextChar  show} for
+
+		% TitlesShort
+		MarginL  Y VotingHeightWineRows 1 add 2 idiv LineGap mul sub  moveto
+		VotingRowHeaders WithinPage get show
+
+	} for  % WithinPage
+
+	showpage
+
+
+} forall
 
 
 
