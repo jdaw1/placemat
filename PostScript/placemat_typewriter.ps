@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:30 Wednesday 5th November 2025
+% This version 20:45 Wednesday 5th November 2025
 
 % https://github.com/jdaw1/placemat/blob/main/PostScript/placemat_typewriter.ps
 % is, in effect, a self-mocking parody of
@@ -16,7 +16,7 @@
 % not PDF; nor images of such a document. But it does include re-usable improvements to the body of the code.
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202511052030) def
+/ParametersVersionDateTimeAdobeFormat (D:202511052045) def
 
 /TitlesLong [
 	(Warre)
@@ -82,20 +82,6 @@
 /ShowGlasses              true  def
 /ShowTastingNotes         true  def
  
-/FontName /Courier def  % There is only one font, and it must be monospace: /Courier /FiraMono-Regular /RobotoMono-Regular /DejaVuSansMono
-/FontSize 11 def  % There is only one font size. Pica = 10 c.p.i. ~= 12pt; Elite = 12 c.p.i. ~= 10pt.
-/FontSizeTweak true def  % Small efficient increase in font size.
-/LineGapProportionFontSize 0.94 def
-/SpacerCharsMinNum 2 def
-
-/PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]; good value is   {SheetNumGlasses SheetNum get 7 le {/A4} {/A3} ifelse} bind
-/Orientation /Portrait def  % /Landscape /Portrait
-
-/MarginL 24 def
-/MarginR MarginL def
-/MarginB MarginL def
-/MarginT MarginL FontSize add def
-
 % Array, length a multiple of three:  indented0-boolean, (Descriptor0), (http://URL0);  indented1-boolean, (Descriptor1), (http://URL1);  ...
 % Links for some restaurants and many Port houses at http://GitHub.com/jdaw1/placemat/blob/main/PostScript/ExternalLinks_data.ps
 /ExternalLinks [
@@ -109,6 +95,20 @@
 	true    [/ellipsis (StreetMap.co.uk)]                (http://www.StreetMap.co.uk/map.srf?x=532409&y=180083&z=106&pc=SE1+1TA)
 	true    [/ellipsis (bing.com)]                       (http://www.bing.com/maps?where1=SE1+1TA)
 ] def  % /ExternalLinks
+
+/FontName /Courier def  % There is only one font, and it must be monospace: /Courier /FiraMono-Regular /RobotoMono-Regular /DejaVuSansMono
+/FontSize 11 def  % There is only one font size. Pica = 10 c.p.i. ~= 12pt; Elite = 12 c.p.i. ~= 10pt.
+/FontSizeTweak true def  % Small efficient increase in font size.
+/LineGapProportionFontSize 0.94 def
+/SpacerCharsMinNum 2 def
+
+/PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]; good value is   {SheetNumGlasses SheetNum get 7 le {/A4} {/A3} ifelse} bind
+/Orientation /Portrait def  % /Landscape /Portrait
+
+/MarginL 24 def
+/MarginR MarginL def
+/MarginB MarginL def
+/MarginT MarginL FontSize add def
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
