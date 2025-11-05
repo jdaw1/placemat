@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:00 Tuesday 4th November 2025
+% This version 20:30 Wednesday 5th November 2025
 
 % https://github.com/jdaw1/placemat/blob/main/PostScript/placemat_typewriter.ps
 % is, in effect, a self-mocking parody of
@@ -16,7 +16,7 @@
 % not PDF; nor images of such a document. But it does include re-usable improvements to the body of the code.
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202511042200) def
+/ParametersVersionDateTimeAdobeFormat (D:202511052030) def
 
 /TitlesLong [
 	(Warre)
@@ -77,6 +77,11 @@
 
 /PDF_title (1970s, 18Nov2025) def
 
+/ShowVoteRecorder_Guesses false def
+/ShowVoteRecorder_WOTN    true  def
+/ShowGlasses              true  def
+/ShowTastingNotes         true  def
+ 
 /FontName /Courier def  % There is only one font, and it must be monospace: /Courier /FiraMono-Regular /RobotoMono-Regular /DejaVuSansMono
 /FontSize 11 def  % There is only one font size. Pica = 10 c.p.i. ~= 12pt; Elite = 12 c.p.i. ~= 10pt.
 /FontSizeTweak true def  % Small efficient increase in font size.
@@ -686,201 +691,214 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 } bind def  % /PaintHeaders
 
 /NumPages  TitlesLong length GlassesNumRows GlassesNumCols mul div ceiling cvi  def
-
 0  1  Names length 1 sub
 {
 	/NameNum exch def
 	/ThisName Names NameNum get def
 
-	0  1  NumPages 1 sub
+	ShowGlasses
 	{
-		/PageNum exch def
-
-		/WithinPageStart  GlassesNumRows GlassesNumCols mul PageNum mul  def
-		/WithinPageEnd    GlassesNumRows GlassesNumCols mul PageNum 1 add mul  TitlesLong length  2 copy gt {exch} if pop   1 sub  def
-
-		DeBugAssist  0 NameNum eq  and
+		0  1  NumPages 1 sub
 		{
-			gsave
-			1 0 0 setrgbcolor  0.48 setlinewidth  0 setlinejoin  [] 0 setdash
-			MarginL  MarginB  PageWidth MarginL MarginR add sub  PageHeight MarginB MarginT add sub  rectstroke
-			grestore
-		} if  % DeBugAssist  0 NameNum eq  and
+			/PageNum exch def
 
+			/WithinPageStart  GlassesNumRows GlassesNumCols mul PageNum mul  def
+			/WithinPageEnd    GlassesNumRows GlassesNumCols mul PageNum 1 add mul  TitlesLong length  2 copy gt {exch} if pop   1 sub  def
 
-		% Glasses pages
-
-		false PaintHeaders
-
-		WithinPageStart 1 WithinPageEnd
-		{
-			/WithinPage exch def
-
-			/CentreX
-			GlassesNumCols 1 gt
-			{
-				RadiusHorizontal  MarginL  add
-				GlassesNumCols 1 sub  WithinPage WithinPageStart sub GlassesNumCols mod sub  mul
-
-				PageWidth  RadiusHorizontal MarginR add  sub
-				WithinPage WithinPageStart sub GlassesNumCols mod  mul
-
-				add   GlassesNumCols 1 sub  div
-			} {PageWidth MarginL MarginR sub add 2 div} ifelse  % GlassesNumCols 1 gt
-			def  % /CentreX
-
-			/CentreY
-			GlassesNumRows 1 gt
-			{
-				RadiusVertical  MarginB  add
-				WithinPage WithinPageStart sub GlassesNumCols idiv  mul
-
-				PageHeight  RadiusVertical MarginT add  sub
-				GlassesNumRows 1 sub  WithinPage WithinPageStart sub GlassesNumCols idiv sub  mul
-
-				add   GlassesNumRows 1 sub  div
-			} {PageHeight MarginB MarginT sub add 2 div} ifelse  % GlassesNumRows 1 gt
-			def  % /CentreY
-
-			DeBugAssist  1 NameNum ge  and
+			DeBugAssist  0 NameNum eq  and
 			{
 				gsave
-				CentreX CentreY Radius              3 copy add moveto  90 450 arc   closepath
-				CentreX CentreY Radius LineGap sub  3 copy add moveto  450 90 arcn  closepath
-				0 1 0 setrgbcolor  0.48 setlinewidth  0 setlinejoin  [] 0 setdash  stroke
+				1 0 0 setrgbcolor  0.48 setlinewidth  0 setlinejoin  [] 0 setdash
+				MarginL  MarginB  PageWidth MarginL MarginR add sub  PageHeight MarginB MarginT add sub  rectstroke
 				grestore
-			} if  % DeBugAssist  1 NameNum ge  and
+			} if  % DeBugAssist  0 NameNum eq  and
 
-			% Paint horizontals
-			0  1  1 {/NumY exch def
-				CentreX NumHorizontals 2 div CharWidth mul sub
-				CentreY NumVerticals 2 div NumDiagonals add  NumY 0 eq {neg} {1 sub} ifelse LineGap mul add
-				moveto
-				0  1  NumHorizontals 1 sub {NumHorizontals (-) TitlesShort WithinPage get NextChar show} for
-			} for  % /NumY
 
-			% Paint verticals
-			0  1  1 {/NumX exch def
-				0  1  NumVerticals 1 sub
-				{
-					/ThisCharNum exch def
-					CentreX NumHorizontals 2 div NumDiagonals add  NumX 0 eq {neg} {1 sub} ifelse  CharWidth mul add
-					CentreY NumVerticals 2 div ThisCharNum sub 1 sub LineGap mul add
-					moveto
-					ThisCharNum NumVerticals (|) TitlesShort WithinPage get NextChar show
-				} for  % verticals
-			} for  % /NumX
+			% Glasses pages
+				false PaintHeaders
 
-			% Paint diagonals
-			0  1  1 {/NumY exch def
-			0  1  1 {/NumX exch def
-				0  1  NumDiagonals 1 sub
-				{
-					/ThisCharNum exch def
-					NumX 0 eq
-					{
-						CentreX NumHorizontals -2 div NumDiagonals sub ThisCharNum add CharWidth mul add
-						NumY 0 eq
-							{CentreY NumVerticals -2 div 1 sub ThisCharNum sub LineGap mul add}
-							{CentreY NumVerticals 2 div ThisCharNum add LineGap mul add}
-						ifelse  % NumY 0 eq
-					}{
-						CentreX NumHorizontals 2 div ThisCharNum add CharWidth mul add
-						NumY 0 eq
-							{CentreY NumVerticals -2 div NumDiagonals sub ThisCharNum add LineGap mul add}
-							{CentreY NumVerticals 2 div NumDiagonals 1 sub add ThisCharNum sub LineGap mul add}
-						ifelse  % NumY 0 eq
-					} ifelse  % NumX 0 eq
-					moveto
-					ThisCharNum NumDiagonals NumX NumY eq {(\\)} {(/)} ifelse TitlesShort WithinPage get NextChar show
-				} for  % diagonals
-			} for  % /NumX
-			} for  % /NumY
-
-			TitlesLong WithinPage get  dup length
-			dup 2 mod sub NumHorizontals 2 mod add  -2 div CharWidth mul  CentreX add
-			CentreY  NumVerticals 2 mod 1 eq {LineGap 2 div sub} if
-			moveto  show
-			TitlesBelow length WithinPage gt
+			WithinPageStart 1 WithinPageEnd
 			{
-				TitlesBelow WithinPage get  dup length
+				/WithinPage exch def
+
+				/CentreX
+				GlassesNumCols 1 gt
+				{
+					RadiusHorizontal  MarginL  add
+					GlassesNumCols 1 sub  WithinPage WithinPageStart sub GlassesNumCols mod sub  mul
+
+					PageWidth  RadiusHorizontal MarginR add  sub
+					WithinPage WithinPageStart sub GlassesNumCols mod  mul
+
+					add   GlassesNumCols 1 sub  div
+				} {PageWidth MarginL MarginR sub add 2 div} ifelse  % GlassesNumCols 1 gt
+				def  % /CentreX
+
+				/CentreY
+				GlassesNumRows 1 gt
+				{
+					RadiusVertical  MarginB  add
+					WithinPage WithinPageStart sub GlassesNumCols idiv  mul
+
+					PageHeight  RadiusVertical MarginT add  sub
+					GlassesNumRows 1 sub  WithinPage WithinPageStart sub GlassesNumCols idiv sub  mul
+
+					add   GlassesNumRows 1 sub  div
+				} {PageHeight MarginB MarginT sub add 2 div} ifelse  % GlassesNumRows 1 gt
+				def  % /CentreY
+
+				DeBugAssist  1 NameNum ge  and
+				{
+					gsave
+					CentreX CentreY Radius              3 copy add moveto  90 450 arc   closepath
+					CentreX CentreY Radius LineGap sub  3 copy add moveto  450 90 arcn  closepath
+					0 1 0 setrgbcolor  0.48 setlinewidth  0 setlinejoin  [] 0 setdash  stroke
+					grestore
+				} if  % DeBugAssist  1 NameNum ge  and
+
+				% Paint horizontals
+				1 dict begin
+				0  1  1 {/NumY exch def
+					CentreX NumHorizontals 2 div CharWidth mul sub
+					CentreY NumVerticals 2 div NumDiagonals add  NumY 0 eq {neg} {1 sub} ifelse LineGap mul add
+					moveto
+					0  1  NumHorizontals 1 sub {NumHorizontals (-) TitlesShort WithinPage get NextChar show} for
+				} for  % /NumY
+				end
+
+				% Paint verticals
+				2 dict begin
+				0  1  1 {/NumX exch def
+					0  1  NumVerticals 1 sub
+					{
+						/ThisCharNum exch def
+						CentreX NumHorizontals 2 div NumDiagonals add  NumX 0 eq {neg} {1 sub} ifelse  CharWidth mul add
+						CentreY NumVerticals 2 div ThisCharNum sub 1 sub LineGap mul add
+						moveto
+						ThisCharNum NumVerticals (|) TitlesShort WithinPage get NextChar show
+					} for  % verticals
+				} for  % /NumX
+				end
+
+				% Paint diagonals
+				3 dict begin
+				0  1  1 {/NumY exch def
+				0  1  1 {/NumX exch def
+					0  1  NumDiagonals 1 sub
+					{
+						/ThisCharNum exch def
+						NumX 0 eq
+						{
+							CentreX NumHorizontals -2 div NumDiagonals sub ThisCharNum add CharWidth mul add
+							NumY 0 eq
+								{CentreY NumVerticals -2 div 1 sub ThisCharNum sub LineGap mul add}
+								{CentreY NumVerticals 2 div ThisCharNum add LineGap mul add}
+							ifelse  % NumY 0 eq
+						}{
+							CentreX NumHorizontals 2 div ThisCharNum add CharWidth mul add
+							NumY 0 eq
+								{CentreY NumVerticals -2 div NumDiagonals sub ThisCharNum add LineGap mul add}
+								{CentreY NumVerticals 2 div NumDiagonals 1 sub add ThisCharNum sub LineGap mul add}
+							ifelse  % NumY 0 eq
+						} ifelse  % NumX 0 eq
+						moveto
+						ThisCharNum NumDiagonals NumX NumY eq {(\\)} {(/)} ifelse TitlesShort WithinPage get NextChar show
+					} for  % diagonals
+				} for  % /NumX
+				} for  % /NumY
+				end
+
+				TitlesLong WithinPage get  dup length
 				dup 2 mod sub NumHorizontals 2 mod add  -2 div CharWidth mul  CentreX add
-				CentreY  NumVerticals 2 mod 1 eq {LineGap 2 div sub} if  LineGap sub
+				CentreY  NumVerticals 2 mod 1 eq {LineGap 2 div sub} if
 				moveto  show
-			} if  % TitlesBelow exists
-		} for  % WithinPage
+				TitlesBelow length WithinPage gt
+				{
+					TitlesBelow WithinPage get  dup length
+					dup 2 mod sub NumHorizontals 2 mod add  -2 div CharWidth mul  CentreX add
+					CentreY  NumVerticals 2 mod 1 eq {LineGap 2 div sub} if  LineGap sub
+					moveto  show
+				} if  % TitlesBelow exists
+			} for  % WithinPage
 
-		/i  GlassesNumCols 1 gt {GlassesNumCols dup 2 mod sub 2 div 0.5 sub} {0.25} ifelse  def
-		/X
-			Radius  MarginL  add
-			GlassesNumCols 1 sub  i sub  mul
+			3 dict begin
+			/i  GlassesNumCols 1 gt {GlassesNumCols dup 2 mod sub 2 div 0.5 sub} {0.25} ifelse  def
+			/X
+				Radius  MarginL  add
+				GlassesNumCols 1 sub  i sub  mul
 
-			PageWidth  Radius MarginR add  sub
-			i  mul
+				PageWidth  Radius MarginR add  sub
+				i  mul
 
-			add   GlassesNumCols 1 sub  div
-		def  % /X
-		/Y  MarginB RadiusVertical add  NumVerticals 2 div NumDiagonals add LineGap mul  sub  def  % Should be MarginB
-		X Y moveto   ThisName dup stringwidth pop -2 div 0 rmoveto  show
+				add   GlassesNumCols 1 sub  div
+			def  % /X
+			/Y  MarginB RadiusVertical add  NumVerticals 2 div NumDiagonals add LineGap mul  sub  def  % Should be MarginB
+			X Y moveto   ThisName dup stringwidth pop -2 div 0 rmoveto  show
+			end
 
-		showpage
-	} for  % PageNum
+			showpage
+		} for  % PageNum
+	} if  %ShowGlasses
 
 
-
-	% Tasting-note pages
-
-	0  1  NumPages 1 sub
+	ShowTastingNotes
 	{
-		/PageNum exch def
+		% Tasting-note pages
 
-		/WithinPageStart  GlassesNumRows GlassesNumCols mul PageNum mul  def
-		/WithinPageEnd    GlassesNumRows GlassesNumCols mul PageNum 1 add mul  TitlesLong length  2 copy gt {exch} if pop   1 sub  def
-
-		DeBugAssist  0 NameNum eq  and
+		5 dict begin
+		0  1  NumPages 1 sub
 		{
-			gsave
-			1 0 0 setrgbcolor  0.48 setlinewidth  0 setlinejoin  [] 0 setdash
-			MarginL  MarginB  PageWidth MarginL MarginR add sub  PageHeight MarginB MarginT add sub  rectstroke
-			grestore
-		} if  % DeBugAssist  0 NameNum eq  and
+			/PageNum exch def
 
-		true PaintHeaders
+			/WithinPageStart  GlassesNumRows GlassesNumCols mul PageNum mul  def
+			/WithinPageEnd    GlassesNumRows GlassesNumCols mul PageNum 1 add mul  TitlesLong length  2 copy gt {exch} if pop   1 sub  def
 
-		WithinPageStart 1 WithinPageEnd
-		{
-			/WithinPage exch def
+			DeBugAssist  0 NameNum eq  and
+			{
+				gsave
+				1 0 0 setrgbcolor  0.48 setlinewidth  0 setlinejoin  [] 0 setdash
+				MarginL  MarginB  PageWidth MarginL MarginR add sub  PageHeight MarginB MarginT add sub  rectstroke
+				grestore
+			} if  % DeBugAssist  0 NameNum eq  and
 
-			/Y
-				MarginB LineGap sub
-				WithinPage WithinPageStart sub mul
+			true PaintHeaders
 
-				PageHeight MarginT sub LineGap sub
-				GlassesNumRows GlassesNumCols mul WithinPage WithinPageStart sub sub  mul
+			WithinPageStart 1 WithinPageEnd
+			{
+				/WithinPage exch def
 
-				add   GlassesNumRows GlassesNumCols mul  div
-			def  % /CentreY
+				/Y
+					MarginB LineGap sub
+					WithinPage WithinPageStart sub mul
 
-			MarginL Y moveto
-			0  1  PageWidthChars 1 sub {PageWidthChars (-) TitlesShort WithinPage get NextChar show} for
+					PageHeight MarginT sub LineGap sub
+					GlassesNumRows GlassesNumCols mul WithinPage WithinPageStart sub sub  mul
 
-			MarginL Y LineGap sub moveto
-			TitlesLong WithinPage get show
-			TitlesBelow length WithinPage gt {TitlesBelow WithinPage get dup length 0 gt {(   ) show show} {pop} ifelse} if
-		} for  % WithinPage
+					add   GlassesNumRows GlassesNumCols mul  div
+				def  % /CentreY
 
-		PageWidthChars ThisName length sub CharWidth mul MarginL add  MarginB  moveto
-		ThisName show
+				MarginL Y moveto
+				0  1  PageWidthChars 1 sub {PageWidthChars (-) TitlesShort WithinPage get NextChar show} for
 
-		showpage
+				MarginL Y LineGap sub moveto
+				TitlesLong WithinPage get show
+				TitlesBelow length WithinPage gt {TitlesBelow WithinPage get dup length 0 gt {(   ) show show} {pop} ifelse} if
+			} for  % WithinPage
 
-	} for  % PageNum
+			PageWidthChars ThisName length sub CharWidth mul MarginL add  MarginB  moveto
+			ThisName show
+
+			showpage
+
+		} for  % PageNum
+		end
+	} if  % ShowTastingNotes
 } for  % NameNum
 
 
 % Vote recorders
 
-[ false true ]
+[ ShowVoteRecorder_WOTN {false} if   ShowVoteRecorder_Guesses {true} if ]
 {
 	/IsGuessing exch def
 
@@ -904,6 +922,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 	def  % /VotingRowHeadersLengthMax
 
 	/VotingRowLongStrings [
+		1 dict begin
 		0  1  TitlesLong length 1 sub
 		{
 			/WithinPage exch def
@@ -911,6 +930,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 			TitlesBelow length WithinPage gt {TitlesBelow WithinPage get dup length 0 gt {mark 3 1 roll ( ) exch ConcatenateToMark} {pop} ifelse} if
 		} for  % WithinPage
 		IsGuessing {()} if
+		end
 	] def  % /VotingColumnHeaders
 
 	/VotingNumCols  VotingColumnHeaders length  def
@@ -948,6 +968,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 	true PaintHeaders
 
 	% Vertical lines
+	5 dict begin
 	0  1  VotingNumCols 2 sub
 	{
 		/ColumnNum exch def
@@ -971,8 +992,10 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 			} if
 		} for  % LineNum
 	} for  % Voting columns
+	end
 
 	% Column headings, mostly Names
+	4 dict begin
 	/Y  PageHeight MarginT sub  LineGap sub  def
 	0  1  VotingNumCols 1 sub
 	{
@@ -1006,14 +1029,11 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 			moveto length {(_) show} repeat
 		} ifelse
 	} for  % Voting columns
-
-
-%	% Underscores at top
-%	MarginL VotingWidthFirstCol CharWidth mul add  Y  moveto
-%	VotingWidthNonFirstCols 1 add VotingColumnHeaders length mul {(_) show} repeat
+	end
 
 
 	% Wine names
+	3 dict begin
 	0  1  VotingRowHeaders length 1 sub
 	{
 		/WithinPage exch def
@@ -1030,6 +1050,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 		VotingRowHeaders WithinPage get show
 
 	} for  % WithinPage
+	end
 
 	showpage
 
