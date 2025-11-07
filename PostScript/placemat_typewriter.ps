@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:45 Wednesday 5th November 2025
+% This version 23:30 Friday 7th November 2025
 
 % https://github.com/jdaw1/placemat/blob/main/PostScript/placemat_typewriter.ps
 % is, in effect, a self-mocking parody of
@@ -16,9 +16,9 @@
 % not PDF; nor images of such a document. But it does include re-usable improvements to the body of the code.
 
 
-/ParametersVersionDateTimeAdobeFormat (D:202511052045) def
+/ParametersVersionDateTimeAdobeFormat (D:202511072330) def
 
-/TitlesLong [
+/TitlesCentre [
 	(Warre)
 	(Graham)
 	(Quarles Harris)
@@ -31,7 +31,11 @@
 	(Sandeman)
 	(Offley Boa Vista)
 	(Quinta do Noval)
-] def  % /TitlesLong
+] def  % /TitlesCentre
+
+/TitlesAbove [
+	TitlesCentre length {()} repeat
+] def  % /TitlesAbove
 
 /TitlesBelow [
 	(1970)
@@ -48,7 +52,7 @@
 	(1970)
 ] def  % /TitlesBelow
 
-/TitlesShort [
+/TitlesAround [
 	(W70)
 	(G70)
 	(QH70)
@@ -61,7 +65,9 @@
 	(S70)
 	(OBV70)
 	(N70)
-] def  % /TitlesShort
+] def  % /TitlesAround
+
+/TitlesAcross TitlesCentre def
 
 /Names [
 	(JDAW)
@@ -100,7 +106,8 @@
 /FontSize 11 def  % There is only one font size. Pica = 10 c.p.i. ~= 12pt; Elite = 12 c.p.i. ~= 10pt.
 /FontSizeTweak true def  % Small efficient increase in font size.
 /LineGapProportionFontSize 0.94 def
-/SpacerCharsMinNum 2 def
+/SpacerCharsMinNum_Around 2 def
+/SpacerCharsMinNum_Across 3 def
 
 /PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]; good value is   {SheetNumGlasses SheetNum get 7 le {/A4} {/A3} ifelse} bind
 /Orientation /Portrait def  % /Landscape /Portrait
@@ -112,9 +119,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+/SoftwareVersionDateTimeAdobeFormat (D:202511072330) def
+
 /DeBugLevel 65535 def
 
 /DeBugAssist false def
+
+/TypeOfPagesBeingRendered /Multiple def
 
 % Much of the following are, some simplified, from
 % https://github.com/jdaw1/placemat/blob/main/PostScript/placemat.ps
@@ -539,6 +550,75 @@
 	end
 } bind def  % /TrimSpaces
 
+/NonEmptyCompoundObject
+{
+	//DeBugLevel 5 le {(+NonEmptyCompoundObject) OutputToLog} if
+	1 dict begin
+	/param exch def
+	1 {
+		/param load xcheck {/param load length 0 gt exit} if
+		param type /stringtype eq {param length 0 gt exit} if
+		param type /nametype eq {//true exit} if
+		param type /integertype eq {//true exit} if
+		param type /realtype eq {//true exit} if
+		param type /arraytype eq {//false param {NonEmptyCompoundObject {pop //true exit} if} forall exit} if
+		//false param {dup type dup /stringtype ne exch /nametype ne and {NonEmptyCompoundObject {pop //true exit} if} {pop} ifelse} forall
+		mark (Warning: NonEmptyCompoundObject parameter ) /param load 0 //true ThingToDebugText  ( is of type ) param type ( rather than executable, string, name, number or array.) ConcatenateToMark OutputToLog  //true
+	} repeat
+	end
+	//DeBugLevel 5 le {(-NonEmptyCompoundObject) OutputToLog} if
+} bind def  % /NonEmptyCompoundObject
+
+/MonthNames [(Jan) (Feb) (March) (April) (May) (June) (July) (Aug) (Sep) (Oct) (Nov) (Dec)] def
+% http://en.wikibooks.org/wiki/PostScript_FAQ#How_to_get_date_and_time.3F
+% http://groups.google.com/g/comp.lang.postscript/c/UAkMrNLakKs  "Can PostScript access the machine clock, expressed as a date and time?", 15 Aug 2015
+(\%Calendar\%) dup /IODevice resourcestatus
+{
+	pop pop  currentdevparams begin
+	Running
+	{
+		mark (Distilled ) Hour 2 string cvs dup length 1 le {(0) exch} if (:) Minute 2 string cvs dup length 1 le {(0) exch} if ( ) [(Sun) (Mon) (Tue) (Wed) (Thu) (Fri) (Sat)] Weekday get ( )
+		Day 2 string cvs dup length 1 le {(0) exch} if ( ) MonthNames Month 1 sub get ( ) Year  (, according to the clock of the computer running the distillation application.)  ConcatenateToMark OutputToLog
+	} if  % Running
+	end
+} {pop} ifelse  % ... resourcestatus
+
+% AdobeFormatDate  AdobeFormatDateToString  string
+/AdobeFormatDateToString
+{
+	4 dict begin
+	/AdobeFormatDate exch def
+	/YYYY AdobeFormatDate 2 4 getinterval cvi def  /MM AdobeFormatDate 6 2 getinterval cvi def  /DD AdobeFormatDate 8 2 getinterval cvi def
+	mark
+	AdobeFormatDate 10 2 getinterval  (:)  % HH
+	AdobeFormatDate 12 2 getinterval  ( )  % MM
+	YYYY 2099 le
+	{
+		[ (Mon) (Tue) (Wed) (Thu) (Fri) (Sat) (Sun) ]
+		[ 3 5 6 0 1 3 4 5 6 1 2 3 4 6 0 1 2 4 5 6 0 2 3 4 5 0 1 2 ] YYYY 28 mod get
+		[ 0 31 59 90 120 151 181 212 243 273 304 334 ] MM 1 sub get  YYYY 4 mod 0 eq MM 3 ge and {1 add} if  DD add add 7 mod get ( )
+	} if  % <= 2099
+	AdobeFormatDate 8 2 getinterval ( )  % DD
+	MonthNames MM 1 sub get ( )  % Month
+	AdobeFormatDate 2 4 getinterval  % YYYY
+	end ConcatenateToMark
+} bind def  % /AdobeFormatDateToString
+
+mark   /Action << >>  /Color [0.4 0.4 0.4]  /F 1  /Title (\200 ) ParametersVersionDateTimeAdobeFormat AdobeFormatDateToString Concatenate  /OUT pdfmark
+
+mark
+[ /SoftwareVersionDateTimeAdobeFormat  /ParametersVersionDateTimeAdobeFormat  /WizardVersionDateTimeAdobeFormat dup where pop pop ]
+{
+	/NameDTAF exch def   /DTAF NameDTAF load def
+	DTAF length 14 ne {mark (Error: ) NameDTAF ( should be of length 14, in format \(D:YYYYMMDDHHMM\), but isn't.) ConcatenateToMark OutputToLog} if
+	DTAF 0 2 getinterval (D:) ne {mark (Error: ) NameDTAF ( should begin "D:", but doesn't.) ConcatenateToMark OutputToLog} if
+	2  1  DTAF length 1 sub {/i exch def DTAF i get dup (0) 0 get lt exch (9) 0 get gt exch or {mark (Error: ) NameDTAF ( ) i ( get should be in range 0...9, but isn't.) ConcatenateToMark OutputToLog} if} for
+} forall
+(Software version  =    SoftwareVersionDateTimeAdobeFormat  =  ) SoftwareVersionDateTimeAdobeFormat   (  =  )  1 index AdobeFormatDateToString (\n)
+(These placemats  ~=  ParametersVersionDateTimeAdobeFormat  =  ) ParametersVersionDateTimeAdobeFormat (  =  )  1 index AdobeFormatDateToString ConcatenateToMark OutputToLog
+/WizardVersionDateTimeAdobeFormat where {pop  /WizardLongName where {pop
+	mark  WizardLongName (, version =  ) WizardVersionDateTimeAdobeFormat (  =  ) 1 index AdobeFormatDateToString ConcatenateToMark OutputToLog
+} if} if
 
 % These links constitute the signature of the author of the code. Yes, the code is open source, so you have the power to remove them.
 % Please don't. If you want code to be open source, respect this wish of an author who has released code for free. Thank you.
@@ -570,6 +650,75 @@
 ] def  % /ExternalLinksExtras
 
 
+/Outline_etc
+{
+	3 dict begin
+	1 {
+		/Glasses TypeOfPagesBeingRendered eq
+		{
+			/PageDestName mark
+				(G_) NameNum  dup 10 lt {(0) exch} if
+				(_)  PageNum  dup 10 lt {(0) exch} if
+			ConcatenateToMark cvn def  % /PageDestName
+			/TextOUT mark
+				(G: ) Names NameNum get dup length 0 eq {pop (BlankName)} if
+				NumPages 1 gt {(, ) PageNum } if
+			ConcatenateToMark def  % /TextOUT
+			exit
+		} if  % /Glasses
+
+		/TastingNotes TypeOfPagesBeingRendered eq
+		{
+			/PageDestName mark 
+				(TN_) NameNum  dup 10 lt {(0) exch} if
+				(_)   PageNum  dup 10 lt {(0) exch} if
+			ConcatenateToMark cvn def  % /PageDestName
+			/TextOUT mark
+				(TN: ) Names NameNum get dup length 0 eq {pop (BlankName)} if
+				NumPages 1 gt {(, ) PageNum } if
+			ConcatenateToMark def  % /TextOUT
+			exit
+		} if  % /TastingNotes
+
+		/VoteRecorder TypeOfPagesBeingRendered eq
+		{
+			/PageDestName (VoteRecorder) cvn def
+			/TextOUT  (VoteRecorder) def
+			exit
+		} if  % /VoteRecorder
+
+		mark (Error: in TypeOfPagesBeingRendered, failure to handle page type ) TypeOfPagesBeingRendered ConcatenateToMark OutputToLog quit
+	} repeat  % 1
+
+	/NamePageLabel TextOUT def
+
+	mark  /Label NamePageLabel  /PAGELABEL  pdfmark
+	mark  /Dest PageDestName  /View [TypeOfPagesBeingRendered /VoteRecorder eq {/FitH PageHeight} {/Fit} ifelse]  /DEST  pdfmark
+	mark  /Action /GoTo /Dest PageDestName  /Title TextOUT  /F 0  /OUT  pdfmark
+	end
+} bind def  % /Outline_etc
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+[ 
+	[ /TitlesAround /TitlesCentre /TitlesAbove /TitlesBelow /TitlesAcross ]
+]
+{
+	/ArraysWhichShouldBeSameLength exch def
+	1  1  ArraysWhichShouldBeSameLength length 1 sub
+	{
+		/i exch def
+		/i0 ArraysWhichShouldBeSameLength 0 get load execU dup type dup /arraytype eq {pop length} {/integertype ne {pop //null} if} ifelse def
+		/ii ArraysWhichShouldBeSameLength i get load execU dup type dup /arraytype eq {pop length} {/integertype ne {pop //null} if} ifelse def
+		i0 ii ne  i0 //null ne  ii //null ne  and and
+		{
+			[ (Error: ) ArraysWhichShouldBeSameLength 0 get ToString ( and ) ArraysWhichShouldBeSameLength i get ToString
+			( should be the same length, but are actually of lengths ) i0 ToString ( and ) ii ToString (.) ] ASCIIfy OutputToLog
+		} if  % ... 'ne' ...
+	} for  % i
+} bind forall  % ArraysWhichShouldBeSameLength
+
 mark
 	/CreationDate ParametersVersionDateTimeAdobeFormat
 	/Title PDF_title ASCIIfy
@@ -580,29 +729,8 @@ mark
 /DOCINFO pdfmark
 
 
-mark  /Action << >>  /Color [0 0 0]  /Title ExternalLinks length 3 gt {(\247 External Links)} {(\247 External Link)} ifelse  /F 2  /OUT  pdfmark
-/NextF 0 def
-
-0 1 1
-{
-	0 eq {ExternalLinks} {ExternalLinksExtras} ifelse /A exch def
-	0  3  A length 3 sub
-	{
-		/i exch def
-		/IndentationCount  0   A i GetEU not {i 3 add 3 A length 3 sub {A exch GetEU {1 add} {exit} ifelse} for} if  def
-		mark  A i 2 add GetEU length 0 gt
-			{/Color [0 0 0  ]  /Action << /Subtype /URI /URI A i 2 add GetEU >>}
-			{/Color [0 0 0.6]  /Action << >>}
-		ifelse  /Title A i 1 add get PDFDocEncodingify  /Count IndentationCount neg  /F NextF 0 eq {A i 2 add GetEU length 0 gt {0} {1} ifelse} {NextF} ifelse  /OUT  pdfmark
-		/NextF  A i 1 add GetEU length 0 gt {0} {2} ifelse  store
-	} for  % i
-} bind for  % ExternalLinks | ExternalLinksExtras
-
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-
-
-TitlesLong length  TitlesShort length  ne {(\nTitlesLong and TitlesShort must be of the same length. Aborting.\n) =  quit} if
-TitlesLong length  TitlesBelow length  lt {(\nTitlesLong and TitlesBelow must be of the same length. Aborting.\n) =  quit} if
+mark  /Action << >>  /Color [0 0 0]  /Title ()  /F 0  /OUT  pdfmark
+mark  /Action << >>  /Color [0 0 0]  /Title (\247 Pages)  /F 2  /OUT  pdfmark
 
 false false true PaperType Orientation  SetPaperSize
 
@@ -648,15 +776,16 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 /PageWidthChars   PageWidth  MarginL MarginR add sub  CharWidth  div floor cvi  def
 /PageHeightLines  PageHeight MarginB MarginT add sub  LineGap    div floor cvi  def
 
-% ThisCharNum TotalNumChars SpacerChar ShortString NextChar  char
+% ThisCharNum TotalNumChars SpacerChar RepeatedString SpacerCharsMinNum NextChar  char
 /NextChar
 {
 	7 dict begin
-	/ShortString exch def
+	/SpacerCharsMinNum exch def
+	/RepeatedString exch def
 	/SpacerChar exch def
 	/TotalNumChars exch def
 	/ThisCharNum exch def
-	/Step  ShortString length SpacerCharsMinNum add  def
+	/Step  RepeatedString length SpacerCharsMinNum add  def
 	/InitialSpacersNum  TotalNumChars SpacerCharsMinNum sub  Step  mod 2 idiv  SpacerCharsMinNum add def
 	/LastNonSpacer
 		TotalNumChars InitialSpacersNum sub  Step idiv
@@ -665,9 +794,9 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 	def  % /LastNonSpacer
 	1 {
 		ThisCharNum InitialSpacersNum lt {SpacerChar exit} if
-		ThisCharNum InitialSpacersNum sub  Step  mod  ShortString length ge {SpacerChar exit} if
+		ThisCharNum InitialSpacersNum sub  Step  mod  RepeatedString length ge {SpacerChar exit} if
 		ThisCharNum LastNonSpacer gt {SpacerChar exit} if
-		ShortString  ThisCharNum InitialSpacersNum sub  Step  mod  1  getinterval
+		RepeatedString  ThisCharNum InitialSpacersNum sub  Step  mod  1  getinterval
 	} repeat  % 1
 	end
 } bind def  % /NextChar
@@ -690,7 +819,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 	end
 } bind def  % /PaintHeaders
 
-/NumPages  TitlesLong length GlassesNumRows GlassesNumCols mul div ceiling cvi  def
+/NumPages  TitlesCentre length GlassesNumRows GlassesNumCols mul div ceiling cvi  def
 0  1  Names length 1 sub
 {
 	/NameNum exch def
@@ -703,7 +832,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 			/PageNum exch def
 
 			/WithinPageStart  GlassesNumRows GlassesNumCols mul PageNum mul  def
-			/WithinPageEnd    GlassesNumRows GlassesNumCols mul PageNum 1 add mul  TitlesLong length  2 copy gt {exch} if pop   1 sub  def
+			/WithinPageEnd    GlassesNumRows GlassesNumCols mul PageNum 1 add mul  TitlesCentre length  2 copy gt {exch} if pop   1 sub  def
 
 			DeBugAssist  0 NameNum eq  and
 			{
@@ -715,7 +844,8 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 
 
 			% Glasses pages
-				false PaintHeaders
+			/TypeOfPagesBeingRendered /Glasses store
+			false PaintHeaders
 
 			WithinPageStart 1 WithinPageEnd
 			{
@@ -762,7 +892,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 					CentreX NumHorizontals 2 div CharWidth mul sub
 					CentreY NumVerticals 2 div NumDiagonals add  NumY 0 eq {neg} {1 sub} ifelse LineGap mul add
 					moveto
-					0  1  NumHorizontals 1 sub {NumHorizontals (-) TitlesShort WithinPage get NextChar show} for
+					0  1  NumHorizontals 1 sub {NumHorizontals (-) TitlesAround WithinPage get SpacerCharsMinNum_Around NextChar show} for
 				} for  % /NumY
 				end
 
@@ -775,7 +905,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 						CentreX NumHorizontals 2 div NumDiagonals add  NumX 0 eq {neg} {1 sub} ifelse  CharWidth mul add
 						CentreY NumVerticals 2 div ThisCharNum sub 1 sub LineGap mul add
 						moveto
-						ThisCharNum NumVerticals (|) TitlesShort WithinPage get NextChar show
+						ThisCharNum NumVerticals (|) TitlesAround WithinPage get SpacerCharsMinNum_Around NextChar show
 					} for  % verticals
 				} for  % /NumX
 				end
@@ -802,23 +932,25 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 							ifelse  % NumY 0 eq
 						} ifelse  % NumX 0 eq
 						moveto
-						ThisCharNum NumDiagonals NumX NumY eq {(\\)} {(/)} ifelse TitlesShort WithinPage get NextChar show
+						ThisCharNum NumDiagonals NumX NumY eq {(\\)} {(/)} ifelse TitlesAround WithinPage get SpacerCharsMinNum_Around NextChar show
 					} for  % diagonals
 				} for  % /NumX
 				} for  % /NumY
 				end
 
-				TitlesLong WithinPage get  dup length
+				/Y  CentreY  NumVerticals 2 mod 1 eq {LineGap 2 div sub} if  def
+
+				TitlesCentre WithinPage get  dup length
 				dup 2 mod sub NumHorizontals 2 mod add  -2 div CharWidth mul  CentreX add
-				CentreY  NumVerticals 2 mod 1 eq {LineGap 2 div sub} if
-				moveto  show
-				TitlesBelow length WithinPage gt
-				{
-					TitlesBelow WithinPage get  dup length
-					dup 2 mod sub NumHorizontals 2 mod add  -2 div CharWidth mul  CentreX add
-					CentreY  NumVerticals 2 mod 1 eq {LineGap 2 div sub} if  LineGap sub
-					moveto  show
-				} if  % TitlesBelow exists
+				Y   moveto  show
+
+				TitlesAbove WithinPage get  dup length
+				dup 2 mod sub NumHorizontals 2 mod add  -2 div CharWidth mul  CentreX add
+				Y LineGap add   moveto  show
+
+				TitlesBelow WithinPage get  dup length
+				dup 2 mod sub NumHorizontals 2 mod add  -2 div CharWidth mul  CentreX add
+				Y LineGap sub   moveto  show
 			} for  % WithinPage
 
 			3 dict begin
@@ -836,7 +968,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 			X Y moveto   ThisName dup stringwidth pop -2 div 0 rmoveto  show
 			end
 
-			showpage
+			Outline_etc showpage
 		} for  % PageNum
 	} if  %ShowGlasses
 
@@ -844,6 +976,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 	ShowTastingNotes
 	{
 		% Tasting-note pages
+		/TypeOfPagesBeingRendered /TastingNotes store
 
 		5 dict begin
 		0  1  NumPages 1 sub
@@ -851,7 +984,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 			/PageNum exch def
 
 			/WithinPageStart  GlassesNumRows GlassesNumCols mul PageNum mul  def
-			/WithinPageEnd    GlassesNumRows GlassesNumCols mul PageNum 1 add mul  TitlesLong length  2 copy gt {exch} if pop   1 sub  def
+			/WithinPageEnd    GlassesNumRows GlassesNumCols mul PageNum 1 add mul  TitlesCentre length  2 copy gt {exch} if pop   1 sub  def
 
 			DeBugAssist  0 NameNum eq  and
 			{
@@ -878,17 +1011,18 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 				def  % /CentreY
 
 				MarginL Y moveto
-				0  1  PageWidthChars 1 sub {PageWidthChars (-) TitlesShort WithinPage get NextChar show} for
+				0  1  PageWidthChars 1 sub {PageWidthChars (-) TitlesAround WithinPage get SpacerCharsMinNum_Across NextChar show} for
 
 				MarginL Y LineGap sub moveto
-				TitlesLong WithinPage get show
-				TitlesBelow length WithinPage gt {TitlesBelow WithinPage get dup length 0 gt {(   ) show show} {pop} ifelse} if
+				TitlesCentre WithinPage get show
+				TitlesAbove WithinPage get dup length 0 gt {(   ) show show} {pop} ifelse
+				TitlesBelow WithinPage get dup length 0 gt {(   ) show show} {pop} ifelse
 			} for  % WithinPage
 
 			PageWidthChars ThisName length sub CharWidth mul MarginL add  MarginB  moveto
 			ThisName show
 
-			showpage
+			Outline_etc showpage
 
 		} for  % PageNum
 		end
@@ -897,6 +1031,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 
 
 % Vote recorders
+/TypeOfPagesBeingRendered /VoteRecorder store
 
 [ ShowVoteRecorder_WOTN {false} if   ShowVoteRecorder_Guesses {true} if ]
 {
@@ -912,7 +1047,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 	/VotingColHeadersLengthMax  0  VotingColumnHeaders {length 2 copy lt {exch} if pop} forall  def
 
 	/VotingRowHeaders [
-		TitlesShort aload pop
+		TitlesAround aload pop
 		IsGuessing {(Total)} if
 	] def  % /VotingColumnHeaders
 
@@ -921,17 +1056,7 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 		VotingRowHeaders {length 2 copy lt {exch} if pop} forall
 	def  % /VotingRowHeadersLengthMax
 
-	/VotingRowLongStrings [
-		1 dict begin
-		0  1  TitlesLong length 1 sub
-		{
-			/WithinPage exch def
-			TitlesLong WithinPage get
-			TitlesBelow length WithinPage gt {TitlesBelow WithinPage get dup length 0 gt {mark 3 1 roll ( ) exch ConcatenateToMark} {pop} ifelse} if
-		} for  % WithinPage
-		IsGuessing {()} if
-		end
-	] def  % /VotingColumnHeaders
+	/VotingRowLongStrings [  TitlesAcross aload pop   IsGuessing {()} if  ] def
 
 	/VotingNumCols  VotingColumnHeaders length  def
 	/VotingNumRows  VotingRowLongStrings length  1 add  def
@@ -1040,24 +1165,42 @@ NumDiagonals 2 mul sub /NumVerticals exch def
 
 		/RowNum  WithinPage VotingHeightWineRows 1 add mul VotingHeightNamesRow add 1 add def
 
-		% --TitlesLong--
+		% --TitlesCentre--
 		/Y  PageHeight MarginT sub  LineGap RowNum mul sub  def
 		MarginL Y moveto
-		0 1 PageWidthChars 1 sub {PageWidthChars (-) VotingRowLongStrings WithinPage get  NextChar  show} for
+		0 1 PageWidthChars 1 sub {PageWidthChars (-) VotingRowLongStrings WithinPage get  SpacerCharsMinNum_Across  NextChar  show} for
 
-		% TitlesShort
+		% TitlesAround
 		MarginL  Y VotingHeightWineRows 1 add 2 idiv LineGap mul sub  moveto
 		VotingRowHeaders WithinPage get show
 
 	} for  % WithinPage
 	end
 
-	showpage
+	Outline_etc showpage
 
 
-} forall
+} forall  % IsGuessing
 
 
+mark  /Action << >>  /Color [0 0 0]  /Title ()  /F 0  /OUT  pdfmark
+mark  /Action << >>  /Color [0 0 0]  /Title ExternalLinks length 3 gt {(\247 External Links)} {(\247 External Link)} ifelse  /F 2  /OUT  pdfmark
+
+/NextF 0 def
+0 1 1
+{
+	0 eq {ExternalLinks} {ExternalLinksExtras} ifelse /A exch def
+	0  3  A length 3 sub
+	{
+		/i exch def
+		/IndentationCount  0   A i GetEU not {i 3 add 3 A length 3 sub {A exch GetEU {1 add} {exit} ifelse} for} if  def
+		mark  A i 2 add GetEU length 0 gt
+			{/Color [0 0 0  ]  /Action << /Subtype /URI /URI A i 2 add GetEU >>}
+			{/Color [0 0 0.6]  /Action << >>}
+		ifelse  /Title A i 1 add get PDFDocEncodingify  /Count IndentationCount neg  /F NextF 0 eq {A i 2 add GetEU length 0 gt {0} {1} ifelse} {NextF} ifelse  /OUT  pdfmark
+		/NextF  A i 1 add GetEU length 0 gt {0} {2} ifelse  store
+	} for  % i
+} bind for  % ExternalLinks | ExternalLinksExtras
 
 (\n\n) =
 count              (      = count: this really should be 0\n)   dup 0  4 -1 roll  6 string cvs  putinterval
