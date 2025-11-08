@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:30 Friday 17th October 2025
+% This version 18:00 Saturday 8th November 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202510172030) def
+/ParametersVersionDateTimeAdobeFormat (D:202511081800) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -61,7 +61,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 18) {SuperscriptOn} (th) {SuperscriptOff} ( November 2025)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 17) {SuperscriptOn} (th) {SuperscriptOff} ( February 2026)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -79,8 +79,8 @@
 % Links for some restaurants and many Port houses at http://GitHub.com/jdaw1/placemat/blob/main/PostScript/ExternalLinks_data.ps
 /ExternalLinks [
 	false   (Thread on ThePortForum.com)                 (http://www.ThePortForum.com/viewtopic.php?t=00175&view=unread#unread)
-%	false   (Latest version this placemat)               (http://www.JDAWiseman.com/2025/    .pdf)
-%	true    (in list of placemats)                       (http://www.JDAWiseman.com/papers/placemat/placemats_list.html#a2025MMDD)
+%	false   (Latest version this placemat)               (http://www.JDAWiseman.com/2026/    .pdf)
+%	true    (in list of placemats)                       (http://www.JDAWiseman.com/papers/placemat/placemats_list.html#a2026MMDD)
 	false   (Boot & Flogger)                             (http://www.davy.co.uk/wine-bar/boot-and-flogger/)
 	true    [/ellipsis (OpenStreetMap)]                  (http://www.OpenStreetMap.org/node/534961998)
 	true    [/ellipsis (google.co.uk)]                   (http://goo.gl/maps/7NEiwAMEZpG2)
@@ -155,7 +155,7 @@
 % Base styles: /RectangularDislocation /Diamonds /DiamondsPlus /Bespoke5 /Bespoke7 /Temple /PostsAndLintel /Arch /RectangularAlternateNudge /SquareGrid /TopRow /MiddleRow /BottomRow /Sides /LeftSide /RightSide  [ /Array ...  /Positions ... ]
 % Variations, those on this line taking no parameters, those on the next two lines taking one: /Mirror  /ShoveLeft /ShoveRight  /ProhibitVerticalNudging /ProhibitHorizontalNudging
 % /OnlyIfSheetNumMin /OnlyIfSheetNumMax  /OnlyIfOrientation  /OnlyIfGlassesNumMin /OnlyIfGlassesNumMax    /ImprovementPointsMin /ImprovementProportionMin
-% /GlassesDeemedAtLeast /PackingDirectionTopToBottom /PackingDirectionLeftToRight /PackingNestingColumnMajor  /RowsNumMin /RowsNumMax  /CentralGlasses /RectColsToLeftOrRowsBelow /TempleExtraColsToLeftOrRowsBelow
+% /GlassesDeemedAtLeast /PackingDirectionTopToBottom /PackingDirectionLeftToRight /PackingNestingColumnMajor  /RowsNumMin /RowsNumMax /ColsNumMin /ColsNumMax  /CentralGlasses /RectColsToLeftOrRowsBelow /TempleExtraColsToLeftOrRowsBelow
 % /SquareGrid only, /HorizontalAlignment is followed by one of /Left /Right /Centre /Justify; and /VerticalAlignment by one of /Top /Bottom /Middle /Justify.
 % To suppress, by placement, headers, icons, and water boxes, use flags /SuppressOrnamentsLeft, /SuppressOrnamentsRight, and /SuppressOrnamentsCentre.
 /PackingNestingColumnMajor {Orientation /Landscape eq  SideBySideGlassesTastingNotes not  and} def  % Default value, which can be overridden at the level of the individual item of PackingStyles
@@ -338,9 +338,9 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /Droplets false def
 /DropletsCharges [  % Length a multiple of 4
-	/All  [ 92.409 675.071]  -1     0  % SheetNum Location Charge Spin. SheetNum can be /All; location is reals [x y], or integer WithinPage, or integers [WithinPage0, WithinPag1, ...].
-	/All  [502.866 675.071]  -1     0  % SheetNum Location Charge Spin. SheetNum can be /All; location is reals [x y], or integer WithinPage, or integers [WithinPage0, WithinPag1, ...].
-	/All  [1 4]               4  -430  % Default settings chosen for A4, 5 glasses, RectangularDislocation. Anticlockwise for northern-hemisphere Coriolis effect.
+	/All  [ 92.409 675.071]  -1     0  % SheetNum Location Charge Spin. SheetNum can be /All;
+	/All  [502.866 675.071]  -1     0  % location is reals [x y], or integer WithinPage, or integers [WithinPage0, WithinPag1, ...].
+	/All  [1 4]               4  -430  % Default settings chosen for A4, 5 glasses, RectangularDislocation. Widdershins for northern-hemisphere Coriolis effect.
 ] def  % DropletsCharges
 /DropletsProportionBackwards 0.0204 def  % Keeping this small adds humour to their discovery. ("Naughty creatures being rebellious. It's like herding cats!")
 
@@ -716,7 +716,7 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /OneCircleBackgroundPaintCode
 {
-	% As of Aug 2025, largest number of flights in a single file has been five. So nine hopefully enough.
+	% As of Nov 2025, largest number of flights in a single file has been five. So nine hopefully enough.
 	[
 		{1   setgray}  % White
 		{0.9 setgray}  % Very pale grey
@@ -837,7 +837,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202510172030) def
+/SoftwareVersionDateTimeAdobeFormat (D:202511081800) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -1520,7 +1520,7 @@ currentdict /ArrowCircleToCircle_CanWarn undef
 /WatchExpression {WatchExpression_MakeString OutputToLog} def
 
 % [ name|code  ... ]  WatchExpressions  -
-/WatchExpressions {mark exch ()  exch {WatchExpression_MakeString (\n)} forall	pop ConcatenateToMark OutputToLog} bind def  % WatchExpressions, plural
+/WatchExpressions {mark exch ()  exch {WatchExpression_MakeString (\n)} forall  pop ConcatenateToMark OutputToLog} bind def  % WatchExpressions, plural
 
 % array, perhaps nested  AllEqual, returning either  false  or  value true
 /AllEqual
@@ -2755,11 +2755,12 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 /IsNumber {type dup /integertype eq exch /realtype eq or} bind def
 
 % Using actual float limit, rather than small Infinity. PLRM3, Appendix B, p739, table B.1, row 2.
-% IEEE has max float = 2 2 -23 exp sub 2 127 exp mul = 340282346638528859811704183484516925440, for safety truncated to 2 sig fig.
-/Min  {dup type /arraytype eq { 3.4E38 exch {Min  2 copy gt {exch} if pop} forall} if} bind def
-/Max  {dup type /arraytype eq {-3.4E38 exch {Max  2 copy lt {exch} if pop} forall} if} bind def
-/Min0 {dup type /arraytype eq {   0    exch {Min  2 copy gt {exch} if pop} forall} if} bind def
-/Max0 {dup type /arraytype eq {   0    exch {Max  2 copy lt {exch} if pop} forall} if} bind def
+% IEEE has max float = 2 2 -23 exp sub 2 127 exp mul = 340282346638528859811704183484516925440.
+% But want to avoid overflows, so restricted to integer limits, +- two billion, as not using chubbier reals.
+/Min  {dup type /arraytype eq {IntegerMax exch {Min  2 copy gt {exch} if pop} forall} if} bind def
+/Max  {dup type /arraytype eq {IntegerMin exch {Max  2 copy lt {exch} if pop} forall} if} bind def
+/Min0 {dup type /arraytype eq {      0    exch {Min  2 copy gt {exch} if pop} forall} if} bind def
+/Max0 {dup type /arraytype eq {      0    exch {Max  2 copy lt {exch} if pop} forall} if} bind def
 /MinToMark {//Infinity {exch dup mark eq {pop exit} if  2 copy gt {exch} if pop} loop} bind def
 /MaxToMark {//InfinNeg {exch dup mark eq {pop exit} if  2 copy lt {exch} if pop} loop} bind def
 
@@ -4880,8 +4881,8 @@ currentdict /GlyphShowKnownAbsences undef
 
 	/ShoveLeft //false def
 	/ShoveRight //false def
-	/RowsNumMin 1 def
-	/RowsNumMax NG def
+	/RowsNumMin 1 def   /RowsNumMax NG def
+	/ColsNumMin 1 def   /ColsNumMax NG def
 	/OnlyIfGlassesNumMin 1 def
 	/OnlyIfGlassesNumMax //ArrayLengthMax def
 	/GlassesDeemedAtLeast 0 def
@@ -4908,6 +4909,8 @@ currentdict /GlyphShowKnownAbsences undef
 				dup  /ProhibitHorizontalNudging   eq {pop  /ProhibitHorizontalNudging   //true                          store  /i i 1 add store  exit} if
 				dup  /RowsNumMin                  eq {pop  /RowsNumMin                  PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /RowsNumMax                  eq {pop  /RowsNumMax                  PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
+				dup  /ColsNumMin                  eq {pop  /ColsNumMin                  PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
+				dup  /ColsNumMax                  eq {pop  /ColsNumMax                  PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /OnlyIfGlassesNumMin         eq {pop  /OnlyIfGlassesNumMin         PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /OnlyIfGlassesNumMax         eq {pop  /OnlyIfGlassesNumMax         PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
 				dup  /GlassesDeemedAtLeast        eq {pop  /GlassesDeemedAtLeast        PackingDescriptor i 1 add GetEU store  /i i 2 add store  exit} if
@@ -4934,13 +4937,6 @@ currentdict /GlyphShowKnownAbsences undef
 			} repeat  % 1
 		} loop
 	} if  % PackingDescriptor type /arraytype eq
-
-	% Ensure RowsNumMin and RowsNumMax are sensible
-	BaseStyle /Bespoke5 eq NG 5 le and {/RowsNumMin 2 store /RowsNumMax 3 store} if  % Because if /Bespoke5 also test /Diamonds
-	BaseStyle /Bespoke7 eq NG 7 le and {Orientation /Landscape eq {/RowsNumMin 2 store /RowsNumMax 3 store} {/RowsNumMin 5 store /RowsNumMax 7 store} ifelse} if  % Because if /Bespoke7 also test /Diamonds
-	RowsNumMin 1 lt {/RowsNumMin 1 store} if   RowsNumMin NG gt {/RowsNumMin NG store} if
-	RowsNumMax RowsNumMin lt {/RowsNumMax RowsNumMin store} if   RowsNumMax NG gt {/RowsNumMax NG store} if
-	NG BaseStyle /PostsAndLintel eq {1 add 2 idiv} if  dup  RowsNumMin lt {dup /RowsNumMin exch store} if  dup RowsNumMax lt {/RowsNumMax exch store} {pop} ifelse
 
 	ShoveLeft ShoveRight and {mark (Error: ProcessOnePackingType, packing with BaseStyle /) BaseStyle ( has both /ShoveLeft and /ShoveRight. Continuing regardless.) ConcatenateToMark OutputToLog} if
 
@@ -4975,21 +4971,25 @@ currentdict /GlyphShowKnownAbsences undef
 						{/NC  NG 1 sub 3 div ceiling cvi 2 mul 1 add  def}
 						{/NC  NG 1 eq {1} {NG NR idiv 2 mul  NG NR mod dup 0 eq {pop} {NR 1 add 2 idiv gt {2} {1} ifelse add} ifelse} ifelse  def}
 					ifelse  % /Temple BaseStyle eq
-					/a  1  NC 2 sub NC mul NR 2 sub mul NR mul  sub 4 mul  def
-					/b  NC 1 sub dup mul H mul  NR 1 sub dup mul W mul  add  -4 mul  def
-					/c  NC 1 sub H mul dup mul  NR 1 sub W mul dup mul add  def
-					/R  [ H NR 1 add div   W NC 1 add div   [ c b a ] 0 //true //Infinity //true //PrinterEpsilon PolynomialRoots aload pop ] Min def
-
-					R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
-					R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+					NC ColsNumMax le
 					{
-						/BestRadius R store
-						BestParamsDict {pop BestParamsDict exch undef} forall
-						BestParamsDict /PackingDescriptor PackingDescriptor put
-						BestParamsDict /BaseStyle /Diamonds put
-						BestParamsDict /NumRows NR put
-						BestParamsDict /NumCols NC put
-					} if  % R PriorBestRadius ... gt ...
+						NC ColsNumMin lt {/NC ColsNumMin store} if
+						/a  1  NC 2 sub NC mul NR 2 sub mul NR mul  sub 4 mul  def
+						/b  NC 1 sub dup mul H mul  NR 1 sub dup mul W mul  add  -4 mul  def
+						/c  NC 1 sub H mul dup mul  NR 1 sub W mul dup mul add  def
+						/R  [ H NR 1 add div   W NC 1 add div   [ c b a ] 0 //true //Infinity //true //PrinterEpsilon PolynomialRoots aload pop ] Min def
+
+						R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
+						R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+						{
+							/BestRadius R store
+							BestParamsDict {pop BestParamsDict exch undef} forall
+							BestParamsDict /PackingDescriptor PackingDescriptor put
+							BestParamsDict /BaseStyle /Diamonds put
+							BestParamsDict /NumRows NR put
+							BestParamsDict /NumCols NC put
+						} if  % R PriorBestRadius ... gt ...
+					} if  % NC ColsNumMax le
 				} if  % NR 3 eq  /Temple BaseStyle ne  or
 			} for  % NR
 			% No exit as /Diamonds used as a fallback for others
@@ -5100,17 +5100,21 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				/NR exch def % NumRows
 				/NC NG NR div ceiling cvi def
-				/R  H NR 2 ge {NR div} if   W NC 2 ge {NC div} if  2 copy gt {exch} if pop  2 div  def
-				R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
-				R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+				NC ColsNumMax le
 				{
-					/BestRadius R store
-					BestParamsDict {pop BestParamsDict exch undef} forall
-					BestParamsDict /PackingDescriptor dup load put
-					BestParamsDict /BaseStyle dup load put
-					BestParamsDict /NumRows NR put
-					BestParamsDict /NumCols NC put
-				} if  % R PriorBestRadius ... gt ...
+					NC ColsNumMin lt {/NC ColsNumMin store} if
+					/R  H NR 2 ge {NR div} if   W NC 2 ge {NC div} if  2 copy gt {exch} if pop  2 div  def
+					R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
+					R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+					{
+						/BestRadius R store
+						BestParamsDict {pop BestParamsDict exch undef} forall
+						BestParamsDict /PackingDescriptor dup load put
+						BestParamsDict /BaseStyle dup load put
+						BestParamsDict /NumRows NR put
+						BestParamsDict /NumCols NC put
+					} if  % R PriorBestRadius ... gt ...
+				} if  % NC ColsNumMax le
 			} for  % NR
 			exit  % 1 {...} repeat
 		} if  % /SquareGrid /TopRow /MiddleRow /BottomRow
@@ -5166,26 +5170,30 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				/NR exch def
 				/NC NG NR div ceiling cvi def
-				/R  W NC 2 mul div  H NR 2 mul div  2 copy gt {exch} if pop  def
-				NR NC mul NG gt
+				NC ColsNumMax le
 				{
-					% With dislocation. For calculating R it matters not between which rows.
-					/a  4  NC 1 sub NR 1 sub mul 4 mul dup mul add  NC 1 sub 4 mul dup mul sub  def
-					/b  -4 W mul  NC 1 sub dup mul NR 1 sub mul 16 mul H mul sub  def
-					/c  W W mul  NC 1 sub 2 mul H mul dup mul add  def
-					/R  W NC 2 mul div  H NR 1 sub 2 mul div  2 copy gt {exch} if pop  def
-					[ c b a ] 0 //true R //false //PrinterEpsilon PolynomialRoots  dup length [ {pop R} {0 get} {Min} ] exch get exec /R exch def
-				} if  % Dislocation
-				R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
-				R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
-				{
-					/BestRadius R store
-					BestParamsDict {pop BestParamsDict exch undef} forall
-					BestParamsDict /PackingDescriptor dup load put
-					BestParamsDict /BaseStyle dup load put
-					BestParamsDict /NumRows NR put
-					BestParamsDict /NumCols NC put  % One fewer column in narrower section
-				} if  % R PriorBestRadius ... gt ...
+					NC ColsNumMin lt {/NC ColsNumMin store} if
+					/R  W NC 2 mul div  H NR 2 mul div  2 copy gt {exch} if pop  def
+					NR NC mul NG gt
+					{
+						% With dislocation. For calculating R it matters not between which rows.
+						/a  4  NC 1 sub NR 1 sub mul 4 mul dup mul add  NC 1 sub 4 mul dup mul sub  def
+						/b  -4 W mul  NC 1 sub dup mul NR 1 sub mul 16 mul H mul sub  def
+						/c  W W mul  NC 1 sub 2 mul H mul dup mul add  def
+						/R  W NC 2 mul div  H NR 1 sub 2 mul div  2 copy gt {exch} if pop  def
+						[ c b a ] 0 //true R //false //PrinterEpsilon PolynomialRoots  dup length [ {pop R} {0 get} {Min} ] exch get exec /R exch def
+					} if  % Dislocation
+					R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
+					R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+					{
+						/BestRadius R store
+						BestParamsDict {pop BestParamsDict exch undef} forall
+						BestParamsDict /PackingDescriptor dup load put
+						BestParamsDict /BaseStyle dup load put
+						BestParamsDict /NumRows NR put
+						BestParamsDict /NumCols NC put  % One fewer column in narrower section
+					} if  % R PriorBestRadius ... gt ...
+				} if  % NC ColsNumMax le
 			} for  % NR
 			exit  % 1 {...} repeat
 		} if  % /RectangularDislocation
@@ -5206,30 +5214,33 @@ currentdict /GlyphShowKnownAbsences undef
 				RowsNumMin 1 RowsNumMax
 				{
 					/V exch 1 sub def  % num glasses touching each vertical side, so 1 less than the number of rows
-					/a  V V mul 8 mul  NGaE V 4 mul sub NGaE mul add  4 sub  def
-					/b  H V mul 4 mul  NGaE V 2 mul sub W mul add  neg  def
-					/c  W W mul 4 div H H mul add  def
-					mark
-					[ c b a ]  0  //true  [V 0 gt {H //PrinterEpsilon add V 2 mul div} if  NGaE V 2 mul gt {W //PrinterEpsilon add NGaE V 2 mul sub 2 mul div} if] Min  //true  //PrinterEpsilon  PolynomialRoots
-					dup length [ {pop H  V 1 add 2 mul  div   NGaE V 2 mul sub  dup 0 gt {2 mul W exch div} {pop //Infinity} ifelse} {0 get} {Min (Warning: ProcessOnePackingType, PostsAndLintel, two seemingly good solutions.) OutputToLog} ] exch get exec
-					W 4 div  H 2 div  % As above geometry doesn't prevent overlapping of non-adjacent circles
-					CentralGlasses 1 eq {W 6 div  H NGaE 2 mod 0 eq {//Sqrt3 2 add} {4} ifelse div} if
-					CentralGlasses 2 eq {W 8 div  H NGaE 2 mod 1 eq {//Sqrt3 2 add} {4} ifelse div} if
-					CentralGlasses 3 eq {W 8 div  H NGaE 2 mod 1 eq {//Sqrt3 4 add} {//Sqrt3 2 mul 2 add} ifelse div} if
-					MinToMark /R exch def
-
-					R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
-					R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+					/NC  NG V 2 mul sub  2 add  def
+					NC ColsNumMax le  NC ColsNumMin ge  and
 					{
-						/BestRadius R store
-						BestParamsDict {pop BestParamsDict exch undef} forall
-						BestParamsDict /PackingDescriptor dup load put
-						BestParamsDict /BaseStyle dup load put
-						BestParamsDict /NumRows V 1 add put
-						BestParamsDict /CentralGlasses dup load put
-						W H lt {(Warning: PostsAndLintel packings rarely look good with Orientation equalling /Portrait: consider "... /OnlyIfOrientation /Landscape ...".) OutputToLog} if
-					} if  % R PriorBestRadius ... gt ...
+						/a  V V mul 8 mul  NGaE V 4 mul sub NGaE mul add  4 sub  def
+						/b  H V mul 4 mul  NGaE V 2 mul sub W mul add  neg  def
+						/c  W W mul 4 div H H mul add  def
+						mark
+						[ c b a ]  0  //true  [V 0 gt {H //PrinterEpsilon add V 2 mul div} if  NGaE V 2 mul gt {W //PrinterEpsilon add NGaE V 2 mul sub 2 mul div} if] Min  //true  //PrinterEpsilon  PolynomialRoots
+						dup length [ {pop H  V 1 add 2 mul  div   NGaE V 2 mul sub  dup 0 gt {2 mul W exch div} {pop //Infinity} ifelse} {0 get} {Min (Warning: ProcessOnePackingType, PostsAndLintel, two seemingly good solutions.) OutputToLog} ] exch get exec
+						W 4 div  H 2 div  % As above geometry doesn't prevent overlapping of non-adjacent circles
+						CentralGlasses 1 eq {W 6 div  H NGaE 2 mod 0 eq {//Sqrt3 2 add} {4} ifelse div} if
+						CentralGlasses 2 eq {W 8 div  H NGaE 2 mod 1 eq {//Sqrt3 2 add} {4} ifelse div} if
+						CentralGlasses 3 eq {W 8 div  H NGaE 2 mod 1 eq {//Sqrt3 4 add} {//Sqrt3 2 mul 2 add} ifelse div} if
+						MinToMark /R exch def
 
+						R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
+						R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+						{
+							/BestRadius R store
+							BestParamsDict {pop BestParamsDict exch undef} forall
+							BestParamsDict /PackingDescriptor dup load put
+							BestParamsDict /BaseStyle dup load put
+							BestParamsDict /NumRows V 1 add put
+							BestParamsDict /CentralGlasses dup load put
+							W H lt {(Warning: PostsAndLintel packings rarely look good with Orientation equalling /Portrait: consider "... /OnlyIfOrientation /Landscape ...".) OutputToLog} if
+						} if  % R PriorBestRadius ... gt ...
+					} if  % NC ...
 				} for  % V
 
 			} ifelse  % NGaE 1 le
@@ -5260,7 +5271,7 @@ currentdict /GlyphShowKnownAbsences undef
 				NGiA 2 mod 0 eq
 					{H 2 mul W add -2 mul   4 NGiA sub NGiA mul 4 add}
 					{H -4 mul W sub         2 NGiA sub NGiA mul 4 add}
-				ifelse ]  0  //true  H W lt {H} {W} ifelse 2 div  //false  //PrinterEpsilon  PolynomialRoots  dup length 0 eq {pop 0} {Min} ifelse
+				ifelse ]  0  //true  H W le {H} {W} ifelse 2 div //PrinterEpsilon add  //false  //PrinterEpsilon  PolynomialRoots  dup length 0 eq {pop 0} {Min} ifelse
 				NGiA 4 le {//PrinterEpsilon 2 mul sub} if  UpperR //PrinterEpsilon 2 mul sub 2 copy gt {exch} if pop  def
 				/R  LowerR BestRadius lt {BestRadius //PrinterEpsilon sub} {LowerR UpperR add 2 div} ifelse  def  % If BestRadius not tiny, try to fail early
 				/LittleN2sub NGiA 1 add 2 idiv  2 sub def
@@ -5362,54 +5373,57 @@ currentdict /GlyphShowKnownAbsences undef
 				/NR exch def
 				% NC refers to the fully filled diamonds section, outside which are NR+1 glasses.
 				/NC  NG NR 1 add sub NR div ceiling cvi 2 mul   NG NR 1 add sub NR mod 2 mul dup 0 gt exch NR le and {1 sub} if  def
-				/NEaT NC 1 add 2 idiv def  % Number Extras at Top
-				% This is the quartic that solves for radius with three rows (Landscape), when adjacent items in a row don't touch -- but do touch the circles in the neighbouring row(s).
-				% Valid range will be 0 to its first turning point, which will be the next thing solved.
-				/QuarticCoeffs
-				[
-					NC dup mul 1 sub S S mul mul dup mul  S L mul dup mul 8 mul NC dup mul 1 add mul add  L L mul dup mul 16 mul add  % Coeff 0
-					NC dup mul dup 2 sub exch 1 sub mul -8 mul S S S mul mul mul  NC dup mul 1 add L S S mul mul mul  NC dup mul 2 add L L S mul mul mul  add 32 mul sub  128 L L L mul mul mul sub  % Coeff 1
-					NC dup mul dup 3 sub exch 4 add mul -8 mul S S mul mul  NC dup mul 2 add 128 mul S L mul mul add  NC dup mul 4 sub -96 mul L L mul mul add  % Coeff 2
-					NC dup mul 3 mul 4 sub 128 mul L mul  NC dup mul dup 4 sub exch 3 mul 2 add mul 32 mul S mul add  % Coeff 3
-					NC dup mul 3 mul 4 sub dup mul 16 mul  % Coeff 4
-				] def  % /QuarticCoeffs
-				QuarticCoeffs  0  //true  S 4 div L NEaT 2 mul div 2 copy gt {exch} if pop //PrinterEpsilon add  //false  //PrinterEpsilon  PolynomialRoots dup length 0 eq {pop //Infinity} {Min} ifelse
-				S 4 div  2 copy gt {exch} if pop   /R exch def
-
-				% If diagonal touching has horizontal overlapping, then instead have horizontal touching and diagonal gaps.
-				8 R mul S sub S mul dup 0 ge {sqrt 2 div  2 R mul add L exch sub NC div  //PrinterEpsilon add  R lt} {pop //false} ifelse
+				NC ColsNumMax le  NC ColsNumMin ge  and
 				{
-					% Next equation assumes that circles in the top row touch, so this is effectively /PostsAndLintel with two circles in the lintel.
-					[ 4 L L mul mul S S mul add   NC 2 mod 1 eq {NEaT 2 mul 1 add L mul S add -8 mul  NEaT 2 mul 1 add dup mul 4 mul} {NEaT 1 add L mul -16 mul S 8 mul sub  NEaT 1 add dup mul 16 mul} ifelse ]
-					0  //true  S 2 div  //false  //PrinterEpsilon  PolynomialRoots  dup length 0 eq {pop //Infinity} {Min} ifelse
-					% And check that middle row doesn't interfere with end two
+					/NEaT NC 1 add 2 idiv def  % Number Extras at Top
+					% This is the quartic that solves for radius with three rows (Landscape), when adjacent items in a row don't touch -- but do touch the circles in the neighbouring row(s).
+					% Valid range will be 0 to its first turning point, which will be the next thing solved.
+					/QuarticCoeffs
 					[
-						S dup mul dup L dup mul 16 mul add mul
-						L L mul 8 mul  S S mul add  NC 2 mul 3 add 2 mul L S mul mul add  S mul -8 mul
-						8 L L mul mul  NC 2 mul 3 add 4 mul L S mul mul add  NC dup 3 add mul S S mul mul add  16 mul
-						NC 4 mul 6 add L mul  NC dup 3 add mul 1 sub S mul add  -64 mul
-						NC dup 3 add mul 2 mul 1 add 64 mul
-					]  0  //true  L  //false  //PrinterEpsilon  PolynomialRoots  dup length 0 eq {pop //Infinity} {Min} ifelse
-					S //Sqrt3 1 add 2 mul div  2 {2 copy gt {exch} if pop} repeat   /R exch def
-					/DistHorizontal //true def
-				} {/DistHorizontal //false def} ifelse
-				L NEaT 2 mul 2 add div  dup R  lt {/R exch def} {pop} ifelse
+						NC dup mul 1 sub S S mul mul dup mul  S L mul dup mul 8 mul NC dup mul 1 add mul add  L L mul dup mul 16 mul add  % Coeff 0
+						NC dup mul dup 2 sub exch 1 sub mul -8 mul S S S mul mul mul  NC dup mul 1 add L S S mul mul mul  NC dup mul 2 add L L S mul mul mul  add 32 mul sub  128 L L L mul mul mul sub  % Coeff 1
+						NC dup mul dup 3 sub exch 4 add mul -8 mul S S mul mul  NC dup mul 2 add 128 mul S L mul mul add  NC dup mul 4 sub -96 mul L L mul mul add  % Coeff 2
+						NC dup mul 3 mul 4 sub 128 mul L mul  NC dup mul dup 4 sub exch 3 mul 2 add mul 32 mul S mul add  % Coeff 3
+						NC dup mul 3 mul 4 sub dup mul 16 mul  % Coeff 4
+					] def  % /QuarticCoeffs
+					QuarticCoeffs  0  //true  S 4 div L NEaT 2 mul div 2 copy gt {exch} if pop //PrinterEpsilon add  //false  //PrinterEpsilon  PolynomialRoots dup length 0 eq {pop //Infinity} {Min} ifelse
+					S 4 div  2 copy gt {exch} if pop   /R exch def
 
-				R S 2 div //PrinterEpsilon add lt
-				{
-					R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
-					R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and
+					% If diagonal touching has horizontal overlapping, then instead have horizontal touching and diagonal gaps.
+					8 R mul S sub S mul dup 0 ge {sqrt 2 div  2 R mul add L exch sub NC div  //PrinterEpsilon add  R lt} {pop //false} ifelse
 					{
-						mark (DiamondsPlus improves radius by ) R PriorBestRadius sub dup (pt = ) exch 72 div dup (" = ) exch 25.4 mul (mm )
-						PriorBestRadius 0 gt {(= ) R PriorBestRadius div 1 sub 100 mul (% )} if (to ) R (pt from ) PriorBestRadius (pt on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
-						/BestRadius R store
-						BestParamsDict {pop BestParamsDict exch undef} forall
-						BestParamsDict /PackingDescriptor PackingDescriptor put
-						BestParamsDict /BaseStyle BaseStyle put
-						BestParamsDict /NumCols NC put
-						BestParamsDict /DistHorizontal DistHorizontal put
-					} if  % R BestRadius gt ...
-				} if  % R finite
+						% Next equation assumes that circles in the top row touch, so this is effectively /PostsAndLintel with two circles in the lintel.
+						[ 4 L L mul mul S S mul add   NC 2 mod 1 eq {NEaT 2 mul 1 add L mul S add -8 mul  NEaT 2 mul 1 add dup mul 4 mul} {NEaT 1 add L mul -16 mul S 8 mul sub  NEaT 1 add dup mul 16 mul} ifelse ]
+						0  //true  S 2 div  //false  //PrinterEpsilon  PolynomialRoots  dup length 0 eq {pop //Infinity} {Min} ifelse
+						% And check that middle row doesn't interfere with end two
+						[
+							S dup mul dup L dup mul 16 mul add mul
+							L L mul 8 mul  S S mul add  NC 2 mul 3 add 2 mul L S mul mul add  S mul -8 mul
+							8 L L mul mul  NC 2 mul 3 add 4 mul L S mul mul add  NC dup 3 add mul S S mul mul add  16 mul
+							NC 4 mul 6 add L mul  NC dup 3 add mul 1 sub S mul add  -64 mul
+							NC dup 3 add mul 2 mul 1 add 64 mul
+						]  0  //true  L  //false  //PrinterEpsilon  PolynomialRoots  dup length 0 eq {pop //Infinity} {Min} ifelse
+						S //Sqrt3 1 add 2 mul div  2 {2 copy gt {exch} if pop} repeat   /R exch def
+						/DistHorizontal //true def
+					} {/DistHorizontal //false def} ifelse
+					L NEaT 2 mul 2 add div  dup R  lt {/R exch def} {pop} ifelse
+
+					R S 2 div //PrinterEpsilon add lt
+					{
+						R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
+						R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and
+						{
+							mark (DiamondsPlus improves radius by ) R PriorBestRadius sub dup (pt = ) exch 72 div dup (" = ) exch 25.4 mul (mm )
+							PriorBestRadius 0 gt {(= ) R PriorBestRadius div 1 sub 100 mul (% )} if (to ) R (pt from ) PriorBestRadius (pt on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
+							/BestRadius R store
+							BestParamsDict {pop BestParamsDict exch undef} forall
+							BestParamsDict /PackingDescriptor PackingDescriptor put
+							BestParamsDict /BaseStyle BaseStyle put
+							BestParamsDict /NumCols NC put
+							BestParamsDict /DistHorizontal DistHorizontal put
+						} if  % R BestRadius gt ...
+					} if  % R finite
+				} if  % NC ...
 			} for  % NR
 			exit
 		} if  % /DiamondsPlus
@@ -5423,63 +5437,66 @@ currentdict /GlyphShowKnownAbsences undef
 				/NR exch def
 				/NiLR NG NR div ceiling cvi def  % Num in Longer Rows
 				/NC NiLR 2 mul 1 sub def  % Always odd
-				/NSR  NiLR NR mul NG sub  NR 1 sub 2 idiv  2 copy gt {exch} if pop  def  % Num Short Rows, the upper limit being /Diamonds with an odd number of columns
-
-				NR 3 ge  NR RowsNumMin ge  NR RowsNumMax le  and and
+				NC ColsNumMax le
 				{
-					% /AboveBelow true
-					[
-						NSR W mul dup mul 4 mul  NC 1 sub H mul dup mul add
-						NR 2 NSR mul sub NC 1 sub dup mul mul -4 mul H mul  NSR dup mul 16 mul W mul sub
-						NC 1 sub dup mul NR mul NR NSR 4 mul sub mul NSR dup mul 4 mul add  4 mul
-					] 0 //true  H W lt {H} {W} ifelse 2 div //false  //PrinterEpsilon  PolynomialRoots
-					dup length 0 gt
-					{
-						Min   W NiLR 2 mul div 2 copy gt {exch} if pop  NR NSR gt {H NR NSR sub 2 mul div 2 copy gt {exch} if pop} if  /R exch def
-						R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
-						R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
-						{
-							/BestRadius R store
-							BestParamsDict {pop BestParamsDict exch undef} forall
-							BestParamsDict /PackingDescriptor dup load put
-							BestParamsDict /BaseStyle dup load put
-							BestParamsDict /AboveBelow //true put
-							BestParamsDict /NumRows NR put
-							BestParamsDict /NumCols NC put
-							BestParamsDict /NumInLongerRows NiLR put
-							BestParamsDict /NumShorterRows NSR put
-						} if  % R PriorBestRadius ... gt ...
-					} {pop} ifelse  % any solutions to quadratic
-				} if  % NR ...
+					NC ColsNumMin lt {/NC ColsNumMin store} if
+					/NSR  NiLR NR mul NG sub  NR 1 sub 2 idiv  2 copy gt {exch} if pop  def  % Num Short Rows, the upper limit being /Diamonds with an odd number of columns
 
-				% /AboveBelow false
-				% In this section except BestParamsDict, meaning of rows and columns is reversed. Careful!
-				NC 3 ge  NC RowsNumMin ge  NC RowsNumMax le  and and
-				{
-					[
-						NSR H mul dup mul 4 mul  NC 1 sub W mul dup mul add
-						NR 2 NSR mul sub NC 1 sub dup mul mul -4 mul W mul  NSR dup mul 16 mul H mul sub
-						NC 1 sub dup mul NR mul NR NSR 4 mul sub mul NSR dup mul 4 mul add  4 mul
-					] 0 //true  H W lt {H} {W} ifelse 2 div //false  //PrinterEpsilon  PolynomialRoots
-					dup length 0 gt
+					NR 3 ge  NR RowsNumMin ge  NR RowsNumMax le  and and
 					{
-						Min   H NiLR 2 mul div 2 copy gt {exch} if pop  NR NSR gt {W NR NSR sub 2 mul div 2 copy gt {exch} if pop} if  /R exch def
-						R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
-						R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+						% /AboveBelow true
+						[
+							NSR W mul dup mul 4 mul  NC 1 sub H mul dup mul add
+							NR 2 NSR mul sub NC 1 sub dup mul mul -4 mul H mul  NSR dup mul 16 mul W mul sub
+							NC 1 sub dup mul NR mul NR NSR 4 mul sub mul NSR dup mul 4 mul add  4 mul
+						] 0 //true  H W le {H} {W} ifelse 2 div //PrinterEpsilon add  //false  //PrinterEpsilon  PolynomialRoots
+						dup length 0 gt
 						{
-							/BestRadius R store
-							BestParamsDict {pop BestParamsDict exch undef} forall
-							BestParamsDict /PackingDescriptor dup load put
-							BestParamsDict /BaseStyle dup load put
-							BestParamsDict /AboveBelow //false put
-							BestParamsDict /NumRows NC put
-							BestParamsDict /NumCols NR put
-							BestParamsDict /NumInLongerCols NiLR put
-							BestParamsDict /NumShorterCols NSR put
-						} if  % R PriorBestRadius ... gt ...
-					} {pop} ifelse  % any solutions to quadratic
-				} if  % NC ...
+							Min   W NiLR 2 mul div 2 copy gt {exch} if pop  NR NSR gt {H NR NSR sub 2 mul div 2 copy gt {exch} if pop} if  /R exch def
+							R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
+							R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+							{
+								/BestRadius R store
+								BestParamsDict {pop BestParamsDict exch undef} forall
+								BestParamsDict /PackingDescriptor dup load put
+								BestParamsDict /BaseStyle dup load put
+								BestParamsDict /AboveBelow //true put
+								BestParamsDict /NumRows NR put
+								BestParamsDict /NumCols NC put
+								BestParamsDict /NumInLongerRows NiLR put
+								BestParamsDict /NumShorterRows NSR put
+							} if  % R PriorBestRadius ... gt ...
+						} {pop} ifelse  % any solutions to quadratic
+					} if  % NR ...
 
+					% /AboveBelow false
+					% In this section except BestParamsDict, meaning of rows and columns is reversed. Careful!
+					NC 3 ge  NC RowsNumMin ge  NC RowsNumMax le  and and
+					{
+						[
+							NSR H mul dup mul 4 mul  NC 1 sub W mul dup mul add
+							NR 2 NSR mul sub NC 1 sub dup mul mul -4 mul W mul  NSR dup mul 16 mul H mul sub
+							NC 1 sub dup mul NR mul NR NSR 4 mul sub mul NSR dup mul 4 mul add  4 mul
+						] 0 //true  H W le {H} {W} ifelse 2 div //PrinterEpsilon add  //false  //PrinterEpsilon  PolynomialRoots
+						dup length 0 gt
+						{
+							Min   H NiLR 2 mul div 2 copy gt {exch} if pop  NR NSR gt {W NR NSR sub 2 mul div 2 copy gt {exch} if pop} if  /R exch def
+							R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
+							R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+							{
+								/BestRadius R store
+								BestParamsDict {pop BestParamsDict exch undef} forall
+								BestParamsDict /PackingDescriptor dup load put
+								BestParamsDict /BaseStyle dup load put
+								BestParamsDict /AboveBelow //false put
+								BestParamsDict /NumRows NC put
+								BestParamsDict /NumCols NR put
+								BestParamsDict /NumInLongerCols NiLR put
+								BestParamsDict /NumShorterCols NSR put
+							} if  % R PriorBestRadius ... gt ...
+						} {pop} ifelse  % any solutions to quadratic
+					} if  % NC ...
+				} if  % NC ColsNumMax le
 			} for  % NR
 			exit
 		} if  % /DiamondsAndRectangular
@@ -5492,46 +5509,50 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				/NR exch def
 				/NC NG NR div ceiling cvi def
-				NR 2 ge NC 2 ge and
-				{[
-					{
-						/NudgeRows //true def
-						/c  4 H H mul mul  NR 1 sub W mul dup mul  add def
-						/b  NR 1 sub dup mul NC mul W mul  4 H mul add  -4 mul def
-						/a  NR 1 sub NC mul dup mul  NR 2 sub NR mul 4 mul sub  4 mul def
-					} ProhibitHorizontalNudging {pop} if
-					{
-						/NudgeRows //false def
-						/c  4 W W mul mul  NC 1 sub H mul dup mul  add def
-						/b  NC 1 sub dup mul NR mul H mul  4 W mul add  -4 mul def
-						/a  NC 1 sub NR mul dup mul  NC 2 sub NC mul 4 mul sub  4 mul def
-					} ProhibitVerticalNudging {pop} if
-				]} {[]} ifelse  % at least two rows and columns
+				NC ColsNumMax le
 				{
-					exec [ c b a ]  0  //true  H W lt {H} {W} ifelse 2 div  //false  //PrinterEpsilon  PolynomialRoots
-					{
-						/R exch def
-						NudgeRows
-							{NR 1 add R mul H //PrinterEpsilon add lt  NC 2 mul R mul W //PrinterEpsilon add lt  NC 1 add 2 mul R mul W //PrinterEpsilon sub gt  and and}
-							{NC 1 add R mul W //PrinterEpsilon add lt  NR 2 mul R mul H //PrinterEpsilon add lt  NR 1 add 2 mul R mul H //PrinterEpsilon sub gt  and and}
-						ifelse  % NudgeRows
+					NC ColsNumMin lt {/NC ColsNumMin store} if
+					NR 2 ge NC 2 ge and
+					{[
 						{
-							R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
-							R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+							/NudgeRows //true def
+							/c  4 H H mul mul  NR 1 sub W mul dup mul  add def
+							/b  NR 1 sub dup mul NC mul W mul  4 H mul add  -4 mul def
+							/a  NR 1 sub NC mul dup mul  NR 2 sub NR mul 4 mul sub  4 mul def
+						} ProhibitHorizontalNudging {pop} if
+						{
+							/NudgeRows //false def
+							/c  4 W W mul mul  NC 1 sub H mul dup mul  add def
+							/b  NC 1 sub dup mul NR mul H mul  4 W mul add  -4 mul def
+							/a  NC 1 sub NR mul dup mul  NC 2 sub NC mul 4 mul sub  4 mul def
+						} ProhibitVerticalNudging {pop} if
+					]} {[]} ifelse  % at least two rows and columns
+					{
+						exec [ c b a ]  0  //true  H W le {H} {W} ifelse 2 div //PrinterEpsilon add  //false  //PrinterEpsilon  PolynomialRoots
+						{
+							/R exch def
+							NudgeRows
+								{NR 1 add R mul H //PrinterEpsilon add lt  NC 2 mul R mul W //PrinterEpsilon add lt  NC 1 add 2 mul R mul W //PrinterEpsilon sub gt  and and}
+								{NC 1 add R mul W //PrinterEpsilon add lt  NR 2 mul R mul H //PrinterEpsilon add lt  NR 1 add 2 mul R mul H //PrinterEpsilon sub gt  and and}
+							ifelse  % NudgeRows
 							{
-								mark (RectangularAlternateSplitNudge improves radius by ) R PriorBestRadius sub dup (pt = ) exch 72 div dup (" = ) exch 25.4 mul (mm )
-								PriorBestRadius 0 gt {(= ) R PriorBestRadius div 1 sub 100 mul (% )} if (to ) R (pt from ) PriorBestRadius (pt on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
-								/BestRadius R store
-								BestParamsDict {pop BestParamsDict exch undef} forall
-								BestParamsDict /PackingDescriptor dup load put
-								BestParamsDict /BaseStyle dup load put
-								BestParamsDict /NumRows NR put
-								BestParamsDict /NumCols NC put
-								BestParamsDict /NudgeRows  NudgeRows put
-							} if  % R PriorBestRadius ... gt ...
-						} if  % valid solution
-					} forall  % solutions to PolynomialRoots
-				} forall  % Nudge rows or columns
+								R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
+								R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+								{
+									mark (RectangularAlternateSplitNudge improves radius by ) R PriorBestRadius sub dup (pt = ) exch 72 div dup (" = ) exch 25.4 mul (mm )
+									PriorBestRadius 0 gt {(= ) R PriorBestRadius div 1 sub 100 mul (% )} if (to ) R (pt from ) PriorBestRadius (pt on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
+									/BestRadius R store
+									BestParamsDict {pop BestParamsDict exch undef} forall
+									BestParamsDict /PackingDescriptor dup load put
+									BestParamsDict /BaseStyle dup load put
+									BestParamsDict /NumRows NR put
+									BestParamsDict /NumCols NC put
+									BestParamsDict /NudgeRows  NudgeRows put
+								} if  % R PriorBestRadius ... gt ...
+							} if  % valid solution
+						} forall  % solutions to PolynomialRoots
+					} forall  % Nudge rows or columns
+				} if  % NC ColsNumMax le
 			} for  % NR
 			exit
 		} if  % /RectangularAlternateSplitNudge
@@ -5545,39 +5566,43 @@ currentdict /GlyphShowKnownAbsences undef
 			{
 				/NR exch def
 				/NC NG NR div ceiling cvi def
-				[
-					{
-						/NudgeRows //true def
-						H NR 1 sub //Sqrt3 mul 2 add div  W NC 2 mul div  % R may not exceed lesser of these
-						/a  NR 1 sub NC mul dup mul  NR 2 sub NR mul sub  4 mul def
-						/b  NR 1 sub dup mul NC mul W mul H add -4 mul def
-						/c  NR 1 sub W mul dup mul H dup mul add def
-					} ProhibitHorizontalNudging {pop} if
-					{
-						/NudgeRows //false def
-						W NC 1 sub //Sqrt3 mul 2 add div  H NR 2 mul div  % R may not exceed lesser of these
-						/a  NC 1 sub NR mul dup mul  NC 2 sub NC mul sub  4 mul def
-						/b  NC 1 sub dup mul NR mul H mul W add -4 mul def
-						/c  NC 1 sub H mul dup mul W dup mul add def
-					} ProhibitVerticalNudging {pop} if
-				]
+				NC ColsNumMax le
 				{
-					exec [ c b a ]  0  //true  H W lt {H} {W} ifelse 2 div  //false  //PrinterEpsilon  PolynomialRoots
-					{2 copy gt {exch} if pop} forall  2 copy gt {exch} if pop   /R exch def
-					R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
-					R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+					NC ColsNumMin lt {/NC ColsNumMin store} if
+					[
+						{
+							/NudgeRows //true def
+							H NR 1 sub //Sqrt3 mul 2 add div  W NC 2 mul div  % R may not exceed lesser of these
+							/a  NR 1 sub NC mul dup mul  NR 2 sub NR mul sub  4 mul def
+							/b  NR 1 sub dup mul NC mul W mul H add -4 mul def
+							/c  NR 1 sub W mul dup mul H dup mul add def
+						} ProhibitHorizontalNudging {pop} if
+						{
+							/NudgeRows //false def
+							W NC 1 sub //Sqrt3 mul 2 add div  H NR 2 mul div  % R may not exceed lesser of these
+							/a  NC 1 sub NR mul dup mul  NC 2 sub NC mul sub  4 mul def
+							/b  NC 1 sub dup mul NR mul H mul W add -4 mul def
+							/c  NC 1 sub H mul dup mul W dup mul add def
+						} ProhibitVerticalNudging {pop} if
+					]
 					{
-						mark (RectangularAlternateNudge improves radius by ) R PriorBestRadius sub dup (pt = ) exch 72 div dup (" = ) exch 25.4 mul (mm )
-						PriorBestRadius 0 gt {(= ) R PriorBestRadius div 1 sub 100 mul (% )} if (to ) R (pt from ) PriorBestRadius (pt on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
-						/BestRadius R store
-						BestParamsDict {pop BestParamsDict exch undef} forall
-						BestParamsDict /PackingDescriptor dup load put
-						BestParamsDict /BaseStyle dup load put
-						BestParamsDict /NumRows NR put
-						BestParamsDict /NumCols NC put
-						BestParamsDict /NudgeRows  NudgeRows put
-					} if  % R PriorBestRadius ... gt ...
-				} forall  % Nudge rows or columns
+						exec [ c b a ]  0  //true  H W le {H} {W} ifelse 2 div //PrinterEpsilon add  //false  //PrinterEpsilon  PolynomialRoots
+						{2 copy gt {exch} if pop} forall  2 copy gt {exch} if pop   /R exch def
+						R  PriorBestRadius ImprovementPointsMin dup 0 gt {add} {pop} ifelse  gt
+						R  PriorBestRadius ImprovementProportionMin dup 0 gt {1 add mul} {pop} ifelse  gt  and  R BestRadius gt and
+						{
+							mark (RectangularAlternateNudge improves radius by ) R PriorBestRadius sub dup (pt = ) exch 72 div dup (" = ) exch 25.4 mul (mm )
+							PriorBestRadius 0 gt {(= ) R PriorBestRadius div 1 sub 100 mul (% )} if (to ) R (pt from ) PriorBestRadius (pt on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
+							/BestRadius R store
+							BestParamsDict {pop BestParamsDict exch undef} forall
+							BestParamsDict /PackingDescriptor dup load put
+							BestParamsDict /BaseStyle dup load put
+							BestParamsDict /NumRows NR put
+							BestParamsDict /NumCols NC put
+							BestParamsDict /NudgeRows  NudgeRows put
+						} if  % R PriorBestRadius ... gt ...
+					} forall  % Nudge rows or columns
+				} if  % NC ColsNumMax le
 			} for  % NR
 			exit
 		} if  % /RectangularAlternateNudge
@@ -5630,7 +5655,7 @@ currentdict /GlyphShowKnownAbsences undef
 									/a  DiffX2 DiffY2 add 1 sub 4 mul  def
 									/b  W DiffX2 mul  H DiffY2 mul  add -4 mul  def
 									/c  W W mul DiffX2 mul  H H mul DiffY2 mul  add  def
-									[ c b a ]  0  //true  H W lt {H} {W} ifelse 2 div  //false  //PrinterEpsilon  PolynomialRoots
+									[ c b a ]  0  //true  H W le {H} {W} ifelse 2 div //PrinterEpsilon add  //false  //PrinterEpsilon  PolynomialRoots
 									dup length [ {pop 0} {0 get} {Min (Warning: ProcessOnePackingType, arraytype, two seemingly good solutions.) OutputToLog} ] exch get exec
 									dup R ge {pop} {/R exch def} ifelse
 								} ifelse  % MinYY MaxYY ge
@@ -5679,33 +5704,45 @@ currentdict /GlyphShowKnownAbsences undef
 	/BestRadius 0 def
 	/BestParamsDict 8 dict def
 
-	PackingStyles
+	ParamNG 1 ge
 	{
-		/PackingStyleThis exch def
-		ParamNG
-		/arraytype PackingStyleThis type eq
+		PackingStyles
 		{
-			0  1  PackingStyleThis length 2 sub  % 2 sub as next element is numeric
+			/PackingStyleThis exch def
+			ParamNG
+			/arraytype PackingStyleThis type eq
 			{
-				/i exch def
-				/GlassesDeemedAtLeast  PackingStyleThis i get  eq {pop  PackingStyleThis i 1 add get} if
-			} for  % i
-		} if  % /arraytype
-		ParamNG  2 copy lt {exch} if pop  /NG exch def
-		PackingStyleThis ProcessOnePackingType
-	} forall
+				0  1  PackingStyleThis length 2 sub  % 2 sub as next element is numeric
+				{
+					/i exch def
+					/GlassesDeemedAtLeast  PackingStyleThis i get  eq {pop  PackingStyleThis i 1 add get} if
+				} for  % i
+			} if  % /arraytype
+			ParamNG  2 copy lt {exch} if pop  /NG exch def
+			PackingStyleThis ProcessOnePackingType
+		} forall
 
-	% If PackingStyles effectively empty then try some sensible arrangements.
-	BestRadius 0 le
-	{
-		mark (Warning: ProcessOnePackingType re-invoked with standard-ish layouts, because no valid layouts in PackingStyles on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
-		ParamNG 1 gt
+		% If PackingStyles effectively empty then try some sensible arrangements.
+		BestRadius 0 le
 		{
-			[ /RectangularDislocation /Diamonds /DiamondsAndRectangular [/Bespoke5 /OnlyIfOrientation /Landscape] [/Bespoke7 /OnlyIfOrientation /Landscape] [/DiamondsPlus /ImprovementPointsMin 2] ] {ProcessOnePackingType} forall
-		} {/TopRow ProcessOnePackingType} ifelse  % ParamNG 1 gt
-	} if  % BestRadius 0 le
+			mark (Warning: ProcessOnePackingType re-invoked with standard-ish layouts, because no valid layouts in PackingStyles on SheetNum=) SheetNum (.) ConcatenateToMark OutputToLog
+			ParamNG 1 gt
+			{
+				[ /RectangularDislocation /Diamonds /DiamondsAndRectangular [/Bespoke5 /OnlyIfOrientation /Landscape] [/Bespoke7 /OnlyIfOrientation /Landscape] [/DiamondsPlus /ImprovementPointsMin 2] ] {ProcessOnePackingType} forall
+			} {/TopRow ProcessOnePackingType} ifelse  % ParamNG 1 gt
+		} if  % BestRadius 0 le
 
-	/R  BestRadius MaxRadius 2 copy gt {exch} if pop  def
+		/R  BestRadius MaxRadius 2 copy gt {exch} if pop  def
+	}{
+		mark (Warning: SheetNum=) SheetNum ( has zero glasses. Likely an error. Continuing.) ConcatenateToMark OutputToLog
+		BestParamsDict /PackingDescriptor /SquareGrid put
+		BestParamsDict /BaseStyle         /SquareGrid put
+		BestParamsDict /NumRows           0           put
+		BestParamsDict /NumCols           0           put
+		/NG 0 def
+		/R  H W le {H} {W} ifelse 2 div  def
+	} ifelse  % ParamNG 1 ge
+
 	/BaseStyle         BestParamsDict 1 index get def
 	/PackingDescriptor BestParamsDict 1 index get def
 
@@ -5743,6 +5780,8 @@ currentdict /GlyphShowKnownAbsences undef
 				dup  /SuppressOrnamentsCentre           eq {pop  /i i 1 add store  exit} if
 				dup  /RowsNumMin                        eq {pop  /i i 2 add store  exit} if
 				dup  /RowsNumMax                        eq {pop  /i i 2 add store  exit} if
+				dup  /ColsNumMin                        eq {pop  /i i 2 add store  exit} if
+				dup  /ColsNumMax                        eq {pop  /i i 2 add store  exit} if
 				dup  /OnlyIfGlassesNumMin               eq {pop  /i i 2 add store  exit} if
 				dup  /OnlyIfGlassesNumMax               eq {pop  /i i 2 add store  exit} if
 				dup  /GlassesDeemedAtLeast              eq {pop  /i i 2 add store  exit} if
@@ -7239,7 +7278,7 @@ currentdict /GlyphShowKnownAbsences undef
 		( ~= ) usertimeInterval dup cvi 2 copy eq {exch} if pop ( seconds)  % Recent Distiller versions seems to report usertime in whole seconds.
 		usertimeInterval       60 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( minutes)} {pop exit} ifelse  % There have been some distillation times of multiple minutes.
 		usertimeInterval     3600 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( hours)  } {pop exit} ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
-		usertimeInterval    86400 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of July 2025, JDAW's longest distillation time has been ~=22 minutes.
+		usertimeInterval    86400 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Nov 2025, JDAW's longest distillation time has been ~=22 minutes.
 		usertimeInterval  2629800 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. PostScript's max integer ~= 0.8 months.
 		usertimeInterval 31557600 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( years)  } {pop exit} ifelse  % Years?! Something is very amiss.
 	} repeat  % 1
@@ -7251,7 +7290,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 % This open curly brace starts code passed to stopped
 {
-	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: just before error checking, execution time) usertime usertimeStart TimeIntervalString ConcatenateToMark OutputToLog} if
+	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: just before error checking, execution time ~= ) usertime usertimeStart TimeIntervalString ConcatenateToMark OutputToLog} if
 	% Elementary error checking
 	/ErrorFlag //false def
 
@@ -7975,8 +8014,8 @@ currentdict /GlyphShowKnownAbsences undef
 	/CirclearraysFontSizesBest NumSheets array def
 	/CirclearraysN [ SheetNumGlasses {array} forall ] def
 	/CirclearraysUnroundedN [ SheetNumGlasses {array} forall ] def
-	/RadiiCirclearrayBaseline NumSheets array def
-	/RadiiCirclearrayInside NumSheets array def
+	/RadiiCirclearrayBaseline [ Radii aload pop ] def  % Populated with these values in case empty page.
+	/RadiiCirclearrayInside   [ Radii aload pop ] def  % Populated with these values in case empty page.
 	/RadiiCirclearrayInsideUsableTAB NumSheets array def
 	/RadiiCirclearrayInsideUsableO NumSheets array def
 	/CircletextMaxFontSizes [ NumSheets {//Infinity} repeat ] def
@@ -9225,6 +9264,8 @@ currentdict /GlyphShowKnownAbsences undef
 		Belowtitles NonEmptyCompoundObject {(BelowtitleFontSizes/TitleFontSizes = ) BelowtitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
 		Overtitles NonEmptyCompoundObject {(OvertitleFontSizes/TitleFontSizes = ) OvertitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
 		TABO_MaxT_WithinPage 0 ge  TABO_MinB_WithinPage 0 le  or
+		TABO_MaxT_WithinPage 0 ge  TABO_MaxT_SheetNum 0 ge  and and  % Fails for empty page.
+		TABO_MinB_WithinPage 0 ge  TABO_MinB_SheetNum 0 ge  and and
 		{
 			<< /MaxT TitleAboveBelowOverT TABO_MaxT_SheetNum get TABO_MaxT_WithinPage get   /MinB TitleAboveBelowOverB TABO_MinB_SheetNum get TABO_MinB_WithinPage get >> begin
 			TABO_MaxT_SheetNum (,) TABO_MaxT_WithinPage (,)  GlassesOnSheets TABO_MaxT_SheetNum get TABO_MaxT_WithinPage get (,) Titles 2 index get ASCIIfy
@@ -10292,150 +10333,113 @@ currentdict /GlyphShowKnownAbsences undef
 					DropletShowReversed   //false DropletsWhichReversed SheetNum get {DropletNum eq {pop //true exit} if} forall  eq  % Is this reversed, and does that match DropletShowReversed
 					{
 						/ThisDroplet DropletPaths SheetNum get DropletNum get def
-						ThisDroplet length dup  5 eq  exch dup 4 ge exch 4 mod 0 eq and  or
+
+						/DistStart  ThisDroplet 2 get  def
+						/DistTotal  ThisDroplet dup length 2 sub get  DistStart sub  def
+						DistTotal //PrinterEpsilon gt  % I.e., can draw a line.
 						{
-							ThisDroplet length 8 ge
+							[ //false //true ]
 							{
-								/DistStart  ThisDroplet 2 get  def
-								/DistTotal  ThisDroplet dup length 2 sub get  DistStart sub  def
-								DistTotal //PrinterEpsilon gt  % I.e., can draw a line.
+								/IsInner exch def
+								/DpWS  IsInner {DropletsInnerWidthStart} {DropletsOuterWidthStart} ifelse  def  % These might be code doing randomisation.
+								/DpWE  IsInner {DropletsInnerWidthEnd  } {DropletsOuterWidthEnd  } ifelse  def  % Even if so, fixed per droplet, so independent of i.
+								DpWS 0 gt  DpWE 0 gt  or
 								{
-									0  1  1
+									% Testing whether droplet is paintable. Testing it in this inner loop after assignment of (the likes of) DpWS, in case (ditto) DropletsInnerGrayStart invoke rand.
+									4  4  ThisDroplet length 1 sub  % The third of these for parameters replaced by sensible value if any line crosses the inside. Used 39 lines below; perhaps modified before.
+									//true  % All points outside box
+									4 copy pop
 									{
-										1 eq /IsInner exch def
-										IsInner
+										/i exch def
+										/X0  ThisDroplet i 4 sub get  def
+										/Y0  ThisDroplet i 3 sub get  def
+										/X1  ThisDroplet i       get  def
+										/Y1  ThisDroplet i 1 add get  def
+										X0 Llx gt  X1 Urx lt  and   X1 Llx gt  X0 Urx lt  and  or
+										Y0 Lly gt  Y1 Ury lt  and   Y1 Lly gt  Y0 Ury lt  and  or  and  {pop //false exit} if
+									} for  % i, to determine whether doing next i loop
+									{pop -1} if  % If all points outside box
+									dup 4 ge  WithinPage 0 ge  and  % If already not this droplet, then not this droplet; if WithinPage negative, ignored.
+									{
+										% These tests not done if calling on a Glasses pages. But if, for example, from a PrePour, then don't want to show all droplets. Hence this.
+										//true  % Further from circle WithinPage than from all others
+										0  4  ThisDroplet length 1 sub
 										{
-											/DpWS DropletsInnerWidthStart def  % These might be code doing randomisation. Even if so, fixed per droplet, so independent of i.
-											/DpWE DropletsInnerWidthEnd   def
-										}{
-											/DpWS DropletsOuterWidthStart def  % These might be code doing randomisation. Even if so, fixed per droplet, so independent of i.
-											/DpWE DropletsOuterWidthEnd   def
-										} ifelse  % IsInner
-										DpWS 0 gt  DpWE 0 gt  or
+											/i exch def
+											//true  % Point i closest to WithinPage
+											0  1  GlassPositions SheetNum get length 1 sub
+											{
+												/WP exch def
+												WithinPage WP ne
+												{
+													% Double test on points: at most Radius+DropletsPathLength * LengthsDistance from centre; closer to WithinPage than WP.
+													GlassPositions SheetNum get WithinPage get aload pop
+													ThisDroplet i 1 add get sub dup mul exch  ThisDroplet i get sub dup mul  add
+													dup Radii SheetNum get DropletsPathLength LengthsDistance mul add dup mul gt exch
+													GlassPositions SheetNum get WP         get aload pop
+													ThisDroplet i 1 add get sub dup mul exch  ThisDroplet i get sub dup mul  add
+													gt or {pop //false exit} if  % Point i further from WithinPage than from WP
+												} if  % WithinPage WP ne
+											} for  % WP
+											{pop //false exit} if  % Not further from WithinPage than all others
+										} for  % i
+										{pop -1} if  % Further from circle WithinPage than from all others
+									} if  % dup 4 ge  WithinPage 0 ge  and
+									% Three integer loop parameters from 39 lines above, perhaps modified since
+									{
+										% Some effort not to add to size of PDF. E.g.: don't setgray to currentgray; don't setlinewidth to currentlinewidth.
+										/i exch def
+										/X0  ThisDroplet i 4 sub get  def
+										/Y0  ThisDroplet i 3 sub get  def
+										/F0  ThisDroplet i 2 sub get  DistStart sub  DistTotal div def
+										/X1  ThisDroplet i       get  def
+										/Y1  ThisDroplet i 1 add get  def
+										/F1  ThisDroplet i 2 add get  DistStart sub  DistTotal div def
+										/LW0  1 F0 sub DpWS mul  F0 DpWE mul  add  def
+										/LW1  1 F1 sub DpWS mul  F1 DpWE mul  add  def
+										LW0 LW1 mul  0  lt
 										{
-											% Testing whether droplet is paintable. Testing it in this inner loop after assignment of (the likes of) DpWS, in case (ditto) DropletsInnerGrayStart invoke rand.
-											4  4  ThisDroplet length 1 sub  % The third of these for parameters replaced by sensible value if any line crosses the inside. Used 38 lines below; perhaps modified before.
-											//true  % All points outside box
-											4 copy pop
-											{
-												/i exch def
-												/X0  ThisDroplet i 4 sub get  def
-												/Y0  ThisDroplet i 3 sub get  def
-												/X1  ThisDroplet i       get  def
-												/Y1  ThisDroplet i 1 add get  def
-												X0 Llx gt  X1 Urx lt  and   X1 Llx gt  X0 Urx lt  and  or
-												Y0 Lly gt  Y1 Ury lt  and   Y1 Lly gt  Y0 Ury lt  and  or  and  {pop //false exit} if
-											} for  % i, to determine whether doing next i loop
-											{pop -1} if  % If all points outside box
-											dup 4 ge  WithinPage 0 ge  and  % If already not this droplet, then not this droplet; if WithinPage negative, ignored.
-											{
-												//true  % Further from circle WithinPage than from all others
-												0  4  ThisDroplet length 1 sub
-												{
-													/i exch def
-													//true  % Point i closest to WithinPage
-													0  1  GlassPositions SheetNum get length 1 sub
-													{
-														/WP exch def
-														WithinPage WP ne
-														{
-															% Double test on points: at most Radius+DropletsPathLength * LengthsDistance from centre; closer to WithinPage than WP.
-															GlassPositions SheetNum get WithinPage get aload pop
-															ThisDroplet i 1 add get sub dup mul exch  ThisDroplet i get sub dup mul  add
-															dup Radii SheetNum get DropletsPathLength LengthsDistance mul add dup mul gt exch
-															GlassPositions SheetNum get WP         get aload pop
-															ThisDroplet i 1 add get sub dup mul exch  ThisDroplet i get sub dup mul  add
-															gt or {pop //false exit} if  % Point i further from WithinPage than from WP
-														} if  % WithinPage WP ne
-													} for  % WP
-													{pop //false exit} if  % Not further from WithinPage than all others
-												} for  % i
-												{pop -1} if  % Further from circle WithinPage than from all others
-											} if  % dup 4 ge  WithinPage 0 ge  and
-											% Three integer loop parameters from 38 lines above, perhaps modified since
-											{
-												% Some effort not to add to size of PDF. E.g.: don't setgray to currentgray; don't setlinewidth to currentlinewidth.
-												/i exch def
-												/X0  ThisDroplet i 4 sub get  def
-												/Y0  ThisDroplet i 3 sub get  def
-												/F0  ThisDroplet i 2 sub get  DistStart sub  DistTotal div def
-												/X1  ThisDroplet i       get  def
-												/Y1  ThisDroplet i 1 add get  def
-												/F1  ThisDroplet i 2 add get  DistStart sub  DistTotal div def
-												/LW0  1 F0 sub DpWS mul  F0 DpWE mul  add  def
-												/LW1  1 F1 sub DpWS mul  F1 DpWE mul  add  def
-												LW0 LW1 mul  0  lt
-												{
-													F0 LW1 mul F1 LW0 mul sub  LW1 LW0 sub div
-													X0 LW1 mul X1 LW0 mul sub  LW1 LW0 sub div
-													Y0 LW1 mul Y1 LW0 mul sub  LW1 LW0 sub div
-													LW0 0 lt
-														{/Y0 exch def  /X0 exch def  /F0 exch def  /LW0 0 def  /EndAtStart //true  def}
-														{/Y1 exch def  /X1 exch def  /F1 exch def  /LW1 0 def  /EndAtStart //false def}
-													ifelse  % LW0 0 lt
-												} {/EndAtStart //false def} ifelse  % Different sides of zero
-												LW0 0 gt LW1 0 ge and  LW0 0 ge LW1 0 gt and  or
-												{
-													/Dist  X0 X1 sub dup mul  Y0 Y1 sub dup mul  add sqrt  def
-													1 {
-														Dist 0 le {exit} if  % Usually when IsInner, at zero-width start of point. Don't want to omit several consecutive very very small lines, so threshold is 0.
-														/AngMain Y1 Y0 sub X1 X0 sub atan def  % /AngMain
-														/AngSub  LW1 LW0 sub abs //PrinterEpsilon gt
-														{
-															LW1 2 div   Dist LW1 mul LW1 LW0 sub div dup mul  LW1 2 div dup mul sub
-																dup 0 lt {mark (Error in DropletsPaint: ) 0 4 ThisDroplet length 1 sub {(\n) exch ThisDroplet exch 4 getinterval {(\t)} forall} for  ConcatenateToMark OutputToLog pop pop pop exit} if
-															2 copy 0 ne exch 0 ne or {sqrt atan} {pop pop 0} ifelse  LW1 LW0 lt {neg} if
-														} {0} ifelse def  % /AngSub
-														LW0 2 div  AngMain  90 AngSub add sub  2 copy cos mul X0 add  3 1 roll sin mul Y0 add moveto
-														X1  Y1  LW1 2 div  AngMain -90 AngSub sub add  AngMain  90 AngSub add add  arc
-														EndAtStart {closepath} {LW0 2 div  AngMain  90 AngSub add add  2 copy cos mul X0 add  3 1 roll sin mul Y0 add lineto} ifelse  % closepath done implicitly by fill; but fewer PDF bytes than lineto
-														IsInner {1 setgray  DropletsInnerFillCode} {0.85 setgray  DropletsOuterFillCode} ifelse  fill
-													} repeat  % 1
-												} if  % Widths non-negative and at least one positive
-											} for  % i, loop not happening unless any point of droplet inside Llx Lly Urx Ury
-											/DropletsPaintAtEnd load dup length 0 gt
-											{
-												DropletsPaintAtEndRotate
-												{
-													matrix currentmatrix exch
-													X1 Y1 translate  0 0 moveto
-													X1 X0 sub  Y1 Y0 sub
-													2 copy dup mul exch dup mul add //PrinterEpsilonSquared gt {atan neg rotate} {pop pop} ifelse
-													exec  setmatrix
-												} {X1 Y1 moveto  exec} ifelse  % DropletsPaintAtEndRotate
-											} {pop} ifelse  % DropletsPaintAtEnd
-										} if  % DpWS 0 gt  DpWE 0 gt  or
-									} for  % IsInner
-								} if  % DistTotal //PrinterEpsilon gt
-							}{
-								/X0  ThisDroplet 0 get  def   /Y0  ThisDroplet 1 get  def
-								X0 Llx ge  X0 Urx le and  Y0 Lly ge and  Y0 Ury le and
-								{
-									ThisDroplet length 5 eq  % So 5th element is one of the two eigenvectors of the Hessian
-									{
-										DropletsOuterWidthEnd dup 0 gt
+											F0 LW1 mul F1 LW0 mul sub  LW1 LW0 sub div
+											X0 LW1 mul X1 LW0 mul sub  LW1 LW0 sub div
+											Y0 LW1 mul Y1 LW0 mul sub  LW1 LW0 sub div
+											LW0 0 lt
+												{/Y0 exch def  /X0 exch def  /F0 exch def  /LW0 0 def  /EndAtStart //true  def}
+												{/Y1 exch def  /X1 exch def  /F1 exch def  /LW1 0 def  /EndAtStart //false def}
+											ifelse  % LW0 0 lt
+										} {/EndAtStart //false def} ifelse  % Different sides of zero
+										LW0 0 gt LW1 0 ge and  LW0 0 ge LW1 0 gt and  or
 										{
-											dup  DropletsInnerWidthEnd dup 0 gt {sub} {pop} ifelse 2 div dup currentlinewidth sub //PrinterEpsilon gt {setlinewidth} {pop} ifelse
-											dup ThisDroplet 4 get aload pop 3 1 roll mul 3 1 roll mul  2 copy 2 copy exch neg 2 copy
-											2 {Y0 add exch X0 add exch moveto  Y0 exch sub exch X0 exch sub exch lineto} repeat
-											1 setlinecap
-											DropletsOuterGrayEnd dup  /DeviceGray currentcolorspace 0 get ne  exch currentgray sub abs 0.017 ge  or {setgray} {pop} ifelse
-											stroke
-										} {pop} ifelse  % DropletsOuterWidthEnd ... 0 gt
-									} if  % ThisDroplet length 5 eq
-									DropletsOuterWidthEnd 0 gt
+											/Dist  X0 X1 sub dup mul  Y0 Y1 sub dup mul  add sqrt  def
+											1 {
+												Dist 0 le {exit} if  % Usually when IsInner, at zero-width start of point. Don't want to omit several consecutive very very small lines, so threshold is 0.
+												/AngMain Y1 Y0 sub X1 X0 sub atan def  % /AngMain
+												/AngSub  LW1 LW0 sub abs //PrinterEpsilon gt
+												{
+													LW1 2 div   Dist LW1 mul LW1 LW0 sub div dup mul  LW1 2 div dup mul sub
+														dup 0 lt {mark (Error in DropletsPaint: ) 0 4 ThisDroplet length 1 sub {(\n) exch ThisDroplet exch 4 getinterval {(\t)} forall} for  ConcatenateToMark OutputToLog pop pop pop exit} if
+													2 copy 0 ne exch 0 ne or {sqrt atan} {pop pop 0} ifelse  LW1 LW0 lt {neg} if
+												} {0} ifelse def  % /AngSub
+												LW0 2 div  AngMain  90 AngSub add sub  2 copy cos mul X0 add  3 1 roll sin mul Y0 add moveto
+												X1  Y1  LW1 2 div  AngMain -90 AngSub sub add  AngMain  90 AngSub add add  arc
+												EndAtStart {closepath} {LW0 2 div  AngMain  90 AngSub add add  2 copy cos mul X0 add  3 1 roll sin mul Y0 add lineto} ifelse  % closepath done implicitly by fill; but fewer PDF bytes than lineto
+												IsInner {1 setgray  DropletsInnerFillCode} {0.85 setgray  DropletsOuterFillCode} ifelse  fill
+											} repeat  % 1
+										} if  % Widths non-negative and at least one positive
+									} for  % i, loop not happening unless any point of droplet inside Llx Lly Urx Ury
+									/DropletsPaintAtEnd load dup length 0 gt
 									{
-										DropletsOuterGrayEnd dup  /DeviceGray currentcolorspace 0 get ne  exch currentgray sub abs 0.017 ge  or {setgray} {pop} ifelse
-										X0  Y0  DropletsOuterWidthEnd 2 div  0  360  arc   fill
-									} if  % DropletsOuterWidthEnd 0 gt
-									DropletsInnerWidthEnd 0 gt
-									{
-										DropletsInnerGrayEnd dup  /DeviceGray currentcolorspace 0 get ne  exch currentgray sub abs 0.017 ge  or {setgray} {pop} ifelse
-										X0  Y0  DropletsInnerWidthEnd 2 div  0  360  arc   fill
-									} if  % DropletsInnerWidthEnd 0 gt
-								} if  % On page
-							} ifelse  % ThisDroplet length 8 ge
-						} if  % ThisDroplet length dup  5 eq  exch dup 4 ge exch 4 mod 0 eq and  or
+										DropletsPaintAtEndRotate
+										{
+											matrix currentmatrix exch
+											X1 Y1 translate  0 0 moveto
+											X1 X0 sub  Y1 Y0 sub
+											2 copy dup mul exch dup mul add //PrinterEpsilonSquared gt {atan neg rotate} {pop pop} ifelse
+											exec  setmatrix
+										} {X1 Y1 moveto  exec} ifelse  % DropletsPaintAtEndRotate
+									} {pop} ifelse  % DropletsPaintAtEnd
+								} if  % DpWS 0 gt  DpWE 0 gt  or
+							} forall  % IsInner
+						} if  % DistTotal //PrinterEpsilon gt
 					} if  % matches DropletShowReversed
 				} for  % DropletNum, ThisDroplet
 			} for  % DropletShowReversed
@@ -13092,7 +13096,7 @@ currentdict /GlyphShowKnownAbsences undef
 		{
 			/usertimePostPrev exch store
 			mark ( GlassesPageInnerLoop, TitleAboveBelowOverForms: NameNum=) NameNum (; SheetNum=) SheetNum
-			(; execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
+			(; execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
 		} {pop} ifelse  % usertime ...
 
 		% Names
@@ -13244,7 +13248,7 @@ currentdict /GlyphShowKnownAbsences undef
 		{
 			/usertimePostPrev exch store
 			mark ( TastingNotesInnerLoop, TastingNoteForms: NameNum= ) NameNum (; name=") ThisNameASCII ("; TNSheetNum=) TNSheetNum
-			(; execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
+			(; execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
 		} {pop} ifelse  % usertime ...
 
 		end
@@ -13354,7 +13358,7 @@ currentdict /GlyphShowKnownAbsences undef
 		{
 			/usertimePostPrev exch store
 			mark ( PrePourInnerLoop, PrePourForms: SheetNum=) SheetNum (; WithinPage=) WithinPage (; WithinTitles=) WithinTitles
-			(; title~=") Titles WithinTitles get ASCIIfy ("; execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
+			(; title~=") Titles WithinTitles get ASCIIfy ("; execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
 		} {pop} ifelse  % usertime ...
 		//DeBugLevel 100 le {(-PrePourInnerLoop) OutputToLog} if
 	} bind def  % /PrePourInnerLoop
@@ -13396,7 +13400,7 @@ currentdict /GlyphShowKnownAbsences undef
 		} {pop pop} ifelse  % EmptyPageString non-empty
 		/TypeOfPagesBeingRendered /Empty store ShowPage end
 	} if  % EmptyGlassesPageAtStart
-	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: starting outermost page-rendering loop: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if	/ShowHeadersAndFooters //true def
+	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: starting outermost page-rendering loop: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if	/ShowHeadersAndFooters //true def
 	UsedPageOrderings
 	{
 		/ThisPageOrdering exch def
@@ -13634,7 +13638,7 @@ currentdict /GlyphShowKnownAbsences undef
 							{
 								/usertimePostPrev exch store
 								mark ( Main: -PlaceName: NameNum=) NameNum (; PlaceNameSetNum=) PlaceNameSetNum
-								(; execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
+								(; execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
 							} {pop} ifelse  % usertime ...
 						} if  % ... ThisPaperType ... ThisPageOrdering ... and
 					} if  % NameNum  NamesPlaceNames PlaceNameSetNum GetEU length  lt
@@ -13881,8 +13885,8 @@ currentdict /GlyphShowKnownAbsences undef
 						/CDBestSizeScore //InfinNeg def
 						/CDBestWidthOneCork 0 def
 						/CDBestHeightOneCork 0 def
-						/CDBestNumRows //null def
-						/CDBestNumCols //null def
+						/CDBestNumRows 0 def  % Zero in case page empty.
+						/CDBestNumCols 0 def
 
 						[ /Portrait /Landscape ]
 						{
@@ -14451,7 +14455,7 @@ currentdict /GlyphShowKnownAbsences undef
 					DecanterLabelsPaperType ThisPaperType PaperTypesEqual   PageOrderingDecanterLabels SheetNum get  ThisPageOrdering  eq   and {pop //true exit} if
 				} for  % /SheetNum
 				{
-					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+DecanterLabels: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (+DecanterLabels: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 					/TypeOfPagesBeingRendered /DecanterLabels store  //false //false //false //false DecanterLabelsPaperType /Portrait SetPaperSize   //true DefStoreMgns
 					/ThisName (Decanter labels) def
 					/DecanterLabelsGap 8 def  % embedded constant
@@ -14642,7 +14646,7 @@ currentdict /GlyphShowKnownAbsences undef
 							DLNumOnPage 0 gt {ShowPage} if
 						} if  % DLTotalNumCopies 1 gt
 					} ifelse  % DLBestNumOnPage 1 lt
-					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (-DecanterLabels: execution time) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
+					AnyFillTextingAtAll //DeBugLevel 100 le or {mark (-DecanterLabels: execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 				} if  % ... ThisPaperType ... ThisPageOrdering ... and
 				end
 			} if  % ... DecanterLabelsNumCopies 1 ge ...
@@ -15115,7 +15119,7 @@ currentdict /GlyphShowKnownAbsences undef
 		2 dict begin  aload pop  /Prefix exch def  /NumThisType exch def
 		NumThisType 0 gt {Prefix (0) NumThisType 2 ge {NumThisType 2 eq {(, )} {( ... )} ifelse Prefix NumThisType 1 sub} if (; )} if
 		end
-	} forall	pop ConcatenateToMark
+	} forall  pop ConcatenateToMark
 	OutputLogToPage  OneCircleSuppressOtherPageTypes not and  BottleWrapSuppressOtherPageTypes not and
 		{dup length 0 gt {(; )} if (DistillationLog)}
 	if  % Log pages likely to exist
