@@ -1,6 +1,6 @@
 %!PS
 
-% This version 18:00 Saturday 8th November 2025
+% This version 16:45 Sunday 9th November 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202511081800) def
+/ParametersVersionDateTimeAdobeFormat (D:202511091645) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -837,7 +837,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202511081800) def
+/SoftwareVersionDateTimeAdobeFormat (D:202511091645) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -4215,7 +4215,7 @@ currentdict /GlyphShowKnownAbsences undef
 /ShapesClippedToPath
 {
 	//DeBugLevel 42 le {(+ShapesClippedToPath) OutputToLog} if
-	20 dict begin  GSave
+	21 dict begin  GSave
 	GSave flattenpath pathbbox /ury exch def /urx exch def /lly exch def /llx exch def GRestore  % pathbbox rather than PathBBox because approximate suffices, and is faster
 	{clip} if  % DoActuallyClip
 	/UClipPath //true upath def  newpath  % Even if not clipping, show only those shapes that intersect this path
@@ -4228,51 +4228,59 @@ currentdict /GlyphShowKnownAbsences undef
 	/OuterRegionLly exch def
 	/OuterRegionLlx exch def
 
+	/ShapesToUseLocal [ ShapesToUse {
+		execU  //true  [ /Flower /Star /Heart /Circle ] {2 index eq {pop //false exit} if} forall   {pop} if
+	} forall ] def  % /ShapesToUseLocal
+
+	% Makes double-depth array [ ... [ShapesIntX ShapesIntY X Y ThisShapeRadius ThisShape] ... ]
 	[
-		SpecialPlace /Origin eq  % If contains (0,0), then 0,0 assumed special; otherwise centre is special
+		ShapesToUseLocal length 1 ge
 		{
-			OuterRegionLly ShapesAverageSeparation div floor cvi  1  OuterRegionUry ShapesAverageSeparation div ceiling cvi {/ShapesIntY exch def
-			OuterRegionLlx ShapesAverageSeparation div floor cvi  1  OuterRegionUrx ShapesAverageSeparation div ceiling cvi {/ShapesIntX exch def
-				ShapesIntX 0 ne  ShapesIntY 0 ne  or
-				{
-					[
-						ShapesIntX  ShapesIntY
-						ShapesIntX ShapesAverageSeparation mul   ShapesAverageMaxTweakPlusMinus dup 0 ne {rand //HalfRandMax div 1 sub mul add} {pop} ifelse
-						ShapesIntY ShapesAverageSeparation mul   ShapesAverageMaxTweakPlusMinus dup 0 ne {rand //HalfRandMax div 1 sub mul add} {pop} ifelse
-						rand //RandMax div ShapesEnclosingCircleRadiusMax ShapesEnclosingCircleRadiusMin sub mul ShapesEnclosingCircleRadiusMin add
-						ShapesToUse  dup length dup 1 le {1 sub} {rand exch mod} ifelse  GetEU
-					]
-					counttomark rand exch mod 1 add 1 roll  % The shuffling removes the apparent direction caused by overlapping
-				} if  % Not 0,0
-			} for  % /ShapesIntX
-			} for  % /ShapesIntY
-			[ 0 0   0 0   ShapesEnclosingCircleRadiusMax  ShapesToUse 0 GetEU ]  % Last, so on top.
-		}{
-			% SpecialPlace is /Centre or /None
-			OuterRegionUry OuterRegionLly sub ShapesAverageSeparation div -2 div floor cvi   1   1 index neg {/ShapesIntY exch def
-			OuterRegionUrx OuterRegionLlx sub ShapesAverageSeparation div -2 div floor cvi   1   1 index neg {/ShapesIntX exch def
-				SpecialPlace /None eq  ShapesIntX 0 ne or  ShapesIntY 0 ne or
-				{
-					[
-						ShapesIntX  ShapesIntY
-						OuterRegionUrx OuterRegionLlx add 2 div   ShapesIntX ShapesAverageSeparation mul add   ShapesAverageMaxTweakPlusMinus dup 0 ne {rand //HalfRandMax div 1 sub mul add} {pop} ifelse
-						OuterRegionUry OuterRegionLly add 2 div   ShapesIntY ShapesAverageSeparation mul add   ShapesAverageMaxTweakPlusMinus dup 0 ne {rand //HalfRandMax div 1 sub mul add} {pop} ifelse
-						rand //RandMax div ShapesEnclosingCircleRadiusMax ShapesEnclosingCircleRadiusMin sub mul ShapesEnclosingCircleRadiusMin add
-						ShapesToUse  dup length dup 1 le {1 sub} {rand exch mod} ifelse  GetEU
-					]
-					counttomark rand exch mod 1 add 1 roll  % The shuffling removes the apparent direction caused by overlapping
-				} if  % Not 0,0
-			} for  % /ShapesIntX
-			} for  % /ShapesIntY
-			SpecialPlace /None ne {[
-				0  0
-				OuterRegionLlx OuterRegionUrx add 2 div
-				OuterRegionLly OuterRegionUry add 2 div
-				ShapesEnclosingCircleRadiusMax
-				ShapesToUse 0 get
-			]} if  % Last, so on top. It might be out of range, but if so, will be caught by later tests.
-		} ifelse  % Contains (0,0)
-	]  % Double-depth array [ ... [ShapesIntX ShapesIntY X Y ThisShapeRadius ThisShape] ... ]
+			SpecialPlace /Origin eq  % If contains (0,0), then 0,0 assumed special; otherwise centre is special
+			{
+				OuterRegionLly ShapesAverageSeparation div floor cvi  1  OuterRegionUry ShapesAverageSeparation div ceiling cvi {/ShapesIntY exch def
+				OuterRegionLlx ShapesAverageSeparation div floor cvi  1  OuterRegionUrx ShapesAverageSeparation div ceiling cvi {/ShapesIntX exch def
+					ShapesIntX 0 ne  ShapesIntY 0 ne  or
+					{
+						[
+							ShapesIntX  ShapesIntY
+							ShapesIntX ShapesAverageSeparation mul   ShapesAverageMaxTweakPlusMinus dup 0 ne {rand //HalfRandMax div 1 sub mul add} {pop} ifelse
+							ShapesIntY ShapesAverageSeparation mul   ShapesAverageMaxTweakPlusMinus dup 0 ne {rand //HalfRandMax div 1 sub mul add} {pop} ifelse
+							rand //RandMax div ShapesEnclosingCircleRadiusMax ShapesEnclosingCircleRadiusMin sub mul ShapesEnclosingCircleRadiusMin add
+							ShapesToUseLocal  dup length dup 1 le {1 sub} {rand exch mod} ifelse  GetEU
+						]
+						counttomark rand exch mod 1 add 1 roll  % The shuffling removes the apparent direction caused by overlapping
+					} if  % Not 0,0
+				} for  % /ShapesIntX
+				} for  % /ShapesIntY
+				[ 0 0   0 0   ShapesEnclosingCircleRadiusMax  ShapesToUseLocal 0 GetEU ]  % Last, so on top.
+			}{
+				% SpecialPlace is /Centre or /None
+				OuterRegionUry OuterRegionLly sub ShapesAverageSeparation div -2 div floor cvi   1   1 index neg {/ShapesIntY exch def
+				OuterRegionUrx OuterRegionLlx sub ShapesAverageSeparation div -2 div floor cvi   1   1 index neg {/ShapesIntX exch def
+					SpecialPlace /None eq  ShapesIntX 0 ne or  ShapesIntY 0 ne or
+					{
+						[
+							ShapesIntX  ShapesIntY
+							OuterRegionUrx OuterRegionLlx add 2 div   ShapesIntX ShapesAverageSeparation mul add   ShapesAverageMaxTweakPlusMinus dup 0 ne {rand //HalfRandMax div 1 sub mul add} {pop} ifelse
+							OuterRegionUry OuterRegionLly add 2 div   ShapesIntY ShapesAverageSeparation mul add   ShapesAverageMaxTweakPlusMinus dup 0 ne {rand //HalfRandMax div 1 sub mul add} {pop} ifelse
+							rand //RandMax div ShapesEnclosingCircleRadiusMax ShapesEnclosingCircleRadiusMin sub mul ShapesEnclosingCircleRadiusMin add
+							ShapesToUseLocal  dup length dup 1 le {1 sub} {rand exch mod} ifelse  GetEU
+						]
+						counttomark rand exch mod 1 add 1 roll  % The shuffling removes the apparent direction caused by overlapping
+					} if  % Not 0,0
+				} for  % /ShapesIntX
+				} for  % /ShapesIntY
+				SpecialPlace /None ne {[
+					0  0
+					OuterRegionLlx OuterRegionUrx add 2 div
+					OuterRegionLly OuterRegionUry add 2 div
+					ShapesEnclosingCircleRadiusMax
+					ShapesToUseLocal 0 get
+				]} if  % Last, so on top. It might be out of range, but if so, will be caught by later tests.
+			} ifelse  % Contains (0,0)
+		} if  % ShapesToUseLocal length 1 ge, to trap zero-mod errors.
+	]
 	{
 		aload pop  /ThisShape exch execU def   /ThisShapeRadius exch def  /Y exch def  /X exch def  /ShapesIntY exch def /ShapesIntX exch def
 		/Rand1 rand def  /Rand2 rand def  % Sometimes, by rounding, a transformed TABO can select differently, which should't desynchronise rand usage; hence rands always done.
@@ -4326,7 +4334,7 @@ currentdict /GlyphShowKnownAbsences undef
 			}{
 				ShapesClippedToPath_WarningFlag
 				{
-					mark (Warning: ShapesToUse contains invalid shape ) ThisShape ConcatenateToMark OutputToLog
+					mark (Warning: ShapesToUseLocal contains invalid shape ) ThisShape ConcatenateToMark OutputToLog
 					/ShapesClippedToPath_WarningFlag //false store
 				} if  % ShapesClippedToPath_WarningFlag
 			} ifelse  % ThisShape is valid
