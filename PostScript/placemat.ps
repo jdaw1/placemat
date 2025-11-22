@@ -1,6 +1,6 @@
 %!PS
 
-% This version 16:45 Sunday 9th November 2025
+% This version 21:15 Saturday 22nd November 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202511091645) def
+/ParametersVersionDateTimeAdobeFormat (D:202511222115) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -837,7 +837,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202511091645) def
+/SoftwareVersionDateTimeAdobeFormat (D:202511222115) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -880,7 +880,7 @@ RandomisationSeed srand
 
 /usertimePostPrev IntegerMin def
 
-/DeSizeRounding 64 def  % 1000 just too big. 250 seems OK. This small for safety, and it's good enough for task.
+/DeSizeRounding 4000 def  % There's rounding in some of the path operations. For a scaleable size, need to start big. This is ~=20* largest actual used font size, and seems sufficient.
 
 /OneThird 1 3 div def   /Cbrt {dup dup 0 lt {neg //OneThird exp neg} {//OneThird exp} ifelse  dup abs 1290 le {dup cvi dup dup mul mul 3 -1 roll eq {cvi} if} {exch pop} ifelse} bind def  % 1290^3 < IntegerMax < 1291^3
 
