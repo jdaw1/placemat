@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:15 Saturday 22nd November 2025
+% This version 21:15 Sunday 23rd November 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202511222115) def
+/ParametersVersionDateTimeAdobeFormat (D:202511232115) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -837,7 +837,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202511222115) def
+/SoftwareVersionDateTimeAdobeFormat (D:202511232115) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -3287,58 +3287,61 @@ currentdict /SmallCapsDict undef
 	//DeBugLevel 10 le {(-PathDistinctiveXY) OutputToLog} if
 } bind def % /PathDistinctiveXY
 
-% CentreX CentreY MinMaxRadiusSquared Tolerance   PathBRadiusSquared   MaxRadiusSquared
+/PBRS_SetMaxR  % takes two parameters, x y
+{
+	dup mul  exch  dup mul  add
+	dup RadiusSquaredMax gt {/RadiusSquaredMax exch def} {pop} ifelse
+} bind def  % PBRS_SetMaxR
+
+% CentreX CentreY   PathBRadiusSquared   RadiusSquaredMax
 % What is largest distance from CentreX,CentreY?
 /PathBRadiusSquared
 {
 	//DeBugLevel 10 le {(+PathBRadiusSquared) OutputToLog} if
-	23 dict begin
-	/Tolerance exch def  /MaxRadiusSquared exch def  /CentreY exch def  /CentreX exch def
+	12 dict begin
+	/CentreY exch def  /CentreX exch def
 
-	/SetMaxR  % takes two parameters, x y
-	{
-		CentreY sub dup mul  exch  CentreX sub dup mul  add
-		dup MaxRadiusSquared gt {/MaxRadiusSquared exch def} {pop} ifelse
-	} def  % SetMaxR
-
+	/RadiusSquaredMax 0 def
 	1 {
 		% First rough bounds from a quick run-through, as doing so can save doing needless arithmetic in curve routine.
 		{
 			{ % start move
-				/y0 exch def    /x0 exch def
+				/y0 exch CentreY sub def    /x0 exch CentreX sub def
 				/b //true def
 			}  % end of move
 			{  % start line
-				b {x0 y0 SetMaxR  /b //false def} if
-				/y0 exch def    /x0 exch def
-				x0 y0 SetMaxR
+				b {x0 y0 PBRS_SetMaxR  /b //false def} if
+				/y0 exch CentreY sub def    /x0 exch CentreX sub def
+				x0 y0 PBRS_SetMaxR
 			}  % end of line
 			{  % start curve
-				b {x0 y0 SetMaxR  /b //false def} if
-				/y0 exch def  /x0 exch def  pop pop pop pop
-				x0 y0 SetMaxR
+				b {x0 y0 PBRS_SetMaxR  /b //false def} if
+				/y0 exch CentreY sub def  /x0 exch CentreX sub def  pop pop pop pop
+				x0 y0 PBRS_SetMaxR
 			}  % end of curve
-			{  % start close
-			}  % end of close
+			{}  % close
 			pathforall
 		} Stopped
 		{
 			(Warning: protected path in PathBRadiusSquared, position 1) OutputToLog
-			GSave flattenpath pathbbox GRestore  4 copy 3 1 roll exch  SetMaxR SetMaxR SetMaxR SetMaxR  exit
+			GSave flattenpath pathbbox GRestore  4 copy 3 1 roll exch  PBRS_SetMaxR PBRS_SetMaxR PBRS_SetMaxR PBRS_SetMaxR  exit
 		} if  % Stopped
 
 		% Second a slower run-through, not redoing the above, but, where necessary, thinking hard about curves. Different role for b.
 		{
 			{  % start move
-				/y0 exch def    /x0 exch def
+				/y0 exch CentreY sub def    /x0 exch CentreX sub def
 			}  % end of move
 			{  % start line
-				/y0 exch def    /x0 exch def
+				/y0 exch CentreY sub def    /x0 exch CentreX sub def
 			}  % end of line
 			{  % start curve
-				/y3 exch def  /x3 exch def    /y2 exch def  /x2 exch def    /y1 exch def  /x1 exch def
-				y2 CentreY sub dup mul  x2 CentreX sub dup mul  add  MaxRadiusSquared gt
-				y1 CentreY sub dup mul  x1 CentreX sub dup mul  add  MaxRadiusSquared gt  or
+				/y3 exch CentreY sub def  /x3 exch CentreX sub def
+				/y2 exch CentreY sub def  /x2 exch CentreX sub def
+				/y1 exch CentreY sub def  /x1 exch CentreX sub def
+
+				y2 dup mul  x2 dup mul  add  RadiusSquaredMax gt
+				y1 dup mul  x1 dup mul  add  RadiusSquaredMax gt  or
 				{
 					/ax x0 neg x1 3 mul add x2 3 mul sub x3 add def
 					/ay y0 neg y1 3 mul add y2 3 mul sub y3 add def
@@ -3347,36 +3350,38 @@ currentdict /SmallCapsDict undef
 					/cx x1 x0 sub 3 mul def
 					/cy y1 y0 sub 3 mul def
 
-					/tNumIntervals
-					Tolerance 0 eq {256}
+					% Mathematica:
+					% dr2 = Collect[ D[(az t^3 + bz t^2 + cz t + z0)^2, t], t ];
+					% coeffs = CoefficientList[dr2, t] // FullSimplify;
+					% StringReplace[ToString[FortranForm[coeffs]], {","->",   ",  "**"->"^"}]
+					% Ans:  List(2*cz*z0,   2*(cz^2 + 2*bz*z0),   6*(bz*cz + az*z0),   4*(bz^2 + 2*az*cz),   10*az*bz,   6*az^2)
+					[
+						cx x0 mul                       cy y0 mul                       add  2 mul  % Coeff 0
+						cx cx mul 2 bx x0 mul mul add   cy cy mul 2 by y0 mul mul add   add  2 mul  % Coeff 1
+						bx cx mul ax x0 mul add         by cy mul ay y0 mul add         add  6 mul  % Coeff 2
+						bx bx mul 2 ax cx mul mul add   by by mul 2 ay cy mul mul add   add  4 mul  % Coeff 3
+						ax bx mul                       ay by mul                       add 10 mul  % Coeff 4
+						ax ax mul                       ay ay mul                       add  6 mul  % Coeff 5: quintic -- doff hat at Evariste Galois.
+					] 0 //true  1 //true  //Epsilon  PolynomialRoots  % array of t, turning points values
 					{
-						x0 x1 sub abs  x0 x2 sub abs  x0 x3 sub abs  x1 x2 sub abs  x1 x3 sub abs  x2 x3 sub abs
-						y0 y1 sub abs  y0 y2 sub abs  y0 y3 sub abs  y1 y2 sub abs  y1 y3 sub abs  y2 y3 sub abs
-						11 {2 copy lt {exch} if pop} repeat
-						Tolerance add  3 mul  Tolerance div ceiling cvi  % the 3 mul is slightly excessive
-					} ifelse  def  % /tNumIntervals
-
-					1  1  tNumIntervals 1 sub
-					{
-						tNumIntervals div /t exch def
+						/t exch def
 						ax t mul bx add t mul cx add t mul x0 add
 						ay t mul by add t mul cy add t mul y0 add
-						SetMaxR
-					} for  % t
+						PBRS_SetMaxR
+					} forall  % t
 				} if  % curve might cross current boundary
 				/y0 y3 def    /x0 x3 def
 			}  % end of curve
-			{  % start close
-			}  % end of close
+			{}  % close
 			pathforall
 		} exec //false % Stopped
 		{
 			(Warning: protected path in PathBRadiusSquared, position 2) OutputToLog
-			GSave flattenpath pathbbox GRestore  4 copy 3 1 roll exch  SetMaxR SetMaxR SetMaxR SetMaxR  exit
+			GSave flattenpath pathbbox GRestore  4 copy 3 1 roll exch  PBRS_SetMaxR PBRS_SetMaxR PBRS_SetMaxR PBRS_SetMaxR  exit
 		} if  % Stopped
 	} repeat  % 1
 
-	MaxRadiusSquared
+	RadiusSquaredMax
 	end
 	//DeBugLevel 10 le {(-PathBRadiusSquared) OutputToLog} if
 } bind def  % PathBRadiusSquared
@@ -8677,7 +8682,7 @@ currentdict /GlyphShowKnownAbsences undef
 			TitleOffsetsProportionFontSizeVertical   SheetNum get WithinPage get  //DeSizeRounding mul neg
 			GSave  NullDevice  newpath
 			TitlesFont //DeSizeRounding SelectFont  0 0 moveto  Titles WithinTitles get  //true  CharPathRecursive
-			0  0.12  PathBRadiusSquared  % sub-1pt tolerance probably much tighter than needed, but underestimation of radius could be bad.
+			PathBRadiusSquared
 			GRestore
 			dup 0 gt
 			{
@@ -8997,12 +9002,12 @@ currentdict /GlyphShowKnownAbsences undef
 			TitleProportionFontSizeT SheetNum get WithinPage get  add  mul  exch 1 exch sub mul add      AbovetitleOffsetsAbsoluteVertical SheetNum get exch WithinPage exch put
 			TitleProportionFontSizeB SheetNum get WithinPage get  add  mul  exch 1 exch sub mul sub neg  BelowtitleOffsetsAbsoluteVertical SheetNum get exch WithinPage exch put
 
-			% CentreX CentreY MinMaxRadiusSquared Tolerance   PathBRadiusSquared   MaxRadiusSquared
+			% CentreX CentreY   PathBRadiusSquared   MaxRadiusSquared
 			OvertitleOffsetsProportionFontSizeHorizontal SheetNum get WithinPage get  //DeSizeRounding mul neg
 			OvertitleOffsetsProportionFontSizeVertical SheetNum get WithinPage get  //DeSizeRounding mul neg
 			GSave  NullDevice  newpath
 			OvertitlesFont //DeSizeRounding SelectFont  0 0 moveto  Overtitles WithinTitles get  //true  CharPathRecursive
-			0  0.12  PathBRadiusSquared  % sub-1pt tolerance probably much tighter than needed, but underestimation of radius could be bad.
+			PathBRadiusSquared
 			GRestore
 			dup 0 gt {sqrt RadiiCirclearrayInsideUsableO SheetNum get exch div //DeSizeRounding mul} {pop //Infinity} ifelse
 			TitleFontSizes SheetNum get WithinPage get dup //PrinterEpsilon le {pop} {OvertitleMaxFontSizeProportionTitles mul 2 copy gt {exch} if pop} ifelse
