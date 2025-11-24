@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:15 Sunday 23rd November 2025
+% This version 19:55 Monday 24th November 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202511232115) def
+/ParametersVersionDateTimeAdobeFormat (D:202511241955) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -837,7 +837,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202511232115) def
+/SoftwareVersionDateTimeAdobeFormat (D:202511241955) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -3351,17 +3351,16 @@ currentdict /SmallCapsDict undef
 					/cy y1 y0 sub 3 mul def
 
 					% Mathematica:
-					% dr2 = Collect[ D[(az t^3 + bz t^2 + cz t + z0)^2, t], t ];
-					% coeffs = CoefficientList[dr2, t] // FullSimplify;
+					% coeffs = CoefficientList[ D[(az t^3 + bz t^2 + cz t + z0)^2, t] / 2, t] // FullSimplify;
 					% StringReplace[ToString[FortranForm[coeffs]], {","->",   ",  "**"->"^"}]
-					% Ans:  List(2*cz*z0,   2*(cz^2 + 2*bz*z0),   6*(bz*cz + az*z0),   4*(bz^2 + 2*az*cz),   10*az*bz,   6*az^2)
+					% Ans:  List(cz*z0,   cz^2 + 2*bz*z0,   3*(bz*cz + az*z0),   2*(bz^2 + 2*az*cz),   5*az*bz,   3*az^2)
 					[
-						cx x0 mul                       cy y0 mul                       add  2 mul  % Coeff 0
-						cx cx mul 2 bx x0 mul mul add   cy cy mul 2 by y0 mul mul add   add  2 mul  % Coeff 1
-						bx cx mul ax x0 mul add         by cy mul ay y0 mul add         add  6 mul  % Coeff 2
-						bx bx mul 2 ax cx mul mul add   by by mul 2 ay cy mul mul add   add  4 mul  % Coeff 3
-						ax bx mul                       ay by mul                       add 10 mul  % Coeff 4
-						ax ax mul                       ay ay mul                       add  6 mul  % Coeff 5: quintic -- doff hat at Evariste Galois.
+						cx x0 mul                       cy y0 mul                       add        % Coeff 0
+						cx cx mul 2 bx x0 mul mul add   cy cy mul 2 by y0 mul mul add   add        % Coeff 1
+						bx cx mul ax x0 mul add         by cy mul ay y0 mul add         add 3 mul  % Coeff 2
+						bx bx mul 2 ax cx mul mul add   by by mul 2 ay cy mul mul add   add 2 mul  % Coeff 3
+						ax bx mul                       ay by mul                       add 5 mul  % Coeff 4
+						ax ax mul                       ay ay mul                       add 3 mul  % Coeff 5: quintic -- doff hat at Evariste Galois.
 					] 0 //true  1 //true  //Epsilon  PolynomialRoots  % array of t, turning points values
 					{
 						/t exch def
@@ -3387,7 +3386,7 @@ currentdict /SmallCapsDict undef
 } bind def  % PathBRadiusSquared
 
 % ExpansionCentreX ExpansionCentreY CircleCentreX CircleCentreY CircleRadius   PathMaxScalingFitCircle   Scaling
-% Given a fixed circle, and a path, buy how what factor can the path be expanded about a fixed point and still fit in circle?
+% Given a fixed circle, and a path, by what factor can the path be expanded about a fixed point to just fit in circle?
 /PathMaxScalingFitCircle
 {
 	//DeBugLevel 10 le {(+PathMaxScalingFitCircle) OutputToLog} if
