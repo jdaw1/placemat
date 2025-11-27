@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:55 Monday 24th November 2025
+% This version 23:15 Thursday 27th November 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202511241955) def
+/ParametersVersionDateTimeAdobeFormat (D:202511272315) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -543,6 +543,7 @@ if} bind def  % /VoteRecorderCrossedBox
 
 % GhostScript doesn't pickle settransfer; Preview doesn't see non-pickled settransfer. The bug is in Preview. http://groups.google.com/g/comp.lang.postscript/c/NJLAfvN_jwU  "execform, 75% faded", 30 Jul 2012
 /TastingNotes_NumVerticalSections 1 def  % If table likely to be very space-constrained, set to 2.
+/TastingNotes_FoldSectionsGap 18 def
 /TastingNotesCirclesBehind {IsDistiller  {GlassesNumCopies 1 ge} MightBeTrue and  BackgroundTextsTastingNotes not and  SideBySideGlassesTastingNotes not and} bind def
 /TastingNotesCirclesBehindFitAndCentreInRow false def
 /TastingNotesCirclesBehindFadingFactorIfAllBlack 0.125 def
@@ -837,7 +838,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202511241955) def
+/SoftwareVersionDateTimeAdobeFormat (D:202511272315) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -12827,7 +12828,6 @@ currentdict /GlyphShowKnownAbsences undef
 				/WithinTitles GlassesOnTastingNotePages TNSheetNum GetEU WithinPage GetEU def
 
 				/CurrentTop   TN_NumPerCol  dup WithinPage exch mod sub TNRowHeight mul MgnB add  def
-				/TastingNotes_FoldSectionsGap 18 def  % Embedded constant, perhaps promotable to being a parameter.
 				/ThisW  PageWidth MgnL MgnR add sub  TastingNotes_NumVerticalSections 2 ge {TastingNotes_NumVerticalSections 1 sub TastingNotes_FoldSectionsGap mul sub  TastingNotes_NumVerticalSections div} if  def
 				/ThisL  TastingNotes_NumVerticalSections 2 lt {MgnL} {WithinPage TN_NumPerCol div //Epsilon add floor cvi  ThisW TastingNotes_FoldSectionsGap add mul  MgnL add} ifelse  def
 				ThisL CurrentTop moveto
@@ -13187,48 +13187,54 @@ currentdict /GlyphShowKnownAbsences undef
 		//DeBugLevel 75 le {( TastingNotesInnerLoop: TastingNoteForms) OutputToLog} if
 		TastingNoteForms TNSheetNum get   execform
 		currentdict /WithinPage undef  currentdict /WithinTitles undef
-		12 dict begin
-		0  1  GlassesOnTastingNotePages TNSheetNum GetEU length 1 sub
+		13 dict begin
+		0  4  TastingNotesStarsNameColsRowsArrangement length 4 sub
 		{
-			/WithinPage exch def
-			/WithinTitles GlassesOnTastingNotePages TNSheetNum GetEU WithinPage GetEU def
-			0  4  TastingNotesStarsNameColsRowsArrangement length 4 sub
+			/i exch def
+			% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=69275#p69275
+			ThisNameASCII TastingNotesStarsNameColsRowsArrangement i get ASCIIfy eq
 			{
-				/i exch def
-				% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&p=69275#p69275
-				ThisNameASCII TastingNotesStarsNameColsRowsArrangement i get ASCIIfy eq
+				/TNcols TastingNotesStarsNameColsRowsArrangement i 1 add GetEU def
+				/TNrows TastingNotesStarsNameColsRowsArrangement i 2 add GetEU def
+				/TNtype TastingNotesStarsNameColsRowsArrangement i 3 add GetEU def
+				% 1.577193 = 5 5 sqrt sub 10 div sqrt 3 mul; 1.459220 = 39 5 sqrt 7 mul sub 16 div; 1.979367 = 5 sqrt dup 5 add 2 mul sqrt 8 mul add 1 sub 16 div
+				1 {
+					TNtype /Alternating eq {/xStepFactor 1.577193 def  /yStepFactor 1.459220 def  /Angle {ColNum TNcols add 1 add 2 mod 36 mul} bind def  exit} if
+					TNtype /Sideways    eq {/xStepFactor 1.459220 def  /yStepFactor 1.577193 def  /Angle {RowNum 2 mod 0 eq {18} {-18} ifelse } bind def  exit} if
+					TNtype /Upright     eq {/xStepFactor 1.979367 def  /yStepFactor 1.459220 def  /Angle 0                                      def  exit} if
+					mark (Error: unknown star arrangement in item ) i (+3 = ) i 3 add ( of TastingNotesStarsNameColsRowsArrangement: neither /Alternating nor /Sideways nor /Upright.) ConcatenateToMark OutputToLog stop
+				} repeat  % 1
+				/StarRadius  mark
+					10
+					TitlesFont TastingNotesTitlesFontSizeMax SelectFont (DFGKNOSTVW) StringHeight  1 //Sqrt5 5 div sub mul  % Embedded constant string
+					TastingNotesStarTops TNSheetNum get dup length 1 sub get MgnB sub  TNrows dup 0 le {pop} {1 sub yStepFactor mul 2 add div} ifelse 2 div  % Approx, because stars packed tighter than circles. Final "2 div" to take not more than half space.
+					PageWidth MgnL MgnR add sub 0.25 mul  TNcols dup 0 eq {pop} {1 sub xStepFactor mul 2 add div} ifelse  % Approx, because stars packed tighter than circles
+				MinToMark   def  % /StarRadius
+				/ThisW  PageWidth MgnL MgnR add sub  TastingNotes_NumVerticalSections 2 ge {TastingNotes_NumVerticalSections 1 sub TastingNotes_FoldSectionsGap mul sub  TastingNotes_NumVerticalSections div} if  def
+				0  1  GlassesOnTastingNotePages TNSheetNum GetEU length 1 sub
 				{
-					/TNcols TastingNotesStarsNameColsRowsArrangement i 1 add GetEU def
-					/TNrows TastingNotesStarsNameColsRowsArrangement i 2 add GetEU def
-					/TNtype TastingNotesStarsNameColsRowsArrangement i 3 add GetEU def
-					% 1.577193 = 5 5 sqrt sub 10 div sqrt 3 mul; 1.459220 = 39 5 sqrt 7 mul sub 16 div; 1.979367 = 5 sqrt dup 5 add 2 mul sqrt 8 mul add 1 sub 16 div
-					1 {
-						TNtype /Alternating eq {/xStepFactor 1.577193 def  /yStepFactor 1.459220 def  /Angle {ColNum TNcols add 1 add 2 mod 36 mul} bind def  exit} if
-						TNtype /Sideways    eq {/xStepFactor 1.459220 def  /yStepFactor 1.577193 def  /Angle {RowNum 2 mod 0 eq {18} {-18} ifelse } bind def  exit} if
-						TNtype /Upright     eq {/xStepFactor 1.979367 def  /yStepFactor 1.459220 def  /Angle 0                                      def  exit} if
-						mark (Error: unknown star arrangement in item ) i (+3 = ) i 3 add ( of TastingNotesStarsNameColsRowsArrangement: neither /Alternating nor /Sideways nor /Upright.) ConcatenateToMark OutputToLog stop
-					} repeat  % 1
-					/StarRadius  mark
-						10
-						TitlesFont TastingNotesTitlesFontSizeMax SelectFont (DFGKNOSTVW) StringHeight  1 //Sqrt5 5 div sub mul  % Embedded constant string
-						TastingNotesStarTops TNSheetNum get dup length 1 sub get MgnB sub  TNrows dup 0 le {pop} {1 sub yStepFactor mul 2 add div} ifelse 2 div  % Approx, because stars packed tighter than circles. Final "2 div" to take not more than half space.
-						PageWidth MgnL MgnR add sub 0.25 mul  TNcols dup 0 eq {pop} {1 sub xStepFactor mul 2 add div} ifelse  % Approx, because stars packed tighter than circles
-					MinToMark   def  % /StarRadius
-					0  1  TNcols 1 sub
+					/WithinPage exch def
+					/WithinTitles  GlassesOnTastingNotePages TNSheetNum GetEU WithinPage GetEU  def
+					//false [ CirclearraysTastingNotes TitlesTastingNotes SubtitlesTastingNotes ] {WithinTitles get NonEmptyCompoundObject {pop //true exit} if} forall
 					{
-						/ColNum exch def
-						0  1  TNrows 1 sub
+						/TNVSN  WithinPage  GlassesOnTastingNotePages TNSheetNum GetEU length  TastingNotes_NumVerticalSections  div ceiling  div floor  def
+						/ThisR  PageWidth MgnR sub  TastingNotes_NumVerticalSections 2 ge {TastingNotes_NumVerticalSections 1 sub TNVSN sub  ThisW TastingNotes_FoldSectionsGap add  mul sub} if  def
+						0  1  TNcols 1 sub
 						{
-							/RowNum exch def
-							PageWidth MgnR ColNum StarRadius xStepFactor mul mul add sub   TastingNotesStarTops TNSheetNum get WithinPage get RowNum StarRadius yStepFactor mul mul sub  moveto
-							/Right /Top StarRadius /Radius Angle 5 2 //false //false  Star  0 setgray  fill
-							begin CenterX CenterY moveto /Center /Middle Radius 0.75 mul /Radius Angle 5 2 //false //true end Star pop  1 setgray  fill
-						} for  % /RowNum
-					} for  % /ColNum
-					exit
-				} if  % Names ... eq
-			} for  % i
-		} for  % WithinPage, WithinTitles
+							/ColNum exch def
+							0  1  TNrows 1 sub
+							{
+								/RowNum exch def
+								ThisR TNcols 1 sub ColNum sub StarRadius xStepFactor mul mul sub   TastingNotesStarTops TNSheetNum get WithinPage get RowNum StarRadius yStepFactor mul mul sub  moveto
+								/Right /Top StarRadius /Radius Angle 5 2 //false //false  Star  0 setgray  fill
+								begin CenterX CenterY moveto /Center /Middle Radius 0.75 mul /Radius Angle 5 2 //false //true end Star pop  1 setgray  fill
+							} for  % /RowNum
+						} for  % /ColNum
+					} if  % ... NonEmptyCompoundObject ...
+				} for  % WithinPage, WithinTitles
+				exit  % i loop
+			} if  % Names ... eq
+		} for  % i
 		end
 
 		% Discussion: http://www.ThePortForum.com/viewtopic.php?t=175&start=929
