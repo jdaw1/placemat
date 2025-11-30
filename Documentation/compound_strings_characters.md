@@ -312,6 +312,6 @@ Some examples follow&mdash;though your version of these fonts might not be the s
     - [`/Palatino-Roman`](images/Palatino-Roman.pdf) 
     - [`/RobotoSlab-Regular`](images/RobotoSlab-Regular.pdf) 
     - [`/CenturySchoolbook`](images/CenturySchoolbook.pdf) 
-* A decorative font: 
+* Decorative fonts: 
     - [`/Harrington`](images/Harrington.pdf)
     - [`/DancingScript-Regular`](images/DancingScript-Regular.pdf)
