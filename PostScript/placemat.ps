@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:15 Thursday 27th November 2025
+% This version 17:00 Sunday 30th November 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202511272315) def
+/ParametersVersionDateTimeAdobeFormat (D:202511301700) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -838,7 +838,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202511272315) def
+/SoftwareVersionDateTimeAdobeFormat (D:202511301700) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -3429,6 +3429,8 @@ currentdict /SmallCapsDict undef
 			}  % end of line
 			{  % start curve
 				/y3 exch def  /x3 exch def    /y2 exch def  /x2 exch def    /y1 exch def  /x1 exch def
+				% Would be nice to have solved this with a polynomial. But: Mathematica's GroebnerBasis[] never finished; and likely it
+				% would be a degree-22 polynomial, too much for single-precision arithmetic, per https://github.com/jdaw1/placemat/issues/151
 				b {x0 y0 SetMaxS pop  /b //false def} if
 				x3 y3 SetMaxS pop
 				/ax x0 neg x1 3 mul add x2 3 mul sub x3 add def
@@ -3450,19 +3452,18 @@ currentdict /SmallCapsDict undef
 				{
 					1  1  255
 					{
-						dup 8 mod 0 ne
+						dup 32 mod 0 ne
 						{
 							256 div /t exch def
 							ax t mul bx add t mul cx add t mul x0 add
 							ay t mul by add t mul cy add t mul y0 add
 							SetMaxS pop
-						} {pop} ifelse  % 8 mod 0 ne
+						} {pop} ifelse  % 32 mod 0 ne
 					} for  % t
 				} if  % MoreWorkToDo
 				/y0 y3 def    /x0 x3 def
 			} % end of curve
-			{  % start close
-			}  % end of close
+			{}  % close
 			pathforall
 		} Stopped
 		{
@@ -4593,7 +4594,8 @@ currentdict /GlyphShowKnownAbsences undef
 } bind def  % /CheckMark
 
 
-/ThePortForumIconForm  % Fits in box with lower-left at (0,0) and unit sides. Calling code to translate and scale and revert.
+% Fits in box with lower-left at (0,0) and unit sides. Calling code to translate and scale and revert.
+/ThePortForumIconForm
 <<
 	/FormType 1
 	/BBox [ -0.0625 dup  1.0625 dup ]
