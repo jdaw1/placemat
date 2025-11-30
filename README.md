@@ -22,7 +22,7 @@
 
 ## About ##
 
-This PostScript program makes placemats for tastings of Port, of Madeira, whisky, beer, wine, etc.
+This PostScript program makes placemats for tastings of Port, of Madeira, whisky, whiskey, beer, wine, etc.
 
 <div align="center">
 

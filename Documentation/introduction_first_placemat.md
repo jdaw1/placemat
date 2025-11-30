@@ -36,7 +36,7 @@
 <a name="Introduction"></a>
 ## Introduction ##
 
-You and your lucky guests are to enjoy a tasting of a fine beverage &mdash; perhaps Port, perhaps whisky, perhaps something else. 
+You and your lucky guests are to enjoy a tasting of a fine beverage &mdash; perhaps Port, perhaps Madeira, perhaps whisky or whiskey, or maybe something else. 
 Of course, there will be many glasses, each person having one for each drink to taste. 
 It is important to avoid confusion about what is in each glass. 
 Hence labelling is needed, best done with beautiful printed pages on which glasses can sit. 
