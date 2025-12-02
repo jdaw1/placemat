@@ -1,6 +1,6 @@
 %!PS
 
-% This version 17:00 Sunday 30th November 2025
+% This version 22:10 Tuesday 2nd December 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202511301700) def
+/ParametersVersionDateTimeAdobeFormat (D:202512022210) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -838,7 +838,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202511301700) def
+/SoftwareVersionDateTimeAdobeFormat (D:202512022210) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -3386,53 +3386,53 @@ currentdict /SmallCapsDict undef
 	//DeBugLevel 10 le {(-PathBRadiusSquared) OutputToLog} if
 } bind def  % PathBRadiusSquared
 
+/PMSFC_SetMaxS  % takes three parameters, x y, bool. If bool true and x y and improvement, defs MaxS. Returns boolean showing whether (would be) an improvement
+{
+	/ifBetterDef exch def  /yyy exch def  /xxx exch def
+	% ( s*(xxx-ExpansionCentreX) + ExpansionCentreX - CircleCentreX )^2  +  ( s*(yyy-ExpansionCentreY) + ExpansionCentreY - CircleCentreY )^2  ==  CircleRadius^2
+	% Hence:
+	% s^2: (xxx-ExpansionCentreX)^2 + (yyy-ExpansionCentreY)^2
+	% s^1: 2(xxx-ExpansionCentreX)*(ExpansionCentreX-CircleCentreX) + 2(yyy-ExpansionCentreY)*(ExpansionCentreY-CircleCentreY)
+	% s^0: (ExpansionCentreX-CircleCentreX)^2 + (ExpansionCentreY-CircleCentreY)^2 - CircleRadius^2
+	/aaa  xxx ExpansionCentreX sub dup mul  yyy ExpansionCentreY sub dup mul  add def
+	//false
+	aaa 0 gt
+	{
+		/bbb  xxx ExpansionCentreX sub ExpansionCentreX CircleCentreX sub mul  yyy ExpansionCentreY sub ExpansionCentreY CircleCentreY sub mul  add 2 mul  def
+		/ccc  ExpansionCentreX CircleCentreX sub dup mul  ExpansionCentreY CircleCentreY sub dup mul  add  CircleRadius dup mul sub  def
+		[ ccc bbb aaa ] 0 //true //Infinity //true //PrinterEpsilon PolynomialRoots
+		{dup MaxS lt {ifBetterDef {/MaxS exch def} {pop} ifelse  pop //true} {pop} ifelse} forall
+	} if  % aaa 0 gt
+} bind def  % PMSFC_SetMaxS
+
 % ExpansionCentreX ExpansionCentreY CircleCentreX CircleCentreY CircleRadius   PathMaxScalingFitCircle   Scaling
 % Given a fixed circle, and a path, by what factor can the path be expanded about a fixed point to just fit in circle?
 /PathMaxScalingFitCircle
 {
 	//DeBugLevel 10 le {(+PathMaxScalingFitCircle) OutputToLog} if
-	31 dict begin
+	29 dict begin
 	/CircleRadius exch def  /CircleCentreY exch def  /CircleCentreX exch def  /ExpansionCentreY exch def  /ExpansionCentreX exch def
 
 	/MaxS //Infinity def
 
-	1 {
-		/SetMaxS  % takes two parameters, x y, returns boolean showing whether an improvement
-		{
-			/yyy exch def  /xxx exch def
-
-			% ( s*(xxx-ExpansionCentreX) + ExpansionCentreX - CircleCentreX )^2  +  ( s*(yyy-ExpansionCentreY) + ExpansionCentreY - CircleCentreY )^2  ==  CircleRadius^2
-			% Hence:
-			% s^2: (xxx-ExpansionCentreX)^2 + (yyy-ExpansionCentreY)^2
-			% s^1: 2(xxx-ExpansionCentreX)*(ExpansionCentreX-CircleCentreX) + 2(yyy-ExpansionCentreY)*(ExpansionCentreY-CircleCentreY)
-			% s^0: (ExpansionCentreX-CircleCentreX)^2 + (ExpansionCentreY-CircleCentreY)^2 - CircleRadius^2
-			/aaa  xxx ExpansionCentreX sub dup mul  yyy ExpansionCentreY sub dup mul  add def
-			//false
-			aaa 0 gt
+	{
+		{ % start move
+			/y0 exch def    /x0 exch def    /b //true def
+		}  % end of move
+		{  % start line
+			b {x0 y0 //true PMSFC_SetMaxS pop  /b //false def} if
+			/y0 exch def    /x0 exch def
+			x0 y0 //true PMSFC_SetMaxS pop
+		}  % end of line
+		{  % start curve
+			/y3 exch def  /x3 exch def    /y2 exch def  /x2 exch def    /y1 exch def  /x1 exch def
+			% Difficult to solve this with a polynomial: Mathematica's GroebnerBasis[] never finished; and likely it would be
+			% a degree-22 polynomial, too much for single-precision arithmetic, per https://github.com/jdaw1/placemat/issues/151
+			x1 y1 //false PMSFC_SetMaxS
+			x2 y2 //false PMSFC_SetMaxS or
+			x3 y3 //true  PMSFC_SetMaxS or
+			b {x0 y0 //true PMSFC_SetMaxS or  /b //false def} if
 			{
-				/bbb  xxx ExpansionCentreX sub ExpansionCentreX CircleCentreX sub mul  yyy ExpansionCentreY sub ExpansionCentreY CircleCentreY sub mul  add 2 mul  def
-				/ccc  ExpansionCentreX CircleCentreX sub dup mul  ExpansionCentreY CircleCentreY sub dup mul  add  CircleRadius dup mul sub  def
-				[ ccc bbb aaa ] 0 //true //Infinity //true //PrinterEpsilon PolynomialRoots {dup MaxS lt {/MaxS exch def pop //true} {pop} ifelse} forall
-			} if  % aaa 0 gt
-		} def  % SetMaxS
-
-		% Can't test for bounding box, so only one run-through
-		{
-			{ % start move
-				/y0 exch def    /x0 exch def
-				/b //true def
-			}  % end of move
-			{  % start line
-				b {x0 y0 SetMaxS pop  /b //false def} if
-				/y0 exch def    /x0 exch def
-				x0 y0 SetMaxS pop
-			}  % end of line
-			{  % start curve
-				/y3 exch def  /x3 exch def    /y2 exch def  /x2 exch def    /y1 exch def  /x1 exch def
-				% Would be nice to have solved this with a polynomial. But: Mathematica's GroebnerBasis[] never finished; and likely it
-				% would be a degree-22 polynomial, too much for single-precision arithmetic, per https://github.com/jdaw1/placemat/issues/151
-				b {x0 y0 SetMaxS pop  /b //false def} if
-				x3 y3 SetMaxS pop
 				/ax x0 neg x1 3 mul add x2 3 mul sub x3 add def
 				/ay y0 neg y1 3 mul add y2 3 mul sub y3 add def
 				/bx x0 x1 2 mul sub x2 add 3 mul def
@@ -3440,39 +3440,34 @@ currentdict /SmallCapsDict undef
 				/cx x1 x0 sub 3 mul def
 				/cy y1 y0 sub 3 mul def
 
-				/MoreWorkToDo //false def
-				1  1  7
+				/tNumIntervals
+					[ x0 x1 x2 x3 ] dup Max exch Min sub
+					[ y0 y1 y2 y3 ] dup Max exch Min sub  2 copy lt {exch} if pop
+					48 mul  CurrentFontSizeY div  0.48 div  % Moving along path in 0.48pt steps, of font 48pt, when tangent to boundary circle, is tiny radius difference.
+					ceiling cvi    7  2 copy lt {exch} if pop    1023  2 copy gt {exch} if pop  % Sensible bounds
+				def  % /tNumIntervals
+				% /tNumIntervals WatchExpression
+
+				1  1  tNumIntervals 1 sub
 				{
-					8 div /t exch def
+					tNumIntervals div /t exch def
 					ax t mul bx add t mul cx add t mul x0 add
 					ay t mul by add t mul cy add t mul y0 add
-					SetMaxS {/MoreWorkToDo //true def} if
+					//true PMSFC_SetMaxS pop
 				} for  % t
-				MoreWorkToDo
-				{
-					1  1  255
-					{
-						dup 32 mod 0 ne
-						{
-							256 div /t exch def
-							ax t mul bx add t mul cx add t mul x0 add
-							ay t mul by add t mul cy add t mul y0 add
-							SetMaxS pop
-						} {pop} ifelse  % 32 mod 0 ne
-					} for  % t
-				} if  % MoreWorkToDo
-				/y0 y3 def    /x0 x3 def
-			} % end of curve
-			{}  % close
-			pathforall
-		} Stopped
-		{
-			(Warning: protected path in PathMaxScalingFitCircle) OutputToLog
-			GSave flattenpath pathbbox GRestore  4 copy 3 1 roll exch  SetMaxS pop  SetMaxS pop  SetMaxS pop  SetMaxS pop  exit
-		} if  % Stopped
+			} if  % Bounding box makes a difference
 
-		MaxS
-	} repeat  % 1
+			/y0 y3 def    /x0 x3 def
+		} % end of curve
+		{}  % close
+		pathforall
+	} Stopped
+	{
+		(Warning: protected path in PathMaxScalingFitCircle) OutputToLog
+		GSave flattenpath pathbbox GRestore  4 copy 3 1 roll exch  //true PMSFC_SetMaxS pop  //true PMSFC_SetMaxS pop  //true PMSFC_SetMaxS pop  //true PMSFC_SetMaxS pop
+	} if  % Stopped
+
+	MaxS
 
 	end
 	//DeBugLevel 10 le {(-PathMaxScalingFitCircle) OutputToLog} if
