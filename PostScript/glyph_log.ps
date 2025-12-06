@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:50 Friday 5th December 2025
+% This version 19:05 Saturday 6th December 2025
 % Copyright 2021-2025 Julian D. A. Wiseman of www.jdawiseman.com.
 
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -890,28 +890,29 @@ dup StringWidthRecursive  PageWidth exch sub 2 div  dup Margin lt {pop Margin} i
 [
 	[
 		(THE FIVE BOXING WIZARDS JUMP QUICKLY)
-		[(  ) /Atilde /Eacute /Igrave /Ocircumflex /Udieresis /Ccedilla /Ntilde ]
+		[(  ) /Aring /Eacute /Igrave /Ocircumflex /Udieresis /Ccedilla /Ntilde ]
 		(  0123456789)
-		[(  ) /sterling /dollar /Euro /yen /won]
-		[(  ) /onehalf /threequarters /divide /multiply /minus]
+		[(  ) /onehalf /threequarters]   [/divide /multiply /minus]
+		[(  ) /sterling]   [/dollar]   [/Euro]   [/yen]   [/won]   [/currency]
+		[(  ) /bullet /lozenge]   [/club /diamond /heart /spade]
 	]
 	[
 		(the quick brown fox jumps over a lazy dog)
-		[(  ) /atilde /eacute /igrave /ocircumflex /udieresis /ccedilla /ntilde ]
-		(  !"#$%&'\(\)*+,-./:;<=>?@[\\]^_`{|}~)  % all of which are ASCII
+		[(  ) /aring /eacute /igrave /ocircumflex /udieresis /ccedilla /ntilde ]
+		(  !"#$%&'\(\)*+,-./:;<=>?@[\\]^_`{|}~)  % all ASCII
 		[(  ) /fi /fl]
-		[(  ) /dagger /daggerdbl /section]
+		[(  ) /dagger /daggerdbl /section /paragraph]
 	]
 	[
 		(TH56)  ( S97)  % 17..
 		( Fr15)  ( K47)  ( D78)  ( Mz96)  % 18..
 		( Ck12)  ( Ni27)  ( NN31)  ( Df35)  ( Cr45)  ( TSQ47)  ( W55)  ( O60)  % 19..
 		( SW63)  % Smith Woodhouse 1963 is no longer mythical.
-		( G66)  [( C) /aacute (70)]  ( Ch82)  ( F85)  ( Mg91)  ( T92)  ( RP97)  % 19..
+		( G66)  [( C) /aacute (70)]  ( Ch85)  ( Mg91)  ( T92)  ( F94)  ( RP97)  % 19..
 		( V00)   ( Rr03)  ( Qv11)  [( P) /ccedilla (17)]  ( Ud23)  % 20..
 	]  % Do invite the author to this tasting: particularly keen to taste Dow 1878; also the Kopke 1847.
 	(http://github.com/jdaw1/placemat/blob/main/PostScript/glyph_log.ps)
-	(http://github.com/jdaw1/placemat/blob/main/Documentation/compound_strings_characters.md#readme)
+	(http://github.com/jdaw1/placemat/blob/main/Documentation/compound_strings_characters.md#Lists_and_errors)
 ]{
 	/Y Y LineStep sub def
 	dup type /stringtype eq
