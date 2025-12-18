@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:10 Tuesday 2nd December 2025
+% This version 23:55 Thursday 18th December 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202512022210) def
+/ParametersVersionDateTimeAdobeFormat (D:202512182355) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -51,7 +51,7 @@
 ] def  % /Names
 /LeftHanders [ (RMW)  (SRG) (Simon G.)  (HEG) (Helen G.)  (CSD) (Chris D.)  (JG) (Jeff G.)  (ZDR) (Zak R.)  (DWP) (Douglas P.)  (LAB) (Lee B.) ] def
 
-/PaperType /A4 def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]; good value is   {SheetNumGlasses SheetNum get 7 le {/A4} {/A3} ifelse} bind
+/PaperType {GlassesOnSheets SheetNum get length 7 le {/A4} {/A3} ifelse} bind def  % /A4 /A3 /USL = 8.5"x11", /USLegal = 8.5"x14", /Tabloid = 11"x17", [SmallerPts LargerPts]; good value is   {SheetNumGlasses SheetNum get 7 le {/A4} {/A3} ifelse} bind
 /TastingNotesPaperType /A4 def  % If this is /USL then the distiller log is also on 8.5"x11", otherwise log on /A4
 
 /ThePortForumIconPlacement /LowerNonWaterBox def  % /None
@@ -162,18 +162,24 @@
 /PackingDirectionTopToBottom true def  % Ditto
 /PackingDirectionLeftToRight true def  % Ditto
 /PackingStyles [
-	/RectangularDislocation
-	/Diamonds
-	/DiamondsAndRectangular
-	[ /Bespoke5  /OnlyIfOrientation /Landscape ]
-	[ /Bespoke7  /OnlyIfOrientation /Landscape ]
-	[ /RectangularAlternateSplitNudge  /ImprovementPointsMin 2 ]
-	[ /DiamondsPlus  /OnlyIfOrientation /Portrait ]
-	[ /DiamondsPlus  /OnlyIfOrientation /Landscape  /ImprovementPointsMin 2 ]
-	[ /Temple        /OnlyIfOrientation /Landscape  /ImprovementPointsMin 1 ]
-	[ /Temple        /OnlyIfOrientation /Portrait   /ImprovementPointsMin 2 ]
-	[ /RectangularAlternateNudge  /ImprovementPointsMin 2 ]
-	% [ /RightSide  /OnlyIfGlassesNumMax 3  /OnlyIfOrientation /Portrait  /VerticalAlignment /Justify  /SuppressOrnamentsLeft  /SuppressOrnamentsCentre ]
+	[ /RectangularDislocation     /OnlyIfGlassesNumMin 5 ]
+	[ /RectangularDislocation     /OnlyIfOrientation /Landscape ]
+	[ /Diamonds                   /OnlyIfGlassesNumMin 5 ]
+	[ /Diamonds                   /OnlyIfOrientation /Landscape ]
+	[ /DiamondsAndRectangular     /OnlyIfGlassesNumMin 5 ]
+	[ /DiamondsAndRectangular     /OnlyIfOrientation /Landscape ]
+	[ /RectangularAlternateNudge  /OnlyIfGlassesNumMin 5         /ImprovementPointsMin 2 ]
+	[ /RectangularAlternateNudge  /OnlyIfOrientation /Landscape  /ImprovementPointsMin 2 ]
+	[ /Array  /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMin 4  /OnlyIfGlassesNumMax 4  /Positions [0 2 1 2] [0 0    ] [1 3] [1 1] ]  % /RightSide variant
+	[ /Array  /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMin 3  /OnlyIfGlassesNumMax 3  /Positions [0 2 1 2] [0 0 1 0]       [1 1] ]  % /RightSide variant
+	[ /Array  /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMin 2  /OnlyIfGlassesNumMax 2  /Positions [0 1 1 1]                 [1 0] ]  % /RightSide variant
+	[ /Array  /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMin 1  /OnlyIfGlassesNumMax 1  /Positions [0 0 1 0]                       ]  % /RightSide variant
+	% [ /Bespoke5  /OnlyIfOrientation /Landscape ]
+	% [ /Bespoke7  /OnlyIfOrientation /Landscape ]
+	% [ /DiamondsPlus  /OnlyIfOrientation /Portrait ]
+	% [ /DiamondsPlus  /OnlyIfOrientation /Landscape  /ImprovementPointsMin 2 ]
+	% [ /Temple        /OnlyIfOrientation /Landscape  /ImprovementPointsMin 1 ]
+	% [ /Temple        /OnlyIfOrientation /Portrait   /ImprovementPointsMin 2 ]
 	% [ /PostsAndLintel  /CentralGlasses 1  /OnlyIfGlassesNumMin 7  /OnlyIfOrientation /Landscape ]
 	% [ /Arch            /CentralGlasses 1  /OnlyIfGlassesNumMin 6  /OnlyIfOrientation /Landscape ]
 ] def  % /PackingStyles
@@ -396,7 +402,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % /ToSmallestSamePageOrdering, so the radius of each page in the same session, presumed to be equivalent to having the same value of PageOrderingGlasses, is shrunk to the smallest of that session's radii;
 % array the same length as GlassesOnSheets, each radius being shrunk to the smallest of the pages with equal array element.
 /ShrinkRadii /ToSmallestSamePageOrdering def  % /NotAtAll | /ToSmallest | /ToSmallestSamePageOrdering | array denoting equivalence classes
-/MaxRadius 150 def  % Maximum radius of circles
+/MaxRadius 162 def  % Maximum radius of circles  ==>  diameter <= 4.5" = 114.3mm
 /DecantersLabelsMinSpaceForAbovetitlesProportionSmaller 0.2 def
 /DecantersLabelsMinSpaceForBelowtitlesProportionSmaller 0.2 def
 
@@ -838,7 +844,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202512022210) def
+/SoftwareVersionDateTimeAdobeFormat (D:202512182355) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -5628,10 +5634,14 @@ currentdict /GlyphShowKnownAbsences undef
 				/MinYY //Infinity def  /MaxYY //InfinNeg def
 				PositionsStart  1  PackingDescriptor length 1 sub
 				{
-					PackingDescriptor exch GetEU dup  0 GetEU /XX exch def  1 GetEU /YY exch def
-					MinXX XX gt {/MinXX XX def} if  MaxXX XX lt {/MaxXX XX def} if
-					MinYY YY gt {/MinYY YY def} if  MaxYY YY lt {/MaxYY YY def} if
-				} for  % PackingDescriptor
+					PackingDescriptor exch GetEU /ThisPckDscrp exch def
+					0  2  ThisPckDscrp length 2 sub  % "2" for the XX,YY pairs.
+					{
+						ThisPckDscrp exch  2 copy  GetEU /XX exch def  1 add GetEU /YY exch def
+						MinXX XX gt {/MinXX XX def} if  MaxXX XX lt {/MaxXX XX def} if
+						MinYY YY gt {/MinYY YY def} if  MaxYY YY lt {/MaxYY YY def} if
+					} for  % 'i'
+				} for  % PosnNum
 				/R  W H  2 copy gt {exch} if pop  2 div  def
 				PositionsStart 1 add  1  PackingDescriptor length 1 sub
 				{
@@ -6764,7 +6774,7 @@ currentdict /GlyphShowKnownAbsences undef
 								MsX dup mul MsY dup mul add BsX dup mul BsY dup mul add add  R R mul 4 mul sub  MsX BsX mul MsY BsY mul add 2 mul sub
 								MsX BsX sub MdX mul  MsY BsY sub MdY mul add 2 mul  IsMoveable Blocker get {BsX MsX sub BdX mul BsY MsY sub BdY mul add 2 mul add} if
 								MdX dup mul MdY dup mul add  IsMoveable Blocker get {BdX dup MdX 2 mul sub mul  BdY dup MdY 2 mul sub mul  add add} if
-							]  0  //false  1  //true  //PrinterEpsilon  PolynomialRoots  % If there is an adjacent circle, must be moving towards.
+							]  //PrinterEpsilon neg  //false  1  //false  //PrinterEpsilon  PolynomialRoots  % If there is an adjacent circle, must be moving towards.
 							dup length 0 eq {pop 1 put exit} if
 							dup length 1 eq {0 get dup 0 lt {pop 0} if put exit} if
 							% Two solutions. If a double root, within appropriate precision, ignore. Otherwise lesser.
