@@ -1,6 +1,6 @@
 %!PS
 
-% This version 17:00 Saturday 20th December 2025
+% This version 22:50 Saturday 20th December 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202512201700) def
+/ParametersVersionDateTimeAdobeFormat (D:202512202250) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -849,7 +849,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202512201700) def
+/SoftwareVersionDateTimeAdobeFormat (D:202512202250) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -1625,8 +1625,6 @@ currentdict /ArrowCircleToCircle_CanWarn undef
 	exch FontNameFromChoices exch selectfont
 } bind def  % /SelectFont
 
-/SizeArrayOutput {mark 3 1 roll dup LengthCompoundObject 1 gt {dup AllEqual} {//false} ifelse {exch pop (, all of them)} {0 //false ThingToDebugText} ifelse ConcatenateToMark} bind def
-
 /GlyphToASCII <<
 	/adieresis (ae)  /Adieresis (Ae)  /odieresis (oe)  /Odieresis (Oe)  /udieresis (ue)  /Udieresis (Ue)
 	/aring (aa)  /Aring (Aa)  /oslash (oe)  /Oslash (Oe) /scaron (sh)  /Scaron (Sh) /zcaron (zh)  /Zcaron (Zh)
@@ -1802,7 +1800,7 @@ currentdict /ArrowCircleToCircle_CanWarn undef
 mark [ CopyrightStatementPlacemats LicensingAgreementTextPlacemats LicensingAgreementLinkPlacemats ] {dup length 0 eq {pop} {counttomark 2 ge {(\n) exch} if} ifelse} forall ConcatenateToMark
 dup length 0 eq {pop} {OutputToLog} ifelse
 
-mark  (product = ) product (; languagelevel = ) /languagelevel where {pop languagelevel} {(undefined and hence 1)} ifelse (; version = ) version  (; revision = ) revision  ConcatenateToMark OutputToLog
+mark  (product = ) product (; languagelevel = ) /languagelevel where {pop languagelevel} {(undefined and hence 1)} ifelse (; version = ) version  (; revision = ) revision  (; buildtime = ) buildtime  ConcatenateToMark OutputToLog
 
 /IsDistiller false  1 dict begin /SearchString (Distiller) def  0 1 product length SearchString length sub {product exch SearchString length getinterval SearchString eq {pop //true exit} if} for  end def
 
@@ -1977,6 +1975,27 @@ LogThisExtra ASCIIfy dup length 0 gt {mark exch (\n) exch (\n ) ConcatenateToMar
 	end
 	//DeBugLevel 5 le {(-LengthCompoundObject) OutputToLog} if
 } bind def  % /LengthCompoundObject
+
+/NestedArraysLength {dup type /arraytype eq {0 exch {NestedArraysLength add} forall} {pop 1} ifelse} bind def
+/NestedArraysFirst {//null exch dup type /arraytype eq { {NestedArraysFirst dup //null ne {exch pop exit} {pop} ifelse} forall} {exch pop} ifelse} bind def
+
+% Array to string, for arrays of particular nature.
+/SizeArrayOutput
+{
+	1 {
+		dup NestedArraysLength 2 ge
+		{
+			dup AllEqual
+				{exch pop 0 //false ThingToDebugText TrimSpaces (, all of them) Concatenate}
+				{0 //false ThingToDebugText}
+			ifelse
+			exit
+		} if  % ... 2 gt
+		dup NestedArraysLength 1 eq {NestedArraysFirst  0 //false ThingToDebugText  exit} if
+		0 //false ThingToDebugText  exit  % LengthCompoundObject 0 eq
+	} repeat  % 1
+	TrimSpaces
+} bind def  % /SizeArrayOutput
 
 % Similar to 'for' loop, except numbers out-of-order. Half-way number first, then odd quarter-way numbers, then odd eighth-way numbers, etc.
 % Start Step End Code  ForReverseBinary  [anything left by Code, which might be the out-of-order numbers]
@@ -7989,8 +8008,8 @@ currentdict /GlyphShowKnownAbsences undef
 		sub abs //PrinterEpsilon le  and
 	} bind def  % /PaperTypesEqual
 
-	mark (Radii = ) Radii SizeArrayOutput TrimSpaces ( ==> diameters ~= )
-	() [ Radii {mark exch dup 127 mul 180 div 1 FormatDecimalPlaces exch 36 div 2 FormatDecimalPlaces (mm~=) exch (") ConcatenateToMark} forall ] SizeArrayOutput TrimSpaces (.) ConcatenateToMark OutputToLog
+	mark (Radii = ) Radii SizeArrayOutput (  ==>  diameter) Radii length 1 ne {(s)} if ( ~= )
+	[ Radii {mark exch dup 127 mul 180 div 1 FormatDecimalPlaces exch 36 div 2 FormatDecimalPlaces (mm~=) exch (") ConcatenateToMark} forall ] SizeArrayOutput (.) ConcatenateToMark OutputToLog
 
 	/GlassesOnSheetsAndTastingNotePagesEqual GlassesOnSheets GlassesOnTastingNotePages TwoArraysEqual def
 	/ByRearrangementArrayString
@@ -8446,7 +8465,7 @@ currentdict /GlyphShowKnownAbsences undef
 	{GlassesNumCopies 1 ge PrePourNumCopies 1 ge or NumSheets 1 ge and} MightBeTrue  or
 	{
 		mark  (CirclearraysFontSizeMax = ) /CirclearraysFontSizeMax load 0 //true ThingToDebugText TrimSpaces (; )
-		(CirclearraysFontSizes = ) CirclearraysFontSizes SizeArrayOutput TrimSpaces (.\n)
+		(CirclearraysFontSizes = ) CirclearraysFontSizes SizeArrayOutput (.\n)
 		CirclearraysFontSizeOptimise
 		{
 			mark
@@ -8459,16 +8478,17 @@ currentdict /GlyphShowKnownAbsences undef
 			(No optimisation: score = ) Circlearrays_OptimLog Circlearrays_NumBest get (.\n)
 		} ifelse  % CirclearraysFontSizeOptimise
 
-		(CirclearraysUnroundedN = ) CirclearraysUnroundedN SizeArrayOutput TrimSpaces
-		(; CirclearraysN = ) CirclearraysN SizeArrayOutput TrimSpaces (.\n)
+		(CirclearraysUnroundedN = ) CirclearraysUnroundedN SizeArrayOutput
+		(; CirclearraysN = ) CirclearraysN SizeArrayOutput (.\n)
 		(ProportionBaselineUsed, avg by sheet = ) [
 			CirclearraysN CirclearraysUnroundedN {dup 0 ge {div} {pop pop 0} ifelse} //false TwoArraysFunction
 				{dup 0 exch {add} forall exch length dup 0 gt {div} {pop pop (-)} ifelse}
 			forall  % CirclearraysN / CirclearraysUnroundedN
-		] SizeArrayOutput TrimSpaces (.)
+		] SizeArrayOutput (.)
 		ConcatenateToMark OutputToLog
-		mark (RadiiCirclearrayBaseline = ) RadiiCirclearrayBaseline SizeArrayOutput TrimSpaces
-		(. RadiiCirclearrayInside = ) RadiiCirclearrayInside SizeArrayOutput TrimSpaces (.)
+		mark (RadiiCirclearrayInside = ) RadiiCirclearrayInside SizeArrayOutput
+		(; RadiiCirclearrayBaseline = ) RadiiCirclearrayBaseline SizeArrayOutput
+		(; Radii = ) Radii SizeArrayOutput ( \(already logged\).)
 		ConcatenateToMark OutputToLog
 	} if  % ...NumCopies 1 ge ...
 
@@ -9144,7 +9164,7 @@ currentdict /GlyphShowKnownAbsences undef
 		Titles NonEmptyCompoundObject
 		{
 			7 dict begin
-			(TitleFontSizes = ) TitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)
+			(TitleFontSizes = ) TitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput (.) (\n)
 			/TitleFontSizesUnique [ TitleFontSizes { {counttomark 1 sub -1 1 {index 1 index sub abs //PrinterEpsilon le {pop exit} if} for} forall} forall ] dup {le} ShellSort def  % Unique font sizes
 			TitleFontSizesUnique length 1 gt
 			{
@@ -9194,11 +9214,11 @@ currentdict /GlyphShowKnownAbsences undef
 			} if  % TitleMaxHeightProportionInnerRadiusRelevantNum 0 gt
 			(Title heights / RadiiCirclearrayInsideUsableTAB = )
 			TitleProportionFontSizeT TitleProportionFontSizeB {sub} //false TwoArraysFunction   TitleFontSizes {mul} //false TwoArraysFunction   RadiiCirclearrayInsideUsableTAB {TwoArraysFunctionDiv} //false TwoArraysFunction
-			SizeArrayOutput TrimSpaces (.) (\n)
+			SizeArrayOutput (.) (\n)
 		} if  % Titles NonEmptyCompoundObject
-		Abovetitles NonEmptyCompoundObject {(AbovetitleFontSizes = ) AbovetitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
-		Belowtitles NonEmptyCompoundObject {(BelowtitleFontSizes = ) BelowtitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
-		Overtitles NonEmptyCompoundObject {(OvertitleFontSizes = ) OvertitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
+		Abovetitles NonEmptyCompoundObject {(AbovetitleFontSizes = ) AbovetitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput (.) (\n)} if
+		Belowtitles NonEmptyCompoundObject {(BelowtitleFontSizes = ) BelowtitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput (.) (\n)} if
+		Overtitles NonEmptyCompoundObject {(OvertitleFontSizes = ) OvertitleFontSizes 1 {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput (.) (\n)} if
 	} if  % ... GlassesNumCopies 1 ge ...
 
 	/TitleFontSizesMaxByPage      [      TitleFontSizes {Max} forall ] def
@@ -9304,9 +9324,9 @@ currentdict /GlyphShowKnownAbsences undef
 	{GlassesNumCopies 1 ge  DecanterLabelsNumCopies 1 ge  PrePourNumCopies 1 ge  BottleWrapNumCopies 1 ge  StickyLabelsNumCopies 1 ge  or or or or} MightBeTrue
 	{
 		()
-		Abovetitles NonEmptyCompoundObject {(AbovetitleFontSizes/TitleFontSizes = ) AbovetitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
-		Belowtitles NonEmptyCompoundObject {(BelowtitleFontSizes/TitleFontSizes = ) BelowtitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
-		Overtitles NonEmptyCompoundObject {(OvertitleFontSizes/TitleFontSizes = ) OvertitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput TrimSpaces (.) (\n)} if
+		Abovetitles NonEmptyCompoundObject {(AbovetitleFontSizes/TitleFontSizes = ) AbovetitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput (.) (\n)} if
+		Belowtitles NonEmptyCompoundObject {(BelowtitleFontSizes/TitleFontSizes = ) BelowtitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput (.) (\n)} if
+		Overtitles NonEmptyCompoundObject {(OvertitleFontSizes/TitleFontSizes = ) OvertitleFontSizes TitleFontSizes {TwoArraysFunctionDiv} //false TwoArraysFunction SizeArrayOutput (.) (\n)} if
 		TABO_MaxT_WithinPage 0 ge  TABO_MinB_WithinPage 0 le  or
 		TABO_MaxT_WithinPage 0 ge  TABO_MaxT_SheetNum 0 ge  and and  % Fails for empty page.
 		TABO_MinB_WithinPage 0 ge  TABO_MinB_SheetNum 0 ge  and and
