@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:55 Thursday 18th December 2025
+% This version 17:00 Saturday 20th December 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202512182355) def
+/ParametersVersionDateTimeAdobeFormat (D:202512201700) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -162,26 +162,30 @@
 /PackingDirectionTopToBottom true def  % Ditto
 /PackingDirectionLeftToRight true def  % Ditto
 /PackingStyles [
-	[ /RectangularDislocation     /OnlyIfGlassesNumMin 5 ]
-	[ /RectangularDislocation     /OnlyIfOrientation /Landscape ]
-	[ /Diamonds                   /OnlyIfGlassesNumMin 5 ]
-	[ /Diamonds                   /OnlyIfOrientation /Landscape ]
-	[ /DiamondsAndRectangular     /OnlyIfGlassesNumMin 5 ]
-	[ /DiamondsAndRectangular     /OnlyIfOrientation /Landscape ]
-	[ /RectangularAlternateNudge  /OnlyIfGlassesNumMin 5         /ImprovementPointsMin 2 ]
-	[ /RectangularAlternateNudge  /OnlyIfOrientation /Landscape  /ImprovementPointsMin 2 ]
-	[ /Array  /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMin 4  /OnlyIfGlassesNumMax 4  /Positions [0 2 1 2] [0 0    ] [1 3] [1 1] ]  % /RightSide variant
-	[ /Array  /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMin 3  /OnlyIfGlassesNumMax 3  /Positions [0 2 1 2] [0 0 1 0]       [1 1] ]  % /RightSide variant
-	[ /Array  /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMin 2  /OnlyIfGlassesNumMax 2  /Positions [0 1 1 1]                 [1 0] ]  % /RightSide variant
-	[ /Array  /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMin 1  /OnlyIfGlassesNumMax 1  /Positions [0 0 1 0]                       ]  % /RightSide variant
-	% [ /Bespoke5  /OnlyIfOrientation /Landscape ]
-	% [ /Bespoke7  /OnlyIfOrientation /Landscape ]
-	% [ /DiamondsPlus  /OnlyIfOrientation /Portrait ]
-	% [ /DiamondsPlus  /OnlyIfOrientation /Landscape  /ImprovementPointsMin 2 ]
-	% [ /Temple        /OnlyIfOrientation /Landscape  /ImprovementPointsMin 1 ]
-	% [ /Temple        /OnlyIfOrientation /Portrait   /ImprovementPointsMin 2 ]
-	% [ /PostsAndLintel  /CentralGlasses 1  /OnlyIfGlassesNumMin 7  /OnlyIfOrientation /Landscape ]
-	% [ /Arch            /CentralGlasses 1  /OnlyIfGlassesNumMin 6  /OnlyIfOrientation /Landscape ]
+	% Standard
+	/RectangularDislocation
+	/Diamonds
+	/DiamondsAndRectangular
+	[ /Bespoke5  /OnlyIfOrientation /Landscape ]
+	[ /Bespoke7  /OnlyIfOrientation /Landscape ]
+	[ /RectangularAlternateNudge  /ImprovementPointsMin 2 ]
+
+	% For an /A3 or a /Tabloid, with right-side partial /A4 or /USL
+%	[ /RectangularDislocation     /OnlyIfGlassesNumMin 6                          ]    [ /RectangularDislocation     /OnlyIfOrientation /Landscape ]
+%	[ /Diamonds                   /OnlyIfGlassesNumMin 6                          ]    [ /Diamonds                   /OnlyIfOrientation /Landscape ]
+%	[ /DiamondsAndRectangular     /OnlyIfGlassesNumMin 6                          ]    [ /DiamondsAndRectangular     /OnlyIfOrientation /Landscape ]
+%	[ /RectangularAlternateNudge  /OnlyIfGlassesNumMin 6  /ImprovementPointsMin 2 ]    [ /RectangularAlternateNudge  /OnlyIfOrientation /Landscape  /ImprovementPointsMin 2 ]
+%	[ /Array      /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMax 5  /OnlyIfGlassesNumMin 5       /SuppressOrnamentsLeft  /Positions [0 4 1 4] [0 2 1 2] [0 0 1 0] [1 3] [1 1] ]  % /RightSide variant
+%	[ /Array      /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMax 4  /OnlyIfGlassesNumMin 4       /SuppressOrnamentsLeft  /Positions           [0 2 1 2] [0 0 1 0] [1 3] [1 1] ]  % /RightSide variant
+%	[ /RightSide  /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMax 3  /VerticalAlignment /Justify  /SuppressOrnamentsLeft  /SuppressOrnamentsCentre ]
+
+	% Rarities
+%	[ /DiamondsPlus  /OnlyIfOrientation /Portrait ]
+%	[ /DiamondsPlus  /OnlyIfOrientation /Landscape  /ImprovementPointsMin 2 ]
+%	[ /Temple        /OnlyIfOrientation /Landscape  /ImprovementPointsMin 1 ]
+%	[ /Temple        /OnlyIfOrientation /Portrait   /ImprovementPointsMin 2 ]
+%	[ /PostsAndLintel  /CentralGlasses 1  /OnlyIfGlassesNumMin 7  /OnlyIfOrientation /Landscape ]
+%	[ /Arch            /CentralGlasses 1  /OnlyIfGlassesNumMin 6  /OnlyIfOrientation /Landscape ]
 ] def  % /PackingStyles
 
 /WaterBoxes { {GlassesNumCopies 0 le} MightBeTrue {/Both} {/Glasses} ifelse} bind def  % /Glasses /TastingNotes /Both, any other value being none
@@ -268,6 +272,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /CirclearraysMinCopies 3 def
 /CirclearraysFontSizeMax 12 def
 /CirclearraysMinNumSpacesBetween 3 def
+/CirclearraysOptimisationFontSizeMultiplier 2 def  % Should be strictly positive. Bigger pushes optimiser to bigger font size.
 
 
 % % % % % % % % % % % %
@@ -562,7 +567,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /TastingNotesColumnStrokeCode {0 setgray  0.12 setlinewidth  0 setlinecap  [2.4 16.8] 0 setdash  stroke} def
 /TastingNotesLineGap 2 def
 /TastingNotesTitlesFontSizeMax 18 def
-/TastingNotesSubtitleFontSizeProportionTitles 0.5 def
+/TastingNotesSubtitleFontSizeProportionTitles 5 sqrt 1 sub 2 div def  % 0.618
 /TastingNotesReplaceNameWithPageNum false def
 /TastingNotesPageNumFontSizeFactor 0.333333333 def
 
@@ -844,7 +849,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202512182355) def
+/SoftwareVersionDateTimeAdobeFormat (D:202512201700) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -878,7 +883,8 @@ RandomisationSeed srand
 /ArcCosMinusOneThird 109.471220634490691369 def  % In degrees
 /ArcTanOneQuarter    14.03624346792647858289 def  % In degrees
 /ArcTanFiveEighths   32.00538320808349556079 def  % In degrees
-/Infinity 32767 def  % 2^15-1, which in pt ~= 455" ~= 38' ~= 11.6m, so ~61% bigger than the ~283" diagonal of the 200"x200" max PDF page. Can be '8 exp 256.06251 mul' without overflow, as max float = 2 2 -23 exp sub 2 127 exp mul ~= 3.40282*10^38.
+/FloatMax        340282346638528859811704183484516925440 def  % 2 2 -23 exp sub 2 127 exp mul = 2^104 * 3^2 * 5 * 7 * 13 * 17 * 241 ~= 3.4*10^38
+/Infinity 32767 def  % 2^15-1, which in pt ~= 455" ~= 38' ~= 11.6m, so ~61% bigger than the ~283" diagonal of the 200"x200" max PDF page. Can be '8 exp 256.06 mul' without overflow.
 /InfinNeg Infinity neg def
 /Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, and experimentally 839 times the single-precision minimum increment over 1.
 /PrinterEpsilon 0.01 def  % 0.01 points is half a pixel at 3600 dpi. Also 163.84 times bigger than minimum single-precision increment over 17" = 1224pt.
@@ -8287,11 +8293,21 @@ currentdict /GlyphShowKnownAbsences undef
 				CirclearraysUnroundedN SheetNum get  WithinPage  UnroundedN  put
 				CirclearraysN          SheetNum get  WithinPage    RoundedN  put
 
-				RoundedN UnroundedN div  add  % Score
+				RoundedN 0 gt  UnroundedN 0 gt  and
+				{
+					Circlearrays WithinTitles GetEU length dup 0 gt
+					{
+						1 RoundedN div  1 UnroundedN div  sub  % After being multiplied by Radii, is wasted space linear space, per RoundedN, so sum of gaps within each copy of the Circlearrays texts.
+						% Prev line = (UnroundedN - RoundedN) / (UnroundedN * RoundedN)  ~  0.5 FontSize^2.  E.g., FS tiny, UnroundedN = 100.5, above = 1/20100
+						exch div  % Gap between visible texts, which is the thing most offensive to the eye, so the thing to minimise.
+						add  % Score. Relevant: https://github.com/jdaw1/placemat/issues/165#issuecomment-3677957861
+					} {pop} ifelse  % ... 0 gt
+				} if  %  % ... 0 gt ... 0 gt  and
 			} for  % WithinPage, WithinTitles
-			CirclearraysFontSizes SheetNum get mul  add
+			Radii SheetNum get  mul  % Wasted space linear space between innermost items, summed.
+			CirclearraysFontSizes SheetNum get CirclearraysOptimisationFontSizeMultiplier mul sub   add  % Typically CirclearraysOptimisationFontSizeMultiplier ~= 1
 		} forall  % SheetNumSet, SheetNum
-		0  SheetNumSet {SheetNumGlasses exch get add} forall  dup 0 gt {div} {pop} ifelse  % Result is average over glasses of FontSize * ProportionUsed
+		0  SheetNumSet {SheetNumGlasses exch get add} forall  dup 0 gt {div} {pop} ifelse  % Result is average over glasses of Gap - FontSize * CirclearraysOptimisationFontSizeMultiplier
 		end
 		//DeBugLevel 40 le {mark (-Circlearrays_PopulateN_ReturnScore, returning score = ) 2 index ConcatenateToMark OutputToLog} if
 	} bind def  % /Circlearrays_PopulateN_ReturnScore
@@ -8324,12 +8340,14 @@ currentdict /GlyphShowKnownAbsences undef
 	] readonly def  % /SheetNumSets
 
 	/Circlearrays_ScoreThis  [ SheetNumSets {Circlearrays_PopulateN_ReturnScore} forall ] def
-	/Circlearrays_ScoresBest [ SheetNumSets length {-1} repeat ] def
+	/Circlearrays_ScoresBest [ SheetNumSets length {//Infinity} repeat ] def
 	CirclearraysFontSizes CirclearraysFontSizesBest copy pop
 
 	% Do the work: call the previous
 	/CircletextOptimLogNum 0 def
-	Circlearrays_OptimLog CircletextOptimLogNum dup 2 index length lt {(CirclearraysFontSizes optimisation, as FontSize * ProportionBaselineUsed. Initial state:) put} {pop pop} ifelse
+	Circlearrays_OptimLog CircletextOptimLogNum dup 2 index length lt {(CirclearraysFontSizes optimisation, as AvgExcessGap - FontSize * CirclearraysOptimisationFontSizeMultiplier.) put} {pop pop} ifelse
+	/CircletextOptimLogNum dup load 1 add store
+	Circlearrays_OptimLog CircletextOptimLogNum dup 2 index length lt {(Initial state:) put} {pop pop} ifelse
 	/CircletextOptimLogNum dup load 1 add store
 	Circlearrays_OptimLog CircletextOptimLogNum dup 2 index length lt {mark Circlearrays_ScoreThis ConcatenateToMark TrimSpaces (.) Concatenate put} {pop pop} ifelse
 	/CircletextOptimLogNum dup load 1 add store
@@ -8368,25 +8386,27 @@ currentdict /GlyphShowKnownAbsences undef
 					/CircletextOptimLogNum  CircletextOptimLogNum 1 add  store
 				} {pop pop} ifelse
 
-				Circlearrays_ScoreThis  Circlearrays_ScoresBest SheetNumSet_Num get  gt
+				Circlearrays_ScoreThis  Circlearrays_ScoresBest SheetNumSet_Num get  lt
 				{
 					Circlearrays_ScoresBest SheetNumSet_Num Circlearrays_ScoreThis put
 					CirclearraysFontSizes CirclearraysFontSizesBest copy pop
 				} if  % new best
 
-				% Assume that a tiny nudge in font size fits everything precisely. That score would be the average font size.
-				% If, for font sizes <= current state, that score <= Circlearrays_ScoresBest, then terminate.
-				0   SheetNumSet {/SheetNum exch def   CirclearraysFontSizes SheetNum get  SheetNumGlasses SheetNum get mul  add} forall
-				0   SheetNumSet {SheetNumGlasses exch get add} forall  dup 0 ne {div} {pop} ifelse
-				Circlearrays_ScoresBest SheetNumSet_Num get  le {exit} if
+				0  % What is hypthetical best possible score from here? I.e., all gaps = 0.
+				SheetNumSet
+				{
+					/SheetNum exch def  % CirclearraysOptimisationFontSizeMultiplier could depend on SheetNum.
+					CirclearraysFontSizes SheetNum get CirclearraysOptimisationFontSizeMultiplier mul sub
+				} forall  % SheetNumSet, SheetNum
+				Circlearrays_ScoresBest SheetNumSet_Num get gt {exit} if  % If can't improve, exit CircletextOptimLogNum loop.
 
 				CircletextOptimLogNum 16384 ge
 				{
-					(Warning: weird failure to complete optimisation of CirclearraysFontSizes. Continuing. Pls post this PS file as an issue.) OutputToLog
+					(Warning: weird failure to complete optimisation of CirclearraysFontSizes. Continuing. Pls post this PS file as an issue.\nhttps://github.com/jdaw1/placemat/issues/) OutputToLog
 					exit
 				} if  % CircletextOptimLogNum too big
-			} bind loop  % CircletextOptimLogNum
-		} for  % SheetNumSet_Num, SheetNumSet
+			} loop  % CircletextOptimLogNum
+		} bind for  % SheetNumSet_Num, SheetNumSet
 
 		CirclearraysFontSizesBest CirclearraysFontSizes copy pop
 		Circlearrays_EquivalencesImpose
@@ -8429,8 +8449,12 @@ currentdict /GlyphShowKnownAbsences undef
 		(CirclearraysFontSizes = ) CirclearraysFontSizes SizeArrayOutput TrimSpaces (.\n)
 		CirclearraysFontSizeOptimise
 		{
-			mark () Circlearrays_OptimLog 0 CircletextOptimLogNum getinterval {( )} forall ConcatenateToMark TrimSpaces
-			mark exch (. ScoresBest = ) Circlearrays_ScoresBest ConcatenateToMark TrimSpaces (.\n) Concatenate
+			mark
+			CircletextOptimLogNum 32 le  % Show Circlearrays_OptimLog ?
+			{
+				mark () Circlearrays_OptimLog 0 CircletextOptimLogNum getinterval {( )} forall ConcatenateToMark TrimSpaces (. )
+			} {Circlearrays_OptimLog 0 get} ifelse
+			(ScoresBest = ) Circlearrays_ScoresBest ConcatenateToMark TrimSpaces (.\n) Concatenate
 		}{
 			(No optimisation: score = ) Circlearrays_OptimLog Circlearrays_NumBest get (.\n)
 		} ifelse  % CirclearraysFontSizeOptimise

@@ -50,8 +50,8 @@ Further, the user has much direct control over the layout of the glasses.
 The user has much control, but the default is also good. 
 Unless there is a compelling need to change things, users are encouraged to take the easy course of letting the defaults do their work.
 
-The user specifies an array, `PackingStyles`, which is a list of generic packing styles. 
-In turn each style from the list is taken, and each allowed variation is tested. 
+The parameter `PackingStyles` is an array, a list of generic packing styles. 
+In turn each style from the array is taken, and each of its allowed variations is tested. 
 Broadly, if a later&#8209;tested style allows a larger radius than the current best, then the old best is replaced by this better style.
 
 If the element of `PackingStyles` is just the style, it doesn&rsquo;t need to be in an array. 
@@ -74,7 +74,7 @@ E.g. (which is unrealistically verbose to show some of the possibilities, and wh
 
 The general mathematical problem, largest possible radius for *n* non&#8209;overlapping circles in a particular rectangle, is difficult (see [PackoMania](http://www.packomania.com/) for solutions to many special cases). 
 This code has enough generality that it often finds the best, and when it can&rsquo;t, its radius is not much smaller than the mathematical optimum. 
-E.g., for 14 glasses on `/A3` see discussion in [issue&nbsp;151](http://github.com/jdaw1/placemat/issues/151).
+Fourteen glasses on `/A3` is the most-seen case in which the best findable radius is smaller than the theoretical best (by &asymp;&#8239;0.46%, as discussed in [issue&nbsp;151](http://github.com/jdaw1/placemat/issues/151)).
 
 For many possible tastings, `PackingStyles` can be left at its default value. 
 For example, if there are 24 different Madeiras over four `/A4` pages, the defaults work (though, of course, very important, don&rsquo;t forget to invite [me](http://www.jdawiseman.com/author.html)). 
@@ -399,18 +399,18 @@ This is controlled by `ShrinkRadii`, which can be:
 * `/ToSmallest`, which ensures consistency over the whole document;
 * <code>[ 0 0 0 &hellip; 1 1 1 &hellip; 2 2 ]</code>, which is an arbitrary array of the same length as `GlassesOnSheets`, pages&rsquo; radii being forced to their lesser if elements satisfy PostScript&rsquo;s `eq` condition.
 
-There is also the simple numerical parameter `MaxRadius`, defaulting to `150` &rArr; diameter &le;&nbsp;300pt =&nbsp;4&frac16;&Prime; =&nbsp;105&frac56;mm.
+There is also the simple numerical parameter `MaxRadius`, defaulting to `162`&nbsp; &rArr;&nbsp; diameter &le;&nbsp;324pt =&nbsp;4&frac12;&Prime; =&nbsp;114.3mm.
 
 
 ## Page size and glass diameters
 
-the following shows glass diameters for various numbers of glasses on various page sizes, using the default value of `PackingStyles`, and assuming that `MaxRadius` is <span title="The code that made these examples set:
+The following shows circle diameters for various numbers of glasses on various page sizes, using the default value of `PackingStyles`, and assuming that `MaxRadius` is <span title="The code that made these examples set:
 /&#x1D67C;&#x1D68A;&#x1D6A1;&#x1D681;&#x1D68A;&#x1D68D;&#x1D692;&#x1D69E;&#x1D69C;&nbsp;&#x1D7FF;&#x1D7FF;&#x1D7FF;&#x1D7FF;&nbsp;&#x1D68D;&#x1D68E;&#x1D68F;
 but that value could have been as low as (45446 &minus; 3&radic;182333347)&times;6/127 &asymp; 233.231824288364, so &asymp; 82.279mm &asymp; 3.2393&Prime;.">sufficently large</span>.
 
 <div align="center">
 
-| Num<br>Glasses | `/A4`<br>210mm&times;297mm | `/A3`<br>420mm&times;297mm | `/USLegal`<br>14&Prime;&times;8&frac12;&Prime; | `/USL`<br>8&frac12;&Prime;&times;11&Prime; | `/Tabloid`<br>17&Prime;&times;11&Prime; |
+| Num<br>Glasses | `/A4`<br>210&times;297mm | `/A3`<br>420&times;297mm | `/USLegal`<br>14&Prime;&times;8&frac12;&Prime; | `/USL`<br>8&frac12;&Prime;&times;11&Prime; | `/Tabloid`<br>17&Prime;&times;11&Prime; |
 |---:|---:|---:|---:|---:|---:|
 | 3 | 113.9mm, 4.49&Prime; | 164.6mm, 6.48&Prime; | 126.9mm, 5.00&Prime; | 113.1mm, 4.45&Prime; | 161.1mm, 6.34&Prime; |
 | 4 | 105.1mm, 4.14&Prime; | 151.6mm, 5.97&Prime; | 112.8mm, 4.44&Prime; | 105.6mm, 4.16&Prime; | 145.6mm, 5.73&Prime; |
@@ -437,8 +437,8 @@ but that value could have been as low as (45446 &minus; 3&radic;182333347)&times
 Measure the diameter of your glasses. 
 Add something for two fingers. 
 Add something for the inebriation of the owner of the fingers. 
-Suggestion: &le;6 on `/A4`; &le;15 on `/A3`; &le;9 on `/USLegal`; &le;6 on `/USL`; &le;15 on `/Tabloid`. 
-But sometimes table space is a binding constraint, in which case there must be less paper area, hence smaller circles.
+Suggestion: &le;6 or &le;7 on `/A4`; &le;15 on `/A3`; &le;9 on `/USLegal`; &le;6 or &le;7 on `/USL`; &le;15 on `/Tabloid`. 
+But table space can be a binding constraint &mdash; sometimes glasses need to be packed tightly.
 
 The images show the packings for the diameters &le;&nbsp;4&frac12;&Prime; &asymp;&nbsp;114mm, down to slightly below 3&Prime; &asymp;&nbsp;76mm.
 
