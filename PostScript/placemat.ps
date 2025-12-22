@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:50 Saturday 20th December 2025
+% This version 21:00 Monday 22nd December 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202512202250) def
+/ParametersVersionDateTimeAdobeFormat (D:202512222100) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -849,7 +849,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202512202250) def
+/SoftwareVersionDateTimeAdobeFormat (D:202512222100) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -8364,11 +8364,9 @@ currentdict /GlyphShowKnownAbsences undef
 
 	% Do the work: call the previous
 	/CircletextOptimLogNum 0 def
-	Circlearrays_OptimLog CircletextOptimLogNum dup 2 index length lt {(CirclearraysFontSizes optimisation, as AvgExcessGap - FontSize * CirclearraysOptimisationFontSizeMultiplier.) put} {pop pop} ifelse
+	Circlearrays_OptimLog CircletextOptimLogNum dup 2 index length lt {(Initial state = ) put} {pop pop} ifelse
 	/CircletextOptimLogNum dup load 1 add store
-	Circlearrays_OptimLog CircletextOptimLogNum dup 2 index length lt {(Initial state:) put} {pop pop} ifelse
-	/CircletextOptimLogNum dup load 1 add store
-	Circlearrays_OptimLog CircletextOptimLogNum dup 2 index length lt {mark Circlearrays_ScoreThis ConcatenateToMark TrimSpaces (.) Concatenate put} {pop pop} ifelse
+	Circlearrays_OptimLog CircletextOptimLogNum dup 2 index length lt {mark Circlearrays_ScoreThis ConcatenateToMark TrimSpaces (;) Concatenate put} {pop pop} ifelse
 	/CircletextOptimLogNum dup load 1 add store
 
 	//false  SheetNumGlasses {1 ge {pop CirclearraysFontSizeOptimise  dup {exit} if} if} forall  % Can CirclearraysFontSizeOptimise vary by SheetNum? Not sure.
@@ -8469,11 +8467,14 @@ currentdict /GlyphShowKnownAbsences undef
 		CirclearraysFontSizeOptimise
 		{
 			mark
-			CircletextOptimLogNum 32 le  % Show Circlearrays_OptimLog ?
+			(CirclearraysFontSizes optimisation, ) CircletextOptimLogNum  SheetNumSets length sub ( steps, )
+			(as AvgExcessGap - )
+			/CirclearraysOptimisationFontSizeMultiplier dup load xcheck {64 string cvs} {load} ifelse ( * FontSize)
+			CircletextOptimLogNum 64 le  % Show Circlearrays_OptimLog ?
 			{
-				mark () Circlearrays_OptimLog 0 CircletextOptimLogNum getinterval {( )} forall ConcatenateToMark TrimSpaces (. )
-			} {Circlearrays_OptimLog 0 get} ifelse
-			(ScoresBest = ) Circlearrays_ScoresBest ConcatenateToMark TrimSpaces (.\n) Concatenate
+				(: ) Circlearrays_OptimLog 0 CircletextOptimLogNum getinterval {( )} forall pop
+			} if
+			(; ScoresBest = ) Circlearrays_ScoresBest ConcatenateToMark TrimSpaces (.\n)
 		}{
 			(No optimisation: score = ) Circlearrays_OptimLog Circlearrays_NumBest get (.\n)
 		} ifelse  % CirclearraysFontSizeOptimise

@@ -65,9 +65,13 @@ Extracts of code that made the image, for later explanation:
 <a name="Circlearrays"></a>
 ## Circlearrays ##
 
-The number of copies of each instance of `Circlearrays` is constrained by `CircletextsMinCopies` and `CircletextsMaxCopies`. 
-When the latter is used, the &lsquo;current number&rsquo; of copies is on the stack. 
-This allows a default value of `/CircletextsMaxCopies {dup 32 gt {dup dup 4 mod sub} {65535} ifelse} bind def`: if there are more than 32, the number is slightly reduced to a multiple of 4. 
+The number of copies of each instance of `Circlearrays` is constrained by `CirclearraysMaxCopies`. 
+When used, the &lsquo;current number&rsquo; of copies is on the stack. 
+This allows a default value of `CirclearraysMaxCopies {dup dup 32 gt {dup 4 mod sub} if} bind def`: if there are more than 32, the number is slightly reduced to a multiple of 4. 
+
+The size of the Circlearrays is optimised, to reduce excess space, while not too much reducing the font size. 
+Whether this happens is controlled by the Boolean `CirclearraysFontSizeOptimise`, and the weight given to the font-size constraint is controlled by `CirclearraysOptimisationFontSizeMultiplier` defaulting to `2`. 
+There has previously been unhappiness with the font-size optimisation of the Circlearrays; it was rewritten in Dec&nbsp;2025; it&rsquo;s experimental at the level of both the algorithm and the default control parameter; [issue&nbps;165](https://github.com/jdaw1/placemat/issues/165) is at risk of being reopened.
 
 Very rarely used, there are also the self-explanatory `CirclearraysFillBehind` and `CirclearraysFillBehindCode`.
 
