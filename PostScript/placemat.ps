@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:00 Monday 22nd December 2025
+% This version 16:45 Wednesday 24th December 2025
 
 % Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202512222100) def
+/ParametersVersionDateTimeAdobeFormat (D:202512241645) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -849,7 +849,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202512222100) def
+/SoftwareVersionDateTimeAdobeFormat (D:202512241645) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -863,6 +863,7 @@ RandomisationSeed srand
 /ArrayLengthMax  65535 def        % 2^16 - 1, PLRM3, Appendix B, table B.1, p739 (PDF p753), row 3. Also max string length, etc.
 /RandMax         +2147483647 def  % 2^31 - 1, PLRM3, p637 (PDF p651). Seemingly not linked to IntegerMax.
 /HalfRandMax     RandMax 2 div  def
+% /FloatMax        340282346638528859811704183484516925440 def  % 2 2 -23 exp sub 2 127 exp mul = 2^104 * 3^2 * 5 * 7 * 13 * 17 * 241 ~= 3.4*10^38
 /Pi              3.14159265358979323846 def
 /TwoPi           6.2831853071795864769 def
 /TwoPiReciprocal 0.15915494309189533576888 def
@@ -883,7 +884,6 @@ RandomisationSeed srand
 /ArcCosMinusOneThird 109.471220634490691369 def  % In degrees
 /ArcTanOneQuarter    14.03624346792647858289 def  % In degrees
 /ArcTanFiveEighths   32.00538320808349556079 def  % In degrees
-/FloatMax        340282346638528859811704183484516925440 def  % 2 2 -23 exp sub 2 127 exp mul = 2^104 * 3^2 * 5 * 7 * 13 * 17 * 241 ~= 3.4*10^38
 /Infinity 32767 def  % 2^15-1, which in pt ~= 455" ~= 38' ~= 11.6m, so ~61% bigger than the ~283" diagonal of the 200"x200" max PDF page. Can be '8 exp 256.06 mul' without overflow.
 /InfinNeg Infinity neg def
 /Epsilon 0.00005 def  % 23-bit mantissa is one part in 8,388,608. This is one part in 20k, and experimentally 839 times the single-precision minimum increment over 1.
@@ -3356,7 +3356,7 @@ currentdict /SmallCapsDict undef
 		} Stopped
 		{
 			(Warning: protected path in PathBRadiusSquared, position 1) OutputToLog
-			GSave flattenpath pathbbox GRestore  4 copy 3 1 roll exch  PBRS_SetMaxR PBRS_SetMaxR PBRS_SetMaxR PBRS_SetMaxR  exit
+			GSave 0 setflat flattenpath pathbbox GRestore  4 copy 3 1 roll exch  PBRS_SetMaxR PBRS_SetMaxR PBRS_SetMaxR PBRS_SetMaxR  exit
 		} if  % Stopped
 
 		% Second a slower run-through, not redoing the above, but, where necessary, thinking hard about curves. Different role for b.
@@ -3408,7 +3408,7 @@ currentdict /SmallCapsDict undef
 		} exec //false % Stopped
 		{
 			(Warning: protected path in PathBRadiusSquared, position 2) OutputToLog
-			GSave flattenpath pathbbox GRestore  4 copy 3 1 roll exch  PBRS_SetMaxR PBRS_SetMaxR PBRS_SetMaxR PBRS_SetMaxR  exit
+			GSave 0 setflat flattenpath pathbbox GRestore  4 copy 3 1 roll exch  PBRS_SetMaxR PBRS_SetMaxR PBRS_SetMaxR PBRS_SetMaxR  exit
 		} if  % Stopped
 	} repeat  % 1
 
@@ -3495,7 +3495,7 @@ currentdict /SmallCapsDict undef
 	} Stopped
 	{
 		(Warning: protected path in PathMaxScalingFitCircle) OutputToLog
-		GSave flattenpath pathbbox GRestore  4 copy 3 1 roll exch  //true PMSFC_SetMaxS pop  //true PMSFC_SetMaxS pop  //true PMSFC_SetMaxS pop  //true PMSFC_SetMaxS pop
+		GSave 0 setflat flattenpath pathbbox GRestore  4 copy 3 1 roll exch  //true PMSFC_SetMaxS pop  //true PMSFC_SetMaxS pop  //true PMSFC_SetMaxS pop  //true PMSFC_SetMaxS pop
 	} if  % Stopped
 
 	MaxS
@@ -3848,7 +3848,12 @@ currentdict /SpiralAngles undef   currentdict /SpiralAnglesLength undef
 /StringPathBBox
 {
 	//DeBugLevel 10 le {(+StringPathBBox) OutputToLog} if
-	GSave //DeSizeRounding dup scale newpath 0 0 moveto  //true CharPathRecursive PathBBox GRestore
+	GSave newpath
+	IsDistiller
+		{//DeSizeRounding dup scale 0 0 moveto //true CharPathRecursive PathBBox}
+		{0 0 moveto //true CharPathRecursive 0 setflat flattenpath pathbbox}
+	ifelse  % IsDistiller
+	GRestore
 	//DeBugLevel 10 le {(-StringPathBBox) OutputToLog} if
 } bind def  % /StringPathBBox
 
@@ -4248,7 +4253,7 @@ currentdict /GlyphShowKnownAbsences undef
 {
 	//DeBugLevel 42 le {(+ShapesClippedToPath) OutputToLog} if
 	21 dict begin  GSave
-	GSave flattenpath pathbbox /ury exch def /urx exch def /lly exch def /llx exch def GRestore  % pathbbox rather than PathBBox because approximate suffices, and is faster
+	GSave 0 setflat flattenpath pathbbox /ury exch def /urx exch def /lly exch def /llx exch def GRestore  % pathbbox rather than PathBBox because approximate suffices, and is faster
 	{clip} if  % DoActuallyClip
 	/UClipPath //true upath def  newpath  % Even if not clipping, show only those shapes that intersect this path
 
