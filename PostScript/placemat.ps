@@ -1,8 +1,8 @@
 %!PS
 
-% This version 16:45 Wednesday 24th December 2025
+% This version 21:45 Friday 2nd January 2026
 
-% Copyright Julian D. A. Wiseman 1988 to 2025.  http://github.com/jdaw1/placemat/#readme
+% Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
 % Permissions of this strong copyleft license are conditioned on making available complete source code of
 % licensed works and modifications, which include larger works using a licensed work, under the same license.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202512241645) def
+/ParametersVersionDateTimeAdobeFormat (D:202601022145) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -89,7 +89,7 @@
 	true    [/ellipsis (bing.com)]                       (http://www.bing.com/maps?where1=SE1+1TA)
 ] def  % /ExternalLinks
 
-/CopyrightStatementPlacemats (Copyright 2025 Julian D. A. Wiseman of www.JDAWiseman.com) def
+/CopyrightStatementPlacemats (Copyright 2026 Julian D. A. Wiseman of www.JDAWiseman.com) def
 
 % % % % % % % % % % %
 % Non-Glasses Pages %
@@ -728,7 +728,7 @@ if} bind def  % /VoteRecorderCrossedBox
 
 /OneCircleBackgroundPaintCode
 {
-	% As of Nov 2025, largest number of flights in a single file has been five. So nine hopefully enough.
+	% As of Jan 2026, largest number of flights in a single file has been five. So nine hopefully enough.
 	[
 		{1   setgray}  % White
 		{0.9 setgray}  % Very pale grey
@@ -849,7 +849,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202512241645) def
+/SoftwareVersionDateTimeAdobeFormat (D:202601022145) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -7321,15 +7321,15 @@ currentdict /GlyphShowKnownAbsences undef
 /TimeIntervalString
 {
 	1 dict begin
-	dup 0 lt {cvr 4294967296.0 add} if  % PLRM3 p714 re usertime; and table B.1 p739. Note 2^31 ms ~= 24 days + 20 hours + 31 minutes.
+	dup 0 lt {cvr 4294967296.0 add} if  % PLRM3 p714 re usertime; and table B.1 p739.
 	1000 div /usertimeInterval exch def
 	mark
 	1 {
 		( ~= ) usertimeInterval dup cvi 2 copy eq {exch} if pop ( seconds)  % Recent Distiller versions seems to report usertime in whole seconds.
 		usertimeInterval       60 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( minutes)} {pop exit} ifelse  % There have been some distillation times of multiple minutes.
 		usertimeInterval     3600 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( hours)  } {pop exit} ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
-		usertimeInterval    86400 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Nov 2025, JDAW's longest distillation time has been ~=22 minutes.
-		usertimeInterval  2629800 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. PostScript's max integer ~= 0.8 months.
+		usertimeInterval    86400 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Jan 2026, JDAW's longest distillation time has been ~=22 minutes.
+		usertimeInterval  2629800 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. PostScript's max integer = 2^31 ms ~= 24 days + 20 hours + 31 minutes ~= 0.8 months.
 		usertimeInterval 31557600 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( years)  } {pop exit} ifelse  % Years?! Something is very amiss.
 	} repeat  % 1
 	end
