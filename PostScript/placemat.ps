@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:45 Friday 2nd January 2026
+% This version 15:00 Saturday 3rd January 2026
 
 % Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202601022145) def
+/ParametersVersionDateTimeAdobeFormat (D:202601031500) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -849,7 +849,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202601022145) def
+/SoftwareVersionDateTimeAdobeFormat (D:202601031500) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -998,7 +998,7 @@ ifelse} bind def  % /Stopped
 /ShellSortGaps
 [
 	1 3 7 16 37 83 187 419 937 2099 4693 10499 23479 52501  % Below 2^16 = 65536, so sufficient for PostScript.
-	117391 262495 586961 1312481 2934793 6562397 14673961 32811973 73369801 164059859 366848983 820299269 1834244921  % Below 2^31 ~= 2 billion
+	117391 262495 586961 1312481 2934793 6562397 14673961 32811973 73369801 164059859 366848983 820299269 1834244921  % Below 2^31 - 1 ~= 2 billion
 	% 4101496331 9171224603 20507481647 45856123009 102537408229 229280615033 512687041133 1146403075157 2563435205663 5732015375783
 	% 12817176028331 28660076878933 64085880141667 143300384394667 320429400708323 716501921973329 1602147003541613 3582509609866643
 	% 8010735017708063 17912548049333207 40053675088540303 89562740246666023 200268375442701509 447813701233330109
@@ -7321,26 +7321,41 @@ currentdict /GlyphShowKnownAbsences undef
 /TimeIntervalString
 {
 	1 dict begin
-	dup 0 lt {cvr 4294967296.0 add} if  % PLRM3 p714 re usertime; and table B.1 p739.
+	dup 0 lt {cvr 2147483648.0  2 copy div abs ceiling cvi mul add} if  % PLRM3 p714 re usertime; and table B.1 p739.
 	1000 div /usertimeInterval exch def
 	mark
 	1 {
-		( ~= ) usertimeInterval dup cvi 2 copy eq {exch} if pop ( seconds)  % Recent Distiller versions seems to report usertime in whole seconds.
-		usertimeInterval       60 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( minutes)} {pop exit} ifelse  % There have been some distillation times of multiple minutes.
-		usertimeInterval     3600 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( hours)  } {pop exit} ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
-		usertimeInterval    86400 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( days)   } {pop exit} ifelse  % As of Jan 2026, JDAW's longest distillation time has been ~=22 minutes.
-		usertimeInterval  2629800 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. PostScript's max integer = 2^31 ms ~= 24 days + 20 hours + 31 minutes ~= 0.8 months.
-		usertimeInterval 31557600 div dup 1 ge {1 FormatDecimalPlaces 3 index exch ( years)  } {pop exit} ifelse  % Years?! Something is very amiss.
+		usertimeInterval dup cvi 2 copy eq {exch} if pop ( seconds)  % Recent Distiller versions seem to report usertime in whole seconds.
+		usertimeInterval       60 div dup 1   ge {1 FormatDecimalPlaces ( ~= ) exch ( minutes)} {pop exit} ifelse  % There have been some distillation times of multiple minutes.
+		usertimeInterval     3600 div dup 1   ge {1 FormatDecimalPlaces ( ~= ) exch ( hours)  } {pop exit} ifelse  % If time exceeds a few minutes, deactivate FillTitles and FillPlaceNames.
+		usertimeInterval    86400 div dup 0.5 ge {1 FormatDecimalPlaces ( ~= ) exch ( days)   } {pop exit} ifelse  % As of Jan 2026, JDAW's longest distillation time has been ~=22 minutes.
+		usertimeInterval  2629800 div dup 0.5 ge {1 FormatDecimalPlaces ( ~= ) exch ( months) } {pop exit} ifelse  % Julian year of 365.25 days, divided by 12. PostScript's max integer = 2^31 ms ~= 24 days + 20 hours + 31 minutes ~= 0.8 months.
+		usertimeInterval 31557600 div dup 0.5 ge {1 FormatDecimalPlaces ( ~= ) exch ( years)  } {pop exit} ifelse  % Years?! Something is very amiss.
 	} repeat  % 1
 	end
 	ConcatenateToMark
 } bind def  % TimeIntervalString
 
+/usertimePostPrev usertime def  % Into which to store
+/usertimeStartLocal usertimePostPrev def  % ditto
+% str  TimeInterval_LogPerhaps  -
+/TimeInterval_LogPerhaps
+{
+	<< /ut usertime >> begin
+	ut usertimeStartLocal sub 2000 gt  ut usertimePostPrev sub 10000 gt  and  % 2s, 10s
+	{
+		/usertimePostPrev ut store
+		mark exch (; execution time ~= ) ut usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
+	} {pop} ifelse  % not logged in a while
+	end
+} bind def  % /TimeInterval_LogPerhaps
+
+
 % Do stuff: call the routines
 
 % This open curly brace starts code passed to stopped
 {
-	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: just before error checking, execution time ~= ) usertime usertimeStart TimeIntervalString ConcatenateToMark OutputToLog} if
+	AnyFillTextingAtAll //DeBugLevel 100 le or {mark ( Main: just before error checking, execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog} if
 	% Elementary error checking
 	/ErrorFlag //false def
 
@@ -13129,7 +13144,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 		% TitleAboveBelowOverForms
 		//DeBugLevel 75 le {( GlassesPageInnerLoop: TitleAboveBelowOverForms) OutputToLog} if
-		/usertimeStartLocal usertime def
+		/usertimeStartLocal usertime store
 		0  1  SheetNumGlasses SheetNum get 1 sub
 		{
 			WithinPage-WithinTitles-def
@@ -13161,12 +13176,8 @@ currentdict /GlyphShowKnownAbsences undef
 		} for  % WithinPage, WithinTitles
 		currentdict /WithinPage undef
 		currentdict /WithinTitles undef
-		usertime dup dup usertimeStartLocal sub 1000 gt exch usertimePostPrev sub 10000 gt  and
-		{
-			/usertimePostPrev exch store
-			mark ( GlassesPageInnerLoop, TitleAboveBelowOverForms: NameNum=) NameNum (; SheetNum=) SheetNum
-			(; execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
-		} {pop} ifelse  % usertime ...
+
+		mark ( GlassesPageInnerLoop, TitleAboveBelowOverForms: NameNum=) NameNum (; SheetNum=) SheetNum ConcatenateToMark  TimeInterval_LogPerhaps
 
 		% Names
 		SideBySideGlassesTastingNotes not
@@ -13191,7 +13202,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 		ShowHeadersAndFooters
 		{
-			//DeBugLevel 75 le {( GlassesPageInnerLoop: headers and footers) OutputToLog} if
+			//DeBugLevel 75 le {mark ( GlassesPageInnerLoop: headers and footers: NameNum=) NameNum (; SheetNum=) SheetNum ConcatenateToMark OutputToLog} if
 			<< /SideBySideGlassesTastingNotes //false >> begin  //false DefStoreMgns  dup matrix currentmatrix exch setmatrix  HeadersAndFooters PaintHeadersFooters  setmatrix  end
 			//false DefStoreMgns
 		} if  % ShowHeadersAndFooters
@@ -13223,7 +13234,7 @@ currentdict /GlyphShowKnownAbsences undef
 		//DeBugLevel 100 le {(+TastingNotesInnerLoop) OutputToLog} if
 		20 dict begin
 
-		/usertimeStartLocal usertime def
+		/usertimeStartLocal usertime store
 
 		TastingNotesReplaceNameWithPageNum {/ThisName TastingNotesPageNumCompoundString def} if
 
@@ -13319,12 +13330,7 @@ currentdict /GlyphShowKnownAbsences undef
 		NamesTastingNotes NameNum get IsLeftHander {MgnL ThisNameL sub} {PageWidth MgnR sub ThisNameR sub} ifelse  MgnB ThisNameB sub  moveto
 		/ThisName load ShowRecursive
 
-		usertime dup dup usertimeStartLocal sub 1000 gt exch usertimePostPrev sub 10000 gt  and
-		{
-			/usertimePostPrev exch store
-			mark ( TastingNotesInnerLoop, TastingNoteForms: NameNum= ) NameNum (; name=") ThisNameASCII ("; TNSheetNum=) TNSheetNum
-			(; execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
-		} {pop} ifelse  % usertime ...
+		mark ( TastingNotesInnerLoop, TastingNoteForms: NameNum= ) NameNum (; name=") ThisNameASCII ("; TNSheetNum=) TNSheetNum ConcatenateToMark  TimeInterval_LogPerhaps
 
 		end
 		//DeBugLevel 100 le {(-TastingNotesInnerLoop) OutputToLog} if
@@ -13420,7 +13426,7 @@ currentdict /GlyphShowKnownAbsences undef
 	/PrePourInnerLoop
 	{
 		//DeBugLevel 100 le {(+PrePourInnerLoop) OutputToLog} if
-		/usertimeStartLocal usertime def
+		/usertimeStartLocal usertime store
 		CircleNonEmpty SheetNum get WithinPage get {PrePourForms SheetNum get WithinPage get  execform} if
 
 		ShowHeadersAndFooters
@@ -13429,12 +13435,7 @@ currentdict /GlyphShowKnownAbsences undef
 			HeadersAndFooters PaintHeadersFooters
 		} if  % ShowHeadersAndFooters
 
-		usertime dup dup usertimeStartLocal sub 1000 gt exch usertimePostPrev sub 10000 gt  and
-		{
-			/usertimePostPrev exch store
-			mark ( PrePourInnerLoop, PrePourForms: SheetNum=) SheetNum (; WithinPage=) WithinPage (; WithinTitles=) WithinTitles
-			(; title~=") Titles WithinTitles get ASCIIfy ("; execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
-		} {pop} ifelse  % usertime ...
+		mark ( PrePourInnerLoop, PrePourForms: SheetNum=) SheetNum (; WithinPage=) WithinPage (; WithinTitles=) WithinTitles ConcatenateToMark  TimeInterval_LogPerhaps
 		//DeBugLevel 100 le {(-PrePourInnerLoop) OutputToLog} if
 	} bind def  % /PrePourInnerLoop
 
@@ -13700,7 +13701,7 @@ currentdict /GlyphShowKnownAbsences undef
 						PlaceNamesPaperType ThisPaperType PaperTypesEqual   PageOrderingPlaceNames PlaceNameSetNum GetEU  ThisPageOrdering  eq   and
 						{
 							/ThisName NamesPlaceNames PlaceNameSetNum GetEU NameNum get def
-							/usertimeStartLocal usertime def
+							/usertimeStartLocal usertime store
 							matrix currentmatrix
 							/TypeOfPagesBeingRendered /PlaceName store
 							//false  //false  MirrorPagesPlaceNames PlaceNameSetNum GetEU  //true  PlaceNamesPaperType  PlaceNamesOrientation  SetPaperSize
@@ -13709,12 +13710,7 @@ currentdict /GlyphShowKnownAbsences undef
 							PlaceNamesInnerLoop
 							//DeBugLevel 40 le {(+PaintForegroundCode) OutputToLog} if   GSave newpath /PaintForegroundCode load execU GRestore   //DeBugLevel 40 le {(-PaintForegroundCode) OutputToLog} if
 							setmatrix   ShowPage
-							usertime dup dup usertimeStartLocal sub 1000 gt exch usertimePostPrev sub 10000 gt  and
-							{
-								/usertimePostPrev exch store
-								mark ( Main: -PlaceName: NameNum=) NameNum (; PlaceNameSetNum=) PlaceNameSetNum
-								(; execution time ~= ) usertime usertimeStart sub TimeIntervalString ConcatenateToMark OutputToLog
-							} {pop} ifelse  % usertime ...
+							mark ( Main: -PlaceName: NameNum=) NameNum (; PlaceNameSetNum=) PlaceNameSetNum ConcatenateToMark  TimeInterval_LogPerhaps
 						} if  % ... ThisPaperType ... ThisPageOrdering ... and
 					} if  % NameNum  NamesPlaceNames PlaceNameSetNum GetEU length  lt
 				} for  % /PlaceNameSetNum
@@ -14440,12 +14436,7 @@ currentdict /GlyphShowKnownAbsences undef
 							} for  % PrePourSheetNum, if not collating
 						} forall  % PrePourSheetNumWithinPageWithinTitles
 
-						usertime dup usertimePostPrev sub 10000 gt {//DeBugLevel 100 le  AnyFillTextingAtAll  or} {//false} ifelse
-						{
-							/usertimePostPrev exch store
-							mark (PrePour, PrePourSheetNum=) PrePourSheetNum (, WithinTitles=) WithinTitles (; execution time)
-							usertimePostPrev usertimeStart sub TimeIntervalString  ConcatenateToMark OutputToLog
-						} {pop} ifelse
+						mark (PrePour, PrePourSheetNum=) PrePourSheetNum (, WithinTitles=) WithinTitles (; execution time) ConcatenateToMark  TimeInterval_LogPerhaps
 						Finished  PrePourCollate not  or {exit} if
 						/PrePourSheetNum PrePourSheetNum 1 add def
 					} loop  % PrePourSheetNum, if collating
@@ -14503,12 +14494,7 @@ currentdict /GlyphShowKnownAbsences undef
 								setmatrix   ShowPage
 							} for  % BottleWrapSheetNum, if not collating
 						} forall  % BottleWrapSheetNumWithinPageWithinTitles
-						usertime dup usertimePostPrev sub 10000 gt {//DeBugLevel 100 le  AnyFillTextingAtAll  or} {//false} ifelse
-						{
-							/usertimePostPrev exch store
-							mark (BottleWrap, SheetNum=) SheetNum (, WithinTitles=) WithinTitles (; execution time)
-							usertimePostPrev usertimeStart sub TimeIntervalString  ConcatenateToMark OutputToLog
-						} {pop} ifelse
+						mark (BottleWrap, SheetNum=) SheetNum (, WithinTitles=) WithinTitles (; execution time) ConcatenateToMark  TimeInterval_LogPerhaps
 						Finished  BottleWrapCollate not  or {exit} if
 						/BottleWrapSheetNum BottleWrapSheetNum 1 add def
 					} loop  % BottleWrapSheetNum, if collating
@@ -15115,12 +15101,7 @@ currentdict /GlyphShowKnownAbsences undef
 					StickyLabelsNumPaintedOnCurrentPage 0 gt {AnnotatePDF ShowPage  /StickyLabelsNumPaintedOnCurrentPage 0 def} if
 					setmatrix
 
-					usertime dup usertimePostPrev sub 10000 gt {//DeBugLevel 100 le  AnyFillTextingAtAll  or} {//false} ifelse
-					{
-						/usertimePostPrev exch store
-						mark (StickyLabels: execution time)
-						usertimePostPrev usertimeStart sub TimeIntervalString  ConcatenateToMark OutputToLog
-					} {pop} ifelse
+					(StickyLabels: execution time) TimeInterval_LogPerhaps
 				} if  % ... StickyLabelsNumCopies 1 ge ...
 				end
 			} forall  % StickyLabelsTypeThis drawn from StickyLabelsTypes
@@ -15876,7 +15857,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 	EpilogueCode
 
-	mark (Execution time) usertime usertimeStart sub TimeIntervalString (, excluding time for parameter assignments, log page(s), finishing, and output.) ConcatenateToMark  OutputToLog
+	mark (Execution time ~= ) usertime usertimeStart sub TimeIntervalString (, excluding time for parameter assignments, log page(s), and output.) ConcatenateToMark  OutputToLog
 
 	/EndError //false def
 	count mark exch    dup                0 eq    {(:-\)    )} {/EndError //true store (Error! )} ifelse exch (      = count:              should = 0\n)   dup  3 -1 roll 5 string cvs dup length 5 exch sub exch putinterval
