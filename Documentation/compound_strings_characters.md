@@ -286,7 +286,7 @@ So the usual advice applies: carefully check the output.
 
 Attempts to use a non-existent glyph are logged, but some fonts have the glyph name but not a proper glyph. 
 E.g., several glyphs in Harrington paint as ![Missing glyph in Harrington font](images/Harrington_notdef.png). 
-So, as an assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15, and shows them in an elegant PDF. 
+So, as an assist, there is a [stand-alone PostScript program](../PostScript/glyph_log.ps) which logs all the glyphs from the font specified in its line&nbsp;15, and shows them in an elegant PDF ([small online mention](https://www.theportforum.com/viewtopic.php?t=16562&p=141159#p141159)). 
 Some examples follow&mdash;though your version of these fonts might not be the same as my version, so do re-run the [PostScript generator](../PostScript/glyph_log.ps) on your machine. 
 * Sans-serif fonts: 
     - [`/TrebuchetMS-Bold`](images/TrebuchetMS-Bold.pdf) 
