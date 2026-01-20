@@ -1,6 +1,6 @@
 %!PS
 
-% This version 19:20 Sunday 18th January 2026
+% This version 20:50 Tuesday 20th January 2026
 
 % Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202601181920) def
+/ParametersVersionDateTimeAdobeFormat (D:202601202050) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -849,7 +849,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202601181920) def
+/SoftwareVersionDateTimeAdobeFormat (D:202601202050) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -13491,25 +13491,34 @@ currentdict /GlyphShowKnownAbsences undef
 		{OneCircles} MightBeTrue  PageOrderingOneCircle ThisPageOrdering eq  and
 		{
 			/TypeOfPagesBeingRendered /OneCircle store
-			15 dict begin
-			/MgnL 0 def  /MgnR 0 def  /MgnB 0 def  /MgnT 0 def
+			16 dict begin
 			0  1  NumSheets 1 sub
 			{
 				/SheetNum exch def
+				/PageSize  Radii SheetNum get 2 mul 0.25 add ceiling cvi  def  % The ceiling intended to centre the final bitmap image, at least at 72dpi, and a little extra space for cleaner rasterisation.
 				0  1  SheetNumGlasses SheetNum get 1 sub
 				{
 					WithinPage-WithinTitles-def
 					OneCircles  //false PageSuppressed not and  CircleNonEmpty SheetNum get WithinPage get  and
 					{
-						//false  //false  MirrorPagesOneCircle  //true  [Radii SheetNum get 2 mul  dup]  /Portrait   SetPaperSize  % MirrorPagesOneCircle could vary by WithinTitles.
-						//false  //false //false                //false PaperType                        Orientation SetPaperSize   //true DefStoreMgns  % Defs PageHeight etc.
-						matrix currentmatrix    Radii SheetNum get  dup  translate  newpath    /MatrixGlasses matrix currentmatrix def
-						ClipSave  0 0  Radii SheetNum get 0 360  /m ArcAccurate   clip newpath
-						/OneCircleBackgroundPaintCode load dup length 0 gt
+						% ShowCropMarks Rotate180 Mirror Callsetpagedevice PaperType Orientation  SetPaperSize  -
+						//false  //false  MirrorPagesOneCircle  //true  [PageSize  dup]  /Portrait   SetPaperSize  % MirrorPagesOneCircle could vary by WithinTitles.
+						[ /MgnL /MgnR /MgnB /MgnT ] {0 def} forall
+						newpath    matrix currentmatrix    PageSize 2 div dup translate    /MatrixGlasses matrix currentmatrix def
+						ClipSave  % ended 26 lines below
+						0 0  PageSize 2 div 0 360  /m ArcAccurate   clip newpath
+						1 setgray
+						/OneCircleBackgroundPaintCode load  dup length 0 gt
 						{
-							0 0  Radii SheetNum get 1.005 mul  0 360  arc  % Slightly larger, by ~= 33* the -151ppm inward inaccuracy of arc, hopefully to lessen bleed-through of lower white.
-							1 setgray  exec
+							0 0  PageSize 2 div 0.06 sub  0 360  /m ArcAccurate  % Slightly smaller, hopefully to lessen bleed if there is background grey to the edge
+							exec  % if no colour set from OneCircleBackgroundPaintCode, then 1 setgray is the default.
 						} {pop} ifelse  % ... length 0 gt
+
+						IsDistiller not  % This ugly hack to stop GhostScript from auto-rotating some pages, seemingly dependent on the Circlearray.
+						{
+							TitlesFont 200 selectfont  % Same colour as painted background, for needless extra invisibility.
+							(GhostScript Anti-Rotation Hack)   dup stringwidth pop -2 div  -300  moveto  show  % Far below visible page, as lowest thing might be driving GhostScript's auto-rotation.
+						} if  % IsDistiller not
 
 						PrePourShowBackgroundTexts   Droplets {PrePourShowDroplets or} if
 						{
@@ -13520,7 +13529,7 @@ currentdict /GlyphShowKnownAbsences undef
 							Droplets PrePourShowDroplets and
 							{
 								SheetNum  % passed to DropletsPaint
-								MatrixGlasses setmatrix   Radii SheetNum get dup   dup dup neg  dup dup  dup 4 index  moveto lineto lineto lineto   MatrixGlassesPage setmatrix   pathbbox
+								MatrixGlasses setmatrix   PageSize 2 div dup   dup dup neg  dup dup  dup 4 index  moveto lineto lineto lineto   MatrixGlassesPage setmatrix   pathbbox
 								WithinPage  0.0  DropletsPaint
 							} if  % Droplets PrePourShowDroplets and
 						} if  % PrePourShowBackgroundTexts ...PrePourShowDroplets or
@@ -13529,7 +13538,7 @@ currentdict /GlyphShowKnownAbsences undef
 						/TypeOfPagesBeingRendered /Glasses store
 						[ OutlineTitles {OutlineForms} if  Spirals {SpiralForms} if  CrossHatchingInside {CrossHatchingInsideForms} if ] {SheetNum get WithinPage get  execform} forall
 						/PaintBackgroundInsideGlassCircles load dup length 0 gt {execU} {pop} ifelse
-						ClipRestore  % from 20 lines above
+						ClipRestore  % from 26 lines above
 						TitleAboveBelowOverForms SheetNum get WithinPage get  execform  AnnotateGlass
 						CirclearrayForms SheetNum get WithinPage get   execform
 						/TypeOfPagesBeingRendered /OneCircle store
@@ -13537,7 +13546,7 @@ currentdict /GlyphShowKnownAbsences undef
 						OneCircleSuppressOtherPageTypes
 						{
 							mark
-								/Rect [ Radii SheetNum get neg  dup neg   2 copy ]  % Page zero-centred, and radius is half page size. So not PageWidth nor PageHeight.
+								/Rect [ PageSize -2 div  dup neg   2 copy ]  % Page zero-centred.
 								/Subtype /Text
 								/Contents
 									mark  (One circle, intended for the generation of bitmap images, perhaps a GIF animation of all the circles. )
