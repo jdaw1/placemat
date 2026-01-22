@@ -1,6 +1,6 @@
 %!PS
 
-% This version 20:50 Tuesday 20th January 2026
+% This version 22:45 Thursday 22nd January 2026
 
 % Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202601202050) def
+/ParametersVersionDateTimeAdobeFormat (D:202601222245) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -849,7 +849,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202601202050) def
+/SoftwareVersionDateTimeAdobeFormat (D:202601222245) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -13516,7 +13516,7 @@ currentdict /GlyphShowKnownAbsences undef
 
 						IsDistiller not  % This ugly hack to stop GhostScript from auto-rotating some pages, seemingly dependent on the Circlearray.
 						{
-							TitlesFont 200 selectfont  % Same colour as painted background, for needless extra invisibility.
+							TitlesFont 200 SelectFont  % Same colour as painted background, for needless extra invisibility.
 							(GhostScript Anti-Rotation Hack)   dup stringwidth pop -2 div  -300  moveto  show  % Far below visible page, as lowest thing might be driving GhostScript's auto-rotation.
 						} if  % IsDistiller not
 
