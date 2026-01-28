@@ -83,9 +83,9 @@ The exception are URLs, as appear in `ExternalLinks` and `LicensingAgreementLink
 
 The code in a compound string may do any of the following.
 * Put on the stack &ge;0 further compound strings to be painted.
-* `rmoveto` the currentpoint, probably by an amount proportional to `CurrentFontSize` (for the horizontal direction of which there is a shortcut: `{-0.09 Kern}` being equivalent to `{-0.09 CurrentFontSizeX mul 0 rmoveto}`, and for vertical direction an equivalent `VKern`).
-* Change the current font or size, probably by `SelectFont` (or, if the font name is known to be a name rather than an array of possibilities, `selectfont`), and to a size proportional to `CurrentFontSize`, and after storing the original status to permit reversion.
-* Draw a shape, of a size proportional to `CurrentFontSize`, at the current point, and leaving an extant current point at its lower-right. 
+* `rmoveto` the currentpoint, probably by an amount proportional to `CurrentFontSizeY` (for the horizontal direction of which there is a shortcut: `{-0.09 Kern}` being equivalent to `{-0.09 CurrentFontSizeX mul 0 rmoveto}`, and for vertical direction an equivalent `VKern`).
+* Change the current font or size, probably by `SelectFont` (or, if the font name is known to be a name rather than an array of possibilities, `selectfont`), and to a size proportional to `CurrentFontSizeY`, and after storing the original status to permit reversion.
+* Draw a shape, of a size proportional to `CurrentFontSizeY`, at the current point, and leaving an extant current point at its lower-right. 
 Such a shape should be `fill`ed, but non-`bind`edly, so that `fill` can be redefined to allow the software to establish the size of the shape.
 
 When user code within compound strings is being executed the current dictionary is `UserScratchDict`, which persists between executions of such user code. 
@@ -120,9 +120,9 @@ To help with superscripting there are routines `SuperscriptOn` and `SuperscriptO
 A compund string may change the current font:
 ```PostScript
 [ 
-	{/Garamond CurrentFontSize selectfont}         (This is in Garamond; )
-	{/TrebuchetMS-Bold CurrentFontSize selectfont} (this is in TrebuchetMS-Bold; )
-	{/Garamond CurrentFontSize selectfont}         (and then back to Garamond.)
+	{/Garamond CurrentFontSizeY selectfont}         (This is in Garamond; )
+	{/TrebuchetMS-Bold CurrentFontSizeY selectfont} (this is in TrebuchetMS-Bold; )
+	{/Garamond CurrentFontSizeY selectfont}         (and then back to Garamond.)
 ]
 ```
 
@@ -321,9 +321,9 @@ and for that painted in a circle:
 /TwoLineB [(V) {-0.12 Kern} (alente)] def
 
 /TwoLine [
-	{//TwoLineB StringWidthRecursive //TwoLineT StringWidthRecursive sub 2 div dup 0 lt {pop 0} if  CurrentFontSize 0.4375 mul  rmoveto}   //TwoLineT
-	{//TwoLineT StringWidthRecursive //TwoLineB StringWidthRecursive add -2 div                     CurrentFontSize -0.875 mul  rmoveto}   //TwoLineB
-	{//TwoLineT StringWidthRecursive //TwoLineB StringWidthRecursive sub 2 div dup 0 lt {pop 0} if  CurrentFontSize 0.4375 mul  rmoveto}
+	{//TwoLineB StringWidthRecursive //TwoLineT StringWidthRecursive sub 2 div dup 0 lt {pop 0} if  CurrentFontSizeY 0.4375 mul  rmoveto}   //TwoLineT
+	{//TwoLineT StringWidthRecursive //TwoLineB StringWidthRecursive add -2 div                     CurrentFontSizeY -0.875 mul  rmoveto}   //TwoLineB
+	{//TwoLineT StringWidthRecursive //TwoLineB StringWidthRecursive sub 2 div dup 0 lt {pop 0} if  CurrentFontSizeY 0.4375 mul  rmoveto}
 ] bind def  % /TwoLine
 
 /Circlearrays [
