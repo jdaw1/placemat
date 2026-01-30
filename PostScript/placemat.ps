@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:45 Friday 30th January 2026
+% This version 23:30 Friday 30th January 2026
 
 % Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202601302145) def
+/ParametersVersionDateTimeAdobeFormat (D:202601302330) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -849,7 +849,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202601302145) def
+/SoftwareVersionDateTimeAdobeFormat (D:202601302330) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -1826,18 +1826,34 @@ mark  (product = ) product (; languagelevel = ) /languagelevel where {pop langua
 {
 	4 dict begin
 	/AdobeFormatDate exch def
-	//true  % good?
+	//false  % bad?
 	1 {
-		AdobeFormatDate length 14       ne {pop //false exit} if
-		AdobeFormatDate 0 get (D) 0 get ne {pop //false exit} if
-		AdobeFormatDate 1 get (:) 0 get ne {pop //false exit} if
-		2 1 13 {AdobeFormatDate exch get dup (0) 0 get lt exch (9) 0 get gt or {pop //false exit} if} for  % double-exit would be nicer; not worth effort.
+		AdobeFormatDate length dup 14 ne exch 16 ne and {pop //true exit} if  % 14 withotu seconds, 16 with seconds.
+		AdobeFormatDate 0 get (D) 0 get ne {pop //true exit} if
+		AdobeFormatDate 1 get (:) 0 get ne {pop //true exit} if
+		2 1 13 {AdobeFormatDate exch get dup (0) 0 get lt exch (9) 0 get gt or {pop //true exit} if} for    dup {exit} if
+		AdobeFormatDate  2 4 getinterval cvi  2002 lt               {pop //true exit} if  % Year, 2002 being the first writing of this software: www.jdawiseman.com/papers/placemat/placemats_list.html#a20021130
+		AdobeFormatDate  6 2 getinterval cvi dup 1 lt exch 12 gt or {pop //true exit} if  % Month
+		AdobeFormatDate  8 2 getinterval cvi dup 1 lt exch 31 gt or {pop //true exit} if  % Day: not testing for 30th February, etc
+		AdobeFormatDate 10 2 getinterval cvi               23 gt    {pop //true exit} if  % Hour
+		AdobeFormatDate 12 2 getinterval cvi               59 gt    {pop //true exit} if  % Minute
+		AdobeFormatDate length 16 ge {AdobeFormatDate 14 2 getinterval cvi 59 gt {pop //true exit} if} if  % Seconds
 	} repeat  % 1
 	{
+		% Bad
+		//AdobeFormatDateToString_Baddies  AdobeFormatDate cvn dup =  2 copy known not
+		{
+			null put
+			mark (!!! Error: in AdobeFormatDateToString bad AdobeFormatDate = ) AdobeFormatDate ConcatenateToMark OutputToLog
+		} {pop pop} ifelse
+		(!Error!)
+	}{
+		% Good
 		/YYYY AdobeFormatDate 2 4 getinterval cvi def  /MM AdobeFormatDate 6 2 getinterval cvi def  /DD AdobeFormatDate 8 2 getinterval cvi def
-		mark
-		AdobeFormatDate 10 2 getinterval  (:)  % HH
-		AdobeFormatDate 12 2 getinterval  ( )  % MM
+		mark                              AdobeFormatDate 10 2 getinterval      % HH
+		(:)                               AdobeFormatDate 12 2 getinterval      % MM
+		AdobeFormatDate length 16 ge {(:) AdobeFormatDate 14 2 getinterval} if  % SS
+		( )
 		YYYY 2099 le
 		{
 			[ (Mon) (Tue) (Wed) (Thu) (Fri) (Sat) (Sun) ]
@@ -1845,17 +1861,10 @@ mark  (product = ) product (; languagelevel = ) /languagelevel where {pop langua
 			[ 0 31 59 90 120 151 181 212 243 273 304 334 ] MM 1 sub get  YYYY 4 mod 0 eq MM 3 ge and {1 add} if  DD add add 7 mod get ( )
 		} if  % <= 2099
 		AdobeFormatDate 8 2 getinterval ( )  % DD
-		MonthNames MM 1 sub get ( )  % Month
+		//MonthNames MM 1 sub get ( )  % Month
 		AdobeFormatDate 2 4 getinterval  % YYYY
 		ConcatenateToMark
-	}{
-		//AdobeFormatDateToString_Baddies  AdobeFormatDate cvn dup =  2 copy known not
-		{
-			null put
-			mark (!!! Error: in AdobeFormatDateToString bad AdobeFormatDate = ) AdobeFormatDate ConcatenateToMark OutputToLog
-		} {pop pop} ifelse
-		(!Error!)
-	} ifelse  % good
+	} ifelse  % bad
 	end
 } bind def  % /AdobeFormatDateToString
 currentdict /AdobeFormatDateToString_Baddies undef
@@ -1864,7 +1873,7 @@ mark
 [ /SoftwareVersionDateTimeAdobeFormat  /ParametersVersionDateTimeAdobeFormat  /WizardVersionDateTimeAdobeFormat dup where pop pop ]
 {
 	/NameDTAF exch def   /DTAF NameDTAF load def
-	DTAF length 14 ne {mark (Error: ) NameDTAF ( should be of length 14, in format \(D:YYYYMMDDHHMM\), but isn't.) ConcatenateToMark OutputToLog} if
+	DTAF length dup 14 ne exch 16 ne and {mark (Error: ) NameDTAF ( should be of length 14 or 16, in format \(D:YYYYMMDDHHMM\), or with SS, but isn't.) ConcatenateToMark OutputToLog} if
 	DTAF 0 2 getinterval (D:) ne {mark (Error: ) NameDTAF ( should begin "D:", but doesn't.) ConcatenateToMark OutputToLog} if
 	2  1  DTAF length 1 sub {/i exch def DTAF i get dup (0) 0 get lt exch (9) 0 get gt exch or {mark (Error: ) NameDTAF ( ) i ( get should be in range 0...9, but isn't.) ConcatenateToMark OutputToLog} if} for
 } forall
