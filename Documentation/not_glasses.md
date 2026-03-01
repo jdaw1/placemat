@@ -182,7 +182,7 @@ Pages require three folds. First, fold in half; then fold and press hard along t
 The side with the small-writing header and footer should face the named person; the side without should face away. 
 
 Pages to facilitate this are produced using the Boolean `PlaceNames` parameter. 
-Typically, this is the only of these parameters that is touched.
+Typically, this is the only place-names parameter to be changed.
 
 There can be multiple copies of the place names, with different names, so `NamesPlaceNames` is an array of arrays of names, by default containing just one sub-array, `Names`. 
 Why the multiple sets of names? 
@@ -193,7 +193,9 @@ This might be achieved with parameters resembling:
 ```PostScript
 /Names [ (Julian) (Alice) (Ben) (Caroline) (Derek) (Elizabeth) ] def
 /NamesPlaceNames [
-	Names  % People
+	Names  % People array included here
+
+	% And a food array
 	[
 		(Steak & kidney pie)   % Julian
 		(Roast beef, lots)     % Alice
