@@ -506,7 +506,8 @@ Nice to post online can be a GIF animation of all the glass circles.
 [19&nbsp;Nov](http://www.jdawiseman.com/2024/20241119_PeterboroughPortClub_oc.gif), 
 [10&nbsp;Feb&nbsp;2025](http://www.jdawiseman.com/2025/20250210_2000s_oc.gif), 
 [27&nbsp;May](http://www.jdawiseman.com/2025/20250527_1985s_oc.gif), 
-[02&ndash;03&nbsp;Oct](http://www.jdawiseman.com/2025/20251003_1970s_oc.gif).)
+[02&ndash;03&nbsp;Oct](http://www.jdawiseman.com/2025/20251003_1970s_oc.gif),
+[28&nbsp;Oct](http://www.jdawiseman.com/2025/20251028_Pheonix_oc.gif).)
 
 The natural way to proceed is to have the software make single-glass pages. 
 For each page, width = height = 2&nbsp;&times;&nbsp;radius, with the circle centred. 

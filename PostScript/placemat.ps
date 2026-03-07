@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:00 Tuesday 17th February 2026
+% This version 21:00 Saturday 7th March 2026
 
 % Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202602172300) def
+/ParametersVersionDateTimeAdobeFormat (D:202603072100) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -104,7 +104,7 @@
 /DecanterLabelsNumCopies 0 def
 /GlassesNumCopies 1 def
 /TastingNotePagesNumCopies 1 def
-/DecantingNotesNumCopies  Circlearrays length 15 ge {1} {0} ifelse  def
+/DecantingNotesNumCopies 0 def
 /StickyLabelsNumCopies 0 def
 /StickyLabelsTypes [ /Avery_2_4 /Avery_5_13 ] def  % /Avery_2_4 = 2x4 on A4; /Avery_5_13 = 5x13 on A4; /Dymo89_36mm 1x1 on 89mm x 36mm
 /BottleWrapNumCopies 0 def  % Activates BottleWrapSuppressOtherPageTypes
@@ -176,7 +176,7 @@
 %	[ /DiamondsAndRectangular     /OnlyIfGlassesNumMin 6                          ]    [ /DiamondsAndRectangular     /OnlyIfOrientation /Landscape ]
 %	[ /RectangularAlternateNudge  /OnlyIfGlassesNumMin 6  /ImprovementPointsMin 2 ]    [ /RectangularAlternateNudge  /OnlyIfOrientation /Landscape  /ImprovementPointsMin 2 ]
 %	[ /Array      /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMax 5  /OnlyIfGlassesNumMin 5       /SuppressOrnamentsLeft  /Positions [0 4 1 4] [0 2 1 2] [0 0 1 0] [1 3] [1 1] ]  % /RightSide variant
-%	[ /Array      /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMax 4  /OnlyIfGlassesNumMin 4       /SuppressOrnamentsLeft  /Positions           [0 2 1 2] [0 0 1 0] [1 3] [1 1] ]  % /RightSide variant
+%	[ /Array      /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMax 4  /OnlyIfGlassesNumMin 4       /SuppressOrnamentsLeft  /Positions           [0 3 1 3] [0 1 1 1] [1 2] [1 0] ]  % /RightSide variant
 %	[ /RightSide  /OnlyIfOrientation /Portrait  /OnlyIfGlassesNumMax 3  /VerticalAlignment /Justify  /SuppressOrnamentsLeft  /SuppressOrnamentsCentre ]
 
 	% Rarities
@@ -849,7 +849,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202602172300) def
+/SoftwareVersionDateTimeAdobeFormat (D:202603072100) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
