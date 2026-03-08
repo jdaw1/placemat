@@ -106,7 +106,7 @@ There are several possible means by which the PostScript can be &lsquo;distilled
 [ps2pdf.org](http://www.ps2pdf.org/convert.htm), 
 &lsquo;Choose&rsquo; or &lsquo;Add&rsquo; the file, and &lsquo;Convert&rsquo; it.  
 
-If it that has made a PDF resembling [this](images/placemat.pdf), then you can successfully convert the PostScript to PDF: hurray! 
+If that has made a PDF the first page of which resembles [this](images/placemat.pdf), then you can successfully convert the PostScript to PDF: hurray!
 
 
 <div align="center">
