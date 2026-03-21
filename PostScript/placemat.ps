@@ -1,6 +1,6 @@
 %!PS
 
-% This version 21:00 Saturday 7th March 2026
+% This version 22:50 Saturday 21st March 2026
 
 % Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202603072100) def
+/ParametersVersionDateTimeAdobeFormat (D:202603212250) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -400,6 +400,7 @@ if} bind def  % /VoteRecorderCrossedBox
 /MarginT MarginL [ /HeadersLeft /HeadersCenter /HeadersRight ] {load length 0 ne {HeaderFontSize add exit} if} forall def
 /MarginB MarginL [ /FootersLeft /FootersCenter /FootersRight ] {load length 0 ne {FooterFontSize add exit} if} forall def
 
+/PageSizesToForceToPortrait [ /A4 /USL ] def  % Rotates page and contents, because github.com/jdaw1/placemat/issues/173
 /Orientation {SideBySideGlassesTastingNotes {/Landscape} {PaperType /A4 eq PaperType /USL eq or {/Portrait} {/Landscape} ifelse} ifelse} bind def  % /Landscape /Portrait
 % ShrinkRadii can take values:
 % /NotAtAll, so each page's radius is determined independently;
@@ -849,7 +850,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202603072100) def
+/SoftwareVersionDateTimeAdobeFormat (D:202603212250) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -2237,25 +2238,48 @@ currentdict /ForReverseBinaryDict undef
 % First two params ignored if Callsetpagedevice is false
 /SetPaperSize
 {
-	//DeBugLevel 16 le {(+SetPaperSize) OutputToLog} if
+	//DeBugLevel 15 le {(+SetPaperSize) OutputToLog} if
 	2 copy Dimensions /PageHeight exch def  /PageWidth exch def
-	15 dict begin
+	19 dict begin
 	pop  /PaperType exch def  /Callsetpagedevice exch def  /Mirror exch def  /Rotate180 exch def  /ShowCropMarks exch def
+	/ToPortraitRotate
+		PageWidth PageHeight gt
+		{
+			//false
+			PageSizesToForceToPortrait   dup type /arraytype ne { [ exch ] } if  % In case erroreously set to a name.
+			{
+				/PSTFTP exch def
+				PaperType PSTFTP eq {pop //true exit} if
+				PaperType type /arraytype eq  PSTFTP type /arraytype eq  and {PaperType length  PSTFTP length  eq  % Should both be 2
+				{
+					//true
+					0 1 PaperType length 1 sub {dup PaperType exch get exch PSTFTP exch get ne {pop //false exit} if} for
+					{pop //true exit} if  % I.e., if arraytype's match
+				} if } if  % same-length arrays
+			} forall  % PageSizesToForceToPortrait
+		} {//false} ifelse  % PageWidth PageHeight gt
+	def  % /ToPortraitRotate
 
-	Callsetpagedevice  % Sets the page size; and attempts to disable duplex; draws crop marks
+	Callsetpagedevice  % Sets the page size; and attempts to disable duplex
 	{
-		[PageWidth PageHeight] {14400 gt {(Warning: with a paper side > 14400pt = 16'8" = 5.08 metres, about to call setpagedevice, which might fail.) OutputToLog} if} forall
+		[ PageWidth PageHeight ]
+			{14400 gt {(Warning: with paper side > 14400pt = 200" = 16'8" = 508cm = limit in PDF standard, calling setpagedevice, which might fail.) OutputToLog} if}
+		forall
 		<<
-			/OutputFaceUp DefaultOutputFaceUp Mirror {not} if   /PageSize [PageWidth PageHeight]   /ImagingBBox //null
-			//true [/TastingNotes /PrePour /VoteRecorder /DecantingNotes /Accounts /BottleWrap /DistillerLog] {TypeOfPagesBeingRendered eq {pop //false exit} if} forall  {/Duplex //false} if
+			/OutputFaceUp DefaultOutputFaceUp Mirror {not} if   /ImagingBBox //null
+			/PageSize [ PageWidth PageHeight    ToPortraitRotate {exch} if ]
+			/Duplex //false    [ /TastingNotes /VoteRecorder /DecantingNotes /Accounts /DistillerLog ]
+				{TypeOfPagesBeingRendered eq {pop //true exit} if}
+			forall  % page types for which Duplex allowed
 		>> setpagedevice
-		/InitialMatrix matrix currentmatrix store
 		Mirror
-			{Rotate180  {[1 0 0 -1 0 PageHeight] concat}  {[-1 0 0 1 PageWidth 0] concat}  ifelse}
+			{Rotate180  {[ 1 0 0 -1 0         PageHeight]}  {[-1 0 0 1 PageWidth 0]}  ifelse concat}
 			{Rotate180  {[-1 0 0 -1 PageWidth PageHeight] concat}  if}
 		ifelse  % Mirror
+		ToPortraitRotate {[ 0 1 -1  0 PageHeight 0] concat} if
 		/InitialMatrix matrix currentmatrix store
 	} if  % Callsetpagedevice
+
 	ShowCropMarks
 	{
 		/Glasses TypeOfPagesBeingRendered eq
@@ -2755,8 +2779,8 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 			TypeOfPagesBeingRendered /Accounts       eq {pop pop       AccountsPaperType       AccountsOrientation} if
 			TypeOfPagesBeingRendered /CorkDisplay    eq {pop pop    CorkDisplayPaperType         CDBestOrientation} if
 			TypeOfPagesBeingRendered /Empty          eq {pop pop               PaperType               Orientation} if
-			TypeOfPagesBeingRendered /NeckTags       eq {pop pop NeckTagsPaperType       /Portrait                } if
-			TypeOfPagesBeingRendered /StickyLabels   eq {pop pop StickyLabelsPaperType   /Portrait                } if
+			TypeOfPagesBeingRendered /NeckTags       eq {pop pop NeckTagsPaperType            /Portrait           } if
+			TypeOfPagesBeingRendered /StickyLabels   eq {pop pop StickyLabelsPaperType        /Portrait           } if
 			TypeOfPagesBeingRendered /DecanterLabels eq {pop pop DecanterLabelsPaperType DLOrientation {/Portrait} {/Landscape} ifelse} if
 			/ThisOrientation exch
 			/PageNum PageNum
@@ -13529,7 +13553,6 @@ currentdict /GlyphShowKnownAbsences undef
 					WithinPage-WithinTitles-def
 					OneCircles  //false PageSuppressed not and  CircleNonEmpty SheetNum get WithinPage get  and
 					{
-						% ShowCropMarks Rotate180 Mirror Callsetpagedevice PaperType Orientation  SetPaperSize  -
 						//false  //false  MirrorPagesOneCircle  //true  [PageSize  dup]  /Portrait   SetPaperSize  % MirrorPagesOneCircle could vary by WithinTitles.
 						[ /MgnL /MgnR /MgnB /MgnT ] {0 def} forall
 						newpath    matrix currentmatrix    PageSize 2 div dup translate    /MatrixGlasses matrix currentmatrix def

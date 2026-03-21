@@ -26,6 +26,8 @@
 &starf;&#8239;[Droplets](#Droplets)&nbsp; 
 &starf;&#8239;[Flights&nbsp;within&nbsp;a&nbsp;page](#Flights)&nbsp; 
 &starf;&#8239;[ThePortForum&nbsp;Icon](#ThePortForum_Icon)
+&starf;&#8239;[Page&nbsp;rotation](#page_rotation)
+
 
 ----
 
@@ -346,3 +348,14 @@ Icons on the tasting-note pages are controlled by ThePortForumIconTastingNotePla
 Whether or not the icons are shown in colour is set by the boolean `ThePortForumIconColour`.
 
 These parameters are mentioned in [issue 97](http://github.com/jdaw1/placemat/issues/97), re other websites&rsquo; icons.
+
+
+
+<a name="page_rotation"></a>
+## Page rotation ##
+
+Some printers, or maybe printer drivers, seem unable to cope with mixed page orientations, as described in [issue&nbsp;173](https://github.com/jdaw1/placemat/issues/173). 
+A dodge of this problem is needed. 
+There is a parameter, by default <code>/PageSizesToForceToPortrait&nbsp;[&nbsp;/A4&nbsp;/USL&nbsp;]&nbsp;def</code>, that rotates page and content to portrait, for pages of the listed sizes. 
+Then the output is optically landscape, but the printer sees it as portrait, so dodging the rotation problem. 
+Of course, an empty array, <code>/PageSizesToForceToPortrait&nbsp;[&nbsp;]&nbsp;def</code>, keeps orientations at their natural values.
