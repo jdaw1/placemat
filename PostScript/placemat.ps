@@ -1,6 +1,6 @@
 %!PS
 
-% This version 14:30 Sunday 22nd March 2026
+% This version 18:55 Sunday 22nd March 2026
 
 % Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202603221430) def
+/ParametersVersionDateTimeAdobeFormat (D:202603221855) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -850,7 +850,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202603221430) def
+/SoftwareVersionDateTimeAdobeFormat (D:202603221855) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -1806,6 +1806,9 @@ dup length 0 eq {pop} {OutputToLog} ifelse
 mark  (product = ) product (; languagelevel = ) /languagelevel where {pop languagelevel} {(undefined and hence 1)} ifelse (; version = ) version  (; revision = ) revision  (; buildtime = ) buildtime  ConcatenateToMark OutputToLog
 
 /IsDistiller false  1 dict begin /SearchString (Distiller) def  0 1 product length SearchString length sub {product exch SearchString length getinterval SearchString eq {pop //true exit} if} for  end def
+% Weird GhostScript bug affecting pure-white painting, perhaps purged because wrongly believed redundant.
+% At 1200 d.p.i, the near-whiteness might cause one black pixel per 23.15 sq inches.
+/PrefillWhiteGray IsDistiller {1} {0.99999997} ifelse def  % https://github.com/jdaw1/placemat/issues/174
 
 /MonthNames [(Jan) (Feb) (March) (April) (May) (June) (July) (Aug) (Sep) (Oct) (Nov) (Dec)] def
 % http://en.wikibooks.org/wiki/PostScript_FAQ#How_to_get_date_and_time.3F
@@ -4697,7 +4700,7 @@ currentdict /GlyphShowKnownAbsences undef
 		% 9 11 moveto   9 12 lineto   11 12 lineto   11 14 lineto   12 14 lineto   12 11 lineto   closepath  % Right of P
 		1 setgray  fill
 
-		
+
 		0 6 moveto   0 7 lineto   3 7 lineto   3 6 lineto   2 6 lineto   2 2 lineto   1 2 lineto   1 6 lineto   closepath  % T
 		7 11 moveto   7 16 lineto   10 16 lineto   10 13 lineto   8 13 lineto   8 11 lineto   closepath
 		8 14 moveto   9 14 lineto   9 15 lineto   8 15 lineto   closepath  % P
@@ -10939,7 +10942,7 @@ currentdict /GlyphShowKnownAbsences undef
 							moveto
 							Titles WithinTitles get  //true  CharPathRecursive
 						} def  % /InlinePath
-						InlinePath GSave clip InlineTitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
+						InlinePath GSave clip InlineTitlesPrefillWhite {//PrefillWhiteGray setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
 						/InlineBlackPlusWhite  InlineTitlesBlackWidth InlineTitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineTitlesAttemptMinimiseNumContours
 						{
@@ -11034,7 +11037,7 @@ currentdict /GlyphShowKnownAbsences undef
 							OvertitleOffsetsProportionFontSizeVertical SheetNum get WithinPage get  OvertitleFontSizes SheetNum get WithinPage get  mul
 							moveto   Overtitles WithinTitles get  //true  CharPathRecursive
 						} def  % InlinePath
-						InlinePath GSave clip InlineOvertitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
+						InlinePath GSave clip InlineOvertitlesPrefillWhite {//PrefillWhiteGray setgray fill} {newpath} ifelse newpath InlinePath  % http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ
 						/InlineBlackPlusWhite  InlineOvertitlesBlackWidth InlineOvertitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineAboveBelowOverAttemptMinimiseNumContours
 						{
@@ -11126,7 +11129,7 @@ currentdict /GlyphShowKnownAbsences undef
 							moveto   Belowtitles WithinTitles get  //true  CharPathRecursive
 						} def  % InlinePath
 						% http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
-						InlinePath GSave clip InlineBelowtitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath
+						InlinePath GSave clip InlineBelowtitlesPrefillWhite {//PrefillWhiteGray setgray fill} {newpath} ifelse newpath InlinePath
 						/InlineBlackPlusWhite  InlineBelowtitlesBlackWidth InlineBelowtitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineAboveBelowOverAttemptMinimiseNumContours
 						{
@@ -11218,7 +11221,7 @@ currentdict /GlyphShowKnownAbsences undef
 							moveto   Abovetitles WithinTitles get  //true  CharPathRecursive
 						} def  % InlinePath
 						% http://groups.google.com/g/comp.lang.postscript/c/ewwOV_qN4JQ  "Adobe bug with charpath and clip", 05 Jan 2009
-						InlinePath GSave clip InlineAbovetitlesPrefillWhite {1 setgray fill} {newpath} ifelse newpath InlinePath
+						InlinePath GSave clip InlineAbovetitlesPrefillWhite {//PrefillWhiteGray setgray fill} {newpath} ifelse newpath InlinePath
 						/InlineBlackPlusWhite  InlineAbovetitlesBlackWidth InlineAbovetitlesWhiteWidth add abs 2 mul  def  % 2 mul because half of the linewidth clip'ped away
 						InlineAboveBelowOverAttemptMinimiseNumContours
 						{
