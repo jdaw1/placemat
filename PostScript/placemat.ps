@@ -1,6 +1,6 @@
 %!PS
 
-% This version 22:50 Saturday 21st March 2026
+% This version 14:30 Sunday 22nd March 2026
 
 % Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202603212250) def
+/ParametersVersionDateTimeAdobeFormat (D:202603221430) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -96,11 +96,11 @@
 % % % % % % % % % % %
 
 /VoteRecorders true def
-/CorkDisplayNumCopies 1 def
+/CorkDisplayNumCopies 0 def
 /NeckTagsNumCopies 0 def
 /PlaceNames false def
 /PrePourNumCopies   /Names load length 12 ge {1} {0} ifelse def
-/AccountsNumCopies  /Names load length  8 ge {1} {0} ifelse def
+/AccountsNumCopies 0 def
 /DecanterLabelsNumCopies 0 def
 /GlassesNumCopies 1 def
 /TastingNotePagesNumCopies 1 def
@@ -850,7 +850,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202603212250) def
+/SoftwareVersionDateTimeAdobeFormat (D:202603221430) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -2272,11 +2272,9 @@ currentdict /ForReverseBinaryDict undef
 				{TypeOfPagesBeingRendered eq {pop //true exit} if}
 			forall  % page types for which Duplex allowed
 		>> setpagedevice
-		Mirror
-			{Rotate180  {[ 1 0 0 -1 0         PageHeight]}  {[-1 0 0 1 PageWidth 0]}  ifelse concat}
-			{Rotate180  {[-1 0 0 -1 PageWidth PageHeight] concat}  if}
-		ifelse  % Mirror
-		ToPortraitRotate {[ 0 1 -1  0 PageHeight 0] concat} if
+		ToPortraitRotate {[ 0 1 -1  0 PageHeight         0] concat} if
+		Mirror           {[-1 0  0  1 PageWidth          0] concat} if
+		Rotate180        {[-1 0  0 -1 PageWidth PageHeight] concat} if
 		/InitialMatrix matrix currentmatrix store
 	} if  % Callsetpagedevice
 
