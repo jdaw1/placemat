@@ -1,6 +1,6 @@
 %!PS
 
-% This version 18:55 Sunday 22nd March 2026
+% This version 08:30 Saturday 28th March 2026
 
 % Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202603221855) def
+/ParametersVersionDateTimeAdobeFormat (D:202603280830) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -824,7 +824,7 @@ if} bind def  % /VoteRecorderCrossedBox
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% OVERVIEW
+% OVERVIEW (written June 2008)
 
 % Navigation was always a difficult art, / Though with only one ship and one bell: / And he feared he must really decline, for his part, / Undertaking another as well. -- The Hunting of the Snark
 % Use the parameters to navigate the code. Choose a parameter that would be used in the code of interest, and command/control-F.
@@ -850,7 +850,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202603221855) def
+/SoftwareVersionDateTimeAdobeFormat (D:202603280830) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -4758,12 +4758,12 @@ currentdict /GlyphShowKnownAbsences undef
 				param /LowerNonName eq {/param NamesTastingNotes NameNum get IsLeftHander {/LowerRight} {/LowerLeft} ifelse def} if
 				param /LowerName    eq {/param NamesTastingNotes NameNum get IsLeftHander {/LowerLeft} {/LowerRight} ifelse def} if
 			} if  % TypeOfPagesBeingRendered /TastingNotes eq
-			//true TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressOrnamentsLeft eq {pop //false exit} if} forall} {pop} ifelse} if
+			//true TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressOrnamentsLeft  eq {pop //false exit} if} forall} {pop} ifelse} if
 			{
 				param /LowerLeft  eq {matrix currentmatrix MgnL MgnB translate IconSize dup scale IconPaint setmatrix} if
 				param /UpperLeft  eq {matrix currentmatrix MgnL PageHeight MgnT sub IconSize sub translate IconSize dup scale IconPaint setmatrix} if
 			} if  % not /SuppressOrnamentsLeft
-			//true TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressOrnamentsRight  eq {pop //false exit} if} forall} {pop} ifelse} if
+			//true TypeOfPagesBeingRendered /Glasses eq {PackingDescriptors SheetNum get dup type /arraytype eq { {/SuppressOrnamentsRight eq {pop //false exit} if} forall} {pop} ifelse} if
 			{
 				param /LowerRight eq {matrix currentmatrix PageWidth MgnR sub IconSize sub MgnB translate IconSize dup scale IconPaint setmatrix} if
 				param /UpperRight eq {matrix currentmatrix PageWidth MgnR sub IconSize sub PageHeight MgnT sub IconSize sub translate IconSize dup scale IconPaint setmatrix} if
@@ -12113,11 +12113,11 @@ currentdict /GlyphShowKnownAbsences undef
 					{
 						% Horizontal
 						PageHeight MgnT sub VoteRecorderTopTextHeight sub  VoteRecorderHeightFirstRow VoteRecorderNamesMaxT VoteRecorderNamesMinB add add 2 div sub
-						VoteRecorderColWidth VoteRecorderNarrowLineWidth NameNum VoteRecorderNumNames ge {2 div} if sub  % The VoteRecorderNarrowLineWidth is so that adjacent columns don't quite touch
+						VoteRecorderColWidth VoteRecorderMiddleLineWidth NameNum VoteRecorderNumNames ge {2 div} if sub  % The VoteRecorderMiddleLineWidth is a small gap between text boundaries.
 						VoteRecorderNameR NameNum get VoteRecorderNameL NameNum get sub  2 copy lt
 						{
 							//DeBugLevel 9 le {( VoteRecorder: Horizontal, scaled) OutputToLog} if
-							CurrentCentre VoteRecorderColWidth VoteRecorderNarrowLineWidth sub 2 div sub  4 -1 roll  moveto  div  matrix currentmatrix exch  1 scale  VoteRecorderNameL NameNum get neg 0 rmoveto
+							CurrentCentre VoteRecorderColWidth VoteRecorderMiddleLineWidth sub 2 div sub  4 -1 roll  moveto  div  matrix currentmatrix exch  1 scale  VoteRecorderNameL NameNum get neg 0 rmoveto
 							/ThisName load ShowRecursive  setmatrix
 						}{
 							//DeBugLevel 9 le {( VoteRecorder: Horizontal) OutputToLog} if
