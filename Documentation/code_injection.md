@@ -437,7 +437,7 @@ A standard presentation is to have the name of the person bringing the wine as t
 For such tastings it&rsquo;s natural to populate `Names` from `Circlearrays`. 
 However, there&rsquo;s sometimes a blank or spare circle, for which the element of Circlearrays resembles `[ /dagger ]`.
 
-This code gets the last item of each sub-array of `Circlearrays`; discards those of which the `type` is `/nametype`; removes duplicates; and appends a spare&#8209;guest&nbsp;=&nbsp;`()`.
+This code gets the last item of each sub-array of `Circlearrays`; discards those of which the `type` is `/nametype`; removes duplicates; and appends a spare&nbsp;guest&nbsp;=&nbsp;`()`.
 
 ```PostScript
 /Names  % Non-duplicate non-nametypes from last items of Circlearrays' sub-arrays

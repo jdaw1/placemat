@@ -168,11 +168,11 @@ There are several parameters that allow this.
 * `TestingMaxNumPagesToShow` suppresses pages after this integer. 
 
 * `TestingShowThesePagesOnly`: Either `null`, in which case having no effect; or an array of integers, in which case showing only those.
-The `TestingSuppressPageTypes` array can also include `/DistillerLog`, which does not take an integer as it suppresses all log pages.
+The `TestingSuppressPageTypes` array can also include `/DistillLog`, which does not take an integer as it suppresses all log pages.
 
 * `TestingSuppressPageTypes` has been by far the most useful of these controls. 
 For most page types, an entry, which is a page type then integer, shows only the first so many of that page type. 
-For the log file only, `/DistillerLog`, it has no parameter and suppresses the whole log.
+For the log file only, `/DistillLog`, it has no parameter and suppresses the whole log.
 E.g., to show only the first page of each type, and none of the log: 
 ```PostScript
 /TestingSuppressPageTypes [
@@ -189,7 +189,7 @@ E.g., to show only the first page of each type, and none of the log:
 	/StickyLabels   1
 	/BottleWrap     1
 	/OneCircle      1
-	/DistillerLog
+	/DistillLog
 ] def  % /TestingSuppressPageTypes
 ```
 
@@ -210,11 +210,14 @@ The software allows, perhaps even encourages, [code injection](code_injection.md
 No, this isn&rsquo;t the modern idiom for software. 
 But really, modern software isn&rsquo;t written in PostScript.
 
-* `PrologueCode` is executed just once, just before painting pages, which means after many of the internal variables have been computed. 
+* `PrefaceCode` is executed just once, after defining subroutines, but before doing any page calculations. Usage might resemble <code>&hellip;&nbsp;ASCIIfy&nbsp;OutputToLog</code>. 
+
+* `PrologueCode` is executed just once, just before painting pages, which means after many of the internal variables have been computed and some of that information logged.
 
 * `EpilogueCode` is also executed just once, at the end after painting pages.
 
 * `PaintBackgroundCode` is executed once per page, just before other painting begins. Usually, the painting is to happen only on the glasses pages, for which the code might resemble:
+
 ```PostScript
 /PaintBackgroundCode 
 {
@@ -229,7 +232,7 @@ But really, modern software isn&rsquo;t written in PostScript.
 ```
 * `PaintForegroundCode` is executed once per page, just after other painting is finished.
 
-* `PaintBackgroundInsideGlassCircles` is called once per circle on the glasses page. Called with centre of circle translated to 0,0; and clipped to a radius of `Radii SheetNum get`.
+* `PaintBackgroundInsideGlassCircles` is called once per circle on the glasses page. Called with centre of circle translated to 0,0; and <code>clip</code>&rsquo;ped to a radius of `Radii SheetNum get`.
 
 
 <a name="Empty_page"></a>
@@ -389,6 +392,7 @@ So `GlassesDestForEachCircle`&rsquo;s default value is `{NameNum 0 eq}`, which
 | `/StickyLabels`   | `#StickyLabels_0`   |
 | `/BottleWrap`     | `#BottleWrap_0`     |
 | `/OneCircle`      | `#OneCircle_0`      |
+| `/DistillLog`     | `#DistillLog`<small><br/>(present only for<br/>first page of log<br/>&DoubleLongRightArrow; no numbers)</small> |
 
 </div>
 
@@ -408,12 +412,12 @@ It is intended that the latter two, or at least the last, will be embedded in th
 ### Distillation log ###
 
 Various log outputs are produced by the software. 
-Some might help bebugging. 
-Others, such as listing fonts used, are to help those using old placemats as inspiration for new. 
-The log can go to three places, controlled by three Booleans.
+Some might help debugging. 
+Others, such as listing the used fonts, are to help those using old placemats as inspiration for new. 
+The log can be output in any of three places, controlled by three Booleans.
 * `OutputLogToLog`: there is no reason not to do this. 
-* `OutputLogToPage`: appears at the end, and generally a good idea (except when the pages are to be converted to a GIF animation, or if many copies are to be printed by somebody inattentive). 
-* `OutputLogToAnnotation`, a small pop-up text box on the last page of the PDF &mdash; necessary only when `OutputLogToPage` is false. 
+* `OutputLogToPage`: as printable page(s) at the end of the document, and generally a good idea (except when the pages are to be converted to a GIF animation, or if many copies are to be printed by somebody inattentive). 
+* `OutputLogToAnnotation`, a small pop-up text box on the last page of the PDF &mdash; by default only when `OutputLogToPage` is `false`. 
 
 `LogThisExtra` contains a string, perhaps a multi-line string, which is output to the log file. 
 
@@ -425,9 +429,9 @@ So far, mostly only for making documentation, and for making the images used in 
 
 PDFs allow page labels. 
 In some PDF viewers the page labels appear beneath the thumbnails in the sidebar. 
-They have another purpose: if a PDF has been imported by [Lemke Software&rsquo;s GraphicConverter](http://www.lemkesoft.de/en/products/graphicconverter/), and all the pages are output, the page labels become the file names of the separate bitmap files. 
+They have another purpose: if a PDF has been imported by Lemke Software&rsquo;s (very excellent) [GraphicConverter](http://www.lemkesoft.de/en/products/graphicconverter/), and all the pages are output, the page labels become the file names of the separate bitmap files. 
 So if, for example, making [documentation for the `PackingStyles`](PackingStyles.md#readme) function, having the parameters control the page labels would eliminate possible copy-paste errors in the naming of the files. 
 
-The usual page labels are overridden if `PageLabelOverride` is true. 
-for example, it might be `def`&rsquo;d to `{/Glasses TypeOfPagesBeingRendered eq}`. 
-Then `PageLabelOverrideWith` is a string, or code returning a string, that is the desired page label. 
+The usual page labels are overridden if `PageLabelOverride` is `true`. 
+for example, it might be `def`&rsquo;d to <code>{/Glasses&nbsp;TypeOfPagesBeingRendered&nbsp;eq}</code>. 
+Then the page label becomes `PageLabelOverrideWith`, which should be a compound string or code returning that.

@@ -112,7 +112,7 @@ So sometimes errors are fiddlier, especially with [injected code](code_injection
 Failures can happen in the software because of bugs in the software itself, or because of a type error in a parameter, or because of a bug in [injected code](code_injection.md#readme). 
 
 As with the built-in error support, the log will show the error, and the state of the stack. 
-It will also show the value of `TypeOfPagesBeingRendered`, though the value `/DistillerLog` can mean a generic page. 
+It will also show the value of `TypeOfPagesBeingRendered`, though the value `/DistillLog` can mean a generic page. 
 
 Next in the log will be the contents of the top three dictionaries on the dictionary stack. 
 Distinctive variables in these can be a great help in locating the place of failure. 

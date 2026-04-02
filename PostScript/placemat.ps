@@ -1,6 +1,6 @@
 %!PS
 
-% This version 13:45 Sunday 29th March 2026
+% This version 21:30 Thursday 2nd April 2026
 
 % Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202603291345) def
+/ParametersVersionDateTimeAdobeFormat (D:202604022130) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -717,13 +717,14 @@ if} bind def  % /VoteRecorderCrossedBox
 /LicensingAgreementLinkPlacemats (http://creativecommons.org/licenses/by-sa/4.0/deed.en) def  % To be consistent with LicensingAgreementTextPlacemats
 /PageLabelOverride false def  % E.g., {/Glasses TypeOfPagesBeingRendered eq}. So far, used only in the generation of some of the documentation.
 /PageLabelOverrideWith {[(PageNum) ShownPages 5 string cvs]} def
+/PrefaceCode  {} def  % Executed once, after defining subroutines, but before doing any page calculations. Might resemble ... ASCIIfy OutputToLog
 /PrologueCode {} def  % Executed once, just before painting pages
 /EpilogueCode {} def  % Executed once, just after painting pages
 /EmptyGlassesPageAtStart false def  % Temporary page, to make PNG, to replace an image of a no-longer existing page on a server.
 /EmptyGlassesPageOrientation /Portrait def
 /OneCircleSuppressOtherPageTypes   /OneCircles          load false  ne  def  % OneCircle always a separate document.
 /BottleWrapSuppressOtherPageTypes  /BottleWrapNumCopies load   0    ne  def  % BottleWrap usually a separate document, people printing their page(s) in advance.
-/TestingSuppressPageTypes [ ] def  % [ /Glasses 1  /TastingNotes 1  /VoteRecorder 1  /DecantingNotes 1  /Accounts 1  /CorkDisplay 1  /NeckTags 1  /PrePour 1  /PlaceName 1  /DecanterLabels 1  /BottleWrap 1  /OneCircle 1  /StickyLabels 1 ]. Also, no int, /DistillerLog
+/TestingSuppressPageTypes [ ] def  % [ /Glasses 1  /TastingNotes 1  /VoteRecorder 1  /DecantingNotes 1  /Accounts 1  /CorkDisplay 1  /NeckTags 1  /PrePour 1  /PlaceName 1  /DecanterLabels 1  /BottleWrap 1  /OneCircle 1  /StickyLabels 1 ]. Also, no int, /DistillLog
 /TestingMaxNumPagesToShow 2147483647 def
 /TestingShowThesePagesOnly null def   % Either null, in which case having no effect, or an array of integers. If making a PDF for insertion to another doc, perhaps also "/pdfmark {cleartomark} def".
 
@@ -850,7 +851,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202603291345) def
+/SoftwareVersionDateTimeAdobeFormat (D:202604022130) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -898,7 +899,7 @@ RandomisationSeed srand
 
 /OneThird 1 3 div def   /Cbrt {dup dup 0 lt {neg //OneThird exp neg} {//OneThird exp} ifelse  dup abs 1290 le {dup cvi dup dup mul mul 3 -1 roll eq {cvi} if} {exch pop} ifelse} bind def  % 1290^3 < IntegerMax < 1291^3
 
-/TypeOfPagesBeingRendered /Multiple def  % Always being one of /Multiple /Glasses /TastingNotes /PlaceName /PrePour /VoteRecorder /DecantingNotes /Accounts /CorkDisplay /NeckTags /DecanterLabels /BottleWrap /StickyLabels /OneCircle /Empty /DistillerLog
+/TypeOfPagesBeingRendered /Multiple def  % Always being one of /Multiple /Glasses /TastingNotes /PlaceName /PrePour /VoteRecorder /DecantingNotes /Accounts /CorkDisplay /NeckTags /DecanterLabels /BottleWrap /StickyLabels /OneCircle /Empty /DistillLog
 /UserScratchDict << >> def  % Not 0 dict, to avoid addition of /DictionaryOriginalSize
 /execU {    //UserScratchDict begin exec end} bind def
 /GetEU {get //UserScratchDict begin exec end} bind def
@@ -1800,29 +1801,12 @@ currentdict /ArrowCircleToCircle_CanWarn undef
 	} repeat  % 1
 } bind def  % /MightBeCompoundString
 
-mark [ CopyrightStatementPlacemats LicensingAgreementTextPlacemats LicensingAgreementLinkPlacemats ] {dup length 0 eq {pop} {counttomark 2 ge {(\n) exch} if} ifelse} forall ConcatenateToMark
-dup length 0 eq {pop} {OutputToLog} ifelse
-
-mark  (product = ) product (; languagelevel = ) /languagelevel where {pop languagelevel} {(undefined and hence 1)} ifelse (; version = ) version  (; revision = ) revision  (; buildtime = ) buildtime  ConcatenateToMark OutputToLog
-
 /IsDistiller false  1 dict begin /SearchString (Distiller) def  0 1 product length SearchString length sub {product exch SearchString length getinterval SearchString eq {pop //true exit} if} for  end def
 % Weird GhostScript bug affecting pure-white painting, perhaps purged because wrongly believed redundant.
 % At 1200 d.p.i, the near-whiteness might cause one black pixel per 23.15 sq inches.
 /PrefillWhiteGray IsDistiller {1} {0.99999997} ifelse def  % https://github.com/jdaw1/placemat/issues/174
 
 /MonthNames [(Jan) (Feb) (March) (April) (May) (June) (July) (Aug) (Sep) (Oct) (Nov) (Dec)] def
-% http://en.wikibooks.org/wiki/PostScript_FAQ#How_to_get_date_and_time.3F
-% http://groups.google.com/g/comp.lang.postscript/c/UAkMrNLakKs  "Can PostScript access the machine clock, expressed as a date and time?", 15 Aug 2015
-(\%Calendar\%) dup /IODevice resourcestatus
-{
-	pop pop  currentdevparams begin
-	Running
-	{
-		mark (Distilled ) Hour 2 string cvs dup length 1 le {(0) exch} if (:) Minute 2 string cvs dup length 1 le {(0) exch} if ( ) [(Sun) (Mon) (Tue) (Wed) (Thu) (Fri) (Sat)] Weekday get ( )
-		Day 2 string cvs dup length 1 le {(0) exch} if ( ) MonthNames Month 1 sub get ( ) Year  (, according to the clock of the computer running the distillation application.)  ConcatenateToMark OutputToLog
-	} if  % Running
-	end
-} {pop} ifelse  % ... resourcestatus
 
 % AdobeFormatDate  AdobeFormatDateToString  string
 /AdobeFormatDateToString_Baddies << >> def
@@ -1872,20 +1856,6 @@ mark  (product = ) product (; languagelevel = ) /languagelevel where {pop langua
 	end
 } bind def  % /AdobeFormatDateToString
 currentdict /AdobeFormatDateToString_Baddies undef
-
-mark
-[ /SoftwareVersionDateTimeAdobeFormat  /ParametersVersionDateTimeAdobeFormat  /WizardVersionDateTimeAdobeFormat dup where pop pop ]
-{
-	/NameDTAF exch def   /DTAF NameDTAF load def
-	DTAF length dup 14 ne exch 16 ne and {mark (Error: ) NameDTAF ( should be of length 14 or 16, in format \(D:YYYYMMDDHHMM\), or with SS, but isn't.) ConcatenateToMark OutputToLog} if
-	DTAF 0 2 getinterval (D:) ne {mark (Error: ) NameDTAF ( should begin "D:", but doesn't.) ConcatenateToMark OutputToLog} if
-	2  1  DTAF length 1 sub {/i exch def DTAF i get dup (0) 0 get lt exch (9) 0 get gt exch or {mark (Error: ) NameDTAF ( ) i ( get should be in range 0...9, but isn't.) ConcatenateToMark OutputToLog} if} for
-} forall
-(Software version  =    SoftwareVersionDateTimeAdobeFormat  =  ) SoftwareVersionDateTimeAdobeFormat   (  =  )  1 index AdobeFormatDateToString (\n)
-(These placemats  ~=  ParametersVersionDateTimeAdobeFormat  =  ) ParametersVersionDateTimeAdobeFormat (  =  )  1 index AdobeFormatDateToString ConcatenateToMark OutputToLog
-/WizardVersionDateTimeAdobeFormat where {pop  /WizardLongName where {pop
-	mark  WizardLongName (, version =  ) WizardVersionDateTimeAdobeFormat (  =  ) 1 index AdobeFormatDateToString ConcatenateToMark OutputToLog
-} if} if
 
 TestingMaxNumPagesToShow 2147483647 lt  TestingShowThesePagesOnly //null ne  TestingSuppressPageTypes length 0 gt  or or
 {
@@ -1948,8 +1918,6 @@ GlassesAnnotations length 2 ge
 	0 2 GlassesAnnotations length 2 sub {(\t) exch dup GlassesAnnotations exch GetEU Titles exch get ASCIIfy exch (: ) exch 1 add GlassesAnnotations exch GetEU ASCIIfy (\n)} for
 	pop ConcatenateToMark OutputToLog
 } if  % GlassesAnnotations length 2 ge
-
-LogThisExtra ASCIIfy dup length 0 gt {mark exch (\n) exch (\n ) ConcatenateToMark OutputToLog} {pop} ifelse
 
 /MightBeTrue {<< >> begin  GSave NullDevice  Stopped {//true} {//false ne} ifelse  GRestore  end} bind def
 
@@ -2226,8 +2194,8 @@ currentdict /ForReverseBinaryDict undef
 	{
 		/z exch def
 		1 {
-			z 72 div dup round sub abs //Epsilon le {z 72 div round cvi (") exit} if  % 1 inch
-			z 7.2 div dup round sub abs //Epsilon le {z 72 div 1 FormatDecimalPlaces (") exit} if  % 0.1 inch
+			z 72  div dup round sub abs //Epsilon le {z 72 div round cvi             (") exit} if  % 1    inch
+			z 7.2 div dup round sub abs //Epsilon le {z 72 div 1 FormatDecimalPlaces (") exit} if  % 0.1  inch
 			z 3.6 div dup round sub abs //Epsilon le {z 72 div 2 FormatDecimalPlaces (") exit} if  % 0.05 inch
 			z 127 mul 360 div dup round sub abs //Epsilon le {z 127 mul 360 div round cvi (mm) exit} if  % mm
 			z dup type /realtype eq {1 FormatDecimalPlaces} if (pt)  % othewise in points, rounded to 0.1
@@ -2271,7 +2239,7 @@ currentdict /ForReverseBinaryDict undef
 		<<
 			/OutputFaceUp DefaultOutputFaceUp Mirror {not} if   /ImagingBBox //null
 			/PageSize [ PageWidth PageHeight    ToPortraitRotate {exch} if ]
-			/Duplex //false    [ /TastingNotes /VoteRecorder /DecantingNotes /Accounts /DistillerLog ]
+			/Duplex //false    [ /TastingNotes /VoteRecorder /DecantingNotes /Accounts /DistillLog ]
 				{TypeOfPagesBeingRendered eq {pop //true exit} if}
 			forall  % page types for which Duplex allowed
 		>> setpagedevice
@@ -2389,88 +2357,6 @@ currentdict /ForReverseBinaryDict undef
 } bind def  % /SetPaperSize
 
 
-//DeBugLevel 100 le {( Main: computing PaperTypes, UsedPaperTypes, UsedPageOrderings) OutputToLog} if
-/TypeOfPagesBeingRendered /Glasses store
-/PaperTypes   [  0  1  NumSheets 1 sub {/SheetNum exch def  PaperType} for  ] def  currentdict /SheetNum undef  % Duplicates not removed
-/TypeOfPagesBeingRendered /TastingNotes store
-/TastingNotesPaperTypes [   0  1  GlassesOnTastingNotePages length 1 sub {/TNSheetNum exch def   TastingNotesPaperType   counttomark 1 sub -1 1 {index 1 index eq {pop exit} if} for} for   ] def  currentdict /TNSheetNum undef  % No duplicates
-
-/TypeOfPagesBeingRendered /Multiple store
-/UsedPaperTypes   [   [ 7 dict begin  /SheetNum 0 def  /TNSheetNum 0 def  % Construct an array with many duplicates; construct new duplicates-free array.
-	PaperTypes aload pop   TastingNotesPaperTypes aload pop
-	{PlaceNames} MightBeTrue {0  1  NamesPlaceNames length 1 sub {/PlaceNameSetNum exch def  PlaceNamesPaperType} for} if
-	/VoteRecorders load MightBeTrue {0  1  GlassesClusteredOnVoteRecorders length 1 sub {/VoteRecorderSheetNum exch def  /VoteRecorders load MightBeTrue {VoteRecorderPaperType} if} for} if
-	0  1  NumSheets 1 sub {/SheetNum exch def  0 1 SheetNumGlasses SheetNum get 1 sub {
-		WithinPage-WithinTitles-def
-		{PrePourNumCopies        1 ge} MightBeTrue {       PrePourPaperType} if
-		{NeckTagsNumCopies       1 ge} MightBeTrue {      NeckTagsPaperType} if
-		{BottleWrapNumCopies     1 ge} MightBeTrue {    BottleWrapPaperType} if
-		{DecanterLabelsNumCopies 1 ge} MightBeTrue {DecanterLabelsPaperType} if
-	} for} for
-	{StickyLabelsNumCopies 1 ge} MightBeTrue {StickyLabelsTypes {execU /StickyLabelsTypeThis exch def  {StickyLabelsNumCopies 1 ge} MightBeTrue {StickyLabelsPaperType} if  } forall} if  {CorkDisplayNumCopies 1 ge} MightBeTrue {CorkDisplayPaperType} if
-	{AccountsNumCopies 1 ge} MightBeTrue {AccountsPaperType} if   {DecantingNotesNumCopies 1 ge} MightBeTrue {DecantingNotesPaperType} if
-end  ]   {counttomark 1 sub -1 1 {index 1 index eq {pop exit} if} for} bind forall   ]    def  % /UsedPaperTypes
-
-/UsedPageOrderings  [   [   % Construct an array with many duplicates; sort it; construct new duplicates-free array.
-		{OneCircles}                     MightBeTrue {PageOrderingOneCircle         execU        } if
-		{BottleWrapNumCopies       1 ge} MightBeTrue {PageOrderingBottleWrap       {execU} forall} if
-		{GlassesNumCopies          1 ge} MightBeTrue {PageOrderingGlasses          {execU} forall} if
-		{TastingNotePagesNumCopies 1 ge} MightBeTrue {PageOrderingTastingNotePages {execU} forall} if
-		{VoteRecorders}                  MightBeTrue {PageOrderingVoteRecorder     {execU} forall} if
-		{DecantingNotesNumCopies   1 ge} MightBeTrue {PageOrderingDecantingNotes   {execU} forall} if
-		{AccountsNumCopies         1 ge} MightBeTrue {PageOrderingAccounts         {execU} forall} if
-		{CorkDisplayNumCopies      1 ge} MightBeTrue {PageOrderingCorkDisplay      {execU} forall} if
-		{NeckTagsNumCopies         1 ge} MightBeTrue {PageOrderingNeckTags         {execU} forall} if
-		{PrePourNumCopies          1 ge} MightBeTrue {PageOrderingPrePourPages     {execU} forall} if
-		{PlaceNames}                     MightBeTrue {PageOrderingPlaceNames       {execU} forall} if
-		{DecanterLabelsNumCopies   1 ge} MightBeTrue {PageOrderingDecanterLabels   {execU} forall} if
-		{StickyLabelsNumCopies     1 ge} MightBeTrue {PageOrderingStickyLabels     {execU} forall} if
-	] dup {le} ShellSort {2 copy eq {pop} if} bind forall  % There is a mark on stack, so the "2 copy" doesn't fail
-]  def  % /UsedPageOrderings
-
-mark (Used paper types: ) UsedPaperTypes {PaperTypeString (; )} forall pop (.) ConcatenateToMark dup length 10 gt {OutputToLog} {pop} ifelse
-
-8 dict begin   /DesMaxLength -1 def  mark (External links for document outline:)
-0 1 1
-{
-	0 eq {ExternalLinks} {ExternalLinksExtras} ifelse /A exch def
-	0  3  A length 3 sub
-	{
-		/i exch def
-		/Des  A i 1 add get ASCIIfy TrimSpaces length  A i GetEU {4 add} if  def
-		/URL  A i 2 add get ASCIIfy TrimSpaces length def
-		Des URL add 123 gt URL 0 eq or {0} {Des} ifelse dup DesMaxLength gt {/DesMaxLength exch def} {pop} ifelse
-	} for  % i = position in array A
-} bind for  % ExternalLinks | ExternalLinksExtras
-/RowNum 0 def
-0 1 1
-{
-	0 eq {ExternalLinks} {ExternalLinksExtras} ifelse /A exch def
-	0  3  A length 3 sub
-	{
-		/i exch def
-		/Des  A i 1 add get ASCIIfy TrimSpaces  def
-		/URL  A i 2 add get ASCIIfy TrimSpaces  def
-		Des length 0 gt
-		{
-			(\n)  Des  A i get {(    ) exch Concatenate} if
-			URL length 0 gt
-			{
-				dup  length dup URL length add 127 ge {pop 0} {DesMaxLength exch sub  dup 0 lt {pop 0} if} ifelse  /Extras exch def
-				Extras 5 mod {( )} repeat
-				Extras 5 idiv {RowNum 3 mod 0 eq {(  =  )} {(     )} ifelse} repeat
-				(  =  )  URL
-			} if  % URL length 0 gt
-		}{
-			URL length 0 gt {(\n)  A i GetEU {(    )} if  URL} if
-		} ifelse  % Descriptor non-zero length
-		/RowNum RowNum 1 add def
-	} for  % i = position in array A
-} bind for  % ExternalLinks | ExternalLinksExtras
-DesMaxLength 0 ge {ConcatenateToMark OutputToLog} {cleartomark} ifelse   end
-
-/AnyFillTextingAtAll {FillTitles FillAbovetitles or FillBelowtitles or FillOvertitles or FillPlaceNames or} MightBeTrue  def
-
 % name  IsLeftHander  bool
 /IsLeftHander
 {
@@ -2479,28 +2365,6 @@ DesMaxLength 0 ge {ConcatenateToMark OutputToLog} {cleartomark} ifelse   end
 	//false  //LeftHanders {PDFDocEncodingify nm eq {pop //true exit} if} forall
 	end
 } bind def  % /IsLeftHander
-
-4 dict begin
-/FontData [
-[
-	/Titles                load NonEmptyCompoundObject {/TitlesFont      } if
-	/Abovetitles           load NonEmptyCompoundObject {/AbovetitlesFont } if
-	/Belowtitles           load NonEmptyCompoundObject {/BelowtitlesFont } if
-	/Overtitles            load NonEmptyCompoundObject {/OvertitlesFont  } if
-	/Circlearrays          load NonEmptyCompoundObject {/CirclearraysFont} if
-	/Names                 load NonEmptyCompoundObject {/NamesFont       } if
-	/SubtitlesTastingNotes load NonEmptyCompoundObject {/SubtitlesFont   } if
-	AnyFillTextingAtAll                                {/FillTextFont    } if
-	/PlaceNames load MightBeTrue                       {/PlaceNamesFont  } if
-	//false [ /HeadersLeft /HeadersCenter /HeadersRight ] {load length 0 gt {pop //true exit} if} forall {/HeaderFont} if
-	//false [ /FootersLeft /FootersCenter /FootersRight ] {load length 0 gt {pop //true exit} if} forall {/FooterFont} if
-	{BackgroundTextsGlasses PrePourShowBackgroundTexts BackgroundTextsTastingNotes or or} MightBeTrue {/BackgroundTextsFont} if
-]  {[ exch dup /fv exch def fv load ValueIfAscertainable {FontNameFromChoices} {fv load} ifelse ]} forall ] def % FontData
-mark (Fonts: )
-0 1 FontData length 1 sub {/i exch def FontData i get 1 get dup //null ne {dup type /nametype eq {(/) exch} if  ( \() FontData i get 0 get (, )
-	i 1 add 1 FontData length 1 sub {/j exch def FontData i get 1 get FontData j get 1 get eq {FontData j get 0 get (, )  FontData j get 1 //null put} if} for  pop (\)) (; )
-} {pop} ifelse} for  pop (; and perhaps others.) ConcatenateToMark OutputToLog
-end
 
 % thing1 thing2  eqArray  boolean
 /eqArray
@@ -2512,47 +2376,8 @@ end
 		//true 0 1 3 index length 1 sub << /thing1 8 -2 roll /thing2 exch >> begin  {dup /thing1 load exch get exch /thing2 load exch get eqArray not {pop //false exit} if} for  end
 	} repeat  % 1
 } bind def  % /eqArray
-mark (Array equalities:  {)  4 dict begin
-/ArraysToCompare [
-	/Circlearrays /Titles /Abovetitles /Belowtitles /Overtitles  AnyFillTextingAtAll {/FillTexts} if
-	{GlassesOnTastingNotePages length 0 gt} MightBeTrue {TastingNotePagesNumCopies 1 ge} MightBeTrue and {/CirclearraysTastingNotes /TitlesTastingNotes /SubtitlesTastingNotes /Names /NamesTastingNotes} {/Names} ifelse
-	/VoteRecorders load            MightBeTrue {/CirclearraysVoteRecorder   /TitlesVoteRecorder   /SubtitlesVoteRecorder /NamesVoteRecorder} if
-	{DecantingNotesNumCopies 1 ge} MightBeTrue {/CirclearraysDecantingNotes /TitlesDecantingNotes /SubtitlesDecantingNotes} if
-	{AccountsNumCopies       1 ge} MightBeTrue {/NamesAccounts} if
-	{CorkDisplayNumCopies    1 ge} MightBeTrue {/CirclearraysCorkDisplay    /TitlesCorkDisplay    /SubtitlesCorkDisplay} if
-	{NeckTagsNumCopies       1 ge} MightBeTrue {/CirclearraysNeckTags  } if
-	{PrePourNumCopies        1 ge} MightBeTrue {/CirclearraysPrePour   } if
-	{BottleWrapNumCopies     1 ge} MightBeTrue {/CirclearraysBottleWrap} if
-	/PlaceNames load MightBeTrue {0 1 NamesPlaceNames length 1 sub {[ exch /NamesPlaceNames cvx exch /get cvx ] cvx} for} if
-	{StickyLabelsNumCopies 1 ge} {StickyLabelsTypes length 0 gt} MightBeTrue exch MightBeTrue and {/CirclearraysStickyLabels} if
-	//false 1 dict begin StickyLabelsTypes {/StickyLabelsTypeThis exch def {StickyLabelsNumCopies 1 ge} MightBeTrue /StickyLabelsByNameWhichReplaceCirclearrays load MightBeTrue and {pop //true exit} if} forall end  {/NamesStickyLabels} if
-	4 dict begin  counttomark /i exch 1 sub def
-	{
-		i 1 le {exit} if              i index 32 string cvs 0 3 getinterval  /is exch def  % assumes all of length >=3
-		i 1 sub  -1  0 {/j exch def   j index 32 string cvs 0 3 getinterval  is  ne {exit} if} for  % j
-		j 1 sub  -1  0 {/k exch def   k index 32 string cvs 0 3 getinterval  is  eq {k 1 add -1 roll  j 1 add 1 roll  /j j 1 sub def} if} for  % k
-		/i j def
-	} loop  end
-] def  % /ArraysToCompare
-/ArraysRemaining [ ArraysToCompare {dup type /nametype eq {load NonEmptyCompoundObject} {pop //true} ifelse} forall ] def
-0  1  ArraysToCompare length 1 sub
-{
-	/i exch def
-	ArraysRemaining i get
-	{
-		ArraysToCompare i get ToString TrimSpaces
-		i 1 add  1  ArraysToCompare length 1 sub
-		{
-			/j exch def
-			ArraysToCompare i get dup type /nametype eq {load} {exec} ifelse
-			ArraysToCompare j get dup type /nametype eq {load} {exec} ifelse  eqArray
-				{( = )  ArraysToCompare j get ToString TrimSpaces  ArraysRemaining j //false put}
-			if  % ... i ... j ... eq
-		} for  % j
-		(}) (;   {)
-	} if  % ArraysRemaining i get
-} bind for  % i
-end pop (.) ConcatenateToMark OutputToLog
+
+/AnyFillTextingAtAll {FillTitles FillAbovetitles or FillBelowtitles or FillOvertitles or FillPlaceNames or} MightBeTrue  def
 
 DeBugLevel 100 le	 % This logging introduced in May 2011. In December 2021 decided to be too much clutter. Hence this de facto disablement.
 {
@@ -4947,6 +4772,192 @@ currentdict /GlyphShowKnownAbsences undef
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Start code specific to setting out placemats
+
+PrefaceCode
+
+LogThisExtra ASCIIfy dup length 0 gt {mark exch (\n) exch (\n ) ConcatenateToMark OutputToLog} {pop} ifelse
+
+mark [ CopyrightStatementPlacemats LicensingAgreementTextPlacemats LicensingAgreementLinkPlacemats ] {dup length 0 eq {pop} {counttomark 2 ge {(\n) exch} if} ifelse} forall ConcatenateToMark
+dup length 0 eq {pop} {OutputToLog} ifelse
+
+mark  (product = ) product (; languagelevel = ) /languagelevel where {pop languagelevel} {(undefined and hence 1)} ifelse (; version = ) version  (; revision = ) revision  (; buildtime = ) buildtime  ConcatenateToMark OutputToLog
+
+mark
+[ /SoftwareVersionDateTimeAdobeFormat  /ParametersVersionDateTimeAdobeFormat  /WizardVersionDateTimeAdobeFormat dup where pop pop ]
+{
+	/NameDTAF exch def   /DTAF NameDTAF load def
+	DTAF length dup 14 ne exch 16 ne and {mark (Error: ) NameDTAF ( should be of length 14 or 16, in format \(D:YYYYMMDDHHMM\), or with SS, but isn't.) ConcatenateToMark OutputToLog} if
+	DTAF 0 2 getinterval (D:) ne {mark (Error: ) NameDTAF ( should begin "D:", but doesn't.) ConcatenateToMark OutputToLog} if
+	2  1  DTAF length 1 sub {/i exch def DTAF i get dup (0) 0 get lt exch (9) 0 get gt exch or {mark (Error: ) NameDTAF ( ) i ( get should be in range 0...9, but isn't.) ConcatenateToMark OutputToLog} if} for
+} forall
+(Software version  =    SoftwareVersionDateTimeAdobeFormat  =  ) SoftwareVersionDateTimeAdobeFormat   (  =  )  1 index AdobeFormatDateToString (\n)
+(These placemats  ~=  ParametersVersionDateTimeAdobeFormat  =  ) ParametersVersionDateTimeAdobeFormat (  =  )  1 index AdobeFormatDateToString ConcatenateToMark OutputToLog
+/WizardVersionDateTimeAdobeFormat where {pop  /WizardLongName where {pop
+	mark  WizardLongName (, version =  ) WizardVersionDateTimeAdobeFormat (  =  ) 1 index AdobeFormatDateToString ConcatenateToMark OutputToLog
+} if} if
+
+% http://en.wikibooks.org/wiki/PostScript_FAQ#How_to_get_date_and_time.3F
+% http://groups.google.com/g/comp.lang.postscript/c/UAkMrNLakKs  "Can PostScript access the machine clock, expressed as a date and time?", 15 Aug 2015
+(\%Calendar\%) dup /IODevice resourcestatus
+{
+	pop pop  currentdevparams begin
+	Running
+	{
+		mark (Distilled ) Hour 2 string cvs dup length 1 le {(0) exch} if (:) Minute 2 string cvs dup length 1 le {(0) exch} if ( ) [(Sun) (Mon) (Tue) (Wed) (Thu) (Fri) (Sat)] Weekday get ( )
+		Day 2 string cvs dup length 1 le {(0) exch} if ( ) MonthNames Month 1 sub get ( ) Year  (, according to the clock of the computer running the distillation application.)  ConcatenateToMark OutputToLog
+	} if  % Running
+	end
+} {pop} ifelse  % ... resourcestatus
+
+//DeBugLevel 100 le {( Main: computing PaperTypes, UsedPaperTypes, UsedPageOrderings) OutputToLog} if
+/TypeOfPagesBeingRendered /Glasses store
+/PaperTypes   [  0  1  NumSheets 1 sub {/SheetNum exch def  PaperType} for  ] def  currentdict /SheetNum undef  % Duplicates not removed
+/TypeOfPagesBeingRendered /TastingNotes store
+/TastingNotesPaperTypes [   0  1  GlassesOnTastingNotePages length 1 sub {/TNSheetNum exch def   TastingNotesPaperType   counttomark 1 sub -1 1 {index 1 index eq {pop exit} if} for} for   ] def  currentdict /TNSheetNum undef  % No duplicates
+
+/TypeOfPagesBeingRendered /Multiple store
+/UsedPaperTypes   [   [ 7 dict begin  /SheetNum 0 def  /TNSheetNum 0 def  % Construct an array with many duplicates; construct new duplicates-free array.
+	PaperTypes aload pop   TastingNotesPaperTypes aload pop
+	{PlaceNames} MightBeTrue {0  1  NamesPlaceNames length 1 sub {/PlaceNameSetNum exch def  PlaceNamesPaperType} for} if
+	/VoteRecorders load MightBeTrue {0  1  GlassesClusteredOnVoteRecorders length 1 sub {/VoteRecorderSheetNum exch def  /VoteRecorders load MightBeTrue {VoteRecorderPaperType} if} for} if
+	0  1  NumSheets 1 sub {/SheetNum exch def  0 1 SheetNumGlasses SheetNum get 1 sub {
+		WithinPage-WithinTitles-def
+		{PrePourNumCopies        1 ge} MightBeTrue {       PrePourPaperType} if
+		{NeckTagsNumCopies       1 ge} MightBeTrue {      NeckTagsPaperType} if
+		{BottleWrapNumCopies     1 ge} MightBeTrue {    BottleWrapPaperType} if
+		{DecanterLabelsNumCopies 1 ge} MightBeTrue {DecanterLabelsPaperType} if
+	} for} for
+	{StickyLabelsNumCopies 1 ge} MightBeTrue {StickyLabelsTypes {execU /StickyLabelsTypeThis exch def  {StickyLabelsNumCopies 1 ge} MightBeTrue {StickyLabelsPaperType} if  } forall} if  {CorkDisplayNumCopies 1 ge} MightBeTrue {CorkDisplayPaperType} if
+	{AccountsNumCopies 1 ge} MightBeTrue {AccountsPaperType} if   {DecantingNotesNumCopies 1 ge} MightBeTrue {DecantingNotesPaperType} if
+end  ]   {counttomark 1 sub -1 1 {index 1 index eq {pop exit} if} for} bind forall   ]    def  % /UsedPaperTypes
+
+/UsedPageOrderings  [   [   % Construct an array with many duplicates; sort it; construct new duplicates-free array.
+		{OneCircles}                     MightBeTrue {PageOrderingOneCircle         execU        } if
+		{BottleWrapNumCopies       1 ge} MightBeTrue {PageOrderingBottleWrap       {execU} forall} if
+		{GlassesNumCopies          1 ge} MightBeTrue {PageOrderingGlasses          {execU} forall} if
+		{TastingNotePagesNumCopies 1 ge} MightBeTrue {PageOrderingTastingNotePages {execU} forall} if
+		{VoteRecorders}                  MightBeTrue {PageOrderingVoteRecorder     {execU} forall} if
+		{DecantingNotesNumCopies   1 ge} MightBeTrue {PageOrderingDecantingNotes   {execU} forall} if
+		{AccountsNumCopies         1 ge} MightBeTrue {PageOrderingAccounts         {execU} forall} if
+		{CorkDisplayNumCopies      1 ge} MightBeTrue {PageOrderingCorkDisplay      {execU} forall} if
+		{NeckTagsNumCopies         1 ge} MightBeTrue {PageOrderingNeckTags         {execU} forall} if
+		{PrePourNumCopies          1 ge} MightBeTrue {PageOrderingPrePourPages     {execU} forall} if
+		{PlaceNames}                     MightBeTrue {PageOrderingPlaceNames       {execU} forall} if
+		{DecanterLabelsNumCopies   1 ge} MightBeTrue {PageOrderingDecanterLabels   {execU} forall} if
+		{StickyLabelsNumCopies     1 ge} MightBeTrue {PageOrderingStickyLabels     {execU} forall} if
+	] dup {le} ShellSort {2 copy eq {pop} if} bind forall  % There is a mark on stack, so the "2 copy" doesn't fail
+]  def  % /UsedPageOrderings
+
+mark
+	(Used paper types: )    UsedPaperTypes    dup length 0 gt { {PaperTypeString (; )} forall pop (.      )} {pop pop} ifelse
+	(Used page orderings: ) UsedPageOrderings dup length 0 gt { {                (; )} forall pop (.)      } {pop pop} ifelse
+ConcatenateToMark dup length 10 gt {OutputToLog} {pop} ifelse
+
+4 dict begin
+/FontData [
+[
+	/Titles                load NonEmptyCompoundObject {/TitlesFont      } if
+	/Abovetitles           load NonEmptyCompoundObject {/AbovetitlesFont } if
+	/Belowtitles           load NonEmptyCompoundObject {/BelowtitlesFont } if
+	/Overtitles            load NonEmptyCompoundObject {/OvertitlesFont  } if
+	/Circlearrays          load NonEmptyCompoundObject {/CirclearraysFont} if
+	/Names                 load NonEmptyCompoundObject {/NamesFont       } if
+	/SubtitlesTastingNotes load NonEmptyCompoundObject {/SubtitlesFont   } if
+	AnyFillTextingAtAll                                {/FillTextFont    } if
+	/PlaceNames load MightBeTrue                       {/PlaceNamesFont  } if
+	//false [ /HeadersLeft /HeadersCenter /HeadersRight ] {load length 0 gt {pop //true exit} if} forall {/HeaderFont} if
+	//false [ /FootersLeft /FootersCenter /FootersRight ] {load length 0 gt {pop //true exit} if} forall {/FooterFont} if
+	{BackgroundTextsGlasses PrePourShowBackgroundTexts BackgroundTextsTastingNotes or or} MightBeTrue {/BackgroundTextsFont} if
+]  {[ exch dup /fv exch def fv load ValueIfAscertainable {FontNameFromChoices} {fv load} ifelse ]} forall ] def % FontData
+mark (Fonts: )
+0 1 FontData length 1 sub {/i exch def FontData i get 1 get dup //null ne {dup type /nametype eq {(/) exch} if  ( \() FontData i get 0 get (, )
+	i 1 add 1 FontData length 1 sub {/j exch def FontData i get 1 get FontData j get 1 get eq {FontData j get 0 get (, )  FontData j get 1 //null put} if} for  pop (\)) (; )
+} {pop} ifelse} for  pop (; and perhaps others.) ConcatenateToMark OutputToLog
+end
+
+mark (Array equalities:  {)  4 dict begin
+/ArraysToCompare [
+	/Circlearrays /Titles /Abovetitles /Belowtitles /Overtitles  AnyFillTextingAtAll {/FillTexts} if
+	{GlassesOnTastingNotePages length 0 gt} MightBeTrue {TastingNotePagesNumCopies 1 ge} MightBeTrue and {/CirclearraysTastingNotes /TitlesTastingNotes /SubtitlesTastingNotes /Names /NamesTastingNotes} {/Names} ifelse
+	/VoteRecorders load            MightBeTrue {/CirclearraysVoteRecorder   /TitlesVoteRecorder   /SubtitlesVoteRecorder /NamesVoteRecorder} if
+	{DecantingNotesNumCopies 1 ge} MightBeTrue {/CirclearraysDecantingNotes /TitlesDecantingNotes /SubtitlesDecantingNotes} if
+	{AccountsNumCopies       1 ge} MightBeTrue {/NamesAccounts} if
+	{CorkDisplayNumCopies    1 ge} MightBeTrue {/CirclearraysCorkDisplay    /TitlesCorkDisplay    /SubtitlesCorkDisplay} if
+	{NeckTagsNumCopies       1 ge} MightBeTrue {/CirclearraysNeckTags  } if
+	{PrePourNumCopies        1 ge} MightBeTrue {/CirclearraysPrePour   } if
+	{BottleWrapNumCopies     1 ge} MightBeTrue {/CirclearraysBottleWrap} if
+	/PlaceNames load MightBeTrue {0 1 NamesPlaceNames length 1 sub {[ exch /NamesPlaceNames cvx exch /get cvx ] cvx} for} if
+	{StickyLabelsNumCopies 1 ge} {StickyLabelsTypes length 0 gt} MightBeTrue exch MightBeTrue and {/CirclearraysStickyLabels} if
+	//false 1 dict begin StickyLabelsTypes {/StickyLabelsTypeThis exch def {StickyLabelsNumCopies 1 ge} MightBeTrue /StickyLabelsByNameWhichReplaceCirclearrays load MightBeTrue and {pop //true exit} if} forall end  {/NamesStickyLabels} if
+	4 dict begin  counttomark /i exch 1 sub def
+	{
+		i 1 le {exit} if              i index 32 string cvs 0 3 getinterval  /is exch def  % assumes all of length >=3
+		i 1 sub  -1  0 {/j exch def   j index 32 string cvs 0 3 getinterval  is  ne {exit} if} for  % j
+		j 1 sub  -1  0 {/k exch def   k index 32 string cvs 0 3 getinterval  is  eq {k 1 add -1 roll  j 1 add 1 roll  /j j 1 sub def} if} for  % k
+		/i j def
+	} loop  end
+] def  % /ArraysToCompare
+/ArraysRemaining [ ArraysToCompare {dup type /nametype eq {load NonEmptyCompoundObject} {pop //true} ifelse} forall ] def
+0  1  ArraysToCompare length 1 sub
+{
+	/i exch def
+	ArraysRemaining i get
+	{
+		ArraysToCompare i get ToString TrimSpaces
+		i 1 add  1  ArraysToCompare length 1 sub
+		{
+			/j exch def
+			ArraysToCompare i get dup type /nametype eq {load} {exec} ifelse
+			ArraysToCompare j get dup type /nametype eq {load} {exec} ifelse  eqArray
+				{( = )  ArraysToCompare j get ToString TrimSpaces  ArraysRemaining j //false put}
+			if  % ... i ... j ... eq
+		} for  % j
+		(}) (;   {)
+	} if  % ArraysRemaining i get
+} bind for  % i
+end pop (.) ConcatenateToMark OutputToLog
+
+8 dict begin   /DesMaxLength -1 def  mark (External links for document outline:)
+0 1 1
+{
+	0 eq {ExternalLinks} {ExternalLinksExtras} ifelse /A exch def
+	0  3  A length 3 sub
+	{
+		/i exch def
+		/Des  A i 1 add get ASCIIfy TrimSpaces length  A i GetEU {4 add} if  def
+		/URL  A i 2 add get ASCIIfy TrimSpaces length def
+		Des URL add 123 gt URL 0 eq or {0} {Des} ifelse dup DesMaxLength gt {/DesMaxLength exch def} {pop} ifelse
+	} for  % i = position in array A
+} bind for  % ExternalLinks | ExternalLinksExtras
+/RowNum 0 def
+0 1 1
+{
+	0 eq {ExternalLinks} {ExternalLinksExtras} ifelse /A exch def
+	0  3  A length 3 sub
+	{
+		/i exch def
+		/Des  A i 1 add get ASCIIfy TrimSpaces  def
+		/URL  A i 2 add get ASCIIfy TrimSpaces  def
+		Des length 0 gt
+		{
+			(\n)  Des  A i get {(    ) exch Concatenate} if
+			URL length 0 gt
+			{
+				dup  length dup URL length add 127 ge {pop 0} {DesMaxLength exch sub  dup 0 lt {pop 0} if} ifelse  /Extras exch def
+				Extras 5 mod {( )} repeat
+				Extras 5 idiv {RowNum 3 mod 0 eq {(  =  )} {(     )} ifelse} repeat
+				(  =  )  URL
+			} if  % URL length 0 gt
+		}{
+			URL length 0 gt {(\n)  A i GetEU {(    )} if  URL} if
+		} ifelse  % Descriptor non-zero length
+		/RowNum RowNum 1 add def
+	} for  % i = position in array A
+} bind for  % ExternalLinks | ExternalLinksExtras
+DesMaxLength 0 ge {ConcatenateToMark OutputToLog} {cleartomark} ifelse   end
+
+
+
 
 % boolean  DefStoreMgns  -
 % true ==> def; false ==> store
@@ -15243,7 +15254,7 @@ currentdict /GlyphShowKnownAbsences undef
 		end
 	} forall  pop ConcatenateToMark
 	OutputLogToPage  OneCircleSuppressOtherPageTypes not and  BottleWrapSuppressOtherPageTypes not and
-		{dup length 0 gt {(; )} if (DistillationLog)}
+		{dup length 0 gt {(; )} if (DistillLog)}
 	if  % Log pages likely to exist
 	ShownGlassesCircles 0 gt
 	{
@@ -15658,7 +15669,7 @@ currentdict /GlyphShowKnownAbsences undef
 	} bind loop  % ShownPageThis
 
 	//DeBugLevel 50 le {( Main: pdfmark's, OUT, re-arranged) OutputToLog} if
-	/TypeOfPagesBeingRendered /DistillerLog def
+	/TypeOfPagesBeingRendered /DistillLog def
 	OutputLogToPage {false PageSuppressed not} {false} ifelse
 	{
 		0 2 PageOrderingSections length 2 sub
@@ -15668,7 +15679,7 @@ currentdict /GlyphShowKnownAbsences undef
 		} for  % i
 
 		/DistillationLogPaperType  /TastingNotesPaperType dup where {exch get dup /USL ne {pop /A4} if} {pop /A4} ifelse  def
-		mark /Action /GoTo /Dest /DistillationLog /Title mark (Distillation log \() OutputtedToLog 2 mul ExternalLinks length 3 idiv add 120 gt {(from )} if (p) ShownPageThis 0 gt {ShownPagesData ShownPageThis 1 sub get /PageNum get 2 add} {0} ifelse (, )
+		mark /Action /GoTo /Dest /DistillLog /Title mark (Distillation log \() OutputtedToLog 2 mul ExternalLinks length 3 idiv add 120 gt {(from )} if (p) ShownPageThis 0 gt {ShownPagesData ShownPageThis 1 sub get /PageNum get 2 add} {0} ifelse (, )
 		<< /ThisPaperType DistillationLogPaperType >> begin PaperTypeStringShortPDF end (\)) ConcatenateToMark TruncateTo255  /F 0  /OUT pdfmark  % Log page lacks ShownPagesData, so using one more than previous; and "from" if likely to be more than one page.
 	} if  % OutputLogToPage ...
 	[
@@ -15969,7 +15980,7 @@ OutputLogToAnnotation  ShownPages 0 gt  and
 			(Placemat software:\nhttp://GitHub.com/jdaw1/placemat/)
 			OutputLog {dup type /stringtype eq {(\n\n) exch} {pop exit} ifelse} forall
 		ConcatenateToMark
-		/NM      (DistillationLog)
+		/NM      (DistillLog)
 		/M       ParametersVersionDateTimeAdobeFormat   /CreationDate 1 index
 		/F       64 128 add  % ReadOnly + Locked. PDFReference16.pdf page 574
 		/C       [0.4]
@@ -15978,15 +15989,15 @@ OutputLogToAnnotation  ShownPages 0 gt  and
 		/Open false
 	/ANN pdfmark
 } if  % OutputLogToAnnotation ...
-/TypeOfPagesBeingRendered /DistillerLog def
+/TypeOfPagesBeingRendered /DistillLog def
 OutputLogToPage {false PageSuppressed not} {false} ifelse
 {{
 	35 dict begin
-	/TypeOfPagesBeingRendered /DistillerLog def  % def rather than store in case top-most instance of TypeOfPagesBeingRendered is in a readonly dictionary
+	/TypeOfPagesBeingRendered /DistillLog def  % def rather than store in case top-most instance of TypeOfPagesBeingRendered is in a readonly dictionary
 	/OuterMarginL 0 def  /OuterMarginR 0 def  /OuterMarginT 0 def  /OuterMarginB 0 def
 	% Fixed page size based on type of first page. Also will use 27 margins all round. Page not really for high-quality printing.
 	/SPS {//false  //false  //false  //true  TastingNotesPaperType NorthAmericanPaperSize {/USL} {/A4} ifelse  /Portrait  SetPaperSize} bind def
-	SPS    mark  /Dest /DistillationLog  /View [/FitH PageHeight]  /DEST  pdfmark    mark  /Label (Distillation log)  /PAGELABEL  pdfmark
+	SPS    mark  /Dest /DistillLog  /View [/FitH PageHeight]  /DEST  pdfmark    mark  /Label (Distillation log)  /PAGELABEL  pdfmark
 	/FontSize 6.25 def   /Courier FontSize selectfont  /WidthW (W) stringwidth pop def  % Large initial FontSize, constrained by >=132 char limit, on A4 is FontSize ~=6.833; 6.25 leads to 6.22043.
 	/FontSize  PageWidth 54 sub //PrinterEpsilon sub  dup WidthW div ceiling  132  2 copy lt {exch} if pop  WidthW mul div FontSize mul def  % /FontSize WatchExpression
 	/YlineStep FontSize 1.125 mul def
