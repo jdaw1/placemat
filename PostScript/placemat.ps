@@ -1,6 +1,6 @@
 %!PS
 
-% This version 23:30 Thursday 2nd April 2026
+% This version 14:40 Friday 3rd April 2026
 
 % Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202604022330) def
+/ParametersVersionDateTimeAdobeFormat (D:202604031440) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -851,7 +851,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202604022330) def
+/SoftwareVersionDateTimeAdobeFormat (D:202604031440) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -2205,31 +2205,45 @@ currentdict /ForReverseBinaryDict undef
 
 /DefaultOutputFaceUp currentpagedevice /OutputFaceUp 2 copy known {get} {pop pop //false} ifelse def
 
+% PaperType Orientation  ForceToPortraitNeeded  bool
+/ForceToPortraitNeeded
+{
+	/Landscape eq
+	{
+		2 dict begin
+		/PaperType exch def
+		//false
+		1 {
+			//false  PageSizesToForceToPortrait {PaperType eq {pop //true exit} if} forall   {pop //true exit} if
+			PaperType type /arraytype ne {exit} if
+			PaperType length    2     lt {exit} if
+
+			PageSizesToForceToPortrait
+			{
+				/PSTFTP exch def
+				PSTFTP type /arraytype eq
+				{
+					PSTFTP length 2 ge
+					{
+						PaperType 0 get  PSTFTP 0 get  sub abs //PrinterEpsilon le
+						PaperType 1 get  PSTFTP 1 get  sub abs //PrinterEpsilon le  and {pop //true exit} if
+					} if  % PSTFTP length 2 ge
+				} if  % /arraytype
+			} forall  % PSTFTP
+		} repeat  % 1
+		end
+	} {pop //false} ifelse
+} bind def  % /ForceToPortraitNeeded
+
 % ShowCropMarks Rotate180 Mirror Callsetpagedevice PaperType Orientation  SetPaperSize  -
 % First two params ignored if Callsetpagedevice is false
 /SetPaperSize
 {
 	//DeBugLevel 15 le {(+SetPaperSize) OutputToLog} if
 	2 copy Dimensions /PageHeight exch def  /PageWidth exch def
-	19 dict begin
-	pop  /PaperType exch def  /Callsetpagedevice exch def  /Mirror exch def  /Rotate180 exch def  /ShowCropMarks exch def
-	/ToPortraitRotate
-		PageWidth PageHeight gt
-		{
-			//false
-			PageSizesToForceToPortrait   dup type /arraytype ne { [ exch ] } if  % In case erroreously set to a name.
-			{
-				/PSTFTP exch def
-				PaperType PSTFTP eq {pop //true exit} if
-				PaperType type /arraytype eq  PSTFTP type /arraytype eq  and {PaperType length  PSTFTP length  eq  % Should both be 2
-				{
-					//true
-					0 1 PaperType length 1 sub {dup PaperType exch get exch PSTFTP exch get ne {pop //false exit} if} for
-					{pop //true exit} if  % I.e., if arraytype's match
-				} if } if  % same-length arrays
-			} forall  % PageSizesToForceToPortrait
-		} {//false} ifelse  % PageWidth PageHeight gt
-	def  % /ToPortraitRotate
+	20 dict begin
+	/Orientation exch def  /PaperType exch def  /Callsetpagedevice exch def  /Mirror exch def  /Rotate180 exch def  /ShowCropMarks exch def
+	/ToPortraitRotate  PaperType Orientation ForceToPortraitNeeded  def
 
 	Callsetpagedevice  % Sets the page size; and attempts to disable duplex
 	{
@@ -13820,7 +13834,9 @@ DesMaxLength 0 ge {ConcatenateToMark OutputToLog} {cleartomark} ifelse   end
 							/VoteRecorderTopTextNum exch def
 							/VoteRecorderThisSheetLength  0  VoteRecorderThisSheet {execU length add} forall  VoteRecorderShowTotalRow VoteRecorderSheetNum GetEU {1 add} if  def
 							/TypeOfPagesBeingRendered /VoteRecorder store
-							//false  //false  MirrorPagesVoteRecorder VoteRecorderSheetNum GetEU  //true  VoteRecorderPaperType
+							//false
+							VoteRecorderPaperType  VoteRecorderForms VoteRecorderSheetNum get /VoteRecorderOrientationLocal get  ForceToPortraitNeeded  % If VoteRecorderNamesOrientationIsHorizontal not, which isn't yet known, PDF more readable by Rotate180.
+							MirrorPagesVoteRecorder VoteRecorderSheetNum GetEU  //true  VoteRecorderPaperType
 							VoteRecorderForms VoteRecorderSheetNum get /VoteRecorderOrientationLocal get
 							SetPaperSize
 							//true DefStoreMgns
