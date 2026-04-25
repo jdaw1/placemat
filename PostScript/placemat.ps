@@ -1,6 +1,6 @@
 %!PS
 
-% This version 14:40 Friday 3rd April 2026
+% This version 17:55 Saturday 25th April 2026
 
 % Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202604031440) def
+/ParametersVersionDateTimeAdobeFormat (D:202604251755) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -61,7 +61,7 @@
 
 % Headers... are arrays of even length, alternately an item of PageOrdering, and the relevant compound string.
 /HeadersLeft [
-	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 21) {SuperscriptOn} (st) {SuperscriptOff} ( April 2026)]
+	0  [(Boot & Flogger, T) {-0.08 Kern} (uesday 17) {SuperscriptOn} (st) {SuperscriptOff} ( November 2026)]
 ] def  % /HeadersLeft
 /HeadersCenter [
 	0  [(1970s)]
@@ -851,7 +851,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202604031440) def
+/SoftwareVersionDateTimeAdobeFormat (D:202604251755) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -943,6 +943,7 @@ OutputLog  0  (!!! Error !!! Error !!!   An error occurred. More information bel
 	end
 } bind def  % /OutputToLog
 
+/DistillationLogPaperType  /TastingNotesPaperType dup where {exch get dup /USL ne {pop /A4} if} {pop /A4} ifelse  def
 
 /SuppressANN   % http://groups.google.com/g/comp.lang.postscript/c/8V9XFDwuLPg  "Is 'mark ... /ANN pdfmark' allowed?", 23 Feb 2015
 /currentdistillerparams where
@@ -4830,7 +4831,7 @@ mark
 /TastingNotesPaperTypes [   0  1  GlassesOnTastingNotePages length 1 sub {/TNSheetNum exch def   TastingNotesPaperType   counttomark 1 sub -1 1 {index 1 index eq {pop exit} if} for} for   ] def  currentdict /TNSheetNum undef  % No duplicates
 
 /TypeOfPagesBeingRendered /Multiple store
-/UsedPaperTypes   [   [ 7 dict begin  /SheetNum 0 def  /TNSheetNum 0 def  % Construct an array with many duplicates; construct new duplicates-free array.
+/UsedPaperTypes   [   [ 8 dict begin  /SheetNum 0 def  /TNSheetNum 0 def  % Construct an array with many duplicates; construct new duplicates-free array.
 	PaperTypes aload pop   TastingNotesPaperTypes aload pop
 	{PlaceNames} MightBeTrue {0  1  NamesPlaceNames length 1 sub {/PlaceNameSetNum exch def  PlaceNamesPaperType} for} if
 	/VoteRecorders load MightBeTrue {0  1  GlassesClusteredOnVoteRecorders length 1 sub {/VoteRecorderSheetNum exch def  /VoteRecorders load MightBeTrue {VoteRecorderPaperType} if} for} if
@@ -4843,6 +4844,12 @@ mark
 	} for} for
 	{StickyLabelsNumCopies 1 ge} MightBeTrue {StickyLabelsTypes {execU /StickyLabelsTypeThis exch def  {StickyLabelsNumCopies 1 ge} MightBeTrue {StickyLabelsPaperType} if  } forall} if  {CorkDisplayNumCopies 1 ge} MightBeTrue {CorkDisplayPaperType} if
 	{AccountsNumCopies 1 ge} MightBeTrue {AccountsPaperType} if   {DecantingNotesNumCopies 1 ge} MightBeTrue {DecantingNotesPaperType} if
+	OutputLogToPage
+	{
+		% DistillationLogPaperType should be last, so remove earlier copies of it.
+		counttomark 1 sub  -1  0 {/i exch def  i index DistillationLogPaperType eq {i 1 add  -1  roll pop} if} for
+		DistillationLogPaperType
+	} if  % OutputLogToPage
 end  ]   {counttomark 1 sub -1 1 {index 1 index eq {pop exit} if} for} bind forall   ]    def  % /UsedPaperTypes
 
 /UsedPageOrderings  [   [   % Construct an array with many duplicates; sort it; construct new duplicates-free array.
@@ -15694,7 +15701,6 @@ DesMaxLength 0 ge {ConcatenateToMark OutputToLog} {cleartomark} ifelse   end
 			PageOrderingSections i GetEU  PrevPageOrdering gt {mark /Action << >>  /Color [0 0 0]  /F 1  /Title PageOrderingSections i 1 add get PDFDocEncodingify  /OUT pdfmark} if
 		} for  % i
 
-		/DistillationLogPaperType  /TastingNotesPaperType dup where {exch get dup /USL ne {pop /A4} if} {pop /A4} ifelse  def
 		mark /Action /GoTo /Dest /DistillLog /Title mark (Distillation log \() OutputtedToLog 2 mul ExternalLinks length 3 idiv add 120 gt {(from )} if (p) ShownPageThis 0 gt {ShownPagesData ShownPageThis 1 sub get /PageNum get 2 add} {0} ifelse (, )
 		<< /ThisPaperType DistillationLogPaperType >> begin PaperTypeStringShortPDF end (\)) ConcatenateToMark TruncateTo255  /F 0  /OUT pdfmark  % Log page lacks ShownPagesData, so using one more than previous; and "from" if likely to be more than one page.
 	} if  % OutputLogToPage ...
