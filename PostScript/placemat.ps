@@ -1,6 +1,6 @@
 %!PS
 
-% This version 17:55 Saturday 25th April 2026
+% This version 21:15 Monday 10th August 2026
 
 % Copyright Julian D. A. Wiseman 1988 to 2026.  http://github.com/jdaw1/placemat/#readme
 % This sofware is licensed under the GNU General Public License v3.0.
@@ -17,7 +17,7 @@
 % Essentials  %
 % % % % % % % %
 
-/ParametersVersionDateTimeAdobeFormat (D:202604251755) def
+/ParametersVersionDateTimeAdobeFormat (D:202608102115) def
 
 /Circlearrays [
 	[ (Quinta do Noval)          (1970)   (bot. The Wine Society) ]
@@ -851,7 +851,7 @@ if} bind def  % /VoteRecorderCrossedBox
 % that nothing remains on it. OutputToLog outputs stuff according to OutputLogToLog and OutputLogToPage.
 
 /usertimeStart usertime def
-/SoftwareVersionDateTimeAdobeFormat (D:202604251755) def
+/SoftwareVersionDateTimeAdobeFormat (D:202608102115) def
 /DeBugLevel 9999 def  % Smaller numbers are smaller more-core routines.
 
 RandomisationSeed srand
@@ -2619,7 +2619,7 @@ PagesToBeInserted {/PagesToBeInsertedInstanceNums [ PagesToBeInsertedDests lengt
 			TypeOfPagesBeingRendered /DecantingNotes eq {pop pop DecantingNotesPaperType DecantingNotesOrientation} if
 			TypeOfPagesBeingRendered /Accounts       eq {pop pop       AccountsPaperType       AccountsOrientation} if
 			TypeOfPagesBeingRendered /CorkDisplay    eq {pop pop    CorkDisplayPaperType         CDBestOrientation} if
-			TypeOfPagesBeingRendered /Empty          eq {pop pop               PaperType               Orientation} if
+			TypeOfPagesBeingRendered /Empty          eq {pop pop << /SheetNum NumSheets 1 sub /TNSheetNum 0 >> begin PaperType Orientation end} if
 			TypeOfPagesBeingRendered /NeckTags       eq {pop pop NeckTagsPaperType            /Portrait           } if
 			TypeOfPagesBeingRendered /StickyLabels   eq {pop pop StickyLabelsPaperType        /Portrait           } if
 			TypeOfPagesBeingRendered /DecanterLabels eq {pop pop DecanterLabelsPaperType DLOrientation {/Portrait} {/Landscape} ifelse} if
