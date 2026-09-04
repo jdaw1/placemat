@@ -182,7 +182,7 @@ There are two blocks of image data.
 * Then there are three lines to be quoted vertabim. (If you must, see [p15](http://www.acumentraining.com/Acumen_Journal/AcumenJournal_Dec2002.zip) and [p9](http://www.acumentraining.com/Acumen_Journal/AcumenJournal_Jan2003.zip).) 
 * The gray-scale image had 2481 lines of data; the colour image had 6105 lines. Likely as not, your images will have a different number of lines.
 * The image data is terminated with a &ldquo;>&rdquo;. My preference has been that this starts a new line, but that newline is optional. 
-* And then a `def`, which attaches that block of data to the variable name, 
+* And then a `def`, which attaches that block of data to the variable name. 
 
 <a name="PaintBackgroundCode"></a>
 ### PaintBackgroundInsideGlassCircles and PaintBackgroundCode ###
